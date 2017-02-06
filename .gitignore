@@ -1,0 +1,26 @@
+# Python cruft
+*.pyc
+*.pyo
+__pycache__
+
+# IDEs
+.idea
+
+# Mac cruft
+.DS_Store
+
+# Locale file is not editable
+src/locale
+
+# Unwanted Krtia files
+*autosave.kra
+
+*~
+*.save
+*.orig
+*.orig.meta
+
+# Unity excludes
+Harvest Moom/Library
+Harvest Moom/Temp
+obj/
