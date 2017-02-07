@@ -12,6 +12,9 @@ public static class Consts
     // Tiles on different layers are placed this far apart
     public const float TILE_HEIGHT = 0.5f;
 
+    // All tiles are scaled by this amount in an attempt to tackle gaps
+    public const float scaleFudge = 0.001f;
+
     /**
      * Editor related
      **/

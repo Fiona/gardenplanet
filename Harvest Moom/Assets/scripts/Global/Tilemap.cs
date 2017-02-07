@@ -22,6 +22,8 @@ public class Tilemap : MonoBehaviour
                 _z * Consts.TILE_HEIGHT,
                 y);
             tileObj.transform.Rotate(new Vector3(0, 180, 0));
+            // Combats tile gaps
+            tileObj.transform.localScale = new Vector3(100.0f + Consts.SCALE_FUDGE, 100.0f + Consts.SCALE_FUDGE, 100.0f + Consts.SCALE_FUDGE);
 
             CreateCollisionShapes();
         }
