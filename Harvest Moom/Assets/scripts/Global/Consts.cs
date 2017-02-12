@@ -13,7 +13,7 @@ public static class Consts
     public const float TILE_HEIGHT = 0.5f;
 
     // All tiles are scaled by this amount in an attempt to tackle gaps
-    public const float SCALE_FUDGE = 0.001f;
+    public const float SCALE_FUDGE = 0.01f;
 
     /**
      * Editor related
@@ -21,4 +21,5 @@ public static class Consts
     public const float MOUSE_BUMP_BORDER = 20.0f;
     public const float MOUSE_BUMP_SPEED = 500.0f;
     public const float CAMERA_Y = 6.0f;
+    public const float VERTICAL_EDGE_DISTANCE = 5.0f;
 }

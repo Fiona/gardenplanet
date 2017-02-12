@@ -20,10 +20,10 @@ public class InputManager : MonoBehaviour
         // Get mouse over tiles
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 100.0f, 1 << Consts.COLLISION_LAYER_TILES))
-        {
-            tilemap.mouseOverTile(hit.transform.gameObject);
-        }
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
+            tilemap.MouseOverTile(hit.transform.gameObject);
+        else
+            tilemap.MouseOverTile(null);
 
     }
 
