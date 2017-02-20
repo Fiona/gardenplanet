@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{2BCF1727-F670-B492-B2C3-A75EF9DAAAE0}") = "StrawberrySupernova", "Assembly-CSharp-firstpass.csproj", "{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}"
+EndProject
+Project("{2BCF1727-F670-B492-B2C3-A75EF9DAAAE0}") = "StrawberrySupernova", "Assembly-CSharp.csproj", "{ACBEEA75-25C9-8954-20C9-FD210A2439A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBEEA75-25C9-8954-20C9-FD210A2439A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBEEA75-25C9-8954-20C9-FD210A2439A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBEEA75-25C9-8954-20C9-FD210A2439A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBEEA75-25C9-8954-20C9-FD210A2439A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
