@@ -16,25 +16,30 @@ public class MapEditorController : MonoBehaviour
     public GameObject currentTilePanel;
     public Text currentTileText;
     public GameObject TilemapSelectionCube;
+    public GameObject barrierTemplate;
 
     private string currentTileName;
     private GameObject currentTileTypeSelectedObj;
     private Tilemap.Tile currentHoveredTile;
+    private List<GameObject> barriers;
 
     public void Awake()
     {
 
-        var tileMapWidth = 20;
-        var tileMapHeight = 20;
+        barriers = new List<GameObject>();
 
-        for(int x = 0; x <= tileMapWidth; x++)
+        var tileMapWidth = 15;
+        var tileMapHeight = 10;
+        tilemap.SetSize(tileMapWidth, tileMapHeight);
+
+        for(int x = 0; x < tileMapWidth; x++)
         {
-            for(int y = 0; y <= tileMapHeight; y++)
+            for(int y = 0; y < tileMapHeight; y++)
             {
                 if(x < 10 && y < 10)
                     tilemap.AddTile(((UnityEngine.Random.Range(0.0f, 1.0f) > .5f) ? "grass02" : "grass01"), x, y, 0);
-                else
-                    tilemap.AddTile(null, x, y, 0);
+                //else
+                //    tilemap.AddTile(null, x, y, 0);
             }
         }
 
@@ -64,11 +69,10 @@ public class MapEditorController : MonoBehaviour
             body.AddForce(((Vector3)direction) * Consts.MOUSE_BUMP_SPEED * Time.deltaTime);
 
         // Clamp camera pos
-        var tileExtents = tilemap.GetTileExtents();
         camera.transform.position = new Vector3(
-            Mathf.Clamp(camera.transform.position.x, tileExtents[0], tileExtents[1]),
+            Mathf.Clamp(camera.transform.position.x, 0, tilemap.width),
             camera.transform.position.y,
-            Mathf.Clamp(camera.transform.position.z, tileExtents[2] - Consts.VERTICAL_EDGE_DISTANCE, tileExtents[3] - Consts.VERTICAL_EDGE_DISTANCE)
+            Mathf.Clamp(camera.transform.position.z, -Consts.VERTICAL_EDGE_DISTANCE, tilemap.height - Consts.VERTICAL_EDGE_DISTANCE)
             );
     }
 
@@ -132,6 +136,8 @@ public class MapEditorController : MonoBehaviour
             camera.transform.position.x,
             y,
             camera.transform.position.z);
+        CreateBarrier();
+        tilemap.GenerateEmptyTiles(currentLayer);
     }
 
     /*
@@ -204,6 +210,78 @@ public class MapEditorController : MonoBehaviour
             chosenIndex = currentIndex-1;
 
         SelectTileType(tileTypes.GetKeyFromIndex(chosenIndex));
+
+    }
+
+    public void CreateBarrier()
+    {
+
+        // Delete old barriers
+        foreach(var barrier in barriers)
+            Destroy(barrier);
+        barriers = new List<GameObject>();
+
+        // Top of barrier
+        var topBarrier = Instantiate(barrierTemplate);
+        topBarrier.transform.parent = tilemap.transform;
+        topBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.width,
+            topBarrier.transform.localScale.y,
+            0.02f
+            );
+        topBarrier.transform.localPosition = new Vector3(
+            tilemap.width / 2,
+            0.098f + (currentLayer * 0.5f),
+            tilemap.height - 0.5f
+            );
+        barriers.Add(topBarrier);
+
+        // Bottom of barrier
+        var bottomBarrier = Instantiate(barrierTemplate);
+        bottomBarrier.transform.parent = tilemap.transform;
+        bottomBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.width,
+            bottomBarrier.transform.localScale.y,
+            0.02f
+            );
+        bottomBarrier.transform.localPosition = new Vector3(
+            tilemap.width / 2,
+            0.098f + (currentLayer * 0.5f),
+            -0.5f
+            );
+        barriers.Add(bottomBarrier);
+
+        // Left barrier
+        var leftBarrier = Instantiate(barrierTemplate);
+        leftBarrier.transform.parent = tilemap.transform;
+        leftBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.height,
+            leftBarrier.transform.localScale.y,
+            0.02f
+            );
+        leftBarrier.transform.localPosition = new Vector3(
+            -0.5f,
+            0.098f + (currentLayer * 0.5f),
+            (tilemap.height/2) - 0.5f
+            );
+        leftBarrier.transform.Rotate(new Vector3(0f, 0f, 90f));
+        barriers.Add(leftBarrier);
+
+        // Riiight
+        var rightBarrier = Instantiate(barrierTemplate);
+        rightBarrier.transform.parent = tilemap.transform;
+        rightBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.height,
+            rightBarrier.transform.localScale.y,
+            0.02f
+            );
+        rightBarrier.transform.localPosition = new Vector3(
+            tilemap.width-0.5f,
+            0.098f + (currentLayer * 0.5f),
+            (tilemap.height/2) - 0.5f
+            );
+        rightBarrier.transform.Rotate(new Vector3(0f, 0f, -90f));
+        barriers.Add(rightBarrier);
 
     }
 

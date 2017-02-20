@@ -50,23 +50,19 @@ public class Tilemap : MonoBehaviour
     private TileTypesDictionary tileTypes;
     private List<Tile> tilemap;
     private Tile currentTileMouseOver = null;
-    private float[] tileExtents = new float[4];
 
     public MapEditorController mapEditor;
+    public int width;
+    public int height;
 
-    /*
-      Constructor
-    */
-    public Tilemap()
-    {
-        tilemap = new List<Tile>();
-    }
 
     /*
       Loads in all the available tile types
      */
     public void Awake()
     {
+        tilemap = new List<Tile>();
+
         tileTypes = new TileTypesDictionary();
         var unsortedNewTileTypes = Resources.LoadAll("tiles/");
 
@@ -80,11 +76,27 @@ public class Tilemap : MonoBehaviour
     }
 
     /*
+      The tilemap will be of 0 size if this hasn't been called.
+     */
+    public void SetSize(int width, int height)
+    {
+        this.width = width;
+        this.height = height;
+    }
+
+    /*
       Helper method fer adding a tile including it's gameobject at
       a specified tile position.
      */
     public void AddTile(string tilename, int x, int y, int layer)
     {
+
+        if(x < 0 || x >= width || y < 0 || y >= height)
+        {
+            Debug.Log("Tile outside of tilemap.");
+            return;
+        }
+
         // If we want a named tile or an empty one
         GameObject newTileObj = null;
         if(tilename != null)
@@ -97,6 +109,7 @@ public class Tilemap : MonoBehaviour
         tilemap.Add(newTile);
 
         // Find new extents
+        /*
         float? minZ = null, maxZ = null, minX = null, maxX = null;
         foreach(var tile in tilemap)
         {
@@ -113,6 +126,7 @@ public class Tilemap : MonoBehaviour
         }
         tileExtents[0] = (float)minX; tileExtents[1] = (float)maxX;
         tileExtents[2] = (float)minZ; tileExtents[3] = (float)maxZ;
+        */
     }
 
     /*
@@ -214,12 +228,25 @@ public class Tilemap : MonoBehaviour
     }
 
     /*
-      Returns 4 item array containing the bounds of tiles at the edges of the world.
-      [minX, maxX, minZ, maxZ]
+      Used in the editor when switching layers to create fake ass
+      empty tiles for capturing rays.
      */
-    public float[] GetTileExtents()
+    public void GenerateEmptyTiles(int layer)
     {
-        return tileExtents;
+
+        if(tilemap == null)
+            return;
+
+        var clonedTilemap = new List<Tile>(tilemap);
+        foreach(var tile in clonedTilemap)
+            if(tile.emptyTile)
+                RemoveTile(tile.x, tile.y, tile.layer);
+
+        for(int x = 0; x < width; x++)
+            for(int y = 0; y < height; y++)
+                if(GetTileAt(x, y, layer) == null)
+                    AddTile(null, x, y, layer);
+
     }
 
     /*
