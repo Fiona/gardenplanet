@@ -25,6 +25,7 @@ public class MapEditorController : MonoBehaviour
 
     private string currentTileName;
     private GameObject currentTileTypeSelectedObj;
+    private string previousTileType;
     private Tilemap.Tile currentHoveredTile;
     private List<GameObject> barriers;
     private Direction newTileDirection;
@@ -56,6 +57,7 @@ public class MapEditorController : MonoBehaviour
         var tileTypes = tilemap.GetTileTypes();
         SelectTileType(tileTypes.GetKeyFromIndex(0));
 
+        mainMenuBar.ShowMehMessage("What's up my glip glops");
     }
 
     public void Update()
@@ -122,7 +124,6 @@ public class MapEditorController : MonoBehaviour
      */
     public void SelectedNewTile(Tilemap.Tile selectedTile)
     {
-
         if(worldPanel.GetComponent<IsMouseOver>().isOver)
             currentHoveredTile = selectedTile;
         else
@@ -162,15 +163,22 @@ public class MapEditorController : MonoBehaviour
     private void SelectTileType(string tileTypeName)
     {
 
-        var tileTypes = tilemap.GetTileTypes();
-        if(!tileTypes.ContainsKey(tileTypeName))
-            throw new Exception("Tile attempted to change to not in tile type dictionary.");
-
         if(currentTileTypeSelectedObj != null)
         {
             Destroy(currentTileTypeSelectedObj);
             currentTileTypeSelectedObj = null;
         }
+
+        if(tileTypeName == null)
+        {
+            currentTileName = null;
+            currentTileText.text = "Empty";
+            return;
+        }
+
+        var tileTypes = tilemap.GetTileTypes();
+        if(!tileTypes.ContainsKey(tileTypeName))
+            throw new Exception("Tile attempted to change to not in tile type dictionary.");
 
         currentTileTypeSelectedObj = Instantiate(tileTypes[tileTypeName]) as GameObject;
         currentTileTypeSelectedObj.transform.parent = currentTilePanel.transform;
@@ -280,6 +288,12 @@ public class MapEditorController : MonoBehaviour
     public void NextTileButtonPressed()
     {
 
+        if(currentTileName == null)
+        {
+            SelectTileType(previousTileType);
+            return;
+        }
+
         var tileTypes = tilemap.GetTileTypes();
         var currentIndex = tileTypes.IndexOf(currentTileName);
         int chosenIndex;
@@ -299,6 +313,12 @@ public class MapEditorController : MonoBehaviour
     public void PreviousTileButtonPressed()
     {
 
+        if(currentTileName == null)
+        {
+            SelectTileType(previousTileType);
+            return;
+        }
+
         var tileTypes = tilemap.GetTileTypes();
         var currentIndex = tileTypes.IndexOf(currentTileName);
         int chosenIndex;
@@ -310,6 +330,20 @@ public class MapEditorController : MonoBehaviour
 
         SelectTileType(tileTypes.GetKeyFromIndex(chosenIndex));
 
+    }
+
+    /*
+      Pressed button to cancel out the selection.
+     */
+    public void EmptyTileButtonPressed()
+    {
+        if(currentTileName == null)
+        {
+            SelectTileType(previousTileType);
+            return;
+        }
+        previousTileType = currentTileName;
+        SelectTileType(null);
     }
 
     /*

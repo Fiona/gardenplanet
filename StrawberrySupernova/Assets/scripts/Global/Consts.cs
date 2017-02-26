@@ -30,3 +30,4 @@ public static class Consts
 
 public enum Direction{Left, Right, Up, Down};
 public enum RotationalDirection{Clockwise, AntiClockwise};
+public enum EditorMessageType{Good, Bad, Meh};
