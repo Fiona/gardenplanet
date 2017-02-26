@@ -76,7 +76,17 @@ public class MapEditorController : MonoBehaviour
         if(direction != null)
             body.AddForce(((Vector3)direction) * Consts.MOUSE_BUMP_SPEED * Time.deltaTime);
 
-        // Clamp camera pos
+        ClampCameraToBorders();
+    }
+
+    public void PanCamera(float vertical, float horizontal)
+    {
+        mainCamera.transform.position -= new Vector3(vertical, 0.0f, horizontal);
+        ClampCameraToBorders();
+    }
+
+    public void ClampCameraToBorders()
+    {
         mainCamera.transform.position = new Vector3(
             Mathf.Clamp(mainCamera.transform.position.x, 0, tilemap.width),
             mainCamera.transform.position.y,
