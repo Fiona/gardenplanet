@@ -15,6 +15,10 @@ public static class Consts
     // All tiles are scaled by this amount in an attempt to tackle gaps
     public const float SCALE_FUDGE = 0.01f;
 
+    // Any mouse wheel axis movements at or outside of this movement will
+    // class as a click in that direction.
+    public const float MOUSE_WHEEL_CLICK_SNAP = 0.05f;
+
     /**
      * Editor related
      **/
@@ -23,3 +27,6 @@ public static class Consts
     public const float CAMERA_Y = 6.0f;
     public const float VERTICAL_EDGE_DISTANCE = 5.0f;
 }
+
+public enum Direction{Left, Right, Up, Down};
+public enum RotationalDirection{Clockwise, AntiClockwise};

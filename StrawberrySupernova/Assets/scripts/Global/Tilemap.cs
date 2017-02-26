@@ -12,21 +12,26 @@ public class Tilemap : MonoBehaviour
         public int x;
         public int y;
         public int layer;
+        public Direction direction;
         public GameObject tileObj;
         public bool emptyTile;
         public Material[] sharedMaterials;
 
-        public Tile(int _x, int _y, int _layer, GameObject _tileObj, bool _emptyTile=false)
+        public Tile(int x, int y, int layer, Direction direction, GameObject tileObj, bool emptyTile=false)
         {
             // Place tile
-            x = _x; y = _y; layer = _layer; tileObj = _tileObj;
-            emptyTile = _emptyTile;
+            this.x = x;
+            this.y = y;
+            this.layer = layer;
+            this.tileObj = tileObj;
+            this.emptyTile = emptyTile;
+
             tileObj.transform.localPosition = new Vector3(
                 x,
-                _layer * Consts.TILE_HEIGHT,
+                layer * Consts.TILE_HEIGHT,
                 y);
 
-            tileObj.transform.Rotate(new Vector3(0, 180, 0));
+            SetDirection(direction);
             // Combats tile gaps
             tileObj.transform.localScale = new Vector3(100.0f + Consts.SCALE_FUDGE, 100.0f + Consts.SCALE_FUDGE, 100.0f + Consts.SCALE_FUDGE);
 
@@ -44,6 +49,19 @@ public class Tilemap : MonoBehaviour
             BoxCollider floorCollider = tileObj.AddComponent<BoxCollider>();
             floorCollider.size = new Vector3(0.01f, 0.001f, 0.01f);
             floorCollider.center = new Vector3(0.0f, -0.0004f, 0.0f);
+        }
+
+        public void SetDirection(Direction direction)
+        {
+            this.direction = direction;
+            var baseRotation = 180;
+            if(direction == Direction.Right)
+                baseRotation -= 90;
+            if(direction == Direction.Up)
+                baseRotation -= 180;
+            if(direction == Direction.Left)
+                baseRotation += 90;
+            tileObj.transform.localRotation = Quaternion.Euler(0, baseRotation, 0);
         }
     }
 
@@ -96,7 +114,7 @@ public class Tilemap : MonoBehaviour
       Helper method fer adding a tile including it's gameobject at
       a specified tile position.
      */
-    public void AddTile(string tilename, int x, int y, int layer)
+    public void AddTile(string tilename, int x, int y, int layer, Direction direction)
     {
 
         if(x < 0 || x >= width || y < 0 || y >= height)
@@ -113,7 +131,7 @@ public class Tilemap : MonoBehaviour
             newTileObj = new GameObject("Empty Tile");
         newTileObj.transform.parent = transform;
 
-        var newTile = new Tile(x, y, layer, newTileObj, (tilename==null));
+        var newTile = new Tile(x, y, layer, direction, newTileObj, (tilename==null));
         tilemap.Add(newTile);
 
     }
@@ -146,16 +164,11 @@ public class Tilemap : MonoBehaviour
     }
 
     /*
-      Pass a GameObject to tell the tilemap that we're hovering
+      Pass a Tile object to tell the tilemap that we're hovering
       over the tile that object represents.
      */
-    public void MouseOverTile(GameObject tileGameObject)
+    public void MouseOverTile(Tile tile)
     {
-        var tile = GetTileFromGameObject(tileGameObject);
-
-        if(currentTileMouseOver == tile)
-            return;
-
         if(mapEditor != null)
         {
 
@@ -163,10 +176,13 @@ public class Tilemap : MonoBehaviour
             if(currentTileMouseOver != tile && currentTileMouseOver != null && currentTileMouseOver.emptyTile == false)
             {
                 // Destroy the old instanced materials and go back to the shared ones
-                var tileRenderer = currentTileMouseOver.tileObj.GetComponent<Renderer>();
-                for(var i = 0; i < tileRenderer.materials.Length; i++)
-                    Destroy(tileRenderer.materials[i]);
-                tileRenderer.materials = currentTileMouseOver.sharedMaterials;
+                if(currentTileMouseOver.tileObj != null)
+                {
+                    var tileRenderer = currentTileMouseOver.tileObj.GetComponent<Renderer>();
+                    for(var i = 0; i < tileRenderer.materials.Length; i++)
+                        Destroy(tileRenderer.materials[i]);
+                    tileRenderer.materials = currentTileMouseOver.sharedMaterials;
+                }
             }
 
         }
@@ -234,8 +250,54 @@ public class Tilemap : MonoBehaviour
         for(int x = 0; x < width; x++)
             for(int y = 0; y < height; y++)
                 if(GetTileAt(x, y, layer) == null)
-                    AddTile(null, x, y, layer);
+                    AddTile(null, x, y, layer, Direction.Down);
 
+    }
+
+    /*
+      Pass a tile object to rotate it 90 degrees in the rotational
+      direction passed.
+     */
+    public void RotateTileInDirection(Tile tile, RotationalDirection direction)
+    {
+        var newDirection = Direction.Down;
+        if(direction == RotationalDirection.AntiClockwise)
+        {
+            switch(tile.direction)
+            {
+                case Direction.Down:
+                    newDirection = Direction.Left;
+                    break;
+                case Direction.Left:
+                    newDirection = Direction.Up;
+                    break;
+                case Direction.Up:
+                    newDirection = Direction.Right;
+                    break;
+                case Direction.Right:
+                    newDirection = Direction.Down;
+                    break;
+            }
+        }
+        else if(direction == RotationalDirection.Clockwise)
+        {
+            switch(tile.direction)
+            {
+                case Direction.Down:
+                    newDirection = Direction.Right;
+                    break;
+                case Direction.Left:
+                    newDirection = Direction.Down;
+                    break;
+                case Direction.Up:
+                    newDirection = Direction.Left;
+                    break;
+                case Direction.Right:
+                    newDirection = Direction.Up;
+                    break;
+            }
+        }
+        tile.SetDirection(newDirection);
     }
 
     /*

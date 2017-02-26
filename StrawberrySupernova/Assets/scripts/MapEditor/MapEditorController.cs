@@ -26,6 +26,7 @@ public class MapEditorController : MonoBehaviour
     private GameObject currentTileTypeSelectedObj;
     private Tilemap.Tile currentHoveredTile;
     private List<GameObject> barriers;
+    private Direction newTileDirection;
 
     public void Awake()
     {
@@ -41,13 +42,14 @@ public class MapEditorController : MonoBehaviour
             for(int y = 0; y < tileMapHeight; y++)
             {
                 if(x < 10 && y < 10)
-                    tilemap.AddTile(((UnityEngine.Random.Range(0.0f, 1.0f) > .5f) ? "grass02" : "grass01"), x, y, 0);
+                    tilemap.AddTile(((UnityEngine.Random.Range(0.0f, 1.0f) > .5f) ? "grass02" : "grass01"), x, y, 0, Direction.Down);
                 //else
                 //    tilemap.AddTile(null, x, y, 0);
             }
         }
 
         // Set up editor
+        SetNewTileDirection(Direction.Down);
         currentTileTemplate.SetActive(false);
         SwitchToLayer(0);
         var tileTypes = tilemap.GetTileTypes();
@@ -104,7 +106,7 @@ public class MapEditorController : MonoBehaviour
         int layer = currentHoveredTile.layer;
 
         tilemap.RemoveTile(x, y, layer);
-        tilemap.AddTile(currentTileName, x, y, layer);
+        tilemap.AddTile(currentTileName, x, y, layer, newTileDirection);
     }
 
     /*
@@ -176,6 +178,11 @@ public class MapEditorController : MonoBehaviour
         currentTileName = tileTypeName;
         currentTileText.text = currentTileName;
 
+    }
+
+    public void SetNewTileDirection(Direction direction)
+    {
+        newTileDirection = direction;
     }
 
     public void ResizeTilemapTo(int width, int height)

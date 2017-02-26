@@ -448,7 +448,6 @@ GameObject:
   - component: {fileID: 315689259}
   - component: {fileID: 315689258}
   - component: {fileID: 315689257}
-  - component: {fileID: 315689256}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -456,13 +455,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &315689256
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 315689255}
-  m_Enabled: 1
 --- !u!92 &315689257
 Behaviour:
   m_ObjectHideFlags: 0
@@ -736,7 +728,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseTexture: {fileID: 2800000, guid: bf66622d15cd14b18977f09c3a6be868, type: 3}
-  tilemap: {fileID: 1694270511}
 --- !u!4 &500756334
 Transform:
   m_ObjectHideFlags: 0
