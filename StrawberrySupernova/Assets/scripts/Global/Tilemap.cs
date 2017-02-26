@@ -15,16 +15,18 @@ public class Tilemap : MonoBehaviour
         public Direction direction;
         public GameObject tileObj;
         public bool emptyTile;
+        public string tileTypeName;
         public Material[] sharedMaterials;
 
-        public Tile(int x, int y, int layer, Direction direction, GameObject tileObj, bool emptyTile=false)
+        public Tile(int x, int y, int layer, Direction direction, GameObject tileObj, string tileTypeName)
         {
             // Place tile
             this.x = x;
             this.y = y;
             this.layer = layer;
             this.tileObj = tileObj;
-            this.emptyTile = emptyTile;
+            this.tileTypeName = tileTypeName;
+            this.emptyTile = (tileTypeName == null);
 
             tileObj.transform.localPosition = new Vector3(
                 x,
@@ -131,7 +133,7 @@ public class Tilemap : MonoBehaviour
             newTileObj = new GameObject("Empty Tile");
         newTileObj.transform.parent = transform;
 
-        var newTile = new Tile(x, y, layer, direction, newTileObj, (tilename==null));
+        var newTile = new Tile(x, y, layer, direction, newTileObj, tilename);
         tilemap.Add(newTile);
 
     }

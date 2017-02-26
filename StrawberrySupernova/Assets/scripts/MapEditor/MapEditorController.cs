@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -96,17 +97,24 @@ public class MapEditorController : MonoBehaviour
             );
     }
 
-    public void ClickedOnWorld()
+    public void ClickedOnWorld(BaseEventData data)
     {
         if(currentHoveredTile == null)
             return;
 
-        int x = currentHoveredTile.x;
-        int y = currentHoveredTile.y;
-        int layer = currentHoveredTile.layer;
+        PointerEventData pointerEventData = data as PointerEventData;
 
-        tilemap.RemoveTile(x, y, layer);
-        tilemap.AddTile(currentTileName, x, y, layer, newTileDirection);
+        if(pointerEventData.button == PointerEventData.InputButton.Left)
+        {
+            int x = currentHoveredTile.x;
+            int y = currentHoveredTile.y;
+            int layer = currentHoveredTile.layer;
+
+            tilemap.RemoveTile(x, y, layer);
+            tilemap.AddTile(currentTileName, x, y, layer, newTileDirection);
+        }
+        else if(pointerEventData.button == PointerEventData.InputButton.Right)
+            SelectTileType(currentHoveredTile.tileTypeName);
     }
 
     /*
