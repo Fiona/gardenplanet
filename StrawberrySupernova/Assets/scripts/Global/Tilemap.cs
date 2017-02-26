@@ -76,12 +76,20 @@ public class Tilemap : MonoBehaviour
     }
 
     /*
-      The tilemap will be of 0 size if this hasn't been called.
+      The tilemap will be of 0 size if this hasn't been called. Also
+      kills all orphaned tiles.
      */
     public void SetSize(int width, int height)
     {
         this.width = width;
         this.height = height;
+
+        var tilesToKill = new List<Tile>();
+        foreach(var tile in tilemap)
+            if(tile.x >= width || tile.y >= height)
+                tilesToKill.Add(tile);
+        foreach(var tile in tilesToKill)
+            RemoveTile(tile.x, tile.y, tile.layer);
     }
 
     /*
@@ -108,25 +116,6 @@ public class Tilemap : MonoBehaviour
         var newTile = new Tile(x, y, layer, newTileObj, (tilename==null));
         tilemap.Add(newTile);
 
-        // Find new extents
-        /*
-        float? minZ = null, maxZ = null, minX = null, maxX = null;
-        foreach(var tile in tilemap)
-        {
-            float tileX = tile.tileObj.transform.localPosition.x;
-            float tileZ = tile.tileObj.transform.localPosition.z;
-            if(minX == null || tileX < minX)
-                minX = tileX;
-            if(maxX == null || tileX > maxX)
-                maxX = tileX;
-            if(minZ == null || tileZ < minZ)
-                minZ = tileZ;
-            if(maxZ == null || tileZ > maxZ)
-                maxZ = tileZ;
-        }
-        tileExtents[0] = (float)minX; tileExtents[1] = (float)maxX;
-        tileExtents[2] = (float)minZ; tileExtents[3] = (float)maxZ;
-        */
     }
 
     /*

@@ -18,7 +18,7 @@ public static class Consts
     /**
      * Editor related
      **/
-    public const float MOUSE_BUMP_BORDER = 20.0f;
+    public const float MOUSE_BUMP_BORDER = 40.0f;
     public const float MOUSE_BUMP_SPEED = 500.0f;
     public const float CAMERA_Y = 6.0f;
     public const float VERTICAL_EDGE_DISTANCE = 5.0f;

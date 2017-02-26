@@ -11,12 +11,16 @@ public class MapEditorController : MonoBehaviour
 
     [Header("Editor component references")]
     public Tilemap tilemap;
-    public Camera camera;
+    public Camera mainCamera;
     public Text layerText;
     public GameObject currentTilePanel;
     public Text currentTileText;
+    public GameObject currentTileTemplate;
     public GameObject TilemapSelectionCube;
     public GameObject barrierTemplate;
+    public Image worldPanel;
+    public MainMenuBar mainMenuBar;
+    public YesNoDialog yesNoDialog;
 
     private string currentTileName;
     private GameObject currentTileTypeSelectedObj;
@@ -44,6 +48,7 @@ public class MapEditorController : MonoBehaviour
         }
 
         // Set up editor
+        currentTileTemplate.SetActive(false);
         SwitchToLayer(0);
         var tileTypes = tilemap.GetTileTypes();
         SelectTileType(tileTypes.GetKeyFromIndex(0));
@@ -53,26 +58,29 @@ public class MapEditorController : MonoBehaviour
     public void Update()
     {
         // Do bump scrolling
-        var body = camera.GetComponent<Rigidbody>();
+        var body = mainCamera.GetComponent<Rigidbody>();
         Vector3? direction = null;
 
-        if(Input.mousePosition[0] < Consts.MOUSE_BUMP_BORDER)
-            direction = Vector3.left;
-        if(Input.mousePosition[0] > Screen.width - Consts.MOUSE_BUMP_BORDER)
-            direction = Vector3.right;
-        if(Input.mousePosition[1] < Consts.MOUSE_BUMP_BORDER)
-            direction = Vector3.back;
-        if(Input.mousePosition[1] > Screen.height - Consts.MOUSE_BUMP_BORDER)
-            direction = Vector3.forward;
+        if(worldPanel.GetComponent<IsMouseOver>().isOver)
+        {
+            if(Input.mousePosition[0] < Consts.MOUSE_BUMP_BORDER)
+                direction = Vector3.left;
+            if(Input.mousePosition[0] > Screen.width - Consts.MOUSE_BUMP_BORDER)
+                direction = Vector3.right;
+            if(Input.mousePosition[1] < Consts.MOUSE_BUMP_BORDER)
+                direction = Vector3.back;
+            if(Input.mousePosition[1] > Screen.height - Consts.MOUSE_BUMP_BORDER - mainMenuBar.GetComponent<RectTransform>().rect.height)
+                direction = Vector3.forward;
+        }
 
         if(direction != null)
             body.AddForce(((Vector3)direction) * Consts.MOUSE_BUMP_SPEED * Time.deltaTime);
 
         // Clamp camera pos
-        camera.transform.position = new Vector3(
-            Mathf.Clamp(camera.transform.position.x, 0, tilemap.width),
-            camera.transform.position.y,
-            Mathf.Clamp(camera.transform.position.z, -Consts.VERTICAL_EDGE_DISTANCE, tilemap.height - Consts.VERTICAL_EDGE_DISTANCE)
+        mainCamera.transform.position = new Vector3(
+            Mathf.Clamp(mainCamera.transform.position.x, 0, tilemap.width),
+            mainCamera.transform.position.y,
+            Mathf.Clamp(mainCamera.transform.position.z, -Consts.VERTICAL_EDGE_DISTANCE, tilemap.height - Consts.VERTICAL_EDGE_DISTANCE)
             );
     }
 
@@ -90,27 +98,15 @@ public class MapEditorController : MonoBehaviour
     }
 
     /*
-      Pressed button that makes Z layer go up
-     */
-    public void LayerUpButtonPressed()
-    {
-        SwitchToLayer(currentLayer + 1);
-    }
-
-    /*
-      Pressed button that makes Z layer go down
-     */
-    public void LayerDownButtonPressed()
-    {
-        SwitchToLayer(currentLayer - 1);
-    }
-
-    /*
       Called from Tilemap when the mouse is over a tile
      */
     public void SelectedNewTile(Tilemap.Tile selectedTile)
     {
-        currentHoveredTile = selectedTile;
+
+        if(worldPanel.GetComponent<IsMouseOver>().isOver)
+            currentHoveredTile = selectedTile;
+        else
+            currentHoveredTile = null;
 
         if(currentHoveredTile == null)
             TilemapSelectionCube.GetComponent<MeshRenderer>().enabled = false;
@@ -132,10 +128,10 @@ public class MapEditorController : MonoBehaviour
         currentLayer = layer;
         layerText.text = String.Format("{0}", layer);
         float y = Consts.CAMERA_Y + (Consts.TILE_HEIGHT * layer);
-        camera.transform.position = new Vector3(
-            camera.transform.position.x,
+        mainCamera.transform.position = new Vector3(
+            mainCamera.transform.position.x,
             y,
-            camera.transform.position.z);
+            mainCamera.transform.position.z);
         CreateBarrier();
         tilemap.GenerateEmptyTiles(currentLayer);
     }
@@ -158,20 +154,98 @@ public class MapEditorController : MonoBehaviour
 
         currentTileTypeSelectedObj = Instantiate(tileTypes[tileTypeName]) as GameObject;
         currentTileTypeSelectedObj.transform.parent = currentTilePanel.transform;
+        currentTileTypeSelectedObj.AddComponent<RectTransform>();
+        var rect = currentTileTypeSelectedObj.GetComponent<RectTransform>();
 
-        // Position according to magic values subject to change
-        currentTileTypeSelectedObj.transform.localPosition = new Vector3(105.0f, 23.0f, -243.48f);
-        currentTileTypeSelectedObj.transform.localScale = new Vector3(10000.0f, 10000.0f, 10000.0f);
-        currentTileTypeSelectedObj.transform.localRotation = Quaternion.Euler(32.0f, 120.0f, 0.0f);
-
-        // Switch to special ordered shader
-        var fadeOverShader = Shader.Find("Custom/FadeOver");
-        var renderer = currentTileTypeSelectedObj.GetComponent<Renderer>();
-        for(var i = 0; i < renderer.materials.Length; i++)
-            renderer.materials[i].shader = fadeOverShader;
+        // Base values on template
+        currentTileTypeSelectedObj.layer = currentTileTemplate.layer;
+        rect.localPosition = currentTileTemplate.GetComponent<RectTransform>().localPosition;
+        rect.localScale = currentTileTemplate.GetComponent<RectTransform>().localScale;
+        rect.localRotation = currentTileTemplate.GetComponent<RectTransform>().localRotation;
 
         currentTileName = tileTypeName;
         currentTileText.text = currentTileName;
+
+    }
+
+    public void ResizeTilemapTo(int width, int height)
+    {
+        if(width <= 0 || height <= 0)
+            throw new Exception("Values must be higher than 0.");
+        tilemap.SetSize(width, height);
+        CreateBarrier();
+        tilemap.GenerateEmptyTiles(currentLayer);
+    }
+
+    public void CreateBarrier()
+    {
+
+        // Delete old barriers
+        foreach(var barrier in barriers)
+            Destroy(barrier);
+        barriers = new List<GameObject>();
+
+        // Top of barrier
+        var topBarrier = Instantiate(barrierTemplate);
+        topBarrier.transform.parent = tilemap.transform;
+        topBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.width,
+            topBarrier.transform.localScale.y,
+            0.02f
+            );
+        topBarrier.transform.localPosition = new Vector3(
+            (tilemap.width / 2.0f) - 0.5f,
+            0.098f + (currentLayer * 0.5f),
+            tilemap.height - 0.5f
+            );
+        barriers.Add(topBarrier);
+
+        // Bottom of barrier
+        var bottomBarrier = Instantiate(barrierTemplate);
+        bottomBarrier.transform.parent = tilemap.transform;
+        bottomBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.width,
+            bottomBarrier.transform.localScale.y,
+            0.02f
+            );
+        bottomBarrier.transform.localPosition = new Vector3(
+            (tilemap.width / 2.0f) - 0.5f,
+            0.098f + (currentLayer * 0.5f),
+            -0.5f
+            );
+        barriers.Add(bottomBarrier);
+
+        // Left barrier
+        var leftBarrier = Instantiate(barrierTemplate);
+        leftBarrier.transform.parent = tilemap.transform;
+        leftBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.height,
+            leftBarrier.transform.localScale.y,
+            0.02f
+            );
+        leftBarrier.transform.localPosition = new Vector3(
+            -0.5f,
+            0.098f + (currentLayer * 0.5f),
+            (tilemap.height / 2.0f) - 0.5f
+            );
+        leftBarrier.transform.Rotate(new Vector3(0f, 0f, 90f));
+        barriers.Add(leftBarrier);
+
+        // Riiight
+        var rightBarrier = Instantiate(barrierTemplate);
+        rightBarrier.transform.parent = tilemap.transform;
+        rightBarrier.transform.localScale = new Vector3(
+            0.1f * tilemap.height,
+            rightBarrier.transform.localScale.y,
+            0.02f
+            );
+        rightBarrier.transform.localPosition = new Vector3(
+            tilemap.width-0.5f,
+            0.098f + (currentLayer * 0.5f),
+            (tilemap.height / 2.0f) - 0.5f
+            );
+        rightBarrier.transform.Rotate(new Vector3(0f, 0f, -90f));
+        barriers.Add(rightBarrier);
 
     }
 
@@ -213,76 +287,20 @@ public class MapEditorController : MonoBehaviour
 
     }
 
-    public void CreateBarrier()
+    /*
+      Pressed button that makes Z layer go up
+     */
+    public void LayerUpButtonPressed()
     {
+        SwitchToLayer(currentLayer + 1);
+    }
 
-        // Delete old barriers
-        foreach(var barrier in barriers)
-            Destroy(barrier);
-        barriers = new List<GameObject>();
-
-        // Top of barrier
-        var topBarrier = Instantiate(barrierTemplate);
-        topBarrier.transform.parent = tilemap.transform;
-        topBarrier.transform.localScale = new Vector3(
-            0.1f * tilemap.width,
-            topBarrier.transform.localScale.y,
-            0.02f
-            );
-        topBarrier.transform.localPosition = new Vector3(
-            tilemap.width / 2,
-            0.098f + (currentLayer * 0.5f),
-            tilemap.height - 0.5f
-            );
-        barriers.Add(topBarrier);
-
-        // Bottom of barrier
-        var bottomBarrier = Instantiate(barrierTemplate);
-        bottomBarrier.transform.parent = tilemap.transform;
-        bottomBarrier.transform.localScale = new Vector3(
-            0.1f * tilemap.width,
-            bottomBarrier.transform.localScale.y,
-            0.02f
-            );
-        bottomBarrier.transform.localPosition = new Vector3(
-            tilemap.width / 2,
-            0.098f + (currentLayer * 0.5f),
-            -0.5f
-            );
-        barriers.Add(bottomBarrier);
-
-        // Left barrier
-        var leftBarrier = Instantiate(barrierTemplate);
-        leftBarrier.transform.parent = tilemap.transform;
-        leftBarrier.transform.localScale = new Vector3(
-            0.1f * tilemap.height,
-            leftBarrier.transform.localScale.y,
-            0.02f
-            );
-        leftBarrier.transform.localPosition = new Vector3(
-            -0.5f,
-            0.098f + (currentLayer * 0.5f),
-            (tilemap.height/2) - 0.5f
-            );
-        leftBarrier.transform.Rotate(new Vector3(0f, 0f, 90f));
-        barriers.Add(leftBarrier);
-
-        // Riiight
-        var rightBarrier = Instantiate(barrierTemplate);
-        rightBarrier.transform.parent = tilemap.transform;
-        rightBarrier.transform.localScale = new Vector3(
-            0.1f * tilemap.height,
-            rightBarrier.transform.localScale.y,
-            0.02f
-            );
-        rightBarrier.transform.localPosition = new Vector3(
-            tilemap.width-0.5f,
-            0.098f + (currentLayer * 0.5f),
-            (tilemap.height/2) - 0.5f
-            );
-        rightBarrier.transform.Rotate(new Vector3(0f, 0f, -90f));
-        barriers.Add(rightBarrier);
-
+    /*
+      Pressed button that makes Z layer go down
+     */
+    public void LayerDownButtonPressed()
+    {
+        SwitchToLayer(currentLayer - 1);
     }
 
 }

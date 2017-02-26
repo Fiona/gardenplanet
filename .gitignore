@@ -21,6 +21,6 @@ src/locale
 *.orig.meta
 
 # Unity excludes
-Harvest Moom/Library
-Harvest Moom/Temp
+StrawberrySupernova/Library
+StrawberrySupernova/Temp
 obj/
