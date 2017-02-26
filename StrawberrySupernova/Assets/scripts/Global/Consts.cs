@@ -19,6 +19,10 @@ public static class Consts
     // class as a click in that direction.
     public const float MOUSE_WHEEL_CLICK_SNAP = 0.05f;
 
+    public const string DATA_DIR = "vault";
+    public const string DATA_DIR_MAPS = "maps";
+    public const string FILE_EXTENSION_MAP = "map";
+
     /**
      * Editor related
      **/

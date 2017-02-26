@@ -22,6 +22,7 @@ public class MapEditorController : MonoBehaviour
     public Image worldPanel;
     public MainMenuBar mainMenuBar;
     public YesNoDialog yesNoDialog;
+    public Map map;
 
     private string currentTileName;
     private GameObject currentTileTypeSelectedObj;
@@ -34,30 +35,8 @@ public class MapEditorController : MonoBehaviour
     {
 
         barriers = new List<GameObject>();
+        LoadMap(null);
 
-        var tileMapWidth = 15;
-        var tileMapHeight = 10;
-        tilemap.SetSize(tileMapWidth, tileMapHeight);
-
-        for(int x = 0; x < tileMapWidth; x++)
-        {
-            for(int y = 0; y < tileMapHeight; y++)
-            {
-                if(x < 10 && y < 10)
-                    tilemap.AddTile(((UnityEngine.Random.Range(0.0f, 1.0f) > .5f) ? "grass02" : "grass01"), x, y, 0, Direction.Down);
-                //else
-                //    tilemap.AddTile(null, x, y, 0);
-            }
-        }
-
-        // Set up editor
-        SetNewTileDirection(Direction.Down);
-        currentTileTemplate.SetActive(false);
-        SwitchToLayer(0);
-        var tileTypes = tilemap.GetTileTypes();
-        SelectTileType(tileTypes.GetKeyFromIndex(0));
-
-        mainMenuBar.ShowMehMessage("What's up my glip glops");
     }
 
     public void Update()
@@ -82,6 +61,28 @@ public class MapEditorController : MonoBehaviour
             body.AddForce(((Vector3)direction) * Consts.MOUSE_BUMP_SPEED * Time.deltaTime);
 
         ClampCameraToBorders();
+    }
+
+    public void LoadMap(string filename)
+    {
+        try
+        {
+            map = new Map(filename);
+        }
+        catch(EditorErrorException){}
+        tilemap.LoadFromMap(map);
+        SetNewTileDirection(Direction.Down);
+        currentTileTemplate.SetActive(false);
+        SwitchToLayer(0);
+        var tileTypes = tilemap.GetTileTypes();
+        SelectTileType(tileTypes.GetKeyFromIndex(0));
+    }
+
+    // Saves the current Tilemap to the current Map file.
+    public void SaveMap()
+    {
+        map = new Map(map.filename, tilemap);
+        map.SaveMap();
     }
 
     public void PanCamera(float vertical, float horizontal)

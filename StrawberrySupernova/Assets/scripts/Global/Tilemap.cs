@@ -68,12 +68,15 @@ public class Tilemap : MonoBehaviour
     }
 
     private TileTypesDictionary tileTypes;
-    private List<Tile> tilemap;
     private Tile currentTileMouseOver = null;
 
     public MapEditorController mapEditor;
+    [HideInInspector]
     public int width;
+    [HideInInspector]
     public int height;
+    [HideInInspector]
+    public List<Tile> tilemap;
 
 
     /*
@@ -93,6 +96,28 @@ public class Tilemap : MonoBehaviour
 
         foreach(var newType in newTileTypes)
             tileTypes[newType.name] = (GameObject)newType;
+    }
+
+    /*
+      Initialises the tilemap using the passed Map object.
+    */
+    public void LoadFromMap(Map map)
+    {
+
+        // Destroy old one
+        if(tilemap.Count > 0)
+        {
+            var tilemapClone = new List<Tile>(tilemap);
+            foreach(var tile in tilemapClone)
+                RemoveTile(tile.x, tile.y, tile.layer);
+            tilemap = new List<Tile>();
+        }
+
+        // Load in tiles
+        SetSize(map.width, map.height);
+        foreach(var tile in map.tiles)
+            AddTile(tile.type, tile.x, tile.y, tile.layer, tile.direction);
+
     }
 
     /*

@@ -9,6 +9,7 @@ public class MainMenuBar : MonoBehaviour
     public GameObject menuBarOverlay;
     public MapSetSizeDialog mapSetSizeDialog;
     public MapNameDialog mapNameDialog;
+    public LoadMapDialog loadMapDialog;
 
     private MenuBarMessage message;
     private MapEditorController controller;
@@ -60,6 +61,7 @@ public class MainMenuBar : MonoBehaviour
       --------
     */
 
+    // New map
     public void NewMapPressed()
     {
         CloseAllDropdowns();
@@ -68,13 +70,62 @@ public class MainMenuBar : MonoBehaviour
 
     public IEnumerator DoNewMapPressed()
     {
-        string newName = null;
-        var nameStore = new Ref<string>(newName);
+        var nameStore = new Ref<string>("");
         yield return StartCoroutine(mapNameDialog.Show(nameStore));
-        //controller.StartNewMap();
+        if(Map.DoesMapNameExist(nameStore.Value))
+            ShowBadMessage("A map with this name already exists.");
+        else
+            controller.LoadMap(nameStore.Value);
     }
 
+    // Save map
+    public void SaveMapPressed()
+    {
+        CloseAllDropdowns();
+        StartCoroutine(DoSaveMapPressed());
+    }
 
+    public IEnumerator DoSaveMapPressed()
+    {
+        if(controller.map.filename == null)
+        {
+            var nameStore = new Ref<string>("");
+            yield return StartCoroutine(mapNameDialog.Show(nameStore));
+            if(Map.DoesMapNameExist(nameStore.Value))
+            {
+                ShowBadMessage("A map with this name already exists.");
+                yield break;
+            }
+            controller.map.filename = nameStore.Value;
+        }
+        controller.SaveMap();
+    }
+
+    // Load map
+    public void LoadMapPressed()
+    {
+        CloseAllDropdowns();
+        StartCoroutine(DoLoadMapPressed());
+    }
+
+    public IEnumerator DoLoadMapPressed()
+    {
+        var nameStore = new Ref<string>("");
+        yield return StartCoroutine(loadMapDialog.Show(nameStore));
+
+        if(nameStore.Value == "")
+            yield break;
+
+        if(!Map.DoesMapNameExist(nameStore.Value))
+        {
+            ShowBadMessage("Map cannot be found.");
+            yield break;
+        }
+
+        controller.LoadMap(nameStore.Value);
+    }
+
+    // Quit
     public void QuitButtonPressed()
     {
         CloseAllDropdowns();
