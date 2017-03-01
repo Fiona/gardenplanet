@@ -53,9 +53,10 @@
      <Compile Include="Assets\scripts\Global\InputManager.cs" />
      <Compile Include="Assets\scripts\Global\Map.cs" />
      <Compile Include="Assets\scripts\Global\Ref.cs" />
-     <Compile Include="Assets\scripts\Global\TileTypesDictionary.cs" />
+     <Compile Include="Assets\scripts\Global\TileTypeSet.cs" />
      <Compile Include="Assets\scripts\Global\Tilemap.cs" />
      <Compile Include="Assets\scripts\MapEditor\DropdownMenu.cs" />
+     <Compile Include="Assets\scripts\MapEditor\EditTileDialog.cs" />
      <Compile Include="Assets\scripts\MapEditor\LoadMapDialog.cs" />
      <Compile Include="Assets\scripts\MapEditor\MainMenuBar.cs" />
      <Compile Include="Assets\scripts\MapEditor\MapEditorController.cs" />
@@ -67,7 +68,6 @@
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
-     <None Include="Assets\Plugins\Rotorz\Ordered Dictionary\LICENSE.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
@@ -78,7 +78,6 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
-     <None Include="Assets\Plugins\Rotorz\Ordered Dictionary\README.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />
@@ -88,7 +87,6 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
-     <None Include="Assets\Plugins\Rotorz\Ordered Dictionary\Editor\OrderedDictionary.Editor.xml" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
@@ -103,7 +101,6 @@
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
-     <None Include="Assets\Plugins\Rotorz\Ordered Dictionary\OrderedDictionary.xml" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
@@ -155,9 +152,6 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
- </Reference>
- <Reference Include="OrderedDictionary">
- <HintPath>/home/fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Plugins/Rotorz/Ordered Dictionary/OrderedDictionary.dll</HintPath>
  </Reference>
  <Reference Include="LitJson">
  <HintPath>/home/fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>

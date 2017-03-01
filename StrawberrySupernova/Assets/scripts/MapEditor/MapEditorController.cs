@@ -23,6 +23,7 @@ public class MapEditorController : MonoBehaviour
     public MainMenuBar mainMenuBar;
     public YesNoDialog yesNoDialog;
     public Map map;
+    public EditTileDialog editTileDialog;
 
     private string currentTileName;
     private GameObject currentTileTypeSelectedObj;
@@ -30,12 +31,18 @@ public class MapEditorController : MonoBehaviour
     private Tilemap.Tile currentHoveredTile;
     private List<GameObject> barriers;
     private Direction newTileDirection;
+    private TileTypeSet tileTypeSet;
 
     public void Awake()
     {
 
         barriers = new List<GameObject>();
-        LoadMap(null);
+        try
+        {
+            tileTypeSet = new TileTypeSet("default");
+            LoadMap(null);
+        }
+        catch(EditorErrorException){}
 
     }
 
@@ -69,20 +76,31 @@ public class MapEditorController : MonoBehaviour
         {
             map = new Map(filename);
         }
-        catch(EditorErrorException){}
-        tilemap.LoadFromMap(map);
+        catch(EditorErrorException)
+        {
+            return;
+        }
+        tilemap.LoadFromMap(map, tileTypeSet);
         SetNewTileDirection(Direction.Down);
         currentTileTemplate.SetActive(false);
         SwitchToLayer(0);
-        var tileTypes = tilemap.GetTileTypes();
-        SelectTileType(tileTypes.GetKeyFromIndex(0));
+        SelectTileType(tileTypeSet.types[0].name);
+        mainMenuBar.ShowGoodMessage("Loaded map");
     }
 
     // Saves the current Tilemap to the current Map file.
     public void SaveMap()
     {
-        map = new Map(map.filename, tilemap);
-        map.SaveMap();
+        try
+        {
+            map = new Map(map.filename, tilemap);
+            map.SaveMap();
+        }
+        catch(EditorErrorException)
+        {
+            return;
+        }
+        mainMenuBar.ShowGoodMessage("Saved map");
     }
 
     public void PanCamera(float vertical, float horizontal)
@@ -177,11 +195,8 @@ public class MapEditorController : MonoBehaviour
             return;
         }
 
-        var tileTypes = tilemap.GetTileTypes();
-        if(!tileTypes.ContainsKey(tileTypeName))
-            throw new Exception("Tile attempted to change to not in tile type dictionary.");
+        currentTileTypeSelectedObj = tileTypeSet.InstantiateTile(tileTypeName);
 
-        currentTileTypeSelectedObj = Instantiate(tileTypes[tileTypeName]) as GameObject;
         currentTileTypeSelectedObj.transform.parent = currentTilePanel.transform;
         currentTileTypeSelectedObj.AddComponent<RectTransform>();
         var rect = currentTileTypeSelectedObj.GetComponent<RectTransform>();
@@ -295,16 +310,22 @@ public class MapEditorController : MonoBehaviour
             return;
         }
 
-        var tileTypes = tilemap.GetTileTypes();
-        var currentIndex = tileTypes.IndexOf(currentTileName);
+        TileType typeObject = null;
+        try
+        {
+            typeObject = tileTypeSet.GetTileTypeByName(currentTileName);
+        }
+        catch(EditorErrorException){ }
+
+        var currentIndex = tileTypeSet.types.IndexOf(typeObject);
         int chosenIndex;
 
-        if(currentIndex+1 == tileTypes.Count)
+        if(currentIndex+1 == tileTypeSet.types.Count)
             chosenIndex = 0;
         else
             chosenIndex = currentIndex+1;
 
-        SelectTileType(tileTypes.GetKeyFromIndex(chosenIndex));
+        SelectTileType(tileTypeSet.types[chosenIndex].name);
 
     }
 
@@ -320,16 +341,22 @@ public class MapEditorController : MonoBehaviour
             return;
         }
 
-        var tileTypes = tilemap.GetTileTypes();
-        var currentIndex = tileTypes.IndexOf(currentTileName);
+        TileType typeObject = null;
+        try
+        {
+            typeObject = tileTypeSet.GetTileTypeByName(currentTileName);
+        }
+        catch(EditorErrorException){ }
+
+        var currentIndex = tileTypeSet.types.IndexOf(typeObject);
         int chosenIndex;
 
         if(currentIndex == 0)
-            chosenIndex = tileTypes.Count - 1;
+            chosenIndex = tileTypeSet.types.Count - 1;
         else
             chosenIndex = currentIndex-1;
 
-        SelectTileType(tileTypes.GetKeyFromIndex(chosenIndex));
+        SelectTileType(tileTypeSet.types[chosenIndex].name);
 
     }
 
@@ -345,6 +372,15 @@ public class MapEditorController : MonoBehaviour
         }
         previousTileType = currentTileName;
         SelectTileType(null);
+    }
+
+    /*
+      Edit tile button
+    */
+    public void EditTileButtonPressed()
+    {
+        if(currentTileName != null)
+            StartCoroutine(editTileDialog.Show(currentTileName));
     }
 
     /*

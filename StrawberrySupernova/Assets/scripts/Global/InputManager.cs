@@ -33,6 +33,11 @@ public class InputManager : MonoBehaviour
             var currentTile = controller.tilemap.GetTileFromGameObject(hit.transform.gameObject);
             if(currentTile != null)
             {
+                if(currentTile.layer != controller.currentLayer)
+                {
+                    controller.tilemap.MouseOverTile(null);
+                    return;
+                }
                 controller.tilemap.MouseOverTile(currentTile);
                 var axis = Input.GetAxis("Mouse ScrollWheel");
                 if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)

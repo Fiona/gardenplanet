@@ -67,7 +67,7 @@ public class Tilemap : MonoBehaviour
         }
     }
 
-    private TileTypesDictionary tileTypes;
+    private TileTypeSet tileTypeSet;
     private Tile currentTileMouseOver = null;
 
     public MapEditorController mapEditor;
@@ -85,24 +85,15 @@ public class Tilemap : MonoBehaviour
     public void Awake()
     {
         tilemap = new List<Tile>();
-
-        tileTypes = new TileTypesDictionary();
-        var unsortedNewTileTypes = Resources.LoadAll("tiles/");
-
-        GameObject[] newTileTypes = unsortedNewTileTypes.Select(r => (r as GameObject)).
-            Where(r => r != null).
-            OrderBy(t => t.name).
-            ToArray<GameObject>();
-
-        foreach(var newType in newTileTypes)
-            tileTypes[newType.name] = (GameObject)newType;
     }
 
     /*
       Initialises the tilemap using the passed Map object.
     */
-    public void LoadFromMap(Map map)
+    public void LoadFromMap(Map map, TileTypeSet tileTypeSet)
     {
+
+        this.tileTypeSet = tileTypeSet;
 
         // Destroy old one
         if(tilemap.Count > 0)
@@ -150,15 +141,10 @@ public class Tilemap : MonoBehaviour
             return;
         }
 
-        // If we want a named tile or an empty one
-        GameObject newTileObj = null;
-        if(tilename != null)
-            newTileObj = Instantiate(tileTypes[tilename]) as GameObject;
-        else
-            newTileObj = new GameObject("Empty Tile");
-        newTileObj.transform.parent = transform;
+        var newTileObject = tileTypeSet.InstantiateTile(tilename);
+        newTileObject.transform.parent = transform;
 
-        var newTile = new Tile(x, y, layer, direction, newTileObj, tilename);
+        var newTile = new Tile(x, y, layer, direction, newTileObject, tilename);
         tilemap.Add(newTile);
 
     }
@@ -325,14 +311,6 @@ public class Tilemap : MonoBehaviour
             }
         }
         tile.SetDirection(newDirection);
-    }
-
-    /*
-      Returns dictionary relating to tile types
-    */
-    public TileTypesDictionary GetTileTypes()
-    {
-        return tileTypes;
     }
 
 }

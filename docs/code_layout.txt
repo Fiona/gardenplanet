@@ -1,0 +1,53 @@
+Hopefully I keep this updated.
+
+
+==================
+Tile map system
+==================
+
+ (Map.cs, Tilemap.cs, TileTypeSet.cs)
+
+Maps contain positions and rotations for tiles. Each tile is a TileType.
+TileTypes are stored in TileTypeSets.
+
+Tilemaps are a Monobehaviour that is responsible for taking a loaded Map and
+combining them with a TileTypeSet to display them for playing.
+
+To summise: Maps are a representation of a .map file and the Tileset is the
+  "live" version of that map.
+
+----------
+Load a map
+----------
+
+* Create or load a TileTypeSet object (file extension .set)
+* Create or load a Map object (file extension .map)
+* Create a Tilemap object and use the LoadFromMap to pass the previously
+  created Map and TileTypeSet. Tiles will be drawn as children of the Tilemap
+  object.
+
+----------
+Alter and save a map
+-----------
+
+* Map objects and not designed to be altered, you should create a new one
+  passing in a Tilemap object.
+* Call the SaveMap method on Maps.
+
+-----------
+About TileTypeSets
+-----------
+
+TileTypeSets are a representation of a .set file, but unlike Maps they are
+designed to be altered and saved back to the file system directly.
+
+-----------
+About TileTypeVolumes
+-----------
+
+TileTypeVolumes are shapes that can be positioned and scaled on a TileType,
+they are used for a number of things but primarily as definitions for
+collision volumes.
+
+The Tilemap will read a TileType's "volumes" member to determine how to set
+up collisions and other things.

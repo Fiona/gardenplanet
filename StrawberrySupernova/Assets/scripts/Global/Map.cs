@@ -9,7 +9,7 @@ using UnityEngine;
 public class Map
 {
 
-    public struct Tile
+    public struct MapTile
     {
         public int x;
         public int y;
@@ -22,11 +22,11 @@ public class Map
     public int height;
     public string filename;
     public string fullFilepath;
-    public List<Tile> tiles;
+    public List<MapTile> tiles;
 
     public Map()
     {
-        tiles = new List<Tile>();
+        tiles = new List<MapTile>();
     }
 
     public Map(string filename)
@@ -35,7 +35,7 @@ public class Map
         this.filename = filename;
         width = 5;
         height = 5;
-        tiles = new List<Tile>();
+        tiles = new List<MapTile>();
 
         if(filename == null)
             return;
@@ -56,8 +56,6 @@ public class Map
                 Debug.Log(e);
                 throw new EditorErrorException("Error loading map.");
             }
-            this.filename = loadedMap.filename;
-            this.fullFilepath = loadedMap.fullFilepath;
             this.tiles = loadedMap.tiles;
             this.width = loadedMap.width;
             this.height = loadedMap.height;
@@ -73,12 +71,12 @@ public class Map
         width = tilemap.width;
         height = tilemap.height;
 
-        tiles = new List<Tile>();
+        tiles = new List<MapTile>();
         foreach(var tile in tilemap.tilemap)
         {
             if(tile.emptyTile)
                 continue;
-            var newTile = new Map.Tile(){
+            var newTile = new MapTile(){
                 x=tile.x,
                 y=tile.y,
                 layer=tile.layer,
@@ -114,7 +112,6 @@ public class Map
             fh.SetLength(0);
             fh.Write(jsonBytes, 0, jsonBytes.Length);
         }
-
     }
 
     public static string GetMapFilePathFromName(string name)

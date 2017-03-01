@@ -72,6 +72,8 @@ public class MainMenuBar : MonoBehaviour
     {
         var nameStore = new Ref<string>("");
         yield return StartCoroutine(mapNameDialog.Show(nameStore));
+        if(nameStore.Value.Trim() == "")
+            yield break;
         if(Map.DoesMapNameExist(nameStore.Value))
             ShowBadMessage("A map with this name already exists.");
         else
@@ -91,6 +93,8 @@ public class MainMenuBar : MonoBehaviour
         {
             var nameStore = new Ref<string>("");
             yield return StartCoroutine(mapNameDialog.Show(nameStore));
+            if(nameStore.Value.Trim() == "")
+                yield break;
             if(Map.DoesMapNameExist(nameStore.Value))
             {
                 ShowBadMessage("A map with this name already exists.");

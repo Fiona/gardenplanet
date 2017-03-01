@@ -19,9 +19,12 @@ public static class Consts
     // class as a click in that direction.
     public const float MOUSE_WHEEL_CLICK_SNAP = 0.05f;
 
+    // File system related consts
+    public const string FILE_DEFAULT_TILE_SET = "tiles";
     public const string DATA_DIR = "vault";
     public const string DATA_DIR_MAPS = "maps";
     public const string FILE_EXTENSION_MAP = "map";
+    public const string FILE_EXTENSION_TILE_SET = "set";
 
     /**
      * Editor related
@@ -35,3 +38,4 @@ public static class Consts
 public enum Direction{Left, Right, Up, Down};
 public enum RotationalDirection{Clockwise, AntiClockwise};
 public enum EditorMessageType{Good, Bad, Meh};
+public enum TileTypeVolumeType{CollisionPlane, CollisionBox};
