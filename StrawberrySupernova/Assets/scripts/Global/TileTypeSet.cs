@@ -149,6 +149,11 @@ public class TileTypeSet
         throw new EditorErrorException("Couldn't find tile type requested.");
     }
 
+    public GameObject InstantiateTile(TileType tileName)
+    {
+        return InstantiateTile(tileName.name);
+    }
+
     public GameObject InstantiateTile(string tileName)
     {
         GameObject newTileObj = null;
@@ -159,16 +164,41 @@ public class TileTypeSet
         return newTileObj;
     }
 
+    public void ReplaceTileType(string tileTypeName, TileType tileType)
+    {
+        var currentType = GetTileTypeByName(tileTypeName);
+        //this.types.Remove(currentType);
+        //this.types.Add(currentType);
+        this.types[this.types.FindIndex(k=>k.Equals(currentType))] =  tileType;
+        //this.types.Sort((x, y) => x.name.CompareTo(y.name));
+    }
+
 }
 
 public class TileTypeVolume
 {
     public TileTypeVolumeType type;
-    public float x;
-    public float y;
-    public float z;
-    public int width;
-    public int height;
+    public double x;
+    public double y;
+    public double z;
+    public int xScale;
+    public int yScale;
+    public int zScale;
+
+    public TileTypeVolume()
+    {
+        xScale = 100;
+        yScale = 100;
+        zScale = 100;
+    }
+
+    public TileTypeVolume(TileTypeVolumeType type)
+    {
+        this.type = type;
+        xScale = 100;
+        yScale = 100;
+        zScale = 100;
+    }
 }
 
 public class TileType

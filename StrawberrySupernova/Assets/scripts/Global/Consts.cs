@@ -15,6 +15,12 @@ public static class Consts
     // All tiles are scaled by this amount in an attempt to tackle gaps
     public const float SCALE_FUDGE = 0.01f;
 
+    // Value used to adjust positions of tile volumes
+    public const float VOLUME_POSITION_SHIFT_PER_UNIT = 0.00250f;
+
+    // Default scale of tile volumes
+    public const float VOLUME_SCALE_DEFAULT = 0.01f;
+
     // Any mouse wheel axis movements at or outside of this movement will
     // class as a click in that direction.
     public const float MOUSE_WHEEL_CLICK_SNAP = 0.05f;

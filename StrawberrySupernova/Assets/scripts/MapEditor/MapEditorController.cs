@@ -24,6 +24,8 @@ public class MapEditorController : MonoBehaviour
     public YesNoDialog yesNoDialog;
     public Map map;
     public EditTileDialog editTileDialog;
+    [HideInInspector]
+    public TileTypeSet tileTypeSet;
 
     private string currentTileName;
     private GameObject currentTileTypeSelectedObj;
@@ -31,7 +33,6 @@ public class MapEditorController : MonoBehaviour
     private Tilemap.Tile currentHoveredTile;
     private List<GameObject> barriers;
     private Direction newTileDirection;
-    private TileTypeSet tileTypeSet;
 
     public void Awake()
     {
