@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c73011d59756a467a866adac30e8e23c
+timeCreated: 1488459840
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: HelvetiHand
+  fontNames:
+  - HelvetiHand
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

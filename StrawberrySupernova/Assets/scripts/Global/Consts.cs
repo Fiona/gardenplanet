@@ -6,6 +6,9 @@ using System.Collections.Generic;
 public static class Consts
 {
 
+    // Where to boot the app into
+    public const AppState INITIAL_APP_STATE = AppState.Title;
+
     // Interal number for tile collision layer
     public const int COLLISION_LAYER_TILES = 8;
 
@@ -45,3 +48,4 @@ public enum Direction{Left, Right, Up, Down};
 public enum RotationalDirection{Clockwise, AntiClockwise};
 public enum EditorMessageType{Good, Bad, Meh};
 public enum TileTypeVolumeType{CollisionPlane, CollisionBox};
+public enum AppState{Title, Editor, Game};

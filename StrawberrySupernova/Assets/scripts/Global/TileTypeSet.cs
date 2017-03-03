@@ -143,6 +143,8 @@ public class TileTypeSet
 
     public TileType GetTileTypeByName(string name)
     {
+        if(name == null)
+            return null;
         foreach(var type in this.types)
             if(type.name == name)
                 return type;
@@ -167,13 +169,11 @@ public class TileTypeSet
     public void ReplaceTileType(string tileTypeName, TileType tileType)
     {
         var currentType = GetTileTypeByName(tileTypeName);
-        //this.types.Remove(currentType);
-        //this.types.Add(currentType);
         this.types[this.types.FindIndex(k=>k.Equals(currentType))] =  tileType;
-        //this.types.Sort((x, y) => x.name.CompareTo(y.name));
     }
 
 }
+
 
 public class TileTypeVolume
 {
@@ -200,6 +200,7 @@ public class TileTypeVolume
         zScale = 100;
     }
 }
+
 
 public class TileType
 {

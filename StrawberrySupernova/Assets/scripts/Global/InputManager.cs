@@ -11,19 +11,30 @@ public class InputManager : MonoBehaviour
     private MapEditorController controller;
     private Vector2 lastMousePosition = Vector2.zero;
     private Vector2 deltaMousePosition = Vector2.zero;
+    private App app;
 
     public void Awake()
     {
-        controller = FindObjectOfType<MapEditorController>();
+        app = FindObjectOfType<App>();
         SetMouseTexture(mouseTexture);
         StartCoroutine(HandlePanning());
     }
 
     public void Update()
     {
-
         deltaMousePosition = (Vector2)Input.mousePosition - lastMousePosition;
         lastMousePosition = Input.mousePosition;
+
+        if(app.state == AppState.Editor)
+            UpdateEditor();
+    }
+
+    public void UpdateEditor()
+    {
+
+        controller = FindObjectOfType<MapEditorController>();
+        if(controller == null)
+            return;
 
         // Get mouse over tiles
         RaycastHit hit;
@@ -57,6 +68,9 @@ public class InputManager : MonoBehaviour
 
     public IEnumerator HandlePanning()
     {
+        if(app.state != AppState.Editor)
+            yield break;
+
         while(true)
         {
             if(Input.GetMouseButtonDown(2))

@@ -138,10 +138,7 @@ public class MainMenuBar : MonoBehaviour
 
     public void DoQuitButton()
     {
-        Application.Quit();
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+        FindObjectOfType<App>().StartNewState(AppState.Title);
     }
 
     /*

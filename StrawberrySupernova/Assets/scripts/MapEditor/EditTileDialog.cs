@@ -24,6 +24,7 @@ public class EditTileDialog : MonoBehaviour
     private MapEditorController controller;
     private GameObject currentTilePreviewObject;
     private GameObject currentVolumeObject;
+    private float rotation;
 
     public void Awake()
     {
@@ -31,10 +32,16 @@ public class EditTileDialog : MonoBehaviour
         volumeListButtonTemplate.gameObject.SetActive(false);
     }
 
+    public void Update()
+    {
+        SetTilePreviewRotation();
+    }
+
     public IEnumerator Show(string tileTypeName)
     {
 
         controller = (MapEditorController)FindObjectOfType(typeof(MapEditorController));
+        rotation = 0.0f;
 
         try
         {
@@ -60,7 +67,6 @@ public class EditTileDialog : MonoBehaviour
         currentTilePreviewObject.layer = tilePreviewTemplate.layer;
         rect.localPosition = tilePreviewTemplate.GetComponent<RectTransform>().localPosition;
         rect.localScale = tilePreviewTemplate.GetComponent<RectTransform>().localScale;
-        rect.localRotation = tilePreviewTemplate.GetComponent<RectTransform>().localRotation;
 
         // Set dropdown options
         newVolumeTypeDropdown.ClearOptions();
@@ -110,6 +116,13 @@ public class EditTileDialog : MonoBehaviour
                 }
             );
         }
+    }
+
+    public void SetTilePreviewRotation()
+    {
+        if(currentTilePreviewObject == null)
+            return;
+        currentTilePreviewObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, rotation, 0);
     }
 
     public void SelectNewVolume(TileTypeVolume volume)
@@ -306,6 +319,11 @@ public class EditTileDialog : MonoBehaviour
             return;
         selectedVolume.zScale += 10;
         PositionAndScaleVolume();
+    }
+
+    public void RotateTilePreviewPressed()
+    {
+        rotation = (rotation + 90.0f) % 360.0f;
     }
 
 }

@@ -47,10 +47,42 @@ public class Tilemap : MonoBehaviour
         {
             // Set collision layer
             tileObj.layer = Consts.COLLISION_LAYER_TILES;
-            // Floor
-            BoxCollider floorCollider = tileObj.AddComponent<BoxCollider>();
-            floorCollider.size = new Vector3(0.01f, 0.001f, 0.01f);
-            floorCollider.center = new Vector3(0.0f, -0.0004f, 0.0f);
+
+            // Editor tile floor
+            if(FindObjectOfType<App>().state == AppState.Editor)
+            {
+                BoxCollider floorCollider = tileObj.AddComponent<BoxCollider>();
+                floorCollider.size = new Vector3(0.01f, 0.001f, 0.01f);
+                floorCollider.center = new Vector3(0.0f, -0.0004f, 0.0f);
+                return;
+            }
+
+            var tileType = FindObjectOfType<GameController>().tileTypeSet.GetTileTypeByName(tileTypeName);
+
+            // For each volume, create them if they're a recognisable
+            // collision shape.
+            foreach(var volume in tileType.volumes)
+            {
+                BoxCollider newCollider = tileObj.AddComponent<BoxCollider>();
+                float yScale;
+                if(volume.type == TileTypeVolumeType.CollisionPlane)
+                    yScale = 0.0005f;
+                else
+                    yScale = (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.yScale;
+                newCollider.size = new Vector3(
+                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.xScale,
+                    yScale,
+                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.zScale
+                    );
+                newCollider.center = new Vector3(
+                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.x,
+                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.y,
+                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.z
+                    );
+                if(volume.type == TileTypeVolumeType.CollisionPlane)
+                    newCollider.center += new Vector3(0.0f, -0.0002f, 0.0f);
+            }
+
         }
 
         public void SetDirection(Direction direction)
@@ -70,6 +102,7 @@ public class Tilemap : MonoBehaviour
     private TileTypeSet tileTypeSet;
     private Tile currentTileMouseOver = null;
 
+    [HideInInspector]
     public MapEditorController mapEditor;
     [HideInInspector]
     public int width;
@@ -84,6 +117,7 @@ public class Tilemap : MonoBehaviour
      */
     public void Awake()
     {
+        mapEditor = FindObjectOfType<MapEditorController>();
         tilemap = new List<Tile>();
     }
 
@@ -108,7 +142,6 @@ public class Tilemap : MonoBehaviour
         SetSize(map.width, map.height);
         foreach(var tile in map.tiles)
             AddTile(tile.type, tile.x, tile.y, tile.layer, tile.direction);
-
     }
 
     /*
