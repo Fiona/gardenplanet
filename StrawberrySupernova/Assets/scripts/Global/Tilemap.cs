@@ -18,8 +18,12 @@ public class Tilemap : MonoBehaviour
         public string tileTypeName;
         public Material[] sharedMaterials;
 
+        private static PhysicMaterial material;
+
         public Tile(int x, int y, int layer, Direction direction, GameObject tileObj, string tileTypeName)
         {
+            //if(Tile.material == null)
+                //Tile.material = (PhysicMaterial)Resources.Load("TilePhysicMaterial") as PhysicMaterial;
             // Place tile
             this.x = x;
             this.y = y;
@@ -81,6 +85,7 @@ public class Tilemap : MonoBehaviour
                     );
                 if(volume.type == TileTypeVolumeType.CollisionPlane)
                     newCollider.center += new Vector3(0.0f, -0.0002f, 0.0f);
+                newCollider.material = Tile.material;
             }
 
         }

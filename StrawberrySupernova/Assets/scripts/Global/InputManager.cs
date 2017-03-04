@@ -8,7 +8,6 @@ public class InputManager : MonoBehaviour
 
     public Texture2D mouseTexture;
 
-    private MapEditorController controller;
     private Vector2 lastMousePosition = Vector2.zero;
     private Vector2 deltaMousePosition = Vector2.zero;
     private App app;
@@ -27,12 +26,34 @@ public class InputManager : MonoBehaviour
 
         if(app.state == AppState.Editor)
             UpdateEditor();
+        else if(app.state == AppState.Game)
+            UpdateGame();
+    }
+
+    public void UpdateGame()
+    {
+
+        GameController controller = FindObjectOfType<GameController>();
+        if(controller == null)
+            return;
+        if(controller.player == null)
+            return;
+
+        if(Input.GetKey(KeyCode.Comma))
+            controller.player.WalkInDirection(Direction.Up);
+        if(Input.GetKey(KeyCode.E))
+            controller.player.WalkInDirection(Direction.Right);
+        if(Input.GetKey(KeyCode.O))
+            controller.player.WalkInDirection(Direction.Down);
+        if(Input.GetKey(KeyCode.A))
+            controller.player.WalkInDirection(Direction.Left);
+
     }
 
     public void UpdateEditor()
     {
 
-        controller = FindObjectOfType<MapEditorController>();
+        MapEditorController controller = FindObjectOfType<MapEditorController>();
         if(controller == null)
             return;
 
@@ -70,6 +91,8 @@ public class InputManager : MonoBehaviour
     {
         if(app.state != AppState.Editor)
             yield break;
+
+        MapEditorController controller = FindObjectOfType<MapEditorController>();
 
         while(true)
         {

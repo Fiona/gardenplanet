@@ -6,8 +6,16 @@ using System.Collections.Generic;
 public static class Consts
 {
 
+    // -----------------------------
+    // CONFIG SETTINGS
+    // -----------------------------
+
     // Where to boot the app into
     public const AppState INITIAL_APP_STATE = AppState.Title;
+
+    // -----------------------------
+    // TILE DRAWING
+    // -----------------------------
 
     // Interal number for tile collision layer
     public const int COLLISION_LAYER_TILES = 8;
@@ -24,20 +32,44 @@ public static class Consts
     // Default scale of tile volumes
     public const float VOLUME_SCALE_DEFAULT = 0.01f;
 
+    // -----------------------------
+    // INPUT
+    // -----------------------------
+
     // Any mouse wheel axis movements at or outside of this movement will
     // class as a click in that direction.
     public const float MOUSE_WHEEL_CLICK_SNAP = 0.05f;
 
-    // File system related consts
+    // -----------------------------
+    // CAMERA
+    // -----------------------------
+
+    // How far away the camera usually is from the player
+    public const float CAMERA_PLAYER_DISTANCE = 3.0f;
+
+    // How far from the ground the rotation usually is
+    public const float CAMERA_DEFAULT_ROTATION = 45.0f;
+
+    // -----------------------------
+    // PLAYER
+    // -----------------------------
+
+    public const float PLAYER_SPEED = 40f;
+
+    // -----------------------------
+    // FILESYSTEM
+    // -----------------------------
+
     public const string FILE_DEFAULT_TILE_SET = "tiles";
     public const string DATA_DIR = "vault";
     public const string DATA_DIR_MAPS = "maps";
     public const string FILE_EXTENSION_MAP = "map";
     public const string FILE_EXTENSION_TILE_SET = "set";
 
-    /**
-     * Editor related
-     **/
+    // -----------------------------
+    // EDITOR
+    // -----------------------------
+
     public const float MOUSE_BUMP_BORDER = 40.0f;
     public const float MOUSE_BUMP_SPEED = 500.0f;
     public const float CAMERA_Y = 6.0f;
