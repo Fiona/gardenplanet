@@ -184,6 +184,7 @@ public class TileTypeVolume
     public int xScale;
     public int yScale;
     public int zScale;
+    public bool isWall;
 
     public TileTypeVolume()
     {

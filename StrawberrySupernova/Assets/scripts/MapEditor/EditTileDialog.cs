@@ -17,6 +17,7 @@ public class EditTileDialog : MonoBehaviour
     public Button volumeListButtonTemplate;
     public GameObject volumeListContent;
     public Dropdown newVolumeTypeDropdown;
+    public Toggle isWallToggle;
 
     private TileType tileType;
     private TileTypeVolume selectedVolume;
@@ -137,6 +138,7 @@ public class EditTileDialog : MonoBehaviour
         else
         {
             volumeSettings.SetActive(true);
+            isWallToggle.isOn = volume.isWall;
             currentVolumeObject = Instantiate(GetVolumeTypeTemplate(selectedVolume.type));
             currentVolumeObject.SetActive(true);
             currentVolumeObject.transform.SetParent(currentTilePreviewObject.transform, false);
@@ -319,6 +321,13 @@ public class EditTileDialog : MonoBehaviour
             return;
         selectedVolume.zScale += 10;
         PositionAndScaleVolume();
+    }
+
+    public void IsWallToggled()
+    {
+        if (selectedVolume == null)
+            return;
+        selectedVolume.isWall = isWallToggle.isOn;        
     }
 
     public void RotateTilePreviewPressed()

@@ -6,6 +6,9 @@ public class Player: MonoBehaviour
 
     private Rigidbody rigidBody;
     private Vector3 walkDir = new Vector3();
+    private bool isJumping = false;
+    private bool attemptJump = false;
+    private Vector3 desiredRotation;
 
     public void Awake()
     {
@@ -15,34 +18,31 @@ public class Player: MonoBehaviour
 
     public void Update()
     {
-        //Vector3 dir = pushDir + (Vector3.down * 2.0f);
-        //Vector3 newPos = transform.position + dir * Time.deltaTime;
-        //float deltaDistance = Vector3.Distance(transform.position, newPos);
 
-        //RaycastHit hit;
-        //var ray = new Ray(transform.position, dir);
-        //if(Physics.Raycast(ray, out hit, deltaDistance, 1 << Consts.COLLISION_LAYER_TILES) == false)
-        //rigidBody.MovePosition(newPos);
-        //rigidBody.velocity += velocityDir;
-        //rigidBody.velocity *= .9f;
-
-
+        // Handle walking
         if(rigidBody.velocity.magnitude < 1.0f)
             rigidBody.AddForce(
                 Vector3.ClampMagnitude(walkDir * Consts.PLAYER_SPEED, Consts.PLAYER_SPEED) * Time.deltaTime,
                 ForceMode.Impulse
                 );
         walkDir = new Vector3();
-        //rigidBody.AddForce(Physics.gravity);
 
-        //rigidBody.velocity = Vector3.ClampMagnitude(walkDir * Consts.PLAYER_SPEED, Consts.PLAYER_SPEED);
+        // Do rotation towards mouse
+        float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
+        transform.rotation = Quaternion.LookRotation(newDir);
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
 
+        // Deal with jumping
+        isJumping = (Mathf.Abs(rigidBody.velocity.y) > 0.01f);
+        if(isJumping)
+            attemptJump = false;
+        else if(attemptJump)
+        {
+            rigidBody.AddForce(0, Consts.PLAYER_JUMP_FORCE * Time.deltaTime, 0, ForceMode.Impulse);
+            attemptJump = false;
+        }
 
-        //velocityDir = Vector3.ClampMagnitude(velocityDir, amount);
-    }
-
-    public void LateUpdate()
-    {
     }
 
     /*
@@ -66,12 +66,23 @@ public class Player: MonoBehaviour
             case Direction.Right:
                 walkDir += Vector3.right;
                 break;
-        }
-
-        //pushDir = (vecDir * amount);
-        //Vector3 pos = (vecDir * amount) + (Vector3.down * 2.0f);
-        //rigidBody.MovePosition(transform.position + pos * Time.deltaTime);
-        //rigidBody.AddForce(vecDir * amount);
+        }        
     }
 
+    /*
+     Player will turn towards the world position passed
+     */
+    public void TurnToWorldPoint(Vector3 turnTo)
+    {
+        if((transform.position - turnTo).magnitude > .2f)
+            desiredRotation = turnTo - transform.position;
+    }
+
+    /*
+     Call if the player should try to jump if possible
+     */
+    public void Jump()
+    {
+        attemptJump = true;
+    }
 }

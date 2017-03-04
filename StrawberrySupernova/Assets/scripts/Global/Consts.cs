@@ -54,7 +54,11 @@ public static class Consts
     // PLAYER
     // -----------------------------
 
-    public const float PLAYER_SPEED = 40f;
+    public const float PLAYER_SPEED = 100f;
+
+    public const float PLAYER_ROTATION_SPEED = 4f;
+
+    public const float PLAYER_JUMP_FORCE = 600f;
 
     // -----------------------------
     // FILESYSTEM

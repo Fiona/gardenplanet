@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
         if(controller.player == null)
             return;
 
+        // Walking
         if(Input.GetKey(KeyCode.Comma))
             controller.player.WalkInDirection(Direction.Up);
         if(Input.GetKey(KeyCode.E))
@@ -47,6 +48,16 @@ public class InputManager : MonoBehaviour
             controller.player.WalkInDirection(Direction.Down);
         if(Input.GetKey(KeyCode.A))
             controller.player.WalkInDirection(Direction.Left);
+
+        // Turning
+        Vector3 pointTo = Camera.main.ScreenToWorldPoint(
+            Input.mousePosition + new Vector3(0f, 0f, Consts.CAMERA_PLAYER_DISTANCE)
+            );
+        controller.player.TurnToWorldPoint(pointTo);
+
+        // Jumping
+        if(Input.GetKeyUp(KeyCode.Space))
+            controller.player.Jump();
 
     }
 
@@ -59,7 +70,7 @@ public class InputManager : MonoBehaviour
 
         // Get mouse over tiles
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
         {
             var currentTile = controller.tilemap.GetTileFromGameObject(hit.transform.gameObject);
@@ -103,10 +114,15 @@ public class InputManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 while(true)
                 {
-                    pannedPosition = (initialMousePosition - Input.mousePosition) * .001f;
-                    if(Mathf.Abs(pannedPosition[0]) > 0.1f || Mathf.Abs(pannedPosition[1]) > 0.1f)
-                        controller.PanCamera(pannedPosition[0], -pannedPosition[1]);
-                    if(Input.GetMouseButtonUp(2))
+                    
+                    // Old fuked version
+                    //pannedPosition = (initialMousePosition - Input.mousePosition) * .001f;
+                    //if(Mathf.Abs(pannedPosition[0]) > 0.1f || Mathf.Abs(pannedPosition[1]) > 0.1f)
+                    //    controller.PanCamera(pannedPosition[0], -pannedPosition[1]);
+
+                    // New shiney version
+                    controller.PanCamera(-Input.GetAxis("Mouse X") * .8f, -Input.GetAxis("Mouse Y") * .8f);
+                    if (Input.GetMouseButtonUp(2))
                     {
                         Cursor.lockState = CursorLockMode.None;
                         break;
