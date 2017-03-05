@@ -23,4 +23,5 @@ src/locale
 # Unity excludes
 StrawberrySupernova/Library
 StrawberrySupernova/Temp
+StrawberrySupernova/.vs
 obj/
