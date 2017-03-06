@@ -1,38 +1,41 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class DropdownMenu : MonoBehaviour
+namespace StrawberryNova
 {
 
-    [Header("Object references")]
-    public GameObject dropdownContents;
-    public MainMenuBar mainMenuBar;
+	public class DropdownMenu : MonoBehaviour
+	{
 
-    public void Awake()
-    {
-        CloseMenu();
-    }
+	    [Header("Object references")]
+	    public GameObject dropdownContents;
+	    public MainMenuBar mainMenuBar;
 
-    public void OpenMenu()
-    {
+	    public void Awake()
+	    {
+	        CloseMenu();
+	    }
 
-        if(dropdownContents.activeSelf)
-        {
-            CloseMenu();
-            mainMenuBar.MenuClosed();
-            return;
-        }
+	    public void OpenMenu()
+	    {
 
-        mainMenuBar.CloseAllDropdowns();
-        dropdownContents.SetActive(true);
-        mainMenuBar.MenuOpened();
+	        if(dropdownContents.activeSelf)
+	        {
+	            CloseMenu();
+	            mainMenuBar.MenuClosed();
+	            return;
+	        }
 
-    }
+	        mainMenuBar.CloseAllDropdowns();
+	        dropdownContents.SetActive(true);
+	        mainMenuBar.MenuOpened();
 
-    public void CloseMenu()
-    {
-        dropdownContents.SetActive(false);
-    }
+	    }
+
+	    public void CloseMenu()
+	    {
+	        dropdownContents.SetActive(false);
+	    }
+
+	}
 
 }
