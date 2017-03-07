@@ -120,6 +120,16 @@ namespace StrawberryNova
 			return null;
 		}
 
+		public void NewMapSize(int width, int height)
+		{
+			var markersToKill = new List<ObjectTilePosition>();
+			foreach(var marker in tileMarkers)
+				if(marker.x >= width || marker.y >= height)
+					markersToKill.Add(marker);
+			foreach(var marker in markersToKill)
+				RemoveMarkerAt(marker.x, marker.y, marker.layer);			
+		}
+
 		public void RotateMarkerInDirection(ObjectTilePosition marker, RotationalDirection rot)
 		{
 			SetMarkerDirection(marker, DirectionHelper.RotateDirection(marker.dir, rot));

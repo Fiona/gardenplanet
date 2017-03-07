@@ -327,6 +327,7 @@ namespace StrawberryNova
 	        tilemap.SetSize(width, height);
 	        CreateBarrier();
 	        tilemap.GenerateEmptyTiles(currentLayer);
+			markerManager.NewMapSize(width, height);
 	    }
 
 	    public void CreateBarrier()
