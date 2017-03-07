@@ -17,9 +17,12 @@ namespace StrawberryNova
 	    public TileTypeSet tileTypeSet;
 	    [HideInInspector]
 	    public Map map;
+		[HideInInspector]
+		public MarkerManager markerManager;
 
 	    public void Awake()
 	    {
+			// Create required objects
 	        tileTypeSet = new TileTypeSet("default");
 	        map = new Map("main");
 
@@ -27,7 +30,18 @@ namespace StrawberryNova
 	        tilemap = tilemapObj.AddComponent<Tilemap>();
 	        tilemap.LoadFromMap(map, tileTypeSet);
 
-	        mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
+			var markerManagerObj = new GameObject("MarkerManager");
+			markerManager = markerManagerObj.AddComponent<MarkerManager>();
+			markerManager.LoadFromMap(map);
+
+			// Set up player and camera
+			var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
+			if(playerStartMarker != null)
+				player.SetPositionToTile(playerStartMarker);
+			else
+				player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
+			mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
+			mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
 	    }
 
 	}

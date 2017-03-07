@@ -16,31 +16,49 @@ namespace StrawberryNova
 	    public Tilemap tilemap;
 	    public Camera mainCamera;
 	    public Text layerText;
-	    public GameObject currentTilePanel;
+		public GameObject TilemapSelectionCube;
+		public GameObject barrierTemplate;
+		public Image worldPanel;
+		public MainMenuBar mainMenuBar;
+		public StompyBlondie.YesNoDialog yesNoDialog;
+		public Map map;
+		public Text currentModeText;
+
+		[Header("Tile mode")]
+		public GameObject modeTile;
+		public GameObject currentTilePanel;
 	    public Text currentTileText;
 	    public GameObject currentTileTemplate;
-	    public GameObject TilemapSelectionCube;
-	    public GameObject barrierTemplate;
-	    public Image worldPanel;
-	    public MainMenuBar mainMenuBar;
-		public StompyBlondie.YesNoDialog yesNoDialog;
-	    public Map map;
-	    public EditTileDialog editTileDialog;
-		public Text currentModeText;
+		public EditTileDialog editTileDialog;
+
+		[Header("Marking mode")]
+		public GameObject modeMarking;
+		public Image currentMarkerPreview;
+		public Text currentMarkerText;
+
+		[Header("Object mode")]
+		public GameObject modeObject;
 
 	    [HideInInspector]
 	    public TileTypeSet tileTypeSet;
+		[HideInInspector]
+		public EditorMode editorMode;
 
-	    private string currentTileName;
-	    private GameObject currentTileTypeSelectedObj;
-	    private string previousTileType;
-	    private Tilemap.Tile currentHoveredTile;
-	    private List<GameObject> barriers;
-	    private Direction newTileDirection;
-	    private EditorMode editorMode;
+	    string currentTileName;
+	    GameObject currentTileTypeSelectedObj;
+	    string previousTileType;
+	    Tilemap.Tile currentHoveredTile;
+	    List<GameObject> barriers;
+	    Direction newTileDirection;
+		MarkerManager markerManager;
+		TileMarkerType selectedMarker;
+		TileMarkerType previousMarker;
 
 	    public void Awake()
 	    {
+			var markerManagerObj = new GameObject("MarkerManager");
+			markerManager = markerManagerObj.AddComponent<MarkerManager>();
+
 	        barriers = new List<GameObject>();
 	        try
 	        {
@@ -79,21 +97,26 @@ namespace StrawberryNova
 	    public void SwitchEditorMode(EditorMode editorMode)
 	    {
 	        this.editorMode = editorMode;
+			modeObject.SetActive(false);
+			modeTile.SetActive(false);
+			modeMarking.SetActive(false);
 			switch(this.editorMode)
 			{
 				case EditorMode.Object:
+					modeObject.SetActive(true);
 					this.currentModeText.text = "Object Mode";
 					break;
 				case EditorMode.Marker:
+					modeMarking.SetActive(true);
 					this.currentModeText.text = "Tile Marking";
 					break;
 				case EditorMode.Tile:
+					modeTile.SetActive(true);
 					this.currentModeText.text = "Tile Drawing";
 					break;
 			    default:
 			        break;
 			}
-
 	    }
 
 	    public void LoadMap(string filename)
@@ -106,11 +129,13 @@ namespace StrawberryNova
 	        {
 	            return;
 	        }
-	        tilemap.LoadFromMap(map, tileTypeSet);
+			tilemap.LoadFromMap(map, tileTypeSet);
+			markerManager.LoadFromMap(map);
 	        SetNewTileDirection(Direction.Down);
 	        currentTileTemplate.SetActive(false);
 	        SwitchToLayer(0);
 	        SelectTileType(tileTypeSet.types[0].name);
+			SelectMarkerType(markerManager.tileMarkerTypes[0].name);
 	        mainMenuBar.ShowGoodMessage("Loaded map");
 	    }
 
@@ -119,7 +144,7 @@ namespace StrawberryNova
 	    {
 	        try
 	        {
-	            map = new Map(map.filename, tilemap);
+				map = new Map(map.filename, tilemap, markerManager);
 	            map.SaveMap();
 	        }
 	        catch(EditorErrorException)
@@ -149,19 +174,49 @@ namespace StrawberryNova
 	        if(currentHoveredTile == null)
 	            return;
 
-	        PointerEventData pointerEventData = data as PointerEventData;
+			PointerEventData pointerEventData = data as PointerEventData;
 
-	        if(pointerEventData.button == PointerEventData.InputButton.Left)
-	        {
-	            int x = currentHoveredTile.x;
-	            int y = currentHoveredTile.y;
-	            int layer = currentHoveredTile.layer;
+			if(pointerEventData.button == PointerEventData.InputButton.Left)
+			{
+				int x = currentHoveredTile.x;
+				int y = currentHoveredTile.y;
+				int layer = currentHoveredTile.layer;
 
-	            tilemap.RemoveTile(x, y, layer);
-	            tilemap.AddTile(currentTileName, x, y, layer, newTileDirection);
-	        }
-	        else if(pointerEventData.button == PointerEventData.InputButton.Right)
-	            SelectTileType(currentHoveredTile.tileTypeName);
+				if(editorMode == EditorMode.Tile)
+				{
+					try
+					{
+						tilemap.RemoveTile(x, y, layer);
+						tilemap.AddTile(currentTileName, x, y, layer, newTileDirection);
+					}
+					catch(EditorErrorException)
+					{
+					}
+				}
+				else if(editorMode == EditorMode.Marker)
+				{
+					try
+					{
+						markerManager.RemoveMarkerAt(x, y, layer);
+						markerManager.AddMarkerAt(selectedMarker, x, y, layer, newTileDirection);
+					}
+					catch(EditorErrorException)
+					{
+					}
+				}
+			}
+			else if(pointerEventData.button == PointerEventData.InputButton.Right)
+			{
+				if(editorMode == EditorMode.Tile)
+					SelectTileType(currentHoveredTile.tileTypeName);
+				else if(editorMode == EditorMode.Marker)
+				{
+					var marker = markerManager.GetMarkerAt(
+						currentHoveredTile.x, currentHoveredTile.y, currentHoveredTile.layer
+					);
+					SelectMarkerType(marker == null ? null : marker.name);
+				}
+			}
 	    }
 
 	    /*
@@ -237,6 +292,28 @@ namespace StrawberryNova
 	        currentTileText.text = currentTileName;
 
 	    }
+
+		/*
+	      Switches selected tile marker type
+	     */
+		private void SelectMarkerType(string markerTypeName)
+		{
+			if(markerTypeName == null)
+			{
+				currentMarkerText.text = "-";
+				selectedMarker = null;
+				currentMarkerPreview.gameObject.SetActive(false);
+				return;
+			}
+			try
+			{
+				currentMarkerPreview.gameObject.SetActive(true);
+				selectedMarker = markerManager.GetTileMarkerTypeByName(markerTypeName);
+				currentMarkerPreview.sprite = selectedMarker.sprite;
+			}
+			catch(EditorErrorException){ }
+			currentMarkerText.text = markerTypeName;
+		}
 
 	    public void SetNewTileDirection(Direction direction)
 	    {
@@ -408,6 +485,46 @@ namespace StrawberryNova
 	        if(currentTileName != null)
 	            StartCoroutine(editTileDialog.Show(currentTileName));
 	    }
+
+		/*
+	      Pressed button to go to the next tile marker
+	     */
+		public void NextTileMarkerButtonPressed()
+		{
+			if(selectedMarker == null)
+			{
+				SelectMarkerType(previousMarker == null ? null : previousMarker.name);
+				return;
+			}
+			SelectMarkerType(markerManager.GetNextTileMarkerType(selectedMarker).name);
+		}
+
+		/*
+	      Pressed button to go to the previous tile marker
+	     */
+		public void PreviousTileMarkerButtonPressed()
+		{
+			if(selectedMarker == null)
+			{
+				SelectMarkerType(previousMarker == null ? null : previousMarker.name);
+				return;
+			}
+			SelectMarkerType(markerManager.GetPreviousTileMarkerType(selectedMarker).name);
+		}
+
+		/*
+	      Pressed button to cancel out the marker selection.
+	     */
+		public void EmptyTileMarkerButtonPressed()
+		{
+			if(selectedMarker == null)
+			{
+				SelectMarkerType(previousMarker.name);
+				return;
+			}
+			previousMarker = selectedMarker;
+			SelectMarkerType(null);
+		}
 
 	    /*
 	      Pressed button that makes Z layer go up

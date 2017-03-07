@@ -48,7 +48,7 @@ namespace StrawberryNova
 	    // -----------------------------
 
 	    // How far away the camera usually is from the player
-	    public const float CAMERA_PLAYER_DISTANCE = 3.0f;
+	    public const float CAMERA_PLAYER_DISTANCE = 4.0f;
 
 	    // How far from the ground the rotation usually is
 	    public const float CAMERA_DEFAULT_ROTATION = 45.0f;
@@ -61,7 +61,7 @@ namespace StrawberryNova
 
 	    public const float PLAYER_ROTATION_SPEED = 4f;
 
-	    public const float PLAYER_JUMP_FORCE = 600f;
+	    public const float PLAYER_JUMP_FORCE = 450f;
 
 	    // -----------------------------
 	    // FILESYSTEM
@@ -81,13 +81,7 @@ namespace StrawberryNova
 	    public const float MOUSE_BUMP_SPEED = 500.0f;
 	    public const float CAMERA_Y = 6.0f;
 	    public const float VERTICAL_EDGE_DISTANCE = 5.0f;
+
 	}
-
-	public enum Direction{Left, Right, Up, Down};
-	public enum RotationalDirection{Clockwise, AntiClockwise};
-	public enum EditorMessageType{Good, Bad, Meh};
-	public enum TileTypeVolumeType{CollisionPlane, CollisionBox};
-	public enum AppState{Title, Editor, Game};
-	public enum EditorMode{Tile, Object, Marker};
-
+		
 }

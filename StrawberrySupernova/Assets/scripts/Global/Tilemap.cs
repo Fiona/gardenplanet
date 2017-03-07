@@ -95,19 +95,13 @@ namespace StrawberryNova
 	        public void SetDirection(Direction direction)
 	        {
 	            this.direction = direction;
-	            var baseRotation = 180;
-	            if(direction == Direction.Right)
-	                baseRotation -= 90;
-	            if(direction == Direction.Up)
-	                baseRotation -= 180;
-	            if(direction == Direction.Left)
-	                baseRotation += 90;
+				var baseRotation = DirectionHelper.DirectionToDegrees(this.direction);
 	            tileObj.transform.localRotation = Quaternion.Euler(0, baseRotation, 0);
 	        }
 	    }
 
-	    private TileTypeSet tileTypeSet;
-	    private Tile currentTileMouseOver = null;
+	    TileTypeSet tileTypeSet;
+	    Tile currentTileMouseOver;
 
 	    [HideInInspector]
 	    public MapEditorController mapEditor;
@@ -137,7 +131,7 @@ namespace StrawberryNova
 	        this.tileTypeSet = tileTypeSet;
 
 	        // Destroy old one
-	        if(tilemap.Count > 0)
+			if(tilemap.Count > 0)
 	        {
 	            var tilemapClone = new List<Tile>(tilemap);
 	            foreach(var tile in tilemapClone)
@@ -176,10 +170,7 @@ namespace StrawberryNova
 	    {
 
 	        if(x < 0 || x >= width || y < 0 || y >= height)
-	        {
-	            Debug.Log("Tile outside of tilemap.");
-	            return;
-	        }
+				throw new EditorErrorException("Tile outside of tilemap.");
 
 	        var newTileObject = tileTypeSet.InstantiateTile(tilename);
 	        newTileObject.transform.parent = transform;
@@ -313,44 +304,7 @@ namespace StrawberryNova
 	     */
 	    public void RotateTileInDirection(Tile tile, RotationalDirection direction)
 	    {
-	        var newDirection = Direction.Down;
-	        if(direction == RotationalDirection.AntiClockwise)
-	        {
-	            switch(tile.direction)
-	            {
-	                case Direction.Down:
-	                    newDirection = Direction.Left;
-	                    break;
-	                case Direction.Left:
-	                    newDirection = Direction.Up;
-	                    break;
-	                case Direction.Up:
-	                    newDirection = Direction.Right;
-	                    break;
-	                case Direction.Right:
-	                    newDirection = Direction.Down;
-	                    break;
-	            }
-	        }
-	        else if(direction == RotationalDirection.Clockwise)
-	        {
-	            switch(tile.direction)
-	            {
-	                case Direction.Down:
-	                    newDirection = Direction.Right;
-	                    break;
-	                case Direction.Left:
-	                    newDirection = Direction.Down;
-	                    break;
-	                case Direction.Up:
-	                    newDirection = Direction.Left;
-	                    break;
-	                case Direction.Right:
-	                    newDirection = Direction.Up;
-	                    break;
-	            }
-	        }
-	        tile.SetDirection(newDirection);
+			tile.SetDirection(DirectionHelper.RotateDirection(tile.direction, direction));
 	    }
 
 	}

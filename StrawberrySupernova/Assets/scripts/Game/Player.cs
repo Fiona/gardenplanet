@@ -42,6 +42,7 @@ namespace StrawberryNova
 	            attemptJump = false;
 	        else if(attemptJump)
 	        {
+				rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0.0f);
 	            rigidBody.AddForce(0, Consts.PLAYER_JUMP_FORCE * Time.deltaTime, 0, ForceMode.Impulse);
 	            attemptJump = false;
 	        }
@@ -88,6 +89,22 @@ namespace StrawberryNova
 	    {
 	        attemptJump = true;
 	    }
+
+		/*
+		 * When passed a tile it will immediately position and
+		 * turn the player to the passed tile position definition.
+		 */
+		public void SetPositionToTile(TilePosition pos)
+		{
+			transform.position = new Vector3(
+				pos.x,
+				(pos.layer * Consts.TILE_HEIGHT),
+				pos.y			
+			);
+			var baseRotation = DirectionHelper.DirectionToDegrees(pos.dir);
+			transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
+		}
+
 	}
 
 }

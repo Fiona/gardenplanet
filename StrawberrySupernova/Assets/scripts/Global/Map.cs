@@ -20,16 +20,26 @@ namespace StrawberryNova
 	        public Direction direction;
 	    }
 
+		public struct Marker
+		{
+			public int x;
+			public int y;
+			public int layer;
+			public string type;
+			public Direction direction;
+		}
+
 	    public int width;
 	    public int height;
 	    public string filename;
 	    public string fullFilepath;
-	    public List<MapTile> tiles;
+		public List<MapTile> tiles;
+		public List<Marker> markers;
 
 	    public Map()
 	    {
-	        tiles = new List<MapTile>();
-
+			tiles = new List<MapTile>();
+			markers = new List<Marker>();
 	    }
 
 	    public Map(string filename)
@@ -38,6 +48,7 @@ namespace StrawberryNova
 	        width = 5;
 	        height = 5;
 	        tiles = new List<MapTile>();
+			markers = new List<Marker>();
 
 	        if(filename == null)
 	            return;
@@ -58,15 +69,16 @@ namespace StrawberryNova
 	                Debug.Log(e);
 	                throw new EditorErrorException("Error loading map.");
 	            }
-	            this.tiles = loadedMap.tiles;
+				this.tiles = loadedMap.tiles;
+				this.markers = loadedMap.markers;
 	            this.width = loadedMap.width;
 	            this.height = loadedMap.height;
 	        }
 
 	    }
 
-	    // Constructor for converting from tilemap
-	    public Map(string filename, Tilemap tilemap)
+	    // Constructor for converting from tilemap and MarkerManager
+		public Map(string filename, Tilemap tilemap, MarkerManager markerManager)
 	    {
 	        this.filename = filename;
 	        fullFilepath = GetMapFilePathFromName(filename);
@@ -87,6 +99,19 @@ namespace StrawberryNova
 	            };
 	            tiles.Add(newTile);
 	        }
+
+			markers = new List<Marker>();
+			foreach(var marker in markerManager.tileMarkers)
+			{
+				var newMarker = new Marker(){
+					x=marker.x,
+					y=marker.y,
+					layer=marker.layer,
+					direction=marker.dir,
+					type=marker.name
+				};
+				markers.Add(newMarker);
+			}
 	    }
 
 	    public void SaveMap()

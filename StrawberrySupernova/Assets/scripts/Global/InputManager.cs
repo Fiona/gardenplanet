@@ -10,9 +10,9 @@ namespace StrawberryNova
 
 	    public Texture2D mouseTexture;
 
-	    private Vector2 lastMousePosition = Vector2.zero;
-	    private Vector2 deltaMousePosition = Vector2.zero;
-	    private App app;
+	    Vector2 lastMousePosition = Vector2.zero;
+	    Vector2 deltaMousePosition = Vector2.zero;
+	    App app;
 
 	    public void Awake()
 	    {
@@ -58,7 +58,7 @@ namespace StrawberryNova
 	        controller.player.TurnToWorldPoint(pointTo);
 
 	        // Jumping
-	        if(Input.GetKeyUp(KeyCode.Space))
+	        if(Input.GetKeyDown(KeyCode.Space))
 	            controller.player.Jump();
 
 	    }
@@ -87,11 +87,19 @@ namespace StrawberryNova
 	                var axis = Input.GetAxis("Mouse ScrollWheel");
 	                if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
 	                {
-	                    controller.tilemap.RotateTileInDirection(
-	                        currentTile,
-	                        (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise)
-	                        );
-	                    controller.SetNewTileDirection(currentTile.direction);
+						var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
+						if(controller.editorMode == EditorMode.Tile)
+						{
+							controller.tilemap.RotateTileInDirection(currentTile, dir);
+							controller.SetNewTileDirection(currentTile.direction);
+						}
+						else if(controller.editorMode == EditorMode.Marker)
+						{
+							var markerManager = FindObjectOfType<MarkerManager>();
+							var marker = markerManager.GetMarkerAt(currentTile.x, currentTile.y, currentTile.layer);
+							if(marker != null)
+								markerManager.RotateMarkerInDirection(marker, dir);						
+						}
 	                }
 	            }
 	        }
@@ -123,7 +131,7 @@ namespace StrawberryNova
 	                    //    controller.PanCamera(pannedPosition[0], -pannedPosition[1]);
 
 	                    // New shiney version
-	                    controller.PanCamera(-Input.GetAxis("Mouse X") * .8f, -Input.GetAxis("Mouse Y") * .8f);
+	                    controller.PanCamera(-Input.GetAxis("Mouse X") * .5f, -Input.GetAxis("Mouse Y") * .5f);
 	                    if (Input.GetMouseButtonUp(2))
 	                    {
 	                        Cursor.lockState = CursorLockMode.None;
