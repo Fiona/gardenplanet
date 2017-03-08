@@ -19,12 +19,12 @@ namespace StrawberryNova
 	        public string tileTypeName;
 	        public Material[] sharedMaterials;
 
-	        private static PhysicMaterial wallPhysicMaterial;
+	        private static PhysicMaterial slideMaterial;
 
 	        public Tile(int x, int y, int layer, Direction direction, GameObject tileObj, string tileTypeName)
 	        {
-	            if(Tile.wallPhysicMaterial == null)
-	                Tile.wallPhysicMaterial = (PhysicMaterial)Resources.Load("WallPhysicMaterial") as PhysicMaterial;
+	            if(Tile.slideMaterial == null)
+	                Tile.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;
 	            // Place tile
 	            this.x = x;
 	            this.y = y;
@@ -87,7 +87,7 @@ namespace StrawberryNova
 	                if(volume.type == TileTypeVolumeType.CollisionPlane)
 	                    newCollider.center += new Vector3(0.0f, -0.0002f, 0.0f);
 	                if(volume.isWall)
-	                    newCollider.material = Tile.wallPhysicMaterial;
+	                    newCollider.material = Tile.slideMaterial;
 	            }
 
 	        }
