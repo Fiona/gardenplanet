@@ -36,28 +36,48 @@ namespace StrawberryNova
 		public Image currentMarkerPreview;
 		public Text currentMarkerText;
 
-		[Header("Object mode")]
-		public GameObject modeObject;
+		[Header("World object mode")]
+		public GameObject modeWorldObject;
+		public GameObject currentWorldObjectPanel;
+		public Text currentWorldObjectText;
+		public GameObject currentWorldObjectTemplate;
+		public Button worldObjectMinorModeButton;
 
 	    [HideInInspector]
 	    public TileTypeSet tileTypeSet;
 		[HideInInspector]
 		public EditorMode editorMode;
 
+		List<GameObject> barriers;
+
+		// Tile mode
 	    string currentTileName;
 	    GameObject currentTileTypeSelectedObj;
 	    string previousTileType;
 	    Tilemap.Tile currentHoveredTile;
-	    List<GameObject> barriers;
 	    Direction newTileDirection;
+
+		// Marker mode
 		MarkerManager markerManager;
 		TileMarkerType selectedMarker;
 		TileMarkerType previousMarker;
+
+		// World object mode
+		WorldObjectManager worldObjectManager;
+		WorldObjectType selectedWorldObject;
+		GameObject currentWorldObjectSelectedObj;
+		[HideInInspector]
+		public ObjectWorldPosition worldObjectMoving;
+		[HideInInspector]
+		public int worldObjectMinorMode;
 
 	    public void Awake()
 	    {
 			var markerManagerObj = new GameObject("MarkerManager");
 			markerManager = markerManagerObj.AddComponent<MarkerManager>();
+
+			var worldObjectManagerObj = new GameObject("WorldObjectManager");
+			worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
 
 	        barriers = new List<GameObject>();
 	        try
@@ -68,8 +88,9 @@ namespace StrawberryNova
 	        catch(EditorErrorException){}
 
 	        SwitchEditorMode(EditorMode.Tile);
+			SwitchWorldObjectMinorMode(0);
 	    }
-
+			
 	    public void Update()
 	    {
 	        // Do bump scrolling
@@ -92,19 +113,56 @@ namespace StrawberryNova
 	            body.AddForce(((Vector3)direction) * Consts.MOUSE_BUMP_SPEED * Time.deltaTime);
 
 	        ClampCameraToBorders();
-	    }
+
+			// If let go of mouse then we stop moving any world objects we've moving
+			if(Input.GetMouseButtonUp(0) && movingWorldObject)
+				movingWorldObject = false;			
+
+			// If we've hit delete and we're moving theeen... delete it
+			if(worldObjectMoving != null && Input.GetKey(KeyCode.Delete))
+			{
+				DeleteWorldObject(worldObjectMoving);
+				return;
+			}
+
+			// If we're moving an object
+			if(movingWorldObject)
+			{
+				if(worldObjectMoving != null)
+				{
+					// Set the position to the tile point that the mouse is pointing at
+					RaycastHit secondaryHit;
+					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					if(Physics.Raycast(ray, out secondaryHit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
+					{						
+						var objTransform = worldObjectMoving.gameObject.transform;
+						// Snap to grid if holding shift
+						if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+							objTransform.position = new Vector3(
+								secondaryHit.transform.position.x, objTransform.position.y, secondaryHit.transform.position.z
+							);
+						else
+							objTransform.position = new Vector3(
+								secondaryHit.point.x, objTransform.position.y, secondaryHit.point.z
+							);
+					}
+				}
+			}
+
+		}
 			
 	    public void SwitchEditorMode(EditorMode editorMode)
 	    {
 	        this.editorMode = editorMode;
-			modeObject.SetActive(false);
+			modeWorldObject.SetActive(false);
 			modeTile.SetActive(false);
 			modeMarking.SetActive(false);
+			StopMovingWorldObject();
 			switch(this.editorMode)
 			{
-				case EditorMode.Object:
-					modeObject.SetActive(true);
-					this.currentModeText.text = "Object Mode";
+				case EditorMode.WorldObject:
+					modeWorldObject.SetActive(true);
+					this.currentModeText.text = "World Object Mode";
 					break;
 				case EditorMode.Marker:
 					modeMarking.SetActive(true);
@@ -131,11 +189,15 @@ namespace StrawberryNova
 	        }
 			tilemap.LoadFromMap(map, tileTypeSet);
 			markerManager.LoadFromMap(map);
+			worldObjectManager.LoadFromMap(map);
 	        SetNewTileDirection(Direction.Down);
 	        currentTileTemplate.SetActive(false);
+			currentWorldObjectTemplate.SetActive(false);
 	        SwitchToLayer(0);
 	        SelectTileType(tileTypeSet.types[0].name);
 			SelectMarkerType(markerManager.tileMarkerTypes[0].name);
+			SelectWorldObjectType(worldObjectManager.worldObjectTypes[0].name);
+			SwitchEditorMode(EditorMode.Tile);
 	        mainMenuBar.ShowGoodMessage("Loaded map");
 	    }
 
@@ -144,7 +206,7 @@ namespace StrawberryNova
 	    {
 	        try
 	        {
-				map = new Map(map.filename, tilemap, markerManager);
+				map = new Map(map.filename, tilemap, markerManager, worldObjectManager);
 	            map.SaveMap();
 	        }
 	        catch(EditorErrorException)
@@ -169,6 +231,8 @@ namespace StrawberryNova
 	            );
 	    }
 
+		private bool movingWorldObject; 
+
 	    public void ClickedOnWorld(BaseEventData data)
 	    {
 	        if(currentHoveredTile == null)
@@ -176,46 +240,85 @@ namespace StrawberryNova
 
 			PointerEventData pointerEventData = data as PointerEventData;
 
-			if(pointerEventData.button == PointerEventData.InputButton.Left)
+			try
 			{
-				int x = currentHoveredTile.x;
-				int y = currentHoveredTile.y;
-				int layer = currentHoveredTile.layer;
+				var tilePos = new TilePosition{
+					x=currentHoveredTile.x,
+					y=currentHoveredTile.y,
+					layer=currentHoveredTile.layer
+				};
 
+				// Drawing tiles
 				if(editorMode == EditorMode.Tile)
-				{
-					try
+				{					
+					if(pointerEventData.button == PointerEventData.InputButton.Left)
 					{
-						tilemap.RemoveTile(x, y, layer);
-						tilemap.AddTile(currentTileName, x, y, layer, newTileDirection);
+						tilemap.RemoveTile(tilePos.x, tilePos.y, tilePos.layer);
+						tilemap.AddTile(currentTileName, tilePos.x, tilePos.y, tilePos.layer, newTileDirection);
 					}
-					catch(EditorErrorException)
-					{
-					}
+					else if(pointerEventData.button == PointerEventData.InputButton.Right)
+						SelectTileType(currentHoveredTile.tileTypeName);
 				}
+				// Placing tile markers
 				else if(editorMode == EditorMode.Marker)
 				{
-					try
+					if(pointerEventData.button == PointerEventData.InputButton.Left)
 					{
-						markerManager.RemoveMarkerAt(x, y, layer);
-						markerManager.AddMarkerAt(selectedMarker, x, y, layer, newTileDirection);
+						markerManager.RemoveMarkerAt(tilePos.x, tilePos.y, tilePos.layer);
+						markerManager.AddMarkerAt(selectedMarker, tilePos.x, tilePos.y, tilePos.layer, newTileDirection);
 					}
-					catch(EditorErrorException)
+					else if(pointerEventData.button == PointerEventData.InputButton.Right)
 					{
+						var marker = markerManager.GetMarkerAt(
+							currentHoveredTile.x, currentHoveredTile.y, currentHoveredTile.layer
+						);
+						SelectMarkerType(marker == null ? null : marker.name);
 					}
+				}
+				// Wanting to add world objects
+				else if(editorMode == EditorMode.WorldObject && worldObjectMinorMode == 0)
+				{
+					if(Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.RightShift))
+						worldObjectManager.AddWorldObject(selectedWorldObject, tilePos);
+					else
+					{
+						// Without shift being held we don't snap to grid
+						RaycastHit hit;
+						Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
+						if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
+						{						
+							var worldPos = new WorldPosition{
+								x=hit.point.x,
+								y=hit.point.z,
+								height=(tilePos.layer * Consts.TILE_HEIGHT)
+							};
+							worldObjectManager.AddWorldObject(selectedWorldObject, worldPos);
+						}
+					}
+				}
+				// If moving world objects
+				else if(editorMode == EditorMode.WorldObject && worldObjectMinorMode == 1)
+				{
+					// First check to see if we've clicked on a world object, this switches the selection
+					RaycastHit hit;
+					Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
+					if(!movingWorldObject && Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
+					{
+						var worldObject = worldObjectManager.GetWorldObjectByGameObject(hit.transform.gameObject);
+						if(worldObject != null && worldObject != worldObjectMoving)
+						{
+							WorldObjectMinorModeStartMovingWorldObject(worldObject);
+							return;
+						}
+					}
+					// If we're not switching selection and we already have one then holding
+					// down the mouse will move the object
+					if(!movingWorldObject)
+						movingWorldObject = true;
 				}
 			}
-			else if(pointerEventData.button == PointerEventData.InputButton.Right)
+			catch(EditorErrorException)
 			{
-				if(editorMode == EditorMode.Tile)
-					SelectTileType(currentHoveredTile.tileTypeName);
-				else if(editorMode == EditorMode.Marker)
-				{
-					var marker = markerManager.GetMarkerAt(
-						currentHoveredTile.x, currentHoveredTile.y, currentHoveredTile.layer
-					);
-					SelectMarkerType(marker == null ? null : marker.name);
-				}
 			}
 	    }
 
@@ -229,7 +332,7 @@ namespace StrawberryNova
 	        else
 	            currentHoveredTile = null;
 
-	        if(currentHoveredTile == null)
+			if(currentHoveredTile == null || editorMode == EditorMode.WorldObject)
 	            TilemapSelectionCube.GetComponent<MeshRenderer>().enabled = false;
 	        else
 	        {
@@ -543,12 +646,122 @@ namespace StrawberryNova
 	        SwitchToLayer(currentLayer - 1);
 	    }
 
+		/*
+		 * When switching to another major mode
+		 */
 		public void ChangeEditorModeButtonPressed()
 		{
 			var numModes = Enum.GetNames(typeof(EditorMode)).Length;
 			SwitchEditorMode(
 				(EditorMode)(((int)editorMode + 1) % numModes)
 			);
+		}
+
+		/*
+		 * Use to switch to a minor mode in objects
+		 */
+		public void SwitchWorldObjectMinorMode(int newMinorMode)
+		{
+			worldObjectMinorMode = newMinorMode;
+			if(worldObjectMinorMode == 1)
+				worldObjectMinorModeButton.GetComponentInChildren<Text>().text = "Moving";
+			else
+			{
+				StopMovingWorldObject();
+				worldObjectMinorModeButton.GetComponentInChildren<Text>().text = "Adding";
+			}
+		}
+
+		public void StopMovingWorldObject()
+		{
+			if(worldObjectMoving != null)
+			{
+				var objRenderer = worldObjectMoving.gameObject.GetComponent<Renderer>();
+				var matProp = new MaterialPropertyBlock();
+				matProp.SetColor("_Color", new Color(1f, 1f, 1f));
+				objRenderer.SetPropertyBlock(matProp);
+			}
+			worldObjectMoving = null;
+		}
+
+		public void WorldObjectMinorModeStartMovingWorldObject(ObjectWorldPosition worldObject)
+		{
+			StopMovingWorldObject();
+			var objRenderer = worldObject.gameObject.GetComponent<Renderer>();
+			var matProp = new MaterialPropertyBlock();
+			matProp.SetColor("_Color", new Color(0f, 1f, 1f));
+			objRenderer.SetPropertyBlock(matProp);
+			worldObjectMoving = worldObject;			
+		}
+
+		/*
+		 * World object minor mode button pressed
+		 */
+		public void SwitchWorldObjectMinorModeButtonPressed()
+		{
+			SwitchWorldObjectMinorMode(Math.Abs(worldObjectMinorMode - 1));
+		}
+
+		/*
+	      Pressed button to go to the next world object
+	     */
+		public void NextWorldObjectButtonPressed()
+		{
+			SelectWorldObjectType(worldObjectManager.GetNextWorldObjectMarkerType(selectedWorldObject).name);
+		}
+
+		/*
+	      Pressed button to go to the previous world object
+	     */
+		public void PreviousWorldObjectButtonPressed()
+		{
+			SelectWorldObjectType(worldObjectManager.GetPreviousWorldObjectMarkerType(selectedWorldObject).name);
+		}
+
+		/*
+	      Switches selected world object type
+	     */
+		private void SelectWorldObjectType(string worldObjectTypeName)
+		{
+
+			if(currentWorldObjectSelectedObj != null)
+			{
+				Destroy(currentWorldObjectSelectedObj);
+				currentWorldObjectSelectedObj = null;
+			}
+
+			if(worldObjectTypeName == null)
+			{
+				currentWorldObjectText = null;
+				currentWorldObjectText.text = "None";
+				return;
+			}
+
+			selectedWorldObject = worldObjectManager.GetWorldObjectTypeByName(worldObjectTypeName);
+			currentWorldObjectSelectedObj = Instantiate(selectedWorldObject.prefab);
+
+			currentWorldObjectSelectedObj.transform.parent = currentWorldObjectPanel.transform;
+			currentWorldObjectSelectedObj.AddComponent<RectTransform>();
+			var rect = currentWorldObjectSelectedObj.GetComponent<RectTransform>();
+
+			// Base values on template
+			currentWorldObjectSelectedObj.layer = currentWorldObjectTemplate.layer;
+			rect.localPosition = currentWorldObjectTemplate.GetComponent<RectTransform>().localPosition;
+			rect.localScale = currentWorldObjectTemplate.GetComponent<RectTransform>().localScale;
+			rect.localRotation = currentWorldObjectTemplate.GetComponent<RectTransform>().localRotation;
+
+			currentWorldObjectText.text = selectedWorldObject.name;
+
+		}
+
+		/*
+		 * Used when getting rid of a world object
+		 */
+		public void DeleteWorldObject(ObjectWorldPosition worldObjectToDelete)
+		{
+			if(worldObjectToDelete == worldObjectMoving)
+				StopMovingWorldObject();
+			worldObjectManager.DeleteWorldObject(worldObjectToDelete);			
 		}
 
 	}

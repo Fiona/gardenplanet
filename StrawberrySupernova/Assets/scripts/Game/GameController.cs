@@ -19,6 +19,8 @@ namespace StrawberryNova
 	    public Map map;
 		[HideInInspector]
 		public MarkerManager markerManager;
+		[HideInInspector]
+		public WorldObjectManager worldObjectManager;
 
 	    public void Awake()
 	    {
@@ -33,6 +35,10 @@ namespace StrawberryNova
 			var markerManagerObj = new GameObject("MarkerManager");
 			markerManager = markerManagerObj.AddComponent<MarkerManager>();
 			markerManager.LoadFromMap(map);
+
+			var worldObjectManagerObj = new GameObject("WorldObjectManager");
+			worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
+			worldObjectManager.LoadFromMap(map);
 
 			// Set up player and camera
 			var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
