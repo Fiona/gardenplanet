@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Material.003
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_Name: Glow
+  m_Shader: {fileID: 4800000, guid: e00a6d6ff554041edb514cc3556d56e6, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
@@ -71,6 +71,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
+        name: _BumpDepth
+      second: 1
+    - first:
         name: _BumpScale
       second: 1
     - first:
@@ -101,6 +104,12 @@ Material:
         name: _OcclusionStrength
       second: 1
     - first:
+        name: _Opacity
+      second: 2
+    - first:
+        name: _Outline
+      second: 0.098
+    - first:
         name: _Parallax
       second: 0.02
     - first:
@@ -121,7 +130,13 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.08713996, g: 0.06058153, b: 0.016465193, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _GlowColor
+      second: {r: 1, g: 0.99634886, b: 0.86764705, a: 1}
+    - first:
+        name: _ScaleTrick
+      second: {r: 1, g: 1, b: 1, a: 1}

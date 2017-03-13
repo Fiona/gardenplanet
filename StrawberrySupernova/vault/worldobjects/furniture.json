@@ -1,0 +1,9 @@
+
+{
+    "worldObjectTypes" : {
+        "bed01" : {
+            "displayName" : "Utilitarian Bed",
+            "interactable" : true
+        }
+    }
+}

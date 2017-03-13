@@ -54,7 +54,7 @@ namespace StrawberryNova
 			foreach(var type in this.worldObjectTypes)
 				if(type.name == name)
 					return type;
-			throw new EditorErrorException("Couldn't find world object type requested.");
+			throw new EditorErrorException("Couldn't find world object type requested: " + name);
 		}
 
 		public WorldObjectType GetNextWorldObjectMarkerType(WorldObjectType currentWorldObjectType)
@@ -88,10 +88,6 @@ namespace StrawberryNova
 			newGameObject.transform.localPosition = new Vector3(pos.x, pos.height, pos.y);
 			newGameObject.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
 
-			var comp = newGameObject.GetComponentInChildren<BoxCollider>();
-			if(comp != null)
-				comp.material = WorldObjectManager.slideMaterial;
-
 			var newWorldObject = new ObjectWorldPosition {
 				x = pos.x,
 				y = pos.y,
@@ -102,6 +98,16 @@ namespace StrawberryNova
 
 			worldObjects.Add(newWorldObject);
 			SetWorldObjectDirection(newWorldObject, pos.dir);
+
+			if(FindObjectOfType<App>().state == AppState.Game && objectType.interactable)
+			{
+				var interactable = newGameObject.AddComponent<WorldObjectInteractable>();
+				interactable.worldObject = newWorldObject;
+			}
+
+			var comp = newGameObject.GetComponentInChildren<BoxCollider>();
+			if(comp != null)
+				comp.material = WorldObjectManager.slideMaterial;
 
 		}
 

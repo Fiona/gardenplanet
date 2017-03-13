@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace StrawberryNova
 {
@@ -10,6 +12,8 @@ namespace StrawberryNova
 	    [Header("Object References")]
 	    public PlayerCamera mainCamera;
 	    public Player player;
+		public GameObject worldObjectPopup;
+		public Text worldObjectPopupText;
 
 	    [HideInInspector]
 	    public Tilemap tilemap;
@@ -21,6 +25,9 @@ namespace StrawberryNova
 		public MarkerManager markerManager;
 		[HideInInspector]
 		public WorldObjectManager worldObjectManager;
+
+		bool showPopup;
+		ObjectWorldPosition objectCurrentlyInteractingWith;
 
 	    public void Awake()
 	    {
@@ -40,6 +47,8 @@ namespace StrawberryNova
 			worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
 			worldObjectManager.LoadFromMap(map);
 
+			worldObjectPopup.SetActive(false);
+
 			// Set up player and camera
 			var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
 			if(playerStartMarker != null)
@@ -49,7 +58,30 @@ namespace StrawberryNova
 			mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
 			mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
 	    }
+			
+		public void LateUpdate()
+		{
+			if(!showPopup)
+				worldObjectPopup.SetActive(false);
+			showPopup = false;
+		}
 
+		public void ShowPopup(string textToShow)
+		{
+			worldObjectPopupText.text = worldObjectManager.GetWorldObjectTypeByName(textToShow).displayName;
+			worldObjectPopup.SetActive(true);
+			showPopup = true;
+		}
+			
+		public IEnumerator PlayerInteractWith(ObjectWorldPosition worldObject)
+		{
+			if(objectCurrentlyInteractingWith != null)
+				yield return null;
+			objectCurrentlyInteractingWith = worldObject;
+			yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
+			objectCurrentlyInteractingWith = null;			
+		}
+			
 	}
 
 }

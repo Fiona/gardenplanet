@@ -1,18 +1,32 @@
-﻿<Properties StartupConfiguration="{4C273AFB-6945-1C22-DA39-0890970CBC61}|Unit Tests" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Global/World/InputManager.cs">
+﻿<Properties StartupConfiguration="{4C273AFB-6945-1C22-DA39-0890970CBC61}|Unit Tests" GitUserInfo="UsingGIT" StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Global/Core/Consts.cs">
     <Files>
-      <File FileName="Assets/scripts/MapEditor/MapEditorController.cs" Line="69" Column="20" />
-      <File FileName="Assets/scripts/Global/World/MarkerManager.cs" Line="139" Column="4" />
-      <File FileName="Assets/scripts/Global/World/WorldObjectManager.cs" Line="115" Column="56" />
-      <File FileName="Assets/scripts/Global/Core/Types.cs" Line="10" Column="45" />
-      <File FileName="Assets/scripts/Global/World/Map.cs" Line="39" Column="4" />
-      <File FileName="Assets/scripts/Global/World/WorldObjectType.cs" Line="20" Column="49" />
-      <File FileName="Assets/scripts/Global/World/TileTypeSet.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Global/Core/DirectionHelper.cs" Line="39" Column="1" />
-      <File FileName="Assets/scripts/Global/World/InputManager.cs" Line="85" Column="36" />
+      <File FileName="Assets/scripts/MapEditor/MapEditorController.cs" Line="147" Column="10" />
+      <File FileName="Assets/scripts/Global/World/WorldObjectManager.cs" Line="50" Column="63" />
+      <File FileName="Assets/scripts/Global/Core/Types.cs" Line="37" Column="29" />
+      <File FileName="Assets/scripts/Global/World/WorldObjectType.cs" Line="107" Column="6" />
+      <File FileName="Assets/scripts/Global/World/Tilemap.cs" Line="26" Column="1" />
+      <File FileName="Assets/scripts/Game/GameController.cs" Line="57" Column="111" />
+      <File FileName="Assets/scripts/Game/Player.cs" Line="55" Column="45" />
+      <File FileName="Assets/scripts/Game/WorldObjectInteractable.cs" Line="4" Column="22" />
+      <File FileName="Assets/scripts/Global/Core/Consts.cs" Line="66" Column="3" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="StrawberrySupernova" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True" />
+            <Node name="Assembly-CSharp-Editor" expanded="True" />
+            <Node name="Assembly-CSharp-firstpass" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

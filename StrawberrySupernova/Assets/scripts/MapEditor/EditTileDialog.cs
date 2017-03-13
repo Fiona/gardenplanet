@@ -44,7 +44,7 @@ namespace StrawberryNova
 	    {
 
 	        controller = (MapEditorController)FindObjectOfType(typeof(MapEditorController));
-	        rotation = 0.0f;
+	        rotation = 0f;
 
 	        try
 	        {
@@ -184,9 +184,9 @@ namespace StrawberryNova
 	            Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)selectedVolume.z
 	            );
 	        currentVolumeObject.transform.localScale = new Vector3(
-	            (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.xScale,
-	            (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.yScale,
-	            (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.zScale
+				((Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.xScale),// / .01f,
+				((Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.yScale),// / .01f,
+				((Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.zScale)// / .01f
 	            );
 	        if(selectedVolume.type == TileTypeVolumeType.CollisionPlane)
 	            currentVolumeObject.transform.localScale = new Vector3(
@@ -333,8 +333,8 @@ namespace StrawberryNova
 	    }
 
 	    public void RotateTilePreviewPressed()
-	    {
-	        rotation = (rotation + 90.0f) % 360.0f;
+	    {			
+			rotation = (rotation + 90f) % 360.0f;
 	    }
 
 	}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace StrawberryNova
@@ -7,21 +8,26 @@ namespace StrawberryNova
 	public class Player: MonoBehaviour
 	{
 
-	    private Rigidbody rigidBody;
-	    private Vector3 walkDir = new Vector3();
-	    private bool isJumping = false;
-	    private bool attemptJump = false;
-	    private Vector3 desiredRotation;
+	    Rigidbody rigidBody;
+		Vector3 walkDir;
+	    bool isJumping;
+	    bool attemptJump;
+	    Vector3 desiredRotation;
+		bool inputEnabled;
 
 	    public void Awake()
 	    {
 	        rigidBody = GetComponent<Rigidbody>();
 	        rigidBody.freezeRotation = true;
+			inputEnabled = true;
 	    }
 
 	    public void Update()
 	    {
 
+			if(!inputEnabled)
+				return;
+			
 	        // Handle walking
 	        if(rigidBody.velocity.magnitude < 1.0f)
 	            rigidBody.AddForce(
@@ -32,9 +38,8 @@ namespace StrawberryNova
 
 	        // Do rotation towards mouse
 	        float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
-	        Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
-	        transform.rotation = Quaternion.LookRotation(newDir);
-	        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+			Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
+			SetRotation(newDir);
 
 	        // Deal with jumping
 	        isJumping = (Mathf.Abs(rigidBody.velocity.y) > 0.01f);
@@ -47,7 +52,63 @@ namespace StrawberryNova
 	            attemptJump = false;
 	        }
 
+			// Interact with objects
+			foreach(var obj in FindObjectsOfType<WorldObjectInteractable>())
+			{
+				if(Vector3.Distance(transform.position, obj.transform.position) < Consts.PLAYER_INTERACT_DISTANCE)
+				{
+					obj.Focus();
+					if(Input.GetMouseButtonDown(0))
+						obj.InteractWith();
+				}
+			}
+			/*
+			RaycastHit interactHit;
+			var ray = new Ray(transform.position, transform.forward);
+			if(Physics.Raycast(ray, out interactHit, Consts.PLAYER_INTERACT_DISTANCE, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
+			{						
+				var worldObj = controller.worldObjectManager.GetWorldObjectByGameObject(interactHit.transform.gameObject);
+				controller.PlayerLookingAtWorldObject(worldObj);
+			}
+			else
+				controller.PlayerNotLookingAtWorldObject();
+*/
 	    }
+
+		/*
+		 * Rotates the player towards an object and returns when it finishes
+		 */
+		public IEnumerator TurnTowardsWorldObject(ObjectWorldPosition worldObject)
+		{
+			inputEnabled = false;
+
+			var turnToPos = worldObject.gameObject.transform.position;
+			var myPos = transform.position;
+
+			while(true)
+			{
+				Vector3 newDir = Vector3.RotateTowards(
+					transform.forward,
+					turnToPos-myPos,
+					Consts.PLAYER_ROTATION_SPEED*Time.deltaTime,
+					0.0F
+				);
+				SetRotation(newDir);
+
+				//var angle = Mathf.Atan2(turnToPos.y-myPos.y, turnToPos.x-myPos.x) * Mathf.Rad2Deg;
+
+				float dot = Vector3.Dot((turnToPos-myPos).normalized, transform.forward);
+				float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;  
+
+
+				Debug.Log(angle);
+				if(Mathf.Abs(angle) < 5f)
+					break;
+				yield return new WaitForFixedUpdate();
+			}
+			Debug.Log("done");
+			inputEnabled = true;
+		}
 
 	    /*
 	      Tells the player to walk in the specified direction.
@@ -103,6 +164,12 @@ namespace StrawberryNova
 			);
 			var baseRotation = DirectionHelper.DirectionToDegrees(pos.dir);
 			transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
+		}
+
+		public void SetRotation(Vector3 newDir)
+		{
+			transform.rotation = Quaternion.LookRotation(newDir);
+			transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
 		}
 
 	}

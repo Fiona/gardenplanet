@@ -62,9 +62,19 @@ namespace StrawberryNova
 	        if(Input.GetKeyDown(KeyCode.Space))
 	            controller.player.Jump();
 
+			// Hovering mouse over objects
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        
+			if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
+			{
+				var interactable = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
+				if(interactable != null)
+					interactable.Highlight();
+			}
+
 	    }
 
-		private bool movingWorldObject;
+		bool movingWorldObject;
 
 	    public void UpdateEditor()
 	    {

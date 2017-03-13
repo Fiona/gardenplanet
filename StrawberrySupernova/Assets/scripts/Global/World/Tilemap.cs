@@ -40,7 +40,7 @@ namespace StrawberryNova
 
 	            SetDirection(direction);
 	            // Combats tile gaps
-	            tileObj.transform.localScale = new Vector3(100.0f + Consts.SCALE_FUDGE, 100.0f + Consts.SCALE_FUDGE, 100.0f + Consts.SCALE_FUDGE);
+	            tileObj.transform.localScale = new Vector3(1.0f + Consts.SCALE_FUDGE, 1.0f + Consts.SCALE_FUDGE, 1.0f + Consts.SCALE_FUDGE);
 
 	            if(!emptyTile)
 	                sharedMaterials = tileObj.GetComponent<Renderer>().sharedMaterials;
@@ -57,8 +57,8 @@ namespace StrawberryNova
 	            if(FindObjectOfType<App>().state == AppState.Editor)
 	            {
 	                BoxCollider floorCollider = tileObj.AddComponent<BoxCollider>();
-	                floorCollider.size = new Vector3(0.01f, 0.001f, 0.01f);
-	                floorCollider.center = new Vector3(0.0f, -0.0004f, 0.0f);
+	                floorCollider.size = new Vector3(1f, 0.1f, 1f);
+	                floorCollider.center = new Vector3(0.0f, -0.04f, 0.0f);
 	                return;
 	            }
 
@@ -70,22 +70,22 @@ namespace StrawberryNova
 	            {
 	                BoxCollider newCollider = tileObj.AddComponent<BoxCollider>();
 	                float yScale;
-	                if(volume.type == TileTypeVolumeType.CollisionPlane)
-	                    yScale = 0.0005f;
-	                else
-	                    yScale = (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.yScale;
-	                newCollider.size = new Vector3(
-	                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.xScale,
-	                    yScale,
-	                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.zScale
-	                    );
-	                newCollider.center = new Vector3(
-	                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.x,
-	                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.y,
-	                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.z
-	                    );
-	                if(volume.type == TileTypeVolumeType.CollisionPlane)
-	                    newCollider.center += new Vector3(0.0f, -0.0002f, 0.0f);
+					if(volume.type == TileTypeVolumeType.CollisionPlane)
+						yScale = 0.005f;
+					else
+						yScale = (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.yScale;
+					newCollider.size = new Vector3(
+						(Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.xScale,
+						yScale,
+						(Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.zScale
+					);
+					newCollider.center = new Vector3(
+						Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.x,
+						Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.y,
+						Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.z
+					);
+					if(volume.type == TileTypeVolumeType.CollisionPlane)
+						newCollider.center += new Vector3(0.0f, 0.005f, 0.0f);								
 	                if(volume.isWall)
 	                    newCollider.material = Tile.slideMaterial;
 	            }

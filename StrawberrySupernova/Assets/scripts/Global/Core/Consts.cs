@@ -28,13 +28,13 @@ namespace StrawberryNova
 	    public const float TILE_HEIGHT = 0.5f;
 
 	    // All tiles are scaled by this amount in an attempt to tackle gaps
-	    public const float SCALE_FUDGE = 0.01f;
+		public const float SCALE_FUDGE = 0f;
 
 	    // Value used to adjust positions of tile volumes
-	    public const float VOLUME_POSITION_SHIFT_PER_UNIT = 0.00250f;
+		public const float VOLUME_POSITION_SHIFT_PER_UNIT = 0.250f/*0.00250f*/;
 
 	    // Default scale of tile volumes
-	    public const float VOLUME_SCALE_DEFAULT = 0.01f;
+	    public const float VOLUME_SCALE_DEFAULT = 1f;
 
 	    // -----------------------------
 	    // INPUT
@@ -64,6 +64,8 @@ namespace StrawberryNova
 
 	    public const float PLAYER_JUMP_FORCE = 450f;
 
+		public const float PLAYER_INTERACT_DISTANCE = .75f;
+
 	    // -----------------------------
 	    // FILESYSTEM
 	    // -----------------------------
@@ -73,6 +75,8 @@ namespace StrawberryNova
 	    public const string DATA_DIR_MAPS = "maps";
 	    public const string FILE_EXTENSION_MAP = "map";
 	    public const string FILE_EXTENSION_TILE_SET = "set";
+		public const string DATA_DIR_WORLD_OBJECT_DATA = "worldobjects";
+		public const string FILE_EXTENSION_WORLD_OBJECT_DATA = "json";
 
 	    // -----------------------------
 	    // EDITOR

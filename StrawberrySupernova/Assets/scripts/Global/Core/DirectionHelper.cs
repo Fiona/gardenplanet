@@ -36,7 +36,7 @@ namespace StrawberryNova
 		 */
 		public static float DirectionToDegrees(Direction dir)
 		{
-			return 180f + (90f * (int)dir);
+			return (90f * (int)dir);
 		}
 
 		/*
@@ -45,7 +45,7 @@ namespace StrawberryNova
 		 */
 		public static float DirectionToDegrees(EightDirection dir)
 		{
-			return 180f + (45f * (int)dir);
+			return (45f * (int)dir);
 		}
 
 	}

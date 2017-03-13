@@ -14,14 +14,16 @@ namespace StrawberryNova
 	        : base(message)
 	    {
 	        var controller = (MapEditorController)MonoBehaviour.FindObjectOfType(typeof(MapEditorController));
-	        controller.mainMenuBar.ShowBadMessage(message);
+			if(controller != null)
+				controller.mainMenuBar.ShowBadMessage(message);
 	    }
 
 	    public EditorErrorException(string message, Exception inner)
 	        : base(message, inner)
 	    {
 	        var controller = (MapEditorController)MonoBehaviour.FindObjectOfType(typeof(MapEditorController));
-	        controller.mainMenuBar.ShowBadMessage(message);
+			if(controller != null)
+				controller.mainMenuBar.ShowBadMessage(message);
 	    }
 	}
 
