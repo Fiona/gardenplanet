@@ -67,7 +67,7 @@ namespace StrawberryNova
 		WorldObjectType selectedWorldObject;
 		GameObject currentWorldObjectSelectedObj;
 		[HideInInspector]
-		public ObjectWorldPosition worldObjectMoving;
+		public WorldObject worldObjectMoving;
 		[HideInInspector]
 		public int worldObjectMinorMode;
 
@@ -684,7 +684,7 @@ namespace StrawberryNova
 			worldObjectMoving = null;
 		}
 
-		public void WorldObjectMinorModeStartMovingWorldObject(ObjectWorldPosition worldObject)
+		public void WorldObjectMinorModeStartMovingWorldObject(WorldObject worldObject)
 		{
 			StopMovingWorldObject();
 			var objRenderer = worldObject.gameObject.GetComponent<Renderer>();
@@ -757,7 +757,7 @@ namespace StrawberryNova
 		/*
 		 * Used when getting rid of a world object
 		 */
-		public void DeleteWorldObject(ObjectWorldPosition worldObjectToDelete)
+		public void DeleteWorldObject(WorldObject worldObjectToDelete)
 		{
 			if(worldObjectToDelete == worldObjectMoving)
 				StopMovingWorldObject();

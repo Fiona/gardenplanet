@@ -5,7 +5,7 @@ namespace StrawberryNova
 {
 	public class WorldObjectInteractable: MonoBehaviour
 	{
-		public ObjectWorldPosition worldObject;
+		public WorldObject worldObject;
 
 		Glowable focusGlow;
 		Glowable highlightGlow;

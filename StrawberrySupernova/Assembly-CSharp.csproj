@@ -55,6 +55,8 @@
      <Compile Include="Assets\scripts\Game\Player.cs" />
      <Compile Include="Assets\scripts\Game\PlayerCamera.cs" />
      <Compile Include="Assets\scripts\Game\WorldObjectInteractable.cs" />
+     <Compile Include="Assets\scripts\Game\WorldObjectScripts\Bed.cs" />
+     <Compile Include="Assets\scripts\Game\WorldObjectScripts\IWorldObjectScript.cs" />
      <Compile Include="Assets\scripts\Global\Core\Clone.cs" />
      <Compile Include="Assets\scripts\Global\Core\Consts.cs" />
      <Compile Include="Assets\scripts\Global\Core\DirectionHelper.cs" />
@@ -67,6 +69,7 @@
      <Compile Include="Assets\scripts\Global\World\TileMarkerType.cs" />
      <Compile Include="Assets\scripts\Global\World\TileTypeSet.cs" />
      <Compile Include="Assets\scripts\Global\World\Tilemap.cs" />
+     <Compile Include="Assets\scripts\Global\World\WorldObject.cs" />
      <Compile Include="Assets\scripts\Global\World\WorldObjectManager.cs" />
      <Compile Include="Assets\scripts\Global\World\WorldObjectType.cs" />
      <Compile Include="Assets\scripts\MapEditor\DropdownMenu.cs" />
@@ -154,9 +157,6 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -171,9 +171,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>

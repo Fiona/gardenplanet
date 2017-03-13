@@ -27,7 +27,7 @@ namespace StrawberryNova
 		public WorldObjectManager worldObjectManager;
 
 		bool showPopup;
-		ObjectWorldPosition objectCurrentlyInteractingWith;
+		WorldObject objectCurrentlyInteractingWith;
 
 	    public void Awake()
 	    {
@@ -73,12 +73,14 @@ namespace StrawberryNova
 			showPopup = true;
 		}
 			
-		public IEnumerator PlayerInteractWith(ObjectWorldPosition worldObject)
+		public IEnumerator PlayerInteractWith(WorldObject worldObject)
 		{
 			if(objectCurrentlyInteractingWith != null)
 				yield return null;
 			objectCurrentlyInteractingWith = worldObject;
 			yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
+			if(worldObject.script != null)
+				yield return StartCoroutine(worldObject.script.PlayerInteract());
 			objectCurrentlyInteractingWith = null;			
 		}
 			

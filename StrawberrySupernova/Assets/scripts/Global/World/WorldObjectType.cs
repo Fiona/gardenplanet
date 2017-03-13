@@ -14,6 +14,7 @@ namespace StrawberryNova
 		{
 			public string displayName;
 			public bool interactable;
+			public string script;
 		};
 
 		public struct WorldObjectTypeDataFile
@@ -34,6 +35,11 @@ namespace StrawberryNova
 		{
 			get{ return data.interactable; }
 			set{ data.interactable = value; }
+		}
+		public string script
+		{
+			get{ return data.script; }
+			set{ data.script = value; }
 		}
 
 		/*
@@ -60,7 +66,8 @@ namespace StrawberryNova
 									new WorldObjectDataEntry
 									{
 										displayName=singleObjectData.Value.displayName,
-										interactable=singleObjectData.Value.interactable
+										interactable=singleObjectData.Value.interactable,
+										script=singleObjectData.Value.script
 									}
 								);
 							}

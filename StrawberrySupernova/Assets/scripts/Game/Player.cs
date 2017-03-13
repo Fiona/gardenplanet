@@ -73,12 +73,13 @@ namespace StrawberryNova
 			else
 				controller.PlayerNotLookingAtWorldObject();
 */
+
 	    }
 
 		/*
 		 * Rotates the player towards an object and returns when it finishes
 		 */
-		public IEnumerator TurnTowardsWorldObject(ObjectWorldPosition worldObject)
+		public IEnumerator TurnTowardsWorldObject(WorldObject worldObject)
 		{
 			inputEnabled = false;
 
@@ -95,18 +96,13 @@ namespace StrawberryNova
 				);
 				SetRotation(newDir);
 
-				//var angle = Mathf.Atan2(turnToPos.y-myPos.y, turnToPos.x-myPos.x) * Mathf.Rad2Deg;
-
-				float dot = Vector3.Dot((turnToPos-myPos).normalized, transform.forward);
-				float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;  
-
-
-				Debug.Log(angle);
-				if(Mathf.Abs(angle) < 5f)
+				float found = Vector3.Angle(transform.forward, turnToPos-myPos);
+				if(Mathf.Abs(found) < 30f)
 					break;
+				
 				yield return new WaitForFixedUpdate();
 			}
-			Debug.Log("done");
+
 			inputEnabled = true;
 		}
 

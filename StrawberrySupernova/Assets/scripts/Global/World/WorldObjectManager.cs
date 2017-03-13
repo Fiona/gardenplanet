@@ -8,7 +8,7 @@ namespace StrawberryNova
 	{
 
 		public List<WorldObjectType> worldObjectTypes;
-		public List<ObjectWorldPosition> worldObjects;
+		public List<WorldObject> worldObjects;
 
 		static PhysicMaterial slideMaterial;
 
@@ -17,7 +17,7 @@ namespace StrawberryNova
 			if(WorldObjectManager.slideMaterial == null)
 				WorldObjectManager.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;			
 			worldObjectTypes = WorldObjectType.GetAllWorldObjectTypes();
-			worldObjects = new List<ObjectWorldPosition>();
+			worldObjects = new List<WorldObject>();
 		}
 			
 		/*
@@ -28,10 +28,10 @@ namespace StrawberryNova
 			// Destroy old ones
 			if(worldObjects.Count > 0)
 			{
-				var worldObjectsClone = new List<ObjectWorldPosition>(worldObjects);
+				var worldObjectsClone = new List<WorldObject>(worldObjects);
 				foreach(var obj in worldObjectsClone)
 					DeleteWorldObject(obj);
-				worldObjects = new List<ObjectWorldPosition>();
+				worldObjects = new List<WorldObject>();
 			}
 
 			// Load and create all world objects
@@ -88,7 +88,7 @@ namespace StrawberryNova
 			newGameObject.transform.localPosition = new Vector3(pos.x, pos.height, pos.y);
 			newGameObject.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
 
-			var newWorldObject = new ObjectWorldPosition {
+			var newWorldObject = new WorldObject {
 				x = pos.x,
 				y = pos.y,
 				height = pos.height,
@@ -99,10 +99,26 @@ namespace StrawberryNova
 			worldObjects.Add(newWorldObject);
 			SetWorldObjectDirection(newWorldObject, pos.dir);
 
-			if(FindObjectOfType<App>().state == AppState.Game && objectType.interactable)
+			// If we're in the game then we need to set up behaviours and scripts
+			if(FindObjectOfType<App>().state == AppState.Game)
 			{
-				var interactable = newGameObject.AddComponent<WorldObjectInteractable>();
-				interactable.worldObject = newWorldObject;
+				// Behaviour for interactables
+				if(objectType.interactable)
+				{
+					var interactable = newGameObject.AddComponent<WorldObjectInteractable>();
+					interactable.worldObject = newWorldObject;
+				}
+				// Script
+				Debug.Log(objectType.script);
+				if(!String.IsNullOrEmpty(objectType.script))
+				{
+					var script = Type.GetType(typeof(WorldObjectManager).Namespace+"."+objectType.script);
+					if(script != null)
+					{
+						var newComponent = newWorldObject.gameObject.AddComponent(script);
+						newWorldObject.script = newComponent as IWorldObjectScript;
+					}
+				}
 			}
 
 			var comp = newGameObject.GetComponentInChildren<BoxCollider>();
@@ -111,7 +127,7 @@ namespace StrawberryNova
 
 		}
 
-		public void DeleteWorldObject(ObjectWorldPosition worldObjectToDelete)
+		public void DeleteWorldObject(WorldObject worldObjectToDelete)
 		{
 			if(worldObjects.Exists(x => x == worldObjectToDelete))
 			{
@@ -128,7 +144,7 @@ namespace StrawberryNova
 			AddWorldObject(objectType, new WorldPosition{ x=pos.x, y=pos.y, height=(pos.layer * Consts.TILE_HEIGHT)});
 		}
 
-		public void SetWorldObjectDirection(ObjectWorldPosition worldObject, EightDirection direction)
+		public void SetWorldObjectDirection(WorldObject worldObject, EightDirection direction)
 		{
 			worldObject.dir = direction;
 			if(worldObject.gameObject != null)
@@ -138,12 +154,12 @@ namespace StrawberryNova
 			}
 		}
 
-		public void TurnWorldObjectInDirection(ObjectWorldPosition worldObjectMoving, RotationalDirection dir)
+		public void TurnWorldObjectInDirection(WorldObject worldObjectMoving, RotationalDirection dir)
 		{
 			SetWorldObjectDirection(worldObjectMoving, DirectionHelper.RotateDirection(worldObjectMoving.dir, dir));
 		}
 
-		public ObjectWorldPosition GetWorldObjectByGameObject(GameObject obj)
+		public WorldObject GetWorldObjectByGameObject(GameObject obj)
 		{
 			if(obj == null)
 				return null;

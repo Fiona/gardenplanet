@@ -3,7 +3,8 @@
     "worldObjectTypes" : {
         "bed01" : {
             "displayName" : "Utilitarian Bed",
-            "interactable" : true
+            "interactable" : true,
+            "script" : "Bed"
         }
     }
 }
