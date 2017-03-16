@@ -13,7 +13,8 @@ namespace StrawberryNova
 	    bool isJumping;
 	    bool attemptJump;
 	    Vector3 desiredRotation;
-		bool inputEnabled;
+		[HideInInspector]
+		public bool inputEnabled;
 
 	    public void Awake()
 	    {
@@ -77,11 +78,32 @@ namespace StrawberryNova
 	    }
 
 		/*
+		 * Stops the player doing anything
+		 */
+		public void LockInput()
+		{
+			inputEnabled = false;
+		}
+
+		/*
+		 * Lets the player interact again
+		 */	
+		public void UnlockInput()
+		{
+			inputEnabled = true;
+		}
+
+		/*
 		 * Rotates the player towards an object and returns when it finishes
 		 */
 		public IEnumerator TurnTowardsWorldObject(WorldObject worldObject)
 		{
-			inputEnabled = false;
+			var doUnlock = false;
+			if(inputEnabled)
+			{
+				doUnlock = true;
+				LockInput();
+			}
 
 			var turnToPos = worldObject.gameObject.transform.position;
 			var myPos = transform.position;
@@ -97,13 +119,15 @@ namespace StrawberryNova
 				SetRotation(newDir);
 
 				float found = Vector3.Angle(transform.forward, turnToPos-myPos);
-				if(Mathf.Abs(found) < 30f)
+				Debug.Log(Mathf.Abs(found));
+				if(Mathf.Abs(found) < 40f)
 					break;
 				
 				yield return new WaitForFixedUpdate();
 			}
 
-			inputEnabled = true;
+			if(doUnlock)
+				UnlockInput();
 		}
 
 	    /*

@@ -63,6 +63,7 @@
      <Compile Include="Assets\scripts\Global\Core\Exception.cs" />
      <Compile Include="Assets\scripts\Global\Core\Ref.cs" />
      <Compile Include="Assets\scripts\Global\Core\Types.cs" />
+     <Compile Include="Assets\scripts\Global\GUI\ChoicePopup.cs" />
      <Compile Include="Assets\scripts\Global\World\InputManager.cs" />
      <Compile Include="Assets\scripts\Global\World\Map.cs" />
      <Compile Include="Assets\scripts\Global\World\MarkerManager.cs" />

@@ -41,6 +41,8 @@ namespace StrawberryNova
 	            return;
 	        if(controller.player == null)
 	            return;
+			if(!controller.player.inputEnabled)
+				return;
 
 	        // Walking
 	        if(Input.GetKey(KeyCode.Comma))

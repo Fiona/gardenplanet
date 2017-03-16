@@ -109,7 +109,6 @@ namespace StrawberryNova
 					interactable.worldObject = newWorldObject;
 				}
 				// Script
-				Debug.Log(objectType.script);
 				if(!String.IsNullOrEmpty(objectType.script))
 				{
 					var script = Type.GetType(typeof(WorldObjectManager).Namespace+"."+objectType.script);

@@ -25,9 +25,10 @@ namespace StrawberryNova
 		public MarkerManager markerManager;
 		[HideInInspector]
 		public WorldObjectManager worldObjectManager;
+		[HideInInspector]
+		public WorldObject objectCurrentlyInteractingWith;
 
 		bool showPopup;
-		WorldObject objectCurrentlyInteractingWith;
 
 	    public void Awake()
 	    {
@@ -77,11 +78,13 @@ namespace StrawberryNova
 		{
 			if(objectCurrentlyInteractingWith != null)
 				yield return null;
+			player.LockInput();
 			objectCurrentlyInteractingWith = worldObject;
 			yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
 			if(worldObject.script != null)
 				yield return StartCoroutine(worldObject.script.PlayerInteract());
 			objectCurrentlyInteractingWith = null;			
+			player.UnlockInput();
 		}
 			
 	}

@@ -33,7 +33,7 @@ namespace StrawberryNova
 
 		public void LateUpdate()
 		{
-			if(doHighlight && doFocus)
+			if((doHighlight && doFocus) || controller.objectCurrentlyInteractingWith == worldObject)
 			{
 				focusGlow.GlowTo(new Color(0f, .5f, 1f), .1f);
 				focussed = true;
