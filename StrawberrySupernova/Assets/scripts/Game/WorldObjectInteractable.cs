@@ -27,8 +27,10 @@ namespace StrawberryNova
 
 		public void Update()
 		{
-			if(focussed)
+			if(focussed && worldObject != null && controller != null)
+			{
 				controller.ShowPopup(worldObject.name);
+			}
 		}
 
 		public void LateUpdate()

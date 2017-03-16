@@ -6,6 +6,12 @@ namespace StrawberryNova
 {
 	public class Bed: MonoBehaviour, IWorldObjectScript
 	{
+		GameController controller;
+		public void Start()
+		{
+			controller = FindObjectOfType<GameController>();
+		}
+
 		public bool ShouldTick()
 		{
 			return false;
@@ -35,7 +41,11 @@ namespace StrawberryNova
 				result
 			));
 			if(result.Value == 1)
-				Debug.Log("sleep now");
+			{
+				yield return StartCoroutine(StompyBlondie.ScreenFade.FadeOut(2f));
+				controller.PlayerDoSleep();
+				yield return StartCoroutine(StompyBlondie.ScreenFade.FadeIn(3f));
+			}
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace StrawberryNova
 		public const float SCALE_FUDGE = 0f;
 
 	    // Value used to adjust positions of tile volumes
-		public const float VOLUME_POSITION_SHIFT_PER_UNIT = 0.250f/*0.00250f*/;
+		public const float VOLUME_POSITION_SHIFT_PER_UNIT = 0.250f;
 
 	    // Default scale of tile volumes
 	    public const float VOLUME_SCALE_DEFAULT = 1f;
@@ -65,6 +65,31 @@ namespace StrawberryNova
 	    public const float PLAYER_JUMP_FORCE = 450f;
 
 		public const float PLAYER_INTERACT_DISTANCE = .75f;
+
+		// -----------------------------
+		// GAMEPLAY
+		// -----------------------------
+
+		public const int GAME_START_YEAR = 3356;
+
+		// How many seconds it takes for the in-world timer to go forward a minute
+		public const float SECONDS_PER_GAME_MINUTE = 1f;
+
+		// Timer settings
+		public const int NUM_MINUTES_IN_HOUR = 60;
+		public const int NUM_HOURS_IN_DAY = 24;
+		public const int NUM_DAYS_IN_SEASON = 10;//28;
+		public readonly static string[] SEASONS = {"Spring", "Summer", "Autumn", "Winter"};
+		public readonly static string[] WEEKDAYS = {
+			"Monday", "Tuesday", "Wednesday", "Thursday",
+			"Friday", "Saturday", "Sunday"
+		};
+
+		// -----------------------------
+		// PREFAB PATHS
+		// -----------------------------
+
+		public const string PREFAB_PATH_WORLD_TIMER = "prefabs/gui/WorldTimer";
 
 	    // -----------------------------
 	    // FILESYSTEM

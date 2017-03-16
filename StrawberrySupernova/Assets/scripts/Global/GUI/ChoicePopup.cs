@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using StrawberryNova;
 
 namespace StompyBlondie
 {
@@ -36,7 +35,7 @@ namespace StompyBlondie
 			// Add to canvas
 			var canvas = FindObjectOfType<Canvas>();
 			if(canvas == null)
-				throw new GameErrorException();
+				throw new Exception("Can't find a Canvas to attach to.");
 
 			var comp = choicePopupObject.GetComponent<ChoicePopup>();
 
