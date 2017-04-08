@@ -11,11 +11,14 @@ namespace StrawberryNova
 
 	    [HideInInspector]
 	    public AppState state;
+		[HideInInspector]
+		public Events events;
 
 	    public void Awake()
 	    {
-	        DontDestroyOnLoad(this);
-	        StartNewState(Consts.INITIAL_APP_STATE);
+			DontDestroyOnLoad(this);
+			events = new Events();
+			StartNewState(Consts.INITIAL_APP_STATE);
 	    }
 
 	    public void StartNewState(AppState state)

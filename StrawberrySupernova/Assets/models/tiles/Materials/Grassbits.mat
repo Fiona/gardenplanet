@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Grassbits
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF
+  m_ShaderKeywords: _COLOR_ON _EMISSION _GLOSSYREFLECTIONS_OFF
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -69,7 +69,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ToonShade
+      second:
+        m_Texture: {fileID: 2800000, guid: 5da13de1423af4fc2bc2719a8513c0db, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - first:
+        name: _Brightness
+      second: 1
     - first:
         name: _BumpScale
       second: 1
@@ -79,6 +88,9 @@ Material:
     - first:
         name: _DetailNormalMapScale
       second: 1
+    - first:
+        name: _DetailTex
+      second: 0
     - first:
         name: _DstBlend
       second: 0
@@ -113,7 +125,13 @@ Material:
         name: _SrcBlend
       second: 1
     - first:
+        name: _TintColor
+      second: 1
+    - first:
         name: _UVSec
+      second: 0
+    - first:
+        name: _VertexColor
       second: 0
     - first:
         name: _ZWrite
@@ -121,7 +139,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.10604006, g: 0.281009, b: 0.023519993, a: 1}
+      second: {r: 0.2632529, g: 0.8088235, b: 0.0059472374, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}

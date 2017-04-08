@@ -75,15 +75,18 @@ namespace StrawberryNova
 		// How many seconds it takes for the in-world timer to go forward a minute
 		public const float SECONDS_PER_GAME_MINUTE = 1f;
 
-		// Timer settings
+		// Game time settings
 		public const int NUM_MINUTES_IN_HOUR = 60;
 		public const int NUM_HOURS_IN_DAY = 24;
-		public const int NUM_DAYS_IN_SEASON = 10;//28;
+		public const int NUM_DAYS_IN_SEASON = 28;
 		public readonly static string[] SEASONS = {"Spring", "Summer", "Autumn", "Winter"};
 		public readonly static string[] WEEKDAYS = {
 			"Monday", "Tuesday", "Wednesday", "Thursday",
 			"Friday", "Saturday", "Sunday"
 		};
+
+		// What hour the player wakes up at
+		public const int PLAYER_WAKE_HOUR = 6;
 
 		// -----------------------------
 		// PREFAB PATHS

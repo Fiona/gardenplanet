@@ -1,11 +1,11 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{2BCF1727-F670-B492-B2C3-A75EF9DAAAE0}") = "StrawberrySupernova", "Assembly-CSharp-firstpass.csproj", "{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrawberrySupernova", "Assembly-CSharp-firstpass.csproj", "{AEBFDCCB-7872-1B15-AC67-7D8073D3ABA1}"
 EndProject
-Project("{2BCF1727-F670-B492-B2C3-A75EF9DAAAE0}") = "StrawberrySupernova", "Assembly-CSharp.csproj", "{ACBEEA75-25C9-8954-20C9-FD210A2439A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrawberrySupernova", "Assembly-CSharp.csproj", "{ACBEEA75-25C9-8954-20C9-FD210A2439A7}"
 EndProject
-Project("{2BCF1727-F670-B492-B2C3-A75EF9DAAAE0}") = "StrawberrySupernova", "Assembly-CSharp-Editor.csproj", "{4C273AFB-6945-1C22-DA39-0890970CBC61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrawberrySupernova", "Assembly-CSharp-Editor.csproj", "{4C273AFB-6945-1C22-DA39-0890970CBC61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

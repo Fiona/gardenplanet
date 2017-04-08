@@ -41,16 +41,16 @@ namespace StrawberryNova
 				var worldTimer = FindObjectOfType<WorldTimer>();
 
 				if(GUILayout.Button("Next hour"))
-					worldTimer.GoToNextHour();
+                    worldTimer.gameTime += new GameTime(hours: 1);
 
 				if(GUILayout.Button("Next day"))
-					worldTimer.GoToNextDay();
+                    worldTimer.gameTime += new GameTime(days: 1);
 
 				if(GUILayout.Button("Next season"))
-					worldTimer.GoToNextSeason();
+                    worldTimer.gameTime += new GameTime(seasons: 1);
 
 				if(GUILayout.Button("Next year"))
-					worldTimer.GoToNextYear();
+                    worldTimer.gameTime += new GameTime(years: 1);
 
 				if(GUILayout.Button("< Back"))
 					DebugMode = 1;				

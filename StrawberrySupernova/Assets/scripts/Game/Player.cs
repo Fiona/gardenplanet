@@ -1,4 +1,5 @@
 using System;
+using StompyBlondie;
 using System.Collections;
 using UnityEngine;
 
@@ -13,15 +14,25 @@ namespace StrawberryNova
 	    bool isJumping;
 	    bool attemptJump;
 	    Vector3 desiredRotation;
+		GameController controller;
 		[HideInInspector]
 		public bool inputEnabled;
 
 	    public void Awake()
 	    {
+			controller = FindObjectOfType<GameController>();
 	        rigidBody = GetComponent<Rigidbody>();
 	        rigidBody.freezeRotation = true;
 			inputEnabled = true;
+
+			FindObjectOfType<App>().events.NewHourEvent.AddListener(NextHour);
 	    }
+
+		public void NextHour(int hour)
+		{
+			if(hour == 2)
+				StartCoroutine(PassOut());
+		}
 
 	    public void Update()
 	    {
@@ -190,6 +201,20 @@ namespace StrawberryNova
 		{
 			transform.rotation = Quaternion.LookRotation(newDir);
 			transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+		}			
+
+		public IEnumerator PassOut()
+		{
+			controller.StartCutscene();
+			yield return DialoguePopup.ShowDialoguePopup(
+				"Oh no!",
+				"You pass out from exhaustion..."
+			);
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));
+            controller.worldTimer.gameTime += new GameTime(hours: 4);
+			yield return new WaitForSeconds(2f);
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(4f, new Color(1f,1f,1f)));
+			controller.EndCutscene();
 		}
 
 	}

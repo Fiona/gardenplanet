@@ -27,7 +27,7 @@ namespace StrawberryNova
 
 		public void Update()
 		{
-			if(focussed && worldObject != null && controller != null)
+			if(focussed && worldObject != null && controller != null && controller.objectCurrentlyInteractingWith == null)
 			{
 				controller.ShowPopup(worldObject.name);
 			}

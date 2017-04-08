@@ -53,6 +53,7 @@ namespace StrawberryNova
 
 			var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
 			worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
 			worldTimer = worldTimerObject.GetComponent<WorldTimer>();
 
 			worldObjectPopup.SetActive(false);
@@ -95,22 +96,37 @@ namespace StrawberryNova
 			
 		public IEnumerator PlayerInteractWith(WorldObject worldObject)
 		{
+			// Can't do if already messing with something
 			if(objectCurrentlyInteractingWith != null)
 				yield return null;
-			player.LockInput();
-			worldTimer.StopTimer();
+			// Set up for interaction
+			StartCutscene();
 			objectCurrentlyInteractingWith = worldObject;
+			// Make the player look at the object
 			yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
+			// Run a script that is on the object
 			if(worldObject.script != null)
 				yield return StartCoroutine(worldObject.script.PlayerInteract());
+			// Clean up and return control to player
 			objectCurrentlyInteractingWith = null;			
+			EndCutscene();
+		}
+
+		public void StartCutscene()
+		{
+			player.LockInput();
+			worldTimer.StopTimer();
+		}
+
+		public void EndCutscene()
+		{
 			worldTimer.StartTimer();
 			player.UnlockInput();
 		}
 
 		public void PlayerDoSleep()
 		{
-			worldTimer.GoToNextDay();
+			worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
 		}
 			
 	}
