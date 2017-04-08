@@ -118,8 +118,8 @@ namespace StrawberryNova
 			// Check directories exist
 			if(!Directory.Exists(Consts.DATA_DIR))
 				Directory.CreateDirectory(Consts.DATA_DIR);
-			if(!Directory.Exists(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_MAPS)))
-				Directory.CreateDirectory(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_MAPS));
+            if(!Directory.Exists(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_WORLD_OBJECT_DATA)))
+                Directory.CreateDirectory(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_WORLD_OBJECT_DATA));
 
 			var jsonOutput = new StringBuilder();
 			var writer = new JsonWriter(jsonOutput);

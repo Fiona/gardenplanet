@@ -54,6 +54,8 @@
      <Compile Include="Assets\scripts\Game\Atmosphere.cs" />
      <Compile Include="Assets\scripts\Game\GameController.cs" />
      <Compile Include="Assets\scripts\Game\Glowable.cs" />
+     <Compile Include="Assets\scripts\Game\ItemManager.cs" />
+     <Compile Include="Assets\scripts\Game\ItemType.cs" />
      <Compile Include="Assets\scripts\Game\Player.cs" />
      <Compile Include="Assets\scripts\Game\PlayerCamera.cs" />
      <Compile Include="Assets\scripts\Game\WorldObjectInteractable.cs" />

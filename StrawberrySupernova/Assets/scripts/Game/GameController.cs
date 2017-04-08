@@ -25,6 +25,8 @@ namespace StrawberryNova
 		public MarkerManager markerManager;
 		[HideInInspector]
 		public WorldObjectManager worldObjectManager;
+        [HideInInspector]
+        public ItemManager itemManager;
 		[HideInInspector]
 		public WorldObject objectCurrentlyInteractingWith;
 		[HideInInspector]
@@ -50,6 +52,9 @@ namespace StrawberryNova
 			var worldObjectManagerObj = new GameObject("WorldObjectManager");
 			worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
 			worldObjectManager.LoadFromMap(map);
+
+            var itemManagerObj = new GameObject("ItemManager");
+            itemManager = itemManagerObj.AddComponent<ItemManager>();
 
 			var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
 			worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);

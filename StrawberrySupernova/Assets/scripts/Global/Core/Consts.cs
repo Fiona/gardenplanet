@@ -105,6 +105,8 @@ namespace StrawberryNova
 	    public const string FILE_EXTENSION_TILE_SET = "set";
 		public const string DATA_DIR_WORLD_OBJECT_DATA = "worldobjects";
 		public const string FILE_EXTENSION_WORLD_OBJECT_DATA = "json";
+        public const string DATA_DIR_ITEM_TYPE_DATA = "items";
+        public const string FILE_EXTENSION_ITEM_TYPE_DATA = "json";
 
 	    // -----------------------------
 	    // EDITOR
