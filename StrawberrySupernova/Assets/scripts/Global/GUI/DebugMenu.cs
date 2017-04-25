@@ -16,8 +16,8 @@ namespace StrawberryNova
 			// Root
 			if(DebugMode == 0)
 			{
-				GUILayout.Box("Debug");
-				if(GUILayout.Button("Open"))
+                //GUILayout.Box("Debug");
+				if(GUILayout.Button("Debug Menu"))
 					DebugMode = 1;
 			}
 
@@ -26,8 +26,14 @@ namespace StrawberryNova
 			{
 				GUILayout.Box("Debug");
 
+                if(GUILayout.Button("App"))
+                    DebugMode = 99;
+
 				if(GUILayout.Button("World timer"))
 					DebugMode = 2;
+
+                if(GUILayout.Button("Items"))
+                    DebugMode = 3;
 
 				if(GUILayout.Button("< Back"))
 					DebugMode = 0;
@@ -55,6 +61,45 @@ namespace StrawberryNova
 				if(GUILayout.Button("< Back"))
 					DebugMode = 1;				
 			}
+
+            // Items
+            if(DebugMode == 3)
+            {
+                GUILayout.Box("Items");
+
+                var itemManager = FindObjectOfType<ItemManager>();
+
+                if(GUILayout.Button("Give Tools Level 1"))
+                {
+                    itemManager.GivePlayerItem("broken_sprinkleboy");
+                    itemManager.GivePlayerItem("broken_trowelie");
+                }                    
+
+                if(GUILayout.Button("< Back"))
+                    DebugMode = 1;              
+            }
+
+            // App
+            if(DebugMode == 99)
+            {
+                GUILayout.Box("App");
+
+                if(GUILayout.Button("To Title"))
+                    FindObjectOfType<App>().StartNewState(AppState.Title);
+
+                if(GUILayout.Button("To Editor"))
+                    FindObjectOfType<App>().StartNewState(AppState.Editor);
+
+                if(GUILayout.Button("Quit"))
+                {
+                    Application.Quit();
+                    #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+                    #endif
+                }
+                if(GUILayout.Button("< Back"))
+                    DebugMode = 1;              
+            }
 
 			GUILayout.EndArea();
 

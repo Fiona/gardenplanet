@@ -199,6 +199,7 @@ namespace StrawberryNova
 			SelectWorldObjectType(worldObjectManager.worldObjectTypes[0].name);
 			SwitchEditorMode(EditorMode.Tile);
 	        mainMenuBar.ShowGoodMessage("Loaded map");
+            FindObjectOfType<InputManager>().SetUpMouse();
 	    }
 
 	    // Saves the current Tilemap to the current Map file.

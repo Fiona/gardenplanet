@@ -15,16 +15,16 @@ namespace StrawberryNova
 	    bool attemptJump;
 	    Vector3 desiredRotation;
 		GameController controller;
-		[HideInInspector]
-		public bool inputEnabled;
+        [HideInInspector]
+        public Inventory inventory;
 
 	    public void Awake()
 	    {
 			controller = FindObjectOfType<GameController>();
 	        rigidBody = GetComponent<Rigidbody>();
 	        rigidBody.freezeRotation = true;
-			inputEnabled = true;
 
+            inventory = new Inventory(Consts.PLAYER_INVENTORY_MAX_STACKS);
 			FindObjectOfType<App>().events.NewHourEvent.AddListener(NextHour);
 	    }
 
@@ -37,7 +37,7 @@ namespace StrawberryNova
 	    public void Update()
 	    {
 
-			if(!inputEnabled)
+            if(!controller.inputManager.directInputEnabled)
 				return;
 			
 	        // Handle walking
@@ -74,48 +74,15 @@ namespace StrawberryNova
 						obj.InteractWith();
 				}
 			}
-			/*
-			RaycastHit interactHit;
-			var ray = new Ray(transform.position, transform.forward);
-			if(Physics.Raycast(ray, out interactHit, Consts.PLAYER_INTERACT_DISTANCE, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
-			{						
-				var worldObj = controller.worldObjectManager.GetWorldObjectByGameObject(interactHit.transform.gameObject);
-				controller.PlayerLookingAtWorldObject(worldObj);
-			}
-			else
-				controller.PlayerNotLookingAtWorldObject();
-*/
 
 	    }
-
-		/*
-		 * Stops the player doing anything
-		 */
-		public void LockInput()
-		{
-			inputEnabled = false;
-		}
-
-		/*
-		 * Lets the player interact again
-		 */	
-		public void UnlockInput()
-		{
-			inputEnabled = true;
-		}
-
+            
 		/*
 		 * Rotates the player towards an object and returns when it finishes
 		 */
 		public IEnumerator TurnTowardsWorldObject(WorldObject worldObject)
 		{
-			var doUnlock = false;
-			if(inputEnabled)
-			{
-				doUnlock = true;
-				LockInput();
-			}
-
+            
 			var turnToPos = worldObject.gameObject.transform.position;
 			var myPos = transform.position;
 
@@ -137,8 +104,6 @@ namespace StrawberryNova
 				yield return new WaitForFixedUpdate();
 			}
 
-			if(doUnlock)
-				UnlockInput();
 		}
 
 	    /*

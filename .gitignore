@@ -25,3 +25,6 @@ StrawberrySupernova/Library
 StrawberrySupernova/Temp
 StrawberrySupernova/.vs
 obj/
+
+# builds
+bin/

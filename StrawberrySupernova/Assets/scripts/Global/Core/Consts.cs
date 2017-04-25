@@ -28,7 +28,7 @@ namespace StrawberryNova
 	    public const float TILE_HEIGHT = 0.5f;
 
 	    // All tiles are scaled by this amount in an attempt to tackle gaps
-		public const float SCALE_FUDGE = 0f;
+		public const float SCALE_FUDGE = 0.001f;
 
 	    // Value used to adjust positions of tile volumes
 		public const float VOLUME_POSITION_SHIFT_PER_UNIT = 0.250f;
@@ -66,6 +66,12 @@ namespace StrawberryNova
 
 		public const float PLAYER_INTERACT_DISTANCE = .75f;
 
+        // What hour the player wakes up at
+        public const int PLAYER_WAKE_HOUR = 6;
+
+        // How many stacks of items the player can have at once
+        public const int PLAYER_INVENTORY_MAX_STACKS = 20;
+
 		// -----------------------------
 		// GAMEPLAY
 		// -----------------------------
@@ -84,15 +90,21 @@ namespace StrawberryNova
 			"Monday", "Tuesday", "Wednesday", "Thursday",
 			"Friday", "Saturday", "Sunday"
 		};
-
-		// What hour the player wakes up at
-		public const int PLAYER_WAKE_HOUR = 6;
+            
+        // -----------------------------
+        // GUI
+        // -----------------------------
+        public const float GUI_IN_GAME_MENU_FADE_TIME = .2f;
 
 		// -----------------------------
-		// PREFAB PATHS
+		// RESOURCE PATHS
 		// -----------------------------
 
 		public const string PREFAB_PATH_WORLD_TIMER = "prefabs/gui/WorldTimer";
+        public const string PREFAB_PATH_ATMOSPHERE = "prefabs/world/Atmosphere";
+        public const string PREFAB_PATH_WORLD_OBJECT_POPUP = "prefabs/gui/WorldObjectPopup";
+        public const string PREFAB_PATH_IN_GAME_MENU = "prefabs/gui/InGameMenu";
+        public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse";
 
 	    // -----------------------------
 	    // FILESYSTEM

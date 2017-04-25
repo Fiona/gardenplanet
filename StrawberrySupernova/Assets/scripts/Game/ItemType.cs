@@ -1,12 +1,15 @@
-﻿using System;
+﻿
+using System;
 using System.Text;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 using UnityEngine;
 
 namespace StrawberryNova
 {
+
     public class ItemType
     {
 
@@ -18,6 +21,8 @@ namespace StrawberryNova
             public string Category;
             public int StackSize;
             public bool CanPickup;
+            public Hashtable Attributes;
+            public Sprite Image;
         }
 
         public struct ItemTypeDataFile
@@ -63,6 +68,18 @@ namespace StrawberryNova
             set{ data.CanPickup = value; }
         }
 
+        public Sprite Image
+        {
+            get{ return data.Image; }
+            set{ data.Image = value; }
+        }
+
+        public Hashtable Attributes
+        {
+            get{ return data.Attributes; }
+            set{ data.Attributes = value; }
+        }
+
         /*
          * Returns a List containing all items
          */
@@ -83,17 +100,30 @@ namespace StrawberryNova
                             var loadedDataFile = JsonMapper.ToObject<ItemTypeDataFile>(fh.ReadToEnd());
                             foreach(var singleItemTypeData in loadedDataFile.itemTypes)
                             {
-                                itemTypeData.Add(singleItemTypeData.Key,
-                                    new ItemTypeData
+                                // Basic item data
+                                var newData = new ItemTypeData
                                     {
                                         ID=singleItemTypeData.Value.ID,
                                         DisplayName=singleItemTypeData.Value.DisplayName,
                                         Description=singleItemTypeData.Value.Description,
                                         Category=singleItemTypeData.Value.Category,
                                         StackSize=singleItemTypeData.Value.StackSize,
-                                        CanPickup=singleItemTypeData.Value.CanPickup
-                                    }
-                                );
+                                        CanPickup=singleItemTypeData.Value.CanPickup,
+                                        Attributes=new Hashtable(),
+                                        Image=Resources.Load<Sprite>(
+                                            string.Format("textures/items/{0}_image", singleItemTypeData.Value.ID)
+                                        )
+                                    };
+                                
+                                itemTypeData.Add(singleItemTypeData.Key, newData);
+
+                                // attributes
+                                foreach(string key in singleItemTypeData.Value.Attributes.Keys)
+                                {
+                                    var attrData = ((JsonData)singleItemTypeData.Value.Attributes[key]);
+                                    singleItemTypeData.Value.Attributes.Remove(singleItemTypeData.Key);
+                                    itemTypeData[singleItemTypeData.Key].Attributes.Add(key, attrData);
+                                }
                             }
                         }
                     }
@@ -134,7 +164,8 @@ namespace StrawberryNova
                     Description="Not really a wolf nor bad. Just a boring Dr Who reference.",
                     Category="boop",
                     StackSize=64,
-                    CanPickup=true
+                    CanPickup=true,
+                    Attributes=new Hashtable()
                 }
             );
 

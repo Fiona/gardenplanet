@@ -12,8 +12,6 @@ namespace StrawberryNova
 	    [Header("Object References")]
 	    public PlayerCamera mainCamera;
 	    public Player player;
-		public GameObject worldObjectPopup;
-		public Text worldObjectPopupText;
 
 	    [HideInInspector]
 	    public Tilemap tilemap;
@@ -31,16 +29,24 @@ namespace StrawberryNova
 		public WorldObject objectCurrentlyInteractingWith;
 		[HideInInspector]
 		public WorldTimer worldTimer;
+        [HideInInspector]
+        public Atmosphere atmosphere;
+        [HideInInspector]
+        public GameObject worldObjectPopup;
+        [HideInInspector]
+        public InputManager inputManager;
 
+        Text worldObjectPopupText;
 		bool showPopup;
 		Debug debugMenu;
 
 	    public void Awake()
 	    {
-			// Create required objects
+			// Init
 	        tileTypeSet = new TileTypeSet("default");
 	        map = new Map("main");
 
+            // Managers
 	        var tilemapObj = new GameObject("Tilemap");
 	        tilemap = tilemapObj.AddComponent<Tilemap>();
 	        tilemap.LoadFromMap(map, tileTypeSet);
@@ -56,12 +62,24 @@ namespace StrawberryNova
             var itemManagerObj = new GameObject("ItemManager");
             itemManager = itemManagerObj.AddComponent<ItemManager>();
 
+            var inputManagerObj = new GameObject("InputManager");
+            inputManager = inputManagerObj.AddComponent<InputManager>();
+
+            // GUI objects
 			var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
 			worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
             worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
 			worldTimer = worldTimerObject.GetComponent<WorldTimer>();
 
-			worldObjectPopup.SetActive(false);
+            worldObjectPopup = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_OBJECT_POPUP)) as GameObject;
+            worldObjectPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            worldTimerObject.transform.SetSiblingIndex(worldObjectPopup.transform.GetSiblingIndex() - 1);
+            worldObjectPopup.SetActive(false);
+            worldObjectPopupText = worldObjectPopup.GetComponentInChildren<Text>();
+
+            // World objects
+            var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
+            atmosphere = atmosphereObj.GetComponent<Atmosphere>();
 
 			// Set up player and camera
 			var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
@@ -73,16 +91,17 @@ namespace StrawberryNova
 			mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
 
 			// Optional debug menu
-			if(Application.platform == RuntimePlatform.LinuxEditor)
-			{
+			//if(Application.platform == RuntimePlatform.LinuxEditor)
+			//{
 				var debugObj = new GameObject("DebugMenu");
 				debugObj.AddComponent<DebugMenu>();
-			}
+            //}
 	    }
 
 		public void Start()
 		{
 			worldTimer.StartTimer();
+            StartCoroutine(ControllerCoroutine());
 		}
 			
 		public void LateUpdate()
@@ -91,6 +110,14 @@ namespace StrawberryNova
 				worldObjectPopup.SetActive(false);
 			showPopup = false;
 		}
+
+        /*
+         * TODO TODO
+         */
+        public IEnumerator ControllerCoroutine()
+        {
+            yield return new WaitForFixedUpdate();
+        }
 
 		public void ShowPopup(string textToShow)
 		{
@@ -119,20 +146,37 @@ namespace StrawberryNova
 
 		public void StartCutscene()
 		{
-			player.LockInput();
+            inputManager.LockDirectInput();
 			worldTimer.StopTimer();
 		}
 
 		public void EndCutscene()
 		{
 			worldTimer.StartTimer();
-			player.UnlockInput();
+            inputManager.UnlockDirectInput();
 		}
 
 		public void PlayerDoSleep()
 		{
 			worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
 		}
+
+        public IEnumerator OpenInGameMenu()
+        {
+            inputManager.LockDirectInput();
+            worldTimer.StopTimer();
+            worldTimer.GetComponent<CanvasGroup>().alpha = 0;
+
+            var inGameMenuObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU)) as GameObject;
+            inGameMenuObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            inGameMenuObj.transform.SetSiblingIndex(inGameMenuObj.transform.GetSiblingIndex() - 1);
+            yield return inGameMenuObj.GetComponent<InGameMenu>().OpenMenu();
+            Destroy(inGameMenuObj);
+
+            worldTimer.GetComponent<CanvasGroup>().alpha = 1;
+            worldTimer.StartTimer();
+            inputManager.UnlockDirectInput();
+        }
 			
 	}
 
