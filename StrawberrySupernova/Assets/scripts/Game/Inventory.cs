@@ -131,6 +131,12 @@ namespace StrawberryNova
             return true;
         }
 
+        public bool ItemEntryExists(InventoryItemEntry entry)
+        {
+            return items.IndexOf(entry) > -1;
+        }
+
+
     }
 }
 

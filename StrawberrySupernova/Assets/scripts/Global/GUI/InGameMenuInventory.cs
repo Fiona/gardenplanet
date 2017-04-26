@@ -15,17 +15,23 @@ namespace StrawberryNova
         public Text noItemsText;
         public GameObject itemButtonTemplate;
         public GameObject itemListContent;
-        int selectedItemIndex = -1;
+        public Button[] hotbarButtons;
+        Inventory.InventoryItemEntry selectedItem;
         Inventory playerInventory;
         Sprite missingItemImage;
+        ItemHotbar itemHotbar;
+
+        public void Start()
+        {
+            itemHotbar = FindObjectOfType<ItemHotbar>();
+            missingItemImage = Resources.Load<Sprite>("textures/items/missing_item_image");
+        }
 
         public void Open()
-        {
-            selectedItemIndex = -1;
+        {            
+            selectedItem = null;
             itemInfo.GetComponent<CanvasGroup>().alpha = 0;
             itemButtonTemplate.SetActive(false);
-
-            missingItemImage = Resources.Load<Sprite>("textures/items/missing_item_image");
 
             // Populate item list
             playerInventory = FindObjectOfType<GameController>().player.inventory;
@@ -49,7 +55,7 @@ namespace StrawberryNova
                 newButton.GetComponent<Button>().onClick.AddListener(
                     delegate
                     {
-                        SelectItemEntry(itemIndex);
+                        SelectItemEntry(item);
                     }
                 );
             }
@@ -66,16 +72,51 @@ namespace StrawberryNova
             );
         }
 
-        public void SelectItemEntry(int itemIndex)
-        {
-            selectedItemIndex = itemIndex;
+        public void SelectItemEntry(Inventory.InventoryItemEntry item)
+        {            
+            selectedItem = item;
+
             itemInfo.GetComponent<CanvasGroup>().alpha = 1;
-            itemInfoName.text = playerInventory.Items[itemIndex].itemType.DisplayName;
-            itemInfoDescription.text = playerInventory.Items[itemIndex].itemType.Description;
-            if(playerInventory.Items[itemIndex].itemType.Image == null)
+            itemInfoName.text = selectedItem.itemType.DisplayName;
+            itemInfoDescription.text = selectedItem.itemType.Description;
+            if(selectedItem.itemType.Image == null)
                 itemInfoImage.sprite = missingItemImage;
             else
-                itemInfoImage.sprite = playerInventory.Items[itemIndex].itemType.Image;
+                itemInfoImage.sprite = selectedItem.itemType.Image;
+            
+            SetupHotbarButtons();
+        }
+
+        void SetupHotbarButtons()
+        {
+            for(int i = 0; i < Consts.HOTBAR_SIZE; i++)
+            {
+                var button = hotbarButtons[i];
+                var img = button.gameObject.GetComponentsInChildren<Image>(true)[1];
+                var text = button.gameObject.GetComponentInChildren<Text>(true);
+                if(itemHotbar.Items[i] == null)
+                {
+                    text.gameObject.SetActive(true);
+                    img.gameObject.SetActive(false);
+                }
+                else
+                {
+                    text.gameObject.SetActive(false);
+                    img.gameObject.SetActive(true);
+                    img.sprite = itemHotbar.Items[i].itemType.Image;
+                }
+            }
+        }
+
+        public void RegisterCurrentItemToHotbar(int num)
+        {
+            if(selectedItem == null)
+                return;
+            if(itemHotbar.Items[num] == selectedItem)
+                itemHotbar.SetItemToHotbar(null, num);
+            else
+                itemHotbar.SetItemToHotbar(selectedItem, num);
+            SetupHotbarButtons();
         }
 
     }

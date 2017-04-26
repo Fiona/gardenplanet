@@ -30,6 +30,8 @@ namespace StrawberryNova
 		[HideInInspector]
 		public WorldTimer worldTimer;
         [HideInInspector]
+        public ItemHotbar itemHotbar;
+        [HideInInspector]
         public Atmosphere atmosphere;
         [HideInInspector]
         public GameObject worldObjectPopup;
@@ -73,9 +75,14 @@ namespace StrawberryNova
 
             worldObjectPopup = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_OBJECT_POPUP)) as GameObject;
             worldObjectPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            worldTimerObject.transform.SetSiblingIndex(worldObjectPopup.transform.GetSiblingIndex() - 1);
+            worldObjectPopup.transform.SetSiblingIndex(worldObjectPopup.transform.GetSiblingIndex() - 1);
             worldObjectPopup.SetActive(false);
             worldObjectPopupText = worldObjectPopup.GetComponentInChildren<Text>();
+
+            var itemHotbarObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_ITEM_HOTBAR)) as GameObject;
+            itemHotbarObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            itemHotbarObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
+            itemHotbar = itemHotbarObject.GetComponent<ItemHotbar>();
 
             // World objects
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
@@ -166,6 +173,7 @@ namespace StrawberryNova
             inputManager.LockDirectInput();
             worldTimer.StopTimer();
             worldTimer.GetComponent<CanvasGroup>().alpha = 0;
+            itemHotbar.GetComponent<CanvasGroup>().alpha = 0;
 
             var inGameMenuObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU)) as GameObject;
             inGameMenuObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
@@ -173,6 +181,7 @@ namespace StrawberryNova
             yield return inGameMenuObj.GetComponent<InGameMenu>().OpenMenu();
             Destroy(inGameMenuObj);
 
+            itemHotbar.GetComponent<CanvasGroup>().alpha = 1;
             worldTimer.GetComponent<CanvasGroup>().alpha = 1;
             worldTimer.StartTimer();
             inputManager.UnlockDirectInput();
