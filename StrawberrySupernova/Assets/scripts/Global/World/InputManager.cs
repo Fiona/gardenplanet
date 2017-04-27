@@ -86,6 +86,38 @@ namespace StrawberryNova
                         interactable.Highlight();
                 }
 
+                // Hotbar
+                if(Input.GetKeyUp(KeyCode.Alpha1))
+                    controller.SelectHotbarItem(0);
+                else if(Input.GetKeyUp(KeyCode.Alpha2))
+                    controller.SelectHotbarItem(1);
+                else if(Input.GetKeyUp(KeyCode.Alpha3))
+                    controller.SelectHotbarItem(2);
+                else if(Input.GetKeyUp(KeyCode.Alpha4))
+                    controller.SelectHotbarItem(3);
+                else if(Input.GetKeyUp(KeyCode.Alpha5))
+                    controller.SelectHotbarItem(4);
+                else if(Input.GetKeyUp(KeyCode.Alpha6))
+                    controller.SelectHotbarItem(5);
+                else if(Input.GetKeyUp(KeyCode.Alpha7))
+                    controller.SelectHotbarItem(6);
+                else if(Input.GetKeyUp(KeyCode.Alpha8))
+                    controller.SelectHotbarItem(7);
+                else if(Input.GetKeyUp(KeyCode.Alpha9))
+                    controller.SelectHotbarItem(8);
+                else if(Input.GetKeyUp(KeyCode.Alpha0))
+                    controller.SelectHotbarItem(9);
+
+                var axis = Input.GetAxis("Mouse ScrollWheel");
+
+                if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
+                {
+                    if(axis > 0f)
+                        controller.SelectPreviousHotbarItem();
+                    else
+                        controller.SelectNextHotbarItem();
+                }
+
                 // Menu
                 if(Input.GetKeyUp(KeyCode.Period) || Input.GetKeyUp(KeyCode.Escape))
                 {
@@ -159,8 +191,6 @@ namespace StrawberryNova
     	                }
     	                controller.tilemap.MouseOverTile(currentTile);
     	                var axis = Input.GetAxis("Mouse ScrollWheel");
-                        if(Mathf.Abs(axis) > 0)
-                            Debug.Log(string.Format("axis: {0}", axis));
 
     	                if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
     	                {
@@ -189,12 +219,6 @@ namespace StrawberryNova
             }
 
 	    }
-
-        public void OnGUI()
-        {
-            if(Event.current.type == EventType.ScrollWheel)
-                Debug.Log(Event.current.type);
-        }
 
 	    public IEnumerator HandlePanning()
 	    {

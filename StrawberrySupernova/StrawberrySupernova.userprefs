@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{4C273AFB-6945-1C22-DA39-0890970CBC61}|Unit Tests" GitUserInfo="UsingGIT" StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Global/World/InputManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Game/ItemHotbar.cs">
     <Files>
-      <File FileName="Assets/scripts/Global/Core/Consts.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Game/GameController.cs" Line="138" Column="61" />
+      <File FileName="Assets/scripts/Global/Core/Consts.cs" Line="94" Column="43" />
+      <File FileName="Assets/scripts/Game/GameController.cs" Line="184" Column="61" />
       <File FileName="Assets/scripts/Game/Player.cs" Line="97" Column="21" />
-      <File FileName="Assets/scripts/Game/ItemType.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Game/ItemType.cs" Line="35" Column="1" />
       <File FileName="Assets/scripts/Game/ItemManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Game/Inventory.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Game/Inventory.cs" Line="136" Column="45" />
       <File FileName="Assets/scripts/Global/GUI/DebugMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Global/World/InputManager.cs" Line="102" Column="46" />
+      <File FileName="Assets/scripts/Global/World/InputManager.cs" Line="102" Column="1" />
       <File FileName="Assets/UnityUIExtensions/Scripts/Effects/UIParticleSystem.cs" Line="188" Column="1" />
+      <File FileName="Assets/scripts/Global/GUI/InGameMenuInventory.cs" Line="113" Column="37" />
+      <File FileName="Assets/scripts/Game/ItemHotbar.cs" Line="34" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />

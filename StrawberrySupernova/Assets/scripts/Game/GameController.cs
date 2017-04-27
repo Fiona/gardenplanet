@@ -97,12 +97,15 @@ namespace StrawberryNova
 			mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
 			mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
 
+            // Start at day...
+            worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
+
 			// Optional debug menu
-			//if(Application.platform == RuntimePlatform.LinuxEditor)
-			//{
+			if(Application.platform == RuntimePlatform.LinuxEditor)
+			{
 				var debugObj = new GameObject("DebugMenu");
 				debugObj.AddComponent<DebugMenu>();
-            //}
+            }
 	    }
 
 		public void Start()
@@ -185,6 +188,21 @@ namespace StrawberryNova
             worldTimer.GetComponent<CanvasGroup>().alpha = 1;
             worldTimer.StartTimer();
             inputManager.UnlockDirectInput();
+        }
+
+        public void SelectHotbarItem(int hotbarItemNum)
+        {
+            itemHotbar.SelectItemIndex(hotbarItemNum);
+        }
+
+        public void SelectPreviousHotbarItem()
+        {
+            itemHotbar.SelectPreviousItem();
+        }
+
+        public void SelectNextHotbarItem()
+        {
+            itemHotbar.SelectNextItem();
         }
 			
 	}

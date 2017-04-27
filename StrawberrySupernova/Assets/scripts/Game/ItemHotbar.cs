@@ -11,6 +11,8 @@ namespace StrawberryNova
         public Button[] hotbarButtons;
         public Image[] hotbarImages;
         public Text[] hotbarQuantityText;
+        [Header("Active item")]
+        public GameObject activeItem;
         [Header("Hotbar button images")]
         public Sprite buttonImage;
         public Sprite buttonHoverImage;
@@ -78,23 +80,58 @@ namespace StrawberryNova
             
         public void SelectItemIndex(int newIndex)
         {
-            // Change images back on old one
+            // Change current hotbar item back to unselected state
             SpriteState unclickedSpriteState = new SpriteState();
             unclickedSpriteState.highlightedSprite = buttonHoverImage;
             unclickedSpriteState.pressedSprite = buttonPressedImage;
             hotbarButtons[selectedItemIndex].spriteState = unclickedSpriteState;
             hotbarButtons[selectedItemIndex].GetComponent<Image>().sprite = buttonImage;
+            hotbarButtons[selectedItemIndex].transform.localScale = new Vector3(1f, 1f, 1f);
 
             // Set new one
             selectedItemIndex = newIndex;
 
+            // Update state of newly selected item
             SpriteState activeSpriteState = new SpriteState();
             activeSpriteState.highlightedSprite = buttonActiveHoverImage;
             activeSpriteState.pressedSprite = buttonActivePressedImage;
             hotbarButtons[selectedItemIndex].spriteState = activeSpriteState;
             hotbarButtons[selectedItemIndex].GetComponent<Image>().sprite = buttonAcitveImage;
+            hotbarButtons[selectedItemIndex].transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+
+            // Make active item display reflect selected item
+            var activeText = activeItem.GetComponentInChildren<Text>(true);
+            var activeImage = activeItem.GetComponentsInChildren<Image>(true)[1];
+            if(hotbarItems[selectedItemIndex] == null)
+            {
+                activeText.gameObject.SetActive(false);
+                activeImage.gameObject.SetActive(false);
+            }
+            else
+            {
+                activeText.gameObject.SetActive(true);
+                activeText.text = hotbarItems[selectedItemIndex].quantity.ToString();
+                activeImage.gameObject.SetActive(true);
+                activeImage.sprite = hotbarItems[selectedItemIndex].itemType.Image;
+            }
         }
 
-    }
+        public void SelectPreviousItem()
+        {
+            if(selectedItemIndex == 0)
+                SelectItemIndex(Consts.HOTBAR_SIZE - 1);
+            else
+                SelectItemIndex(selectedItemIndex-1);
+        }
+
+        public void SelectNextItem()
+        {
+            if(selectedItemIndex == Consts.HOTBAR_SIZE - 1)
+                SelectItemIndex(0);
+            else
+                SelectItemIndex(selectedItemIndex+1);
+        }
+
+   }
 }
 

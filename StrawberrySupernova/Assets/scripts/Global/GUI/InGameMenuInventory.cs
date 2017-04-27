@@ -50,6 +50,7 @@ namespace StrawberryNova
                     else if(textObj.name == "Amount")
                         textObj.text = item.quantity.ToString();
                 }
+                newButton.GetComponentsInChildren<Image>()[1].sprite = item.itemType.Image;
                 newButton.transform.SetParent(itemListContent.transform, false);
                 var itemIndex = index;
                 newButton.GetComponent<Button>().onClick.AddListener(
