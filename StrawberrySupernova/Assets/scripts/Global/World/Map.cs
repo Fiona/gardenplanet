@@ -61,8 +61,8 @@ namespace StrawberryNova
 	    public Map(string filename)
 	    {
 	        this.filename = filename;
-	        width = 5;
-	        height = 5;
+	        width = 20;
+            height = 20;
 			Init();
 
 	        if(filename == null)

@@ -209,6 +209,9 @@ namespace StrawberryNova
 	{
 	    public string name;
 	    public List<TileTypeVolume> volumes;
+        public double xCentre;
+        public double yCentre;
+        public double zCentre;
 	}
 
 }

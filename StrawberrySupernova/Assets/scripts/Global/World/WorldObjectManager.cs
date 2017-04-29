@@ -140,7 +140,12 @@ namespace StrawberryNova
 			var tilemap = FindObjectOfType<Tilemap>();
 			if(pos.x < 0 || pos.x >= tilemap.width || pos.y < 0 || pos.y >= tilemap.height)
 				throw new EditorErrorException("Object outside of tilemap.");
-			AddWorldObject(objectType, new WorldPosition{ x=pos.x, y=pos.y, height=(pos.layer * Consts.TILE_HEIGHT)});
+            var worldPos = new WorldPosition {
+                x=pos.x * Consts.TILE_SIZE,
+                y=pos.y * Consts.TILE_SIZE,
+                height=pos.layer * Consts.TILE_SIZE
+            };
+			AddWorldObject(objectType, worldPos);
 		}
 
 		public void SetWorldObjectDirection(WorldObject worldObject, EightDirection direction)

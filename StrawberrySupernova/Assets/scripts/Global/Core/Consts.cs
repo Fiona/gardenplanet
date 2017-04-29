@@ -24,8 +24,8 @@ namespace StrawberryNova
 		public const int COLLISION_LAYER_TILES = 8;
 		public const int COLLISION_LAYER_WORLD_OBJECTS = 9;
 
-	    // Tiles on different layers are placed this far apart
-	    public const float TILE_HEIGHT = 0.5f;
+	    // Tiles are this size on all dimensions
+	    public const float TILE_SIZE = 0.5f;
 
 	    // All tiles are scaled by this amount in an attempt to tackle gaps
 		public const float SCALE_FUDGE = 0.00001f;

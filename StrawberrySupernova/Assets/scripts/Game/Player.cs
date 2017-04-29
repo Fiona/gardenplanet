@@ -154,9 +154,9 @@ namespace StrawberryNova
 		public void SetPositionToTile(TilePosition pos)
 		{
 			transform.position = new Vector3(
-				pos.x,
-				(pos.layer * Consts.TILE_HEIGHT),
-				pos.y			
+                pos.x * Consts.TILE_SIZE,
+				pos.layer * Consts.TILE_SIZE,
+                pos.y * Consts.TILE_SIZE		
 			);
 			var baseRotation = DirectionHelper.DirectionToDegrees(pos.dir);
 			transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);

@@ -20,6 +20,8 @@ namespace StrawberryNova
 	    public GameObject volumeListContent;
 	    public Dropdown newVolumeTypeDropdown;
 	    public Toggle isWallToggle;
+        public GameObject gridLine;
+        public GameObject tileCentreMark;
 
 	    private TileType tileType;
 	    private TileTypeVolume selectedVolume;
@@ -28,17 +30,55 @@ namespace StrawberryNova
 	    private GameObject currentTilePreviewObject;
 	    private GameObject currentVolumeObject;
 	    private float rotation;
+        private bool recreateTilesOfType;
 
 	    public void Awake()
 	    {
 	        tilePreviewTemplate.SetActive(false);
 	        volumeListButtonTemplate.gameObject.SetActive(false);
+            CreateGridLines();
 	    }
+
+        public void CreateGridLines()
+        {
+            gridLine.SetActive(false);
+
+            // Horizontal
+            for(var gridPos = -Consts.TILE_SIZE; gridPos <= Consts.TILE_SIZE; gridPos += Consts.TILE_SIZE / 2)
+            {
+                var newGridLine = Instantiate(gridLine);
+                newGridLine.transform.SetParent(gridLine.transform.parent);
+                newGridLine.transform.localPosition = gridLine.transform.localPosition + new Vector3(gridPos, 0f, 0f);
+                newGridLine.transform.localRotation = gridLine.transform.localRotation;
+                newGridLine.transform.localScale = gridLine.transform.localScale;
+                newGridLine.SetActive(true);
+            }       
+            // Vertical
+            for(var gridPos = -Consts.TILE_SIZE; gridPos <= Consts.TILE_SIZE; gridPos += Consts.TILE_SIZE / 2)
+            {
+                var newGridLine = Instantiate(gridLine);
+                newGridLine.transform.SetParent(gridLine.transform.parent);
+                newGridLine.transform.localPosition = gridLine.transform.localPosition + new Vector3(0f, 0f, gridPos);
+                newGridLine.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                newGridLine.transform.localScale = gridLine.transform.localScale;
+                newGridLine.SetActive(true);
+            }        
+        }
 
 	    public void Update()
 	    {
 	        SetTilePreviewRotation();
+            SetTileCentreMark();
 	    }
+
+        public void SetTileCentreMark()
+        {
+            tileCentreMark.transform.localPosition = new Vector3(
+                (float)tileType.xCentre,
+                (float)tileType.yCentre,
+                (float)tileType.zCentre
+            );
+        }
 
 	    public IEnumerator Show(string tileTypeName)
 	    {
@@ -93,11 +133,31 @@ namespace StrawberryNova
 	        volumeSettings.SetActive(false);
 
 	        // Wait to be told to close
+            recreateTilesOfType = false;
 	        close = false;
 	        while(!close)
 	            yield return new WaitForFixedUpdate();
 	        gameObject.SetActive(false);
 
+            // Update tiles
+            if(recreateTilesOfType)
+            {
+                var tilePosToUpdate = new List<TilePosition>();
+                foreach(var tile in controller.tilemap.tilemap)
+                {
+                    if(tile.tileTypeName == tileTypeName)
+                    {
+                        tilePosToUpdate.Add(
+                            new TilePosition{x = tile.x, y = tile.y, layer = tile.layer, dir = tile.direction}
+                        );
+                    }
+                }
+                foreach(var tilePos in tilePosToUpdate)
+                {
+                    controller.tilemap.RemoveTile(tilePos.x, tilePos.y, tilePos.layer);
+                    controller.tilemap.AddTile(tileTypeName, tilePos.x, tilePos.y, tilePos.layer, tilePos.dir);
+                }
+            }
 	    }
 
 	    public void RecreateVolumeList()
@@ -210,6 +270,7 @@ namespace StrawberryNova
 	        }
 	        catch(EditorErrorException){ }
 	        close = true;
+            recreateTilesOfType = true;
 	    }
 
 	    public void CreateNewVolumePressed()
@@ -336,6 +397,13 @@ namespace StrawberryNova
 	    {			
 			rotation = (rotation + 90f) % 360.0f;
 	    }
+
+        public void XCentreMinusPressed(){ tileType.xCentre -= Consts.TILE_SIZE/2; }
+        public void XCentrePlusPressed(){ tileType.xCentre += Consts.TILE_SIZE/2; }
+        public void YCentreMinusPressed(){ tileType.yCentre -= Consts.TILE_SIZE/2; }
+        public void YCentrePlusPressed(){ tileType.yCentre += Consts.TILE_SIZE/2; }
+        public void ZCentreMinusPressed(){ tileType.zCentre -= Consts.TILE_SIZE/2; }
+        public void ZCentrePlusPressed(){ tileType.zCentre += Consts.TILE_SIZE/2; }
 
 	}
 

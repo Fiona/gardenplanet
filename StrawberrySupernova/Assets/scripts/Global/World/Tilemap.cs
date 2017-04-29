@@ -18,6 +18,7 @@ namespace StrawberryNova
 	        public bool emptyTile;
 	        public string tileTypeName;
 	        public Material[] sharedMaterials;
+            public TileType tileType;
 
 	        private static PhysicMaterial slideMaterial;
 
@@ -34,16 +35,33 @@ namespace StrawberryNova
 	            this.emptyTile = (tileTypeName == null);
 
 	            tileObj.transform.localPosition = new Vector3(
-	                x,
-	                layer * Consts.TILE_HEIGHT,
-	                y);
+                    (x * Consts.TILE_SIZE),
+	                layer * Consts.TILE_SIZE,
+                    y * Consts.TILE_SIZE
+                );
+
+                if(!this.emptyTile)
+                {
+                    if(FindObjectOfType<App>().state == AppState.Editor)
+                        tileType = FindObjectOfType<MapEditorController>().tileTypeSet.GetTileTypeByName(tileTypeName);
+                    else
+                        tileType = FindObjectOfType<GameController>().tileTypeSet.GetTileTypeByName(tileTypeName);
+
+                    tileObj.transform.localPosition += new Vector3(
+                        (float)tileType.xCentre,
+                        (float)tileType.yCentre,
+                        (float)tileType.zCentre
+                    );
+                    sharedMaterials = tileObj.GetComponent<Renderer>().sharedMaterials;
+                }
 
 	            SetDirection(direction);
 	            // Combats tile gaps
-	            tileObj.transform.localScale = new Vector3(1.0f + Consts.SCALE_FUDGE, 1.0f + Consts.SCALE_FUDGE, 1.0f + Consts.SCALE_FUDGE);
-
-	            if(!emptyTile)
-	                sharedMaterials = tileObj.GetComponent<Renderer>().sharedMaterials;
+	            tileObj.transform.localScale = new Vector3(
+                    1.0f + Consts.SCALE_FUDGE,
+                    1.0f + Consts.SCALE_FUDGE,
+                    1.0f + Consts.SCALE_FUDGE
+                );
 
 	            CreateCollisionShapes();
 	        }
@@ -57,13 +75,11 @@ namespace StrawberryNova
 	            if(FindObjectOfType<App>().state == AppState.Editor)
 	            {
 	                BoxCollider floorCollider = tileObj.AddComponent<BoxCollider>();
-	                floorCollider.size = new Vector3(1f, 0.1f, 1f);
+                    floorCollider.size = new Vector3(Consts.TILE_SIZE, 0.1f, Consts.TILE_SIZE);
 	                floorCollider.center = new Vector3(0.0f, -0.04f, 0.0f);
 	                return;
 	            }
-
-	            var tileType = FindObjectOfType<GameController>().tileTypeSet.GetTileTypeByName(tileTypeName);
-
+                    
 	            // For each volume, create them if they're a recognisable
 	            // collision shape.
 	            foreach(var volume in tileType.volumes)

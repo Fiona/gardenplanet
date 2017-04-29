@@ -90,9 +90,9 @@ namespace StrawberryNova
 				newGameObject = Instantiate(markerTemplate);
 				newGameObject.transform.parent = transform;
 				newGameObject.transform.localPosition = new Vector3(
-					x,
-					(layer * Consts.TILE_HEIGHT),
-					y);
+                    x * Consts.TILE_SIZE,
+					layer * Consts.TILE_SIZE,
+                    y * Consts.TILE_SIZE);
 				newGameObject.GetComponentInChildren<MeshRenderer>().material.SetTexture(
 					"_MainTex",
 					markerType.sprite.texture

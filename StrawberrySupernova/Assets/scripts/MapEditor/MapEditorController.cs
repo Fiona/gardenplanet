@@ -291,7 +291,7 @@ namespace StrawberryNova
 							var worldPos = new WorldPosition{
 								x=hit.point.x,
 								y=hit.point.z,
-								height=(tilePos.layer * Consts.TILE_HEIGHT)
+								height=(tilePos.layer * Consts.TILE_SIZE)
 							};
 							worldObjectManager.AddWorldObject(selectedWorldObject, worldPos);
 						}
@@ -338,10 +338,11 @@ namespace StrawberryNova
 	        else
 	        {
 	            TilemapSelectionCube.GetComponent<MeshRenderer>().enabled = true;
-	            TilemapSelectionCube.transform.localPosition = new Vector3(
-	                currentHoveredTile.x,
-	                0.3f + (currentHoveredTile.layer * Consts.TILE_HEIGHT),
-	                currentHoveredTile.y);
+                TilemapSelectionCube.transform.localPosition = new Vector3(
+                    currentHoveredTile.x * Consts.TILE_SIZE,
+                    0.3f + (currentHoveredTile.layer * Consts.TILE_SIZE),
+                    currentHoveredTile.y * Consts.TILE_SIZE
+                );
 	        }
 	    }
 
@@ -352,7 +353,7 @@ namespace StrawberryNova
 	    {
 	        currentLayer = layer;
 	        layerText.text = String.Format("{0}", layer);
-	        float y = Consts.CAMERA_Y + (Consts.TILE_HEIGHT * layer);
+	        float y = Consts.CAMERA_Y + (Consts.TILE_SIZE * layer);
 	        mainCamera.transform.position = new Vector3(
 	            mainCamera.transform.position.x,
 	            y,
@@ -446,14 +447,14 @@ namespace StrawberryNova
 	        var topBarrier = Instantiate(barrierTemplate);
 	        topBarrier.transform.parent = tilemap.transform;
 	        topBarrier.transform.localScale = new Vector3(
-	            0.1f * tilemap.width,
-	            topBarrier.transform.localScale.y,
-	            0.02f
+                Consts.TILE_SIZE * tilemap.width,
+                topBarrier.transform.localScale.y,
+                topBarrier.transform.localScale.z
 	            );
 	        topBarrier.transform.localPosition = new Vector3(
-	            (tilemap.width / 2.0f) - 0.5f,
-	            0.098f + (currentLayer * 0.5f),
-	            tilemap.height - 0.5f
+                (Consts.TILE_SIZE * tilemap.width / 2.0f) - (Consts.TILE_SIZE/2),
+                (currentLayer * Consts.TILE_SIZE) + (Consts.TILE_SIZE/2),
+                (Consts.TILE_SIZE * tilemap.height) - (Consts.TILE_SIZE/2)
 	            );
 	        barriers.Add(topBarrier);
 
@@ -461,14 +462,14 @@ namespace StrawberryNova
 	        var bottomBarrier = Instantiate(barrierTemplate);
 	        bottomBarrier.transform.parent = tilemap.transform;
 	        bottomBarrier.transform.localScale = new Vector3(
-	            0.1f * tilemap.width,
+                Consts.TILE_SIZE * tilemap.width,
 	            bottomBarrier.transform.localScale.y,
-	            0.02f
+                bottomBarrier.transform.localScale.z
 	            );
 	        bottomBarrier.transform.localPosition = new Vector3(
-	            (tilemap.width / 2.0f) - 0.5f,
-	            0.098f + (currentLayer * 0.5f),
-	            -0.5f
+                (Consts.TILE_SIZE * tilemap.width / 2.0f) - (Consts.TILE_SIZE/2),
+                (currentLayer * Consts.TILE_SIZE) + (Consts.TILE_SIZE/2),
+                -(Consts.TILE_SIZE/2)
 	            );
 	        barriers.Add(bottomBarrier);
 
@@ -476,14 +477,14 @@ namespace StrawberryNova
 	        var leftBarrier = Instantiate(barrierTemplate);
 	        leftBarrier.transform.parent = tilemap.transform;
 	        leftBarrier.transform.localScale = new Vector3(
-	            0.1f * tilemap.height,
-	            leftBarrier.transform.localScale.y,
-	            0.02f
+                Consts.TILE_SIZE * tilemap.height,
+                leftBarrier.transform.localScale.y,
+                leftBarrier.transform.localScale.z
 	            );
 	        leftBarrier.transform.localPosition = new Vector3(
-	            -0.5f,
-	            0.098f + (currentLayer * 0.5f),
-	            (tilemap.height / 2.0f) - 0.5f
+                -(Consts.TILE_SIZE/2),
+                (currentLayer * Consts.TILE_SIZE) + (Consts.TILE_SIZE/2),
+                (Consts.TILE_SIZE * tilemap.height / 2.0f) - (Consts.TILE_SIZE/2)
 	            );
 	        leftBarrier.transform.Rotate(new Vector3(0f, 0f, 90f));
 	        barriers.Add(leftBarrier);
@@ -492,14 +493,14 @@ namespace StrawberryNova
 	        var rightBarrier = Instantiate(barrierTemplate);
 	        rightBarrier.transform.parent = tilemap.transform;
 	        rightBarrier.transform.localScale = new Vector3(
-	            0.1f * tilemap.height,
-	            rightBarrier.transform.localScale.y,
-	            0.02f
+                Consts.TILE_SIZE * tilemap.height,
+                rightBarrier.transform.localScale.y,
+                rightBarrier.transform.localScale.z
 	            );
 	        rightBarrier.transform.localPosition = new Vector3(
-	            tilemap.width-0.5f,
-	            0.098f + (currentLayer * 0.5f),
-	            (tilemap.height / 2.0f) - 0.5f
+                (Consts.TILE_SIZE * tilemap.height) - (Consts.TILE_SIZE/2),
+                (currentLayer * Consts.TILE_SIZE) + (Consts.TILE_SIZE/2),
+                (Consts.TILE_SIZE * tilemap.height / 2.0f) - (Consts.TILE_SIZE/2)
 	            );
 	        rightBarrier.transform.Rotate(new Vector3(0f, 0f, -90f));
 	        barriers.Add(rightBarrier);

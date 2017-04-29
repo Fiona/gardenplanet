@@ -52,7 +52,6 @@ namespace StrawberryNova
                 }
                 newButton.GetComponentsInChildren<Image>()[1].sprite = item.itemType.Image;
                 newButton.transform.SetParent(itemListContent.transform, false);
-                var itemIndex = index;
                 newButton.GetComponent<Button>().onClick.AddListener(
                     delegate
                     {
