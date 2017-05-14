@@ -23,6 +23,7 @@ namespace StrawberryNova
 		// Internal collision layer numbers
 		public const int COLLISION_LAYER_TILES = 8;
 		public const int COLLISION_LAYER_WORLD_OBJECTS = 9;
+        public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
 
 	    // Tiles are this size on all dimensions
 	    public const float TILE_SIZE = 0.5f;

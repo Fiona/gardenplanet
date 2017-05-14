@@ -67,6 +67,9 @@ namespace StrawberryNova
             var inputManagerObj = new GameObject("InputManager");
             inputManager = inputManagerObj.AddComponent<InputManager>();
 
+            var mouseHoverPlane = new GameObject("Mouse Hover Plane");
+            mouseHoverPlane.AddComponent<MouseHoverPlane>();
+
             // GUI objects
 			var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
 			worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);

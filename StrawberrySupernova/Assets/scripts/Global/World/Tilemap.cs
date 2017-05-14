@@ -74,10 +74,19 @@ namespace StrawberryNova
 	            // Editor tile floor
 	            if(FindObjectOfType<App>().state == AppState.Editor)
 	            {
+                    /**
 	                BoxCollider floorCollider = tileObj.AddComponent<BoxCollider>();
                     floorCollider.size = new Vector3(Consts.TILE_SIZE, 0.1f, Consts.TILE_SIZE);
 	                floorCollider.center = new Vector3(0.0f, -0.04f, 0.0f);
+                    if(!emptyTile)
+                        floorCollider.center += new Vector3(
+                            (float)tileType.xCentre,
+                            (float)tileType.yCentre,
+                            (float)tileType.zCentre
+                        );
 	                return;
+                 /**/   
+                    return;
 	            }
                     
 	            // For each volume, create them if they're a recognisable
@@ -176,6 +185,8 @@ namespace StrawberryNova
 	                tilesToKill.Add(tile);
 	        foreach(var tile in tilesToKill)
 	            RemoveTile(tile.x, tile.y, tile.layer);
+
+            FindObjectOfType<MouseHoverPlane>().RecreateCollisionPlane();
 	    }
 
 	    /*

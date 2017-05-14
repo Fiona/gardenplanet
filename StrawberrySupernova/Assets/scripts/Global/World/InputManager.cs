@@ -178,8 +178,25 @@ namespace StrawberryNova
     			}
 
     	        // Get mouse over tiles
-    	        if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
-    	        {
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
+                { 
+                    var rayNormal = hit.transform.TransformDirection(hit.normal);
+                    if(rayNormal == hit.transform.up)
+                    {
+                        int tileOverX = (int)((hit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                        int tileOverY = (int)((hit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                        var tileOn = controller.tilemap.GetTileAt(tileOverX, tileOverY, controller.currentLayer);
+                        if(tileOn == null)
+                        {
+                            controller.tilemap.MouseOverTile(null);
+                            yield return new WaitForFixedUpdate();
+                            continue;
+                        }
+                        else
+                            controller.tilemap.MouseOverTile(tileOn);
+                    }
+
+                    /*
     	            var currentTile = controller.tilemap.GetTileFromGameObject(hit.transform.gameObject);
     	            if(currentTile != null)
     	            {
@@ -209,6 +226,7 @@ namespace StrawberryNova
     						}
     	                }
     	            }
+                 */   
     	        }
     	        else
     	            controller.tilemap.MouseOverTile(null);

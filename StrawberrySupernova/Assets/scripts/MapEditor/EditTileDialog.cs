@@ -44,7 +44,7 @@ namespace StrawberryNova
             gridLine.SetActive(false);
 
             // Horizontal
-            for(var gridPos = -Consts.TILE_SIZE; gridPos <= Consts.TILE_SIZE; gridPos += Consts.TILE_SIZE / 2)
+            for(var gridPos = -Consts.TILE_SIZE*2; gridPos <= Consts.TILE_SIZE*2; gridPos += Consts.TILE_SIZE / 2)
             {
                 var newGridLine = Instantiate(gridLine);
                 newGridLine.transform.SetParent(gridLine.transform.parent);
@@ -54,7 +54,7 @@ namespace StrawberryNova
                 newGridLine.SetActive(true);
             }       
             // Vertical
-            for(var gridPos = -Consts.TILE_SIZE; gridPos <= Consts.TILE_SIZE; gridPos += Consts.TILE_SIZE / 2)
+            for(var gridPos = -Consts.TILE_SIZE*2; gridPos <= Consts.TILE_SIZE*2; gridPos += Consts.TILE_SIZE / 2)
             {
                 var newGridLine = Instantiate(gridLine);
                 newGridLine.transform.SetParent(gridLine.transform.parent);
@@ -74,9 +74,9 @@ namespace StrawberryNova
         public void SetTileCentreMark()
         {
             tileCentreMark.transform.localPosition = new Vector3(
-                (float)tileType.xCentre,
-                (float)tileType.yCentre,
-                (float)tileType.zCentre
+                (float)-tileType.xCentre,
+                (float)-tileType.yCentre,
+                (float)-tileType.zCentre
             );
         }
 
@@ -110,6 +110,7 @@ namespace StrawberryNova
 	        currentTilePreviewObject.layer = tilePreviewTemplate.layer;
 	        rect.localPosition = tilePreviewTemplate.GetComponent<RectTransform>().localPosition;
 	        rect.localScale = tilePreviewTemplate.GetComponent<RectTransform>().localScale;
+            rect.localRotation = tilePreviewTemplate.GetComponent<RectTransform>().localRotation;
 
 	        // Set dropdown options
 	        newVolumeTypeDropdown.ClearOptions();
@@ -183,9 +184,9 @@ namespace StrawberryNova
 
 	    public void SetTilePreviewRotation()
 	    {
-	        if(currentTilePreviewObject == null)
+            if(tilePreviewHolder == null)
 	            return;
-	        currentTilePreviewObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, rotation, 0);
+            tilePreviewHolder.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, rotation, 0);
 	    }
 
 	    public void SelectNewVolume(TileTypeVolume volume)

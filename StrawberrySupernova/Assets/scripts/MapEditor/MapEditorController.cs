@@ -49,6 +49,7 @@ namespace StrawberryNova
 		public EditorMode editorMode;
 
 		List<GameObject> barriers;
+        MouseHoverPlane mouseHoverPlane;
 
 		// Tile mode
 	    string currentTileName;
@@ -78,6 +79,9 @@ namespace StrawberryNova
 
 			var worldObjectManagerObj = new GameObject("WorldObjectManager");
 			worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
+
+            var mouseHoverPlaneObj = new GameObject("Mouse Hover Plane");
+            mouseHoverPlane = mouseHoverPlaneObj.AddComponent<MouseHoverPlane>();
 
 	        barriers = new List<GameObject>();
 	        try
@@ -145,6 +149,9 @@ namespace StrawberryNova
 							objTransform.position = new Vector3(
 								secondaryHit.point.x, objTransform.position.y, secondaryHit.point.z
 							);
+                        worldObjectMoving.x = objTransform.position.x;
+                        worldObjectMoving.y = objTransform.position.z;
+                        worldObjectMoving.height = objTransform.position.y;
 					}
 				}
 			}
@@ -360,6 +367,7 @@ namespace StrawberryNova
 	            mainCamera.transform.position.z);
 	        CreateBarrier();
 	        tilemap.GenerateEmptyTiles(currentLayer);
+            mouseHoverPlane.RecreateCollisionPlane();
 	    }
 
 	    /*
@@ -498,7 +506,7 @@ namespace StrawberryNova
                 rightBarrier.transform.localScale.z
 	            );
 	        rightBarrier.transform.localPosition = new Vector3(
-                (Consts.TILE_SIZE * tilemap.height) - (Consts.TILE_SIZE/2),
+                (Consts.TILE_SIZE * tilemap.width) - (Consts.TILE_SIZE/2),
                 (currentLayer * Consts.TILE_SIZE) + (Consts.TILE_SIZE/2),
                 (Consts.TILE_SIZE * tilemap.height / 2.0f) - (Consts.TILE_SIZE/2)
 	            );
