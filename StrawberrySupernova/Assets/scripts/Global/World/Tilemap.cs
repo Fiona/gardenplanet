@@ -259,7 +259,7 @@ namespace StrawberryNova
 	        }
 
 	        if(mapEditor != null && tile != null && tile.layer != mapEditor.currentLayer)
-	            currentTileMouseOver = null;
+                currentTileMouseOver = null;
 	        else
 	            currentTileMouseOver = tile;
 

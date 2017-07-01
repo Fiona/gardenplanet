@@ -180,6 +180,7 @@ namespace StrawberryNova
     	        // Get mouse over tiles
                 if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
                 { 
+                    /*
                     var rayNormal = hit.transform.TransformDirection(hit.normal);
                     if(rayNormal == hit.transform.up)
                     {
@@ -193,9 +194,11 @@ namespace StrawberryNova
                             continue;
                         }
                         else
-                            controller.tilemap.MouseOverTile(tileOn);
+                            controller.tilemap.MouseOverTile(tileOn);                        
                     }
+*/
 
+                    // TODO: Sort out rotating tiles
                     /*
     	            var currentTile = controller.tilemap.GetTileFromGameObject(hit.transform.gameObject);
     	            if(currentTile != null)

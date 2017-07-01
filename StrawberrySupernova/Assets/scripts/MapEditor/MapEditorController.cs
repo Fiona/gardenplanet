@@ -24,13 +24,6 @@ namespace StrawberryNova
 		public Map map;
 		public Text currentModeText;
 
-		[Header("Tile mode")]
-		public GameObject modeTile;
-		public GameObject currentTilePanel;
-	    public Text currentTileText;
-	    public GameObject currentTileTemplate;
-		public EditTileDialog editTileDialog;
-
 		[Header("Marking mode")]
 		public GameObject modeMarking;
 		public Image currentMarkerPreview;
@@ -45,18 +38,14 @@ namespace StrawberryNova
 
 	    [HideInInspector]
 	    public TileTypeSet tileTypeSet;
+        // TODO: Delete
 		[HideInInspector]
 		public EditorMode editorMode;
+        [HideInInspector]
+        public Tilemap.Tile currentHoveredTile;
 
 		List<GameObject> barriers;
         MouseHoverPlane mouseHoverPlane;
-
-		// Tile mode
-	    string currentTileName;
-	    GameObject currentTileTypeSelectedObj;
-	    string previousTileType;
-	    Tilemap.Tile currentHoveredTile;
-	    Direction newTileDirection;
 
 		// Marker mode
 		MarkerManager markerManager;
@@ -72,9 +61,12 @@ namespace StrawberryNova
 		[HideInInspector]
 		public int worldObjectMinorMode;
 
+        List<MapEditorMode> mapEditorModes;
+        int currentMapEditorMode = -1;
+
 	    public void Awake()
 	    {
-			var markerManagerObj = new GameObject("MarkerManager");
+            var markerManagerObj = new GameObject("MarkerManager");
 			markerManager = markerManagerObj.AddComponent<MarkerManager>();
 
 			var worldObjectManagerObj = new GameObject("WorldObjectManager");
@@ -83,17 +75,54 @@ namespace StrawberryNova
             var mouseHoverPlaneObj = new GameObject("Mouse Hover Plane");
             mouseHoverPlane = mouseHoverPlaneObj.AddComponent<MouseHoverPlane>();
 
-	        barriers = new List<GameObject>();
+            tileTypeSet = new TileTypeSet("default");
+
+            barriers = new List<GameObject>();
+
+            CreateMapEditorModes();
+
 	        try
 	        {
-	            tileTypeSet = new TileTypeSet("default");
 	            LoadMap(null);
 	        }
 	        catch(EditorErrorException){}
 
-	        SwitchEditorMode(EditorMode.Tile);
-			SwitchWorldObjectMinorMode(0);
-	    }
+            SelectEditorMode(0);
+        }
+
+        public void CreateMapEditorModes()
+        {
+            if(mapEditorModes != null)
+            {
+                foreach(var mode in mapEditorModes)
+                {
+                    mode.Destroy();
+                }
+            }
+            mapEditorModes = new List<MapEditorMode>();
+            AddMapEditorMode(new MapEditorModeTile());
+        }
+
+        private void AddMapEditorMode(MapEditorMode newMode)
+        {
+            newMode.Initialize();
+            mapEditorModes.Add(newMode);
+            newMode.Disable();
+        }
+
+        public void SelectEditorMode(int num)
+        {
+            if(currentMapEditorMode > -1)
+                mapEditorModes[currentMapEditorMode].Disable();
+            currentMapEditorMode = num;
+            mapEditorModes[currentMapEditorMode].Enable();
+            currentModeText.text = mapEditorModes[currentMapEditorMode].GetModeName();
+        }
+
+        public void SelectNextEditorMode()
+        {
+            SelectEditorMode((currentMapEditorMode + 1) % mapEditorModes.Count);
+        }
 			
 	    public void Update()
 	    {
@@ -157,32 +186,6 @@ namespace StrawberryNova
 			}
 
 		}
-			
-	    public void SwitchEditorMode(EditorMode editorMode)
-	    {
-	        this.editorMode = editorMode;
-			modeWorldObject.SetActive(false);
-			modeTile.SetActive(false);
-			modeMarking.SetActive(false);
-			StopMovingWorldObject();
-			switch(this.editorMode)
-			{
-				case EditorMode.WorldObject:
-					modeWorldObject.SetActive(true);
-					this.currentModeText.text = "World Object Mode";
-					break;
-				case EditorMode.Marker:
-					modeMarking.SetActive(true);
-					this.currentModeText.text = "Tile Marking";
-					break;
-				case EditorMode.Tile:
-					modeTile.SetActive(true);
-					this.currentModeText.text = "Tile Drawing";
-					break;
-			    default:
-			        break;
-			}
-	    }
 
 	    public void LoadMap(string filename)
 	    {
@@ -198,13 +201,12 @@ namespace StrawberryNova
 			markerManager.LoadFromMap(map);
 			worldObjectManager.LoadFromMap(map);
 	        SetNewTileDirection(Direction.Down);
-	        currentTileTemplate.SetActive(false);
+            CreateMapEditorModes();
 			currentWorldObjectTemplate.SetActive(false);
 	        SwitchToLayer(0);
-	        SelectTileType(tileTypeSet.types[0].name);
 			SelectMarkerType(markerManager.tileMarkerTypes[0].name);
 			SelectWorldObjectType(worldObjectManager.worldObjectTypes[0].name);
-			SwitchEditorMode(EditorMode.Tile);
+            SelectEditorMode(0);
 	        mainMenuBar.ShowGoodMessage("Loaded map");
             FindObjectOfType<InputManager>().SetUpMouse();
 	    }
@@ -256,20 +258,13 @@ namespace StrawberryNova
 					layer=currentHoveredTile.layer
 				};
 
-				// Drawing tiles
-				if(editorMode == EditorMode.Tile)
-				{					
-					if(pointerEventData.button == PointerEventData.InputButton.Left)
-					{
-						tilemap.RemoveTile(tilePos.x, tilePos.y, tilePos.layer);
-						tilemap.AddTile(currentTileName, tilePos.x, tilePos.y, tilePos.layer, newTileDirection);
-					}
-					else if(pointerEventData.button == PointerEventData.InputButton.Right)
-						SelectTileType(currentHoveredTile.tileTypeName);
-				}
+                mapEditorModes[currentMapEditorMode].TileLocationClicked(tilePos, pointerEventData);
+
+                /*
 				// Placing tile markers
 				else if(editorMode == EditorMode.Marker)
 				{
+                    
 					if(pointerEventData.button == PointerEventData.InputButton.Left)
 					{
 						markerManager.RemoveMarkerAt(tilePos.x, tilePos.y, tilePos.layer);
@@ -324,6 +319,7 @@ namespace StrawberryNova
 					if(!movingWorldObject)
 						movingWorldObject = true;
 				}
+                */
 			}
 			catch(EditorErrorException)
 			{
@@ -369,43 +365,7 @@ namespace StrawberryNova
 	        tilemap.GenerateEmptyTiles(currentLayer);
             mouseHoverPlane.RecreateCollisionPlane();
 	    }
-
-	    /*
-	      Switches selected tile type for drawing
-	     */
-	    private void SelectTileType(string tileTypeName)
-	    {
-
-	        if(currentTileTypeSelectedObj != null)
-	        {
-	            Destroy(currentTileTypeSelectedObj);
-	            currentTileTypeSelectedObj = null;
-	        }
-
-	        if(tileTypeName == null)
-	        {
-	            currentTileName = null;
-	            currentTileText.text = "Empty";
-	            return;
-	        }
-
-	        currentTileTypeSelectedObj = tileTypeSet.InstantiateTile(tileTypeName);
-
-	        currentTileTypeSelectedObj.transform.parent = currentTilePanel.transform;
-	        currentTileTypeSelectedObj.AddComponent<RectTransform>();
-	        var rect = currentTileTypeSelectedObj.GetComponent<RectTransform>();
-
-	        // Base values on template
-	        currentTileTypeSelectedObj.layer = currentTileTemplate.layer;
-	        rect.localPosition = currentTileTemplate.GetComponent<RectTransform>().localPosition;
-	        rect.localScale = currentTileTemplate.GetComponent<RectTransform>().localScale;
-	        rect.localRotation = currentTileTemplate.GetComponent<RectTransform>().localRotation;
-
-	        currentTileName = tileTypeName;
-	        currentTileText.text = currentTileName;
-
-	    }
-
+            
 		/*
 	      Switches selected tile marker type
 	     */
@@ -430,7 +390,7 @@ namespace StrawberryNova
 
 	    public void SetNewTileDirection(Direction direction)
 	    {
-	        newTileDirection = direction;
+	        //newTileDirection = direction;
 	    }
 
 	    public void ResizeTilemapTo(int width, int height)
@@ -515,91 +475,6 @@ namespace StrawberryNova
 
 	    }
 
-	    /*
-	      Pressed button to go to the next tile
-	     */
-	    public void NextTileButtonPressed()
-	    {
-
-	        if(currentTileName == null)
-	        {
-	            SelectTileType(previousTileType);
-	            return;
-	        }
-
-	        TileType typeObject = null;
-	        try
-	        {
-	            typeObject = tileTypeSet.GetTileTypeByName(currentTileName);
-	        }
-	        catch(EditorErrorException){ }
-
-	        var currentIndex = tileTypeSet.types.IndexOf(typeObject);
-	        int chosenIndex;
-
-	        if(currentIndex+1 == tileTypeSet.types.Count)
-	            chosenIndex = 0;
-	        else
-	            chosenIndex = currentIndex+1;
-
-	        SelectTileType(tileTypeSet.types[chosenIndex].name);
-
-	    }
-
-	    /*
-	      Pressed button to go to the previous tile
-	     */
-	    public void PreviousTileButtonPressed()
-	    {
-
-	        if(currentTileName == null)
-	        {
-	            SelectTileType(previousTileType);
-	            return;
-	        }
-
-	        TileType typeObject = null;
-	        try
-	        {
-	            typeObject = tileTypeSet.GetTileTypeByName(currentTileName);
-	        }
-	        catch(EditorErrorException){ }
-
-	        var currentIndex = tileTypeSet.types.IndexOf(typeObject);
-	        int chosenIndex;
-
-	        if(currentIndex == 0)
-	            chosenIndex = tileTypeSet.types.Count - 1;
-	        else
-	            chosenIndex = currentIndex-1;
-
-	        SelectTileType(tileTypeSet.types[chosenIndex].name);
-
-	    }
-
-	    /*
-	      Pressed button to cancel out the selection.
-	     */
-	    public void EmptyTileButtonPressed()
-	    {
-	        if(currentTileName == null)
-	        {
-	            SelectTileType(previousTileType);
-	            return;
-	        }
-	        previousTileType = currentTileName;
-	        SelectTileType(null);
-	    }
-
-	    /*
-	      Edit tile button
-	    */
-	    public void EditTileButtonPressed()
-	    {
-	        if(currentTileName != null)
-	            StartCoroutine(editTileDialog.Show(currentTileName));
-	    }
-
 		/*
 	      Pressed button to go to the next tile marker
 	     */
@@ -633,7 +508,10 @@ namespace StrawberryNova
 		{
 			if(selectedMarker == null)
 			{
-				SelectMarkerType(previousMarker.name);
+                if(previousMarker == null)
+                    SelectMarkerType(markerManager.tileMarkerTypes[0].name);
+                else
+                    SelectMarkerType(previousMarker.name);
 				return;
 			}
 			previousMarker = selectedMarker;
@@ -655,17 +533,6 @@ namespace StrawberryNova
 	    {
 	        SwitchToLayer(currentLayer - 1);
 	    }
-
-		/*
-		 * When switching to another major mode
-		 */
-		public void ChangeEditorModeButtonPressed()
-		{
-			var numModes = Enum.GetNames(typeof(EditorMode)).Length;
-			SwitchEditorMode(
-				(EditorMode)(((int)editorMode + 1) % numModes)
-			);
-		}
 
 		/*
 		 * Use to switch to a minor mode in objects

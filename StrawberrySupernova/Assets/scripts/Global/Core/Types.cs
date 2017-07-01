@@ -45,6 +45,8 @@ namespace StrawberryNova
 
 	// Editor
 	public enum EditorMessageType{Good, Bad, Meh};
+
+    // TODO: delete
 	public enum EditorMode{Tile, WorldObject, Marker};
 
 }

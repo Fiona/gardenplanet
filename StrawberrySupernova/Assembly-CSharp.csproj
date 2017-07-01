@@ -177,6 +177,7 @@
      <Compile Include="Assets\UnityUIExtensions\Scripts\VR Extensions\VRInputModule.cs" />
      <Compile Include="Assets\scripts\App.cs" />
      <Compile Include="Assets\scripts\Behaviours\Bobber.cs" />
+     <Compile Include="Assets\scripts\Behaviours\DummyMonoBehaviour.cs" />
      <Compile Include="Assets\scripts\Behaviours\FaceCamera.cs" />
      <Compile Include="Assets\scripts\Behaviours\IsMouseOver.cs" />
      <Compile Include="Assets\scripts\Behaviours\YesNoDialog.cs" />
@@ -224,6 +225,8 @@
      <Compile Include="Assets\scripts\MapEditor\LoadMapDialog.cs" />
      <Compile Include="Assets\scripts\MapEditor\MainMenuBar.cs" />
      <Compile Include="Assets\scripts\MapEditor\MapEditorController.cs" />
+     <Compile Include="Assets\scripts\MapEditor\MapEditorMode.cs" />
+     <Compile Include="Assets\scripts\MapEditor\MapEditorModeTile.cs" />
      <Compile Include="Assets\scripts\MapEditor\MapNameDialog.cs" />
      <Compile Include="Assets\scripts\MapEditor\MapSetSizeDialog.cs" />
      <Compile Include="Assets\scripts\MapEditor\MenuBarMessage.cs" />

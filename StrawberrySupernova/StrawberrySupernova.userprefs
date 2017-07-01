@@ -1,10 +1,15 @@
 ﻿<Properties StartupConfiguration="{4C273AFB-6945-1C22-DA39-0890970CBC61}|Unit Tests" GitUserInfo="UsingGIT" StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/MapEditor/EditTileDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/MapEditor/MapEditorController.cs">
     <Files>
-      <File FileName="Assets/scripts/Global/Core/Consts.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Game/GameController.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Global/World/Tilemap.cs" Line="62" Column="47" />
-      <File FileName="Assets/scripts/MapEditor/EditTileDialog.cs" Line="57" Column="81" />
+      <File FileName="Assets/scripts/Global/Core/Consts.cs" Line="137" Column="65" />
+      <File FileName="Assets/scripts/Game/GameController.cs" Line="78" Column="1" />
+      <File FileName="Assets/scripts/Global/World/Tilemap.cs" Line="262" Column="45" />
+      <File FileName="Assets/scripts/MapEditor/EditTileDialog.cs" Line="176" Column="46" />
+      <File FileName="Assets/scripts/Global/World/MouseHoverPlane.cs" Line="39" Column="10" />
+      <File FileName="Assets/scripts/MapEditor/MapEditorController.cs" Line="261" Column="54" />
+      <File FileName="Assets/scripts/Global/World/InputManager.cs" Line="195" Column="26" />
+      <File FileName="Assets/scripts/MapEditor/MapEditorModeTile.cs" Line="113" Column="1" />
+      <File FileName="Assets/scripts/MapEditor/MapEditorMode.cs" Line="25" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />

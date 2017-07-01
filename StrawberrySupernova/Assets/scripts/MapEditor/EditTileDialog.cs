@@ -44,7 +44,7 @@ namespace StrawberryNova
             gridLine.SetActive(false);
 
             // Horizontal
-            for(var gridPos = -Consts.TILE_SIZE*2; gridPos <= Consts.TILE_SIZE*2; gridPos += Consts.TILE_SIZE / 2)
+            for(var gridPos = -Consts.TILE_SIZE*2; gridPos <= Consts.TILE_SIZE*2; gridPos += Consts.TILE_SIZE)
             {
                 var newGridLine = Instantiate(gridLine);
                 newGridLine.transform.SetParent(gridLine.transform.parent);
@@ -54,7 +54,7 @@ namespace StrawberryNova
                 newGridLine.SetActive(true);
             }       
             // Vertical
-            for(var gridPos = -Consts.TILE_SIZE*2; gridPos <= Consts.TILE_SIZE*2; gridPos += Consts.TILE_SIZE / 2)
+            for(var gridPos = -Consts.TILE_SIZE*2; gridPos <= Consts.TILE_SIZE*2; gridPos += Consts.TILE_SIZE)
             {
                 var newGridLine = Instantiate(gridLine);
                 newGridLine.transform.SetParent(gridLine.transform.parent);
