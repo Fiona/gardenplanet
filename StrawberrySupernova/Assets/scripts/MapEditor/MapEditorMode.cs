@@ -50,6 +50,10 @@ namespace StrawberryNova
         {
             Object.Destroy(guiHolder);
         }
+
+        public virtual void Update()
+        {            
+        }
     }
 }
 

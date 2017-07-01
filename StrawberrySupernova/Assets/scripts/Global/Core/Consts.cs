@@ -134,7 +134,8 @@ namespace StrawberryNova
 	    public const float CAMERA_Y = 6.0f;
 	    public const float VERTICAL_EDGE_DISTANCE = 5.0f;
 
-        public const string PREFAB_PATH_EDITOR_MODE_TILE_DRAWING = "Editor/gui/EditorModeTileDrawing";
+		public const string PREFAB_PATH_EDITOR_MODE_TILE_DRAWING = "Editor/gui/EditorModeTileDrawing";
+        public const string PREFAB_PATH_EDITOR_MODE_MARKER = "Editor/gui/EditorModeMarker";
 
 	}
 		

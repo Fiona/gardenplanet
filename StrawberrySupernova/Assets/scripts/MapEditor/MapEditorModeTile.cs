@@ -31,6 +31,7 @@ namespace StrawberryNova
         {
             base.Initialize();
             SelectTileType(controller.tileTypeSet.types[0].name);
+            newTileDirection = Direction.Down;
         }
 
         public override void InitializeGUI()
@@ -51,6 +52,21 @@ namespace StrawberryNova
             currentTilePanel.transform.Find("EmptyTileButton").GetComponent<Button>().onClick.AddListener(EmptyTileButtonPressed);
         }
 
+        public override void Update()
+        {
+            if(controller.currentHoveredTile == null)
+                return;
+            
+            var axis = Input.GetAxis("Mouse ScrollWheel");
+
+            if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
+            {
+                var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
+                controller.tilemap.RotateTileInDirection(controller.currentHoveredTile, dir);
+                newTileDirection = controller.currentHoveredTile.direction;
+            }            
+        }
+        
         public override void Destroy()
         {
             base.Destroy();
@@ -196,4 +212,3 @@ namespace StrawberryNova
             
     }
 }
-

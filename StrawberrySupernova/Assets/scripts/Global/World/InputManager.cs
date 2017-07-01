@@ -13,9 +13,9 @@ namespace StrawberryNova
         public bool directInputEnabled = true;
 
 	    Vector2 lastMousePosition = Vector2.zero;
-        #pragma warning disable CS0414
+        #pragma warning disable 0414
 	    Vector2 deltaMousePosition = Vector2.zero;
-        #pragma warning restore CS0414
+        #pragma warning restore 0414
 	    App app;
 
 	    public void Awake()
@@ -180,7 +180,7 @@ namespace StrawberryNova
     	        // Get mouse over tiles
                 if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
                 { 
-                    /*
+
                     var rayNormal = hit.transform.TransformDirection(hit.normal);
                     if(rayNormal == hit.transform.up)
                     {
@@ -196,9 +196,8 @@ namespace StrawberryNova
                         else
                             controller.tilemap.MouseOverTile(tileOn);                        
                     }
-*/
 
-                    // TODO: Sort out rotating tiles
+                    // TODO: Sort out rotating markers
                     /*
     	            var currentTile = controller.tilemap.GetTileFromGameObject(hit.transform.gameObject);
     	            if(currentTile != null)
