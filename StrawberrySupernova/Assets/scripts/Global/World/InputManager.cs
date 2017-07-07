@@ -6,24 +6,24 @@ using System.Collections;
 namespace StrawberryNova
 {
 	
-	public class InputManager : MonoBehaviour
-	{
+    public class InputManager : MonoBehaviour
+    {
 
-        [HideInInspector]
-        public bool directInputEnabled = true;
+        [HideInInspector] public bool directInputEnabled = true;
+        [HideInInspector] public Vector2? mouseWorldPosition;         
 
-	    Vector2 lastMousePosition = Vector2.zero;
-        #pragma warning disable 0414
-	    Vector2 deltaMousePosition = Vector2.zero;
-        #pragma warning restore 0414
-	    App app;
+        Vector2 lastMousePosition = Vector2.zero;
+#pragma warning disable 0414
+        Vector2 deltaMousePosition = Vector2.zero;
+#pragma warning restore 0414
+        App app;
 
-	    public void Awake()
-	    {
-	        app = FindObjectOfType<App>();
+        public void Awake()
+        {
+            app = FindObjectOfType<App>();
             SetUpMouse();
-	        StartCoroutine(HandlePanning());
-	    }
+            StartCoroutine(HandlePanning());
+        }
 
         public void SetUpMouse()
         {
@@ -39,14 +39,14 @@ namespace StrawberryNova
                 StartCoroutine(ManageInputGame());
         }
 
-	    public void Update()
-	    {
-	        deltaMousePosition = (Vector2)Input.mousePosition - lastMousePosition;
-	        lastMousePosition = Input.mousePosition;
+        public void Update()
+        {
+            deltaMousePosition = (Vector2)Input.mousePosition - lastMousePosition;
+            lastMousePosition = Input.mousePosition;
         }
 
         public IEnumerator ManageInputGame()
-	    {
+        {
 
             GameController controller = FindObjectOfType<GameController>();
 
@@ -128,62 +128,30 @@ namespace StrawberryNova
 
             }
 
-	    }
-
-		bool movingWorldObject;
+        }
 
         public IEnumerator ManageInputEditor()
-	    {
+        {
             
-	        MapEditorController controller = FindObjectOfType<MapEditorController>();
+            MapEditorController controller = FindObjectOfType<MapEditorController>();
 
             while(true)
             {
 
+                mouseWorldPosition = null;
+                
                 while(!directInputEnabled)
                     yield return new WaitForFixedUpdate();
 
-    			RaycastHit hit;
-    			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        
-
-    			// If we're editing world objects and we want to move them
-    			if(controller.editorMode == EditorMode.WorldObject && controller.worldObjectMinorMode == 1)
-    			{
-    				// If an object is selected and we hit arrow keys this adjusts the height
-    				// Mouse wheel rotates the world object
-    				if(controller.worldObjectMoving != null)
-    				{
-    					var objTransform = controller.worldObjectMoving.gameObject.transform;
-    					if(Input.GetKey(KeyCode.UpArrow))
-    						objTransform.position = new Vector3(
-    							objTransform.position.x,
-    							objTransform.position.y + 0.01f,
-    							objTransform.position.z
-    						);
-    					if(Input.GetKey(KeyCode.DownArrow))
-    						objTransform.position = new Vector3(
-    							objTransform.position.x,
-    							objTransform.position.y - 0.01f,
-    							objTransform.position.z
-    						);
-
-    					var axis = Input.GetAxis("Mouse ScrollWheel");
-    					if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
-    					{
-    						var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
-    						var worldObjectManager = FindObjectOfType<WorldObjectManager>();
-    						worldObjectManager.TurnWorldObjectInDirection(controller.worldObjectMoving, dir);						
-    					}
-    				}
-    			}
-
-    	        // Get mouse over tiles
+                // Get mouse over tiles
+                RaycastHit hit;
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);                
                 if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
                 { 
-
                     var rayNormal = hit.transform.TransformDirection(hit.normal);
                     if(rayNormal == hit.transform.up)
                     {
+                        mouseWorldPosition = new Vector2(hit.point.x, hit.point.z);
                         int tileOverX = (int)((hit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
                         int tileOverY = (int)((hit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
                         var tileOn = controller.tilemap.GetTileAt(tileOverX, tileOverY, controller.currentLayer);
@@ -196,46 +164,45 @@ namespace StrawberryNova
                         else
                             controller.tilemap.MouseOverTile(tileOn);                        
                     }
-    	        }
-    	        else
-    	            controller.tilemap.MouseOverTile(null);
+                }
+                else
+                    controller.tilemap.MouseOverTile(null);
 
-                yield return new WaitForFixedUpdate();
                 yield return new WaitForFixedUpdate();
 
             }
 
-	    }
+        }
+		
+        public IEnumerator HandlePanning()
+        {
+            if(app.state != AppState.Editor)
+                yield break;
 
-	    public IEnumerator HandlePanning()
-	    {
-	        if(app.state != AppState.Editor)
-	            yield break;
+            MapEditorController controller = FindObjectOfType<MapEditorController>();
 
-	        MapEditorController controller = FindObjectOfType<MapEditorController>();
-
-	        while(true)
-	        {
-	            if(Input.GetMouseButtonDown(2))
-	            {
-	                var initialMousePosition = Input.mousePosition;
-	                var pannedPosition = Vector2.zero;
-	                Cursor.lockState = CursorLockMode.Locked;
-	                while(true)
-	                {
-	                    controller.PanCamera(-Input.GetAxis("Mouse X") * .5f, -Input.GetAxis("Mouse Y") * .5f);
-	                    if (Input.GetMouseButtonUp(2))
-	                    {
-	                        Cursor.lockState = CursorLockMode.None;
+            while(true)
+            {
+                if(Input.GetMouseButtonDown(2))
+                {
+                    var initialMousePosition = Input.mousePosition;
+                    var pannedPosition = Vector2.zero;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    while(true)
+                    {
+                        controller.PanCamera(-Input.GetAxis("Mouse X") * .5f, -Input.GetAxis("Mouse Y") * .5f);
+                        if (Input.GetMouseButtonUp(2))
+                        {
+                            Cursor.lockState = CursorLockMode.None;
                             FindObjectOfType<InputManager>().SetUpMouse();
-	                        break;
-	                    }
-	                    yield return new WaitForFixedUpdate();
-	                }
-	            }
-	            yield return new WaitForFixedUpdate();
-	        }
-	    }
+                            break;
+                        }
+                        yield return new WaitForFixedUpdate();
+                    }
+                }
+                yield return new WaitForFixedUpdate();
+            }
+        }
 
         /*
          * Stops the player doing anything directly like moving the character. 
@@ -254,11 +221,11 @@ namespace StrawberryNova
             directInputEnabled = true;
         }
 
-	    public void SetMouseTexture(Texture2D texture)
-	    {
-	        Cursor.SetCursor(texture, new Vector2(1.0f, 1.0f), CursorMode.Auto);
-	    }
+        public void SetMouseTexture(Texture2D texture)
+        {
+            Cursor.SetCursor(texture, new Vector2(1.0f, 1.0f), CursorMode.Auto);
+        }
 
-	}
+    }
 
 }

@@ -20,13 +20,17 @@ namespace StrawberryNova
 
 	    public void Awake()
 	    {
-			controller = FindObjectOfType<GameController>();
 	        rigidBody = GetComponent<Rigidbody>();
 	        rigidBody.freezeRotation = true;
 
             inventory = new Inventory(Consts.PLAYER_INVENTORY_MAX_STACKS);
 			FindObjectOfType<App>().events.NewHourEvent.AddListener(NextHour);
 	    }
+
+		public void Start()
+		{
+			controller = FindObjectOfType<GameController>();			
+		}
 
 		public void NextHour(int hour)
 		{
@@ -37,7 +41,7 @@ namespace StrawberryNova
 	    public void Update()
 	    {
 
-            if(!controller.inputManager.directInputEnabled)
+            if(controller.inputManager == null || !controller.inputManager.directInputEnabled)
 				return;
 			
 	        // Handle walking

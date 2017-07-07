@@ -136,6 +136,7 @@ namespace StrawberryNova
 
 		public const string PREFAB_PATH_EDITOR_MODE_TILE_DRAWING = "Editor/gui/EditorModeTileDrawing";
         public const string PREFAB_PATH_EDITOR_MODE_MARKER = "Editor/gui/EditorModeMarker";
+		public const string PREFAB_PATH_EDITOR_MODE_WORLD_OBJECTS = "Editor/gui/EditorModeWorldObjects";
 
 	}
 		

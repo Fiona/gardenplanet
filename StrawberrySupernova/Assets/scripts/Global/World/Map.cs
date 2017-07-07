@@ -90,11 +90,10 @@ namespace StrawberryNova
 	            width = loadedMap.width;
 	            height = loadedMap.height;
 	        }
-
 	    }
 
 	    // Constructor for converting from tilemap
-		public Map(string filename, Tilemap tilemap, WorldObjectManager worldObjectManager)
+		public Map(string filename, Tilemap tilemap)
 	    {
 	        this.filename = filename;
 	        fullFilepath = GetMapFilePathFromName(filename);
@@ -115,18 +114,6 @@ namespace StrawberryNova
 	            };
 	            tiles.Add(newTile);
 	        }
-
-			foreach(var worldObject in worldObjectManager.worldObjects)
-			{
-				var newWorldObject = new WorldObject(){
-					x=(double)worldObject.x,
-					y=(double)worldObject.y,
-					height=(double)worldObject.height,
-					direction=worldObject.dir,
-					type=worldObject.name
-				};
-				worldObjects.Add(newWorldObject);
-			}
 	    }
 
 	    public void SaveMap()

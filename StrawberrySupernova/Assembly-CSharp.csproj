@@ -232,6 +232,7 @@
     <Compile Include="Assets\scripts\MapEditor\MapEditorMode.cs" />
     <Compile Include="Assets\scripts\MapEditor\MapEditorModeMarker.cs" />
     <Compile Include="Assets\scripts\MapEditor\MapEditorModeTile.cs" />
+    <Compile Include="Assets\scripts\MapEditor\MapEditorModeWorldObjects.cs" />
     <Compile Include="Assets\scripts\MapEditor\MapNameDialog.cs" />
     <Compile Include="Assets\scripts\MapEditor\MapSetSizeDialog.cs" />
     <Compile Include="Assets\scripts\MapEditor\MenuBarMessage.cs" />

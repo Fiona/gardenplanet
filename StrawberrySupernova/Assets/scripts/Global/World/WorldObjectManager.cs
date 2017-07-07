@@ -47,6 +47,21 @@ namespace StrawberryNova
 			}
 		}
 
+		public void SaveToMap(Map map)
+		{			
+			foreach(var worldObject in worldObjects)
+			{
+				var newWorldObject = new Map.WorldObject(){
+					x=(double)worldObject.x,
+					y=(double)worldObject.y,
+					height=(double)worldObject.height,
+					direction=worldObject.dir,
+					type=worldObject.name
+				};
+				map.worldObjects.Add(newWorldObject);
+			}
+		}
+		
 		public WorldObjectType GetWorldObjectTypeByName(string name)
 		{
 			if(name == null)

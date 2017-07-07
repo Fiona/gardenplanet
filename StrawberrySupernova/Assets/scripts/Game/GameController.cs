@@ -48,7 +48,10 @@ namespace StrawberryNova
 	        tileTypeSet = new TileTypeSet("default");
 	        map = new Map("farm");
 
-            // Managers
+            // Managers etc
+		    var mouseHoverPlane = new GameObject("Mouse Hover Plane");
+		    mouseHoverPlane.AddComponent<MouseHoverPlane>();
+		    
 	        var tilemapObj = new GameObject("Tilemap");
 	        tilemap = tilemapObj.AddComponent<Tilemap>();
 	        tilemap.LoadFromMap(map, tileTypeSet);
@@ -66,9 +69,6 @@ namespace StrawberryNova
 
             var inputManagerObj = new GameObject("InputManager");
             inputManager = inputManagerObj.AddComponent<InputManager>();
-
-            var mouseHoverPlane = new GameObject("Mouse Hover Plane");
-            mouseHoverPlane.AddComponent<MouseHoverPlane>();
 
             // GUI objects
 			var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
@@ -104,7 +104,7 @@ namespace StrawberryNova
             worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
 
 			// Optional debug menu
-			if(Application.platform == RuntimePlatform.LinuxEditor)
+			if(Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
 			{
 				var debugObj = new GameObject("DebugMenu");
 				debugObj.AddComponent<DebugMenu>();

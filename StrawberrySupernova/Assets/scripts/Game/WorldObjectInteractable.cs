@@ -37,14 +37,14 @@ namespace StrawberryNova
 		{
 			if((doHighlight && doFocus) || controller.objectCurrentlyInteractingWith == worldObject)
 			{
-				focusGlow.GlowTo(new Color(0f, .5f, 1f), .1f);
+				focusGlow.GlowTo(new Color(0f, .5f, 1f), .5f);
 				focussed = true;
 			}
 			else
 			{
 				focussed = false;
 				if(doHighlight)
-					highlightGlow.GlowTo(new Color(.6f, .75f, .86f), .05f);
+					highlightGlow.GlowTo(new Color(.6f, .75f, .86f), .2f);
 			}
 			doHighlight = false;
 			doFocus = false;

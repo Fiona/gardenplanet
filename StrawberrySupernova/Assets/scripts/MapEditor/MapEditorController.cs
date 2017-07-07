@@ -10,8 +10,16 @@ namespace StrawberryNova
     public class MapEditorController : MonoBehaviour
     {
 
-        public int currentLayer;
+        List<GameObject> barriers;
+        MouseHoverPlane mouseHoverPlane;
+        List<MapEditorMode> mapEditorModes;
+        int currentMapEditorMode = -1;
 
+        [HideInInspector] public int currentLayer;
+        [HideInInspector] public Tilemap.Tile currentHoveredTile;
+        [HideInInspector] public TileTypeSet tileTypeSet;
+        [HideInInspector] public InputManager inputManager;
+        
         [Header("Editor component references")]
         public Tilemap tilemap;
         public Camera mainCamera;
@@ -24,42 +32,14 @@ namespace StrawberryNova
         public Map map;
         public Text currentModeText;
 
-        [Header("World object mode")]
-        public GameObject modeWorldObject;
-        public GameObject currentWorldObjectPanel;
-        public Text currentWorldObjectText;
-        public GameObject currentWorldObjectTemplate;
-        public Button worldObjectMinorModeButton;
-
-        [HideInInspector] public TileTypeSet tileTypeSet;
-
-        // TODO: Delete
-        [HideInInspector] public EditorMode editorMode;
-
-        [HideInInspector] public Tilemap.Tile currentHoveredTile;
-
-        List<GameObject> barriers;
-        MouseHoverPlane mouseHoverPlane;
-
-        // World object mode
-        WorldObjectManager worldObjectManager;
-
-        WorldObjectType selectedWorldObject;
-        GameObject currentWorldObjectSelectedObj;
-        [HideInInspector] public WorldObject worldObjectMoving;
-        [HideInInspector] public int worldObjectMinorMode;
-
-        List<MapEditorMode> mapEditorModes;
-        int currentMapEditorMode = -1;
-
         public void Awake()
         {
-            var worldObjectManagerObj = new GameObject("WorldObjectManager");
-            worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
-
             var mouseHoverPlaneObj = new GameObject("Mouse Hover Plane");
             mouseHoverPlane = mouseHoverPlaneObj.AddComponent<MouseHoverPlane>();
 
+            var inputManagerObj = new GameObject("Input Manager");
+            inputManager = inputManagerObj.AddComponent<InputManager>();
+                
             barriers = new List<GameObject>();
 
             tileTypeSet = new TileTypeSet("default");
@@ -88,6 +68,7 @@ namespace StrawberryNova
             mapEditorModes = new List<MapEditorMode>();
             AddMapEditorMode(new MapEditorModeTile());
             AddMapEditorMode(new MapEditorModeMarker());
+            AddMapEditorMode(new MapEditorModeWorldObjects());
         }
 
         private void AddMapEditorMode(MapEditorMode newMode)
@@ -116,46 +97,6 @@ namespace StrawberryNova
             InputBumpScrolling();
             ClampCameraToBorders();
             mapEditorModes[currentMapEditorMode].Update();
-
-            // If let go of mouse then we stop moving any world objects we've moving
-            if(Input.GetMouseButtonUp(0) && movingWorldObject)
-                movingWorldObject = false;
-
-            // If we've hit delete and we're moving theeen... delete it
-            if(worldObjectMoving != null && Input.GetKey(KeyCode.Delete))
-            {
-                DeleteWorldObject(worldObjectMoving);
-                return;
-            }
-
-            // If we're moving an object
-            if(movingWorldObject)
-            {
-                if(worldObjectMoving != null)
-                {
-                    // Set the position to the tile point that the mouse is pointing at
-                    RaycastHit secondaryHit;
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if(Physics.Raycast(ray, out secondaryHit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
-                    {
-                        var objTransform = worldObjectMoving.gameObject.transform;
-                        // Snap to grid if holding shift
-                        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                            objTransform.position = new Vector3(
-                                secondaryHit.transform.position.x, objTransform.position.y,
-                                secondaryHit.transform.position.z
-                            );
-                        else
-                            objTransform.position = new Vector3(
-                                secondaryHit.point.x, objTransform.position.y, secondaryHit.point.z
-                            );
-                        worldObjectMoving.x = objTransform.position.x;
-                        worldObjectMoving.y = objTransform.position.z;
-                        worldObjectMoving.height = objTransform.position.y;
-                    }
-                }
-            }
-
         }
 
         /**
@@ -197,11 +138,8 @@ namespace StrawberryNova
                 return;
             }
             tilemap.LoadFromMap(map, tileTypeSet);
-            worldObjectManager.LoadFromMap(map);
             CreateMapEditorModes();
-            currentWorldObjectTemplate.SetActive(false);
             SwitchToLayer(0);
-            SelectWorldObjectType(worldObjectManager.worldObjectTypes[0].name);
             SelectEditorMode(0);
             mainMenuBar.ShowGoodMessage("Loaded map");
             FindObjectOfType<InputManager>().SetUpMouse();
@@ -214,7 +152,7 @@ namespace StrawberryNova
         {
             try
             {
-                map = new Map(map.filename, tilemap, worldObjectManager);
+                map = new Map(map.filename, tilemap);
                 foreach(var mode in mapEditorModes)
                     mode.SaveToMap(map);   
                 map.SaveMap();
@@ -241,8 +179,6 @@ namespace StrawberryNova
             );
         }
 
-        private bool movingWorldObject; 
-
         public void ClickedOnWorld(BaseEventData data)
         {
             if(currentHoveredTile == null)
@@ -259,50 +195,6 @@ namespace StrawberryNova
                 };
 
                 mapEditorModes[currentMapEditorMode].TileLocationClicked(tilePos, pointerEventData);
-
-                /*
-				// Wanting to add world objects
-				else if(editorMode == EditorMode.WorldObject && worldObjectMinorMode == 0)
-				{
-					if(Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.RightShift))
-						worldObjectManager.AddWorldObject(selectedWorldObject, tilePos);
-					else
-					{
-						// Without shift being held we don't snap to grid
-						RaycastHit hit;
-						Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
-						if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_TILES))
-						{						
-							var worldPos = new WorldPosition{
-								x=hit.point.x,
-								y=hit.point.z,
-								height=(tilePos.layer * Consts.TILE_SIZE)
-							};
-							worldObjectManager.AddWorldObject(selectedWorldObject, worldPos);
-						}
-					}
-				}
-				// If moving world objects
-				else if(editorMode == EditorMode.WorldObject && worldObjectMinorMode == 1)
-				{
-					// First check to see if we've clicked on a world object, this switches the selection
-					RaycastHit hit;
-					Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
-					if(!movingWorldObject && Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
-					{
-						var worldObject = worldObjectManager.GetWorldObjectByGameObject(hit.transform.gameObject);
-						if(worldObject != null && worldObject != worldObjectMoving)
-						{
-							WorldObjectMinorModeStartMovingWorldObject(worldObject);
-							return;
-						}
-					}
-					// If we're not switching selection and we already have one then holding
-					// down the mouse will move the object
-					if(!movingWorldObject)
-						movingWorldObject = true;
-				}
-                */
             }
             catch(EditorErrorException)
             {
@@ -319,7 +211,8 @@ namespace StrawberryNova
             else
                 currentHoveredTile = null;
 
-            if(currentHoveredTile == null || editorMode == EditorMode.WorldObject)
+            // TODO: Stop tile hover effect in world object mode
+            if(currentHoveredTile == null) // || editorMode == EditorMode.WorldObject)
                 TilemapSelectionCube.GetComponent<MeshRenderer>().enabled = false;
             else
             {
@@ -446,113 +339,6 @@ namespace StrawberryNova
         public void LayerDownButtonPressed()
         {
             SwitchToLayer(currentLayer - 1);
-        }
-
-        /*
-         * Use to switch to a minor mode in objects
-         */
-        public void SwitchWorldObjectMinorMode(int newMinorMode)
-        {
-            worldObjectMinorMode = newMinorMode;
-            if(worldObjectMinorMode == 1)
-                worldObjectMinorModeButton.GetComponentInChildren<Text>().text = "Moving";
-            else
-            {
-                StopMovingWorldObject();
-                worldObjectMinorModeButton.GetComponentInChildren<Text>().text = "Adding";
-            }
-        }
-
-        public void StopMovingWorldObject()
-        {
-            if(worldObjectMoving != null)
-            {
-                var objRenderer = worldObjectMoving.gameObject.GetComponent<Renderer>();
-                var matProp = new MaterialPropertyBlock();
-                matProp.SetColor("_Color", new Color(1f, 1f, 1f));
-                objRenderer.SetPropertyBlock(matProp);
-            }
-            worldObjectMoving = null;
-        }
-
-        public void WorldObjectMinorModeStartMovingWorldObject(WorldObject worldObject)
-        {
-            StopMovingWorldObject();
-            var objRenderer = worldObject.gameObject.GetComponent<Renderer>();
-            var matProp = new MaterialPropertyBlock();
-            matProp.SetColor("_Color", new Color(0f, 1f, 1f));
-            objRenderer.SetPropertyBlock(matProp);
-            worldObjectMoving = worldObject;			
-        }
-
-        /*
-         * World object minor mode button pressed
-         */
-        public void SwitchWorldObjectMinorModeButtonPressed()
-        {
-            SwitchWorldObjectMinorMode(Math.Abs(worldObjectMinorMode - 1));
-        }
-
-        /*
-          Pressed button to go to the next world object
-         */
-        public void NextWorldObjectButtonPressed()
-        {
-            SelectWorldObjectType(worldObjectManager.GetNextWorldObjectMarkerType(selectedWorldObject).name);
-        }
-
-        /*
-          Pressed button to go to the previous world object
-         */
-        public void PreviousWorldObjectButtonPressed()
-        {
-            SelectWorldObjectType(worldObjectManager.GetPreviousWorldObjectMarkerType(selectedWorldObject).name);
-        }
-
-        /*
-          Switches selected world object type
-         */
-        private void SelectWorldObjectType(string worldObjectTypeName)
-        {
-
-            if(currentWorldObjectSelectedObj != null)
-            {
-                Destroy(currentWorldObjectSelectedObj);
-                currentWorldObjectSelectedObj = null;
-            }
-
-            if(worldObjectTypeName == null)
-            {
-                currentWorldObjectText = null;
-                currentWorldObjectText.text = "None";
-                return;
-            }
-
-            selectedWorldObject = worldObjectManager.GetWorldObjectTypeByName(worldObjectTypeName);
-            currentWorldObjectSelectedObj = Instantiate(selectedWorldObject.prefab);
-
-            currentWorldObjectSelectedObj.transform.parent = currentWorldObjectPanel.transform;
-            currentWorldObjectSelectedObj.AddComponent<RectTransform>();
-            var rect = currentWorldObjectSelectedObj.GetComponent<RectTransform>();
-
-            // Base values on template
-            currentWorldObjectSelectedObj.layer = currentWorldObjectTemplate.layer;
-            rect.localPosition = currentWorldObjectTemplate.GetComponent<RectTransform>().localPosition;
-            rect.localScale = currentWorldObjectTemplate.GetComponent<RectTransform>().localScale;
-            rect.localRotation = currentWorldObjectTemplate.GetComponent<RectTransform>().localRotation;
-
-            currentWorldObjectText.text = selectedWorldObject.name;
-
-        }
-
-        /*
-         * Used when getting rid of a world object
-         */
-        public void DeleteWorldObject(WorldObject worldObjectToDelete)
-        {
-            if(worldObjectToDelete == worldObjectMoving)
-                StopMovingWorldObject();
-            worldObjectManager.DeleteWorldObject(worldObjectToDelete);			
         }
 
     }
