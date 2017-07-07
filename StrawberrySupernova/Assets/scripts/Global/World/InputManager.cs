@@ -196,39 +196,6 @@ namespace StrawberryNova
                         else
                             controller.tilemap.MouseOverTile(tileOn);                        
                     }
-
-                    // TODO: Sort out rotating markers
-                    /*
-    	            var currentTile = controller.tilemap.GetTileFromGameObject(hit.transform.gameObject);
-    	            if(currentTile != null)
-    	            {
-    	                if(currentTile.layer != controller.currentLayer)
-    	                {
-    	                    controller.tilemap.MouseOverTile(null);
-                            yield return new WaitForFixedUpdate();
-                            continue;
-    	                }
-    	                controller.tilemap.MouseOverTile(currentTile);
-    	                var axis = Input.GetAxis("Mouse ScrollWheel");
-
-    	                if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
-    	                {
-    						var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
-    						if(controller.editorMode == EditorMode.Tile)
-    						{
-    							controller.tilemap.RotateTileInDirection(currentTile, dir);
-    							controller.SetNewTileDirection(currentTile.direction);
-    						}
-    						else if(controller.editorMode == EditorMode.Marker)
-    						{
-    							var markerManager = FindObjectOfType<MarkerManager>();
-    							var marker = markerManager.GetMarkerAt(currentTile.x, currentTile.y, currentTile.layer);
-    							if(marker != null)
-    								markerManager.RotateMarkerInDirection(marker, dir);						
-    						}
-    	                }
-    	            }
-                 */   
     	        }
     	        else
     	            controller.tilemap.MouseOverTile(null);

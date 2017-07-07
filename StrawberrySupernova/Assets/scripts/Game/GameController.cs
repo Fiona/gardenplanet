@@ -46,7 +46,7 @@ namespace StrawberryNova
 	    {
 			// Init
 	        tileTypeSet = new TileTypeSet("default");
-	        map = new Map("main");
+	        map = new Map("farm");
 
             // Managers
 	        var tilemapObj = new GameObject("Tilemap");

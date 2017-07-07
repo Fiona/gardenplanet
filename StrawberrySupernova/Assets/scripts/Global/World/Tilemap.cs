@@ -124,7 +124,6 @@ namespace StrawberryNova
                              );
                 tileObj.transform.rotation = Quaternion.identity;		        		        
                 tileObj.transform.RotateAround(center, Vector3.up, baseRotation);
-                //tileObj.transform.localRotation = Quaternion.Euler(0, baseRotation, 0);
             }
         }
 
@@ -266,12 +265,12 @@ namespace StrawberryNova
             else
                 currentTileMouseOver = tile;
 
-            // Make new tile hovered slightly transparent in editor
+            // Make new tile hovered a different colour in editor
             if(mapEditor != null)
             {
                 if(currentTileMouseOver != null && currentTileMouseOver != null && currentTileMouseOver.emptyTile == false)
                     foreach(var mat in currentTileMouseOver.tileObj.GetComponent<Renderer>().materials)
-                        mat.color = new Color(mat.color[0], mat.color[1], mat.color[2], 0.8f);
+                        mat.color = new Color(1f, .7f, .7f, 1f);
                 mapEditor.SelectedNewTile(currentTileMouseOver);
             }
         }

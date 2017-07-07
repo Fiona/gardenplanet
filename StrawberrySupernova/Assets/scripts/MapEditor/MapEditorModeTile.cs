@@ -74,6 +74,14 @@ namespace StrawberryNova
                 UnityEngine.Object.Destroy(currentTileTypeSelectedObj);
         }
 
+        public override void SaveToMap(Map map)
+        {        
+        }
+
+        public override void ResizeMap(int width, int height)
+        {
+        }
+
         public override void TileLocationClicked(TilePosition tilePos, PointerEventData pointerEventData)
         {
             if(pointerEventData.button == PointerEventData.InputButton.Left)
@@ -115,7 +123,7 @@ namespace StrawberryNova
             rect.localPosition = currentTileTemplate.GetComponent<RectTransform>().localPosition;
             rect.localScale = currentTileTemplate.GetComponent<RectTransform>().localScale;
             rect.localRotation = currentTileTemplate.GetComponent<RectTransform>().localRotation;
-
+            
             currentTileName = tileTypeName;
             currentTileText.text = currentTileName;
 
@@ -208,7 +216,6 @@ namespace StrawberryNova
             previousTileType = currentTileName;
             SelectTileType(null);
         }
-
             
     }
 }

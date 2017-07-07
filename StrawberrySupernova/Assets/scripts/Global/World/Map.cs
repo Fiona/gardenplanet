@@ -93,8 +93,8 @@ namespace StrawberryNova
 
 	    }
 
-	    // Constructor for converting from tilemap and MarkerManager
-		public Map(string filename, Tilemap tilemap, MarkerManager markerManager, WorldObjectManager worldObjectManager)
+	    // Constructor for converting from tilemap
+		public Map(string filename, Tilemap tilemap, WorldObjectManager worldObjectManager)
 	    {
 	        this.filename = filename;
 	        fullFilepath = GetMapFilePathFromName(filename);
@@ -115,18 +115,6 @@ namespace StrawberryNova
 	            };
 	            tiles.Add(newTile);
 	        }
-
-			foreach(var marker in markerManager.tileMarkers)
-			{
-				var newMarker = new Marker(){
-					x=marker.x,
-					y=marker.y,
-					layer=marker.layer,
-					direction=marker.dir,
-					type=marker.name
-				};
-				markers.Add(newMarker);
-			}
 
 			foreach(var worldObject in worldObjectManager.worldObjects)
 			{

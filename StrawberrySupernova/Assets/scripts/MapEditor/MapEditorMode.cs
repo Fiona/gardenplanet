@@ -24,6 +24,16 @@ namespace StrawberryNova
          */
         public abstract void TileLocationClicked(TilePosition tilePos, PointerEventData pointerEventData);
 
+        /*
+         * Use to add any data to map file when one is saving
+         */
+        public abstract void SaveToMap(Map map);
+
+        /*
+         * Use to add functionality when the map is resized
+         */
+        public abstract void ResizeMap(int width, int height);
+        
         public virtual void InitializeGUI()
         {
             guiHolder = Object.Instantiate(Resources.Load(GetGUIPrefabPath())) as GameObject;
@@ -43,7 +53,7 @@ namespace StrawberryNova
 
         public virtual void Disable()
         {
-            guiHolder.SetActive(true);
+            guiHolder.SetActive(false);
         }
 
         public virtual void Destroy()
@@ -56,4 +66,3 @@ namespace StrawberryNova
         }
     }
 }
-

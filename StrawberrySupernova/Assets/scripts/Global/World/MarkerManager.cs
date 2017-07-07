@@ -21,7 +21,6 @@ namespace StrawberryNova
 	    */
 		public void LoadFromMap(Map map)
 		{
-
 			// Destroy old one
 			if(tileMarkers.Count > 0)
 			{
@@ -37,6 +36,21 @@ namespace StrawberryNova
 					GetTileMarkerTypeByName(marker.type),
 					marker.x, marker.y, marker.layer, marker.direction
 				);
+		}
+
+		public void SaveToMap(Map map)
+		{
+			foreach(var marker in tileMarkers)
+			{
+				var newMarker = new Map.Marker(){
+					x=marker.x,
+					y=marker.y,
+					layer=marker.layer,
+					direction=marker.dir,
+					type=marker.name
+				};
+				map.markers.Add(newMarker);
+			}			
 		}
 
 		public TileMarkerType GetTileMarkerTypeByName(string name)
@@ -120,7 +134,7 @@ namespace StrawberryNova
 			return null;
 		}
 
-		public void NewMapSize(int width, int height)
+		public void ResizeMap(int width, int height)
 		{
 			var markersToKill = new List<ObjectTilePosition>();
 			foreach(var marker in tileMarkers)
