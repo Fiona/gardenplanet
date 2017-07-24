@@ -100,7 +100,7 @@ namespace StrawberryNova
 			GameObject newGameObject = null;
 			if(FindObjectOfType<App>().state == AppState.Editor)
 			{
-				var markerTemplate = Resources.Load<GameObject>("Editor/TileMarker");
+				var markerTemplate = Resources.Load<GameObject>("mapeditor/TileMarker");
 				newGameObject = Instantiate(markerTemplate);
 				newGameObject.transform.parent = transform;
 				newGameObject.transform.localPosition = new Vector3(

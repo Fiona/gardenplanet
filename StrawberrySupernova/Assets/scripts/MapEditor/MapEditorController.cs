@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace StrawberryNova
 {
@@ -69,6 +70,7 @@ namespace StrawberryNova
             AddMapEditorMode(new MapEditorModeTile());
             AddMapEditorMode(new MapEditorModeMarker());
             AddMapEditorMode(new MapEditorModeWorldObjects());
+            AddMapEditorMode(new MapEditorModeTileTags());
         }
 
         private void AddMapEditorMode(MapEditorMode newMode)

@@ -3,51 +3,87 @@
 namespace StrawberryNova
 {
 
-	// Top level state
-	public enum AppState{Title, Editor, Game};
+    // Top level state
+    public enum AppState
+    {
+        Title,
+        Editor,
+        Game
+    };
 
-	// Concepts
-	public enum Direction{Down, Left, Up, Right};
-	public enum EightDirection{Down, DownLeft, Left, LeftUp, Up, UpRight, Right, RightDown};
-	public enum RotationalDirection{Clockwise, AntiClockwise};
+    // Concepts
+    public enum Direction
+    {
+        Down,
+        Left,
+        Up,
+        Right
+    };
 
-	// Tile related
-	public enum TileTypeVolumeType{CollisionPlane, CollisionBox};
+    public enum EightDirection
+    {
+        Down,
+        DownLeft,
+        Left,
+        LeftUp,
+        Up,
+        UpRight,
+        Right,
+        RightDown
+    };
 
-	public class TilePosition
-	{
-		public int x;
-		public int y;
-		public int layer;
-		public Direction dir;
-		public string name = "";
-	}
+    public enum RotationalDirection
+    {
+        Clockwise,
+        AntiClockwise
+    };
 
-	public class ObjectTilePosition: TilePosition
-	{
-		public GameObject gameObject;
-	}
+    // Tile related
+    public enum TileTypeVolumeType
+    {
+        CollisionPlane,
+        CollisionBox
+    };
 
-	// Representation of points in the world
-	public class WorldPosition
-	{
-		public float x;
-		public float y;
-		public float height;
-		public EightDirection dir;
-		public string name = "";
-	}
+    public class TilePosition
+    {
+        public int x;
+        public int y;
+        public int layer;
+        public Direction dir;
+        public string name = "";
+    }
 
-	public class ObjectWorldPosition: WorldPosition
-	{
-		public GameObject gameObject;
-	}
+    public class ObjectTilePosition : TilePosition
+    {
+        public GameObject gameObject;
+    }
 
-	// Editor
-	public enum EditorMessageType{Good, Bad, Meh};
+    public struct TileTag
+    {
+        public int X;
+        public int Y; 
+        public int Layer;
+        public string TagType;
+    }
+    
+    // Representation of points in the world
+    public class WorldPosition
+    {
+        public float x;
+        public float y;
+        public float height;
+        public EightDirection dir;
+        public string name = "";
+    }
 
-    // TODO: delete
-	public enum EditorMode{Tile, WorldObject, Marker};
+    // World object positions
+    public class ObjectWorldPosition: WorldPosition
+    {
+        public GameObject gameObject;
+    }	
+	
+    // Editor
+    public enum EditorMessageType{Good, Bad, Meh};
 
 }
-

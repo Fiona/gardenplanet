@@ -18,7 +18,7 @@ namespace StrawberryNova
 		public static List<TileMarkerType> GetAllTileMarkerTypes()
 		{
 			var tileMarkers = new List<TileMarkerType>();
-			var allMarkerTypes = Resources.LoadAll<Sprite>("Editor/tilemarkers/");
+			var allMarkerTypes = Resources.LoadAll<Sprite>("mapeditor/tilemarkers/");
 			foreach(var filesystemType in allMarkerTypes)
 			{				
 				var newMarkerType = new TileMarkerType

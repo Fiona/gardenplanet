@@ -19,6 +19,7 @@ namespace StrawberryNova
             public string tileTypeName;
             public Material[] sharedMaterials;
             public TileType tileType;
+            public List<TileTag> tags;
 
             private static PhysicMaterial slideMaterial;
 

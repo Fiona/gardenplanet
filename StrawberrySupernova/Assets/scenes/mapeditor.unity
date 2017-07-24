@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLayer: 0
+  inputManager: {fileID: 0}
   tilemap: {fileID: 1694270511}
   mainCamera: {fileID: 1603667694}
   layerText: {fileID: 1430831533}
@@ -6124,7 +6125,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1721948366}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 1
