@@ -106,6 +106,7 @@ namespace StrawberryNova
             {
                 activeText.gameObject.SetActive(false);
                 activeImage.gameObject.SetActive(false);
+                EndItemScript();
             }
             else
             {
@@ -113,6 +114,7 @@ namespace StrawberryNova
                 activeText.text = hotbarItems[selectedItemIndex].quantity.ToString();
                 activeImage.gameObject.SetActive(true);
                 activeImage.sprite = hotbarItems[selectedItemIndex].itemType.Image;
+                StartItemScript();
             }
         }
 

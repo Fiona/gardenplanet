@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -225,6 +225,12 @@
     <Reference Include="LitJson">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>
     </Reference>
+    <Reference Include="TextMeshPro-1.0.55.55.0b11">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/TextMeshPro-1.0.55.55.0b11.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMeshPro-1.0.55.55.0b11-Editor">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor/TextMeshPro-1.0.55.55.0b11-Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
@@ -239,12 +245,6 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMeshPro-1.0.55.55.0b11">
-      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/TextMeshPro-1.0.55.55.0b11.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMeshPro-1.0.55.55.0b11-Editor">
-      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor/TextMeshPro-1.0.55.55.0b11-Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

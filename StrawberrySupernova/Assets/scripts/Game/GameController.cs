@@ -6,29 +6,29 @@ using UnityEngine.UI;
 namespace StrawberryNova
 {
 	
-	public class GameController: MonoBehaviour
-	{
+    public class GameController: MonoBehaviour
+    {
 
-	    [Header("Object References")]
-	    public PlayerCamera mainCamera;
-	    public Player player;
+        [Header("Object References")]
+        public PlayerCamera mainCamera;
+        public Player player;
 
-	    [HideInInspector]
-	    public Tilemap tilemap;
-	    [HideInInspector]
-	    public TileTypeSet tileTypeSet;
-	    [HideInInspector]
-	    public Map map;
-		[HideInInspector]
-		public MarkerManager markerManager;
-		[HideInInspector]
-		public WorldObjectManager worldObjectManager;
+        [HideInInspector]
+        public Tilemap tilemap;
+        [HideInInspector]
+        public TileTypeSet tileTypeSet;
+        [HideInInspector]
+        public Map map;
+        [HideInInspector]
+        public MarkerManager markerManager;
+        [HideInInspector]
+        public WorldObjectManager worldObjectManager;
         [HideInInspector]
         public ItemManager itemManager;
-		[HideInInspector]
-		public WorldObject objectCurrentlyInteractingWith;
-		[HideInInspector]
-		public WorldTimer worldTimer;
+        [HideInInspector]
+        public WorldObject objectCurrentlyInteractingWith;
+        [HideInInspector]
+        public WorldTimer worldTimer;
         [HideInInspector]
         public ItemHotbar itemHotbar;
         [HideInInspector]
@@ -37,32 +37,34 @@ namespace StrawberryNova
         public GameObject worldObjectPopup;
         [HideInInspector]
         public InputManager inputManager;
+        [HideInInspector]
+        public TilePosition mouseOverTile;
 
         Text worldObjectPopupText;
-		bool showPopup;
-		Debug debugMenu;
+        bool showPopup;
+        Debug debugMenu;
 
-	    public void Awake()
-	    {
-			// Init
-	        tileTypeSet = new TileTypeSet("default");
-	        map = new Map("farm");
+        public void Awake()
+        {
+            // Init
+            tileTypeSet = new TileTypeSet("default");
+            map = new Map("devtest");
 
             // Managers etc
-		    var mouseHoverPlane = new GameObject("Mouse Hover Plane");
-		    mouseHoverPlane.AddComponent<MouseHoverPlane>();
+            var mouseHoverPlane = new GameObject("Mouse Hover Plane");
+            mouseHoverPlane.AddComponent<MouseHoverPlane>();
 		    
-	        var tilemapObj = new GameObject("Tilemap");
-	        tilemap = tilemapObj.AddComponent<Tilemap>();
-	        tilemap.LoadFromMap(map, tileTypeSet);
+            var tilemapObj = new GameObject("Tilemap");
+            tilemap = tilemapObj.AddComponent<Tilemap>();
+            tilemap.LoadFromMap(map, tileTypeSet);
 
-			var markerManagerObj = new GameObject("MarkerManager");
-			markerManager = markerManagerObj.AddComponent<MarkerManager>();
-			markerManager.LoadFromMap(map);
+            var markerManagerObj = new GameObject("MarkerManager");
+            markerManager = markerManagerObj.AddComponent<MarkerManager>();
+            markerManager.LoadFromMap(map);
 
-			var worldObjectManagerObj = new GameObject("WorldObjectManager");
-			worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
-			worldObjectManager.LoadFromMap(map);
+            var worldObjectManagerObj = new GameObject("WorldObjectManager");
+            worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
+            worldObjectManager.LoadFromMap(map);
 
             var itemManagerObj = new GameObject("ItemManager");
             itemManager = itemManagerObj.AddComponent<ItemManager>();
@@ -71,10 +73,10 @@ namespace StrawberryNova
             inputManager = inputManagerObj.AddComponent<InputManager>();
 
             // GUI objects
-			var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
-			worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
+            worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
             worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
-			worldTimer = worldTimerObject.GetComponent<WorldTimer>();
+            worldTimer = worldTimerObject.GetComponent<WorldTimer>();
 
             worldObjectPopup = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_OBJECT_POPUP)) as GameObject;
             worldObjectPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
@@ -91,38 +93,38 @@ namespace StrawberryNova
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
             atmosphere = atmosphereObj.GetComponent<Atmosphere>();
 
-			// Set up player and camera
-			var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
-			if(playerStartMarker != null)
-				player.SetPositionToTile(playerStartMarker);
-			else
-				player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
-			mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
-			mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
+            // Set up player and camera
+            var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
+            if(playerStartMarker != null)
+                player.SetPositionToTile(playerStartMarker);
+            else
+                player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
+            mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
+            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
 
             // Start at day...
             worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
 
-			// Optional debug menu
-			if(Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
-			{
-				var debugObj = new GameObject("DebugMenu");
-				debugObj.AddComponent<DebugMenu>();
+            // Optional debug menu
+            if(Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                var debugObj = new GameObject("DebugMenu");
+                debugObj.AddComponent<DebugMenu>();
             }
-	    }
+        }
 
-		public void Start()
-		{
-			worldTimer.StartTimer();
+        public void Start()
+        {
+            worldTimer.StartTimer();
             StartCoroutine(ControllerCoroutine());
-		}
+        }
 			
-		public void LateUpdate()
-		{
-			if(!showPopup)
-				worldObjectPopup.SetActive(false);
-			showPopup = false;
-		}
+        public void LateUpdate()
+        {
+            if(!showPopup)
+                worldObjectPopup.SetActive(false);
+            showPopup = false;
+        }
 
         /*
          * TODO TODO
@@ -132,47 +134,52 @@ namespace StrawberryNova
             yield return new WaitForFixedUpdate();
         }
 
-		public void ShowPopup(string textToShow)
-		{
-			worldObjectPopupText.text = worldObjectManager.GetWorldObjectTypeByName(textToShow).displayName;
-			worldObjectPopup.SetActive(true);
-			showPopup = true;
-		}
+        public void UpdateMouseOverTile(TilePosition tilePosition)
+        {
+            mouseOverTile = tilePosition;
+        }
+		
+        public void ShowPopup(string textToShow)
+        {
+            worldObjectPopupText.text = worldObjectManager.GetWorldObjectTypeByName(textToShow).displayName;
+            worldObjectPopup.SetActive(true);
+            showPopup = true;
+        }
 			
-		public IEnumerator PlayerInteractWith(WorldObject worldObject)
-		{
-			// Can't do if already messing with something
-			if(objectCurrentlyInteractingWith != null)
-				yield return null;
-			// Set up for interaction
-			StartCutscene();
-			objectCurrentlyInteractingWith = worldObject;
-			// Make the player look at the object
-			yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
-			// Run a script that is on the object
-			if(worldObject.script != null)
-				yield return StartCoroutine(worldObject.script.PlayerInteract());
-			// Clean up and return control to player
-			objectCurrentlyInteractingWith = null;			
-			EndCutscene();
-		}
+        public IEnumerator PlayerInteractWith(WorldObject worldObject)
+        {
+            // Can't do if already messing with something
+            if(objectCurrentlyInteractingWith != null)
+                yield return null;
+            // Set up for interaction
+            StartCutscene();
+            objectCurrentlyInteractingWith = worldObject;
+            // Make the player look at the object
+            yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
+            // Run a script that is on the object
+            if(worldObject.script != null)
+                yield return StartCoroutine(worldObject.script.PlayerInteract());
+            // Clean up and return control to player
+            objectCurrentlyInteractingWith = null;			
+            EndCutscene();
+        }
 
-		public void StartCutscene()
-		{
+        public void StartCutscene()
+        {
             inputManager.LockDirectInput();
-			worldTimer.StopTimer();
-		}
+            worldTimer.StopTimer();
+        }
 
-		public void EndCutscene()
-		{
-			worldTimer.StartTimer();
+        public void EndCutscene()
+        {
+            worldTimer.StartTimer();
             inputManager.UnlockDirectInput();
-		}
+        }
 
-		public void PlayerDoSleep()
-		{
-			worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
-		}
+        public void PlayerDoSleep()
+        {
+            worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
+        }
 
         public IEnumerator OpenInGameMenu()
         {
@@ -208,6 +215,6 @@ namespace StrawberryNova
             itemHotbar.SelectNextItem();
         }
 			
-	}
+    }
 
 }

@@ -15,8 +15,10 @@ namespace StrawberryNova
 	    bool attemptJump;
 	    Vector3 desiredRotation;
 		GameController controller;
-        [HideInInspector]
+		[HideInInspector]
         public Inventory inventory;
+		[HideInInspector]
+		public int layer;
 
 	    public void Awake()
 	    {
@@ -41,9 +43,12 @@ namespace StrawberryNova
 	    public void Update()
 	    {
 
+		    // Detect layer
+		    layer = (int)Math.Floor(transform.position.y * Consts.TILE_SIZE);
+
             if(controller.inputManager == null || !controller.inputManager.directInputEnabled)
-				return;
-			
+				return;			
+		    
 	        // Handle walking
 	        if(rigidBody.velocity.magnitude < 1.0f)
 	            rigidBody.AddForce(

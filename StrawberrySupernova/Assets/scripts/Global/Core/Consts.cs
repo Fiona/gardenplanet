@@ -77,7 +77,7 @@ namespace StrawberryNova
 		// GAMEPLAY
 		// -----------------------------
 
-		public const int GAME_START_YEAR = 3356;
+		public const int GAME_START_YEAR = 3331;
 
 		// How many seconds it takes for the in-world timer to go forward a minute
 		public const float SECONDS_PER_GAME_MINUTE = 1f;

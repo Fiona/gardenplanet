@@ -64,18 +64,18 @@ namespace StrawberryNova
             UnityEngine.Object.Destroy(tagManager.gameObject);            
         }
 
-        public override void Update()
-        {
-        }
-
         public override void Enable()
         {
             base.Enable();
+            foreach(var tagObj in tagManager.EditorTileTagObjects.Values)
+                tagObj.SetActive(true);
         }
         
         public override void Disable()
         {
             base.Disable();
+            foreach(var tagObj in tagManager.EditorTileTagObjects.Values)
+                tagObj.SetActive(false);
         }
 
         public override void TileLocationClicked(TilePosition tilePos, PointerEventData pointerEventData)
@@ -94,7 +94,13 @@ namespace StrawberryNova
                     Layer = tilePos.layer
                 };
                 tagManager.AddTag(newTag);
-            }            
+            }
+            else if(pointerEventData.button == PointerEventData.InputButton.Right)
+            {
+                var existingTag = tagManager.FindTagAt(tilePos.x, tilePos.y, tilePos.layer);
+                if(existingTag != null)
+                    tagManager.RemoveTag((TileTag)existingTag);                
+            }
         }
 
         public override void SaveToMap(Map map)

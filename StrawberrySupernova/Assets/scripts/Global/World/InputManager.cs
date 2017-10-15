@@ -66,12 +66,6 @@ namespace StrawberryNova
                 if(Input.GetKey(KeyCode.A))
                     controller.player.WalkInDirection(Direction.Left);
 
-                // Turning
-                Vector3 pointTo = Camera.main.ScreenToWorldPoint(
-                    Input.mousePosition + new Vector3(0f, 0f, Consts.CAMERA_PLAYER_DISTANCE)
-                );
-                controller.player.TurnToWorldPoint(pointTo);
-
                 // Jumping
                 if(Input.GetKeyDown(KeyCode.Space))
                     controller.player.Jump();
@@ -84,6 +78,37 @@ namespace StrawberryNova
                     var interactable = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
                     if(interactable != null)
                         interactable.Highlight();
+                }
+
+                // Get mouse over tiles
+                controller.UpdateMouseOverTile(null);                
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
+                {
+                    var rayNormal = hit.transform.TransformDirection(hit.normal);
+                    if(rayNormal == hit.transform.up)
+                    {
+                        mouseWorldPosition = new Vector2(hit.point.x, hit.point.z);
+                        int tileOverX = (int)((hit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                        int tileOverY = (int)((hit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                        TilePosition tilePosition = new TilePosition()
+                        {
+                            x=tileOverX,
+                            y=tileOverY,
+                            layer=controller.player.layer
+                        }; 
+                        controller.UpdateMouseOverTile(tilePosition);
+                    }
+                }
+                else
+                    mouseWorldPosition = null;
+                
+                // Turning
+                if(mouseWorldPosition != null)
+                {
+                    var fullPoint = new Vector3(((Vector2)mouseWorldPosition).x,
+                        controller.player.transform.position.y,
+                        ((Vector2)mouseWorldPosition).y);
+                    controller.player.TurnToWorldPoint(fullPoint);
                 }
 
                 // Hotbar
