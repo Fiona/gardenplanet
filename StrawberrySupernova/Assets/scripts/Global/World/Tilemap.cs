@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StrawberryNova
 {
@@ -19,7 +20,6 @@ namespace StrawberryNova
             public string tileTypeName;
             public Material[] sharedMaterials;
             public TileType tileType;
-            public List<TileTag> tags;
 
             private static PhysicMaterial slideMaterial;
 
@@ -45,7 +45,7 @@ namespace StrawberryNova
                 }
 
                 ResetPosition();
-		        
+
                 SetDirection(direction);
                 // Combats tile gaps
                 tileObj.transform.localScale = new Vector3(
@@ -73,7 +73,7 @@ namespace StrawberryNova
                     );
                 }
             }
-            
+
             public void CreateCollisionShapes()
             {
                 // Set collision layer
@@ -82,7 +82,7 @@ namespace StrawberryNova
                 // Editor doesn't collide
                 if(FindObjectOfType<App>().state == AppState.Editor)
                     return;
-                    
+
                 // For each volume, create them if they're a recognisable
                 // collision shape.
                 foreach(var volume in tileType.volumes)
@@ -104,7 +104,7 @@ namespace StrawberryNova
                         Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.z
                     );
                     if(volume.type == TileTypeVolumeType.CollisionPlane)
-                        newCollider.center += new Vector3(0.0f, 0.005f, 0.0f);								
+                        newCollider.center += new Vector3(0.0f, 0.005f, 0.0f);
                     if(volume.isWall)
                         newCollider.material = Tile.slideMaterial;
                 }
@@ -123,7 +123,7 @@ namespace StrawberryNova
                                  (float)tileType.yCentre,
                                  (float)tileType.zCentre
                              );
-                tileObj.transform.rotation = Quaternion.identity;		        		        
+                tileObj.transform.rotation = Quaternion.identity;
                 tileObj.transform.RotateAround(center, Vector3.up, baseRotation);
             }
         }
@@ -171,6 +171,7 @@ namespace StrawberryNova
             SetSize(map.width, map.height);
             foreach(var tile in map.tiles)
                 AddTile(tile.type, tile.x, tile.y, tile.layer, tile.direction);
+
         }
 
         /*
@@ -288,6 +289,11 @@ namespace StrawberryNova
                     return tile;
             }
             return null;
+        }
+
+        public Tile GetTileAt(TilePosition pos)
+        {
+            return GetTileAt(pos.x, pos.y, pos.layer);
         }
 
         /*

@@ -23,6 +23,7 @@ namespace StrawberryNova
             public bool CanPickup;
             public Hashtable Attributes;
             public Sprite Image;
+            public string Script;
         }
 
         public struct ItemTypeDataFile
@@ -80,6 +81,12 @@ namespace StrawberryNova
             set{ data.Attributes = value; }
         }
 
+        public string Script
+        {
+            get{ return data.Script; }
+            set{ data.Script = value; }
+        }
+
         /*
          * Returns a List containing all items
          */
@@ -112,9 +119,10 @@ namespace StrawberryNova
                                         Attributes=new Hashtable(),
                                         Image=Resources.Load<Sprite>(
                                             string.Format("textures/items/{0}_image", singleItemTypeData.Value.ID)
-                                        )
+                                        ),
+                                        Script=singleItemTypeData.Value.Script
                                     };
-                                
+
                                 itemTypeData.Add(singleItemTypeData.Key, newData);
 
                                 // attributes
@@ -158,18 +166,19 @@ namespace StrawberryNova
             };
             newDataFile.itemTypes.Add("bad_wolf",
                 new ItemTypeData
-                {                   
+                {
                     ID= "bad_wolf",
                     DisplayName="Bad Wolf",
                     Description="Not really a wolf nor bad. Just a boring Dr Who reference.",
                     Category="boop",
                     StackSize=64,
                     CanPickup=true,
-                    Attributes=new Hashtable()
+                    Attributes=new Hashtable(),
+                    Script=null
                 }
             );
 
-            var filepath = GetItemTypeDataFilePathFromName(name);       
+            var filepath = GetItemTypeDataFilePathFromName(name);
 
             // Check directories exist
             if(!Directory.Exists(Consts.DATA_DIR))
@@ -192,7 +201,7 @@ namespace StrawberryNova
             return newDataFile;
 
         }
-            
+
         public static string GetItemTypeDataFilePathFromName(string name)
         {
             return Path.Combine(

@@ -21,7 +21,7 @@ namespace StrawberryNova
 		{
 			public Dictionary<string, WorldObjectDataEntry> worldObjectTypes;
 		};
-			
+
 		public string name;
 		public GameObject prefab;
 		public WorldObjectDataEntry data;
@@ -82,9 +82,9 @@ namespace StrawberryNova
 
 			// Get and create all objects
 			var allObjects = new List<WorldObjectType>();
-			var prefabs = Resources.LoadAll<GameObject>("worldobjects/");
+			var prefabs = Resources.LoadAll<GameObject>(Consts.WORLD_OBJECTS_PREFABS_PATH);
 			foreach(var objectType in prefabs)
-			{				
+			{
 				var newObjectType = new WorldObjectType
 					{
 						name=objectType.name,
@@ -113,7 +113,7 @@ namespace StrawberryNova
 				}
 			);
 
-			var filepath = GetWorldObjectDataFilePathFromName(name);		
+			var filepath = GetWorldObjectDataFilePathFromName(name);
 
 			// Check directories exist
 			if(!Directory.Exists(Consts.DATA_DIR))

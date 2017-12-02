@@ -5,18 +5,16 @@ using System.Collections;
 
 namespace StrawberryNova
 {
-	
+
     public class InputManager : MonoBehaviour
     {
 
         [HideInInspector] public bool directInputEnabled = true;
-        [HideInInspector] public Vector2? mouseWorldPosition;         
+        [HideInInspector] public Vector2? mouseWorldPosition;
 
-        Vector2 lastMousePosition = Vector2.zero;
-#pragma warning disable 0414
-        Vector2 deltaMousePosition = Vector2.zero;
-#pragma warning restore 0414
-        App app;
+        private App app;
+        private MonoBehaviour controller;
+        private float previousScrollWheelAxis;
 
         public void Awake()
         {
@@ -35,144 +33,161 @@ namespace StrawberryNova
         {
             if(app.state == AppState.Editor)
                 StartCoroutine(ManageInputEditor());
+        }
+
+        public void FixedUpdate()
+        {
             if(app.state == AppState.Game)
-                StartCoroutine(ManageInputGame());
+                DoInputGame();
         }
 
-        public void Update()
-        {
-            deltaMousePosition = (Vector2)Input.mousePosition - lastMousePosition;
-            lastMousePosition = Input.mousePosition;
-        }
-
-        public IEnumerator ManageInputGame()
+        private void DoInputGame()
         {
 
-            GameController controller = FindObjectOfType<GameController>();
+            if(controller == null)
+                controller = FindObjectOfType<GameController>();
+            var gameController = (GameController)controller;
 
-            while(true)
+            if(!directInputEnabled)
+                return;
+
+            // Walking
+            if(Input.GetKey(KeyCode.Comma))
+                gameController.player.WalkInDirection(Direction.Up);
+            if(Input.GetKey(KeyCode.E))
+                gameController.player.WalkInDirection(Direction.Right);
+            if(Input.GetKey(KeyCode.O))
+                gameController.player.WalkInDirection(Direction.Down);
+            if(Input.GetKey(KeyCode.A))
+                gameController.player.WalkInDirection(Direction.Left);
+
+            // Jumping
+            if(Input.GetKeyDown(KeyCode.Space))
+                gameController.player.Jump();
+
+            // Hovering mouse over objects
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
             {
+                var interactable = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
+                if(interactable != null)
+                    interactable.Highlight();
+            }
 
-                while(!directInputEnabled)
-                    yield return new WaitForFixedUpdate();
-
-                // Walking
-                if(Input.GetKey(KeyCode.Comma))
-                    controller.player.WalkInDirection(Direction.Up);
-                if(Input.GetKey(KeyCode.E))
-                    controller.player.WalkInDirection(Direction.Right);
-                if(Input.GetKey(KeyCode.O))
-                    controller.player.WalkInDirection(Direction.Down);
-                if(Input.GetKey(KeyCode.A))
-                    controller.player.WalkInDirection(Direction.Left);
-
-                // Jumping
-                if(Input.GetKeyDown(KeyCode.Space))
-                    controller.player.Jump();
-
-                // Hovering mouse over objects
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        
-                if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
+            // Get mouse over tiles
+            gameController.UpdateMouseOverTile(null);
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
+            {
+                var rayNormal = hit.transform.TransformDirection(hit.normal);
+                if(rayNormal == hit.transform.up)
                 {
-                    var interactable = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
-                    if(interactable != null)
-                        interactable.Highlight();
-                }
-
-                // Get mouse over tiles
-                controller.UpdateMouseOverTile(null);                
-                if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
-                {
-                    var rayNormal = hit.transform.TransformDirection(hit.normal);
-                    if(rayNormal == hit.transform.up)
+                    mouseWorldPosition = new Vector2(hit.point.x, hit.point.z);
+                    int tileOverX = (int)((hit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                    int tileOverY = (int)((hit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                    TilePosition tilePosition = new TilePosition()
                     {
-                        mouseWorldPosition = new Vector2(hit.point.x, hit.point.z);
-                        int tileOverX = (int)((hit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
-                        int tileOverY = (int)((hit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
-                        TilePosition tilePosition = new TilePosition()
-                        {
-                            x=tileOverX,
-                            y=tileOverY,
-                            layer=controller.player.layer
-                        }; 
-                        controller.UpdateMouseOverTile(tilePosition);
-                    }
+                        x=tileOverX,
+                        y=tileOverY,
+                        layer=gameController.player.layer
+                    };
+                    gameController.UpdateMouseOverTile(tilePosition);
                 }
+            }
+            else
+                mouseWorldPosition = null;
+
+            // Turning
+            if(mouseWorldPosition != null)
+            {
+                var fullPoint = new Vector3(((Vector2)mouseWorldPosition).x,
+                    gameController.player.transform.position.y,
+                    ((Vector2)mouseWorldPosition).y);
+                gameController.player.TurnToWorldPoint(fullPoint);
+            }
+
+            // Hotbar
+            if(Input.GetKeyUp(KeyCode.Alpha1))
+                gameController.SelectHotbarItem(0);
+            else if(Input.GetKeyUp(KeyCode.Alpha2))
+                gameController.SelectHotbarItem(1);
+            else if(Input.GetKeyUp(KeyCode.Alpha3))
+                gameController.SelectHotbarItem(2);
+            else if(Input.GetKeyUp(KeyCode.Alpha4))
+                gameController.SelectHotbarItem(3);
+            else if(Input.GetKeyUp(KeyCode.Alpha5))
+                gameController.SelectHotbarItem(4);
+            else if(Input.GetKeyUp(KeyCode.Alpha6))
+                gameController.SelectHotbarItem(5);
+            else if(Input.GetKeyUp(KeyCode.Alpha7))
+                gameController.SelectHotbarItem(6);
+            else if(Input.GetKeyUp(KeyCode.Alpha8))
+                gameController.SelectHotbarItem(7);
+            else if(Input.GetKeyUp(KeyCode.Alpha9))
+                gameController.SelectHotbarItem(8);
+            else if(Input.GetKeyUp(KeyCode.Alpha0))
+                gameController.SelectHotbarItem(9);
+
+            var axis = Input.GetAxis("Mouse ScrollWheel");
+
+            if(Math.Abs(previousScrollWheelAxis - axis) > 0.05 && Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
+            {
+                if(axis > 0f)
+                    gameController.SelectPreviousHotbarItem();
                 else
-                    mouseWorldPosition = null;
-                
-                // Turning
-                if(mouseWorldPosition != null)
+                    gameController.SelectNextHotbarItem();
+            }
+
+            previousScrollWheelAxis = axis;
+
+            // Menu
+            if(Input.GetKeyUp(KeyCode.Period) || Input.GetKeyUp(KeyCode.Escape))
+            {
+                StartCoroutine(gameController.OpenInGameMenu());
+                return;
+            }
+
+            // Interact with objects
+            foreach(var obj in FindObjectsOfType<WorldObjectInteractable>())
+            {
+                if(Vector3.Distance(gameController.player.transform.position, obj.transform.position) < Consts.PLAYER_INTERACT_DISTANCE)
                 {
-                    var fullPoint = new Vector3(((Vector2)mouseWorldPosition).x,
-                        controller.player.transform.position.y,
-                        ((Vector2)mouseWorldPosition).y);
-                    controller.player.TurnToWorldPoint(fullPoint);
+                    obj.Focus();
+                    if(Input.GetMouseButtonUp(0))
+                        obj.InteractWith();
+                    return;
                 }
+            }
 
-                // Hotbar
-                if(Input.GetKeyUp(KeyCode.Alpha1))
-                    controller.SelectHotbarItem(0);
-                else if(Input.GetKeyUp(KeyCode.Alpha2))
-                    controller.SelectHotbarItem(1);
-                else if(Input.GetKeyUp(KeyCode.Alpha3))
-                    controller.SelectHotbarItem(2);
-                else if(Input.GetKeyUp(KeyCode.Alpha4))
-                    controller.SelectHotbarItem(3);
-                else if(Input.GetKeyUp(KeyCode.Alpha5))
-                    controller.SelectHotbarItem(4);
-                else if(Input.GetKeyUp(KeyCode.Alpha6))
-                    controller.SelectHotbarItem(5);
-                else if(Input.GetKeyUp(KeyCode.Alpha7))
-                    controller.SelectHotbarItem(6);
-                else if(Input.GetKeyUp(KeyCode.Alpha8))
-                    controller.SelectHotbarItem(7);
-                else if(Input.GetKeyUp(KeyCode.Alpha9))
-                    controller.SelectHotbarItem(8);
-                else if(Input.GetKeyUp(KeyCode.Alpha0))
-                    controller.SelectHotbarItem(9);
-
-                var axis = Input.GetAxis("Mouse ScrollWheel");
-
-                if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
-                {
-                    if(axis > 0f)
-                        controller.SelectPreviousHotbarItem();
-                    else
-                        controller.SelectNextHotbarItem();
-                }
-
-                // Menu
-                if(Input.GetKeyUp(KeyCode.Period) || Input.GetKeyUp(KeyCode.Escape))
-                {
-                    yield return controller.OpenInGameMenu();
-                }
-
-                yield return new WaitForFixedUpdate();
-
+            // Interact tool with ground
+            if(gameController.mouseOverTile != null &&
+               gameController.itemHotbar.CanBeUsedOnTilePos(gameController.mouseOverTile) &&
+               Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(gameController.PlayerUseItemInHandOnTilePos(gameController.mouseOverTile));
+                return;
             }
 
         }
 
         public IEnumerator ManageInputEditor()
         {
-            
+
             MapEditorController controller = FindObjectOfType<MapEditorController>();
 
             while(true)
             {
 
                 mouseWorldPosition = null;
-                
+
                 while(!directInputEnabled)
                     yield return new WaitForFixedUpdate();
 
                 // Get mouse over tiles
                 RaycastHit hit;
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);                
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
-                { 
+                {
                     var rayNormal = hit.transform.TransformDirection(hit.normal);
                     if(rayNormal == hit.transform.up)
                     {
@@ -187,7 +202,7 @@ namespace StrawberryNova
                             continue;
                         }
                         else
-                            controller.tilemap.MouseOverTile(tileOn);                        
+                            controller.tilemap.MouseOverTile(tileOn);
                     }
                 }
                 else
@@ -198,7 +213,7 @@ namespace StrawberryNova
             }
 
         }
-		
+
         public IEnumerator HandlePanning()
         {
             if(app.state != AppState.Editor)
@@ -230,8 +245,8 @@ namespace StrawberryNova
         }
 
         /*
-         * Stops the player doing anything directly like moving the character. 
-         * Still allows mouse clicks to continue.
+         Stops the player doing anything directly like moving the character.
+         Still allows mouse clicks to continue.
          */
         public void LockDirectInput()
         {
@@ -239,8 +254,8 @@ namespace StrawberryNova
         }
 
         /*
-         * Undoes LockDirectInput
-         */ 
+         Undoes LockDirectInput
+         */
         public void UnlockDirectInput()
         {
             directInputEnabled = true;

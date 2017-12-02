@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace StrawberryNova
 {
@@ -52,6 +54,41 @@ namespace StrawberryNova
         public int layer;
         public Direction dir;
         public string name = "";
+
+        public TilePosition()
+        {
+        }
+
+        public TilePosition(WorldPosition pos)
+        {
+            x = Mathf.RoundToInt(pos.x / Consts.TILE_SIZE);
+            layer = Mathf.RoundToInt(pos.height / Consts.TILE_SIZE);
+            y = Mathf.RoundToInt(pos.y / Consts.TILE_SIZE);
+        }
+
+        public float TileDistance(TilePosition otherPos)
+        {
+            return Mathf.Sqrt(
+                Mathf.Pow(otherPos.x-x, 2) +
+                Mathf.Pow(otherPos.y-y, 2)
+            );
+        }
+
+        public bool ContainsWorldObjects()
+        {
+            var pos = new Vector3(
+                x*Consts.TILE_SIZE,
+                (layer*Consts.TILE_SIZE)-(Consts.TILE_SIZE/2),
+                y*Consts.TILE_SIZE
+                );
+            var checkWorldObjectsOverlap = Physics.OverlapBox(
+                pos,
+                new Vector3(Consts.TILE_SIZE/2, Consts.TILE_SIZE/2, Consts.TILE_SIZE/2),
+                Quaternion.identity,
+                layerMask:1 << Consts.COLLISION_LAYER_WORLD_OBJECTS
+            );
+            return checkWorldObjectsOverlap.Length > 0;
+        }
     }
 
     public class ObjectTilePosition : TilePosition
@@ -62,11 +99,11 @@ namespace StrawberryNova
     public struct TileTag
     {
         public int X;
-        public int Y; 
+        public int Y;
         public int Layer;
         public string TagType;
     }
-    
+
     // Representation of points in the world
     public class WorldPosition
     {
@@ -81,8 +118,8 @@ namespace StrawberryNova
     public class ObjectWorldPosition: WorldPosition
     {
         public GameObject gameObject;
-    }	
-	
+    }
+
     // Editor
     public enum EditorMessageType{Good, Bad, Meh};
 

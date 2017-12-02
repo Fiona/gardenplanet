@@ -22,24 +22,33 @@ namespace StrawberryNova
         public Sprite buttonActiveHoverImage;
         public Sprite buttonActivePressedImage;
 
-        int selectedItemIndex;
-        Inventory.InventoryItemEntry[] hotbarItems = new Inventory.InventoryItemEntry[Consts.HOTBAR_SIZE];
-
+        public Inventory.InventoryItemEntry selectedItemEntry
+        {
+            get { return hotbarItems[selectedItemIndex]; }
+        }
         public Inventory.InventoryItemEntry[] Items
         {
             get{ return hotbarItems; }
             set{ hotbarItems = value; }
         }
 
+        private GameController controller;
+        private IItemScript activeItemScript;
+        private Inventory.InventoryItemEntry activeScriptEntry;
+
+        private int selectedItemIndex;
+        private Inventory.InventoryItemEntry[] hotbarItems = new Inventory.InventoryItemEntry[Consts.HOTBAR_SIZE];
+
         public void Start()
         {
+            controller = FindObjectOfType<GameController>();
             SelectItemIndex(0);
             StartCoroutine(DoHotbar());
         }
 
         IEnumerator DoHotbar()
         {
-            var inventory = FindObjectOfType<GameController>().player.inventory;
+            var inventory = controller.player.inventory;
 
             while(true)
             {
@@ -76,8 +85,9 @@ namespace StrawberryNova
                     if(hotbarItems[i] == selectedItem)
                         hotbarItems[i] = null;
             hotbarItems[num] = selectedItem;
+            SelectItemIndex(selectedItemIndex);
         }
-            
+
         public void SelectItemIndex(int newIndex)
         {
             // Change current hotbar item back to unselected state
@@ -99,14 +109,14 @@ namespace StrawberryNova
             hotbarButtons[selectedItemIndex].GetComponent<Image>().sprite = buttonAcitveImage;
             hotbarButtons[selectedItemIndex].transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
-            // Make active item display reflect selected item
+            // Make active item display reflect selected item and deal with scripts
             var activeText = activeItem.GetComponentInChildren<Text>(true);
             var activeImage = activeItem.GetComponentsInChildren<Image>(true)[1];
             if(hotbarItems[selectedItemIndex] == null)
             {
                 activeText.gameObject.SetActive(false);
                 activeImage.gameObject.SetActive(false);
-                EndItemScript();
+                StopItemScript();
             }
             else
             {
@@ -134,6 +144,43 @@ namespace StrawberryNova
                 SelectItemIndex(selectedItemIndex+1);
         }
 
-   }
-}
+        public bool CanBeUsedOnTilePos(TilePosition tilePos)
+        {
+            return activeItemScript != null && activeItemScript.CanBeUsedOnTilePos(tilePos);
+        }
 
+        public IEnumerator UseItemInHandOnTilePos(TilePosition tilePos)
+        {
+            if(selectedItemEntry == null || activeItemScript == null)
+                yield return null;
+            controller.StartCutscene();
+            yield return StartCoroutine(activeItemScript.UseOnTilePos(tilePos));
+            controller.EndCutscene();
+        }
+
+        private void StartItemScript()
+        {
+            var itemType = hotbarItems[selectedItemIndex].itemType;
+            if(String.IsNullOrEmpty(itemType.Script) || activeScriptEntry == hotbarItems[selectedItemIndex])
+                return;
+
+            var script = Type.GetType(typeof(ItemHotbar).Namespace+".Items."+itemType.Script);
+            if(script == null)
+                return;
+
+            activeScriptEntry = hotbarItems[selectedItemIndex];
+            activeItemScript = gameObject.AddComponent(script) as IItemScript;
+            activeItemScript.StartsHolding(activeScriptEntry);
+        }
+
+        private void StopItemScript()
+        {
+            if(activeItemScript == null)
+                return;
+            Destroy(activeItemScript as MonoBehaviour);
+            activeScriptEntry = null;
+            activeItemScript = null;
+        }
+
+    }
+}

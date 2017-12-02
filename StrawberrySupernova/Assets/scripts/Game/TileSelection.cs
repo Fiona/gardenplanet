@@ -8,7 +8,7 @@ namespace StrawberryNova
         public GameObject errorDisplay;
         public GameObject okDisplay;
         public GameObject normalDisplay;
-        
+
         private GameController controller;
 
         private void Awake()
@@ -24,17 +24,26 @@ namespace StrawberryNova
                 return;
             }
             displayHolder.SetActive(true);
-            errorDisplay.SetActive(false);            
-            okDisplay.SetActive(false);            
+            errorDisplay.SetActive(false);
+            okDisplay.SetActive(false);
             normalDisplay.SetActive(false);
             transform.position = new Vector3(
                 controller.mouseOverTile.x * Consts.TILE_SIZE,
                 controller.mouseOverTile.layer * Consts.TILE_SIZE,
                 controller.mouseOverTile.y * Consts.TILE_SIZE
             );
-             
-            normalDisplay.SetActive(true);
-            
+
+            if(controller.itemHotbar.selectedItemEntry == null)
+            {
+                normalDisplay.SetActive(true);
+                return;
+            }
+
+            if(controller.itemHotbar.CanBeUsedOnTilePos(controller.mouseOverTile))
+                okDisplay.SetActive(true);
+            else
+                errorDisplay.SetActive(true);
+
         }
 
     }

@@ -50,7 +50,7 @@ namespace StrawberryNova
 	        var resaveTileSet = false;
 
 	        // Update with new tiles
-	        var allTileTypes = Resources.LoadAll("tiles/");
+	        var allTileTypes = Resources.LoadAll(Consts.TILES_PREFABS_PATH);
 	        bool inSet;
 	        foreach(var filesystemType in allTileTypes)
 	        {

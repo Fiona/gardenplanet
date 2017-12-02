@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using NUnit.Framework;
+using UnityEngine.TestTools;
 
 namespace StrawberryNova
 {
@@ -169,7 +170,7 @@ namespace StrawberryNova
             var time = new GameTime(minutes: 7, hours: 2, days: 16, seasons: 2, years: 11);
             Assert.AreEqual(time.Minutes, 7 + (2 * anHour) + (16 * aDay) + (2 * aSeason) + (11 * aYear));
             Assert.AreEqual(time.Hours, 2 + (Consts.NUM_HOURS_IN_DAY * 16) +
-                (2 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON) + 
+                (2 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON) +
                 (11 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON * Consts.SEASONS.Length));
             Assert.AreEqual(time.Days, 16 + (2 * Consts.NUM_DAYS_IN_SEASON) +
                 (11 * Consts.NUM_DAYS_IN_SEASON * Consts.SEASONS.Length));
@@ -274,7 +275,7 @@ namespace StrawberryNova
         {
             var time = new GameTime(days: 20 + (Consts.NUM_DAYS_IN_SEASON * 30));
             Assert.AreEqual(time.DateDay, 21);
-        }           
+        }
 
         [Test]
         public void TestTimeHour()

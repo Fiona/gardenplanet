@@ -1,5 +1,5 @@
 
-/// Credit Danny Goodayle 
+/// Credit Danny Goodayle
 /// Sourced from - http://www.justapixel.co.uk/radial-layouts-nice-and-simple-in-unity3ds-ui-system/
 /// Updated by ddreaper - removed dependency on a custom ScrollRect script. Now implements drag interfaces and standard Scroll Rect.
 
@@ -46,6 +46,7 @@ namespace UnityEngine.UI.Extensions
         {
             CalculateRadial();
         }
+        /*
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
@@ -53,6 +54,7 @@ namespace UnityEngine.UI.Extensions
             CalculateRadial();
         }
 #endif
+*/
         void CalculateRadial()
         {
             m_Tracker.Clear();

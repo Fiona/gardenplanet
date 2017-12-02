@@ -7,7 +7,7 @@
       "Category": "tools",
       "StackSize": 1,
       "CanPickup": true,
-      "Attributes": {"arrayTest":[1,2,3]}
+      "Attributes": {}
     },
     "broken_trowelie": {
       "ID": "broken_trowelie",
@@ -16,10 +16,8 @@
       "StackSize": 1,
       "CanPickup": true,
       "Description": "\"The latest in agricultural innovation! It's your new best friend - Trowelie! The trowel on a stick!\"\n\nOr so the advert goes. Unfortunately, this one is not as good as promised. It's broken.",
-      "Attributes": {
-        "Testing": 10,
-        "Words": "helllo stuff hi"
-      }
+      "Attributes": {},
+      "Script": "Hoe"
     }
   }
 }

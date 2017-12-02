@@ -1,8 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEditor;
+using UnityEngine.WSA;
 
 namespace StrawberryNova
 {
@@ -12,7 +14,7 @@ namespace StrawberryNova
         public List<TileTagType> TileTagTypes;
         public List<TileTag> TileTags;
         public Dictionary<TileTag, GameObject> EditorTileTagObjects;
-        
+
         public void Awake()
         {
             TileTagTypes = TileTagType.GetAllTileTagTypes();
@@ -70,7 +72,7 @@ namespace StrawberryNova
                     tagType.sprite.texture
                 );
                 EditorTileTagObjects[newTag] = newGameObject;
-            }                
+            }
         }
 
         public void RemoveTag(TileTag tag)
@@ -94,6 +96,12 @@ namespace StrawberryNova
             return null;
         }
 
+        public bool IsTileTaggedWith(TilePosition tilePos, string tagName)
+        {
+            var tag = FindTagAt(tilePos.x, tilePos.y, tilePos.layer);
+            return tag != null && tag.Value.TagType == tagName;
+        }
+
         public void ResizeMap(int width, int height)
         {
             var tagsToKill = new List<TileTag>();
@@ -101,8 +109,8 @@ namespace StrawberryNova
                 if(tag.X >= width || tag.Y >= height)
                     tagsToKill.Add(tag);
             foreach(var tag in tagsToKill)
-                RemoveTag(tag);            
+                RemoveTag(tag);
         }
-        
+
     }
 }

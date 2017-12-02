@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace StrawberryNova
 {
-	
+
     public class GameController: MonoBehaviour
     {
 
@@ -23,6 +23,8 @@ namespace StrawberryNova
         public MarkerManager markerManager;
         [HideInInspector]
         public WorldObjectManager worldObjectManager;
+        [HideInInspector]
+        public TileTagManager tileTagManager;
         [HideInInspector]
         public ItemManager itemManager;
         [HideInInspector]
@@ -53,7 +55,7 @@ namespace StrawberryNova
             // Managers etc
             var mouseHoverPlane = new GameObject("Mouse Hover Plane");
             mouseHoverPlane.AddComponent<MouseHoverPlane>();
-		    
+
             var tilemapObj = new GameObject("Tilemap");
             tilemap = tilemapObj.AddComponent<Tilemap>();
             tilemap.LoadFromMap(map, tileTypeSet);
@@ -65,6 +67,10 @@ namespace StrawberryNova
             var worldObjectManagerObj = new GameObject("WorldObjectManager");
             worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
             worldObjectManager.LoadFromMap(map);
+
+            var tileTagManagerObj = new GameObject("TileTagManager");
+            tileTagManager = tileTagManagerObj.AddComponent<TileTagManager>();
+            tileTagManager.LoadFromMap(map);
 
             var itemManagerObj = new GameObject("ItemManager");
             itemManager = itemManagerObj.AddComponent<ItemManager>();
@@ -118,7 +124,7 @@ namespace StrawberryNova
             worldTimer.StartTimer();
             StartCoroutine(ControllerCoroutine());
         }
-			
+
         public void LateUpdate()
         {
             if(!showPopup)
@@ -138,14 +144,14 @@ namespace StrawberryNova
         {
             mouseOverTile = tilePosition;
         }
-		
+
         public void ShowPopup(string textToShow)
         {
             worldObjectPopupText.text = worldObjectManager.GetWorldObjectTypeByName(textToShow).displayName;
             worldObjectPopup.SetActive(true);
             showPopup = true;
         }
-			
+
         public IEnumerator PlayerInteractWith(WorldObject worldObject)
         {
             // Can't do if already messing with something
@@ -160,8 +166,13 @@ namespace StrawberryNova
             if(worldObject.script != null)
                 yield return StartCoroutine(worldObject.script.PlayerInteract());
             // Clean up and return control to player
-            objectCurrentlyInteractingWith = null;			
+            objectCurrentlyInteractingWith = null;
             EndCutscene();
+        }
+
+        public IEnumerator PlayerUseItemInHandOnTilePos(TilePosition tilePos)
+        {
+            yield return StartCoroutine(itemHotbar.UseItemInHandOnTilePos(tilePos));
         }
 
         public void StartCutscene()
@@ -214,7 +225,7 @@ namespace StrawberryNova
         {
             itemHotbar.SelectNextItem();
         }
-			
+
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
-	
+
 	public class Player: MonoBehaviour
 	{
 
@@ -20,6 +20,23 @@ namespace StrawberryNova
 		[HideInInspector]
 		public int layer;
 
+		public TilePosition CurrentTilePosition
+		{
+			get
+			{
+				var wPos = new WorldPosition()
+				{
+					x = this.transform.position.x,
+					y = this.transform.position.z
+				};
+				var tPos = new TilePosition(wPos)
+				{
+					layer = layer
+				};
+				return tPos;
+			}
+		}
+
 	    public void Awake()
 	    {
 	        rigidBody = GetComponent<Rigidbody>();
@@ -31,7 +48,7 @@ namespace StrawberryNova
 
 		public void Start()
 		{
-			controller = FindObjectOfType<GameController>();			
+			controller = FindObjectOfType<GameController>();
 		}
 
 		public void NextHour(int hour)
@@ -40,15 +57,15 @@ namespace StrawberryNova
 				StartCoroutine(PassOut());
 		}
 
-	    public void Update()
+	    public void FixedUpdate()
 	    {
 
 		    // Detect layer
 		    layer = (int)Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
             if(controller.inputManager == null || !controller.inputManager.directInputEnabled)
-				return;			
-		    
+				return;
+
 	        // Handle walking
 	        if(rigidBody.velocity.magnitude < 1.0f)
 	            rigidBody.AddForce(
@@ -73,25 +90,14 @@ namespace StrawberryNova
 	            attemptJump = false;
 	        }
 
-			// Interact with objects
-			foreach(var obj in FindObjectsOfType<WorldObjectInteractable>())
-			{
-				if(Vector3.Distance(transform.position, obj.transform.position) < Consts.PLAYER_INTERACT_DISTANCE)
-				{
-					obj.Focus();
-					if(Input.GetMouseButtonDown(0))
-						obj.InteractWith();
-				}
-			}
-
 	    }
-            
+
 		/*
 		 * Rotates the player towards an object and returns when it finishes
 		 */
 		public IEnumerator TurnTowardsWorldObject(WorldObject worldObject)
 		{
-            
+
 			var turnToPos = worldObject.gameObject.transform.position;
 			var myPos = transform.position;
 
@@ -109,7 +115,7 @@ namespace StrawberryNova
 				Debug.Log(Mathf.Abs(found));
 				if(Mathf.Abs(found) < 40f)
 					break;
-				
+
 				yield return new WaitForFixedUpdate();
 			}
 
@@ -136,7 +142,7 @@ namespace StrawberryNova
 	            case Direction.Right:
 	                walkDir += Vector3.right;
 	                break;
-	        }        
+	        }
 	    }
 
 	    /*
@@ -165,7 +171,7 @@ namespace StrawberryNova
 			transform.position = new Vector3(
                 pos.x * Consts.TILE_SIZE,
 				pos.layer * Consts.TILE_SIZE,
-                pos.y * Consts.TILE_SIZE		
+                pos.y * Consts.TILE_SIZE
 			);
 			var baseRotation = DirectionHelper.DirectionToDegrees(pos.dir);
 			transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
@@ -175,7 +181,7 @@ namespace StrawberryNova
 		{
 			transform.rotation = Quaternion.LookRotation(newDir);
 			transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
-		}			
+		}
 
 		public IEnumerator PassOut()
 		{

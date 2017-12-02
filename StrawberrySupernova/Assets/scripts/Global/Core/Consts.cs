@@ -2,10 +2,11 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace StrawberryNova
 {
-	
+
 	public static class Consts
 	{
 
@@ -43,7 +44,7 @@ namespace StrawberryNova
 
 	    // Any mouse wheel axis movements at or outside of this movement will
 	    // class as a click in that direction.
-	    public const float MOUSE_WHEEL_CLICK_SNAP = 0.05f;
+	    public const float MOUSE_WHEEL_CLICK_SNAP = 0.1f;
 
 	    // -----------------------------
 	    // CAMERA
@@ -63,7 +64,7 @@ namespace StrawberryNova
 
 	    public const float PLAYER_ROTATION_SPEED = 4f;
 
-	    public const float PLAYER_JUMP_FORCE = 450f;
+	    public const float PLAYER_JUMP_FORCE = 800f;
 
 		public const float PLAYER_INTERACT_DISTANCE = .75f;
 
@@ -72,6 +73,9 @@ namespace StrawberryNova
 
         // How many stacks of items the player can have at once
         public const int PLAYER_INVENTORY_MAX_STACKS = 20;
+
+		// How many tiles away the player can use tools from
+		public const int PLAYER_TOOLS_RANGE = 2;
 
 		// -----------------------------
 		// GAMEPLAY
@@ -93,12 +97,18 @@ namespace StrawberryNova
 		};
 
         public const int HOTBAR_SIZE = 10;
-            
+
         // -----------------------------
         // GUI
         // -----------------------------
 
         public const float GUI_IN_GAME_MENU_FADE_TIME = .2f;
+
+		// -----------------------------
+		// TILE TAGS
+		// -----------------------------
+
+		public const string TILE_TAG_FARM = "Farm";
 
 		// -----------------------------
 		// RESOURCE PATHS
@@ -110,6 +120,9 @@ namespace StrawberryNova
         public const string PREFAB_PATH_WORLD_OBJECT_POPUP = "prefabs/gui/WorldObjectPopup";
         public const string PREFAB_PATH_IN_GAME_MENU = "prefabs/gui/InGameMenu";
         public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse";
+		public const string TILES_PREFABS_PATH = "prefabs/world/tiles/";
+		public const string WORLD_OBJECTS_PREFABS_PATH = "prefabs/world/worldobjects/";
+		public const string ITEMS_PREFABS_PATH = "prefabs/world/items/";
 
 	    // -----------------------------
 	    // FILESYSTEM
@@ -140,5 +153,5 @@ namespace StrawberryNova
 		public const string PREFAB_PATH_EDITOR_MODE_TILE_TAGS = "mapeditor/gui/EditorModeTileTags";
 
 	}
-		
+
 }
