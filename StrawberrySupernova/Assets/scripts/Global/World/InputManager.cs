@@ -35,7 +35,7 @@ namespace StrawberryNova
                 StartCoroutine(ManageInputEditor());
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
             if(app.state == AppState.Game)
                 DoInputGame();
@@ -159,12 +159,20 @@ namespace StrawberryNova
                 }
             }
 
-            // Interact tool with ground
+            // Interact item in hand with ground
             if(gameController.mouseOverTile != null &&
                gameController.itemHotbar.CanBeUsedOnTilePos(gameController.mouseOverTile) &&
                Input.GetMouseButtonUp(0))
             {
                 StartCoroutine(gameController.PlayerUseItemInHandOnTilePos(gameController.mouseOverTile));
+                return;
+            }
+
+            // Drop item in hand on ground
+            if(gameController.mouseOverTile != null &&
+               Input.GetMouseButtonUp(1))
+            {
+                StartCoroutine(gameController.PlayerDropItemInHand());
                 return;
             }
 

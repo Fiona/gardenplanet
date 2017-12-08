@@ -28,3 +28,7 @@ obj/
 
 # builds
 bin/
+
+# Third party 
+StrawberrySupernova/Assets/AmplifyShaderEditor/
+StrawberrySupernova/Assets/AmplifyShaderEditor.meta

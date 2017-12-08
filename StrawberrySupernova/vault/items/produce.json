@@ -1,0 +1,14 @@
+{
+    "itemTypes": {
+        "turnip_seeds": {
+            "ID": "turnip_seeds",
+            "Appearance": "seedbag",
+            "DisplayName": "Turnip Seeds",
+            "Description": "Sow in tilled soil to grow turnips.\n\nGrows best in Autumn and Winter.\n\nDelicious in a stew!",
+            "Category": "produce",
+            "StackSize": 32,
+            "CanPickup": true,
+            "Attributes": {}
+        }
+    }
+}

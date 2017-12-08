@@ -22,10 +22,12 @@ namespace StrawberryNova
         public Sprite buttonActiveHoverImage;
         public Sprite buttonActivePressedImage;
 
+        // Get the entry that corresponds to the active item
         public Inventory.InventoryItemEntry selectedItemEntry
         {
             get { return hotbarItems[selectedItemIndex]; }
         }
+        // Get all the items on the hotbar
         public Inventory.InventoryItemEntry[] Items
         {
             get{ return hotbarItems; }
@@ -33,11 +35,12 @@ namespace StrawberryNova
         }
 
         private GameController controller;
-        private IItemScript activeItemScript;
-        private Inventory.InventoryItemEntry activeScriptEntry;
-
         private int selectedItemIndex;
         private Inventory.InventoryItemEntry[] hotbarItems = new Inventory.InventoryItemEntry[Consts.HOTBAR_SIZE];
+
+        // Used to keep track of script activations
+        private IItemScript activeItemScript;
+        private Inventory.InventoryItemEntry activeItemScriptItemEntry;
 
         public void Start()
         {
@@ -48,32 +51,34 @@ namespace StrawberryNova
 
         IEnumerator DoHotbar()
         {
-            var inventory = controller.player.inventory;
-
             while(true)
             {
-                // Update the state of all hotbar buttons
-                for(int i = 0; i < Consts.HOTBAR_SIZE; i++)
-                {
-                    var itemEntry = hotbarItems[i];
-                    if(itemEntry != null && !inventory.ItemEntryExists(itemEntry))
-                        hotbarItems[i] = null;
-
-                    if(hotbarItems[i] == null)
-                    {
-                        hotbarImages[i].gameObject.SetActive(false);
-                        hotbarQuantityText[i].gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        hotbarImages[i].gameObject.SetActive(true);
-                        hotbarQuantityText[i].gameObject.SetActive(true);
-                        hotbarImages[i].sprite = itemEntry.itemType.Image;
-                        hotbarQuantityText[i].text = itemEntry.quantity.ToString();
-                    }
-                }
-
+                UpdateHotbarState();
                 yield return new WaitForFixedUpdate();
+            }
+        }
+
+        // Update the state of all hotbar buttons
+        private void UpdateHotbarState()
+        {
+            for(int i = 0; i < Consts.HOTBAR_SIZE; i++)
+            {
+                var itemEntry = hotbarItems[i];
+                if(itemEntry != null && !controller.player.inventory.ItemEntryExists(itemEntry))
+                    hotbarItems[i] = null;
+
+                if(hotbarItems[i] == null)
+                {
+                    hotbarImages[i].gameObject.SetActive(false);
+                    hotbarQuantityText[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    hotbarImages[i].gameObject.SetActive(true);
+                    hotbarQuantityText[i].gameObject.SetActive(true);
+                    hotbarImages[i].sprite = itemEntry.itemType.Image;
+                    hotbarQuantityText[i].text = itemEntry.quantity.ToString();
+                }
             }
         }
 
@@ -152,25 +157,43 @@ namespace StrawberryNova
         public IEnumerator UseItemInHandOnTilePos(TilePosition tilePos)
         {
             if(selectedItemEntry == null || activeItemScript == null)
-                yield return null;
+                yield break;
             controller.StartCutscene();
             yield return StartCoroutine(activeItemScript.UseOnTilePos(tilePos));
             controller.EndCutscene();
         }
 
+        public IEnumerator DropItemInHand()
+        {
+            if(selectedItemEntry == null)
+                yield break;
+            if(!controller.player.inventory.ItemEntryExists(selectedItemEntry))
+            {
+                Debug.LogError("Item entry in hotbar not in inventory!");
+                StopItemScript();
+                yield break;
+            }
+            controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,
+                selectedItemEntry.attributes, 1);
+            UpdateHotbarState();
+            SelectItemIndex(selectedItemIndex);
+            Debug.Log("drop item");
+            yield return null;
+        }
+
         private void StartItemScript()
         {
             var itemType = hotbarItems[selectedItemIndex].itemType;
-            if(String.IsNullOrEmpty(itemType.Script) || activeScriptEntry == hotbarItems[selectedItemIndex])
+            if(String.IsNullOrEmpty(itemType.Script) || selectedItemEntry == activeItemScriptItemEntry)
                 return;
 
             var script = Type.GetType(typeof(ItemHotbar).Namespace+".Items."+itemType.Script);
             if(script == null)
                 return;
 
-            activeScriptEntry = hotbarItems[selectedItemIndex];
             activeItemScript = gameObject.AddComponent(script) as IItemScript;
-            activeItemScript.StartsHolding(activeScriptEntry);
+            activeItemScriptItemEntry = selectedItemEntry;
+            activeItemScript.StartsHolding(selectedItemEntry);
         }
 
         private void StopItemScript()
@@ -178,7 +201,7 @@ namespace StrawberryNova
             if(activeItemScript == null)
                 return;
             Destroy(activeItemScript as MonoBehaviour);
-            activeScriptEntry = null;
+            activeItemScriptItemEntry = null;
             activeItemScript = null;
         }
 

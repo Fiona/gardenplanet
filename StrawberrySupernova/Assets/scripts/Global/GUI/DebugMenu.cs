@@ -11,7 +11,7 @@ namespace StrawberryNova
 		void OnGUI()
 		{
 
-			GUILayout.BeginArea(new Rect(Screen.width - width - 20, 20, width, 300));			
+			GUILayout.BeginArea(new Rect(Screen.width - width - 20, 20, width, 300));
 
 			// Root
 			if(DebugMode == 0)
@@ -59,7 +59,7 @@ namespace StrawberryNova
                     worldTimer.gameTime += new GameTime(years: 1);
 
 				if(GUILayout.Button("< Back"))
-					DebugMode = 1;				
+					DebugMode = 1;
 			}
 
             // Items
@@ -69,14 +69,19 @@ namespace StrawberryNova
 
                 var itemManager = FindObjectOfType<ItemManager>();
 
-                if(GUILayout.Button("Give Tools Level 1"))
+	            if(GUILayout.Button("Give Tools Level 1"))
+	            {
+		            itemManager.GivePlayerItem("broken_sprinkleboy");
+		            itemManager.GivePlayerItem("broken_trowelie");
+	            }
+
+                if(GUILayout.Button("Give Seeds"))
                 {
-                    itemManager.GivePlayerItem("broken_sprinkleboy");
-                    itemManager.GivePlayerItem("broken_trowelie");
-                }                    
+	                itemManager.GivePlayerItem("turnip_seeds", quantity:16);
+                }
 
                 if(GUILayout.Button("< Back"))
-                    DebugMode = 1;              
+                    DebugMode = 1;
             }
 
             // App
@@ -98,13 +103,13 @@ namespace StrawberryNova
                     #endif
                 }
                 if(GUILayout.Button("< Back"))
-                    DebugMode = 1;              
+                    DebugMode = 1;
             }
 
 			GUILayout.EndArea();
 
 		}
-				
+
 	}
 }
 

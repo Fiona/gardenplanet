@@ -175,6 +175,11 @@ namespace StrawberryNova
             yield return StartCoroutine(itemHotbar.UseItemInHandOnTilePos(tilePos));
         }
 
+        public IEnumerator PlayerDropItemInHand()
+        {
+            yield return StartCoroutine(itemHotbar.DropItemInHand());
+        }
+
         public void StartCutscene()
         {
             inputManager.LockDirectInput();

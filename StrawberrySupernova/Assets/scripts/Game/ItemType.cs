@@ -24,6 +24,7 @@ namespace StrawberryNova
             public Hashtable Attributes;
             public Sprite Image;
             public string Script;
+            public string Appearance;
         }
 
         public struct ItemTypeDataFile
@@ -87,6 +88,12 @@ namespace StrawberryNova
             set{ data.Script = value; }
         }
 
+        public string Appearance
+        {
+            get{ return data.Appearance == null ? ID : data.Appearance; }
+            set{ data.Appearance = value; }
+        }
+
         /*
          * Returns a List containing all items
          */
@@ -117,10 +124,8 @@ namespace StrawberryNova
                                         StackSize=singleItemTypeData.Value.StackSize,
                                         CanPickup=singleItemTypeData.Value.CanPickup,
                                         Attributes=new Hashtable(),
-                                        Image=Resources.Load<Sprite>(
-                                            string.Format("textures/items/{0}_image", singleItemTypeData.Value.ID)
-                                        ),
-                                        Script=singleItemTypeData.Value.Script
+                                        Script=singleItemTypeData.Value.Script,
+                                        Appearance=singleItemTypeData.Value.Appearance
                                     };
 
                                 itemTypeData.Add(singleItemTypeData.Key, newData);
@@ -146,11 +151,9 @@ namespace StrawberryNova
             var allItems = new List<ItemType>();
             foreach(var i in itemTypeData)
             {
-                allItems.Add(
-                    new ItemType {
-                        data = i.Value
-                    }
-                );
+                var newItem = new ItemType{ data = i.Value };
+                newItem.Image = Resources.Load<Sprite>(string.Format("textures/items/{0}_image", newItem.Appearance));
+                allItems.Add(newItem);
             }
 
             // Reorder and return
@@ -174,7 +177,8 @@ namespace StrawberryNova
                     StackSize=64,
                     CanPickup=true,
                     Attributes=new Hashtable(),
-                    Script=null
+                    Script=null,
+                    Appearance=null
                 }
             );
 
