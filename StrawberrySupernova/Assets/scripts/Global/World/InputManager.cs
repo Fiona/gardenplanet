@@ -46,6 +46,8 @@ namespace StrawberryNova
 
             if(controller == null)
                 controller = FindObjectOfType<GameController>();
+            if(controller == null)
+                return;            
             var gameController = (GameController)controller;
 
             if(!directInputEnabled)
@@ -64,15 +66,37 @@ namespace StrawberryNova
             // Jumping
             if(Input.GetKeyDown(KeyCode.Space))
                 gameController.player.Jump();
-
-            // Hovering mouse over objects
+            
+            // Hovering mouse over objects or in-world items
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_WORLD_OBJECTS))
+            var colLayers = (1 << Consts.COLLISION_LAYER_WORLD_OBJECTS) | (1 << Consts.COLLISION_LAYER_ITEMS);
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity, colLayers))
             {
-                var interactable = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
-                if(interactable != null)
-                    interactable.Highlight();
+                // Try items first
+                var itemComponent = hit.transform.gameObject.GetComponent<InWorldItem>();
+                if(itemComponent != null && itemComponent.itemType.CanPickup)
+                {
+                    if(Vector3.Distance(gameController.player.transform.position, itemComponent.transform.position) <
+                       Consts.PLAYER_PICKUP_DISTANCE)
+                    {
+                        itemComponent.FullHighlight();
+                        if(Input.GetMouseButtonUp(0))
+                        {
+                            itemComponent.Pickup();
+                            return;
+                        }
+                    }
+                    else
+                        itemComponent.Highlight();
+                }
+                else
+                {
+                    // Fallback to trying world object                    
+                    var worldObjectComponent = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
+                    if(worldObjectComponent != null)
+                        worldObjectComponent.Highlight();
+                }
             }
 
             // Get mouse over tiles
@@ -169,8 +193,7 @@ namespace StrawberryNova
             }
 
             // Drop item in hand on ground
-            if(gameController.mouseOverTile != null &&
-               Input.GetMouseButtonUp(1))
+            if(Input.GetMouseButtonUp(1))
             {
                 StartCoroutine(gameController.PlayerDropItemInHand());
                 return;

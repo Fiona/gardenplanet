@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,7 @@ namespace StrawberryNova
         [HideInInspector]
         public TilePosition mouseOverTile;
 
+        GameObject inWorldItems;
         Text worldObjectPopupText;
         bool showPopup;
         Debug debugMenu;
@@ -78,6 +80,8 @@ namespace StrawberryNova
             var inputManagerObj = new GameObject("InputManager");
             inputManager = inputManagerObj.AddComponent<InputManager>();
 
+            inWorldItems = new GameObject("In World Items");
+            
             // GUI objects
             var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
             worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
@@ -95,10 +99,10 @@ namespace StrawberryNova
             itemHotbarObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
             itemHotbar = itemHotbarObject.GetComponent<ItemHotbar>();
 
-            // World objects
+            // Atmosphere
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
             atmosphere = atmosphereObj.GetComponent<Atmosphere>();
-
+            
             // Set up player and camera
             var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
             if(playerStartMarker != null)
@@ -147,7 +151,7 @@ namespace StrawberryNova
 
         public void ShowPopup(string textToShow)
         {
-            worldObjectPopupText.text = worldObjectManager.GetWorldObjectTypeByName(textToShow).displayName;
+            worldObjectPopupText.text = textToShow;
             worldObjectPopup.SetActive(true);
             showPopup = true;
         }
@@ -180,6 +184,36 @@ namespace StrawberryNova
             yield return StartCoroutine(itemHotbar.DropItemInHand());
         }
 
+        public bool GivePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
+        {
+            return itemManager.GivePlayerItem(itemType, attributes, quantity);
+        }
+
+        public bool GivePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
+        {
+            return itemManager.GivePlayerItem(itemTypeId, attributes, quantity);
+        }        
+        
+        // Generates an item in the world at the specified position
+        public void SpawnItemInWorld(ItemType itemType, System.Collections.Hashtable attributes, int amount,
+            WorldPosition worldPos)
+        {
+            var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
+            if (resource == null)
+            {
+                resource = Resources.Load<GameObject>(Consts.ITEMS_PREFAB_MISSING);
+            }
+            foreach (var i in Enumerable.Range(1, amount))
+            {
+                var newItem = Instantiate(resource);
+                newItem.transform.parent = inWorldItems.transform;
+                newItem.transform.localPosition = worldPos.TransformPosition();
+                var newItemComponent = newItem.AddComponent<InWorldItem>();
+                newItemComponent.attributes = attributes;
+                newItemComponent.itemType = itemType;
+            }
+        }
+        
         public void StartCutscene()
         {
             inputManager.LockDirectInput();

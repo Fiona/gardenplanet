@@ -9,55 +9,55 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1767051674228108}
+  m_RootGameObject: {fileID: 1944448592719524}
   m_IsPrefabParent: 1
---- !u!1 &1767051674228108
+--- !u!1 &1944448592719524
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4316085910276862}
-  - component: {fileID: 23836778575188490}
-  - component: {fileID: 102482573078403540}
-  - component: {fileID: 65717074155654132}
-  - component: {fileID: 54735199123336290}
+  - component: {fileID: 4394316334415500}
+  - component: {fileID: 33648698278781454}
+  - component: {fileID: 23697411214663350}
+  - component: {fileID: 54392947849927680}
+  - component: {fileID: 136782888571367166}
   m_Layer: 13
-  m_Name: missing
+  m_Name: seedbag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4316085910276862
+--- !u!4 &4394316334415500
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1767051674228108}
-  m_LocalRotation: {x: 0.28022882, y: -0, z: -0, w: 0.9599333}
-  m_LocalPosition: {x: 0, y: 0.116, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_GameObject: {fileID: 1944448592719524}
+  m_LocalRotation: {x: -6.11676e-17, y: 0.99894273, z: 0.04597181, w: -2.8149597e-18}
+  m_LocalPosition: {x: 0.00047621038, y: -0.0034854934, z: -0.007443943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 32.548, y: 0, z: 0}
---- !u!23 &23836778575188490
+  m_LocalEulerAnglesHint: {x: -5.2700005, y: -180.00002, z: 0}
+--- !u!23 &23697411214663350
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1767051674228108}
+  m_GameObject: {fileID: 1944448592719524}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 59525ff7f5f230a4e9fc26b476c87d72, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,51 +77,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &54735199123336290
+--- !u!33 &33648698278781454
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944448592719524}
+  m_Mesh: {fileID: 4300000, guid: 43c1de4a03c1c8140982ce607a500345, type: 3}
+--- !u!54 &54392947849927680
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1767051674228108}
+  m_GameObject: {fileID: 1944448592719524}
   serializedVersion: 2
-  m_Mass: 6
-  m_Drag: 0
+  m_Mass: 10
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!65 &65717074155654132
-BoxCollider:
+--- !u!136 &136782888571367166
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1767051674228108}
+  m_GameObject: {fileID: 1944448592719524}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7, y: 7, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!102 &102482573078403540
-TextMesh:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1767051674228108}
-  m_Text: ???
-  m_OffsetZ: 0
-  m_CharacterSize: 1
-  m_LineSpacing: 1
-  m_Anchor: 4
-  m_Alignment: 1
-  m_TabSize: 4
-  m_FontSize: 50
-  m_FontStyle: 1
-  m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4279238911
+  m_Radius: 0.06198045
+  m_Height: 0.20921591
+  m_Direction: 0
+  m_Center: {x: -0.007955775, y: 0.047228962, z: 0.040251557}

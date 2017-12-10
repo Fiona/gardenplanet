@@ -59,6 +59,13 @@ namespace StrawberryNova
         {
         }
 
+        public TilePosition(int x, int y, int layer)
+        {
+            this.x = x;
+            this.y = y;
+            this.layer = layer;
+        }
+        
         public TilePosition(WorldPosition pos)
         {
             x = Mathf.RoundToInt(pos.x / Consts.TILE_SIZE);
@@ -88,7 +95,7 @@ namespace StrawberryNova
                 layerMask:1 << Consts.COLLISION_LAYER_WORLD_OBJECTS
             );
             return checkWorldObjectsOverlap.Length > 0;
-        }
+        }        
     }
 
     public class ObjectTilePosition : TilePosition
@@ -112,6 +119,29 @@ namespace StrawberryNova
         public float height;
         public EightDirection dir;
         public string name = "";
+
+        public WorldPosition()
+        {            
+        }
+
+        public WorldPosition(TilePosition tilePos)
+        {
+            x = tilePos.x * Consts.TILE_SIZE;
+            y = tilePos.y * Consts.TILE_SIZE;
+            height = tilePos.layer * Consts.TILE_SIZE;
+        }
+
+        public WorldPosition(Vector3 transformPos)
+        {
+            x = transformPos.x;
+            y = transformPos.z;
+            height = transformPos.y;
+        }
+        
+        public Vector3 TransformPosition()
+        {
+            return new Vector3(x, height, y);
+        }
     }
 
     // World object positions

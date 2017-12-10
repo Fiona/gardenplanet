@@ -25,6 +25,7 @@ namespace StrawberryNova
 		public const int COLLISION_LAYER_TILES = 8;
 		public const int COLLISION_LAYER_WORLD_OBJECTS = 9;
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
+        public const int COLLISION_LAYER_ITEMS = 13;
 
 	    // Tiles are this size on all dimensions
 	    public const float TILE_SIZE = 0.5f;
@@ -67,6 +68,7 @@ namespace StrawberryNova
 	    public const float PLAYER_JUMP_FORCE = 800f;
 
 		public const float PLAYER_INTERACT_DISTANCE = .75f;
+		public const float PLAYER_PICKUP_DISTANCE = .50f;
 
         // What hour the player wakes up at
         public const int PLAYER_WAKE_HOUR = 6;
@@ -123,6 +125,7 @@ namespace StrawberryNova
 		public const string TILES_PREFABS_PATH = "prefabs/world/tiles/";
 		public const string WORLD_OBJECTS_PREFABS_PATH = "prefabs/world/worldobjects/";
 		public const string ITEMS_PREFABS_PATH = "prefabs/world/items/";
+		public const string ITEMS_PREFAB_MISSING = "prefabs/world/items/missing";
 
 	    // -----------------------------
 	    // FILESYSTEM
@@ -150,7 +153,7 @@ namespace StrawberryNova
 		public const string PREFAB_PATH_EDITOR_MODE_TILE_DRAWING = "mapeditor/gui/EditorModeTileDrawing";
         public const string PREFAB_PATH_EDITOR_MODE_MARKER = "mapeditor/gui/EditorModeMarker";
 		public const string PREFAB_PATH_EDITOR_MODE_WORLD_OBJECTS = "mapeditor/gui/EditorModeWorldObjects";
-		public const string PREFAB_PATH_EDITOR_MODE_TILE_TAGS = "mapeditor/gui/EditorModeTileTags";
+		public const string PREFAB_PATH_EDITOR_MODE_TILE_TAGS = "mapeditor/gui/EditorModeTileTags";		
 
 	}
 

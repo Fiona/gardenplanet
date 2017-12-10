@@ -75,6 +75,12 @@ namespace StrawberryNova
 				SetGlowChildSettings(glowTimer);
 			}	
 		}
+
+		public void OnDestroy()
+		{
+			if(glowChild != null)
+				Destroy(glowChild);			
+		}
 			
 		public void GlowTo(Color glowColour, float glowWidth, float glowSpeed = 0.001f)
 		{

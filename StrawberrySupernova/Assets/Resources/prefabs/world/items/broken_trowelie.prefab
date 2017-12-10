@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23894587817853336}
   - component: {fileID: 65496560774340576}
   - component: {fileID: 54157749347489676}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: broken_trowelie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1611544540152570}
   m_LocalRotation: {x: -0.13576555, y: -0.5835441, z: 0.683691, w: 0.41666615}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,6 +52,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -67,6 +68,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -107,5 +109,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.013702818, y: 0.03529308, z: 0.010779168}
-  m_Center: {x: -0.0056159617, y: 0.010304559, z: -0.0029472625}
+  m_Size: {x: 0.16443379, y: 0.42351696, z: 0.12935002}
+  m_Center: {x: -0.06739152, y: 0.12365469, z: -0.035367142}

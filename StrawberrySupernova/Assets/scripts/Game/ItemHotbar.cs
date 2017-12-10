@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,7 @@ namespace StrawberryNova
             while(true)
             {
                 UpdateHotbarState();
+                UpdateActiveItem();
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -114,23 +116,7 @@ namespace StrawberryNova
             hotbarButtons[selectedItemIndex].GetComponent<Image>().sprite = buttonAcitveImage;
             hotbarButtons[selectedItemIndex].transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
-            // Make active item display reflect selected item and deal with scripts
-            var activeText = activeItem.GetComponentInChildren<Text>(true);
-            var activeImage = activeItem.GetComponentsInChildren<Image>(true)[1];
-            if(hotbarItems[selectedItemIndex] == null)
-            {
-                activeText.gameObject.SetActive(false);
-                activeImage.gameObject.SetActive(false);
-                StopItemScript();
-            }
-            else
-            {
-                activeText.gameObject.SetActive(true);
-                activeText.text = hotbarItems[selectedItemIndex].quantity.ToString();
-                activeImage.gameObject.SetActive(true);
-                activeImage.sprite = hotbarItems[selectedItemIndex].itemType.Image;
-                StartItemScript();
-            }
+            UpdateActiveItem();
         }
 
         public void SelectPreviousItem()
@@ -173,12 +159,42 @@ namespace StrawberryNova
                 StopItemScript();
                 yield break;
             }
+            
+            // Spawn item
+            var newPos = new WorldPosition(controller.player.transform.localPosition);
+            newPos.height += .5f;
+            var shiftAmount = .1f;
+            newPos.x -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
+            newPos.y -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
+            controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos);
+            
+            // Remove from inventory
             controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,
                 selectedItemEntry.attributes, 1);
             UpdateHotbarState();
             SelectItemIndex(selectedItemIndex);
-            Debug.Log("drop item");
             yield return null;
+        }
+
+        private void UpdateActiveItem()
+        {
+            // Make active item display reflect selected item and deal with scripts
+            var activeText = activeItem.GetComponentInChildren<Text>(true);
+            var activeImage = activeItem.GetComponentsInChildren<Image>(true)[1];
+            if(hotbarItems[selectedItemIndex] == null)
+            {
+                activeText.gameObject.SetActive(false);
+                activeImage.gameObject.SetActive(false);
+                StopItemScript();
+            }
+            else
+            {
+                activeText.gameObject.SetActive(true);
+                activeText.text = hotbarItems[selectedItemIndex].quantity.ToString();
+                activeImage.gameObject.SetActive(true);
+                activeImage.sprite = hotbarItems[selectedItemIndex].itemType.Image;
+                StartItemScript();
+            }            
         }
 
         private void StartItemScript()
@@ -204,6 +220,6 @@ namespace StrawberryNova
             activeItemScriptItemEntry = null;
             activeItemScript = null;
         }
-
+        
     }
 }
