@@ -87,6 +87,7 @@
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_FunctionOutputNode.shader" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_WorldSpaceCameraPos.shader" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_ATan2OpNode.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Templates\DefaultUnlit.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
@@ -199,6 +200,7 @@
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\LICENSE.txt" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_TexCoordVertexDataNode.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\BuiltinDebugViews.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald Bold - OFL.txt" />
     <None Include="Assets\AmplifyShaderEditor\Examples\Official\TemplateExamples\UI\SimpleUI\SimpleUI.shader" />
     <None Include="Assets\shaders\Glow\GlowVisibleNormal.shader" />
     <None Include="Assets\AmplifyShaderEditor\Examples\Official\SimpleNoise\SimpleNoise.shader" />
@@ -217,6 +219,7 @@
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_SimpleMinNode.shader" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_ViewDirInputsCoordNode.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\NotoSans - License.txt" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_SamplerNode.shader" />
     <None Include="Assets\AmplifyShaderEditor\Examples\Community\LowPolyWater\LowPolyWater.shader" />
     <None Include="Assets\UnityUIExtensions\Shaders\UIImageCrop.shader" />
@@ -240,6 +243,7 @@
     <None Include="Assets\AmplifyShaderEditor\Examples\Community\2Sided\Credits.txt" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_PannerNode.shader" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_ScaleNode.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\AmplifyShaderEditor\Examples\Community\HologramSimple\Credits.txt" />
@@ -264,6 +268,7 @@
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_ACosOpNode.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\GrainGen.shader" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_TextureCoordinatesNode.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\AmplifyShaderEditor\Examples\Official\TriplanarProjection\TriplanarProjection.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\FXAA.shader" />
     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_FunctionInputNode.shader" />
@@ -411,11 +416,11 @@
     <Reference Include="LitJson">
       <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>
     </Reference>
-    <Reference Include="TextMeshPro-1.0.55.2017.1.0b12">
-      <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/TextMeshPro-1.0.55.2017.1.0b12.dll</HintPath>
+    <Reference Include="TextMeshPro-2017.2-1.0.56-Editor">
+      <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-1.0.56-Editor.dll</HintPath>
     </Reference>
-    <Reference Include="TextMeshPro-1.0.55.2017.1.0b12-Editor">
-      <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor/TextMeshPro-1.0.55.2017.1.0b12-Editor.dll</HintPath>
+    <Reference Include="TextMeshPro-2017.2-1.0.56-Runtime">
+      <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-1.0.56-Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/Fiona/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>

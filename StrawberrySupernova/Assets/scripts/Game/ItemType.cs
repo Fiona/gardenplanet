@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using LitJson;
 using UnityEngine;
 
@@ -111,7 +112,9 @@ namespace StrawberryNova
                     {
                         using(var fh = File.OpenText(f))
                         {
-                            var loadedDataFile = JsonMapper.ToObject<ItemTypeDataFile>(fh.ReadToEnd());
+							var fileConents = fh.ReadToEnd();
+							fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);                            
+                            var loadedDataFile = JsonMapper.ToObject<ItemTypeDataFile>(fileConents);
                             foreach(var singleItemTypeData in loadedDataFile.itemTypes)
                             {
                                 // Basic item data

@@ -25,7 +25,10 @@ namespace StrawberryNova
 
             public IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                Debug.Log("Hoe!");
+                var soil = controller.worldObjectManager.AddWorldObject(
+                    controller.worldObjectManager.GetWorldObjectTypeByName("hoedsoil"), tilePos
+                );
+                soil.gameObject.transform.localRotation = Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f);
                 yield break;
             }
 

@@ -1,23 +1,28 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.UI;
 
 namespace StrawberryNova
 {
 	public class WorldObjectManager: MonoBehaviour
 	{
 
+		static PhysicMaterial slideMaterial;
+
 		public List<WorldObjectType> worldObjectTypes;
 		public List<WorldObject> worldObjects;
 
-		static PhysicMaterial slideMaterial;
-
+		private Dictionary<string, List<WorldObject>> tilePosToWorldObjects;
+		
 		public void Awake()
 		{
 			if(WorldObjectManager.slideMaterial == null)
 				WorldObjectManager.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;			
 			worldObjectTypes = WorldObjectType.GetAllWorldObjectTypes();
 			worldObjects = new List<WorldObject>();
+			tilePosToWorldObjects = new Dictionary<string, List<WorldObject>>();
 		}
 			
 		/*
@@ -90,10 +95,10 @@ namespace StrawberryNova
 			return worldObjectTypes[index];
 		}
 
-		public void AddWorldObject(WorldObjectType objectType, WorldPosition pos)
+		public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos)
 		{
 			if(objectType == null)
-				return;
+				return null;
 
 			// Create game object
 			GameObject newGameObject = null;
@@ -139,18 +144,11 @@ namespace StrawberryNova
 			if(comp != null)
 				comp.material = WorldObjectManager.slideMaterial;
 
+			return newWorldObject;
+			
 		}
 
-		public void DeleteWorldObject(WorldObject worldObjectToDelete)
-		{
-			if(worldObjects.Exists(x => x == worldObjectToDelete))
-			{
-				Destroy(worldObjectToDelete.gameObject);
-				worldObjects.Remove(worldObjectToDelete);
-			}
-		}
-
-		public void AddWorldObject(WorldObjectType objectType, TilePosition pos)
+		public WorldObject AddWorldObject(WorldObjectType objectType, TilePosition pos)
 		{
 			var tilemap = FindObjectOfType<Tilemap>();
 			if(pos.x < 0 || pos.x >= tilemap.width || pos.y < 0 || pos.y >= tilemap.height)
@@ -160,9 +158,40 @@ namespace StrawberryNova
                 y=pos.y * Consts.TILE_SIZE,
                 height=pos.layer * Consts.TILE_SIZE
             };
-			AddWorldObject(objectType, worldPos);
-		}
+			var newWorldObject = AddWorldObject(objectType, worldPos);
+			if(newWorldObject == null)
+				return null;
 
+			// Sort out tile pos tracking
+			if(objectType.tileObject)
+			{
+				var posS = pos.ToString();
+				if(!tilePosToWorldObjects.ContainsKey(posS))
+					tilePosToWorldObjects[posS] = new List<WorldObject>();
+				tilePosToWorldObjects[posS].Add(newWorldObject);
+			}
+			return newWorldObject;
+		}
+		
+		public void DeleteWorldObject(WorldObject worldObjectToDelete)
+		{
+			if(worldObjects.Exists(x => x == worldObjectToDelete))
+			{
+				Destroy(worldObjectToDelete.gameObject);
+				worldObjects.Remove(worldObjectToDelete);
+			}
+			if(worldObjectToDelete.tileObject)
+			{
+				foreach(var list in tilePosToWorldObjects)
+					foreach(var obj in new List<WorldObject>(list.Value))
+						if(obj == worldObjectToDelete)
+							tilePosToWorldObjects[list.Key].Remove(worldObjectToDelete);
+				foreach(var list in new Dictionary<string, List<WorldObject>>(tilePosToWorldObjects))
+					if(list.Value.Count == 0)
+						tilePosToWorldObjects.Remove(list.Key);				
+			}
+		}
+		
 		public void SetWorldObjectDirection(WorldObject worldObject, EightDirection direction)
 		{
 			worldObject.dir = direction;
@@ -188,5 +217,13 @@ namespace StrawberryNova
 			return null;
 		}
 
+		public List<WorldObject> GetWorldObjectsAtTilePos(TilePosition tilePos)
+		{
+			var posS = tilePos.ToString();
+			if(tilePosToWorldObjects.ContainsKey(posS))
+				return new List<WorldObject>(tilePosToWorldObjects[posS]);
+			return new List<WorldObject>();
+		}
+		
 	}
 }

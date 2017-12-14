@@ -94,8 +94,21 @@ namespace StrawberryNova
                 Quaternion.identity,
                 layerMask:1 << Consts.COLLISION_LAYER_WORLD_OBJECTS
             );
-            return checkWorldObjectsOverlap.Length > 0;
+            if(checkWorldObjectsOverlap.Length > 0)
+                return true;
+            return UnityEngine.Object.FindObjectOfType<WorldObjectManager>().GetWorldObjectsAtTilePos(this).Count > 0;
+        }
+        
+        public int[] ToArray()
+        {
+            return new int[3] {x, y, layer};
+        }
+        
+        public override string ToString()
+        {
+            return String.Format("{0},{1},{2}", x, y, layer);
         }        
+        
     }
 
     public class ObjectTilePosition : TilePosition

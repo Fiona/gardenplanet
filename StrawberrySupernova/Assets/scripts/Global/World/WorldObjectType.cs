@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using LitJson;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace StrawberryNova
 		{
 			public string displayName;
 			public bool interactable;
+			public bool tileObject;
+			public bool hideInEditor;
 			public string script;
 		};
 
@@ -35,6 +38,16 @@ namespace StrawberryNova
 		{
 			get{ return data.interactable; }
 			set{ data.interactable = value; }
+		}
+		public bool tileObject
+		{
+			get{ return data.tileObject; }
+			set{ data.tileObject = value; }
+		}
+		public bool hideInEditor
+		{
+			get{ return data.hideInEditor; }
+			set{ data.hideInEditor = value; }
 		}
 		public string script
 		{
@@ -59,7 +72,9 @@ namespace StrawberryNova
 					{
 						using(var fh = File.OpenText(f))
 						{
-							var loadedDataFile = JsonMapper.ToObject<WorldObjectTypeDataFile>(fh.ReadToEnd());
+							var fileConents = fh.ReadToEnd();
+							fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);
+							var loadedDataFile = JsonMapper.ToObject<WorldObjectTypeDataFile>(fileConents);
 							foreach(var singleObjectData in loadedDataFile.worldObjectTypes)
 							{
 								worldObjectData.Add(singleObjectData.Key,
@@ -67,6 +82,8 @@ namespace StrawberryNova
 									{
 										displayName=singleObjectData.Value.displayName,
 										interactable=singleObjectData.Value.interactable,
+										tileObject=singleObjectData.Value.tileObject,
+										hideInEditor=singleObjectData.Value.hideInEditor,
 										script=singleObjectData.Value.script
 									}
 								);

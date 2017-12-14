@@ -92,10 +92,22 @@ namespace StrawberryNova
                 }
                 else
                 {
-                    // Fallback to trying world object                    
+                    // Fallback to trying to interact with world objects                    
                     var worldObjectComponent = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
                     if(worldObjectComponent != null)
-                        worldObjectComponent.Highlight();
+                    {
+                        if(Vector3.Distance(gameController.player.transform.position, worldObjectComponent.gameObject.transform.position) < Consts.PLAYER_INTERACT_DISTANCE)
+                        {
+                            worldObjectComponent.Focus();
+                            if(Input.GetMouseButtonUp(0))
+                            {
+                                worldObjectComponent.InteractWith();
+                                return;
+                            }
+                        }
+                        else
+                            worldObjectComponent.Highlight();
+                    }
                 }
             }
 
@@ -169,18 +181,6 @@ namespace StrawberryNova
             {
                 StartCoroutine(gameController.OpenInGameMenu());
                 return;
-            }
-
-            // Interact with objects
-            foreach(var obj in FindObjectsOfType<WorldObjectInteractable>())
-            {
-                if(Vector3.Distance(gameController.player.transform.position, obj.transform.position) < Consts.PLAYER_INTERACT_DISTANCE)
-                {
-                    obj.Focus();
-                    if(Input.GetMouseButtonUp(0))
-                        obj.InteractWith();
-                    return;
-                }
             }
 
             // Interact item in hand with ground

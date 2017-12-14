@@ -10,6 +10,7 @@ namespace StrawberryNova
 		public float height;
 		public EightDirection dir;
 		public string name = "";
+		public bool tileObject;
 		public GameObject gameObject;
 		public IWorldObjectScript script;
 	}

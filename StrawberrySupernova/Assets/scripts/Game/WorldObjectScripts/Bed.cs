@@ -38,6 +38,7 @@ namespace StrawberryNova
 				"Louise",
 				"Hello I am Louise. This is your bed. That might be a bit weird, but just go with it."
 			);
+			yield return StompyBlondie.MessagePopup.ShowMessagePopup("You did a thing!!");
 			var result = new StompyBlondie.Ref<int>(-1);
 			yield return StartCoroutine(StompyBlondie.ChoicePopup.ShowChoicePopup(
 				"Do you want to go to bed and sleep till the morning?",
