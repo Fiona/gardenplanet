@@ -9,6 +9,28 @@
             "StackSize": 32,
             "CanPickup": true,
             "Attributes": {}
+        },
+        
+        "cabbage_seeds": {
+            "ID": "cabbage_seeds",
+            "Appearance": "seedbag",
+            "DisplayName": "Cabbage Seeds",
+            "Description": "Sow in tilled soil to grow cabbage.\n\nGrows best in ???",
+            "Category": "produce",
+            "StackSize": 32,
+            "CanPickup": true,
+            "Attributes": {}
+        },
+        "cabbage": {
+            "ID": "cabbage",
+            "DisplayName": "Cabbage",
+            "Description": "Brassica brassica brassica brassica brassica brassica brassica",
+            "Category": "produce",
+            "StackSize": 32,
+            "CanPickup": true,
+            "Attributes": {}
         }
+        
+        
     }
 }

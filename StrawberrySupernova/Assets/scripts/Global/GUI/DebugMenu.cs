@@ -77,9 +77,15 @@ namespace StrawberryNova
 
                 if(GUILayout.Button("Give Seeds"))
                 {
+	                itemManager.GivePlayerItem("cabbage_seeds", quantity:16);
 	                itemManager.GivePlayerItem("turnip_seeds", quantity:16);
                 }
 
+	            if(GUILayout.Button("Give Vegetables"))
+	            {
+		            itemManager.GivePlayerItem("cabbage", quantity: 16);
+	            }	            
+	            
                 if(GUILayout.Button("< Back"))
                     DebugMode = 1;
             }

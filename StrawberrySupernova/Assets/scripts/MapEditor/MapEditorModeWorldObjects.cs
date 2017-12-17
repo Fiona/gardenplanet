@@ -41,6 +41,8 @@ namespace StrawberryNova
             currentWorldObjectTemplate.SetActive(false);
             SelectWorldObjectType(worldObjectManager.worldObjectTypes[0].name);
             SwitchWorldObjectMinorMode(0);
+            while(selectedWorldObject.hideInEditor)
+                NextWorldObjectButtonPressed();
         }
 
         public override void InitializeGUI()
@@ -89,8 +91,8 @@ namespace StrawberryNova
             // If we are moving an object
             if(movingWorldObject && controller.inputManager.mouseWorldPosition != null)
             {
-                // Snap to grid if holding shift
-                if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                // Snap to grid
+                if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || selectedWorldObject.tileObject)
                 {
                     if(controller.currentHoveredTile != null)
                     {
@@ -147,7 +149,7 @@ namespace StrawberryNova
             // Wanting to add world objects
             if(worldObjectMinorMode == 0)
             {
-                if(Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.RightShift))
+                if(Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.RightShift) || selectedWorldObject.tileObject)
                     worldObjectManager.AddWorldObject(selectedWorldObject, tilePos);
                 else
                 {
@@ -245,6 +247,8 @@ namespace StrawberryNova
         public void NextWorldObjectButtonPressed()
         {
             SelectWorldObjectType(worldObjectManager.GetNextWorldObjectMarkerType(selectedWorldObject).name);
+            if(selectedWorldObject.hideInEditor)
+                NextWorldObjectButtonPressed();
         }
 
         /*
@@ -253,6 +257,8 @@ namespace StrawberryNova
         public void PreviousWorldObjectButtonPressed()
         {
             SelectWorldObjectType(worldObjectManager.GetPreviousWorldObjectMarkerType(selectedWorldObject).name);
+            if(selectedWorldObject.hideInEditor)
+                PreviousWorldObjectButtonPressed();
         }
 
         /*
@@ -289,7 +295,7 @@ namespace StrawberryNova
             currentWorldObjectText.text = selectedWorldObject.name;
 
         }
-
+        
         /*
          * Used when getting rid of a world object
          */

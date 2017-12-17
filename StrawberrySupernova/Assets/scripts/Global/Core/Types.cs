@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,6 +56,8 @@ namespace StrawberryNova
         public Direction dir;
         public string name = "";
 
+        private static WorldObjectManager _worldObjectManager;
+
         public TilePosition()
         {
         }
@@ -81,22 +84,27 @@ namespace StrawberryNova
             );
         }
 
-        public bool ContainsWorldObjects()
+        public bool ContainsCollidableWorldObjects()
         {
             var pos = new Vector3(
                 x*Consts.TILE_SIZE,
                 (layer*Consts.TILE_SIZE)-(Consts.TILE_SIZE/2),
                 y*Consts.TILE_SIZE
-                );
+            );
             var checkWorldObjectsOverlap = Physics.OverlapBox(
                 pos,
                 new Vector3(Consts.TILE_SIZE/2, Consts.TILE_SIZE/2, Consts.TILE_SIZE/2),
                 Quaternion.identity,
                 layerMask:1 << Consts.COLLISION_LAYER_WORLD_OBJECTS
             );
-            if(checkWorldObjectsOverlap.Length > 0)
-                return true;
-            return UnityEngine.Object.FindObjectOfType<WorldObjectManager>().GetWorldObjectsAtTilePos(this).Count > 0;
+            return checkWorldObjectsOverlap.Length > 0;
+        }
+
+        public List<WorldObject> GetTileWorldObjects()
+        {
+            if(TilePosition._worldObjectManager == null)
+                TilePosition._worldObjectManager = UnityEngine.Object.FindObjectOfType<WorldObjectManager>();            
+            return _worldObjectManager.GetWorldObjectsAtTilePos(this);            
         }
         
         public int[] ToArray()
@@ -107,7 +115,7 @@ namespace StrawberryNova
         public override string ToString()
         {
             return String.Format("{0},{1},{2}", x, y, layer);
-        }        
+        }               
         
     }
 
