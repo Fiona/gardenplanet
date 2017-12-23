@@ -10,7 +10,7 @@
             "CanPickup": true,
             "Attributes": {}
         },
-        
+
         "cabbage_seeds": {
             "ID": "cabbage_seeds",
             "Appearance": "seedbag",
@@ -19,7 +19,8 @@
             "Category": "produce",
             "StackSize": 32,
             "CanPickup": true,
-            "Attributes": {}
+            "Attributes": {"type":"cabbage"},
+            "script": "Seedbag"
         },
         "cabbage": {
             "ID": "cabbage",
@@ -30,7 +31,6 @@
             "CanPickup": true,
             "Attributes": {}
         }
-        
-        
+
     }
 }

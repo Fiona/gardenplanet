@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
-	public class Bed: MonoBehaviour, IWorldObjectScript
+	public class Bed: WorldObjectScript
 	{
 		GameController controller;
 		public void Start()
@@ -12,27 +12,7 @@ namespace StrawberryNova
 			controller = FindObjectOfType<GameController>();
 		}
 
-		public bool ShouldTick()
-		{
-			return false;
-		}	
-
-		public IEnumerator Create()
-		{
-			yield return null;
-		}
-
-		public IEnumerator Spawn()
-		{
-			yield return null;
-		}
-
-		public IEnumerator Tick()
-		{
-			yield return null;
-		}
-
-		public IEnumerator PlayerInteract()
+		public override IEnumerator PlayerInteract()
 		{
 			yield return StompyBlondie.DialoguePopup.ShowDialoguePopup(
 				"Louise",

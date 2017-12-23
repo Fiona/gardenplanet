@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using StompyBlondie;
 using UnityEngine;
 
 namespace StrawberryNova
 {
     namespace Items
     {
-        public class Hoe : MonoBehaviour, IItemScript
+        public class Hoe : ItemScript
         {
             GameController controller;
 
-            public void StartsHolding(Inventory.InventoryItemEntry item)
+            public override void StartsHolding()
             {
                 controller = FindObjectOfType<GameController>();
-                Debug.Log("Holding hoe");
             }
 
-            public bool CanBeUsedOnTilePos(TilePosition tilePos)
+            public override bool CanBeUsedOnTilePos(TilePosition tilePos)
             {
-                // Check the tile is hoeable, that it's close enough and that it doesn't contain colliding world objects 
+                // Check the tile is hoeable, that it's close enough and that it doesn't contain colliding world objects
                 var initialCheck = controller.tileTagManager.IsTileTaggedWith(tilePos, Consts.TILE_TAG_FARM) &&
                                    tilePos.TileDistance(controller.player.CurrentTilePosition) < Consts.PLAYER_TOOLS_RANGE &&
                                    !tilePos.ContainsCollidableWorldObjects();
@@ -28,34 +30,23 @@ namespace StrawberryNova
 
                 // Get any tile objects on there so we can check for crops and hoed ground because we can
                 // use it on those to destroy them.
-                var tileObjects = tilePos.GetTileWorldObjects();
-                if(tileObjects.Count > 0)
-                {
-                    foreach(var tileObject in tileObjects)
-                        if(tileObject.name == "hoedsoil")
-                            return true;
-                    // must be something else, so let's say no
+                if(tilePos.GetTileWorldObjects("hoedsoil").Count > 0)
+                    return true;
+                if(tilePos.GetTileWorldObjects().Count > 0)
                     return false;
-                }
-                
                 // Definitely nothing there so yep
                 return true;
             }
 
-            public IEnumerator UseOnTilePos(TilePosition tilePos)
+            public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
                 // Check for hoed soil, using the hoe on it causes it to be removed
-                var tileObjects = tilePos.GetTileWorldObjects();
+                var tileObjects = tilePos.GetTileWorldObjects("hoedsoil");
                 if(tileObjects.Count > 0)
                 {
-                    foreach(var tileObject in tileObjects)
-                    {
-                        if(tileObject.name == "hoedsoil")
-                        {
-                            controller.worldObjectManager.DeleteWorldObject(tileObject);
-                            yield break;
-                        }
-                    }
+                    foreach(var i in tileObjects)
+                        controller.worldObjectManager.DeleteWorldObject(i);
+                    yield break;
                 }
 
                 // Empty tile so hoe the ground
@@ -63,10 +54,9 @@ namespace StrawberryNova
                     controller.worldObjectManager.GetWorldObjectTypeByName("hoedsoil"), tilePos
                 );
                 soil.gameObject.transform.localRotation = Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f);
-                yield break;
             }
 
-            public bool CanBeDroppedOnTilePos(TilePosition tilePos)
+            public override bool CanBeDroppedOnTilePos(TilePosition tilePos)
             {
                 return true;
             }

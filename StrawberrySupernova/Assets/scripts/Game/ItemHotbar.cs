@@ -40,7 +40,7 @@ namespace StrawberryNova
         private Inventory.InventoryItemEntry[] hotbarItems = new Inventory.InventoryItemEntry[Consts.HOTBAR_SIZE];
 
         // Used to keep track of script activations
-        private IItemScript activeItemScript;
+        private ItemScript activeItemScript;
         private Inventory.InventoryItemEntry activeItemScriptItemEntry;
 
         public void Start()
@@ -159,7 +159,7 @@ namespace StrawberryNova
                 StopItemScript();
                 yield break;
             }
-            
+
             // Spawn item
             var newPos = new WorldPosition(controller.player.transform.localPosition);
             newPos.height += .5f;
@@ -167,7 +167,7 @@ namespace StrawberryNova
             newPos.x -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
             newPos.y -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
             controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos);
-            
+
             // Remove from inventory
             controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,
                 selectedItemEntry.attributes, 1);
@@ -194,7 +194,7 @@ namespace StrawberryNova
                 activeImage.gameObject.SetActive(true);
                 activeImage.sprite = hotbarItems[selectedItemIndex].itemType.Image;
                 StartItemScript();
-            }            
+            }
         }
 
         private void StartItemScript()
@@ -207,9 +207,10 @@ namespace StrawberryNova
             if(script == null)
                 return;
 
-            activeItemScript = gameObject.AddComponent(script) as IItemScript;
+            activeItemScript = gameObject.AddComponent(script) as ItemScript;
             activeItemScriptItemEntry = selectedItemEntry;
-            activeItemScript.StartsHolding(selectedItemEntry);
+            activeItemScript.item = activeItemScriptItemEntry;
+            activeItemScript.StartsHolding();
         }
 
         private void StopItemScript()
@@ -220,6 +221,6 @@ namespace StrawberryNova
             activeItemScriptItemEntry = null;
             activeItemScript = null;
         }
-        
+
     }
 }

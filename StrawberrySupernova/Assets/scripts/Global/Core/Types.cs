@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,7 +69,7 @@ namespace StrawberryNova
             this.y = y;
             this.layer = layer;
         }
-        
+
         public TilePosition(WorldPosition pos)
         {
             x = Mathf.RoundToInt(pos.x / Consts.TILE_SIZE);
@@ -103,20 +104,28 @@ namespace StrawberryNova
         public List<WorldObject> GetTileWorldObjects()
         {
             if(TilePosition._worldObjectManager == null)
-                TilePosition._worldObjectManager = UnityEngine.Object.FindObjectOfType<WorldObjectManager>();            
-            return _worldObjectManager.GetWorldObjectsAtTilePos(this);            
+                TilePosition._worldObjectManager = UnityEngine.Object.FindObjectOfType<WorldObjectManager>();
+            return _worldObjectManager.GetWorldObjectsAtTilePos(this);
         }
-        
+
+        public List<WorldObject> GetTileWorldObjects(string name)
+        {
+            if(TilePosition._worldObjectManager == null)
+                TilePosition._worldObjectManager = UnityEngine.Object.FindObjectOfType<WorldObjectManager>();
+            var objList = _worldObjectManager.GetWorldObjectsAtTilePos(this);
+            return objList.Where(singleObj => singleObj.name == name).ToList();
+        }
+
         public int[] ToArray()
         {
             return new int[3] {x, y, layer};
         }
-        
+
         public override string ToString()
         {
             return String.Format("{0},{1},{2}", x, y, layer);
-        }               
-        
+        }
+
     }
 
     public class ObjectTilePosition : TilePosition
@@ -142,7 +151,7 @@ namespace StrawberryNova
         public string name = "";
 
         public WorldPosition()
-        {            
+        {
         }
 
         public WorldPosition(TilePosition tilePos)
@@ -158,7 +167,7 @@ namespace StrawberryNova
             y = transformPos.z;
             height = transformPos.y;
         }
-        
+
         public Vector3 TransformPosition()
         {
             return new Vector3(x, height, y);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace StrawberryNova
@@ -11,8 +12,9 @@ namespace StrawberryNova
 		public EightDirection dir;
 		public string name = "";
 		public GameObject gameObject;
-		public IWorldObjectScript script;
+		public WorldObjectScript script;
 		public WorldObjectType objectType;
+		public Hashtable attributes;
 	}
 }
 

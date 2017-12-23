@@ -6,10 +6,19 @@
             "script" : "HoedSoil",
             "tileObject" : true,
             "hideInEditor" : true
+        },
+
+        "crop" : {
+            "displayName" : "Crop",
+            "interactable" : false,
+            "script" : "Crop",
+            "tileObject" : true,
+            "hideInEditor" : true,
+            "defaultAttributes": {
+                "type" : "",
+                "watered" : false,
+                "growth" : 0.0
+            }
         }
-        
-        /* ------- */
-        /* CABBAGE */
-        /* ------- */
     }
 }

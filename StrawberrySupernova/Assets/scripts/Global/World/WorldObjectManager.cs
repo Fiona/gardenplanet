@@ -1,8 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
+using StompyBlondie;
 
 namespace StrawberryNova
 {
@@ -15,16 +17,16 @@ namespace StrawberryNova
         public List<WorldObject> worldObjects;
 
         private Dictionary<string, List<WorldObject>> tilePosToWorldObjects;
-		
+
         public void Awake()
         {
             if(WorldObjectManager.slideMaterial == null)
-                WorldObjectManager.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;			
+                WorldObjectManager.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;
             worldObjectTypes = WorldObjectType.GetAllWorldObjectTypes();
             worldObjects = new List<WorldObject>();
             tilePosToWorldObjects = new Dictionary<string, List<WorldObject>>();
         }
-			
+
         /*
           Initialises using the passed Map object.
         */
@@ -53,7 +55,7 @@ namespace StrawberryNova
         }
 
         public void SaveToMap(Map map)
-        {			
+        {
             foreach(var worldObject in worldObjects)
             {
                 var newWorldObject = new Map.WorldObject(){
@@ -66,7 +68,7 @@ namespace StrawberryNova
                 map.worldObjects.Add(newWorldObject);
             }
         }
-		
+
         public WorldObjectType GetWorldObjectTypeByName(string name)
         {
             if(name == null)
@@ -95,7 +97,7 @@ namespace StrawberryNova
             return worldObjectTypes[index];
         }
 
-        public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos)
+        public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos, Hashtable attributes = null)
         {
             if(objectType == null)
                 return null;
@@ -114,8 +116,12 @@ namespace StrawberryNova
                 height = pos.height,
                 gameObject = newGameObject,
                 name = objectType.name,
-                objectType = objectType
+                objectType = objectType,
+                attributes=DeepClone.Clone(objectType.defaultAttributes)
             };
+            if(attributes != null)
+                foreach(DictionaryEntry attr in attributes)
+                    newWorldObject.attributes[attr.Key] = attr.Value;
 
             worldObjects.Add(newWorldObject);
             SetWorldObjectDirection(newWorldObject, pos.dir);
@@ -136,7 +142,7 @@ namespace StrawberryNova
                     if(script != null)
                     {
                         var newComponent = newWorldObject.gameObject.AddComponent(script);
-                        newWorldObject.script = newComponent as IWorldObjectScript;
+                        newWorldObject.script = newComponent as WorldObjectScript;
                     }
                 }
             }
@@ -146,10 +152,10 @@ namespace StrawberryNova
                 comp.material = WorldObjectManager.slideMaterial;
 
             return newWorldObject;
-			
+
         }
 
-        public WorldObject AddWorldObject(WorldObjectType objectType, TilePosition pos)
+        public WorldObject AddWorldObject(WorldObjectType objectType, TilePosition pos, Hashtable attributes = null)
         {
             var tilemap = FindObjectOfType<Tilemap>();
             if(pos.x < 0 || pos.x >= tilemap.width || pos.y < 0 || pos.y >= tilemap.height)
@@ -159,7 +165,7 @@ namespace StrawberryNova
                 y=pos.y * Consts.TILE_SIZE,
                 height=pos.layer * Consts.TILE_SIZE
             };
-            var newWorldObject = AddWorldObject(objectType, worldPos);
+            var newWorldObject = AddWorldObject(objectType, worldPos, attributes);
             if(newWorldObject == null)
                 return null;
 
@@ -195,7 +201,7 @@ namespace StrawberryNova
                     if(list.Value.Count == 0)
                         tilePosToWorldObjects.Remove(list.Key);
             }
-            
+
             if(worldObjects.Exists(x => x == worldObjectToDelete))
             {
                 Destroy(worldObjectToDelete.gameObject);
@@ -235,6 +241,6 @@ namespace StrawberryNova
                 return new List<WorldObject>(tilePosToWorldObjects[posS]);
             return new List<WorldObject>();
         }
-		
+
     }
 }

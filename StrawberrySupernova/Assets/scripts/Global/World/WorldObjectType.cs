@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace StrawberryNova
 			public bool tileObject;
 			public bool hideInEditor;
 			public string script;
+			public Hashtable defaultAttributes;
 		};
 
 		public struct WorldObjectTypeDataFile
@@ -27,7 +29,6 @@ namespace StrawberryNova
 
 		public string name;
 		public GameObject prefab;
-		public WorldObjectDataEntry data;
 
 		public string displayName
 		{
@@ -54,6 +55,13 @@ namespace StrawberryNova
 			get{ return data.script; }
 			set{ data.script = value; }
 		}
+		public Hashtable defaultAttributes
+		{
+			get{ return data.defaultAttributes; }
+			set{ data.defaultAttributes = value; }
+		}
+
+		private WorldObjectDataEntry data;
 
 		/*
 		 * Returns a List containing all available world objects.
@@ -84,7 +92,8 @@ namespace StrawberryNova
 										interactable=singleObjectData.Value.interactable,
 										tileObject=singleObjectData.Value.tileObject,
 										hideInEditor=singleObjectData.Value.hideInEditor,
-										script=singleObjectData.Value.script
+										script=singleObjectData.Value.script,
+										defaultAttributes=singleObjectData.Value.defaultAttributes
 									}
 								);
 							}
