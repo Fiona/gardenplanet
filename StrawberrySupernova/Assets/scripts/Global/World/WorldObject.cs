@@ -15,6 +15,8 @@ namespace StrawberryNova
 		public WorldObjectScript script;
 		public WorldObjectType objectType;
 		public Hashtable attributes;
+
+//		public GameObject Get
 	}
 }
 

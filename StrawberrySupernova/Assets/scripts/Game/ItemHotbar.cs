@@ -199,6 +199,9 @@ namespace StrawberryNova
 
         private void StartItemScript()
         {
+            if(activeItemScript != null && selectedItemEntry != activeItemScriptItemEntry)
+                StopItemScript();
+
             var itemType = hotbarItems[selectedItemIndex].itemType;
             if(String.IsNullOrEmpty(itemType.Script) || selectedItemEntry == activeItemScriptItemEntry)
                 return;

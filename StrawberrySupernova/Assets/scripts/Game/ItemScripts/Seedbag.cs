@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using StompyBlondie;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace StrawberryNova
 {
@@ -28,14 +29,14 @@ namespace StrawberryNova
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                // Remove soil
+                // Get soil rotation
                 var soil = tilePos.GetTileWorldObjects("hoedsoil")[0];
                 var rotation = soil.gameObject.transform.localRotation;
-                controller.worldObjectManager.DeleteWorldObject(soil);
 
-                // Drop seedling in it's place
+                // Drop seeds on top
+                var type = controller.worldObjectManager.GetWorldObjectTypeByName("crop");
                 var seedling = controller.worldObjectManager.AddWorldObject(
-                    controller.worldObjectManager.GetWorldObjectTypeByName("crop"),
+                    type,
                     tilePos,
                     new Hashtable()
                     {
@@ -43,7 +44,8 @@ namespace StrawberryNova
                     }
                 );
                 seedling.gameObject.transform.localRotation = rotation;
-                gam
+
+                controller.RemovePlayerItem(item.itemType, item.attributes, 1);
                 yield return null;
             }
 

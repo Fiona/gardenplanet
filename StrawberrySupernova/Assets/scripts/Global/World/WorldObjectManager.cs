@@ -105,7 +105,7 @@ namespace StrawberryNova
             // Create game object
             GameObject newGameObject = null;
 
-            newGameObject = Instantiate(objectType.prefab);
+            newGameObject = new GameObject(objectType.name);
             newGameObject.transform.parent = transform;
             newGameObject.transform.localPosition = new Vector3(pos.x, pos.height, pos.y);
             newGameObject.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
@@ -117,7 +117,7 @@ namespace StrawberryNova
                 gameObject = newGameObject,
                 name = objectType.name,
                 objectType = objectType,
-                attributes=DeepClone.Clone(objectType.defaultAttributes)
+                attributes = new Hashtable(objectType.defaultAttributes)
             };
             if(attributes != null)
                 foreach(DictionaryEntry attr in attributes)
@@ -143,13 +143,30 @@ namespace StrawberryNova
                     {
                         var newComponent = newWorldObject.gameObject.AddComponent(script);
                         newWorldObject.script = newComponent as WorldObjectScript;
+                        newWorldObject.script.worldObject = newWorldObject;
                     }
                 }
             }
 
+            // Set up physics material
             var comp = newGameObject.GetComponentInChildren<BoxCollider>();
             if(comp != null)
                 comp.material = WorldObjectManager.slideMaterial;
+
+            // Set up appearence
+            var appearence = new GameObject("Appearence");
+            appearence.transform.SetParent(newGameObject.transform, false);
+
+            if(newWorldObject.script != null)
+            {
+                var prefab = newWorldObject.script.GetAppearencePrefab();
+                prefab.transform.SetParent(appearence.transform, false);
+            }
+            else if(objectType.prefab != null)
+            {
+                var prefab = Instantiate(objectType.prefab);
+                prefab.transform.SetParent(appearence.transform, false);
+            }
 
             return newWorldObject;
 
@@ -184,14 +201,12 @@ namespace StrawberryNova
         {
             if(worldObjectToDelete.objectType.tileObject)
             {
-                Debug.Log("delete tile obj");
                 foreach(var list in tilePosToWorldObjects)
                 {
                     foreach(var obj in new List<WorldObject>(list.Value))
                     {
                         if(obj == worldObjectToDelete)
                         {
-                            Debug.Log("delete from list");
                             tilePosToWorldObjects[list.Key].Remove(worldObjectToDelete);
                         }
                     }

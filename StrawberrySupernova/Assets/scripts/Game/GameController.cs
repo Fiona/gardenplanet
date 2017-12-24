@@ -81,7 +81,7 @@ namespace StrawberryNova
             inputManager = inputManagerObj.AddComponent<InputManager>();
 
             inWorldItems = new GameObject("In World Items");
-            
+
             // GUI objects
             var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
             worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
@@ -102,7 +102,7 @@ namespace StrawberryNova
             // Atmosphere
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
             atmosphere = atmosphereObj.GetComponent<Atmosphere>();
-            
+
             // Set up player and camera
             var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
             if(playerStartMarker != null)
@@ -192,8 +192,19 @@ namespace StrawberryNova
         public bool GivePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
         {
             return itemManager.GivePlayerItem(itemTypeId, attributes, quantity);
-        }        
-        
+        }
+
+        public bool RemovePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
+        {
+            return itemManager.RemovePlayerItem(itemType, attributes, quantity);
+        }
+
+        public bool RemovePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
+        {
+            return itemManager.RemovePlayerItem(itemTypeId, attributes, quantity);
+        }
+
+
         // Generates an item in the world at the specified position
         public void SpawnItemInWorld(ItemType itemType, System.Collections.Hashtable attributes, int amount,
             WorldPosition worldPos)
@@ -213,7 +224,7 @@ namespace StrawberryNova
                 newItemComponent.itemType = itemType;
             }
         }
-        
+
         public void StartCutscene()
         {
             inputManager.LockDirectInput();

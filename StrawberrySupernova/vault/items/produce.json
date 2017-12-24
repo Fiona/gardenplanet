@@ -20,7 +20,7 @@
             "StackSize": 32,
             "CanPickup": true,
             "Attributes": {"type":"cabbage"},
-            "script": "Seedbag"
+            "Script": "Seedbag"
         },
         "cabbage": {
             "ID": "cabbage",

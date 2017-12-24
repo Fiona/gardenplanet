@@ -40,12 +40,18 @@ namespace StrawberryNova
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                // Check for hoed soil, using the hoe on it causes it to be removed
+                // Check for hoed soil, using the hoe on it causes it and crops to be removed
                 var tileObjects = tilePos.GetTileWorldObjects("hoedsoil");
                 if(tileObjects.Count > 0)
                 {
                     foreach(var i in tileObjects)
                         controller.worldObjectManager.DeleteWorldObject(i);
+
+                    var cropObjects = tilePos.GetTileWorldObjects("crop");
+                    if(cropObjects.Count <= 0)
+                        yield break;
+                    foreach(var j in cropObjects)
+                        controller.worldObjectManager.DeleteWorldObject(j);
                     yield break;
                 }
 
