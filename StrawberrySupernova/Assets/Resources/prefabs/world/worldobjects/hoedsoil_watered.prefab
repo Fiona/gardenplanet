@@ -9,73 +9,44 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1791589888688356}
+  m_RootGameObject: {fileID: 1387861291631930}
   m_IsPrefabParent: 1
---- !u!1 &1637563806847384
+--- !u!1 &1387861291631930
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4927087784354084}
-  - component: {fileID: 33827594444297796}
-  - component: {fileID: 23936012820553294}
+  - component: {fileID: 4327169044488212}
+  - component: {fileID: 33552172720001582}
+  - component: {fileID: 23978016523703712}
   m_Layer: 0
-  m_Name: crop_cabbage_2
+  m_Name: hoedsoil_watered
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1791589888688356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4584286956964360}
-  m_Layer: 0
-  m_Name: crop_cabbage_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4584286956964360
+--- !u!4 &4327169044488212
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791589888688356}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 1387861291631930}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4927087784354084}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4927087784354084
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1637563806847384}
-  m_LocalRotation: {x: -0, y: 0.47805032, z: -0, w: 0.87833244}
-  m_LocalPosition: {x: 0, y: -0.06, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4584286956964360}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 57.116, z: 0}
---- !u!23 &23936012820553294
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!23 &23978016523703712
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1637563806847384}
+  m_GameObject: {fileID: 1387861291631930}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9079257da9e9c22469e100de76bb4502, type: 2}
+  - {fileID: 2100000, guid: 92d9f9b23ac0c754f9fea185a0b5c831, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,10 +75,10 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33827594444297796
+--- !u!33 &33552172720001582
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1637563806847384}
-  m_Mesh: {fileID: 4300000, guid: 25b795a2cd7fafc43be32cbfed0b3c20, type: 3}
+  m_GameObject: {fileID: 1387861291631930}
+  m_Mesh: {fileID: 4300000, guid: fb39847c9d1c482438d586565c11020a, type: 3}

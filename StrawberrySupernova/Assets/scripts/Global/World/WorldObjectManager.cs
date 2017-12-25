@@ -157,15 +157,16 @@ namespace StrawberryNova
             var appearence = new GameObject("Appearence");
             appearence.transform.SetParent(newGameObject.transform, false);
 
+            GameObject prefab = null;
             if(newWorldObject.script != null)
-            {
-                var prefab = newWorldObject.script.GetAppearencePrefab();
-                prefab.transform.SetParent(appearence.transform, false);
-            }
+                prefab = newWorldObject.script.GetAppearencePrefab();
             else if(objectType.prefab != null)
+                prefab = Instantiate(objectType.prefab);
+
+            if(prefab != null)
             {
-                var prefab = Instantiate(objectType.prefab);
                 prefab.transform.SetParent(appearence.transform, false);
+                prefab.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
             }
 
             return newWorldObject;
