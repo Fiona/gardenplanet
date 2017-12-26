@@ -1,0 +1,8 @@
+{
+  "crops":{
+    "cabbage":{
+      "seasons":[0,1,2,3],
+      "growth_per_day":[12.0,20.0]
+    }
+  }
+}

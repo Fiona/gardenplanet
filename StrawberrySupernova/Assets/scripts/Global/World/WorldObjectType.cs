@@ -81,7 +81,7 @@ namespace StrawberryNova
                         using(var fh = File.OpenText(f))
                         {
                             var fileConents = fh.ReadToEnd();
-                            fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);
+                            //fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);
                             var loadedDataFile = JsonMapper.ToObject<WorldObjectTypeDataFile>(fileConents);
                             foreach(var singleObjectData in loadedDataFile.worldObjectTypes)
                             {

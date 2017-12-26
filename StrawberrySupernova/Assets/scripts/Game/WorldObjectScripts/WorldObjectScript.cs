@@ -10,7 +10,7 @@ namespace StrawberryNova
 	public abstract class WorldObjectScript : MonoBehaviour
 	{
 		public WorldObject worldObject;
-		
+
 		/*
 		 * Method that returns a boolean denoting if the Tick coroutine should
 		 * be used on this world object
@@ -58,6 +58,14 @@ namespace StrawberryNova
 		public virtual GameObject GetAppearencePrefab()
 		{
 			return Instantiate(worldObject.objectType.prefab);
+		}
+
+		/*
+		 * Gets the name that should be shown to the player
+		 */
+		public virtual string GetDisplayName()
+		{
+			return worldObject.objectType.displayName;
 		}
 	}
 }

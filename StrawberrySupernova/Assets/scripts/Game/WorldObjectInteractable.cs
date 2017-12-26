@@ -7,17 +7,13 @@ namespace StrawberryNova
     {
         public WorldObject worldObject;
 
-        Glowable focusGlow;
-        Glowable highlightGlow;
-        bool doHighlight;
-        bool doFocus;
-        bool focussed;
+        Glowable glow;
         GameController controller;
 
         public void Start()
         {
-            focusGlow = gameObject.AddComponent<Glowable>();		
-            highlightGlow = gameObject.AddComponent<Glowable>();
+            var appearenceComponent = transform.GetChild(0).GetChild(0).gameObject;
+            glow = appearenceComponent.AddComponent<Glowable>();
         }
 
         public void Awake()
@@ -27,43 +23,24 @@ namespace StrawberryNova
 
         public void Update()
         {
-            if(focussed && worldObject != null && controller != null && controller.objectCurrentlyInteractingWith == null)
-            {
-                controller.ShowPopup(controller.worldObjectManager.GetWorldObjectTypeByName(worldObject.name).displayName);
-            }
-        }
-
-        public void LateUpdate()
-        {
-            if((doHighlight && doFocus) || controller.objectCurrentlyInteractingWith == worldObject)
-            {
-                focusGlow.GlowTo(new Color(0f, .5f, 1f), .5f);
-                focussed = true;
-            }
-            else
-            {
-                focussed = false;
-                if(doHighlight)
-                    highlightGlow.GlowTo(new Color(.6f, .75f, .86f), .2f);
-            }
-            doHighlight = false;
-            doFocus = false;
+            if(controller.objectCurrentlyInteractingWith == worldObject)
+                FullHighlight();
         }
 
         public void Highlight()
         {
-            doHighlight = true;
+            glow.GlowTo(new Color(.6f, .75f, .86f), .5f);
         }
 
-        public void Focus()
+        public void FullHighlight()
         {
-            doFocus = true;
+            glow.GlowTo(new Color(0f, .5f, 1f), .5f);
+            if(worldObject != null && controller != null && controller.objectCurrentlyInteractingWith == null)
+                controller.ShowPopup(worldObject.GetDisplayName());
         }
 
         public void InteractWith()
         {
-            if(!doHighlight || !doFocus)
-                return;
             StartCoroutine(controller.PlayerInteractWith(worldObject));
         }
 

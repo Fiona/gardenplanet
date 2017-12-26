@@ -154,20 +154,7 @@ namespace StrawberryNova
                 comp.material = WorldObjectManager.slideMaterial;
 
             // Set up appearence
-            var appearence = new GameObject("Appearence");
-            appearence.transform.SetParent(newGameObject.transform, false);
-
-            GameObject prefab = null;
-            if(newWorldObject.script != null)
-                prefab = newWorldObject.script.GetAppearencePrefab();
-            else if(objectType.prefab != null)
-                prefab = Instantiate(objectType.prefab);
-
-            if(prefab != null)
-            {
-                prefab.transform.SetParent(appearence.transform, false);
-                prefab.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
-            }
+            newWorldObject.SetAppearence();
 
             return newWorldObject;
 

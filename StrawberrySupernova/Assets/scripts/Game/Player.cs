@@ -112,7 +112,6 @@ namespace StrawberryNova
 				SetRotation(newDir);
 
 				float found = Vector3.Angle(transform.forward, turnToPos-myPos);
-				Debug.Log(Mathf.Abs(found));
 				if(Mathf.Abs(found) < 40f)
 					break;
 

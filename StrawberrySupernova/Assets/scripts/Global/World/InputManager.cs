@@ -47,7 +47,7 @@ namespace StrawberryNova
             if(controller == null)
                 controller = FindObjectOfType<GameController>();
             if(controller == null)
-                return;            
+                return;
             var gameController = (GameController)controller;
 
             if(!directInputEnabled)
@@ -66,7 +66,7 @@ namespace StrawberryNova
             // Jumping
             if(Input.GetKeyDown(KeyCode.Space))
                 gameController.player.Jump();
-            
+
             // Hovering mouse over objects or in-world items
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -92,13 +92,13 @@ namespace StrawberryNova
                 }
                 else
                 {
-                    // Fallback to trying to interact with world objects                    
-                    var worldObjectComponent = hit.transform.gameObject.GetComponent<WorldObjectInteractable>();
+                    // Fallback to trying to interact with world objects
+                    var worldObjectComponent = hit.transform.gameObject.GetComponentInParent<WorldObjectInteractable>();
                     if(worldObjectComponent != null)
                     {
                         if(Vector3.Distance(gameController.player.transform.position, worldObjectComponent.gameObject.transform.position) < Consts.PLAYER_INTERACT_DISTANCE)
                         {
-                            worldObjectComponent.Focus();
+                            worldObjectComponent.FullHighlight();
                             if(Input.GetMouseButtonUp(0))
                             {
                                 worldObjectComponent.InteractWith();

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.IO;
 using System.Linq;
+using LitJson;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,8 @@ namespace StrawberryNova
         public PlayerCamera mainCamera;
         public Player player;
 
+        [HideInInspector]
+        public JsonData globalConfig;
         [HideInInspector]
         public Tilemap tilemap;
         [HideInInspector]
@@ -50,6 +54,14 @@ namespace StrawberryNova
 
         public void Awake()
         {
+            // Load global config
+            var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
+            var jsonContents = "{}";
+            if(File.Exists(configFilePath))
+                using(var fh = File.OpenText(configFilePath))
+                    jsonContents = fh.ReadToEnd();
+            globalConfig = JsonMapper.ToObject(jsonContents);
+
             // Init
             tileTypeSet = new TileTypeSet("default");
             map = new Map("devtest");
@@ -237,9 +249,12 @@ namespace StrawberryNova
             inputManager.UnlockDirectInput();
         }
 
-        public void PlayerDoSleep()
+        public IEnumerator PlayerDoSleep()
         {
+            yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeOut(2f));
             worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
+            yield return new WaitForSeconds(2f);
+            yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeIn(3f));
         }
 
         public IEnumerator OpenInGameMenu()

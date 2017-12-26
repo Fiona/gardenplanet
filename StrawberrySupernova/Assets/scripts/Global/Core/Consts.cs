@@ -131,6 +131,7 @@ namespace StrawberryNova
 	    // FILESYSTEM
 	    // -----------------------------
 
+		public const string FILE_GLOBAL_CONFIG = "globalconfig.json";
 	    public const string FILE_DEFAULT_TILE_SET = "tiles";
 	    public const string DATA_DIR = "vault";
 	    public const string DATA_DIR_MAPS = "maps";
@@ -153,7 +154,7 @@ namespace StrawberryNova
 		public const string PREFAB_PATH_EDITOR_MODE_TILE_DRAWING = "mapeditor/gui/EditorModeTileDrawing";
         public const string PREFAB_PATH_EDITOR_MODE_MARKER = "mapeditor/gui/EditorModeMarker";
 		public const string PREFAB_PATH_EDITOR_MODE_WORLD_OBJECTS = "mapeditor/gui/EditorModeWorldObjects";
-		public const string PREFAB_PATH_EDITOR_MODE_TILE_TAGS = "mapeditor/gui/EditorModeTileTags";		
+		public const string PREFAB_PATH_EDITOR_MODE_TILE_TAGS = "mapeditor/gui/EditorModeTileTags";
 
 	}
 
