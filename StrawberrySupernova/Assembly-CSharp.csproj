@@ -127,7 +127,6 @@
     <Compile Include="Assets\scripts\Global\Core\ConvertTypeHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\DirectionHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\EnumerableMap.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Events.cs" />
     <Compile Include="Assets\scripts\Global\Core\Exception.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameTime.cs" />
     <Compile Include="Assets\scripts\Global\Core\LerpHelper.cs" />

@@ -30,8 +30,11 @@ namespace StrawberryNova
 
                 // Get any tile objects on there so we can check for crops and hoed ground because we can
                 // use it on those to destroy them.
-                if(tilePos.GetTileWorldObjects("hoedsoil").Count > 0)
-                    return true;
+                var crops = tilePos.GetTileWorldObjects("crop");
+                if(crops.Count > 0)
+                    if(crops.Any(crop => crop.GetAttrString("type") == ""))
+                        return true;
+                // Can't use if something in the way
                 if(tilePos.GetTileWorldObjects().Count > 0)
                     return false;
                 // Definitely nothing there so yep
@@ -40,24 +43,19 @@ namespace StrawberryNova
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                // Check for hoed soil, using the hoe on it causes it and crops to be removed
-                var tileObjects = tilePos.GetTileWorldObjects("hoedsoil");
+                // Check for hoed soil, it can be unhoed if empty
+                var tileObjects = tilePos.GetTileWorldObjects("crop");
                 if(tileObjects.Count > 0)
                 {
                     foreach(var i in tileObjects)
-                        controller.worldObjectManager.DeleteWorldObject(i);
-
-                    var cropObjects = tilePos.GetTileWorldObjects("crop");
-                    if(cropObjects.Count <= 0)
-                        yield break;
-                    foreach(var j in cropObjects)
-                        controller.worldObjectManager.DeleteWorldObject(j);
+                        if(i.GetAttrString("type") == "")
+                            controller.worldObjectManager.DeleteWorldObject(i);
                     yield break;
                 }
 
                 // Empty tile so hoe the ground
                 var soil = controller.worldObjectManager.AddWorldObject(
-                    controller.worldObjectManager.GetWorldObjectTypeByName("hoedsoil"), tilePos
+                    controller.worldObjectManager.GetWorldObjectTypeByName("crop"), tilePos
                 );
                 soil.gameObject.transform.localRotation = Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f);
             }

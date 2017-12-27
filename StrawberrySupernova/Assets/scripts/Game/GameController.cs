@@ -249,12 +249,9 @@ namespace StrawberryNova
             inputManager.UnlockDirectInput();
         }
 
-        public IEnumerator PlayerDoSleep()
+        public IEnumerator PlayerSleep()
         {
-            yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeOut(2f));
-            worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
-            yield return new WaitForSeconds(2f);
-            yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeIn(3f));
+            yield return StartCoroutine(player.Sleep());
         }
 
         public IEnumerator OpenInGameMenu()

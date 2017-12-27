@@ -21,7 +21,7 @@ namespace StrawberryNova
 				result
 			));
 			if(result.Value == 1)
-				yield return StartCoroutine(controller.PlayerDoSleep());
+				yield return StartCoroutine(controller.PlayerSleep());
 		}
 
 	}

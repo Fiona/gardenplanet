@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Object = System.Object;
 
 namespace StrawberryNova
 {
@@ -9,16 +10,16 @@ namespace StrawberryNova
      * It can be constructed with minutes, hours, days, seasons and years.
      * Available members are Minutes, Hours, Days, Seasons, Years, WeekDay,
      * WeekDayName.
-     * 
+     *
      * DateSeason, DateSeasonName members are the current sesason the time
      * is currently going through.
-     * 
+     *
      * DateDay is the current number of the day in the season (starting at 1).
-     * 
+     *
      * TimeHour and TimeMinute will return the current hour and minute in the
      * day that the time is at.
      */
-    public class GameTime
+    public class GameTime: IComparable
     {
 
         int _minutes;
@@ -115,7 +116,7 @@ namespace StrawberryNova
             _minutes += days * Consts.NUM_HOURS_IN_DAY * Consts.NUM_MINUTES_IN_HOUR;
             _minutes += seasons * Consts.NUM_DAYS_IN_SEASON * Consts.NUM_HOURS_IN_DAY * Consts.NUM_MINUTES_IN_HOUR;
             _minutes += years * Consts.SEASONS.Length * Consts.NUM_DAYS_IN_SEASON  * Consts.NUM_HOURS_IN_DAY * Consts.NUM_MINUTES_IN_HOUR;
-        }       
+        }
 
         public GameTime(GameTime existingGameTime)
         {
@@ -131,6 +132,67 @@ namespace StrawberryNova
         public static GameTime operator -(GameTime left, GameTime right)
         {
             return new GameTime(left.Minutes - right.Minutes);
+        }
+
+        public override bool Equals(Object obj)
+        {
+            var item = obj as GameTime;
+
+            if(item == null)
+                return false;
+
+            return item.Minutes == Minutes;
+        }
+
+        public override int GetHashCode()
+        {
+            return Minutes;
+        }
+
+        public int CompareTo(Object obj)
+        {
+            var item = obj as GameTime;
+            if(item == null)
+                return 1;
+            if(Minutes < item.Minutes)
+                return -1;
+            return Minutes > item.Minutes ? 1 : 0;
+        }
+
+        public static bool operator ==(GameTime left, GameTime right)
+        {
+            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
+        }
+
+        public static bool operator !=(GameTime left, GameTime right)
+        {
+            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : !left.Equals(right);
+        }
+
+        public static bool operator <=(GameTime left, GameTime right)
+        {
+            return left.Minutes <= right.Minutes;
+        }
+
+        public static bool operator <(GameTime left, GameTime right)
+        {
+            return left.Minutes < right.Minutes;
+        }
+
+        public static bool operator >=(GameTime left, GameTime right)
+        {
+            return left.Minutes >= right.Minutes;
+        }
+
+        public static bool operator >(GameTime left, GameTime right)
+        {
+            return left.Minutes > right.Minutes;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("GameTime. Min:{0} Hour:{1} Day:{2} Seas:{3} Year:{4}", TimeMinute, TimeHour, DateDay,
+                DateSeason, Years);
         }
 
     }

@@ -5,19 +5,16 @@ using UnityEngine.SceneManagement;
 
 namespace StrawberryNova
 {
-	
+
 	public class App: MonoBehaviour
 	{
 
 	    [HideInInspector]
 	    public AppState state;
-		[HideInInspector]
-		public Events events;
 
 	    public void Awake()
 	    {
 			DontDestroyOnLoad(this);
-			events = new Events();
 			StartNewState(Consts.INITIAL_APP_STATE);
 	    }
 

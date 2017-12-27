@@ -170,10 +170,10 @@ namespace StrawberryNova
             var time = new GameTime(minutes: 7, hours: 2, days: 16, seasons: 2, years: 11);
             Assert.AreEqual(time.Minutes, 7 + (2 * anHour) + (16 * aDay) + (2 * aSeason) + (11 * aYear));
             Assert.AreEqual(time.Hours, 2 + (Consts.NUM_HOURS_IN_DAY * 16) +
-                (2 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON) +
-                (11 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON * Consts.SEASONS.Length));
+                                        (2 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON) +
+                                        (11 * Consts.NUM_HOURS_IN_DAY * Consts.NUM_DAYS_IN_SEASON * Consts.SEASONS.Length));
             Assert.AreEqual(time.Days, 16 + (2 * Consts.NUM_DAYS_IN_SEASON) +
-                (11 * Consts.NUM_DAYS_IN_SEASON * Consts.SEASONS.Length));
+                                       (11 * Consts.NUM_DAYS_IN_SEASON * Consts.SEASONS.Length));
             Assert.AreEqual(time.Seasons, 2 + (11 * Consts.SEASONS.Length));
             Assert.AreEqual(time.Years, 11);
             Assert.AreEqual(time.TimeHour, 2);
@@ -361,6 +361,133 @@ namespace StrawberryNova
             Assert.AreEqual((time1 - time2).TimeHour, 1);
         }
 
+        [Test]
+        public void TestEquality()
+        {
+            Assert.AreEqual(
+                new GameTime(minutes: 10),
+                new GameTime(minutes: 10)
+            );
+
+            Assert.AreNotEqual(
+                new GameTime(minutes: 15),
+                new GameTime(minutes: 2)
+            );
+
+            Assert.AreEqual(
+                new GameTime(minutes: 25, hours:4),
+                new GameTime(minutes: 25, hours:4)
+            );
+            Assert.AreNotEqual(
+                new GameTime(minutes: 15, hours:8),
+                new GameTime(minutes: 2, hours:8)
+            );
+
+            Assert.AreEqual(
+                new GameTime(minutes: 35, hours:2, days:16),
+                new GameTime(minutes: 35, hours:2, days:16)
+            );
+            Assert.AreNotEqual(
+                new GameTime(minutes: 15, hours:8, days:10),
+                new GameTime(minutes: 2, hours:8, days:10)
+            );
+
+            Assert.AreEqual(
+                new GameTime(minutes: 25, hours:4, days:18, seasons:2),
+                new GameTime(minutes: 25, hours:4, days:18, seasons:2)
+            );
+            Assert.AreNotEqual(
+                new GameTime(minutes: 15, hours:8, days:19, seasons:1),
+                new GameTime(minutes: 2, hours:8, days:19, seasons:2)
+            );
+
+            Assert.AreEqual(
+                new GameTime(minutes: 25, hours:4, days:18, seasons:2, years:1000),
+                new GameTime(minutes: 25, hours:4, days:18, seasons:2, years:1000)
+            );
+            Assert.AreNotEqual(
+                new GameTime(minutes: 15, hours:8, days:19, seasons:1, years:2001),
+                new GameTime(minutes: 2, hours:8, days:19, seasons:2, years:2002)
+            );
+        }
+
+        [Test]
+        public void TestGreater()
+        {
+            Assert.True(
+                new GameTime(minutes:22) > new GameTime(minutes:10)
+                );
+            Assert.False(
+                new GameTime(minutes:2) > new GameTime(minutes:16)
+            );
+
+            Assert.True(
+                new GameTime(minutes:22, hours:3) > new GameTime(minutes:10, hours:1)
+            );
+            Assert.False(
+                new GameTime(minutes:2,hours:1) > new GameTime(minutes:16, hours:12)
+            );
+
+            Assert.True(
+                new GameTime(minutes:22, hours:5, days:15) > new GameTime(minutes:10, hours:12, days:2)
+            );
+            Assert.False(
+                new GameTime(minutes:2, hours:7, days:2) > new GameTime(minutes:16, hours:12, days:30)
+            );
+
+            Assert.True(
+                new GameTime(minutes:22, hours:5, days:15, seasons:4) > new GameTime(minutes:10, hours:12, days:2, seasons:2)
+            );
+            Assert.False(
+                new GameTime(minutes:2, hours:7, days:10, seasons:2) > new GameTime(minutes:16, hours:12, days:5, seasons:4)
+            );
+
+            Assert.True(
+                new GameTime(minutes:22, hours:5, days:15, seasons:2, years:3000) > new GameTime(minutes:10, hours:12, days:2, seasons:4, years:2000)
+            );
+            Assert.False(
+                new GameTime(minutes:2, hours:7, days:10, seasons:3, years:1) > new GameTime(minutes:16, hours:12, days:5, seasons:2, years:20)
+            );
+        }
+
+        [Test]
+        public void TestLess()
+        {
+            Assert.True(
+                new GameTime(minutes:2) < new GameTime(minutes:16)
+            );
+            Assert.False(
+                new GameTime(minutes:22) < new GameTime(minutes:10)
+            );
+
+            Assert.True(
+                new GameTime(minutes:2,hours:1) < new GameTime(minutes:16, hours:12)
+            );
+            Assert.False(
+                new GameTime(minutes:22, hours:3) < new GameTime(minutes:10, hours:1)
+            );
+
+            Assert.True(
+                new GameTime(minutes:2, hours:7, days:2) < new GameTime(minutes:16, hours:12, days:30)
+            );
+            Assert.False(
+                new GameTime(minutes:22, hours:5, days:15) < new GameTime(minutes:10, hours:12, days:2)
+            );
+
+            Assert.True(
+                new GameTime(minutes:2, hours:7, days:10, seasons:2) < new GameTime(minutes:16, hours:12, days:5, seasons:4)
+            );
+            Assert.False(
+                new GameTime(minutes:22, hours:5, days:15, seasons:4) < new GameTime(minutes:10, hours:12, days:2, seasons:2)
+            );
+
+            Assert.True(
+                new GameTime(minutes:2, hours:7, days:10, seasons:3, years:1) < new GameTime(minutes:16, hours:12, days:5, seasons:2, years:20)
+            );
+            Assert.False(
+                new GameTime(minutes:22, hours:5, days:15, seasons:2, years:3000) < new GameTime(minutes:10, hours:12, days:2, seasons:4, years:2000)
+            );
+        }
+
     }
 }
-

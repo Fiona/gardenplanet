@@ -1,13 +1,5 @@
 {
     "worldObjectTypes" : {
-        "hoedsoil" : {
-            "displayName" : "Hoed Soil",
-            "interactable" : false,
-            "script" : "HoedSoil",
-            "tileObject" : true,
-            "hideInEditor" : true
-        },
-
         "crop" : {
             "displayName" : "Crop",
             "interactable" : false,

@@ -24,27 +24,13 @@ namespace StrawberryNova
                 if(tilePos.TileDistance(controller.player.CurrentTilePosition) >= Consts.PLAYER_TOOLS_RANGE)
                     return false;
 
-                return tilePos.GetTileWorldObjects("hoedsoil").Count > 0;
+                return tilePos.GetTileWorldObjects("crop").Any(crop => crop.GetAttrString("type") == "");
             }
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                // Get soil rotation
-                var soil = tilePos.GetTileWorldObjects("hoedsoil")[0];
-                var rotation = soil.gameObject.transform.localRotation;
-
-                // Drop seeds on top
-                var type = controller.worldObjectManager.GetWorldObjectTypeByName("crop");
-                var seedling = controller.worldObjectManager.AddWorldObject(
-                    type,
-                    tilePos,
-                    new Hashtable()
-                    {
-                        {"type", item.attributes["type"]}
-                    }
-                );
-                seedling.gameObject.transform.localRotation = rotation;
-
+                tilePos.GetTileWorldObjects("crop")[0].attributes["type"] = item.attributes["type"];
+                // TODO: force refresh appearence of crop
                 controller.RemovePlayerItem(item.itemType, item.attributes, 1);
                 yield return null;
             }
