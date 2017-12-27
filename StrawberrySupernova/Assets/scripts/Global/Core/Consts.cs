@@ -103,6 +103,8 @@ namespace StrawberryNova
 
         public const int HOTBAR_SIZE = 10;
 
+		public const int CROP_GROWTH_HOUR = 3;
+
         // -----------------------------
         // GUI
         // -----------------------------

@@ -213,6 +213,7 @@ namespace StrawberryNova
             activeItemScript = gameObject.AddComponent(script) as ItemScript;
             activeItemScriptItemEntry = selectedItemEntry;
             activeItemScript.item = activeItemScriptItemEntry;
+            activeItemScript.controller = controller;
             activeItemScript.StartsHolding();
         }
 

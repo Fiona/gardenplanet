@@ -7,7 +7,8 @@
       "Category": "tools",
       "StackSize": 1,
       "CanPickup": true,
-      "Attributes": {}
+      "Attributes": {},
+      "Script": "WateringCan"
     },
     "broken_trowelie": {
       "ID": "broken_trowelie",

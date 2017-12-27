@@ -12,13 +12,6 @@ namespace StrawberryNova
     {
         public class Seedbag : ItemScript
         {
-            GameController controller;
-
-            public override void StartsHolding()
-            {
-                controller = FindObjectOfType<GameController>();
-            }
-
             public override bool CanBeUsedOnTilePos(TilePosition tilePos)
             {
                 if(tilePos.TileDistance(controller.player.CurrentTilePosition) >= Consts.PLAYER_TOOLS_RANGE)
@@ -29,8 +22,9 @@ namespace StrawberryNova
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                tilePos.GetTileWorldObjects("crop")[0].attributes["type"] = item.attributes["type"];
-                // TODO: force refresh appearence of crop
+                var crop = tilePos.GetTileWorldObjects("crop")[0];
+                crop.attributes["type"] = item.attributes["type"];
+                crop.SetAppearence();
                 controller.RemovePlayerItem(item.itemType, item.attributes, 1);
                 yield return null;
             }

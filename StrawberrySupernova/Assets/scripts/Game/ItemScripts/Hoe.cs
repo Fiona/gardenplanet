@@ -11,12 +11,6 @@ namespace StrawberryNova
     {
         public class Hoe : ItemScript
         {
-            GameController controller;
-
-            public override void StartsHolding()
-            {
-                controller = FindObjectOfType<GameController>();
-            }
 
             public override bool CanBeUsedOnTilePos(TilePosition tilePos)
             {

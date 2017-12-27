@@ -201,6 +201,7 @@ namespace StrawberryNova
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));
             controller.worldTimer.gameTime += new GameTime(hours: 4);
             SetPassOutEvent();
+            controller.worldTimer.DoTimerEvents();
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(4f, new Color(1f,1f,1f)));
             controller.EndCutscene();

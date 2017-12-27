@@ -10,6 +10,7 @@ namespace StrawberryNova
     public abstract class ItemScript: MonoBehaviour
     {
         public Inventory.InventoryItemEntry item;
+        public GameController controller;
 
         // Called when the Item is put in the player's hand and the script is started.
         // Use for initialisation.

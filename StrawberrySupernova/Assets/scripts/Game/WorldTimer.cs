@@ -66,12 +66,7 @@ namespace StrawberryNova
                 }
 
                 // Trigger any events, not done in minute check because time could change later
-                if(eventCallbacks.Count > 0 && eventCallbacks.First().Key < gameTime)
-                {
-                    foreach(var action in eventCallbacks.First().Value)
-                        action(gameTime);
-                    eventCallbacks.Remove(eventCallbacks.First().Key);
-                }
+                DoTimerEvents();
 
                 UpdateDisplay();
                 yield return new WaitForFixedUpdate();
@@ -88,8 +83,17 @@ namespace StrawberryNova
 
         public void GoToNextDay(int hourToStartAt)
         {
-            gameTime = new GameTime(days: gameTime.Days + 1, seasons: gameTime.Seasons, years: gameTime.Years) +
-                       new GameTime(hours: hourToStartAt);
+            gameTime = new GameTime(days: gameTime.Days + 1, hours: hourToStartAt);
+            DoTimerEvents();
+        }
+
+        public void DoTimerEvents()
+        {
+            if(eventCallbacks.Count <= 0 || eventCallbacks.First().Key >= gameTime)
+                return;
+            foreach(var action in eventCallbacks.First().Value)
+                action(gameTime);
+            eventCallbacks.Remove(eventCallbacks.First().Key);
         }
 
         public void RemindMe(GameTime atTime, Action<GameTime> callback)
