@@ -15,8 +15,19 @@ namespace StrawberryNova
             SetDailyReminder();
         }
 
+        // Harvestable when fully grown
+        public override IEnumerator PlayerInteract()
+        {
+            if(worldObject.GetAttrFloat("growth") < 100f)
+                yield break;
+            controller.GivePlayerItem(worldObject.GetAttrString("type"), new Hashtable(), 1);
+            controller.worldTimer.DontRemindMe(DailyGrowth);
+            //controller.worldObjectManager.LateDeleteWorldObject(worldObject);
+        }
+
         public override GameObject GetAppearencePrefab()
         {
+            var cropType = worldObject.GetAttrString("type");
             var appearenceHolder = new GameObject("CropAppearence");
 
             // Add soil
@@ -28,33 +39,80 @@ namespace StrawberryNova
             ).transform.SetParent(appearenceHolder.transform, false);
 
             // If nothing else this is all we want
-            if(worldObject.GetAttrString("type") == "")
+            if(cropType == "")
                 return appearenceHolder;
 
             // If it's been planted on, add additional visuals
+            var fullyGrown = false;
             var additionalPrefabName = "planted_seeds";
-            if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05)
+            if(worldObject.GetAttrFloat("growth") >= 100f)
             {
-                additionalPrefabName = "crop_cabbage_1";
+                // Finished one is interactable
+                additionalPrefabName = String.Format("crop_{0}_grown", cropType);
+                fullyGrown = true;
             }
-            Instantiate(
+            else if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05)
+            {
+                // Work out which stage to display
+                var numStages = (int)controller.globalConfig["crops"][cropType]["num_growth_stages"];
+                var stageAt = Math.Ceiling(numStages * (worldObject.GetAttrFloat("growth") / 100f));
+                additionalPrefabName = String.Format("crop_{0}_{1}", cropType, stageAt);
+                // Show wilted version if applicable
+                if(worldObject.GetAttrBool("wilting"))
+                    additionalPrefabName += "_wilting";
+            }
+
+            var additionalPrefab = Instantiate(
                 Resources.Load<GameObject>(Path.Combine(Consts.WORLD_OBJECTS_PREFABS_PATH, additionalPrefabName))
-            ).transform.SetParent(appearenceHolder.transform, false);
+            );
+            additionalPrefab.transform.SetParent(appearenceHolder.transform, false);
+
+            if(fullyGrown)
+            {
+                var interactable = additionalPrefab.AddComponent<WorldObjectInteractable>();
+                interactable.SetAppearenceObject(additionalPrefab);
+                interactable.worldObject = worldObject;
+                additionalPrefab.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
+            }
 
             return appearenceHolder;
         }
 
+        public override string GetDisplayName()
+        {
+            return controller.itemManager.GetItemTypeByID(worldObject.GetAttrString("type")).DisplayName;
+        }
+
         public void DailyGrowth(GameTime gameTime)
         {
+            var cropType = worldObject.GetAttrString("type");
+
             // If not seeded yet we go away
-            if(worldObject.GetAttrString("type") == "")
+            if(cropType == "")
             {
                 controller.worldObjectManager.DeleteWorldObject(worldObject);
                 return;
             }
 
-            // Dry up
-            worldObject.attributes["watered"] = false;
+            // Watered plants grow
+            if(worldObject.GetAttrBool("watered"))
+            {
+                var growthMin = (float)(double)controller.globalConfig["crops"][cropType]["growth_per_day"][0];
+                var growthMax = (float)(double)controller.globalConfig["crops"][cropType]["growth_per_day"][1];
+                var growthAmount = UnityEngine.Random.Range(growthMin, growthMax);
+                var currentGrowth = worldObject.GetAttrFloat("growth");
+                worldObject.SetAttrFloat("growth", currentGrowth + growthAmount);
+                if(worldObject.GetAttrFloat("growth") > 100.0f)
+                    worldObject.SetAttrFloat("growth", 100f);
+                // Dry up and un wilt
+                worldObject.SetAttrBool("wilting", false);
+                worldObject.SetAttrBool("watered", false);
+            }
+            else
+            {
+                // Unwatered plants wilt
+                worldObject.SetAttrBool("wilting", true);
+            }
 
             // Reset appearence etc
             worldObject.SetAppearence();

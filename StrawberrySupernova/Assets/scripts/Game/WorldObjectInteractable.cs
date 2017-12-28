@@ -9,11 +9,13 @@ namespace StrawberryNova
 
         Glowable glow;
         GameController controller;
+        GameObject appearenceObject;
 
         public void Start()
         {
-            var appearenceComponent = transform.GetChild(0).GetChild(0).gameObject;
-            glow = appearenceComponent.AddComponent<Glowable>();
+            if(appearenceObject == null)
+                appearenceObject = transform.GetChild(0).GetChild(0).gameObject;
+            glow = appearenceObject.AddComponent<Glowable>();
         }
 
         public void Awake()
@@ -25,6 +27,11 @@ namespace StrawberryNova
         {
             if(controller.objectCurrentlyInteractingWith == worldObject)
                 FullHighlight();
+        }
+
+        public void SetAppearenceObject(GameObject appearence)
+        {
+            appearenceObject = appearence;
         }
 
         public void Highlight()

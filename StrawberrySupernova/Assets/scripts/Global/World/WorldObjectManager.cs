@@ -17,6 +17,7 @@ namespace StrawberryNova
         public List<WorldObject> worldObjects;
 
         private Dictionary<string, List<WorldObject>> tilePosToWorldObjects;
+        private List<WorldObject> lateDeleteWorldObjects;
 
         public void Awake()
         {
@@ -24,7 +25,15 @@ namespace StrawberryNova
                 WorldObjectManager.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;
             worldObjectTypes = WorldObjectType.GetAllWorldObjectTypes();
             worldObjects = new List<WorldObject>();
+            lateDeleteWorldObjects = new List<WorldObject>();
             tilePosToWorldObjects = new Dictionary<string, List<WorldObject>>();
+        }
+
+        public void LateUpdate()
+        {
+            foreach(var obj in new List<WorldObject>(lateDeleteWorldObjects))
+                DeleteWorldObject(obj);
+            lateDeleteWorldObjects = new List<WorldObject>();
         }
 
         /*
@@ -210,6 +219,12 @@ namespace StrawberryNova
                 Destroy(worldObjectToDelete.gameObject);
                 worldObjects.Remove(worldObjectToDelete);
             }
+        }
+
+
+        public void LateDeleteWorldObject(WorldObject worldObjectToDelete)
+        {
+            lateDeleteWorldObjects.Add(worldObjectToDelete);
         }
 
         public void SetWorldObjectDirection(WorldObject worldObject, EightDirection direction)

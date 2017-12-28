@@ -12,7 +12,10 @@ namespace StrawberryNova
                 if(tilePos.TileDistance(controller.player.CurrentTilePosition) >= Consts.PLAYER_TOOLS_RANGE)
                     return false;
 
-                return tilePos.GetTileWorldObjects("crop").Count > 0;
+                var crops = tilePos.GetTileWorldObjects("crop");
+                if(crops.Count == 0 || crops[0].GetAttrFloat("growth") >= 100f)
+                    return false;
+                return true;
             }
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)

@@ -9,7 +9,8 @@
             "defaultAttributes": {
                 "type" : "",
                 "watered" : false,
-                "growth" : 0.0
+                "growth" : 0.0,
+                "wilting" : true
             }
         }
     }

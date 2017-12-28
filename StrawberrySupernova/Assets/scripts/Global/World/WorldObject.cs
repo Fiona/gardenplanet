@@ -50,11 +50,21 @@ namespace StrawberryNova
             return (bool)((JsonData)attributes[key]);
         }
 
+        public void SetAttrBool(string key, bool val)
+        {
+            attributes[key] = val;
+        }
+
         public string GetAttrString(string key)
         {
             if(attributes[key] is string)
                 return (string)attributes[key];
             return (string)((JsonData)attributes[key]);
+        }
+
+        public void SetAttrString(string key, string val)
+        {
+            attributes[key] = val;
         }
 
         public float GetAttrFloat(string key)
@@ -64,11 +74,21 @@ namespace StrawberryNova
             return (float)(double)((JsonData)attributes[key]);
         }
 
+        public void SetAttrFloat(string key, float val)
+        {
+            attributes[key] = val;
+        }
+
         public int GetAttrInt(string key)
         {
             if(attributes[key] is int)
                 return (int)attributes[key];
             return (int)((JsonData)attributes[key]);
+        }
+
+        public void SetAttrInt(string key, int val)
+        {
+            attributes[key] = val;
         }
 
     }

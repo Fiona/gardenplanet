@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4468451058130162}
   - component: {fileID: 33534926238202076}
   - component: {fileID: 23510169323574810}
+  - component: {fileID: 65945489597125736}
   m_Layer: 0
   m_Name: crop_cabbage_grown
   m_TagString: Untagged
@@ -51,14 +52,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278764139617308}
-  m_LocalRotation: {x: -8.5962303e-17, y: 0.7872976, z: 1.0453858e-17, w: -0.61657315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4968451238100292}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -103.867004, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4968451238100292
 Transform:
   m_ObjectHideFlags: 1
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437132018671902}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014237946, y: 0.5094287, z: -0.112862505}
+  m_LocalPosition: {x: -0, y: 0.089, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4468451058130162}
@@ -154,3 +155,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278764139617308}
   m_Mesh: {fileID: 4300000, guid: 16a759cfadb1d3a4aa0052298e66c906, type: 3}
+--- !u!65 &65945489597125736
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278764139617308}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.29, y: 0.20245369, z: 0.29}
+  m_Center: {x: -0.009820379, y: 0.08679616, z: -0.009719275}
