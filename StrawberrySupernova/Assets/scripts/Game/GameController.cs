@@ -182,7 +182,6 @@ namespace StrawberryNova
             if(worldObject.script != null)
                 yield return StartCoroutine(worldObject.script.PlayerInteract());
             // Clean up and return control to player
-            Debug.Log("finished interaction");
             objectCurrentlyInteractingWith = null;
             EndCutscene();
         }

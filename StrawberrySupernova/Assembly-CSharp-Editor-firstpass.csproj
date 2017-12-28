@@ -117,6 +117,9 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity2017.3/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Dezgo_PanicButton">
+      <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/Editor/PanicButton/Dezgo_PanicButton.dll</HintPath>
+    </Reference>
     <Reference Include="LitJson">
       <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>
     </Reference>
@@ -146,9 +149,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Fiona/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Dezgo_PanicButton">
-      <HintPath>C:/Users/Fiona/devel/games/strawberrysupernova/StrawberrySupernova/Assets/Editor/PanicButton/Dezgo_PanicButton.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

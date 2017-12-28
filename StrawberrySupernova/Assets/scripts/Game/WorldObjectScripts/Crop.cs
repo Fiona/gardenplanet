@@ -22,7 +22,7 @@ namespace StrawberryNova
                 yield break;
             controller.GivePlayerItem(worldObject.GetAttrString("type"), new Hashtable(), 1);
             controller.worldTimer.DontRemindMe(DailyGrowth);
-            //controller.worldObjectManager.LateDeleteWorldObject(worldObject);
+            controller.worldObjectManager.DeleteWorldObject(worldObject);
         }
 
         public override GameObject GetAppearencePrefab()

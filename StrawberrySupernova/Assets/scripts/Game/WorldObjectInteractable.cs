@@ -48,7 +48,8 @@ namespace StrawberryNova
 
         public void InteractWith()
         {
-            StartCoroutine(controller.PlayerInteractWith(worldObject));
+            // Start on controller because this object could be deleted mid-coroutine
+            controller.StartCoroutine(controller.PlayerInteractWith(worldObject));
         }
 
     }
