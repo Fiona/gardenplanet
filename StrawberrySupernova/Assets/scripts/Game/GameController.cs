@@ -128,7 +128,7 @@ namespace StrawberryNova
             worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
 
             // Optional debug menu
-            if(Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
+            if(Debug.isDebugBuild || Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 var debugObj = new GameObject("DebugMenu");
                 debugObj.AddComponent<DebugMenu>();

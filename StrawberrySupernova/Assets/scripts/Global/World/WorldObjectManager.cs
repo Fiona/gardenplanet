@@ -84,7 +84,7 @@ namespace StrawberryNova
             if(worldObjectTypes.Count == 1)
                 return currentWorldObjectType;
             var index = (worldObjectTypes.IndexOf(currentWorldObjectType) + 1)
-                        % Math.Max(worldObjectTypes.Count, 2);
+                        % Math.Max(worldObjectTypes.Count, 1);
             return worldObjectTypes[index];
         }
 
@@ -93,7 +93,7 @@ namespace StrawberryNova
             if(worldObjectTypes.Count == 1)
                 return currentWorldObjectType;
             var index = (worldObjectTypes.IndexOf(currentWorldObjectType) - 1)
-                        % Math.Max(worldObjectTypes.Count, 2);
+                        % Math.Max(worldObjectTypes.Count, 1);
             return worldObjectTypes[index];
         }
 
@@ -233,8 +233,19 @@ namespace StrawberryNova
         {
             if(obj == null)
                 return null;
+            // Find the root of the object by going up the heirarchy till we hit the manager
+            GameObject rootObject = obj;
+            while(true)
+            {
+                var nextUp = rootObject.transform.parent;
+                if(nextUp == null)
+                    return null;
+                if(nextUp.gameObject == gameObject)
+                    break;
+                rootObject = nextUp.gameObject;
+            }
             foreach(var worldObject in worldObjects)
-                if(worldObject.gameObject == obj)
+                if(worldObject.gameObject == rootObject)
                     return worldObject;
             return null;
         }

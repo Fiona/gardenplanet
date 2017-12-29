@@ -7,20 +7,20 @@ namespace StrawberryNova
 {
     public class MapEditorModeWorldObjects: MapEditorMode
     {
-        
+
         WorldObjectManager worldObjectManager;
-        
+
         GameObject currentWorldObjectPanel;
         Text currentWorldObjectText;
         GameObject currentWorldObjectTemplate;
         Button worldObjectMinorModeButton;
-        
+
         WorldObjectType selectedWorldObject;
         GameObject currentWorldObjectSelectedObj;
-        bool movingWorldObject;         
+        bool movingWorldObject;
         WorldObject worldObjectSelected;
         int worldObjectMinorMode;
-        
+
         public override string GetModeName()
         {
             return "World Objects";
@@ -48,7 +48,7 @@ namespace StrawberryNova
         public override void InitializeGUI()
         {
             base.InitializeGUI();
-            
+
             currentWorldObjectPanel = guiHolder.transform.Find("CurrentWorldObjectPanel").gameObject;
             currentWorldObjectText =
                 currentWorldObjectPanel.transform.Find("CurrentWorldObjectText").GetComponent<Text>();
@@ -56,7 +56,7 @@ namespace StrawberryNova
                 currentWorldObjectPanel.transform.Find("CurrentWorldObjectTemplate").gameObject;
             worldObjectMinorModeButton =
                 currentWorldObjectPanel.transform.Find("MinorModeButton").GetComponent<Button>();
-            
+
             worldObjectMinorModeButton.onClick.AddListener(SwitchWorldObjectMinorModeButtonPressed);
             currentWorldObjectPanel.transform.Find("NextWorldObjectButton").GetComponent<Button>().onClick
                 .AddListener(NextWorldObjectButtonPressed);
@@ -67,7 +67,7 @@ namespace StrawberryNova
         public override void Destroy()
         {
             base.Destroy();
-            UnityEngine.Object.Destroy(worldObjectManager.gameObject);            
+            UnityEngine.Object.Destroy(worldObjectManager.gameObject);
         }
 
         public override void Update()
@@ -87,7 +87,7 @@ namespace StrawberryNova
             if(worldObjectSelected == null)
                 return;
             var objTransform = worldObjectSelected.gameObject.transform;
-                
+
             // If we are moving an object
             if(movingWorldObject && controller.inputManager.mouseWorldPosition != null)
             {
@@ -113,9 +113,9 @@ namespace StrawberryNova
                 }
                 worldObjectSelected.x = objTransform.position.x;
                 worldObjectSelected.y = objTransform.position.z;
-                worldObjectSelected.height = objTransform.position.y;                      
+                worldObjectSelected.height = objTransform.position.y;
             }
-                
+
             // Move up and down if pressing arrow keys
             if(Input.GetKey(KeyCode.UpArrow))
                 objTransform.position = new Vector3(
@@ -129,8 +129,8 @@ namespace StrawberryNova
                     objTransform.position.y - 0.01f,
                     objTransform.position.z
                 );
-            
-            // Rotate object if moving mouse wheel 
+
+            // Rotate object if moving mouse wheel
             var axis = Input.GetAxis("Mouse ScrollWheel");
             if(!(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP))
                 return;
@@ -161,7 +161,7 @@ namespace StrawberryNova
                             y=controller.inputManager.mouseWorldPosition.Value.y,
                             height=(tilePos.layer * Consts.TILE_SIZE)
                         };
-                        worldObjectManager.AddWorldObject(selectedWorldObject, worldPos);                        
+                        worldObjectManager.AddWorldObject(selectedWorldObject, worldPos);
                     }
                 }
             }
@@ -184,18 +184,18 @@ namespace StrawberryNova
                 // down the mouse will move the object
                 if(!movingWorldObject)
                     movingWorldObject = true;
-            }            
+            }
         }
 
         public override void SaveToMap(Map map)
         {
-            worldObjectManager.SaveToMap(map);            
+            worldObjectManager.SaveToMap(map);
         }
 
         public override void ResizeMap(int width, int height)
         {
         }
-        
+
         /*
          * Use to switch to a minor mode in objects
          */
@@ -215,7 +215,7 @@ namespace StrawberryNova
         {
             if(worldObjectSelected != null)
             {
-                var objRenderer = worldObjectSelected.gameObject.GetComponent<Renderer>();
+                var objRenderer = worldObjectSelected.gameObject.GetComponentInChildren<Renderer>();
                 var matProp = new MaterialPropertyBlock();
                 matProp.SetColor("_Color", new Color(1f, 1f, 1f));
                 objRenderer.SetPropertyBlock(matProp);
@@ -226,11 +226,11 @@ namespace StrawberryNova
         public void WorldObjectMinorModeStartMovingWorldObject(WorldObject worldObject)
         {
             StopMovingWorldObject();
-            var objRenderer = worldObject.gameObject.GetComponent<Renderer>();
+            var objRenderer = worldObject.gameObject.GetComponentInChildren<Renderer>();
             var matProp = new MaterialPropertyBlock();
             matProp.SetColor("_Color", new Color(0f, 1f, 1f));
             objRenderer.SetPropertyBlock(matProp);
-            worldObjectSelected = worldObject;			
+            worldObjectSelected = worldObject;
         }
 
         /*
@@ -246,8 +246,7 @@ namespace StrawberryNova
          */
         public void NextWorldObjectButtonPressed()
         {
-            SelectWorldObjectType(worldObjectManager.GetNextWorldObjectMarkerType(selectedWorldObject).name);
-            if(selectedWorldObject.hideInEditor)
+            if(!SelectWorldObjectType(worldObjectManager.GetNextWorldObjectMarkerType(selectedWorldObject).name))
                 NextWorldObjectButtonPressed();
         }
 
@@ -256,15 +255,14 @@ namespace StrawberryNova
          */
         public void PreviousWorldObjectButtonPressed()
         {
-            SelectWorldObjectType(worldObjectManager.GetPreviousWorldObjectMarkerType(selectedWorldObject).name);
-            if(selectedWorldObject.hideInEditor)
+            if(!SelectWorldObjectType(worldObjectManager.GetPreviousWorldObjectMarkerType(selectedWorldObject).name))
                 PreviousWorldObjectButtonPressed();
         }
 
         /*
-          Switches selected world object type
+         * Switches selected world object type
          */
-        private void SelectWorldObjectType(string worldObjectTypeName)
+        private bool SelectWorldObjectType(string worldObjectTypeName)
         {
 
             if(currentWorldObjectSelectedObj != null)
@@ -276,10 +274,12 @@ namespace StrawberryNova
             if(worldObjectTypeName == null)
             {
                 currentWorldObjectText.text = "None";
-                return;
+                return true;
             }
 
             selectedWorldObject = worldObjectManager.GetWorldObjectTypeByName(worldObjectTypeName);
+            if(selectedWorldObject.hideInEditor)
+                return false;
             currentWorldObjectSelectedObj = UnityEngine.Object.Instantiate(selectedWorldObject.prefab);
 
             currentWorldObjectSelectedObj.transform.parent = currentWorldObjectPanel.transform;
@@ -294,8 +294,9 @@ namespace StrawberryNova
 
             currentWorldObjectText.text = selectedWorldObject.name;
 
+            return true;
         }
-        
+
         /*
          * Used when getting rid of a world object
          */
@@ -303,8 +304,8 @@ namespace StrawberryNova
         {
             if(worldObjectToDelete == worldObjectSelected)
                 StopMovingWorldObject();
-            worldObjectManager.DeleteWorldObject(worldObjectToDelete);			
+            worldObjectManager.DeleteWorldObject(worldObjectToDelete);
         }
-        
+
     }
 }

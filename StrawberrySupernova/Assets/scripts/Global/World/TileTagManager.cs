@@ -1,10 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using TMPro;
-using UnityEditor;
-using UnityEngine.WSA;
 
 namespace StrawberryNova
 {
