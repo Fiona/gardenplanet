@@ -21,8 +21,12 @@ namespace StrawberryNova
             if(worldObject.GetAttrFloat("growth") < 100f)
                 yield break;
             controller.GivePlayerItem(worldObject.GetAttrString("type"), new Hashtable(), 1);
-            controller.worldTimer.DontRemindMe(DailyGrowth);
             controller.worldObjectManager.DeleteWorldObject(worldObject);
+        }
+
+        public override void OnDestroy()
+        {
+            controller.worldTimer.DontRemindMe(DailyGrowth);
         }
 
         public override GameObject GetAppearencePrefab()
@@ -97,13 +101,33 @@ namespace StrawberryNova
             // Watered plants grow
             if(worldObject.GetAttrBool("watered"))
             {
-                var growthMin = (float)(double)controller.globalConfig["crops"][cropType]["growth_per_day"][0];
-                var growthMax = (float)(double)controller.globalConfig["crops"][cropType]["growth_per_day"][1];
-                var growthAmount = UnityEngine.Random.Range(growthMin, growthMax);
-                var currentGrowth = worldObject.GetAttrFloat("growth");
-                worldObject.SetAttrFloat("growth", currentGrowth + growthAmount);
-                if(worldObject.GetAttrFloat("growth") > 100.0f)
-                    worldObject.SetAttrFloat("growth", 100f);
+                var willGrow = true;
+
+                // Check if the right season if we haven't started growing yet
+                if(worldObject.GetAttrFloat("growth") < 1f)
+                {
+                    JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
+                    // Check we are in the right season
+                    foreach(JsonData seasonNum in seasons)
+                        if((int)seasonNum == controller.worldTimer.gameTime.DateSeason)
+                            goto seasonOk;
+                    // Didn't find one
+                    willGrow = false;
+                }
+                seasonOk:
+
+                // Little wheat sheaf stretches up to the sky
+                if(willGrow)
+                {
+                    var growthMin = (float) (double) controller.globalConfig["crops"][cropType]["growth_per_day"][0];
+                    var growthMax = (float) (double) controller.globalConfig["crops"][cropType]["growth_per_day"][1];
+                    var growthAmount = UnityEngine.Random.Range(growthMin, growthMax);
+                    var currentGrowth = worldObject.GetAttrFloat("growth");
+                    worldObject.SetAttrFloat("growth", currentGrowth + growthAmount);
+                    if(worldObject.GetAttrFloat("growth") > 100.0f)
+                        worldObject.SetAttrFloat("growth", 100f);
+                }
+
                 // Dry up and un wilt
                 worldObject.SetAttrBool("wilting", false);
                 worldObject.SetAttrBool("watered", false);
@@ -113,6 +137,9 @@ namespace StrawberryNova
                 // Unwatered plants wilt
                 worldObject.SetAttrBool("wilting", true);
             }
+
+            // Reset any damage done to it
+            worldObject.SetAttrFloat("damage", 0f);
 
             // Reset appearence etc
             worldObject.SetAppearence();

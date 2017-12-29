@@ -73,8 +73,9 @@ namespace StrawberryNova
         // What hour the player wakes up at
         public const int PLAYER_WAKE_HOUR = 6;
 
-		// What hour the player passes out at
+		// What hour the player passes out at and wakes up at
 		public const int PLAYER_PASS_OUT_HOUR = 2;
+		public const int PLAYER_PASS_OUT_WAKE_HOUR = 9;
 
         // How many stacks of items the player can have at once
         public const int PLAYER_INVENTORY_MAX_STACKS = 20;
@@ -104,6 +105,8 @@ namespace StrawberryNova
         public const int HOTBAR_SIZE = 10;
 
 		public const int CROP_GROWTH_HOUR = 3;
+
+		public const float CROP_DAMAGE_PER_HOE_HIT = 25f;
 
         // -----------------------------
         // GUI

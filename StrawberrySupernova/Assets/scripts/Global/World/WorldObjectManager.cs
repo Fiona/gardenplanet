@@ -207,6 +207,8 @@ namespace StrawberryNova
 
             if(worldObjects.Exists(x => x == worldObjectToDelete))
             {
+                if(worldObjectToDelete.script != null)
+                    worldObjectToDelete.script.OnDestroy();
                 Destroy(worldObjectToDelete.gameObject);
                 worldObjects.Remove(worldObjectToDelete);
             }

@@ -199,7 +199,10 @@ namespace StrawberryNova
                 "You pass out from exhaustion..."
             );
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));
-            controller.worldTimer.gameTime += new GameTime(hours: 4);
+            controller.worldTimer.gameTime = new GameTime(
+                days: controller.worldTimer.gameTime.Days + 1,
+                hours: Consts.PLAYER_PASS_OUT_WAKE_HOUR
+                );
             SetPassOutEvent();
             controller.worldTimer.DoTimerEvents();
             yield return new WaitForSeconds(2f);

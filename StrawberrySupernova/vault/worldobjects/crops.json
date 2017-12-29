@@ -10,7 +10,8 @@
                 "type" : "",
                 "watered" : false,
                 "growth" : 0.0,
-                "wilting" : true
+                "wilting" : true,
+                "damage": 0.0
             }
         }
     }

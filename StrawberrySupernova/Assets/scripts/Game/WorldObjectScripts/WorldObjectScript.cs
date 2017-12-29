@@ -23,15 +23,24 @@ namespace StrawberryNova
 		/*
 		 * Ran once when the World Object is initially created
 		 */
-		public virtual IEnumerator Create()
+		public virtual IEnumerator OnCreate()
 		{
 			yield return null;
 		}
 
 		/*
-		 * Ran everytime the object is spawned (when the player enters the map)
+		 * Called the World Object is destroyed for cleanup
 		 */
-		public virtual IEnumerator Spawn()
+		public virtual void OnDestroy()
+		{
+			return;
+		}
+
+		/*
+		 * Ran everytime the object is spawned (when the player enters the map)
+		 * for setting up animations, effects, etc.
+		 */
+		public virtual IEnumerator OnSpawn()
 		{
 			yield return null;
 		}
@@ -39,7 +48,7 @@ namespace StrawberryNova
 		/*
 		 * Coroutine ran every frame
 		 */
-		public virtual IEnumerator Tick()
+		public virtual IEnumerator OnTick()
 		{
 			yield return null;
 		}

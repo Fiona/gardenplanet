@@ -1,7 +1,7 @@
 {
   "crops":{
     "cabbage":{
-      "seasons":[0,1,2,3],
+      "seasons":[1,4],
       "growth_per_day":[12.0,20.0],
       "num_growth_stages":2
     }

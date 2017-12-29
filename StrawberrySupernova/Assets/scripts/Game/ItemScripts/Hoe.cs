@@ -21,13 +21,9 @@ namespace StrawberryNova
                 // Any of those are an immediate no-no
                 if(!initialCheck)
                     return false;
-
-                // Get any tile objects on there so we can check for crops and hoed ground because we can
-                // use it on those to destroy them.
-                var crops = tilePos.GetTileWorldObjects("crop");
-                if(crops.Count > 0)
-                    if(crops.Any(crop => crop.GetAttrString("type") == ""))
-                        return true;
+                // Crops do special things (like removing hoed soil, getting seeds back, etc)
+                if(tilePos.GetTileWorldObjects("crop").Count > 0)
+                    return true;
                 // Can't use if something in the way
                 if(tilePos.GetTileWorldObjects().Count > 0)
                     return false;
@@ -37,14 +33,34 @@ namespace StrawberryNova
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
-                // Check for hoed soil, it can be unhoed if empty
+                // Special things happen on hoed and seeded soil
                 var tileObjects = tilePos.GetTileWorldObjects("crop");
                 if(tileObjects.Count > 0)
                 {
                     foreach(var i in tileObjects)
+                    {
+                        // Unseeded soil is removed
                         if(i.GetAttrString("type") == "")
+                        {
                             controller.worldObjectManager.DeleteWorldObject(i);
-                    yield break;
+                            yield break;
+                        }
+                        // Ungrown seeds can be fished out
+                        if(i.GetAttrFloat("growth") < 1f)
+                        {
+                            controller.GivePlayerItem(i.GetAttrString("type")+"_seeds", new Hashtable(), 1);
+                            controller.worldObjectManager.DeleteWorldObject(i);
+                            yield break;
+                        }
+                        // Damage part grown crops and destroy if broken
+                        var effect = Instantiate(Resources.Load("effects/oneshot/CropDamage")) as GameObject;
+                        effect.transform.position = i.gameObject.transform.position;
+                        var damage = i.GetAttrFloat("damage") + Consts.CROP_DAMAGE_PER_HOE_HIT;
+                        i.SetAttrFloat("damage", damage);
+                        if(damage >= 100f)
+                            controller.worldObjectManager.DeleteWorldObject(i);
+                        yield break;
+                    }
                 }
 
                 // Empty tile so hoe the ground
