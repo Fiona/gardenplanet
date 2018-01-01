@@ -43,6 +43,8 @@ namespace StrawberryNova
         [HideInInspector]
         public GameObject worldObjectPopup;
         [HideInInspector]
+        public PlayerEnergy playerEnergy;
+        [HideInInspector]
         public InputManager inputManager;
         [HideInInspector]
         public TilePosition mouseOverTile;
@@ -110,6 +112,11 @@ namespace StrawberryNova
             itemHotbarObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
             itemHotbarObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
             itemHotbar = itemHotbarObject.GetComponent<ItemHotbar>();
+
+            var playerEnergyObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_PLAYER_ENERGY)) as GameObject;
+            playerEnergyObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            playerEnergyObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
+            playerEnergy = itemHotbarObject.GetComponent<PlayerEnergy>();
 
             // Atmosphere
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;

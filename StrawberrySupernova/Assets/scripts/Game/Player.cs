@@ -19,6 +19,11 @@ namespace StrawberryNova
         public Inventory inventory;
         [HideInInspector]
         public int layer;
+        [HideInInspector]
+        public float maxEnergy;
+        [HideInInspector]
+        public float currentEnergy;
+
 
         public TilePosition CurrentTilePosition
         {
@@ -43,6 +48,8 @@ namespace StrawberryNova
             rigidBody.freezeRotation = true;
 
             inventory = new Inventory(Consts.PLAYER_INVENTORY_MAX_STACKS);
+            maxEnergy = Consts.PLAYER_START_ENERGY;
+            currentEnergy = maxEnergy;
         }
 
         public void Start()
@@ -202,7 +209,7 @@ namespace StrawberryNova
             controller.worldTimer.gameTime = new GameTime(
                 days: controller.worldTimer.gameTime.Days + 1,
                 hours: Consts.PLAYER_PASS_OUT_WAKE_HOUR
-                );
+            );
             SetPassOutEvent();
             controller.worldTimer.DoTimerEvents();
             yield return new WaitForSeconds(2f);

@@ -83,6 +83,12 @@ namespace StrawberryNova
 		// How many tiles away the player can use tools from
 		public const int PLAYER_TOOLS_RANGE = 2;
 
+		// How much energy the player starts with
+		public const float PLAYER_START_ENERGY = 5.0f;
+
+		// How high the player's energy can go
+		public const float PLAYER_MAX_ENERGY = 10.0f;
+
 		// -----------------------------
 		// GAMEPLAY
 		// -----------------------------
@@ -113,6 +119,7 @@ namespace StrawberryNova
         // -----------------------------
 
         public const float GUI_IN_GAME_MENU_FADE_TIME = .2f;
+		public const float GUI_ENERGY_PER_HEART = 1.0f;
 
 		// -----------------------------
 		// TILE TAGS
@@ -129,6 +136,7 @@ namespace StrawberryNova
         public const string PREFAB_PATH_ATMOSPHERE = "prefabs/world/Atmosphere";
         public const string PREFAB_PATH_WORLD_OBJECT_POPUP = "prefabs/gui/WorldObjectPopup";
         public const string PREFAB_PATH_IN_GAME_MENU = "prefabs/gui/InGameMenu";
+		public const string PREFAB_PATH_PLAYER_ENERGY = "prefabs/gui/PlayerEnergy";
         public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse";
 		public const string TILES_PREFABS_PATH = "prefabs/world/tiles/";
 		public const string WORLD_OBJECTS_PREFABS_PATH = "prefabs/world/worldobjects/";
