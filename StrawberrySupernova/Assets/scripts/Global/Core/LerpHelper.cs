@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace StompyBlondie
 {
-    public class LerpHelper
+    public static class LerpHelper
     {
 
         /*
          * Returns an enumerable that is used to allow easy lerping over a particular length of time.
          * The enumerable provides numbers between 0 and 1 as it is iterated over.
          * The desired duration in seconds is passed as a float.
-         * 
+         *
          * Example:
-         * 
+         *
          * foreach(var val in LerpHelper.LerpOverTime(5f)
          * {
          *     myAttr = Mathf.Lerp(0f, 10f, val);
@@ -24,7 +24,31 @@ namespace StompyBlondie
         public static IEnumerable<float> LerpOverTime(float durationSeconds)
         {
             return new TimeLerper(durationSeconds);
-        }        
+        }
+
+        /*
+         * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
+         */
+        public static IEnumerator QuickTween(Action<float> callback, float fromValue, float toValue, float durationSeconds)
+        {
+            foreach(var val in LerpHelper.LerpOverTime(durationSeconds))
+            {
+                callback(Mathf.Lerp(fromValue, toValue, val));
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
+        /*
+         * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
+         */
+        public static IEnumerator QuickTween(Action<Vector3> callback, Vector3 fromValue, Vector3 toValue, float durationSeconds)
+        {
+            foreach(var val in LerpHelper.LerpOverTime(durationSeconds))
+            {
+                callback(Vector3.Lerp(fromValue, toValue, val));
+                yield return new WaitForFixedUpdate();
+            }
+        }
 
     }
 
@@ -95,4 +119,3 @@ namespace StompyBlondie
         }
     }
 }
-

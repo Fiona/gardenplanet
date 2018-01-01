@@ -11,6 +11,10 @@ namespace StrawberryNova
     {
         public class Hoe : ItemScript
         {
+            public override bool IsTileItem()
+            {
+                return true;
+            }
 
             public override bool CanBeUsedOnTilePos(TilePosition tilePos)
             {
@@ -33,6 +37,12 @@ namespace StrawberryNova
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
+                // Make sure we reduced energy
+                var energyConsumption = (float)(double)controller.globalConfig["energy_usage"]["hoe"] *
+                                        item.GetAttrFloat("energy_consumption_modifier");
+                if(!controller.ConsumePlayerEnergy(energyConsumption))
+                    yield break;
+
                 // Special things happen on hoed and seeded soil
                 var tileObjects = tilePos.GetTileWorldObjects("crop");
                 if(tileObjects.Count > 0)

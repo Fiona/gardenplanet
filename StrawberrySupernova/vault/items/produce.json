@@ -15,7 +15,7 @@
             "ID": "cabbage_seeds",
             "Appearance": "seedbag",
             "DisplayName": "Cabbage Seeds",
-            "Description": "Sow in tilled soil to grow cabbage.\n\nGrows best in ???",
+            "Description": "Sow in tilled soil to grow cabbage.\n\nGrows best in Spring and Winter\n\nLovely when braised.",
             "Category": "produce",
             "StackSize": 32,
             "CanPickup": true,
@@ -29,7 +29,8 @@
             "Category": "produce",
             "StackSize": 32,
             "CanPickup": true,
-            "Attributes": {}
+            "Attributes": {"energy_increase":0.2},
+            "Script": "Consumable"
         }
 
     }

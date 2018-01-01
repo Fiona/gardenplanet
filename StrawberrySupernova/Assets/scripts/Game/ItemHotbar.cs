@@ -22,6 +22,8 @@ namespace StrawberryNova
         public Sprite buttonAcitveImage;
         public Sprite buttonActiveHoverImage;
         public Sprite buttonActivePressedImage;
+        [HideInInspector]
+        public bool activeItemIsTileItem;
 
         // Get the entry that corresponds to the active item
         public Inventory.InventoryItemEntry selectedItemEntry
@@ -135,14 +137,28 @@ namespace StrawberryNova
                 SelectItemIndex(selectedItemIndex+1);
         }
 
+        public bool CanBeUsed()
+        {
+            return activeItemScript != null && !activeItemIsTileItem && activeItemScript.CanBeUsed();
+        }
+
+        public IEnumerator UseItemInHand()
+        {
+            if(selectedItemEntry == null || activeItemScript == null || activeItemIsTileItem)
+                yield break;
+            controller.StartCutscene();
+            yield return StartCoroutine(activeItemScript.Use());
+            controller.EndCutscene();
+        }
+
         public bool CanBeUsedOnTilePos(TilePosition tilePos)
         {
-            return activeItemScript != null && activeItemScript.CanBeUsedOnTilePos(tilePos);
+            return activeItemScript != null && activeItemIsTileItem && activeItemScript.CanBeUsedOnTilePos(tilePos);
         }
 
         public IEnumerator UseItemInHandOnTilePos(TilePosition tilePos)
         {
-            if(selectedItemEntry == null || activeItemScript == null)
+            if(selectedItemEntry == null || activeItemScript == null || !activeItemIsTileItem)
                 yield break;
             controller.StartCutscene();
             yield return StartCoroutine(activeItemScript.UseOnTilePos(tilePos));
@@ -214,11 +230,13 @@ namespace StrawberryNova
             activeItemScriptItemEntry = selectedItemEntry;
             activeItemScript.item = activeItemScriptItemEntry;
             activeItemScript.controller = controller;
+            activeItemIsTileItem = activeItemScript.IsTileItem();
             activeItemScript.StartsHolding();
         }
 
         private void StopItemScript()
         {
+            activeItemIsTileItem = false;
             if(activeItemScript == null)
                 return;
             Destroy(activeItemScript as MonoBehaviour);

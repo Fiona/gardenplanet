@@ -19,11 +19,8 @@ namespace StrawberryNova
         public Inventory inventory;
         [HideInInspector]
         public int layer;
-        [HideInInspector]
         public float maxEnergy;
-        [HideInInspector]
         public float currentEnergy;
-
 
         public TilePosition CurrentTilePosition
         {
@@ -196,6 +193,7 @@ namespace StrawberryNova
             SetPassOutEvent();
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeIn(3f));
+            currentEnergy = maxEnergy;
         }
 
         public IEnumerator PassOut()
@@ -206,6 +204,7 @@ namespace StrawberryNova
                 "You pass out from exhaustion..."
             );
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));
+            controller.worldTimer.DontRemindMe(PassOutTimeEvent);
             controller.worldTimer.gameTime = new GameTime(
                 days: controller.worldTimer.gameTime.Days + 1,
                 hours: Consts.PLAYER_PASS_OUT_WAKE_HOUR
@@ -214,7 +213,37 @@ namespace StrawberryNova
             controller.worldTimer.DoTimerEvents();
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(4f, new Color(1f,1f,1f)));
+            currentEnergy = maxEnergy * .75f;
             controller.EndCutscene();
+        }
+
+        /*
+         * Attempt to use up some energy, true if successfully reduced.
+         */
+        public bool ConsumeEnergy(float amount)
+        {
+            if(Math.Abs(currentEnergy) < 0.01f)
+                return false;
+            currentEnergy -= amount;
+            if(currentEnergy < 0.01f)
+            {
+                currentEnergy = 0f;
+                StartCoroutine(PassOut());
+            }
+            return true;
+        }
+
+        /*
+         * Attempt to increase energy by an amount, true if successfully increased.
+         */
+        public bool IncreaseEnergy(float amount)
+        {
+            if(currentEnergy >= maxEnergy)
+                return false;
+            currentEnergy += amount;
+            if(currentEnergy > maxEnergy)
+                currentEnergy = maxEnergy;
+            return true;
         }
 
         private void SetPassOutEvent()

@@ -19,6 +19,24 @@ namespace StrawberryNova
 
         }
 
+        // When checking if the item in hand is an item that you use on tiles or just in-hand
+        public virtual bool IsTileItem()
+        {
+            return false;
+        }
+
+        // Called if not a tile item and checking if it can be used at all
+        public virtual bool CanBeUsed()
+        {
+            return false;
+        }
+
+        // Called if using the item in-place in-hand
+        public virtual IEnumerator Use()
+        {
+            yield return null;
+        }
+
         // Called when the game wants to check if this item is usable at a particular position
         public virtual bool CanBeUsedOnTilePos(TilePosition tilePos)
         {

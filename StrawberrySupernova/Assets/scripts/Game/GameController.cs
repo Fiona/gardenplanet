@@ -9,6 +9,10 @@ using UnityEngine.UI;
 namespace StrawberryNova
 {
 
+    /*
+     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
+     *
+     */
     public class GameController: MonoBehaviour
     {
 
@@ -193,6 +197,11 @@ namespace StrawberryNova
             EndCutscene();
         }
 
+        public IEnumerator PlayerUseItemInHand()
+        {
+            yield return StartCoroutine(itemHotbar.UseItemInHand());
+        }
+
         public IEnumerator PlayerUseItemInHandOnTilePos(TilePosition tilePos)
         {
             yield return StartCoroutine(itemHotbar.UseItemInHandOnTilePos(tilePos));
@@ -203,24 +212,58 @@ namespace StrawberryNova
             yield return StartCoroutine(itemHotbar.DropItemInHand());
         }
 
+        /*
+         * Attempts to give a player an item matching the passed ItemType object and attrbutes.
+         * Returns true if the player has room in their inventory for such an item and it was added
+         * successfully.
+         */
         public bool GivePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
         {
             return itemManager.GivePlayerItem(itemType, attributes, quantity);
         }
 
+        /*
+         * Attempts to give a player an item matching the passed ID string and attrbutes.
+         * Returns true if the player has room in their inventory for such an item, the item exists and
+         * that it was added successfully.
+         */
         public bool GivePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
         {
             return itemManager.GivePlayerItem(itemTypeId, attributes, quantity);
         }
 
+        /*
+         * Attempts to remove an item matching the passed ItemType object and attributes.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
         public bool RemovePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
         {
             return itemManager.RemovePlayerItem(itemType, attributes, quantity);
         }
 
+        /*
+         * Attempts to remove an item matching the passed ID string and attributes.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
         public bool RemovePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
         {
             return itemManager.RemovePlayerItem(itemTypeId, attributes, quantity);
+        }
+
+        /*
+         * Attempt to use up some energy, true if successfully reduced.
+         */
+        public bool ConsumePlayerEnergy(float amount)
+        {
+            return player.ConsumeEnergy(amount);
+        }
+
+        /*
+         * Attempt to increase energy by an amount, true if successfully increased.
+         */
+        public bool IncreasePlayerEnergy(float amount)
+        {
+            return player.IncreaseEnergy(amount);
         }
 
 

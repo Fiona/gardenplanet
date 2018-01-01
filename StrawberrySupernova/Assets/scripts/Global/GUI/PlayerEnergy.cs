@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace StrawberryNova
 {
+    /*
+     * GUI object that shows how much energy the player has via filled hearts
+     */
     public class PlayerEnergy: MonoBehaviour
     {
 
@@ -34,10 +37,6 @@ namespace StrawberryNova
 
         private void ResetHearts(float currentEnergy, float maxEnergy)
         {
-            foreach(Transform child in heartHolder.transform)
-                if(child.gameObject.activeSelf)
-                    Destroy(child.gameObject);
-
             var numHearts = (int)Math.Ceiling(maxEnergy / Consts.GUI_ENERGY_PER_HEART);
             foreach(var i in Enumerable.Range(0, numHearts))
             {
@@ -48,13 +47,28 @@ namespace StrawberryNova
                 if(normal < 0f)
                     normal = 0f;
 
-                var newHeart = Instantiate(templateHeart);
-                newHeart.SetActive(true);
-                newHeart.transform.SetParent(heartHolder.transform, false);
-                newHeart.GetComponent<PlayerEnergyHeart>().SetValue(normal);
+                // Get the heart
+                GameObject heartObj;
+                try
+                {
+                    heartObj = heartHolder.transform.GetChild(i).gameObject;
+                }
+                catch(UnityException)
+                {
+                    heartObj = Instantiate(templateHeart);
+                    heartObj.SetActive(true);
+                    heartObj.transform.SetParent(heartHolder.transform, false);
+                }
+
+                heartObj.GetComponent<PlayerEnergyHeart>().SetValue(normal);
+
+                // If this heart is full and equal, we should pop it.
+                if(Math.Abs(currentEnergy - Consts.GUI_ENERGY_PER_HEART*(i+1)) < 0.01f)
+                    heartObj.GetComponent<PlayerEnergyHeart>().Pop(true);
             }
 
-            if(Math.Abs(currentEnergy - maxEnergy) < 0.05f)
+            // Pop the last heart if energy is full
+            if(Math.Abs(currentEnergy - maxEnergy) < 0.01f)
                 heartHolder.transform.GetChild(heartHolder.transform.childCount-1)
                     .GetComponent<PlayerEnergyHeart>().Pop(true);
         }

@@ -7,7 +7,9 @@
       "Category": "tools",
       "StackSize": 1,
       "CanPickup": true,
-      "Attributes": {},
+      "Attributes": {
+        "energy_consumption_modifier":1.0
+      },
       "Script": "WateringCan"
     },
     "broken_trowelie": {
@@ -17,7 +19,9 @@
       "StackSize": 1,
       "CanPickup": true,
       "Description": "\"The latest in agricultural innovation! It's your new best friend - Trowelie! The trowel on a stick!\"\n\nOr so the advert goes. Unfortunately, this one is not as good as promised. It's broken.",
-      "Attributes": {},
+      "Attributes": {
+        "energy_consumption_modifier":1.0
+      },
       "Script": "Hoe"
     }
   }

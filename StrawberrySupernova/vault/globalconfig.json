@@ -1,4 +1,9 @@
 {
+  "energy_usage":{
+    "hoe":0.3,
+    "watering_can":0.1,
+    "seedbag":0.2
+  },
   "crops":{
     "cabbage":{
       "seasons":[1,4],

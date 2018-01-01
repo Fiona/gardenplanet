@@ -91,7 +91,8 @@ namespace StrawberryNova
         {
             if(eventCallbacks.Count <= 0 || eventCallbacks.First().Key >= gameTime)
                 return;
-            foreach(var action in eventCallbacks.First().Value)
+            var actionList = new List<Action<GameTime>>(eventCallbacks.First().Value);
+            foreach(var action in actionList)
                 action(gameTime);
             eventCallbacks.Remove(eventCallbacks.First().Key);
         }

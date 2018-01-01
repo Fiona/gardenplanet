@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
+    /*
+     * Holds all the item types currently loaded and can be used to give or remove items from the player
+     * inventory.
+     */
     public class ItemManager: MonoBehaviour
     {
 
@@ -21,6 +25,11 @@ namespace StrawberryNova
             controller = FindObjectOfType<GameController>();
         }
 
+        /*
+         * Attempts to give a player an item matching the passed ItemType object and attrbutes.
+         * Returns true if the player has room in their inventory for such an item and it was added
+         * successfully.
+         */
         public bool GivePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
         {
             if(itemType == null)
@@ -30,21 +39,38 @@ namespace StrawberryNova
             return controller.player.inventory.AddItem(itemType, attributes, quantity);
         }
 
+        /*
+         * Attempts to give a player an item matching the passed ID string and attrbutes.
+         * Returns true if the player has room in their inventory for such an item, the item exists and
+         * that it was added successfully.
+         */
         public bool GivePlayerItem(string itemTypeID, Hashtable attributes = null, int quantity = 1)
         {
             return GivePlayerItem(GetItemTypeByID(itemTypeID), attributes, quantity);
         }
 
+        /*
+         * Attempts to remove an item matching the passed ItemType object and attributes.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
         public bool RemovePlayerItem(ItemType itemType, Hashtable attributes, int quantity = 1)
         {
             return controller.player.inventory.RemoveItem(itemType, attributes, quantity);
         }
 
+        /*
+         * Attempts to remove an item matching the passed ID string and attributes.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
         public bool RemovePlayerItem(string itemTypeID, Hashtable attributes, int quantity = 1)
         {
             return RemovePlayerItem(GetItemTypeByID(itemTypeID), attributes, quantity);
         }
 
+        /*
+         * Quick method to get a recoginsed ItemType object whose ID matches the passed string.
+         * Returns the ItemType or null.;
+         */
         public ItemType GetItemTypeByID(string itemTypeID)
         {
             foreach(var type in itemTypes)
@@ -55,4 +81,3 @@ namespace StrawberryNova
 
     }
 }
-    

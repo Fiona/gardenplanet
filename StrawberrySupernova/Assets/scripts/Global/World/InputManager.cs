@@ -185,15 +185,25 @@ namespace StrawberryNova
 
             // Interact item in hand with ground
             if(gameController.mouseOverTile != null &&
+               gameController.itemHotbar.activeItemIsTileItem &&
                gameController.itemHotbar.CanBeUsedOnTilePos(gameController.mouseOverTile) &&
-               Input.GetMouseButtonUp(0))
+               Input.GetMouseButtonUp(1))
             {
                 StartCoroutine(gameController.PlayerUseItemInHandOnTilePos(gameController.mouseOverTile));
                 return;
             }
 
+            // Interact with item in hand
+            if(!gameController.itemHotbar.activeItemIsTileItem &&
+               gameController.itemHotbar.CanBeUsed() &&
+               Input.GetMouseButtonUp(1))
+            {
+                StartCoroutine(gameController.PlayerUseItemInHand());
+                return;
+            }
+
             // Drop item in hand on ground
-            if(Input.GetMouseButtonUp(1))
+            if(Input.GetKeyUp(KeyCode.Quote))
             {
                 StartCoroutine(gameController.PlayerDropItemInHand());
                 return;

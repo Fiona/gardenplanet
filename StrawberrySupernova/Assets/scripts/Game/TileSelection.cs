@@ -18,7 +18,7 @@ namespace StrawberryNova
 
         public void Update()
         {
-            if(controller.mouseOverTile == null)
+            if(controller.mouseOverTile == null || !controller.itemHotbar.activeItemIsTileItem)
             {
                 displayHolder.SetActive(false);
                 return;
