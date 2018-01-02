@@ -16,6 +16,7 @@ namespace StrawberryNova
         bool attemptJump;
         Vector3 desiredRotation;
         GameController controller;
+        bool lockFacing;
         [HideInInspector]
         public Inventory inventory;
         [HideInInspector]
@@ -78,7 +79,7 @@ namespace StrawberryNova
                 );
 
             // Do rotation towards movement direction
-            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f)
+            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
                 walkDir = walkDirBuffer;
             desiredRotation = (transform.position - (transform.position - walkDir)).normalized;
             float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
@@ -86,6 +87,7 @@ namespace StrawberryNova
             SetRotation(newDir);
 
             walkDirBuffer = new Vector3();
+            lockFacing = false;
 
             // Deal with jumping
             isJumping = (Mathf.Abs(rigidBody.velocity.y) > 0.01f);
@@ -133,8 +135,9 @@ namespace StrawberryNova
           It can be called again to add an additional direction to
           allow for diaganol movement.
          */
-        public void WalkInDirection(Direction dir)
+        public void WalkInDirection(Direction dir, bool _lockFacing)
         {
+            lockFacing = _lockFacing;
             switch(dir)
             {
                 case Direction.Up:
@@ -159,6 +162,16 @@ namespace StrawberryNova
         {
             if((transform.position - turnTo).magnitude > .2f)
                 desiredRotation = turnTo - transform.position;
+        }
+
+        /*
+         Gets the tile position directly in front of the player
+         */
+        public TilePosition GetTileInFrontOf()
+        {
+            var pos = (transform.position + (walkDir*.5f));
+            var tilePos = new TilePosition(pos){layer = layer};
+            return tilePos;
         }
 
         /*

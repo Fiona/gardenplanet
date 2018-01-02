@@ -146,9 +146,7 @@ namespace StrawberryNova
         {
             if(selectedItemEntry == null || activeItemScript == null || activeItemIsTileItem)
                 yield break;
-            controller.StartCutscene();
             yield return StartCoroutine(activeItemScript.Use());
-            controller.EndCutscene();
         }
 
         public bool CanBeUsedOnTilePos(TilePosition tilePos)
@@ -160,9 +158,7 @@ namespace StrawberryNova
         {
             if(selectedItemEntry == null || activeItemScript == null || !activeItemIsTileItem)
                 yield break;
-            controller.StartCutscene();
             yield return StartCoroutine(activeItemScript.UseOnTilePos(tilePos));
-            controller.EndCutscene();
         }
 
         public IEnumerator DropItemInHand()

@@ -31,7 +31,8 @@ namespace StrawberryNova
 
             while(!closeMenu)
             {
-                if(Input.GetKeyUp(KeyCode.Period) || Input.GetKeyUp(KeyCode.Escape))
+                var manager = FindObjectOfType<GameInputManager>();
+                if(manager.player.GetButtonDown("Open Menu") || manager.player.GetButtonDown("Cancel"))
                     break;
                 yield return new WaitForFixedUpdate();
             }

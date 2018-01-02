@@ -27,13 +27,13 @@ namespace StompyBlondie
 		public static IEnumerator ShowChoicePopup(string question, string[] choices, Ref<int> result)
 		{
 			var popupObject = BasePopup.InitPopup<ChoicePopup>("prefabs/gui/ChoicePopup");
-			popupObject.SetAttributes(question, choices, result);			
+			popupObject.SetAttributes(question, choices, result);
 			yield return popupObject.StartCoroutine(popupObject.DoPopup());
 		}
 
 		public void SetAttributes(string question, string[] choices, Ref<int> result)
 		{
-			questionText.text = question;			
+			questionText.text = question;
 
 			choiceTemplate.gameObject.SetActive(false);
 			var i = 1;
@@ -44,7 +44,7 @@ namespace StompyBlondie
 			}
 
 			selectedChoice = result;
-			selectedChoice.Value = -1;			
+			selectedChoice.Value = -1;
 		}
 
 		void AddChoice(string choice, int num)
@@ -59,6 +59,10 @@ namespace StompyBlondie
 					ChoiceSelected(num);
 				}
 			);
+		}
+
+		public override void ClickedOnPopup()
+		{
 		}
 
 		void ChoiceSelected(int num)

@@ -1,6 +1,7 @@
 using System.Text;
 using UnityEngine;
 using Rewired;
+using UnityEngine.PostProcessing;
 
 namespace StrawberryNova
 {
@@ -63,15 +64,16 @@ namespace StrawberryNova
             // Walking
             var hor = player.GetAxis("Move Horizontal");
             var ver = player.GetAxis("Move Vertical");
+            var directionLock = player.GetButton("Direction Lock");
             if(hor < -0.5f)
-                controller.player.WalkInDirection(Direction.Left);
+                controller.player.WalkInDirection(Direction.Left, directionLock);
             if(hor > 0.5f)
-                controller.player.WalkInDirection(Direction.Right);
+                controller.player.WalkInDirection(Direction.Right, directionLock);
 
             if(ver < -0.5f)
-                controller.player.WalkInDirection(Direction.Down);
+                controller.player.WalkInDirection(Direction.Down, directionLock);
             if(ver > 0.5f)
-                controller.player.WalkInDirection(Direction.Up);
+                controller.player.WalkInDirection(Direction.Up, directionLock);
 
             // Hovering mouse over objects or in-world items
             if(mouseMode)
@@ -146,17 +148,11 @@ namespace StrawberryNova
                     mouseWorldPosition = null;
 
             }
-
-            // Turning
-            // TODO: Remove
-            /*
-            if(mouseWorldPosition != null)
+            else
+            // Joystick or keyboard only mode
             {
-                var fullPoint = new Vector3(((Vector2)mouseWorldPosition).x,
-                    controller.player.transform.position.y,
-                    ((Vector2)mouseWorldPosition).y);
-                controller.player.TurnToWorldPoint(fullPoint);
-            }*/
+                controller.UpdateMouseOverTile(controller.player.GetTileInFrontOf());
+            }
 
             // Hotbar
             /*
