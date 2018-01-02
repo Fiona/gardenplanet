@@ -690,7 +690,7 @@ MonoBehaviour:
   atmosphere: {fileID: 0}
   worldObjectPopup: {fileID: 0}
   playerEnergy: {fileID: 0}
-  inputManager: {fileID: 0}
+  GameInputManager: {fileID: 0}
 --- !u!4 &1083541996
 Transform:
   m_ObjectHideFlags: 0

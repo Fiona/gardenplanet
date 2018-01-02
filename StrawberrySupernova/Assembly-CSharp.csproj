@@ -97,6 +97,19 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\Rewired\Examples\ControlRemapping1\Scripts\ControlRemappingDemo1.cs" />
+    <Compile Include="Assets\Rewired\Examples\CustomControllersTilt\Scripts\CustomControllersTiltDemo.cs" />
+    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo.cs" />
+    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo_Player.cs" />
+    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\TouchButtonExample.cs" />
+    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\TouchJoystickExample.cs" />
+    <Compile Include="Assets\Rewired\Examples\Shared\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Rewired\Examples\SimpleControlRemapping\Scripts\SimpleControlRemapping.cs" />
+    <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredStandaloneInputModule.cs" />
+    <Compile Include="Assets\Rewired\Internal\Scripts\DataStorage\UserDataStore_PlayerPrefs.cs" />
+    <Compile Include="Assets\Rewired\Internal\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Rewired\Internal\Scripts\Misc\ExternalTools.cs" />
+    <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
     <Compile Include="Assets\scripts\App.cs" />
     <Compile Include="Assets\scripts\Behaviours\Bobber.cs" />
     <Compile Include="Assets\scripts\Behaviours\DummyMonoBehaviour.cs" />
@@ -106,7 +119,12 @@
     <Compile Include="Assets\scripts\Behaviours\YesNoDialog.cs" />
     <Compile Include="Assets\scripts\Game\Atmosphere.cs" />
     <Compile Include="Assets\scripts\Game\GameController.cs" />
+    <Compile Include="Assets\scripts\Game\GameInputManager.cs" />
     <Compile Include="Assets\scripts\Game\Glowable.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenu.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenuInventory.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\PlayerEnergy.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\PlayerEnergyHeart.cs" />
     <Compile Include="Assets\scripts\Game\Inventory.cs" />
     <Compile Include="Assets\scripts\Game\InWorldItem.cs" />
     <Compile Include="Assets\scripts\Game\ItemHotbar.cs" />
@@ -139,13 +157,8 @@
     <Compile Include="Assets\scripts\Global\GUI\ChoicePopup.cs" />
     <Compile Include="Assets\scripts\Global\GUI\DebugMenu.cs" />
     <Compile Include="Assets\scripts\Global\GUI\DialoguePopup.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\InGameMenu.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\InGameMenuInventory.cs" />
     <Compile Include="Assets\scripts\Global\GUI\MessagePopup.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\PlayerEnergy.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\PlayerEnergyHeart.cs" />
     <Compile Include="Assets\scripts\Global\GUI\ScreenFade.cs" />
-    <Compile Include="Assets\scripts\Global\World\InputManager.cs" />
     <Compile Include="Assets\scripts\Global\World\Map.cs" />
     <Compile Include="Assets\scripts\Global\World\MarkerManager.cs" />
     <Compile Include="Assets\scripts\Global\World\MouseHoverPlane.cs" />
@@ -158,6 +171,7 @@
     <Compile Include="Assets\scripts\Global\World\WorldObjectManager.cs" />
     <Compile Include="Assets\scripts\Global\World\WorldObjectType.cs" />
     <Compile Include="Assets\scripts\MapEditor\DropdownMenu.cs" />
+    <Compile Include="Assets\scripts\MapEditor\EditorInputManager.cs" />
     <Compile Include="Assets\scripts\MapEditor\EditTileDialog.cs" />
     <Compile Include="Assets\scripts\MapEditor\LoadMapDialog.cs" />
     <Compile Include="Assets\scripts\MapEditor\MainMenuBar.cs" />
@@ -355,10 +369,12 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Tonemapping.cginc" />
+    <None Include="Assets\Rewired\Documentation\licences.txt" />
     <None Include="Assets\UnityUIExtensions\Shaders\UIParticleHidden.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\UnityUIExtensions\Shaders\SoftMaskShader.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
+    <None Include="Assets\Rewired\Documentation\ReadMe.txt" />
     <None Include="Assets\UnityUIExtensions\Scripts\Utilities\Serialization\Surrogates\SurrogatesReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Blit.shader" />
@@ -400,6 +416,7 @@
     <None Include="Assets\shaders\UnityVC\UnityVC.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
     <None Include="Assets\UnityUIExtensions\Shaders\UIMultiply.shader" />
+    <None Include="Assets\Rewired\Documentation\ReleaseNotes.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
     <None Include="Assets\shaders\Glow\GlowVisible.shader" />
@@ -480,6 +497,15 @@
     </Reference>
     <Reference Include="LitJson">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Editor">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows_Lib">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
     </Reference>
     <Reference Include="TextMeshPro-2017.2-1.0.56-Editor">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-1.0.56-Editor.dll</HintPath>

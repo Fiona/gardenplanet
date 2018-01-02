@@ -19,8 +19,8 @@ namespace StrawberryNova
         [HideInInspector] public int currentLayer;
         [HideInInspector] public Tilemap.Tile currentHoveredTile;
         [HideInInspector] public TileTypeSet tileTypeSet;
-        [HideInInspector] public InputManager inputManager;
-        
+        [HideInInspector] public EditorInputManager editorInputManager;
+
         [Header("Editor component references")]
         public Tilemap tilemap;
         public Camera mainCamera;
@@ -39,12 +39,12 @@ namespace StrawberryNova
             mouseHoverPlane = mouseHoverPlaneObj.AddComponent<MouseHoverPlane>();
 
             var inputManagerObj = new GameObject("Input Manager");
-            inputManager = inputManagerObj.AddComponent<InputManager>();
-                
+            editorInputManager = inputManagerObj.AddComponent<EditorInputManager>();
+
             barriers = new List<GameObject>();
 
             tileTypeSet = new TileTypeSet("default");
-            
+
             try
             {
                 LoadMap(null);
@@ -53,7 +53,7 @@ namespace StrawberryNova
             {
             }
 
-            CreateMapEditorModes();            
+            CreateMapEditorModes();
             SelectEditorMode(0);
         }
 
@@ -125,9 +125,9 @@ namespace StrawberryNova
                 body.AddForce(((Vector3)direction) * Consts.MOUSE_BUMP_SPEED * Time.deltaTime);
         }
 
-        
+
         /**
-         * (Re)Initialises the map editor from a map file 
+         * (Re)Initialises the map editor from a map file
          */
         public void LoadMap(string filename)
         {
@@ -144,7 +144,7 @@ namespace StrawberryNova
             SwitchToLayer(0);
             SelectEditorMode(0);
             mainMenuBar.ShowGoodMessage("Loaded map");
-            FindObjectOfType<InputManager>().SetUpMouse();
+            editorInputManager.SetUpMouse();
         }
 
         /**
@@ -156,7 +156,7 @@ namespace StrawberryNova
             {
                 map = new Map(map.filename, tilemap);
                 foreach(var mode in mapEditorModes)
-                    mode.SaveToMap(map);   
+                    mode.SaveToMap(map);
                 map.SaveMap();
             }
             catch(EditorErrorException)
@@ -243,7 +243,7 @@ namespace StrawberryNova
             tilemap.GenerateEmptyTiles(currentLayer);
             mouseHoverPlane.RecreateCollisionPlane();
         }
-            
+
         public void ResizeTilemapTo(int width, int height)
         {
             if(width <= 0 || height <= 0)
@@ -252,7 +252,7 @@ namespace StrawberryNova
             CreateBarrier();
             tilemap.GenerateEmptyTiles(currentLayer);
             foreach(var mode in mapEditorModes)
-                mode.ResizeMap(width, height);            
+                mode.ResizeMap(width, height);
         }
 
         public void CreateBarrier()

@@ -89,7 +89,7 @@ namespace StrawberryNova
             var objTransform = worldObjectSelected.gameObject.transform;
 
             // If we are moving an object
-            if(movingWorldObject && controller.inputManager.mouseWorldPosition != null)
+            if(movingWorldObject && controller.editorInputManager.mouseWorldPosition != null)
             {
                 // Snap to grid
                 if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || selectedWorldObject.tileObject)
@@ -106,9 +106,9 @@ namespace StrawberryNova
                 else
                 {
                     objTransform.position = new Vector3(
-                        controller.inputManager.mouseWorldPosition.Value.x,
+                        controller.editorInputManager.mouseWorldPosition.Value.x,
                         objTransform.position.y,
-                        controller.inputManager.mouseWorldPosition.Value.y
+                        controller.editorInputManager.mouseWorldPosition.Value.y
                     );
                 }
                 worldObjectSelected.x = objTransform.position.x;
@@ -154,11 +154,11 @@ namespace StrawberryNova
                 else
                 {
                     // Without shift being held we don't snap to grid
-                    if(controller.inputManager.mouseWorldPosition != null)
+                    if(controller.editorInputManager.mouseWorldPosition != null)
                     {
                         var worldPos = new WorldPosition{
-                            x=controller.inputManager.mouseWorldPosition.Value.x,
-                            y=controller.inputManager.mouseWorldPosition.Value.y,
+                            x=controller.editorInputManager.mouseWorldPosition.Value.x,
+                            y=controller.editorInputManager.mouseWorldPosition.Value.y,
                             height=(tilePos.layer * Consts.TILE_SIZE)
                         };
                         worldObjectManager.AddWorldObject(selectedWorldObject, worldPos);

@@ -43,6 +43,9 @@ namespace StrawberryNova
 	    // INPUT
 	    // -----------------------------
 
+		// Rewired player ID
+		public const int REWIRED_PLAYER_ID = 0;
+
 	    // Any mouse wheel axis movements at or outside of this movement will
 	    // class as a click in that direction.
 	    public const float MOUSE_WHEEL_CLICK_SNAP = 0.1f;
@@ -63,7 +66,7 @@ namespace StrawberryNova
 
 	    public const float PLAYER_SPEED = 100f;
 
-	    public const float PLAYER_ROTATION_SPEED = 4f;
+	    public const float PLAYER_ROTATION_SPEED = 10f;
 
 	    public const float PLAYER_JUMP_FORCE = 800f;
 

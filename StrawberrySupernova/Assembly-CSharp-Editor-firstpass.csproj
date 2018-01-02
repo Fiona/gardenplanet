@@ -126,6 +126,15 @@
     <Reference Include="LitJson">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>
     </Reference>
+    <Reference Include="Rewired_Editor">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows_Lib">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
+    </Reference>
     <Reference Include="TextMeshPro-2017.2-1.0.56-Editor">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-1.0.56-Editor.dll</HintPath>
     </Reference>

@@ -11,6 +11,7 @@ namespace StrawberryNova
 
         Rigidbody rigidBody;
         Vector3 walkDir;
+        Vector3 walkDirBuffer;
         bool isJumping;
         bool attemptJump;
         Vector3 desiredRotation;
@@ -66,21 +67,25 @@ namespace StrawberryNova
             // Detect layer
             layer = (int)Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
-            if(controller.inputManager == null || !controller.inputManager.directInputEnabled)
+            if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
 
             // Handle walking
             if(rigidBody.velocity.magnitude < 1.0f)
                 rigidBody.AddForce(
-                    Vector3.ClampMagnitude(walkDir * Consts.PLAYER_SPEED, Consts.PLAYER_SPEED) * Time.deltaTime,
+                    walkDirBuffer * Consts.PLAYER_SPEED * Time.deltaTime,
                     ForceMode.Impulse
                 );
-            walkDir = new Vector3();
 
-            // Do rotation towards mouse
+            // Do rotation towards movement direction
+            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f)
+                walkDir = walkDirBuffer;
+            desiredRotation = (transform.position - (transform.position - walkDir)).normalized;
             float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
             SetRotation(newDir);
+
+            walkDirBuffer = new Vector3();
 
             // Deal with jumping
             isJumping = (Mathf.Abs(rigidBody.velocity.y) > 0.01f);
@@ -133,16 +138,16 @@ namespace StrawberryNova
             switch(dir)
             {
                 case Direction.Up:
-                    walkDir += Vector3.forward;
+                    walkDirBuffer += Vector3.forward;
                     break;
                 case Direction.Down:
-                    walkDir += Vector3.back;
+                    walkDirBuffer += Vector3.back;
                     break;
                 case Direction.Left:
-                    walkDir += Vector3.left;
+                    walkDirBuffer += Vector3.left;
                     break;
                 case Direction.Right:
-                    walkDir += Vector3.right;
+                    walkDirBuffer += Vector3.right;
                     break;
             }
         }
