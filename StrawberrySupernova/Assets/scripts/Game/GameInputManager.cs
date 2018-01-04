@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using UnityEngine;
 using Rewired;
@@ -75,66 +76,28 @@ namespace StrawberryNova
             if(ver > 0.5f)
                 controller.player.WalkInDirection(Direction.Up, directionLock);
 
+            // Interacting with objects in the world
+            bool collisionTest = false;
+            RaycastHit hit;
+            var colLayers = (1 << Consts.COLLISION_LAYER_WORLD_OBJECTS) | (1 << Consts.COLLISION_LAYER_ITEMS);
+
             // Hovering mouse over objects or in-world items
             if(mouseMode)
             {
-
-                RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(mouse.screenPosition);
-                var colLayers = (1 << Consts.COLLISION_LAYER_WORLD_OBJECTS) | (1 << Consts.COLLISION_LAYER_ITEMS);
-                if(Physics.Raycast(ray, out hit, Mathf.Infinity, colLayers))
-                {
-                    // Try items first
-                    var itemComponent = hit.transform.gameObject.GetComponent<InWorldItem>();
-                    if(itemComponent != null && itemComponent.itemType.CanPickup)
-                    {
-                        if(Vector3.Distance(controller.player.transform.position, itemComponent.transform.position) <
-                           Consts.PLAYER_PICKUP_DISTANCE)
-                        {
-                            itemComponent.FullHighlight();
-                            if(player.GetButtonUp("Use Object"))
-                            {
-                                itemComponent.Pickup();
-                                return;
-                            }
-                        }
-                        else
-                            itemComponent.Highlight();
-                    }
-                    else
-                    {
-                        // Fallback to trying to interact with world objects
-                        var worldObjectComponent =
-                            hit.transform.gameObject.GetComponentInParent<WorldObjectInteractable>();
-                        if(worldObjectComponent != null)
-                        {
-                            if(Vector3.Distance(controller.player.transform.position,
-                                   worldObjectComponent.gameObject.transform.position) <
-                               Consts.PLAYER_INTERACT_DISTANCE)
-                            {
-                                worldObjectComponent.FullHighlight();
-                                if(player.GetButtonUp("Use Object"))
-                                {
-                                    worldObjectComponent.InteractWith();
-                                    return;
-                                }
-                            }
-                            else
-                                worldObjectComponent.Highlight();
-                        }
-                    }
-                }
+                collisionTest = Physics.Raycast(ray, out hit, Mathf.Infinity, colLayers);
 
-                // Get mouse over tiles
+                // Get tile that the mouse is over
                 controller.UpdateMouseOverTile(null);
-                if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
+                RaycastHit tileHit;
+                if(Physics.Raycast(ray, out tileHit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
                 {
-                    var rayNormal = hit.transform.TransformDirection(hit.normal);
-                    if(rayNormal == hit.transform.up)
+                    var rayNormal = tileHit.transform.TransformDirection(tileHit.normal);
+                    if(rayNormal == tileHit.transform.up)
                     {
-                        mouseWorldPosition = new Vector2(hit.point.x, hit.point.z);
-                        int tileOverX = (int) ((hit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
-                        int tileOverY = (int) ((hit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                        mouseWorldPosition = new Vector2(tileHit.point.x, tileHit.point.z);
+                        int tileOverX = (int) ((tileHit.point.x + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
+                        int tileOverY = (int) ((tileHit.point.z + (Consts.TILE_SIZE / 2)) / Consts.TILE_SIZE);
                         TilePosition tilePosition = new TilePosition()
                         {
                             x = tileOverX,
@@ -146,15 +109,68 @@ namespace StrawberryNova
                 }
                 else
                     mouseWorldPosition = null;
-
             }
             else
             // Joystick or keyboard only mode
             {
+                // Pointing at nearest object
+                Debug.DrawLine(controller.player.transform.position, controller.player.transform.position + controller.player.transform.forward);
+                collisionTest = Physics.SphereCast(controller.player.transform.position, .1f,
+                    controller.player.transform.forward, out hit, Mathf.Infinity, colLayers);
+
+                // Get tile in front of player
                 controller.UpdateMouseOverTile(controller.player.GetTileInFrontOf());
             }
 
+            // If we're pointing at an object with mouse or joystick/keyboard-only
+            if(collisionTest)
+            {
+                // Try items first
+                var itemComponent = hit.transform.gameObject.GetComponent<InWorldItem>();
+                if(itemComponent != null && itemComponent.itemType.CanPickup)
+                {
+                    if(Vector3.Distance(controller.player.transform.position, itemComponent.transform.position) <
+                       Consts.PLAYER_PICKUP_DISTANCE)
+                    {
+                        itemComponent.FullHighlight();
+                        if(player.GetButtonUp("Use Object"))
+                        {
+                            itemComponent.Pickup();
+                            return;
+                        }
+                    }
+                    else
+                        itemComponent.Highlight();
+                }
+                else
+                {
+                    // Fallback to trying to interact with world objects
+                    var worldObjectComponent =
+                        hit.transform.gameObject.GetComponentInParent<WorldObjectInteractable>();
+                    if(worldObjectComponent != null)
+                    {
+                        if(Vector3.Distance(controller.player.transform.position,
+                               worldObjectComponent.gameObject.transform.position) <
+                           Consts.PLAYER_INTERACT_DISTANCE)
+                        {
+                            worldObjectComponent.FullHighlight();
+                            if(player.GetButtonUp("Use Object"))
+                            {
+                                worldObjectComponent.InteractWith();
+                                return;
+                            }
+                        }
+                        else
+                            worldObjectComponent.Highlight();
+                    }
+                }
+            }
+
+
             // Hotbar
+            for(var i = 0; i < 10; i++)
+                if(player.GetButtonUp(String.Format("Hotbar Item {0}", i+1)))
+                    controller.SelectHotbarItem(i);
             /*
             if(Input.GetKeyUp(KeyCode.Alpha1))
                 controller.SelectHotbarItem(0);

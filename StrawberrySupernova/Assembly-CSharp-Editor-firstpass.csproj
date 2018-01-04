@@ -120,9 +120,6 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity2017.3/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Dezgo_PanicButton">
-      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Editor/PanicButton/Dezgo_PanicButton.dll</HintPath>
-    </Reference>
     <Reference Include="LitJson">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Plugins/LitJson.dll</HintPath>
     </Reference>
