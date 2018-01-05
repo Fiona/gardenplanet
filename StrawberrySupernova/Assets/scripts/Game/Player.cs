@@ -11,10 +11,12 @@ namespace StrawberryNova
 
         Rigidbody rigidBody;
         Vector3 walkDir;
+        Vector3 walkDirBuffer;
         bool isJumping;
         bool attemptJump;
         Vector3 desiredRotation;
         GameController controller;
+        bool lockFacing;
         [HideInInspector]
         public Inventory inventory;
         [HideInInspector]
@@ -66,21 +68,26 @@ namespace StrawberryNova
             // Detect layer
             layer = (int)Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
-            if(controller.inputManager == null || !controller.inputManager.directInputEnabled)
+            if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
 
             // Handle walking
             if(rigidBody.velocity.magnitude < 1.0f)
                 rigidBody.AddForce(
-                    Vector3.ClampMagnitude(walkDir * Consts.PLAYER_SPEED, Consts.PLAYER_SPEED) * Time.deltaTime,
+                    walkDirBuffer * Consts.PLAYER_SPEED * Time.deltaTime,
                     ForceMode.Impulse
                 );
-            walkDir = new Vector3();
 
-            // Do rotation towards mouse
+            // Do rotation towards movement direction
+            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
+                walkDir = walkDirBuffer;
+            desiredRotation = (transform.position - (transform.position - walkDir)).normalized;
             float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
             SetRotation(newDir);
+
+            walkDirBuffer = new Vector3();
+            lockFacing = false;
 
             // Deal with jumping
             isJumping = (Mathf.Abs(rigidBody.velocity.y) > 0.01f);
@@ -128,21 +135,22 @@ namespace StrawberryNova
           It can be called again to add an additional direction to
           allow for diaganol movement.
          */
-        public void WalkInDirection(Direction dir)
+        public void WalkInDirection(Direction dir, bool _lockFacing)
         {
+            lockFacing = _lockFacing;
             switch(dir)
             {
                 case Direction.Up:
-                    walkDir += Vector3.forward;
+                    walkDirBuffer += Vector3.forward;
                     break;
                 case Direction.Down:
-                    walkDir += Vector3.back;
+                    walkDirBuffer += Vector3.back;
                     break;
                 case Direction.Left:
-                    walkDir += Vector3.left;
+                    walkDirBuffer += Vector3.left;
                     break;
                 case Direction.Right:
-                    walkDir += Vector3.right;
+                    walkDirBuffer += Vector3.right;
                     break;
             }
         }
@@ -154,6 +162,16 @@ namespace StrawberryNova
         {
             if((transform.position - turnTo).magnitude > .2f)
                 desiredRotation = turnTo - transform.position;
+        }
+
+        /*
+         Gets the tile position directly in front of the player
+         */
+        public TilePosition GetTileInFrontOf()
+        {
+            var pos = (transform.position + (walkDir*.5f));
+            var tilePos = new TilePosition(pos){layer = layer};
+            return tilePos;
         }
 
         /*

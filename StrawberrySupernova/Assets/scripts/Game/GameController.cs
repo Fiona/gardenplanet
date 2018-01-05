@@ -49,9 +49,9 @@ namespace StrawberryNova
         [HideInInspector]
         public PlayerEnergy playerEnergy;
         [HideInInspector]
-        public InputManager inputManager;
+        public GameInputManager GameInputManager;
         [HideInInspector]
-        public TilePosition mouseOverTile;
+        public TilePosition activeTile;
 
         GameObject inWorldItems;
         Text worldObjectPopupText;
@@ -95,8 +95,8 @@ namespace StrawberryNova
             var itemManagerObj = new GameObject("ItemManager");
             itemManager = itemManagerObj.AddComponent<ItemManager>();
 
-            var inputManagerObj = new GameObject("InputManager");
-            inputManager = inputManagerObj.AddComponent<InputManager>();
+            var inputManagerObj = new GameObject("GameInputManager");
+            GameInputManager = inputManagerObj.AddComponent<GameInputManager>();
 
             inWorldItems = new GameObject("In World Items");
 
@@ -169,7 +169,7 @@ namespace StrawberryNova
 
         public void UpdateMouseOverTile(TilePosition tilePosition)
         {
-            mouseOverTile = tilePosition;
+            activeTile = tilePosition;
         }
 
         public void ShowPopup(string textToShow)
@@ -289,14 +289,14 @@ namespace StrawberryNova
 
         public void StartCutscene()
         {
-            inputManager.LockDirectInput();
+            GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
         }
 
         public void EndCutscene()
         {
             worldTimer.StartTimer();
-            inputManager.UnlockDirectInput();
+            GameInputManager.UnlockDirectInput();
         }
 
         public IEnumerator PlayerSleep()
@@ -306,7 +306,7 @@ namespace StrawberryNova
 
         public IEnumerator OpenInGameMenu()
         {
-            inputManager.LockDirectInput();
+            GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
             worldTimer.GetComponent<CanvasGroup>().alpha = 0;
             itemHotbar.GetComponent<CanvasGroup>().alpha = 0;
@@ -320,7 +320,7 @@ namespace StrawberryNova
             itemHotbar.GetComponent<CanvasGroup>().alpha = 1;
             worldTimer.GetComponent<CanvasGroup>().alpha = 1;
             worldTimer.StartTimer();
-            inputManager.UnlockDirectInput();
+            GameInputManager.UnlockDirectInput();
         }
 
         public void SelectHotbarItem(int hotbarItemNum)

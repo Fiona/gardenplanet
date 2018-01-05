@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Rewired.Utils.Classes.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,6 +69,13 @@ namespace StrawberryNova
             this.x = x;
             this.y = y;
             this.layer = layer;
+        }
+
+        public TilePosition(Vector3 pos)
+        {
+            x = Mathf.RoundToInt(pos.x / Consts.TILE_SIZE);
+            layer = Mathf.RoundToInt(pos.y / Consts.TILE_SIZE);
+            y = Mathf.RoundToInt(pos.z / Consts.TILE_SIZE);
         }
 
         public TilePosition(WorldPosition pos)
@@ -152,6 +160,13 @@ namespace StrawberryNova
 
         public WorldPosition()
         {
+        }
+
+        public WorldPosition(float x, float y, float height)
+        {
+            this.x = x;
+            this.y = y;
+            this.height = height;
         }
 
         public WorldPosition(TilePosition tilePos)

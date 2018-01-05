@@ -18,7 +18,7 @@ namespace StrawberryNova
 
         public void Update()
         {
-            if(controller.mouseOverTile == null || !controller.itemHotbar.activeItemIsTileItem)
+            if(controller.activeTile == null || !controller.itemHotbar.activeItemIsTileItem)
             {
                 displayHolder.SetActive(false);
                 return;
@@ -28,9 +28,9 @@ namespace StrawberryNova
             okDisplay.SetActive(false);
             normalDisplay.SetActive(false);
             transform.position = new Vector3(
-                controller.mouseOverTile.x * Consts.TILE_SIZE,
-                controller.mouseOverTile.layer * Consts.TILE_SIZE,
-                controller.mouseOverTile.y * Consts.TILE_SIZE
+                controller.activeTile.x * Consts.TILE_SIZE,
+                controller.activeTile.layer * Consts.TILE_SIZE,
+                controller.activeTile.y * Consts.TILE_SIZE
             );
 
             if(controller.itemHotbar.selectedItemEntry == null)
@@ -39,7 +39,7 @@ namespace StrawberryNova
                 return;
             }
 
-            if(controller.itemHotbar.CanBeUsedOnTilePos(controller.mouseOverTile))
+            if(controller.itemHotbar.CanBeUsedOnTilePos(controller.activeTile))
                 okDisplay.SetActive(true);
             else
                 errorDisplay.SetActive(true);

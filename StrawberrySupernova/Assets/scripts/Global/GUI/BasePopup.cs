@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using StrawberryNova;
 
 namespace StompyBlondie
 {
@@ -12,6 +13,8 @@ namespace StompyBlondie
 	{
 		[HideInInspector]
 		public bool closePopup;
+
+		private GameController controller;
 
 		public static T InitPopup<T>(string prefabName)
 		{
@@ -31,24 +34,26 @@ namespace StompyBlondie
 
 		public IEnumerator DoPopup()
 		{
+			controller = FindObjectOfType<GameController>();
+
 			// Wait for input
 			closePopup = false;
 			while(!closePopup)
 				yield return new WaitForFixedUpdate();
 
 			// Remove from canvas
-			Destroy(this.gameObject);			
-		}		
-		
+			Destroy(this.gameObject);
+		}
+
 		public void Update()
 		{
 			if(closePopup)
 				return;
-			if(Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Return))
-				closePopup = true;
+			if(controller.GameInputManager.player.GetButtonDown("Confirm"))
+				ClickedOnPopup();
 		}
 
-		public void ClickedOnPopup()
+		public virtual void ClickedOnPopup()
 		{
 			closePopup = true;
 		}
