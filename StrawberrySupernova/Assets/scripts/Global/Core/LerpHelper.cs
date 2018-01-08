@@ -29,25 +29,46 @@ namespace StompyBlondie
         /*
          * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
          */
-        public static IEnumerator QuickTween(Action<float> callback, float fromValue, float toValue, float durationSeconds)
+        public static IEnumerator QuickTween(Action<float> callback, float fromValue, float toValue, float durationSeconds, Action onDone = null)
         {
             foreach(var val in LerpHelper.LerpOverTime(durationSeconds))
             {
                 callback(Mathf.Lerp(fromValue, toValue, val));
                 yield return new WaitForFixedUpdate();
             }
+
+            if(onDone != null)
+                onDone();
         }
 
         /*
          * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
          */
-        public static IEnumerator QuickTween(Action<Vector3> callback, Vector3 fromValue, Vector3 toValue, float durationSeconds)
+        public static IEnumerator QuickTween(Action<Vector3> callback, Vector3 fromValue, Vector3 toValue, float durationSeconds, Action onDone = null)
         {
             foreach(var val in LerpHelper.LerpOverTime(durationSeconds))
             {
                 callback(Vector3.Lerp(fromValue, toValue, val));
                 yield return new WaitForFixedUpdate();
             }
+
+            if(onDone != null)
+                onDone();
+        }
+
+        /*
+         * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
+         */
+        public static IEnumerator QuickTween(Action<Color> callback, Color fromValue, Color toValue, float durationSeconds, Action onDone = null)
+        {
+            foreach(var val in LerpHelper.LerpOverTime(durationSeconds))
+            {
+                callback(Color.Lerp(fromValue, toValue, val));
+                yield return new WaitForFixedUpdate();
+            }
+
+            if(onDone != null)
+                onDone();
         }
 
     }
