@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Security.Cryptography.X509Certificates;
+using StompyBlondie;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +12,9 @@ namespace StrawberryNova
 
         public Button[] hotbarButtons;
         public Image[] hotbarImages;
-        public Text[] hotbarQuantityText;
-        [Header("Active item")]
-        public GameObject activeItem;
-        [Header("Hotbar button images")]
-        public Sprite buttonImage;
-        public Sprite buttonHoverImage;
-        public Sprite buttonPressedImage;
-        [Header("Selected button images")]
-        public Sprite buttonAcitveImage;
-        public Sprite buttonActiveHoverImage;
-        public Sprite buttonActivePressedImage;
+        public TextMeshProUGUI[] hotbarQuantityText;
+        [Header("Selection Marker")]
+        public Image selectionMarker;
         [HideInInspector]
         public bool activeItemIsTileItem;
 
@@ -57,7 +50,7 @@ namespace StrawberryNova
             while(true)
             {
                 UpdateHotbarState();
-                UpdateActiveItem();
+                HandleActiveItemScript();
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -73,14 +66,15 @@ namespace StrawberryNova
 
                 if(hotbarItems[i] == null)
                 {
-                    hotbarImages[i].gameObject.SetActive(false);
+                    hotbarImages[i].sprite = null;
+                    hotbarImages[i].color = new Color(1f,1f,1f,0f);
                     hotbarQuantityText[i].gameObject.SetActive(false);
                 }
                 else
                 {
-                    hotbarImages[i].gameObject.SetActive(true);
-                    hotbarQuantityText[i].gameObject.SetActive(true);
                     hotbarImages[i].sprite = itemEntry.itemType.Image;
+                    hotbarImages[i].color = new Color(1f,1f,1f,1f);
+                    hotbarQuantityText[i].gameObject.SetActive(true);
                     hotbarQuantityText[i].text = itemEntry.quantity.ToString();
                 }
             }
@@ -99,26 +93,19 @@ namespace StrawberryNova
 
         public void SelectItemIndex(int newIndex)
         {
-            // Change current hotbar item back to unselected state
-            SpriteState unclickedSpriteState = new SpriteState();
-            unclickedSpriteState.highlightedSprite = buttonHoverImage;
-            unclickedSpriteState.pressedSprite = buttonPressedImage;
-            hotbarButtons[selectedItemIndex].spriteState = unclickedSpriteState;
-            hotbarButtons[selectedItemIndex].GetComponent<Image>().sprite = buttonImage;
-            hotbarButtons[selectedItemIndex].transform.localScale = new Vector3(1f, 1f, 1f);
-
-            // Set new one
+            // Apply and set marker position
             selectedItemIndex = newIndex;
+            selectionMarker.transform.position = hotbarButtons[selectedItemIndex].transform.position;
 
-            // Update state of newly selected item
-            SpriteState activeSpriteState = new SpriteState();
-            activeSpriteState.highlightedSprite = buttonActiveHoverImage;
-            activeSpriteState.pressedSprite = buttonActivePressedImage;
-            hotbarButtons[selectedItemIndex].spriteState = activeSpriteState;
-            hotbarButtons[selectedItemIndex].GetComponent<Image>().sprite = buttonAcitveImage;
-            hotbarButtons[selectedItemIndex].transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            // Do little fade in
+            StartCoroutine(LerpHelper.QuickTween(
+                (val) => { selectionMarker.color = val; },
+                new Color(1f, 1f, 1f, 0f),
+                new Color(1f, 1f, 1f, 1f),
+                .1f
+            ));
 
-            UpdateActiveItem();
+            HandleActiveItemScript();
         }
 
         public void SelectPreviousItem()
@@ -188,25 +175,12 @@ namespace StrawberryNova
             yield return null;
         }
 
-        private void UpdateActiveItem()
+        private void HandleActiveItemScript()
         {
-            // Make active item display reflect selected item and deal with scripts
-            var activeText = activeItem.GetComponentInChildren<Text>(true);
-            var activeImage = activeItem.GetComponentsInChildren<Image>(true)[1];
             if(hotbarItems[selectedItemIndex] == null)
-            {
-                activeText.gameObject.SetActive(false);
-                activeImage.gameObject.SetActive(false);
                 StopItemScript();
-            }
             else
-            {
-                activeText.gameObject.SetActive(true);
-                activeText.text = hotbarItems[selectedItemIndex].quantity.ToString();
-                activeImage.gameObject.SetActive(true);
-                activeImage.sprite = hotbarItems[selectedItemIndex].itemType.Image;
                 StartItemScript();
-            }
         }
 
         private void StartItemScript()
