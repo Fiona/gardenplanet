@@ -26,6 +26,9 @@ StrawberrySupernova/Temp
 StrawberrySupernova/.vs
 obj/
 
+# Blender stuff
+*.blend1
+
 # builds
 bin/
 
@@ -33,3 +36,4 @@ bin/
 StrawberrySupernova/Assets/AmplifyShaderEditor/
 StrawberrySupernova/Assets/AmplifyShaderEditor.meta
 StrawberrySupernova/Assets/Editor/PanicButton*
+
