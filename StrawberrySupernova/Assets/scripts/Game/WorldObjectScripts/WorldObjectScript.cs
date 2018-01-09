@@ -70,11 +70,11 @@ namespace StrawberryNova
 		}
 
 		/*
-		 * Gets the name that should be shown to the player
+		 * Gets info popup for name etc
 		 */
-		public virtual string GetDisplayName()
+		public virtual string[] GetInfoPopup()
 		{
-			return worldObject.objectType.displayName;
+			return new[]{ worldObject.objectType.displayName, ""};
 		}
 	}
 }

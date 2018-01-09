@@ -8,17 +8,13 @@ using UnityEngine.UI;
 
 namespace StrawberryNova
 {
-
-    /*
-     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
-     *
-     */
     public class GameController: MonoBehaviour
     {
 
         [Header("Object References")]
         public PlayerCamera mainCamera;
         public Player player;
+        public RectTransform canvasRect;
 
         [HideInInspector]
         public JsonData globalConfig;
@@ -45,18 +41,17 @@ namespace StrawberryNova
         [HideInInspector]
         public Atmosphere atmosphere;
         [HideInInspector]
-        public GameObject worldObjectPopup;
-        [HideInInspector]
         public PlayerEnergy playerEnergy;
         [HideInInspector]
         public GameInputManager GameInputManager;
         [HideInInspector]
         public TilePosition activeTile;
+        [HideInInspector]
+        public bool noTileSelection;
 
         GameObject inWorldItems;
-        Text worldObjectPopupText;
-        bool showPopup;
         Debug debugMenu;
+        InfoPopup infoPopup;
 
         public void Awake()
         {
@@ -106,11 +101,9 @@ namespace StrawberryNova
             worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
             worldTimer = worldTimerObject.GetComponent<WorldTimer>();
 
-            worldObjectPopup = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_OBJECT_POPUP)) as GameObject;
-            worldObjectPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            worldObjectPopup.transform.SetSiblingIndex(worldObjectPopup.transform.GetSiblingIndex() - 1);
-            worldObjectPopup.SetActive(false);
-            worldObjectPopupText = worldObjectPopup.GetComponentInChildren<Text>();
+            infoPopup = (Instantiate(Resources.Load(Consts.PREFAB_PATH_INFO_POPUP)) as GameObject).GetComponent<InfoPopup>();
+            infoPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            infoPopup.transform.SetSiblingIndex(infoPopup.transform.GetSiblingIndex() - 1);
 
             var itemHotbarObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_ITEM_HOTBAR)) as GameObject;
             itemHotbarObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
@@ -152,13 +145,6 @@ namespace StrawberryNova
             StartCoroutine(ControllerCoroutine());
         }
 
-        public void LateUpdate()
-        {
-            if(!showPopup)
-                worldObjectPopup.SetActive(false);
-            showPopup = false;
-        }
-
         /*
          * TODO TODO
          */
@@ -172,11 +158,14 @@ namespace StrawberryNova
             activeTile = tilePosition;
         }
 
-        public void ShowPopup(string textToShow)
+        public void ShowInfoPopup(TilePosition tilePos, string textToShow, string extraTextToShow = "")
         {
-            worldObjectPopupText.text = textToShow;
-            worldObjectPopup.SetActive(true);
-            showPopup = true;
+            infoPopup.Show(tilePos, textToShow, extraTextToShow);
+        }
+
+        public void ShowInfoPopup(WorldPosition tilePos, string textToShow, string extraTextToShow = "")
+        {
+            infoPopup.Show(tilePos, textToShow, extraTextToShow);
         }
 
         public IEnumerator PlayerInteractWith(WorldObject worldObject)
@@ -340,4 +329,8 @@ namespace StrawberryNova
 
     }
 
+    /*
+     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
+     *
+     */
 }

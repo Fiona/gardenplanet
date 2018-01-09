@@ -2,6 +2,7 @@ using System;
 using StompyBlondie;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI.Extensions.Tweens;
 
 namespace StrawberryNova
 {
@@ -10,13 +11,14 @@ namespace StrawberryNova
     {
 
         Rigidbody rigidBody;
-        Vector3 walkDir;
         Vector3 walkDirBuffer;
+        private Vector3 lookDirection;
         bool isJumping;
         bool attemptJump;
         Vector3 desiredRotation;
         GameController controller;
         bool lockFacing;
+
         [HideInInspector]
         public Inventory inventory;
         [HideInInspector]
@@ -66,7 +68,7 @@ namespace StrawberryNova
         {
 
             // Detect layer
-            layer = (int)Math.Floor(transform.position.y * Consts.TILE_SIZE);
+            layer = (int) Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
             if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
@@ -80,13 +82,13 @@ namespace StrawberryNova
 
             // Do rotation towards movement direction
             if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
-                walkDir = walkDirBuffer;
-            desiredRotation = (transform.position - (transform.position - walkDir)).normalized;
+                lookDirection = walkDirBuffer;
+            desiredRotation = (transform.position - (transform.position - lookDirection)).normalized;
             float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
             SetRotation(newDir);
 
-            walkDirBuffer = new Vector3();
+            walkDirBuffer = Vector3.zero;
             lockFacing = false;
 
             // Deal with jumping
@@ -156,6 +158,14 @@ namespace StrawberryNova
         }
 
         /*
+         * Points to a specified direction based on two axis.
+         */
+        public void LookInDirection(Vector3 direction)
+        {
+            lookDirection = direction;
+        }
+
+        /*
          Player will turn towards the world position passed
          */
         public void TurnToWorldPoint(Vector3 turnTo)
@@ -169,7 +179,7 @@ namespace StrawberryNova
          */
         public TilePosition GetTileInFrontOf()
         {
-            var pos = (transform.position + (walkDir*.5f));
+            var pos = (transform.position + (lookDirection.normalized*.5f));
             var tilePos = new TilePosition(pos){layer = layer};
             return tilePos;
         }

@@ -22,7 +22,7 @@ namespace StrawberryNova
             StartCoroutine(DropAnim());
             if(itemType.CanPickup)
             {
-                highlightGlow = gameObject.AddComponent<Glowable>();            
+                highlightGlow = gameObject.AddComponent<Glowable>();
                 fullHighlightGlow = gameObject.AddComponent<Glowable>();
             }
         }
@@ -33,15 +33,15 @@ namespace StrawberryNova
                 return;
             if(doFullHighlight)
             {
+                controller.ShowInfoPopup(new WorldPosition(transform.position), itemType.DisplayName);
                 fullHighlightGlow.GlowTo(new Color(0f, .5f, 1f), 1f);
-                controller.ShowPopup(itemType.DisplayName);    
             }
-            else if (doHighlight)
+            else if(doHighlight)
                 highlightGlow.GlowTo(new Color(.6f, .75f, .86f), .5f);
             doHighlight = false;
             doFullHighlight = false;
         }
-        
+
         public void Highlight()
         {
             doHighlight = true;
@@ -61,20 +61,20 @@ namespace StrawberryNova
             Object.Destroy(highlightGlow);
             StartCoroutine(PickupAnim());
         }
-        
+
         private IEnumerator DropAnim()
-        {           
+        {
             var endScale = transform.localScale;
             foreach(var val in LerpHelper.LerpOverTime(.25f))
             {
                 transform.localScale = Vector3.Lerp(Vector3.zero, endScale, val);
-                yield return new WaitForFixedUpdate();                
+                yield return new WaitForFixedUpdate();
             }
             transform.localScale = endScale;
         }
 
         private IEnumerator PickupAnim()
-        {           
+        {
             var startScale = transform.localScale;
             var startPos = transform.position;
             foreach(var val in LerpHelper.LerpOverTime(.25f))
@@ -86,8 +86,8 @@ namespace StrawberryNova
             }
             transform.localScale = Vector3.zero;
             controller.GivePlayerItem(itemType, attributes, 1);
-            Object.Destroy(this.gameObject);            
+            Object.Destroy(this.gameObject);
         }
-        
+
     }
 }

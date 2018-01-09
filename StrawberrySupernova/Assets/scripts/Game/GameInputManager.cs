@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 using Rewired;
@@ -63,18 +64,27 @@ namespace StrawberryNova
             }
 
             // Walking
-            var hor = player.GetAxis("Move Horizontal");
-            var ver = player.GetAxis("Move Vertical");
+            var walkHor = player.GetAxis("Move Horizontal");
+            var walkVer = player.GetAxis("Move Vertical");
+            var lookHor = player.GetAxis("Look Horizontal");
+            var lookVer = player.GetAxis("Look Vertical");
+
             var directionLock = player.GetButton("Direction Lock");
-            if(hor < -0.5f)
+            if(walkHor < -0.5f)
                 controller.player.WalkInDirection(Direction.Left, directionLock);
-            if(hor > 0.5f)
+            if(walkHor > 0.5f)
                 controller.player.WalkInDirection(Direction.Right, directionLock);
 
-            if(ver < -0.5f)
+            if(walkVer < -0.5f)
                 controller.player.WalkInDirection(Direction.Down, directionLock);
-            if(ver > 0.5f)
+            if(walkVer > 0.5f)
                 controller.player.WalkInDirection(Direction.Up, directionLock);
+
+            // looking in direction
+            if(Mathf.Abs(walkHor) < .5f && Mathf.Abs(walkVer) < .5f && (Mathf.Abs(lookHor) > .5f || Mathf.Abs(lookVer) > .5f))
+            {
+                controller.player.LookInDirection(new Vector3(lookHor, 0f, lookVer));
+            }
 
             // Interacting with objects in the world
             bool collisionTest = false;
@@ -111,7 +121,7 @@ namespace StrawberryNova
                     mouseWorldPosition = null;
             }
             else
-            // Joystick or keyboard only mode
+                // Joystick or keyboard only mode
             {
                 // Pointing at nearest object
                 Debug.DrawLine(controller.player.transform.position, controller.player.transform.position + controller.player.transform.forward);
@@ -123,6 +133,7 @@ namespace StrawberryNova
             }
 
             // If we're pointing at an object with mouse or joystick/keyboard-only
+            controller.noTileSelection = false;
             if(collisionTest)
             {
                 // Try items first
@@ -133,6 +144,7 @@ namespace StrawberryNova
                        Consts.PLAYER_PICKUP_DISTANCE)
                     {
                         itemComponent.FullHighlight();
+                        controller.noTileSelection = true;
                         if(player.GetButtonUp("Use Object"))
                         {
                             itemComponent.Pickup();
@@ -154,6 +166,7 @@ namespace StrawberryNova
                            Consts.PLAYER_INTERACT_DISTANCE)
                         {
                             worldObjectComponent.FullHighlight();
+                            controller.noTileSelection = true;
                             if(player.GetButtonUp("Use Object"))
                             {
                                 worldObjectComponent.InteractWith();
@@ -166,33 +179,11 @@ namespace StrawberryNova
                 }
             }
 
-
             // Hotbar
             for(var i = 0; i < 10; i++)
                 if(player.GetButtonUp(String.Format("Hotbar Item {0}", i+1)))
                     controller.SelectHotbarItem(i);
-            /*
-            if(Input.GetKeyUp(KeyCode.Alpha1))
-                controller.SelectHotbarItem(0);
-            else if(Input.GetKeyUp(KeyCode.Alpha3))
-                controller.SelectHotbarItem(2);
-            else if(Input.GetKeyUp(KeyCode.Alpha2))
-                controller.SelectHotbarItem(1);
-            else if(Input.GetKeyUp(KeyCode.Alpha4))
-                controller.SelectHotbarItem(3);
-            else if(Input.GetKeyUp(KeyCode.Alpha5))
-                controller.SelectHotbarItem(4);
-            else if(Input.GetKeyUp(KeyCode.Alpha6))
-                controller.SelectHotbarItem(5);
-            else if(Input.GetKeyUp(KeyCode.Alpha7))
-                controller.SelectHotbarItem(6);
-            else if(Input.GetKeyUp(KeyCode.Alpha8))
-                controller.SelectHotbarItem(7);
-            else if(Input.GetKeyUp(KeyCode.Alpha9))
-                controller.SelectHotbarItem(8);
-            else if(Input.GetKeyUp(KeyCode.Alpha0))
-                controller.SelectHotbarItem(9);
-*/
+
             if(player.GetButtonDown("Previous Hotbar Item"))
                 controller.SelectPreviousHotbarItem();
             if(player.GetButtonDown("Next Hotbar Item"))
@@ -209,7 +200,8 @@ namespace StrawberryNova
             if(player.GetButtonUp("Use Item"))
             {
                 // Tile item
-                if(controller.activeTile != null &&
+                if(!controller.noTileSelection &&
+                   controller.activeTile != null &&
                    controller.itemHotbar.activeItemIsTileItem &&
                    controller.itemHotbar.CanBeUsedOnTilePos(controller.activeTile))
                 {

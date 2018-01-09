@@ -10,6 +10,9 @@ namespace StrawberryNova
 	public static class Consts
 	{
 
+		// TODO: Make these player options
+		public const bool PLAYER_SETTING_STATIC_INFO_POPUP = false;
+
 	    // -----------------------------
 	    // CONFIG SETTINGS
 	    // -----------------------------
@@ -137,7 +140,7 @@ namespace StrawberryNova
         public const string PREFAB_PATH_WORLD_TIMER = "prefabs/gui/WorldTimer";
 		public const string PREFAB_PATH_ITEM_HOTBAR = "prefabs/gui/ItemHotbar";
         public const string PREFAB_PATH_ATMOSPHERE = "prefabs/world/Atmosphere";
-        public const string PREFAB_PATH_WORLD_OBJECT_POPUP = "prefabs/gui/WorldObjectPopup";
+		public const string PREFAB_PATH_INFO_POPUP = "prefabs/gui/InfoPopup";
         public const string PREFAB_PATH_IN_GAME_MENU = "prefabs/gui/InGameMenu";
 		public const string PREFAB_PATH_PLAYER_ENERGY = "prefabs/gui/PlayerEnergy";
         public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse";

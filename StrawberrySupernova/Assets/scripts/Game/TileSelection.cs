@@ -18,11 +18,23 @@ namespace StrawberryNova
 
         public void Update()
         {
-            if(controller.activeTile == null || !controller.itemHotbar.activeItemIsTileItem)
+            if(controller.activeTile == null || controller.noTileSelection)
             {
                 displayHolder.SetActive(false);
                 return;
             }
+
+            // Do info popup
+            var objs = controller.activeTile.GetTileWorldObjects();
+            foreach(var o in objs)
+            {
+                var info = o.GetInfoPopup();
+                if(info == null)
+                    continue;
+                controller.ShowInfoPopup(controller.activeTile, info[0], info[1]);
+            }
+
+            // Display the right version of the selection marker
             displayHolder.SetActive(true);
             errorDisplay.SetActive(false);
             okDisplay.SetActive(false);
