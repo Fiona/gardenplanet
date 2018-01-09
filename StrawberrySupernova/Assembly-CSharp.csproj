@@ -121,13 +121,15 @@
     <Compile Include="Assets\scripts\Game\GameController.cs" />
     <Compile Include="Assets\scripts\Game\GameInputManager.cs" />
     <Compile Include="Assets\scripts\Game\Glowable.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InfoPopup.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InfoPopupDisplay.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenuInventory.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\ItemHotbar.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergy.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergyHeart.cs" />
     <Compile Include="Assets\scripts\Game\Inventory.cs" />
     <Compile Include="Assets\scripts\Game\InWorldItem.cs" />
-    <Compile Include="Assets\scripts\Game\ItemHotbar.cs" />
     <Compile Include="Assets\scripts\Game\ItemManager.cs" />
     <Compile Include="Assets\scripts\Game\ItemScripts\Consumable.cs" />
     <Compile Include="Assets\scripts\Game\ItemScripts\Hoe.cs" />
@@ -504,11 +506,11 @@
     <Reference Include="Rewired_Windows_Lib">
       <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
     </Reference>
-    <Reference Include="TextMeshPro-2017.2-1.0.56-Editor">
-      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-1.0.56-Editor.dll</HintPath>
+    <Reference Include="TextMeshPro-2017.3-1.0.56-Editor">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Editor.dll</HintPath>
     </Reference>
-    <Reference Include="TextMeshPro-2017.2-1.0.56-Runtime">
-      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-1.0.56-Runtime.dll</HintPath>
+    <Reference Include="TextMeshPro-2017.3-1.0.56-Runtime">
+      <HintPath>C:/Users/Fiona/devel/unity/strawberrysupernova/StrawberrySupernova/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Fiona/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

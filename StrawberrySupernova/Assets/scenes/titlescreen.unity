@@ -1690,6 +1690,15 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 23
+      _name: Look Vertical
+      _type: 0
+      _descriptiveName: Look Vertical
+      _positiveDescriptiveName: Look Up
+      _negativeDescriptiveName: Look Down
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     - _id: 2
       _name: Use Item
       _type: 1
@@ -1861,6 +1870,15 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 22
+      _name: Look Horizontal
+      _type: 0
+      _descriptiveName: Look Horizontal
+      _positiveDescriptiveName: Look Right
+      _negativeDescriptiveName: Look Left
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Game
@@ -1875,7 +1893,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 00000000010000000800000002000000060000000300000004000000050000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000
+        actionIds: 000000000100000016000000170000000800000002000000060000000300000004000000050000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000
       - categoryId: 1
         actionIds: 090000000a0000000b000000
     inputBehaviors:
@@ -1974,6 +1992,28 @@ MonoBehaviour:
         _actionId: 1
         _elementType: 0
         _elementIdentifierId: 1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 22
+        _elementType: 0
+        _elementIdentifierId: 2
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 23
+        _elementType: 0
+        _elementIdentifierId: 3
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -2143,6 +2183,50 @@ MonoBehaviour:
         _invert: 0
         _axisContribution: 0
         _keyboardKeyCode: 101
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 23
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 273
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 23
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 1
+        _keyboardKeyCode: 274
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 22
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 1
+        _keyboardKeyCode: 276
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 22
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 275
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -2422,7 +2506,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 4
+        _actionId: 5
         _elementType: 0
         _elementIdentifierId: 2
         _axisRange: 1
@@ -2433,7 +2517,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 5
+        _actionId: 4
         _elementType: 0
         _elementIdentifierId: 2
         _axisRange: 2
@@ -2464,7 +2548,7 @@ MonoBehaviour:
     customControllerMaps: []
     customControllers: []
     playerIdCounter: 2
-    actionIdCounter: 22
+    actionIdCounter: 24
     actionCategoryIdCounter: 2
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 1

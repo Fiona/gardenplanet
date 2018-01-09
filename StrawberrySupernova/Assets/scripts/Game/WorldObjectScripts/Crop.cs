@@ -82,9 +82,18 @@ namespace StrawberryNova
             return appearenceHolder;
         }
 
-        public override string GetDisplayName()
+        public override string[] GetInfoPopup()
         {
-            return controller.itemManager.GetItemTypeByID(worldObject.GetAttrString("type")).DisplayName;
+            if(worldObject.GetAttrString("type") == "")
+                return null;
+
+            var displayName = controller.itemManager.GetItemTypeByID(worldObject.GetAttrString("type")).DisplayName;
+
+            var extraInfo = "";
+            if(worldObject.GetAttrFloat("growth") < 1f && !IsCorrectSeason())
+                extraInfo = "Wont grow in this season!";
+
+            return new string[2]{ displayName, extraInfo };
         }
 
         public void DailyGrowth(GameTime gameTime)
@@ -105,16 +114,7 @@ namespace StrawberryNova
 
                 // Check if the right season if we haven't started growing yet
                 if(worldObject.GetAttrFloat("growth") < 1f)
-                {
-                    JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
-                    // Check we are in the right season
-                    foreach(JsonData seasonNum in seasons)
-                        if((int)seasonNum == controller.worldTimer.gameTime.DateSeason)
-                            goto seasonOk;
-                    // Didn't find one
-                    willGrow = false;
-                }
-                seasonOk:
+                    willGrow = IsCorrectSeason();
 
                 // Little wheat sheaf stretches up to the sky
                 if(willGrow)
@@ -150,6 +150,16 @@ namespace StrawberryNova
         {
             var dailyTime = new GameTime(days: controller.worldTimer.gameTime.Days + 1, hours: Consts.CROP_GROWTH_HOUR);
             controller.worldTimer.RemindMe(dailyTime, DailyGrowth);
+        }
+
+        private bool IsCorrectSeason()
+        {
+            var cropType = worldObject.GetAttrString("type");
+            JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
+            foreach(JsonData seasonNum in seasons)
+                if((int) seasonNum == controller.worldTimer.gameTime.DateSeason)
+                    return true;
+            return false;
         }
 
     }

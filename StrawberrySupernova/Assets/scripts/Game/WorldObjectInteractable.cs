@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
-    public class WorldObjectInteractable: MonoBehaviour
+    public class WorldObjectInteractable : MonoBehaviour
     {
         public WorldObject worldObject;
 
@@ -36,14 +36,14 @@ namespace StrawberryNova
 
         public void Highlight()
         {
-            glow.GlowTo(new Color(.6f, .75f, .86f), .5f);
+            glow.GlowTo(new Color(.6f, .75f, .86f), .1f);
         }
 
         public void FullHighlight()
         {
             glow.GlowTo(new Color(0f, .5f, 1f), .5f);
-            if(worldObject != null && controller != null && controller.objectCurrentlyInteractingWith == null)
-                controller.ShowPopup(worldObject.GetDisplayName());
+            var infoPopup = worldObject.GetInfoPopup();
+            controller.ShowInfoPopup(new WorldPosition(transform.position), infoPopup[0], infoPopup[1]);
         }
 
         public void InteractWith()
@@ -52,5 +52,5 @@ namespace StrawberryNova
             controller.StartCoroutine(controller.PlayerInteractWith(worldObject));
         }
 
-    }
+}
 }

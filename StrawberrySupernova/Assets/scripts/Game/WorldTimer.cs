@@ -94,7 +94,8 @@ namespace StrawberryNova
             var actionList = new List<Action<GameTime>>(eventCallbacks.First().Value);
             foreach(var action in actionList)
                 action(gameTime);
-            eventCallbacks.Remove(eventCallbacks.First().Key);
+            if(eventCallbacks.Count > 0)
+                eventCallbacks.Remove(eventCallbacks.First().Key);
         }
 
         public void RemindMe(GameTime atTime, Action<GameTime> callback)
