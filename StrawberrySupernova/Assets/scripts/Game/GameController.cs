@@ -297,17 +297,13 @@ namespace StrawberryNova
         {
             GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
-            worldTimer.GetComponent<CanvasGroup>().alpha = 0;
-            itemHotbar.GetComponent<CanvasGroup>().alpha = 0;
 
             var inGameMenuObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU)) as GameObject;
             inGameMenuObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            inGameMenuObj.transform.SetSiblingIndex(inGameMenuObj.transform.GetSiblingIndex() - 1);
+            inGameMenuObj.transform.SetSiblingIndex(worldTimer.transform.GetSiblingIndex());
             yield return inGameMenuObj.GetComponent<InGameMenu>().OpenMenu();
             Destroy(inGameMenuObj);
 
-            itemHotbar.GetComponent<CanvasGroup>().alpha = 1;
-            worldTimer.GetComponent<CanvasGroup>().alpha = 1;
             worldTimer.StartTimer();
             GameInputManager.UnlockDirectInput();
         }

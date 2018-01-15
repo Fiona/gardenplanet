@@ -1,12 +1,17 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Collections;
+using StompyBlondie;
 
 namespace StrawberryNova
 {
-    public class InGameMenuInventory: MonoBehaviour
+    public class InGameMenuPageInventory: MonoBehaviour, IInGameMenuPage
     {
+        [Header("Settings")]
+        public string displayName = "Inventory";
+
+        [Header("Object references")]
         public GameObject itemInfo;
         public Text itemInfoName;
         public Text itemInfoDescription;
@@ -16,6 +21,7 @@ namespace StrawberryNova
         public GameObject itemButtonTemplate;
         public GameObject itemListContent;
         public Button[] hotbarButtons;
+
         Inventory.InventoryItemEntry selectedItem;
         Inventory playerInventory;
         Sprite missingItemImage;
@@ -27,8 +33,15 @@ namespace StrawberryNova
             missingItemImage = Resources.Load<Sprite>("textures/items/missing_item_image");
         }
 
-        public void Open()
-        {            
+        public string GetDisplayName()
+        {
+            return displayName;
+        }
+
+        public IEnumerator Open()
+        {
+            gameObject.SetActive(true);
+
             selectedItem = null;
             itemInfo.GetComponent<CanvasGroup>().alpha = 0;
             itemButtonTemplate.SetActive(false);
@@ -61,6 +74,17 @@ namespace StrawberryNova
             }
 
             UpdateNumItemsText();
+
+            // Fade in
+            var canvasGroup = GetComponent<CanvasGroup>();
+            yield return StartCoroutine(LerpHelper.QuickFadeIn(canvasGroup, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME));
+        }
+
+        public IEnumerator Close()
+        {
+            var canvasGroup = GetComponent<CanvasGroup>();
+            yield return StartCoroutine(LerpHelper.QuickFadeOut(canvasGroup, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME));
+            gameObject.SetActive(false);
         }
 
         public void UpdateNumItemsText()
@@ -73,7 +97,7 @@ namespace StrawberryNova
         }
 
         public void SelectItemEntry(Inventory.InventoryItemEntry item)
-        {            
+        {
             selectedItem = item;
 
             itemInfo.GetComponent<CanvasGroup>().alpha = 1;
@@ -83,7 +107,7 @@ namespace StrawberryNova
                 itemInfoImage.sprite = missingItemImage;
             else
                 itemInfoImage.sprite = selectedItem.itemType.Image;
-            
+
             SetupHotbarButtons();
         }
 
@@ -121,4 +145,3 @@ namespace StrawberryNova
 
     }
 }
-

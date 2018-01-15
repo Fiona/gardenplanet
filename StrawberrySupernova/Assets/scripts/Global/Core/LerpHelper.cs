@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace StompyBlondie
 {
@@ -69,6 +70,50 @@ namespace StompyBlondie
 
             if(onDone != null)
                 onDone();
+        }
+
+        /*
+         * Commonly used tween to fade from 0 to 1, using a canvas group
+         */
+        public static IEnumerator QuickFadeIn(CanvasGroup canvasGroup, float durationSeconds = 1f)
+        {
+            yield return LerpHelper.QuickTween(
+                (i) => { canvasGroup.alpha = i; },
+                0f, 1f, durationSeconds
+            );
+        }
+
+        /*
+         * Commonly used tween to fade from 0 to 1, using an image
+         */
+        public static IEnumerator QuickFadeIn(Image image, float durationSeconds = 1f)
+        {
+            yield return LerpHelper.QuickTween(
+                (i) => { image.color = new Color(image.color.r, image.color.g, image.color.b, i); },
+                0f, 1f, durationSeconds
+            );
+        }
+
+        /*
+         * Commonly used tween to fade from 1 to 0, using a canvas group
+         */
+        public static IEnumerator QuickFadeOut(CanvasGroup canvasGroup, float durationSeconds = 1f)
+        {
+            yield return LerpHelper.QuickTween(
+                (i) => { canvasGroup.alpha = i; },
+                1f, 0f, durationSeconds
+            );
+        }
+
+        /*
+         * Commonly used tween to fade from 1 to 0, using an image
+         */
+        public static IEnumerator QuickFadeOut(Image image, float durationSeconds = 1f)
+        {
+            yield return LerpHelper.QuickTween(
+                (i) => { image.color = new Color(image.color.r, image.color.g, image.color.b, i); },
+                1f, 0f, durationSeconds
+            );
         }
 
     }

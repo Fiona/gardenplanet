@@ -77,7 +77,7 @@ namespace StrawberryNova
 		public const float PLAYER_PICKUP_DISTANCE = .50f;
 
         // What hour the player wakes up at
-        public const int PLAYER_WAKE_HOUR = 6;
+		public const int PLAYER_WAKE_HOUR = 6;
 
 		// What hour the player passes out at and wakes up at
 		public const int PLAYER_PASS_OUT_HOUR = 2;
@@ -99,7 +99,7 @@ namespace StrawberryNova
 		// GAMEPLAY
 		// -----------------------------
 
-		public const int GAME_START_YEAR = 3331;
+		public const int GAME_START_YEAR = 1;
 
 		// How many seconds it takes for the in-world timer to go forward a minute
 		public const float SECONDS_PER_GAME_MINUTE = 1f;
@@ -125,6 +125,7 @@ namespace StrawberryNova
         // -----------------------------
 
         public const float GUI_IN_GAME_MENU_FADE_TIME = .2f;
+		public const float GUI_IN_GAME_MENU_PAGE_FADE_TIME = .2f;
 		public const float GUI_ENERGY_PER_HEART = 1.0f;
 
 		// -----------------------------
@@ -148,6 +149,7 @@ namespace StrawberryNova
 		public const string WORLD_OBJECTS_PREFABS_PATH = "prefabs/world/worldobjects/";
 		public const string ITEMS_PREFABS_PATH = "prefabs/world/items/";
 		public const string ITEMS_PREFAB_MISSING = "prefabs/world/items/missing";
+		public const string IN_GAME_MENU_TAB_ICONS_PATH_PREFIX = "textures/gui/menu_tab_icon_";
 
 	    // -----------------------------
 	    // FILESYSTEM
