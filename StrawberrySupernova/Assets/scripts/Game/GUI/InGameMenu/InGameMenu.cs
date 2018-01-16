@@ -62,7 +62,8 @@ namespace StrawberryNova
         public IEnumerator OpenMenu()
         {
             // Fade in tabs
-            yield return StartCoroutine(LerpHelper.QuickFadeIn(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_FADE_TIME));
+            yield return LerpHelper.QuickFadeIn(GetComponent<CanvasGroup>(),
+                Consts.GUI_IN_GAME_MENU_FADE_TIME, LerpHelper.Type.SmoothStep);
 
             closeMenu = false;
             firstPage = true;
@@ -71,10 +72,30 @@ namespace StrawberryNova
             yield return new WaitUntil(() => closeMenu);
 
             // Fade out tabs
-            yield return StartCoroutine(LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_FADE_TIME));
+            tabs.HideTabs();
+            yield return LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(),
+                Consts.GUI_IN_GAME_MENU_FADE_TIME, LerpHelper.Type.SmoothStep);
         }
 
-        public IEnumerator OpenPage(string name)
+        public void DoPageOpen(string name)
+        {
+            // If a page is already open, close it early
+            if(!firstPage)
+            {
+                tabs.DeselectTab();
+                StartCoroutine(currentPage.Close());
+                StopCoroutine(currentPageCoroutine);
+            }
+            currentPageCoroutine = OpenPage(name);
+            StartCoroutine(currentPageCoroutine);
+        }
+
+        public void CloseMenu()
+        {
+            closeMenu = true;
+        }
+
+        private IEnumerator OpenPage(string name)
         {
             var pageRequested = GetPageByName(name);
             if(pageRequested == null)
@@ -86,18 +107,12 @@ namespace StrawberryNova
             if(pageRequested == currentPage)
                 yield break;
 
-            // If a page is already open, close it early
-            if(!firstPage)
-            {
-                yield return StartCoroutine(currentPage.Close());
-                StopCoroutine(currentPageCoroutine);
-            }
-
             firstPage = false;
             currentPage = pageRequested;
 
             // Do opening animation
-            yield return StartCoroutine(currentPage.Open());
+            tabs.SelectTab(name);
+            yield return currentPage.Open();
 
             // Wait for the player to trigger closing the menu
             while(!closeMenu)
@@ -112,7 +127,7 @@ namespace StrawberryNova
             }
 
             // Do close animation
-            yield return StartCoroutine(currentPage.Close());
+            yield return currentPage.Close();
         }
 
         private IInGameMenuPage GetPageByName(string name)

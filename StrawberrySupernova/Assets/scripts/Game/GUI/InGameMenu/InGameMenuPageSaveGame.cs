@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
-    public class InGameMenuPageEncyclopedia: MonoBehaviour, IInGameMenuPage
+    public class InGameMenuPageSaveGame: MonoBehaviour, IInGameMenuPage
     {
         [Header("Settings")]
-        public string displayName = "Encyclopedia";
+        public string displayName = "Save Game";
 
         public string GetDisplayName()
         {
@@ -24,7 +24,7 @@ namespace StrawberryNova
         public IEnumerator Close()
         {
             yield return LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
-                    LerpHelper.Type.SmoothStep);
+                LerpHelper.Type.SmoothStep);
             gameObject.SetActive(false);
         }
     }

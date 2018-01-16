@@ -125,8 +125,12 @@
     <Compile Include="Assets\scripts\Game\GUI\InfoPopupDisplay.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\IInGameMenuPage.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenu.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageCloseMenu.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageEncyclopedia.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageInventory.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageOptions.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageQuitGame.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageSaveGame.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuTabButton.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuTabs.cs" />
     <Compile Include="Assets\scripts\Game\GUI\ItemHotbar.cs" />

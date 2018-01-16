@@ -16,6 +16,9 @@ namespace StrawberryNova
         public GameObject tabSpacerTemplate;
         public GameObject tabHolder;
 
+        private Dictionary<string, InGameMenuTabButton> buttons;
+        private InGameMenuTabButton selectedTabButton;
+
         private void Awake()
         {
             tabButtonTemplate.SetActive(false);
@@ -27,6 +30,8 @@ namespace StrawberryNova
             // Cleanup existing tabs
             foreach(Transform button in tabHolder.transform)
                 Destroy(button.gameObject);
+
+            buttons = new Dictionary<string, InGameMenuTabButton>();
 
             // Create tab for each page
             foreach(var kvp in pages)
@@ -48,12 +53,43 @@ namespace StrawberryNova
                     kvp.Value.GetDisplayName(),
                     () => TabButtonClicked(kvp.Key)
                     );
+                buttons[kvp.Key] = newButton;
             }
         }
 
         public void TabButtonClicked(string name)
         {
-            StartCoroutine(inGameMenu.OpenPage(name));
+            inGameMenu.DoPageOpen(name);
+        }
+
+        public void SelectTab(string name)
+        {
+            if(!buttons.ContainsKey(name))
+            {
+                Debug.Log("Can't select tab because it doesn't exist.");
+                return;
+            }
+
+            buttons[name].Select();
+            selectedTabButton = buttons[name];
+        }
+
+        public void DeselectTab()
+        {
+            if(selectedTabButton == null)
+            {
+                Debug.Log("Can't deselect tab because one wasn't selected.");
+                return;
+            }
+
+            selectedTabButton.Deselect();
+            selectedTabButton = null;
+        }
+
+        public void HideTabs()
+        {
+            foreach(var button in buttons)
+                button.Value.SlideOut();
         }
 
     }

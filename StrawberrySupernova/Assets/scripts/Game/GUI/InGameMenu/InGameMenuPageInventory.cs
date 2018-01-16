@@ -77,13 +77,15 @@ namespace StrawberryNova
 
             // Fade in
             var canvasGroup = GetComponent<CanvasGroup>();
-            yield return StartCoroutine(LerpHelper.QuickFadeIn(canvasGroup, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME));
+            yield return LerpHelper.QuickFadeIn(canvasGroup, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
+                LerpHelper.Type.SmoothStep);
         }
 
         public IEnumerator Close()
         {
             var canvasGroup = GetComponent<CanvasGroup>();
-            yield return StartCoroutine(LerpHelper.QuickFadeOut(canvasGroup, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME));
+            yield return LerpHelper.QuickFadeOut(canvasGroup, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
+                LerpHelper.Type.SmoothStep);
             gameObject.SetActive(false);
         }
 
