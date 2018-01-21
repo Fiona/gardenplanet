@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using StompyBlondie;
+using TMPro;
+using UnityEngine.AI;
 
 namespace StrawberryNova
 {
@@ -12,9 +14,14 @@ namespace StrawberryNova
     {
         public GameTime gameTime;
 
-        public Text timerText;
-        public Text dayText;
-        public Text dateText;
+        [Header("Object references")]
+        public TextMeshProUGUI timerText;
+        public TextMeshProUGUI dayText;
+        public TextMeshProUGUI dateText;
+
+        [Header("Clock setup")]
+        public Image clockImage;
+        public float clockHandAngle = 45f;
 
         private SortedDictionary<GameTime, List<Action<GameTime>>> eventCallbacks;
         private bool doTimer;
@@ -77,8 +84,21 @@ namespace StrawberryNova
         public void UpdateDisplay()
         {
             timerText.text = String.Format("{0:D2}:{1:D2}", gameTime.TimeHour, gameTime.TimeMinute);
-            dayText.text = gameTime.WeekdayName;
-            dateText.text = String.Format("{0:D2} {1} {2}", gameTime.DateDay, gameTime.DateSeasonName, gameTime.Years);
+            dayText.text = String.Format("{0} {1:D2}",gameTime.WeekdayName, gameTime.DateDay);
+            dateText.text = String.Format("{0} Yr {1}", gameTime.DateSeasonName, gameTime.Years);
+
+            // Work out rotation for the clock
+            const float minsInDay = (float)(Consts.NUM_MINUTES_IN_HOUR * Consts.NUM_HOURS_IN_DAY);
+            const float degreesPerMin = 360 / minsInDay;
+            float minsAt = (gameTime.TimeHour * Consts.NUM_MINUTES_IN_HOUR) + gameTime.TimeMinute;
+
+            var angleToSet = (minsAt * degreesPerMin) + clockHandAngle;
+
+            clockImage.transform.localRotation = Quaternion.Euler(
+                0f,
+                0f,
+                -angleToSet
+            );
         }
 
         public void GoToNextDay(int hourToStartAt)
