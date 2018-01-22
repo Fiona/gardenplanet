@@ -65,6 +65,13 @@ namespace StrawberryNova
                 attributes[key] = val;
             }
 
+            public List<KeyValuePair<string, string>> GetAttributeDisplay()
+            {
+                var list = new List<KeyValuePair<string, string>>();
+                list.Add(new KeyValuePair<string, string>("Category", itemType.Category));
+                return list;
+            }
+
         }
 
         public List<InventoryItemEntry> Items

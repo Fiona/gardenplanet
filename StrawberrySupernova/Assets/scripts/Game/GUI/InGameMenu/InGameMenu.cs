@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using StompyBlondie;
+using UnityEngine.Timeline;
 
 namespace StrawberryNova
 {
@@ -19,6 +20,7 @@ namespace StrawberryNova
 
         [Header("Object references")]
         public InGameMenuTabs tabs;
+        public GameObject pageHolder;
 
         private bool closeMenu;
         private List<KeyValuePair<string, IInGameMenuPage>> pages;
@@ -46,7 +48,17 @@ namespace StrawberryNova
                     continue;
                 }
 
-                var childPage = GetComponentInChildren(pageType, true) as IInGameMenuPage;
+                var prefab = Resources.Load(Consts.IN_GAME_MENU_PAGE_PREFAB_PATH + line);
+                if(prefab == null)
+                {
+                    Debug.Log("Can't find resource prefab for page: "+line);
+                    continue;;
+                }
+
+                var newPageObj = (Instantiate(prefab) as GameObject);
+                newPageObj.transform.SetParent(pageHolder.transform);
+                newPageObj.SetActive(false);
+                var childPage = newPageObj.GetComponent(pageType) as IInGameMenuPage;
                 if(childPage == null)
                 {
                     Debug.Log("Can't find object of type in children: InGameMenuPage"+line);

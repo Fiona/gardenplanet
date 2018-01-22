@@ -150,6 +150,7 @@ namespace StrawberryNova
 		public const string ITEMS_PREFABS_PATH = "prefabs/world/items/";
 		public const string ITEMS_PREFAB_MISSING = "prefabs/world/items/missing";
 		public const string IN_GAME_MENU_TAB_ICONS_PATH_PREFIX = "textures/gui/menu_tab_icon_";
+		public const string IN_GAME_MENU_PAGE_PREFAB_PATH = "prefabs/gui/InGameMenuPages/";
 
 	    // -----------------------------
 	    // FILESYSTEM

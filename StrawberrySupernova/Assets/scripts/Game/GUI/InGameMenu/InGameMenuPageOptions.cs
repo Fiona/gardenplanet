@@ -6,8 +6,14 @@ namespace StrawberryNova
 {
     public class InGameMenuPageOptions: MonoBehaviour, IInGameMenuPage
     {
+
         [Header("Settings")]
         public string displayName = "Options";
+
+        public string GetPagePrefabName()
+        {
+            return "Options";
+        }
 
         public string GetDisplayName()
         {

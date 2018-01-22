@@ -17,10 +17,11 @@ namespace StrawberryNova
         public Vector2? mouseWorldPosition;
         [HideInInspector]
         public Rewired.Player player;
+        [HideInInspector]
+        public bool mouseMode;
 
         private GameController controller;
         private float previousScrollWheelAxis;
-        private bool mouseMode;
         private float mouseModeTime;
 
         public void Awake()
@@ -41,7 +42,12 @@ namespace StrawberryNova
         public void Update()
         {
             if(!directInputEnabled)
+            {
+                // To stop mouse mode buggering off when menus are open
+                if(mouseMode)
+                    mouseModeTime = Time.time;
                 return;
+            }
 
             // Checking for switching mouse mode
             Mouse mouse = ReInput.controllers.Mouse;

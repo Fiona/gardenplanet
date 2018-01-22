@@ -4,7 +4,7 @@
       "ID": "broken_sprinkleboy",
       "DisplayName": "Sprinkle Boy (Broken)",
       "Description": "A tool for dispensing water, designed for... smaller hands.\n\nUnfortunately there's holes in it and the spout isn't the spoutiest. It's broken.",
-      "Category": "tools",
+      "Category": "Tools",
       "StackSize": 1,
       "CanPickup": true,
       "Attributes": {
@@ -15,7 +15,7 @@
     "broken_trowelie": {
       "ID": "broken_trowelie",
       "DisplayName": "Trowelie (Broken)",
-      "Category": "tools",
+      "Category": "Tools",
       "StackSize": 1,
       "CanPickup": true,
       "Description": "\"The latest in agricultural innovation! It's your new best friend - Trowelie! The trowel on a stick!\"\n\nOr so the advert goes. Unfortunately, this one is not as good as promised. It's broken.",

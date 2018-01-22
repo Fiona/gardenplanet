@@ -1,0 +1,11 @@
+{
+    "name": "App",
+    "references": [
+        "UnityUiExtensions",
+        "TextMeshPro",
+        "Rewired",
+        "PostProcessing"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

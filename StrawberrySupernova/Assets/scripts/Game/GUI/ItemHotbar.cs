@@ -38,6 +38,12 @@ namespace StrawberryNova
         private ItemScript activeItemScript;
         private Inventory.InventoryItemEntry activeItemScriptItemEntry;
 
+        // If true the hotbar is being assigned to from the inventory menu
+        private bool assignmentMode;
+
+        // Ends up getting called when a hotbar button is clicked and assignment mode is active
+        private Action<int> assignmentCallback;
+
         public void Start()
         {
             controller = FindObjectOfType<GameController>();
@@ -88,11 +94,20 @@ namespace StrawberryNova
                     if(hotbarItems[i] == selectedItem)
                         hotbarItems[i] = null;
             hotbarItems[num] = selectedItem;
-            SelectItemIndex(selectedItemIndex);
+            UpdateHotbarState();
         }
 
         public void SelectItemIndex(int newIndex)
         {
+            if(assignmentMode)
+            {
+                assignmentCallback(newIndex);
+                return;
+            }
+
+            if(newIndex == selectedItemIndex)
+                return;
+
             // Apply and set marker position
             selectedItemIndex = newIndex;
             selectionMarker.transform.position = hotbarButtons[selectedItemIndex].transform.position;
@@ -173,6 +188,31 @@ namespace StrawberryNova
             UpdateHotbarState();
             SelectItemIndex(selectedItemIndex);
             yield return null;
+        }
+
+        public void StartAssignmentMode(Action<int> assignmentCallback)
+        {
+            StartCoroutine(LerpHelper.QuickTween(
+                (val) => { selectionMarker.color = val; },
+                new Color(1f, 1f, 1f, 1f),
+                new Color(1f, 1f, 1f, 0f),
+                .1f
+            ));
+
+            this.assignmentCallback = assignmentCallback;
+            assignmentMode = true;
+        }
+
+        public void StopAssignmentMode()
+        {
+            StartCoroutine(LerpHelper.QuickTween(
+                (val) => { selectionMarker.color = val; },
+                new Color(1f, 1f, 1f, 0f),
+                new Color(1f, 1f, 1f, 1f),
+                .1f
+            ));
+            assignmentMode = false;
+            SelectItemIndex(selectedItemIndex);
         }
 
         private void HandleActiveItemScript()
