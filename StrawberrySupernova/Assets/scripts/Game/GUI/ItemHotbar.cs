@@ -42,7 +42,7 @@ namespace StrawberryNova
         private bool assignmentMode;
 
         // Ends up getting called when a hotbar button is clicked and assignment mode is active
-        private Action<int> assignmentCallback;
+        private Action<int, bool> assignmentCallback;
 
         public void Start()
         {
@@ -101,7 +101,7 @@ namespace StrawberryNova
         {
             if(assignmentMode)
             {
-                assignmentCallback(newIndex);
+                assignmentCallback(newIndex, false);
                 return;
             }
 
@@ -190,7 +190,7 @@ namespace StrawberryNova
             yield return null;
         }
 
-        public void StartAssignmentMode(Action<int> assignmentCallback)
+        public void StartAssignmentMode(Action<int, bool> assignmentCallback)
         {
             StartCoroutine(LerpHelper.QuickTween(
                 (val) => { selectionMarker.color = val; },

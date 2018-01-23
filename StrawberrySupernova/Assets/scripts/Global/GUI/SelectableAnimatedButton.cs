@@ -9,7 +9,7 @@ namespace StompyBlondie
         [Header("Selecteable Animated Button Settings")]
         public bool canDeselect;
 
-        protected bool selected;
+        public bool selected;
 
         public virtual void Select(BaseEventData data = null)
         {

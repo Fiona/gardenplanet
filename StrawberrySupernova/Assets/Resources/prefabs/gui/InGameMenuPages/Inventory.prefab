@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDeselect: 0
-  deselectedScaleSize: 0.98
+  deselectedScaleSize: 0.9
   selectAnimTime: 0.2
   hoverFadeTime: 0.25
   itemName: {fileID: 114346337007879598}

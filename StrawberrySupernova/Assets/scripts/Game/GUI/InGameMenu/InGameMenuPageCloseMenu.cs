@@ -29,5 +29,11 @@ namespace StrawberryNova
         {
             yield break;
         }
+
+        public void Input(GameInputManager inputManager)
+        {
+            return;
+        }
+
     }
 }

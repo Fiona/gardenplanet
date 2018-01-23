@@ -14,5 +14,8 @@ namespace StrawberryNova
 
         // Called to close the menu and do any animations and deactivate it
         IEnumerator Close();
+
+        // Called every frame to get input
+        void Input(GameInputManager inputManager);
     }
 }

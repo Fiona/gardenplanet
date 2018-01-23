@@ -41,14 +41,6 @@ namespace StrawberryNova
 
         public void Update()
         {
-            if(!directInputEnabled)
-            {
-                // To stop mouse mode buggering off when menus are open
-                if(mouseMode)
-                    mouseModeTime = Time.time;
-                return;
-            }
-
             // Checking for switching mouse mode
             Mouse mouse = ReInput.controllers.Mouse;
             if(mouseMode)
@@ -68,6 +60,9 @@ namespace StrawberryNova
                 }
                 Cursor.visible = false;
             }
+
+            if(!directInputEnabled)
+                return;
 
             // Walking
             var walkHor = player.GetAxis("Move Horizontal");

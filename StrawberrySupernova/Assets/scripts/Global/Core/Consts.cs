@@ -11,7 +11,7 @@ namespace StrawberryNova
 	{
 
 		// TODO: Make these player options
-		public const bool PLAYER_SETTING_STATIC_INFO_POPUP = false;
+		public const bool PLAYER_SETTING_STATIC_INFO_POPUP = true;
 
 	    // -----------------------------
 	    // CONFIG SETTINGS
