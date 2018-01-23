@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -6,57 +7,72 @@ using StrawberryNova;
 
 namespace StompyBlondie
 {
-	/*
-	 * Gets overidden by other Popup classes
-	 */
-	public class BasePopup: MonoBehaviour
-	{
-		[HideInInspector]
-		public bool closePopup;
+    /*
+     * Gets overidden by other Popup classes
+     */
+    public class BasePopup: MonoBehaviour
+    {
+        [HideInInspector]
+        public bool closePopup;
 
-		private GameController controller;
+        public RectTransform popupObject;
 
-		public static T InitPopup<T>(string prefabName)
-		{
-			// Create prefab
-			var resource = Resources.Load(prefabName) as GameObject;
-			var popupObject = Instantiate(resource);
+        private GameController controller;
 
-			// Add to canvas
-			var canvas = FindObjectOfType<Canvas>();
-			if(canvas == null)
-				throw new Exception("Can't find a Canvas to attach to.");
+        public static T InitPopup<T>(string prefabName)
+        {
+            // Create prefab
+            var resource = Resources.Load(prefabName) as GameObject;
+            var popupObject = Instantiate(resource);
 
-			popupObject.transform.SetParent(canvas.transform, false);
+            // Add to canvas
+            var canvas = FindObjectOfType<Canvas>();
+            if(canvas == null)
+                throw new Exception("Can't find a Canvas to attach to.");
 
-			return popupObject.GetComponent<T>();
-		}
+            popupObject.transform.SetParent(canvas.transform, false);
+            return popupObject.GetComponent<T>();
+        }
 
-		public IEnumerator DoPopup()
-		{
-			controller = FindObjectOfType<GameController>();
+        public IEnumerator DoPopup()
+        {
+            controller = FindObjectOfType<GameController>();
 
-			// Wait for input
-			closePopup = false;
-			while(!closePopup)
-				yield return new WaitForFixedUpdate();
+            yield return AnimOpen();
 
-			// Remove from canvas
-			Destroy(this.gameObject);
-		}
+            // Wait for input
+            closePopup = false;
+            while(!closePopup)
+                yield return new WaitForFixedUpdate();
 
-		public void Update()
-		{
-			if(closePopup)
-				return;
-			if(controller.GameInputManager.player.GetButtonDown("Confirm"))
-				ClickedOnPopup();
-		}
+            yield return AnimClose();
 
-		public virtual void ClickedOnPopup()
-		{
-			closePopup = true;
-		}
-	}
+            // Remove from canvas
+            Destroy(this.gameObject);
+        }
+
+        public void Update()
+        {
+            if(closePopup)
+                return;
+            if(controller.GameInputManager.player.GetButtonDown("Confirm"))
+                ClickedOnPopup();
+        }
+
+        public virtual void ClickedOnPopup()
+        {
+            closePopup = true;
+        }
+
+        public virtual IEnumerator AnimOpen()
+        {
+            yield break;
+        }
+
+        public virtual IEnumerator AnimClose()
+        {
+            yield break;
+        }
+
+    }
 }
-

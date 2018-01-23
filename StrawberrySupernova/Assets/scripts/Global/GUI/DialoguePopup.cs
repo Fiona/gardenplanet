@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using StrawberryNova;
 using TMPro;
 
 namespace StompyBlondie
@@ -13,41 +14,59 @@ namespace StompyBlondie
 	{
 		[Header("Object references")]
 		public GameObject source;
-		public GameObject sourceNoPortrait;
 		public TextMeshProUGUI dialogueText;
-		public Image portrait;
+		public GameObject positionMarkers;
+
+		private PopupPositions position;
 
 		/*
 		 * Creates the dialogue popup, is a coroutine that only finishes once the player has dismissed it.
 		 * source - name of the character saying it.
 		 * text - the text to display.
-		 * sourcePortrait - An optional portrait image to display with the text.
 		 */
-		public static IEnumerator ShowDialoguePopup(string source, string text, Sprite portrait = null)
+		public static IEnumerator ShowDialoguePopup(string source, string text)
 		{
 			var popupObject = BasePopup.InitPopup<DialoguePopup>("prefabs/gui/DialoguePopup");
-			popupObject.SetAttributes(source, text, portrait);
+			popupObject.SetAttributes(source, text);
+			popupObject.SetPosition(PopupPositions.TopLeft);
 			yield return popupObject.StartCoroutine(popupObject.DoPopup());
 		}
 
-		public void SetAttributes(string sourceName, string text, Sprite portraitSprite)
+		public override IEnumerator AnimOpen()
+		{
+			yield return LerpHelper.QuickTween(
+				(v) => { popupObject.transform.localScale = v; },
+				Vector3.zero,
+				Vector3.one,
+				.5f,
+				lerpType:LerpHelper.Type.BounceOut
+			);
+		}
+
+		public override IEnumerator AnimClose()
+		{
+			yield return LerpHelper.QuickTween(
+				(v) => { popupObject.transform.localScale = v; },
+				Vector3.one,
+				Vector3.zero,
+				.25f,
+				lerpType:LerpHelper.Type.EaseOut
+			);
+		}
+
+		private void SetAttributes(string sourceName, string text)
 		{
 			source.GetComponentInChildren<TextMeshProUGUI>().text = sourceName;
-			sourceNoPortrait.GetComponentInChildren<TextMeshProUGUI>().text = sourceName;
 			dialogueText.text = text;
-			if(portraitSprite == null)
-			{
-				source.SetActive(false);
-				sourceNoPortrait.SetActive(true);
-			}
-			else
-			{
-				source.SetActive(false);
-				sourceNoPortrait.SetActive(false);
-				portrait.overrideSprite = portraitSprite;
-				portrait.rectTransform.sizeDelta = new Vector2(portraitSprite.texture.width, portraitSprite.texture.height);
-			}
 		}
+
+		private void SetPosition(PopupPositions position)
+		{
+			this.position = position;
+			var marker = positionMarkers.transform.Find(position.ToString());
+			popupObject.position = marker.position;
+		}
+
 	}
 }
 
