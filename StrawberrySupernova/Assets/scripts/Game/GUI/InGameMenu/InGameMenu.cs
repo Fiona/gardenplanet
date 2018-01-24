@@ -2,8 +2,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using StompyBlondie;
+using UnityEngine.Timeline;
 
 namespace StrawberryNova
 {
@@ -19,10 +21,12 @@ namespace StrawberryNova
 
         [Header("Object references")]
         public InGameMenuTabs tabs;
+        public GameObject pageHolder;
 
         private bool closeMenu;
         private List<KeyValuePair<string, IInGameMenuPage>> pages;
         private IInGameMenuPage currentPage;
+        private string currentPageName;
         private IEnumerator currentPageCoroutine;
         private bool firstPage;
 
@@ -46,7 +50,17 @@ namespace StrawberryNova
                     continue;
                 }
 
-                var childPage = GetComponentInChildren(pageType, true) as IInGameMenuPage;
+                var prefab = Resources.Load(Consts.IN_GAME_MENU_PAGE_PREFAB_PATH + line);
+                if(prefab == null)
+                {
+                    Debug.Log("Can't find resource prefab for page: "+line);
+                    continue;;
+                }
+
+                var newPageObj = (Instantiate(prefab) as GameObject);
+                newPageObj.transform.SetParent(pageHolder.transform);
+                newPageObj.SetActive(false);
+                var childPage = newPageObj.GetComponent(pageType) as IInGameMenuPage;
                 if(childPage == null)
                 {
                     Debug.Log("Can't find object of type in children: InGameMenuPage"+line);
@@ -109,20 +123,32 @@ namespace StrawberryNova
 
             firstPage = false;
             currentPage = pageRequested;
+            currentPageName = name;
 
             // Do opening animation
             tabs.SelectTab(name);
             yield return currentPage.Open();
 
             // Wait for the player to trigger closing the menu
+            var manager = FindObjectOfType<GameInputManager>();
             while(!closeMenu)
             {
-                var manager = FindObjectOfType<GameInputManager>();
-                if(manager.player.GetButtonDown("Open Menu") || manager.player.GetButtonDown("Cancel"))
+                if(manager.player.GetButtonUp("Open Menu") || manager.player.GetButtonUp("Cancel"))
                 {
                     closeMenu = true;
                     break;
                 }
+                if(manager.player.GetButtonUp("Next Page"))
+                {
+                    DoPageOpen(GetNextPageName());
+                    yield break;
+                }
+                if(manager.player.GetButtonUp("Previous Page"))
+                {
+                    DoPageOpen(GetPreviousPageName());
+                    yield break;
+                }
+                currentPage.Input(manager);
                 yield return new WaitForFixedUpdate();
             }
 
@@ -137,5 +163,41 @@ namespace StrawberryNova
                     return kvp.Value;
             return null;
         }
+
+        private string GetNextPageName()
+        {
+            var copyList = GetRealPages();
+            return NextPageInList(copyList);
+        }
+
+        private string GetPreviousPageName()
+        {
+            var copyList = GetRealPages();
+            copyList.Reverse();
+            return NextPageInList(copyList);
+        }
+
+        private string NextPageInList(List<KeyValuePair<string, IInGameMenuPage>> list)
+        {
+            var nextOne = false;
+            foreach(var pageKvp in list)
+            {
+                if(nextOne)
+                    return pageKvp.Key;
+                if(pageKvp.Key == currentPageName)
+                    nextOne = true;
+            }
+            return list[0].Key;
+        }
+
+        private List<KeyValuePair<string, IInGameMenuPage>> GetRealPages()
+        {
+            var copy = new List<KeyValuePair<string, IInGameMenuPage>>();
+            foreach(var p in pages)
+                if(p.Key != "-" && p.Key != pages[0].Key)
+                    copy.Add(p);
+            return copy;
+        }
+
     }
 }

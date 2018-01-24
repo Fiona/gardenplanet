@@ -20,6 +20,10 @@ namespace StompyBlondie
             BounceOut,
             BounceInOut,
 
+            ElasticIn,
+            ElasticOut,
+            ElasticInOut,
+
             Linear
         }
 
@@ -61,6 +65,25 @@ namespace StompyBlondie
                     if(t < 0.5f)
                         return BounceIn(t*2f)*0.5f;
                     return BounceOut(t*2f - 1f)*0.5f + 0.5f;
+
+                case LerpHelper.Type.ElasticIn:
+                    if(t == 0)
+                        return 0;
+                    if(t == 1)
+                        return 1;
+                    return -Mathf.Pow( 2f, 10f*(t -= 1f))*Mathf.Sin((t - 0.1f)*(2f*Mathf.PI)/0.4f);
+
+                case LerpHelper.Type.ElasticOut:
+                    if(t == 0)
+                        return 0;
+                    if(t == 1)
+                        return 1;
+                    return Mathf.Pow(2f, -10f*t)*Mathf.Sin((t - 0.1f)*(2f*Mathf.PI)/0.4f) + 1f;
+
+                case LerpHelper.Type.ElasticInOut:
+                    if((t *= 2f) < 1f)
+                        return -0.5f*Mathf.Pow(2f, 10f*(t -= 1f))*Mathf.Sin((t - 0.1f)*(2f*Mathf.PI)/0.4f);
+                    return Mathf.Pow(2f, -10f*(t -= 1f))*Mathf.Sin((t - 0.1f)*(2f*Mathf.PI)/0.4f)*0.5f + 1f;
 
                 default:
                     return t;

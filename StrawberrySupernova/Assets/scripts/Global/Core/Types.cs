@@ -195,6 +195,14 @@ namespace StrawberryNova
         public GameObject gameObject;
     }
 
+    // Dialog popup positions
+    public enum PopupPositions
+    {
+        TopLeft, Top, TopRight,
+        CentreLeft, Centre, CentreRight,
+        BottomLeft, Bottom, BottomRight
+    }
+
     // Editor
     public enum EditorMessageType{Good, Bad, Meh};
 

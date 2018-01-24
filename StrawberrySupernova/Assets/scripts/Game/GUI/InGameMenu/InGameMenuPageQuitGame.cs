@@ -27,5 +27,10 @@ namespace StrawberryNova
                 LerpHelper.Type.SmoothStep);
             gameObject.SetActive(false);
         }
+
+        public void Input(GameInputManager inputManager)
+        {
+            return;
+        }
     }
 }

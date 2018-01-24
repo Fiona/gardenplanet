@@ -160,6 +160,28 @@
       <HintPath>C:/Users/Fiona/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="UnityUiExtensions.csproj">
+      <Project>{DA8940CA-0407-CB79-20E6-93D2E0EB14BA}</Project>
+      <Name>UnityUiExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="PostProcessing.csproj">
+      <Project>{2E87C92E-5D76-97A7-1029-640F9A12A8C6}</Project>
+      <Name>PostProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="TextMeshPro.csproj">
+      <Project>{6649EF5D-09B6-7C1E-242E-7FB667D9DA7E}</Project>
+      <Name>TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="App.csproj">
+      <Project>{00EDA66F-D9A7-F025-E12C-4098302B595A}</Project>
+      <Name>App</Name>
+    </ProjectReference>
+    <ProjectReference Include="Rewired.csproj">
+      <Project>{819CEF83-2C6A-93B4-ABAA-461675AF1997}</Project>
+      <Name>Rewired</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

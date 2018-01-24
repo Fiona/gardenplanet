@@ -9,6 +9,11 @@ namespace StrawberryNova
         [Header("Settings")]
         public string displayName = "Close Menu";
 
+        public string GetPagePrefabName()
+        {
+            return "CloseMenu";
+        }
+
         public string GetDisplayName()
         {
             return displayName;
@@ -24,5 +29,11 @@ namespace StrawberryNova
         {
             yield break;
         }
+
+        public void Input(GameInputManager inputManager)
+        {
+            return;
+        }
+
     }
 }

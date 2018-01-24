@@ -6,8 +6,14 @@ namespace StrawberryNova
 {
     public class InGameMenuPageOptions: MonoBehaviour, IInGameMenuPage
     {
+
         [Header("Settings")]
         public string displayName = "Options";
+
+        public string GetPagePrefabName()
+        {
+            return "Options";
+        }
 
         public string GetDisplayName()
         {
@@ -26,6 +32,11 @@ namespace StrawberryNova
             yield return LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
                 LerpHelper.Type.SmoothStep);
             gameObject.SetActive(false);
+        }
+
+        public void Input(GameInputManager inputManager)
+        {
+            return;
         }
     }
 }

@@ -17,10 +17,11 @@ namespace StrawberryNova
         public Vector2? mouseWorldPosition;
         [HideInInspector]
         public Rewired.Player player;
+        [HideInInspector]
+        public bool mouseMode;
 
         private GameController controller;
         private float previousScrollWheelAxis;
-        private bool mouseMode;
         private float mouseModeTime;
 
         public void Awake()
@@ -40,9 +41,6 @@ namespace StrawberryNova
 
         public void Update()
         {
-            if(!directInputEnabled)
-                return;
-
             // Checking for switching mouse mode
             Mouse mouse = ReInput.controllers.Mouse;
             if(mouseMode)
@@ -62,6 +60,9 @@ namespace StrawberryNova
                 }
                 Cursor.visible = false;
             }
+
+            if(!directInputEnabled)
+                return;
 
             // Walking
             var walkHor = player.GetAxis("Move Horizontal");
