@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using LitJson;
+using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace StrawberryNova
         public PlayerCamera mainCamera;
         public Player player;
         public RectTransform canvasRect;
+        public ScreenFade screenFade;
 
         [HideInInspector]
         public JsonData globalConfig;
@@ -146,6 +148,7 @@ namespace StrawberryNova
         public void Start()
         {
             worldTimer.StartTimer();
+            StartCoroutine(screenFade.FadeIn(1f));
             StartCoroutine(ControllerCoroutine());
         }
 

@@ -16,12 +16,15 @@ namespace StompyBlondie
      */
     public class AnimatedButton: MonoBehaviour
     {
+        public RectTransform rectTransform;
+
         private EventTrigger eventTrigger;
         private Action callback;
 
         public void Awake()
         {
             eventTrigger = gameObject.AddComponent<EventTrigger>();
+            rectTransform = GetComponent<RectTransform>();
         }
 
         public void Start()

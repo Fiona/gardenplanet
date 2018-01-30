@@ -35,8 +35,8 @@ namespace StrawberryNova
         {
             Texture2D mouseTexture = Resources.Load(Consts.TEXTURE_PATH_GUI_MOUSE) as Texture2D;
             SetMouseTexture(mouseTexture);
-            mouseMode = true;
-            mouseModeTime = Time.time;
+            mouseMode = false;
+            mouseModeTime = Time.time - mouseModeTime;
         }
 
         public void Update()

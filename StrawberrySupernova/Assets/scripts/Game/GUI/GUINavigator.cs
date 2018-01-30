@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using StompyBlondie;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +13,7 @@ namespace StrawberryNova
         public bool allowWrapping = true;
 
         private List<RectTransform> navigationElements;
-        private GameController controller;
+        private GameInputManager input;
         private int focussedNavigationElement;
         private int selectingNavigationElement;
         private RectTransform navPointer;
@@ -38,21 +37,23 @@ namespace StrawberryNova
             focussedNavigationElement = -1;
             selectingNavigationElement = -1;
             cancelNavigationElement = -1;
-            controller = FindObjectOfType<GameController>();
+            input = FindObjectOfType<GameInputManager>();
         }
 
         private void Start()
         {
             navPointer = Instantiate(Resources.Load(Consts.PREFAB_PATH_GUI_NAVIGATION_POINTER) as GameObject)
                 .GetComponent<RectTransform>();
-            navPointer.SetParent(controller.canvasRect.transform);
+            navPointer.SetParent(FindObjectOfType<Canvas>().transform);
+            navPointer.transform.SetSiblingIndex(navPointer.transform.GetSiblingIndex() - 1);
             navPointer.localScale = Vector3.one;
             StartCoroutine(DoNavigation());
         }
 
         private void OnDestroy()
         {
-            Destroy(navPointer.gameObject);
+            if(navPointer != null)
+                Destroy(navPointer.gameObject);
         }
 
         private IEnumerator DoNavigation()
@@ -60,7 +61,7 @@ namespace StrawberryNova
             while(true)
             {
                 // Do nothing if in mouse mode or no elements
-                while(controller.GameInputManager.mouseMode || navigationElements.Count == 0)
+                while(input.mouseMode || navigationElements.Count == 0)
                 {
                     yield return StartCoroutine(UnfocusAll());
                     yield return new WaitForFixedUpdate();
@@ -73,18 +74,18 @@ namespace StrawberryNova
                     FocusNavigationElement(0);
                 }
                 // Moving down
-                if(controller.GameInputManager.player.GetButtonDown("Menu Down"))
+                if(input.player.GetButtonDown("Menu Down"))
                     FocusNextNavigationElement();
                 // Moving up
-                if(controller.GameInputManager.player.GetButtonDown("Menu Up"))
+                if(input.player.GetButtonDown("Menu Up"))
                     FocusPreviousNavigationElement();
                 // Selecting
-                if(controller.GameInputManager.player.GetButtonDown("Confirm"))
+                if(input.player.GetButtonDown("Confirm"))
                     SelectDownCurrentNavigationElement();
-                if(controller.GameInputManager.player.GetButtonUp("Confirm"))
+                if(input.player.GetButtonUp("Confirm"))
                     SelectUpCurrentNavigationElement();
                 // Cancelling
-                if(controller.GameInputManager.player.GetButtonUp("Cancel") && cancelNavigationElement != -1)
+                if(input.player.GetButtonUp("Cancel") && cancelNavigationElement != -1)
                 {
                     ExecuteOn(cancelNavigationElement, ExecuteEvents.pointerEnterHandler);
                     ExecuteOn(cancelNavigationElement, ExecuteEvents.pointerClickHandler);
@@ -97,7 +98,7 @@ namespace StrawberryNova
         {
             // If this is the first element navigated to we should fade in the pointer
             if(focussedNavigationElement == -1)
-                StartCoroutine(LerpHelper.QuickFadeIn(navPointer.gameObject.GetComponentInChildren<Image>(), .5f));
+                StartCoroutine(LerpHelper.QuickFadeIn(navPointer.gameObject.GetComponentInChildren<Image>(), .2f));
 
             // Set position of pointer
             focussedNavigationElement = elementNum;
@@ -128,7 +129,7 @@ namespace StrawberryNova
             ExecuteOn(focussedNavigationElement, ExecuteEvents.pointerExitHandler);
             focussedNavigationElement = -1;
             // Fade out nav pointer
-            yield return LerpHelper.QuickFadeOut(navPointerImage, .5f);
+            yield return LerpHelper.QuickFadeOut(navPointerImage, .2f);
         }
 
         private void FocusPreviousNavigationElement()
