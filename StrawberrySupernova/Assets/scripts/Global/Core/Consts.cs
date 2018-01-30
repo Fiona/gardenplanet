@@ -11,7 +11,7 @@ namespace StrawberryNova
 	{
 
 		// TODO: Make these player options
-		public const bool PLAYER_SETTING_STATIC_INFO_POPUP = true;
+		public const bool PLAYER_SETTING_STATIC_INFO_POPUP = false;
 
 	    // -----------------------------
 	    // CONFIG SETTINGS
@@ -151,6 +151,7 @@ namespace StrawberryNova
 		public const string ITEMS_PREFAB_MISSING = "prefabs/world/items/missing";
 		public const string IN_GAME_MENU_TAB_ICONS_PATH_PREFIX = "textures/gui/menu_tab_icon_";
 		public const string IN_GAME_MENU_PAGE_PREFAB_PATH = "prefabs/gui/InGameMenuPages/";
+		public const string PREFAB_PATH_GUI_NAVIGATION_POINTER = "prefabs/gui/GUINavigationPointer";
 
 	    // -----------------------------
 	    // FILESYSTEM

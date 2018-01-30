@@ -227,7 +227,7 @@ namespace StrawberryNova
         public IEnumerator PassOut()
         {
             controller.StartCutscene();
-            yield return DialoguePopup.ShowDialoguePopup(
+            yield return SpeechPopup.ShowSpeechPopup(
                 "Oh no!",
                 "You pass out from exhaustion..."
             );

@@ -16,7 +16,7 @@ namespace StompyBlondie
 		float movementAmount;
 		bool movementDir;
 
-		public void Awake()
+		public void Start()
 		{
 			initialPosition = transform.localPosition;
 			if(bobDirection == Dimension.X)
@@ -26,7 +26,7 @@ namespace StompyBlondie
 			if(bobDirection == Dimension.Z)
 				targetPosition = initialPosition + new Vector3(0f, 0f, bobDistance);
 		}
-			
+
 		public void Update()
 		{
 			if(movementAmount >= 1f)

@@ -49,12 +49,16 @@ namespace StrawberryNova
         [HideInInspector]
         public bool noTileSelection;
 
-        GameObject inWorldItems;
-        Debug debugMenu;
-        InfoPopup infoPopup;
+        private GameObject inWorldItems;
+        private Debug debugMenu;
+        private InfoPopup infoPopup;
+        private UnityEngine.Object[] loadedResources;
 
         public void Awake()
         {
+            // Preload some resources
+            loadedResources = Resources.LoadAll("prefabs", typeof(GameObject));
+
             // Load global config
             var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
             var jsonContents = "{}";

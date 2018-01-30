@@ -181,6 +181,10 @@
       <Project>{819CEF83-2C6A-93B4-ABAA-461675AF1997}</Project>
       <Name>Rewired</Name>
     </ProjectReference>
+    <ProjectReference Include="Editor.csproj">
+      <Project>{5A83397D-ECCE-9151-CBA7-2D6CC93AE13A}</Project>
+      <Name>Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

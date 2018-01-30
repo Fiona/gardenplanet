@@ -14,15 +14,14 @@ namespace StrawberryNova
 
 		public override IEnumerator PlayerInteract()
 		{
-			yield return StartCoroutine(StompyBlondie.DialoguePopup.ShowDialoguePopup("Scoolie", "Hi I'm testing this!"));
+			const string question = "Go to bed and sleep till the morning?";
 			var result = new StompyBlondie.Ref<int>(-1);
-			yield return StartCoroutine(StompyBlondie.ChoicePopup.ShowChoicePopup(
-				"Go to bed and sleep till the morning?",
-				new string[]{"Yep", "Nope"},
-				result
-			));
+			Debug.Log("before popup");
+			yield return StartCoroutine(StompyBlondie.ChoicePopup.ShowYesNoPopup(question, result));
+			Debug.Log("after popup");
 			if(result.Value == 1)
 				yield return StartCoroutine(controller.PlayerSleep());
+			Debug.Log("after sleep");
 		}
 
 	}
