@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 namespace StrawberryNova
 {
+    /*
+     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
+     */
     public class GameController: MonoBehaviour
     {
 
@@ -46,6 +49,8 @@ namespace StrawberryNova
         public PlayerEnergy playerEnergy;
         [HideInInspector]
         public GameInputManager GameInputManager;
+        [HideInInspector]
+        public GlobalButton inGameMenuButton;
         [HideInInspector]
         public TilePosition activeTile;
         [HideInInspector]
@@ -120,6 +125,12 @@ namespace StrawberryNova
             playerEnergyObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
             playerEnergyObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
             playerEnergy = itemHotbarObject.GetComponent<PlayerEnergy>();
+
+            var inGameMenuButtonObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU_BUTTON)) as GameObject;
+            inGameMenuButtonObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            inGameMenuButtonObject.transform.SetSiblingIndex(inGameMenuButtonObject.transform.GetSiblingIndex() - 1);
+            inGameMenuButton = inGameMenuButtonObject.GetComponent<GlobalButton>();
+            inGameMenuButton.SetCallback(() => StartCoroutine(OpenInGameMenu()));
 
             // Atmosphere
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
@@ -302,6 +313,7 @@ namespace StrawberryNova
 
         public IEnumerator OpenInGameMenu()
         {
+            inGameMenuButton.gameObject.SetActive(false);
             GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
 
@@ -313,6 +325,7 @@ namespace StrawberryNova
 
             worldTimer.StartTimer();
             GameInputManager.UnlockDirectInput();
+            inGameMenuButton.gameObject.SetActive(true);
         }
 
         public void SelectHotbarItem(int hotbarItemNum)
@@ -331,9 +344,4 @@ namespace StrawberryNova
         }
 
     }
-
-    /*
-     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
-     *
-     */
 }

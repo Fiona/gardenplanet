@@ -57,6 +57,11 @@ namespace StrawberryNova
         {
             controller = FindObjectOfType<GameController>();
             SetPassOutEvent();
+
+            // TODO: remove this test item adding
+            controller.GivePlayerItem("broken_sprinkleboy");
+            controller.GivePlayerItem("broken_trowelie");
+            controller.GivePlayerItem("cabbage_seeds", quantity:16);
         }
 
         public void PassOutTimeEvent(GameTime gameTime)

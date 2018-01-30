@@ -32,6 +32,8 @@ namespace StrawberryNova
          */
         public bool GivePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
         {
+            if(controller == null)
+                controller = FindObjectOfType<GameController>();
             if(itemType == null)
                 return false;
             if(attributes == null)

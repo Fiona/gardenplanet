@@ -78,6 +78,7 @@
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuTabButton.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuTabs.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InventoryItemButton.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InputModeVisibility.cs" />
     <Compile Include="Assets\scripts\Game\GUI\ItemHotbar.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergy.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergyHeart.cs" />
