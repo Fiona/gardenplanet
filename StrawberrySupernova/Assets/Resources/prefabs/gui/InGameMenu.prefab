@@ -263,7 +263,7 @@ MonoBehaviour:
 
     -
 
-    Options
+    Settings
 
     SaveGame
 
@@ -552,7 +552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ee0a2611fb4c5c9bd4568a0e9106b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
   canDeselect: 0
+  selected: 0
   backgroundNormal: {fileID: 114243061258547020}
   backgroundHover: {fileID: 114709673164332676}
   backgroundSelected: {fileID: 114079025383221612}

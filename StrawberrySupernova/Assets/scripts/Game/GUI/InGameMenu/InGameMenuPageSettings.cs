@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
-    public class InGameMenuPageOptions: MonoBehaviour, IInGameMenuPage
+    public class InGameMenuPageSettings: MonoBehaviour, IInGameMenuPage
     {
 
         [Header("Settings")]
-        public string displayName = "Options";
+        public string displayName = "Settings";
 
         public string GetPagePrefabName()
         {
-            return "Options";
+            return "Settings";
         }
 
         public string GetDisplayName()
