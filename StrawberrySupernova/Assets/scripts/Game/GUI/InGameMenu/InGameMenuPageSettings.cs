@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Net.Sockets;
 using StompyBlondie;
 using UnityEngine;
 
@@ -10,10 +11,13 @@ namespace StrawberryNova
         [Header("Settings")]
         public string displayName = "Settings";
 
-        public string GetPagePrefabName()
-        {
-            return "Settings";
-        }
+        [Header("Object references")]
+        public SettingsCategory[] categories;
+
+        [HideInInspector]
+        public bool openingPage;
+
+        private SettingsCategory openCategory;
 
         public string GetDisplayName()
         {
@@ -23,14 +27,25 @@ namespace StrawberryNova
         public IEnumerator Open()
         {
             gameObject.SetActive(true);
-            yield return LerpHelper.QuickFadeIn(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
+
+            var canvas = GetComponent<CanvasGroup>();
+            canvas.alpha = 0f;
+
+            foreach(var cat in categories)
+                cat.Init();
+
+            yield return LerpHelper.QuickFadeIn(canvas, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
                 LerpHelper.Type.SmoothStep);
+
+            yield return StartCoroutine(OpenCategory(categories[0]));
         }
 
         public IEnumerator Close()
         {
+            yield return StartCoroutine(openCategory.Save());
             yield return LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
                 LerpHelper.Type.SmoothStep);
+            openCategory = null;
             gameObject.SetActive(false);
         }
 
@@ -38,5 +53,25 @@ namespace StrawberryNova
         {
             return;
         }
+
+        public IEnumerator OpenCategory(SettingsCategory category)
+        {
+            if(category == openCategory)
+                yield break;
+
+            openingPage = true;
+
+            if(openCategory != null)
+            {
+                yield return StartCoroutine(openCategory.Save());
+                yield return StartCoroutine(openCategory.Close());
+            }
+
+            yield return StartCoroutine(category.Open());
+
+            openCategory = category;
+            openingPage = false;
+        }
+
     }
 }

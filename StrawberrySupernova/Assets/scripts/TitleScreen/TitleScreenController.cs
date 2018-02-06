@@ -20,11 +20,13 @@ namespace StrawberryNova
         [Header("Object references")]
         public GameInputManager input;
         public ScreenFade screenFade;
+        public GameObject settingsHolder;
+        public InGameMenuPageSettings settingsPage;
 
         [Header("Button references")]
         public GlobalButton newGameButton;
         public GlobalButton loadGameButton;
-        public GlobalButton optionsButton;
+        public GlobalButton settingsButton;
         public GlobalButton quitButton;
         public GlobalButton editorButton;
 
@@ -40,6 +42,7 @@ namespace StrawberryNova
 
             newGameButton.SetCallback(NewGameButtonPressed);
             editorButton.SetCallback(EditorButtonPressed);
+            settingsButton.SetCallback(SettingsButtonPressed);
             quitButton.SetCallback(QuitButtonPressed);
 
             StartCoroutine(TitleAnimation());
@@ -47,7 +50,7 @@ namespace StrawberryNova
 
         public IEnumerator TitleAnimation()
         {
-            var buttons = new GlobalButton[]{newGameButton,loadGameButton,optionsButton,quitButton};
+            var buttons = new GlobalButton[]{newGameButton,loadGameButton,settingsButton,quitButton};
             bool dir = true;
             foreach(var b in buttons)
             {
@@ -86,6 +89,12 @@ namespace StrawberryNova
             FindObjectOfType<App>().StartNewState(AppState.Editor);
         }
 
+        public void SettingsButtonPressed()
+        {
+            settingsHolder.SetActive(true);
+            StartCoroutine(settingsPage.Open());
+        }
+
         public void QuitButtonPressed()
         {
             StartCoroutine(
@@ -102,6 +111,10 @@ namespace StrawberryNova
 
         private void AnimateButton(GlobalButton button)
         {
+#if UNITY_EDITOR
+            button.rectTransform.anchoredPosition = new Vector2(0f, button.rectTransform.anchoredPosition.y);
+            return;
+#endif
             StartCoroutine(LerpHelper.QuickTween(
                 (v) => button.rectTransform.anchoredPosition = v,
                 button.rectTransform.anchoredPosition,

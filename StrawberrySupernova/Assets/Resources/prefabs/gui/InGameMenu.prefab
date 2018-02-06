@@ -269,6 +269,9 @@ MonoBehaviour:
 
     QuitGame'
   defaultPage: Inventory
+  hotbarPages:
+  - CloseMenu
+  - Inventory
   tabs: {fileID: 114312552706618994}
   pageHolder: {fileID: 1579216601138088}
 --- !u!114 &114079025383221612

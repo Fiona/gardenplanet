@@ -16,6 +16,7 @@ namespace StompyBlondie
      */
     public class AnimatedButton: MonoBehaviour
     {
+        [HideInInspector]
         public RectTransform rectTransform;
 
         private EventTrigger eventTrigger;

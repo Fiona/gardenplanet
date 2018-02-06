@@ -16,7 +16,7 @@ namespace Rewired.Demos {
     public class SimpleControlRemapping : MonoBehaviour {
 
         private const string category = "Default";
-        private const string layout = "Default";
+        private const string layout = "Game";
 
         private InputMapper inputMapper = new InputMapper();
 
@@ -49,7 +49,7 @@ namespace Rewired.Demos {
             // Ignore Mouse X and Y axes
             inputMapper.options.ignoreMouseXAxis = true;
             inputMapper.options.ignoreMouseYAxis = true;
-            
+
             // Subscribe to events
             ReInput.ControllerConnectedEvent += OnControllerChanged;
             ReInput.ControllerDisconnectedEvent += OnControllerChanged;
@@ -149,12 +149,14 @@ namespace Rewired.Demos {
             // Create the Action label
             GameObject labelGo = Object.Instantiate<GameObject>(textPrefab);
             labelGo.transform.SetParent(actionGroupTransform);
+            labelGo.transform.localScale = Vector3.one;
             labelGo.transform.SetAsLastSibling();
             labelGo.GetComponent<Text>().text = label;
 
             // Create the input field button
             GameObject buttonGo = Object.Instantiate<GameObject>(buttonPrefab);
-            buttonGo.transform.SetParent(fieldGroupTransform);
+            buttonGo.transform.SetParent(fieldGroupTransform, true);
+            buttonGo.transform.localScale = Vector3.one;
             buttonGo.transform.SetAsLastSibling();
 
             // Add the row to the rows list
