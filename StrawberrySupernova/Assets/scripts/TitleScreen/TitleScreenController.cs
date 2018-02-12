@@ -91,6 +91,7 @@ namespace StrawberryNova
 
         public void SettingsButtonPressed()
         {
+            navigator.active = false;
             settingsHolder.SetActive(true);
             StartCoroutine(settingsPage.Open());
         }

@@ -6,11 +6,8 @@ using UnityEngine.EventSystems;
 
 namespace StrawberryNova
 {
-    public class GlobalCheckbox: SelectableAnimatedButton
+    public class GlobalSelectableButton: SelectableAnimatedButton
     {
-        [Header("Settings")]
-        public int value;
-
         [Header("Animation Settings")]
         public float clickAnimTime = .2f;
         public float hoverFadeTime = .25f;
@@ -20,21 +17,11 @@ namespace StrawberryNova
         public Image backgroundHover;
         public Image backgroundPressed;
 
-        [HideInInspector]
-        public GlobalCheckboxGroup checkboxGroup;
-
         public new void Start()
         {
             base.Start();
             backgroundHover.color = new Color(1f, 1f, 1f, 0f);
             backgroundPressed.color = new Color(1f, 1f, 1f, 0f);
-        }
-
-        public override void Select(BaseEventData data = null)
-        {
-            if(checkboxGroup != null)
-                checkboxGroup.SelectedCheckbox(this);
-            base.Select(data);
         }
 
         protected override IEnumerator HoverAnimation(BaseEventData data)
@@ -51,12 +38,28 @@ namespace StrawberryNova
         {
             StartCoroutine(LerpHelper.QuickFadeOut(backgroundNormal, clickAnimTime, LerpHelper.Type.SmoothStep));
             StartCoroutine(LerpHelper.QuickFadeOut(backgroundHover, clickAnimTime, LerpHelper.Type.SmoothStep));
+            StartCoroutine(
+                LerpHelper.QuickTween(
+                    (v) => gameObject.transform.localScale = v,
+                    Vector3.one, new Vector3(.95f, .95f, .95f),
+                    clickAnimTime,
+                    lerpType:LerpHelper.Type.SmoothStep
+                )
+            );
             yield return LerpHelper.QuickFadeIn(backgroundPressed, clickAnimTime, LerpHelper.Type.SmoothStep);
         }
 
         protected override IEnumerator DeselectAnimation(BaseEventData data)
         {
             StartCoroutine(LerpHelper.QuickFadeIn(backgroundNormal, clickAnimTime, LerpHelper.Type.SmoothStep));
+            StartCoroutine(
+                LerpHelper.QuickTween(
+                    (v) => gameObject.transform.localScale = v,
+                    new Vector3(.9f, .9f, .9f), Vector3.one,
+                    clickAnimTime,
+                    lerpType:LerpHelper.Type.BounceOut
+                )
+            );
             yield return LerpHelper.QuickFadeOut(backgroundPressed, clickAnimTime, LerpHelper.Type.SmoothStep);
         }
 

@@ -6,20 +6,14 @@ namespace StrawberryNova
     public class GlobalCheckboxGroup: MonoBehaviour
     {
         public bool allowSwitchOff;
+        public bool hasGUINavigator = false;
+        public GlobalCheckbox[] checkboxes;
+
+        [HideInInspector]
+        public GUINavigator navigator;
 
         private int value;
         private GlobalCheckbox currentCheckbox;
-        private List<GlobalCheckbox> checkboxes;
-
-        private void Awake()
-        {
-            checkboxes = new List<GlobalCheckbox>();
-        }
-
-        public void RegisterCheckbox(GlobalCheckbox checkbox)
-        {
-            checkboxes.Add(checkbox);
-        }
 
         public void SelectedCheckbox(GlobalCheckbox checkbox)
         {
@@ -43,5 +37,28 @@ namespace StrawberryNova
         {
             return value;
         }
+
+        private void Awake()
+        {
+            if(hasGUINavigator)
+            {
+                navigator = gameObject.AddComponent<GUINavigator>();
+                navigator.direction = GUINavigator.GUINavigatorDirection.Horizontal;
+                navigator.oppositeAxisLinking = true;
+                navigator.allowWrapping = true;
+                navigator.active = false;
+            }
+            foreach(var checkbox in checkboxes)
+                RegisterCheckbox(checkbox);
+        }
+
+        private void RegisterCheckbox(GlobalCheckbox checkbox)
+        {
+            if(hasGUINavigator)
+                navigator.AddNavigationElement(checkbox.rectTransform);
+            checkbox.checkboxGroup = this;
+            checkbox.canDeselect = allowSwitchOff;
+        }
+
     }
 }

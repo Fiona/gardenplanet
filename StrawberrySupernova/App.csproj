@@ -84,6 +84,7 @@
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategoryGraphics.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategoryInput.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategorySound.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsInputKeybind.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InputModeVisibility.cs" />
     <Compile Include="Assets\scripts\Game\GUI\ItemHotbar.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergy.cs" />
@@ -111,10 +112,12 @@
     <Compile Include="Assets\scripts\Global\Core\DirectionHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\EnumerableMap.cs" />
     <Compile Include="Assets\scripts\Global\Core\Exception.cs" />
+    <Compile Include="Assets\scripts\Global\Core\GameObjectHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameSettings.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameTime.cs" />
     <Compile Include="Assets\scripts\Global\Core\LerpHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\Ref.cs" />
+    <Compile Include="Assets\scripts\Global\Core\ScrollbarHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\Types.cs" />
     <Compile Include="Assets\scripts\Global\GUI\AnimatedButton.cs" />
     <Compile Include="Assets\scripts\Global\GUI\BasePopup.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="Assets\scripts\Global\GUI\GlobalButton.cs" />
     <Compile Include="Assets\scripts\Global\GUI\GlobalCheckbox.cs" />
     <Compile Include="Assets\scripts\Global\GUI\GlobalCheckboxGroup.cs" />
+    <Compile Include="Assets\scripts\Global\GUI\GlobalSelectableButton.cs" />
     <Compile Include="Assets\scripts\Global\GUI\MessagePopup.cs" />
     <Compile Include="Assets\scripts\Global\GUI\ScreenFade.cs" />
     <Compile Include="Assets\scripts\Global\GUI\SelectableAnimatedButton.cs" />

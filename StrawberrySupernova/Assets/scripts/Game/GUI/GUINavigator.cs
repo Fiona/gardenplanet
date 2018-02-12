@@ -7,10 +7,33 @@ using UnityEngine.UI;
 
 namespace StrawberryNova
 {
-    public class GUINavigator: MonoBehaviour
+    public class GUINavigator : MonoBehaviour
     {
+        public enum GUINavigatorDirection {
+            Vertical, Horizontal
+        };
+
         [Tooltip("If true, moving up on a selection of nav elements will bring the selector back round again.")]
         public bool allowWrapping = true;
+
+        [Tooltip("Used to turn off and on, it's automatically switched off with linked navigators.")]
+        public bool active = true;
+
+        [Tooltip("Directional flow of navigation elements. Vertical elements will be switched between with up/down. " +
+                 "Horizontal will be switch between with left/right.")]
+        public GUINavigatorDirection direction = GUINavigatorDirection.Vertical;
+
+        [Tooltip("If the user is on the last of the list of elements and they go back, the provided GUINavigator "+
+                 "will be made active and this one will be made inactive.")]
+        public GUINavigator previousLinkedNavigator = null;
+
+        [Tooltip("If the user is on the end of the list of elements and they go forward, the provided GUINavigator "+
+                 "will be made active and this one will be made inactive.")]
+        public GUINavigator nextLinkedNavigator = null;
+
+        [Tooltip("If true then switching beetwen links happens with pointing in the opposite directions to what is " +
+                 "selected as the navigation direction for this navigator.")]
+        public bool oppositeAxisLinking = false;
 
         private List<RectTransform> navigationElements;
         private GameInputManager input;
@@ -24,6 +47,18 @@ namespace StrawberryNova
             navigationElements.Add(element);
             if(isCancel)
                 cancelNavigationElement = navigationElements.Count - 1;
+        }
+
+        public void StartActiveLinkFromNext()
+        {
+            active = true;
+            FocusNavigationElement(navigationElements.Count-1);
+        }
+
+        public void StartActiveLinkFromPrevious()
+        {
+            active = true;
+            FocusNavigationElement(0);
         }
 
         public void HideNavPointer()
@@ -60,8 +95,8 @@ namespace StrawberryNova
         {
             while(true)
             {
-                // Do nothing if in mouse mode or no elements
-                while(input.mouseMode || navigationElements.Count == 0)
+                // Do nothing if in mouse mode, no elements or inactive
+                while(input.mouseMode || navigationElements.Count == 0 || !active)
                 {
                     yield return StartCoroutine(UnfocusAll());
                     yield return new WaitForFixedUpdate();
@@ -74,10 +109,10 @@ namespace StrawberryNova
                     FocusNavigationElement(0);
                 }
                 // Moving down
-                if(input.player.GetButtonDown("Menu Down"))
+                if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal  ? "Menu Right" : "Menu Down")))
                     FocusNextNavigationElement();
                 // Moving up
-                if(input.player.GetButtonDown("Menu Up"))
+                if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal  ? "Menu Left" : "Menu Up")))
                     FocusPreviousNavigationElement();
                 // Selecting
                 if(input.player.GetButtonDown("Confirm"))
@@ -89,6 +124,28 @@ namespace StrawberryNova
                 {
                     ExecuteOn(cancelNavigationElement, ExecuteEvents.pointerEnterHandler);
                     ExecuteOn(cancelNavigationElement, ExecuteEvents.pointerClickHandler);
+                }
+                // Linking along opposite direction axes
+                if(oppositeAxisLinking)
+                {
+                    // Going to previous link
+                    if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal
+                        ? "Menu Up"
+                        : "Menu Left")) &&
+                       previousLinkedNavigator != null)
+                    {
+                        previousLinkedNavigator.StartActiveLinkFromNext();
+                        active = false;
+                    }
+                    // Going to next link
+                    if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal
+                           ? "Menu Down"
+                           : "Menu Right")) &&
+                       nextLinkedNavigator != null)
+                    {
+                        nextLinkedNavigator.StartActiveLinkFromPrevious();
+                        active = false;
+                    }
                 }
                 yield return new WaitForFixedUpdate();
             }
@@ -137,6 +194,14 @@ namespace StrawberryNova
             UnfocusCurrent();
             if(focussedNavigationElement == 0)
             {
+                // Handle linking if links are on the same axis
+                if(previousLinkedNavigator != null && !oppositeAxisLinking)
+                {
+                    previousLinkedNavigator.StartActiveLinkFromNext();
+                    active = false;
+                    return;
+                }
+                // Wrapping around elements
                 if(allowWrapping)
                     FocusNavigationElement(navigationElements.Count-1);
                 return;
@@ -149,6 +214,14 @@ namespace StrawberryNova
             UnfocusCurrent();
             if(focussedNavigationElement == navigationElements.Count - 1)
             {
+                // Handle linking if links are on the same axis
+                if(nextLinkedNavigator != null && !oppositeAxisLinking)
+                {
+                    nextLinkedNavigator.StartActiveLinkFromPrevious();
+                    active = false;
+                    return;
+                }
+                // Wrapping around elements
                 if(allowWrapping)
                     FocusNavigationElement(0);
                 return;

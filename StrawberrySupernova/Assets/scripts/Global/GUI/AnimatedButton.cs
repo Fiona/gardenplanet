@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,9 +13,9 @@ namespace StompyBlondie
      * They each have an equivalent virtual animation functions that are coroutines which are started by the previous
      * event callbacks - HoverAnimation, HoverEndAnimation, ClickAnimation.
      */
+    [RequireComponent(typeof(RectTransform))]
     public class AnimatedButton: MonoBehaviour
     {
-        [HideInInspector]
         public RectTransform rectTransform;
 
         private EventTrigger eventTrigger;
@@ -24,8 +23,8 @@ namespace StompyBlondie
 
         public void Awake()
         {
-            eventTrigger = gameObject.AddComponent<EventTrigger>();
             rectTransform = GetComponent<RectTransform>();
+            eventTrigger = gameObject.AddComponent<EventTrigger>();
         }
 
         public void Start()

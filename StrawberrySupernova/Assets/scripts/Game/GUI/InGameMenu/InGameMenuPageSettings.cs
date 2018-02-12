@@ -13,11 +13,13 @@ namespace StrawberryNova
 
         [Header("Object references")]
         public SettingsCategory[] categories;
+        public RectTransform[] categoryButtons;
 
         [HideInInspector]
         public bool openingPage;
 
         private SettingsCategory openCategory;
+        private GUINavigator navigator;
 
         public string GetDisplayName()
         {
@@ -31,13 +33,19 @@ namespace StrawberryNova
             var canvas = GetComponent<CanvasGroup>();
             canvas.alpha = 0f;
 
+            navigator = gameObject.AddComponent<GUINavigator>();
+            navigator.direction = GUINavigator.GUINavigatorDirection.Horizontal;
+            navigator.oppositeAxisLinking = true;
+            foreach(var b in categoryButtons)
+                navigator.AddNavigationElement(b);
+
             foreach(var cat in categories)
-                cat.Init();
+                cat.Init(navigator);
+
+            StartCoroutine(OpenCategory(categories[0]));
 
             yield return LerpHelper.QuickFadeIn(canvas, Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
                 LerpHelper.Type.SmoothStep);
-
-            yield return StartCoroutine(OpenCategory(categories[0]));
         }
 
         public IEnumerator Close()
