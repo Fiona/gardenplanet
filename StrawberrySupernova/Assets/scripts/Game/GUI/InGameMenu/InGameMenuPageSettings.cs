@@ -20,6 +20,7 @@ namespace StrawberryNova
 
         private SettingsCategory openCategory;
         private GUINavigator navigator;
+        private bool initialised = false;
 
         public string GetDisplayName()
         {
@@ -33,14 +34,21 @@ namespace StrawberryNova
             var canvas = GetComponent<CanvasGroup>();
             canvas.alpha = 0f;
 
-            navigator = gameObject.AddComponent<GUINavigator>();
+            if(navigator == null)
+                navigator = gameObject.AddComponent<GUINavigator>();
+            navigator.ClearNavigationElements();
             navigator.direction = GUINavigator.GUINavigatorDirection.Horizontal;
             navigator.oppositeAxisLinking = true;
             foreach(var b in categoryButtons)
                 navigator.AddNavigationElement(b);
+            navigator.active = true;
 
-            foreach(var cat in categories)
-                cat.Init(navigator);
+            if(!initialised)
+            {
+                foreach(var cat in categories)
+                    cat.Init(navigator);
+                initialised = true;
+            }
 
             StartCoroutine(OpenCategory(categories[0]));
 
@@ -51,6 +59,7 @@ namespace StrawberryNova
         public IEnumerator Close()
         {
             yield return StartCoroutine(openCategory.Save());
+            StartCoroutine(openCategory.Close());
             yield return LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(), Consts.GUI_IN_GAME_MENU_PAGE_FADE_TIME,
                 LerpHelper.Type.SmoothStep);
             openCategory = null;
@@ -68,6 +77,7 @@ namespace StrawberryNova
                 yield break;
 
             openingPage = true;
+            navigator.active = true;
 
             if(openCategory != null)
             {

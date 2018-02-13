@@ -10,6 +10,7 @@ namespace StrawberryNova
     {
 
         public bool popupInfoStatic;
+        public bool autoPickupItems;
 
         private string gameSettingsPath;
         private JsonData settings;
@@ -31,11 +32,13 @@ namespace StrawberryNova
 
             // Load settings
             popupInfoStatic = (bool)(SettingContain("popupInfoStatic") ? settings["popupInfoStatic"] : false);
+            autoPickupItems = (bool)(SettingContain("autoPickupItems") ? settings["autoPickupItems"] : true);
         }
 
         public void Save()
         {
             settings["popupInfoStatic"] = popupInfoStatic;
+            settings["autoPickupItems"] = autoPickupItems;
 
             string jsonOutput;
             jsonOutput = JsonMapper.ToJson(settings);

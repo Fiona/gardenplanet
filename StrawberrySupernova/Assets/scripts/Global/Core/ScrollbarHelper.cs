@@ -58,5 +58,29 @@ namespace StompyBlondie
             );
         }
 
+        public static void ScrollbarAutoFocusToElement(Scrollbar scrollbar, GameObject content,
+            RectTransform contentWindow, RectTransform element)
+        {
+            if(!scrollbar.gameObject.activeSelf)
+                return;
+
+            var heightOfScrollWindow = contentWindow.rect.height;
+            var heightOfContent = content.GetComponent<RectTransform>().sizeDelta.y;
+            var halfScrollHeight = (heightOfScrollWindow / 2);
+
+            var elementY = Mathf.Abs(element.anchoredPosition.y);
+            if(elementY < halfScrollHeight)
+                SetScrollbarTo(scrollbar, 0f);
+            else if(elementY > heightOfContent - halfScrollHeight)
+            {
+                SetScrollbarTo(scrollbar, 1f);
+            }
+            else
+            {
+                SetScrollbarTo(scrollbar, elementY / heightOfContent);
+            }
+
+        }
+
     }
 }

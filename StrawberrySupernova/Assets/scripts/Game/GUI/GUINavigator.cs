@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using StompyBlondie;
 using UnityEngine;
@@ -35,18 +36,34 @@ namespace StrawberryNova
                  "selected as the navigation direction for this navigator.")]
         public bool oppositeAxisLinking = false;
 
+        [Tooltip("How much of a lead time we have between switches so we don't immediately switch")]
+        public float linkTime = .1f;
+
+        [HideInInspector]
+        private static float linkTimer = -1f;
+
         private List<RectTransform> navigationElements;
         private GameInputManager input;
         private int focussedNavigationElement;
         private int selectingNavigationElement;
+        private int savedFocussedElement = -1;
         private RectTransform navPointer;
         private int cancelNavigationElement;
+        private Action<RectTransform> focusCallback;
 
         public void AddNavigationElement(RectTransform element, bool isCancel = false)
         {
             navigationElements.Add(element);
             if(isCancel)
                 cancelNavigationElement = navigationElements.Count - 1;
+        }
+
+        public void ClearNavigationElements()
+        {
+            navigationElements = new List<RectTransform>();
+            focussedNavigationElement = -1;
+            savedFocussedElement = -1;
+            UnfocusAll();
         }
 
         public void StartActiveLinkFromNext()
@@ -66,6 +83,11 @@ namespace StrawberryNova
             navPointer.GetComponentInChildren<Image>().color = Color.clear;
         }
 
+        public void SetFocusCallback(Action<RectTransform> callback)
+        {
+            focusCallback = callback;
+        }
+
         private void Awake()
         {
             navigationElements = new List<RectTransform>();
@@ -73,6 +95,7 @@ namespace StrawberryNova
             selectingNavigationElement = -1;
             cancelNavigationElement = -1;
             input = FindObjectOfType<GameInputManager>();
+            focusCallback = null;
         }
 
         private void Start()
@@ -82,7 +105,24 @@ namespace StrawberryNova
             navPointer.SetParent(FindObjectOfType<Canvas>().transform);
             navPointer.transform.SetSiblingIndex(navPointer.transform.GetSiblingIndex() - 1);
             navPointer.localScale = Vector3.one;
+            if(linkTimer < 0)
+                linkTimer = Time.time;
             StartCoroutine(DoNavigation());
+        }
+
+        private void OnDisable()
+        {
+            if(navPointer != null)
+                navPointer.gameObject.SetActive(false);
+        }
+
+        private void OnEnable()
+        {
+            if(navPointer != null)
+            {
+                navPointer.gameObject.SetActive(true);
+                StartCoroutine(DoNavigation());
+            }
         }
 
         private void OnDestroy()
@@ -98,7 +138,7 @@ namespace StrawberryNova
                 // Do nothing if in mouse mode, no elements or inactive
                 while(input.mouseMode || navigationElements.Count == 0 || !active)
                 {
-                    yield return StartCoroutine(UnfocusAll());
+                    yield return StartCoroutine(UnfocusAll(keepFocus:true));
                     yield return new WaitForFixedUpdate();
                 }
                 navPointer.gameObject.SetActive(true);
@@ -106,47 +146,81 @@ namespace StrawberryNova
                 if(focussedNavigationElement == -1)
                 {
                     yield return new WaitForSeconds(.5f);
-                    FocusNavigationElement(0);
+                    FocusNavigationElement(savedFocussedElement > -1 ? savedFocussedElement : 0);
+                    savedFocussedElement = -1;
                 }
+
+                // Wait a bit if we just switched
+                if(Time.time < linkTimer + linkTime)
+                {
+                    yield return new WaitForFixedUpdate();
+                }
+
                 // Moving down
-                if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal  ? "Menu Right" : "Menu Down")))
+                var nav = false;
+                if(input.player.GetButtonRepeating((direction == GUINavigatorDirection.Horizontal
+                    ? "Menu Right"
+                    : "Menu Down")))
+                {
                     FocusNextNavigationElement();
+                    nav = true;
+                }
+
                 // Moving up
-                if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal  ? "Menu Left" : "Menu Up")))
+                if(input.player.GetButtonRepeating((direction == GUINavigatorDirection.Horizontal ? "Menu Left" : "Menu Up"))
+                )
+                {
                     FocusPreviousNavigationElement();
+                    nav = true;
+                }
+
                 // Selecting
                 if(input.player.GetButtonDown("Confirm"))
+                {
                     SelectDownCurrentNavigationElement();
+                    nav = true;
+                }
+
                 if(input.player.GetButtonUp("Confirm"))
+                {
                     SelectUpCurrentNavigationElement();
+                    nav = true;
+                }
+
                 // Cancelling
                 if(input.player.GetButtonUp("Cancel") && cancelNavigationElement != -1)
                 {
                     ExecuteOn(cancelNavigationElement, ExecuteEvents.pointerEnterHandler);
                     ExecuteOn(cancelNavigationElement, ExecuteEvents.pointerClickHandler);
+                    nav = true;
                 }
+
                 // Linking along opposite direction axes
-                if(oppositeAxisLinking)
+                if(!nav && oppositeAxisLinking)
                 {
                     // Going to previous link
-                    if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal
-                        ? "Menu Up"
-                        : "Menu Left")) &&
+                    if(input.player.GetButtonRepeating((direction == GUINavigatorDirection.Horizontal
+                           ? "Menu Up"
+                           : "Menu Left")) &&
                        previousLinkedNavigator != null)
                     {
+                        linkTimer = Time.time;
                         previousLinkedNavigator.StartActiveLinkFromNext();
                         active = false;
                     }
                     // Going to next link
-                    if(input.player.GetButtonDown((direction == GUINavigatorDirection.Horizontal
+                    if(input.player.GetButtonRepeating((direction == GUINavigatorDirection.Horizontal
                            ? "Menu Down"
                            : "Menu Right")) &&
                        nextLinkedNavigator != null)
                     {
+                        linkTimer = Time.time;
                         nextLinkedNavigator.StartActiveLinkFromPrevious();
                         active = false;
                     }
                 }
+                // Update pos
+                SetPointerPosition();
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -159,11 +233,14 @@ namespace StrawberryNova
 
             // Set position of pointer
             focussedNavigationElement = elementNum;
-            navPointer.position = navigationElements[elementNum].position;
-            navPointer.anchoredPosition -= new Vector2(navigationElements[elementNum].sizeDelta.x/2, 0f);
+            SetPointerPosition();
 
             // Send mouse enter event
             ExecuteOn(focussedNavigationElement, ExecuteEvents.pointerEnterHandler);
+
+            // Callback
+            if(focusCallback != null)
+                focusCallback(navigationElements[focussedNavigationElement]);
         }
 
         private void UnfocusCurrent()
@@ -173,7 +250,15 @@ namespace StrawberryNova
                 ExecuteOn(focussedNavigationElement, ExecuteEvents.pointerExitHandler);
         }
 
-        private IEnumerator UnfocusAll()
+        private void SetPointerPosition()
+        {
+            if(focussedNavigationElement == -1)
+                return;
+            navPointer.position = navigationElements[focussedNavigationElement].position;
+            navPointer.anchoredPosition -= new Vector2(navigationElements[focussedNavigationElement].sizeDelta.x/2, 0f);
+        }
+
+        private IEnumerator UnfocusAll(bool keepFocus = false)
         {
             // If nothing is focussed immediately hide the pointer
             var navPointerImage = navPointer.gameObject.GetComponentInChildren<Image>();
@@ -182,6 +267,9 @@ namespace StrawberryNova
                 navPointerImage.color = new Color(1f, 1f, 1f, 0f);
                 yield break;
             }
+            // Store what we're currently on if wanting to keep focus between activations
+            if(keepFocus)
+                savedFocussedElement = focussedNavigationElement;
             // Send mouse exit event
             ExecuteOn(focussedNavigationElement, ExecuteEvents.pointerExitHandler);
             focussedNavigationElement = -1;
@@ -197,6 +285,7 @@ namespace StrawberryNova
                 // Handle linking if links are on the same axis
                 if(previousLinkedNavigator != null && !oppositeAxisLinking)
                 {
+                    linkTimer = Time.time;
                     previousLinkedNavigator.StartActiveLinkFromNext();
                     active = false;
                     return;
@@ -217,6 +306,7 @@ namespace StrawberryNova
                 // Handle linking if links are on the same axis
                 if(nextLinkedNavigator != null && !oppositeAxisLinking)
                 {
+                    linkTimer = Time.time;
                     nextLinkedNavigator.StartActiveLinkFromPrevious();
                     active = false;
                     return;

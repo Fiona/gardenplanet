@@ -14,6 +14,7 @@ namespace StrawberryNova
         private InGameMenuPageSettings settings;
         private CanvasGroup page;
         protected GUINavigator categoryButtonNavigator;
+        protected bool isOpen = false;
 
         public virtual void Init(GUINavigator categoryButtonNavigator)
         {
@@ -32,6 +33,7 @@ namespace StrawberryNova
         {
             if(!button.selected)
                 button.Select();
+            isOpen = true;
             yield return LerpHelper.QuickFadeIn(page, .2f, LerpHelper.Type.SmoothStep);
             page.blocksRaycasts = true;
         }
@@ -39,6 +41,7 @@ namespace StrawberryNova
         public virtual IEnumerator Close()
         {
             button.Deselect();
+            isOpen = false;
             yield return LerpHelper.QuickFadeOut(page, .2f, LerpHelper.Type.SmoothStep);
             page.blocksRaycasts = false;
         }

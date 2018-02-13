@@ -13,6 +13,7 @@ namespace StrawberryNova
 
         [HideInInspector]
         public bool directInputEnabled = true;
+        public bool doingRebind = false;
         [HideInInspector]
         public Vector2? mouseWorldPosition;
         [HideInInspector]
@@ -41,6 +42,9 @@ namespace StrawberryNova
 
         public void Update()
         {
+            if(doingRebind)
+                return;
+            
             // Checking for switching mouse mode
             Mouse mouse = ReInput.controllers.Mouse;
             if(mouseMode)

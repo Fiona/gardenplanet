@@ -60,7 +60,7 @@ namespace StrawberryNova
                 if(prefab == null)
                 {
                     Debug.Log("Can't find resource prefab for page: "+line);
-                    continue;;
+                    continue;
                 }
 
                 var newPageObj = (Instantiate(prefab) as GameObject);
@@ -154,6 +154,9 @@ namespace StrawberryNova
             var manager = FindObjectOfType<GameInputManager>();
             while(!closeMenu)
             {
+                while(manager.doingRebind)
+                    yield return new WaitForSeconds(.5f);
+
                 if(manager.player.GetButtonUp("Open Menu") || manager.player.GetButtonUp("Cancel"))
                 {
                     closeMenu = true;

@@ -92,6 +92,9 @@ namespace StrawberryNova
 		// How high the player's energy can go
 		public const float PLAYER_MAX_ENERGY = 10.0f;
 
+		// How far the auto pickup radius is
+		public const float PLAYER_AUTO_PICKUP_RADIUS = .2f;
+
 		// -----------------------------
 		// GAMEPLAY
 		// -----------------------------
