@@ -276,10 +276,10 @@ namespace StrawberryNova
 
         // Generates an item in the world at the specified position
         public void SpawnItemInWorld(ItemType itemType, System.Collections.Hashtable attributes, int amount,
-            WorldPosition worldPos)
+            WorldPosition worldPos, bool droppedByPlayer = false)
         {
             var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
-            if (resource == null)
+            if(resource == null)
             {
                 resource = Resources.Load<GameObject>(Consts.ITEMS_PREFAB_MISSING);
             }
@@ -291,6 +291,7 @@ namespace StrawberryNova
                 var newItemComponent = newItem.AddComponent<InWorldItem>();
                 newItemComponent.attributes = attributes;
                 newItemComponent.itemType = itemType;
+                newItemComponent.droppedByPlayer = droppedByPlayer;
             }
         }
 

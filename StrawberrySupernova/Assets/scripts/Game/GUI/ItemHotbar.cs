@@ -186,7 +186,8 @@ namespace StrawberryNova
             var shiftAmount = .1f;
             newPos.x -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
             newPos.y -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
-            controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos);
+            controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos,
+                droppedByPlayer:true);
 
             // Remove from inventory
             controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,

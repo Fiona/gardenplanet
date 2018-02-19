@@ -118,7 +118,7 @@ namespace StrawberryNova
                         var comp = item.GetComponent<InWorldItem>();
                         if(comp == null)
                             continue;
-                        comp.Pickup();
+                        comp.Pickup(autoPickup:true);
                     }
                 }
             }

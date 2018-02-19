@@ -44,7 +44,7 @@ namespace StrawberryNova
         {
             if(doingRebind)
                 return;
-            
+
             // Checking for switching mouse mode
             Mouse mouse = ReInput.controllers.Mouse;
             if(mouseMode)

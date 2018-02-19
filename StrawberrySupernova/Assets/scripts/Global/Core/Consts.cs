@@ -25,6 +25,7 @@ namespace StrawberryNova
 		public const int COLLISION_LAYER_TILES = 8;
 		public const int COLLISION_LAYER_WORLD_OBJECTS = 9;
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
+		public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
 
 	    // Tiles are this size on all dimensions

@@ -8,6 +8,7 @@ namespace StrawberryNova
     {
         public ItemType itemType;
         public Hashtable attributes;
+        public bool droppedByPlayer;
 
         GameController controller;
         Glowable highlightGlow;
@@ -29,6 +30,15 @@ namespace StrawberryNova
 
         public void LateUpdate()
         {
+            // If dropped we need to not be picked up unless the player has moved away
+            if(droppedByPlayer)
+            {
+                var hits = Physics.OverlapSphere(transform.position, Consts.PLAYER_AUTO_PICKUP_RADIUS,
+                    1<<Consts.COLLISION_LAYER_PLAYER);
+                if(hits.Length == 0)
+                    droppedByPlayer = false;
+            }
+
             if(beingPickedUp || !itemType.CanPickup)
                 return;
             if(doFullHighlight)
@@ -52,8 +62,10 @@ namespace StrawberryNova
             doFullHighlight = true;
         }
 
-        public void Pickup()
+        public void Pickup(bool autoPickup = false)
         {
+            if(autoPickup && droppedByPlayer)
+                return;
             if(beingPickedUp || !itemType.CanPickup)
                 return;
             beingPickedUp = true;
