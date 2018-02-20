@@ -10,7 +10,8 @@ namespace StrawberryNova
     public class InventoryItemButton: SelectableAnimatedButton
     {
         [Header("Inventory Item Settings")]
-        public float deselectedScaleSize = .95f;
+        public float deselectedScaleSize = .98f;
+        public float pressedScaleSize = .96f;
         public float selectAnimTime = .2f;
         public float hoverFadeTime = .25f;
 
@@ -43,6 +44,36 @@ namespace StrawberryNova
             yield return LerpHelper.QuickFadeOut(backgroundHover, hoverFadeTime, LerpHelper.Type.SmoothStep);
         }
 
+        protected override IEnumerator PointerDownAnimation(BaseEventData data)
+        {
+            if(selected)
+                yield break;
+            yield return StartCoroutine(
+                LerpHelper.QuickTween(
+                    (v) => gameObject.transform.localScale = v,
+                    new Vector3(deselectedScaleSize, deselectedScaleSize, deselectedScaleSize),
+                    new Vector3(pressedScaleSize, pressedScaleSize, pressedScaleSize),
+                    selectAnimTime,
+                    lerpType:LerpHelper.Type.SmoothStep
+                )
+            );
+        }
+
+        protected override IEnumerator PointerUpAnimation(BaseEventData data)
+        {
+            if(selected)
+                yield break;
+            yield return StartCoroutine(
+                LerpHelper.QuickTween(
+                    (v) => gameObject.transform.localScale = v,
+                    new Vector3(pressedScaleSize, pressedScaleSize, pressedScaleSize),
+                    new Vector3(deselectedScaleSize, deselectedScaleSize, deselectedScaleSize),
+                    selectAnimTime,
+                    lerpType:LerpHelper.Type.SmoothStep
+                )
+            );
+        }
+
         protected override IEnumerator SelectAnimation(BaseEventData data)
         {
             StartCoroutine(LerpHelper.QuickFadeOut(backgroundNormal, selectAnimTime, LerpHelper.Type.SmoothStep));
@@ -52,7 +83,7 @@ namespace StrawberryNova
                 (v) => { transform.localScale = v; },
                 new Vector3(deselectedScaleSize, deselectedScaleSize, deselectedScaleSize),
                 Vector3.one,
-                selectAnimTime, lerpType:LerpHelper.Type.EaseIn
+                selectAnimTime, lerpType:LerpHelper.Type.SmoothStep
             );
         }
 

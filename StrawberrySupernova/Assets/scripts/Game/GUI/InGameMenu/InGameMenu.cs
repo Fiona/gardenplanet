@@ -64,7 +64,7 @@ namespace StrawberryNova
                 }
 
                 var newPageObj = (Instantiate(prefab) as GameObject);
-                newPageObj.transform.SetParent(pageHolder.transform);
+                newPageObj.transform.SetParent(pageHolder.transform, false);
                 newPageObj.SetActive(false);
                 var childPage = newPageObj.GetComponent(pageType) as IInGameMenuPage;
                 if(childPage == null)

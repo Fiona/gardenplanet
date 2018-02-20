@@ -61,7 +61,7 @@
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>C:\Users\Fiona\devel\games\strawberrysupernova\StrawberrySupernova\Library/resharper-unity-libs/nunit3.5.0/nunit.framework.dll</HintPath>
+      <HintPath>C:\Users\Fiona\devel\unity\strawberrysupernova\StrawberrySupernova\Library/resharper-unity-libs/nunit3.5.0/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.EditorTestsRunner">
       <HintPath>Library\UnityAssemblies\UnityEditor.EditorTestsRunner.dll</HintPath>

@@ -22,6 +22,14 @@ namespace StrawberryNova
 			StartNewState(Consts.INITIAL_APP_STATE);
 	    }
 
+		public void Quit()
+		{
+			Application.Quit();
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#endif
+		}
+
 	    public void StartNewState(AppState state)
 	    {
 	        this.state = state;

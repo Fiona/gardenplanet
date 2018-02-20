@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directInputEnabled: 1
+  doingRebind: 0
   mouseMode: 0
 --- !u!4 &413021701
 Transform:
@@ -675,7 +676,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonAnimateTime: 1.5
-  offScreenXPos: 1150
   fadeInTime: 0.5
   fadeOutTime: 0.5
   input: {fileID: 413021700}
@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 2
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96

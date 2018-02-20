@@ -13,7 +13,6 @@ namespace StrawberryNova
 
         [Header("Settings")]
         public float buttonAnimateTime;
-        public float offScreenXPos;
         public float fadeInTime;
         public float fadeOutTime;
 
@@ -31,6 +30,7 @@ namespace StrawberryNova
         public GlobalButton editorButton;
 
         private GUINavigator navigator;
+        private float offScreenXPos;
 
         public void Update()
         {
@@ -44,6 +44,7 @@ namespace StrawberryNova
             editorButton.SetCallback(EditorButtonPressed);
             settingsButton.SetCallback(SettingsButtonPressed);
             quitButton.SetCallback(QuitButtonPressed);
+            offScreenXPos = (Screen.width / 2f) + (newGameButton.GetComponent<RectTransform>().sizeDelta.x*2);
 
             StartCoroutine(TitleAnimation());
         }
@@ -98,24 +99,11 @@ namespace StrawberryNova
 
         public void QuitButtonPressed()
         {
-            StartCoroutine(
-                screenFade.FadeOut(fadeOutTime, callback: () =>
-                    {
-                        Application.Quit();
-#if UNITY_EDITOR
-                        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-                    }
-                )
-            );
+            StartCoroutine(screenFade.FadeOut(fadeOutTime, callback: FindObjectOfType<App>().Quit));
         }
 
         private void AnimateButton(GlobalButton button)
         {
-#if UNITY_EDITOR
-            button.rectTransform.anchoredPosition = new Vector2(0f, button.rectTransform.anchoredPosition.y);
-            return;
-#endif
             StartCoroutine(LerpHelper.QuickTween(
                 (v) => button.rectTransform.anchoredPosition = v,
                 button.rectTransform.anchoredPosition,
