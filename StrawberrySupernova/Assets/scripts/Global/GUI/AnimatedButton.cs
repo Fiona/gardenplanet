@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using StrawberryNova;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -20,11 +21,14 @@ namespace StompyBlondie
 
         private EventTrigger eventTrigger;
         private Action callback;
+        private GameInputManager inputManager;
+        private bool hover;
 
         public void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
             eventTrigger = gameObject.AddComponent<EventTrigger>();
+            inputManager = FindObjectOfType<GameInputManager>();
         }
 
         public void Start()
@@ -55,6 +59,12 @@ namespace StompyBlondie
             eventTrigger.triggers.Add(pointerUpEntry);
         }
 
+        public void Update()
+        {
+            if(hover)
+                inputManager.SetMouseTexture(inputManager.mouseHover, true);
+        }
+
         public void SetCallback(Action callback)
         {
             this.callback = callback;
@@ -62,11 +72,13 @@ namespace StompyBlondie
 
         protected virtual void Hover(BaseEventData data)
         {
+            hover = true;
             StartCoroutine(HoverAnimation(data));
         }
 
         protected virtual void HoverEnd(BaseEventData data)
         {
+            hover = false;
             StartCoroutine(HoverEndAnimation(data));
         }
 

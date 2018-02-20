@@ -22,6 +22,8 @@ namespace StrawberryNova
         public float shownDisplayX;
         public float selectedDisplayX;
 
+        private IEnumerator glowAnim;
+
         public void Initialise(string id, string displayName, Action callback)
         {
             // Hide certain images
@@ -70,11 +72,20 @@ namespace StrawberryNova
                 new Vector2(selectedDisplayX, 0f),
                 1f, lerpType:LerpHelper.Type.BounceOut
             );
+            if(glowAnim == null)
+            {
+                glowAnim = GlowAnim();
+                StartCoroutine(glowAnim);
+            }
         }
 
         protected override IEnumerator DeselectAnimation(BaseEventData data)
         {
-            StartCoroutine(LerpHelper.QuickFadeOut(backgroundSelected, .2f, LerpHelper.Type.SmoothStep));
+            if(glowAnim != null)
+                StopCoroutine(glowAnim);
+            glowAnim = null;
+            StartCoroutine(LerpHelper.QuickTween(BackgroundSelectedFade, backgroundSelected.color.a,
+                0f, .2f, lerpType:LerpHelper.Type.SmoothStep));
             yield return LerpHelper.QuickTween(
                 (v) => { display.anchoredPosition = v; },
                 new Vector2(selectedDisplayX, 0f),
@@ -92,6 +103,28 @@ namespace StrawberryNova
                     new Vector2(hiddenDisplayX, 0f),
                     .2f, lerpType:LerpHelper.Type.SmoothStep
                 )
+            );
+        }
+
+        private IEnumerator GlowAnim()
+        {
+            while(true)
+            {
+                if(!selected)
+                    yield break;
+                yield return LerpHelper.QuickTween(
+                    BackgroundSelectedFade, 1f, .5f, 2f, lerpType:LerpHelper.Type.SmoothStep
+                );
+                yield return LerpHelper.QuickTween(
+                    BackgroundSelectedFade, .5f, 1f, 2f, lerpType:LerpHelper.Type.SmoothStep
+                );
+            }
+        }
+
+        private void BackgroundSelectedFade(float v)
+        {
+            backgroundSelected.color = new Color(
+                backgroundSelected.color.r, backgroundSelected.color.g, backgroundSelected.color.b, v
             );
         }
 

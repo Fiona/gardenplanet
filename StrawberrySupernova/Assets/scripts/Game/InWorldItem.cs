@@ -45,9 +45,14 @@ namespace StrawberryNova
             {
                 controller.ShowInfoPopup(new WorldPosition(transform.position), itemType.DisplayName);
                 fullHighlightGlow.GlowTo(new Color(0f, .5f, 1f), 1f);
+                controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseOkay);
             }
             else if(doHighlight)
+            {
                 highlightGlow.GlowTo(new Color(.6f, .75f, .86f), .5f);
+                controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseHover);
+            }
+
             doHighlight = false;
             doFullHighlight = false;
         }

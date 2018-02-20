@@ -20,10 +20,19 @@ namespace StrawberryNova
         public Rewired.Player player;
         [HideInInspector]
         public bool mouseMode;
+        [HideInInspector]
+        public Texture2D mouseNormal;
+        [HideInInspector]
+        public Texture2D mouseHover;
+        [HideInInspector]
+        public Texture2D mouseOkay;
+        [HideInInspector]
+        public Texture2D mouseError;
 
         private GameController controller;
         private float previousScrollWheelAxis;
         private float mouseModeTime;
+        private bool mouseTextureSet;
 
         public void Awake()
         {
@@ -34,10 +43,20 @@ namespace StrawberryNova
 
         public void SetUpMouse()
         {
-            Texture2D mouseTexture = Resources.Load(Consts.TEXTURE_PATH_GUI_MOUSE) as Texture2D;
-            SetMouseTexture(mouseTexture);
+            mouseNormal = Resources.Load(Consts.TEXTURE_PATH_GUI_MOUSE) as Texture2D;
+            mouseHover = Resources.Load(Consts.TEXTURE_PATH_GUI_MOUSE_HOVER) as Texture2D;
+            mouseOkay = Resources.Load(Consts.TEXTURE_PATH_GUI_MOUSE_OKAY) as Texture2D;
+            mouseError = Resources.Load(Consts.TEXTURE_PATH_GUI_MOUSE_ERROR) as Texture2D;
+            SetMouseTexture(mouseNormal);
             mouseMode = false;
             mouseModeTime = Time.time - mouseModeTime;
+        }
+
+        private void LateUpdate()
+        {
+            if(!mouseTextureSet)
+                SetMouseTexture(mouseNormal, true);
+            mouseTextureSet = false;
         }
 
         public void Update()
@@ -129,7 +148,6 @@ namespace StrawberryNova
                 // Joystick or keyboard only mode
             {
                 // Pointing at nearest object
-                Debug.DrawLine(controller.player.transform.position, controller.player.transform.position + controller.player.transform.forward);
                 collisionTest = Physics.SphereCast(controller.player.transform.position, .1f,
                     controller.player.transform.forward, out hit, Mathf.Infinity, colLayers);
 
@@ -248,9 +266,12 @@ namespace StrawberryNova
             directInputEnabled = true;
         }
 
-        public void SetMouseTexture(Texture2D texture)
+        public void SetMouseTexture(Texture2D texture, bool forceChange = false)
         {
-            Cursor.SetCursor(texture, new Vector2(1.0f, 1.0f), CursorMode.Auto);
+            if(!directInputEnabled && !forceChange)
+                return;
+            mouseTextureSet = true;
+            Cursor.SetCursor(texture, new Vector2(2.0f, 2.0f), CursorMode.Auto);
         }
 
     }

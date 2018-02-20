@@ -31,7 +31,7 @@ namespace StompyBlondie
             }
             yield return StartCoroutine(Fade(timeToFade, colorFrom, colorTo, callback));
         }
-            
+
         public IEnumerator FadeIn(float timeToFade = 1f, Color? fadeColour = null, Action callback = null)
         {
             Color? colorFrom, colorTo;
@@ -50,24 +50,27 @@ namespace StompyBlondie
 
 		public IEnumerator Fade(float timeToFade = 1f, Color? colourFrom = null, Color? colourTo = null, Action callback = null)
 		{
-            if(!colourTo.HasValue)
+			if(!colourTo.HasValue)
 				colourTo = defaultColour;
             if(!colourFrom.HasValue)
 				colourFrom = defaultColour;
 
             var img = GetComponent<Image>();
             var t = 0f;
+
+			img.raycastTarget = true;
             while(t < 1)
             {
                 t += Time.deltaTime / timeToFade;
                 img.color = Color.Lerp((Color)colourFrom, (Color)colourTo, t);
                 yield return new WaitForFixedUpdate();
             }
+			img.raycastTarget = false;
 
 			if(callback != null)
 				callback();
 		}
-            			
+
 	}
 }
 

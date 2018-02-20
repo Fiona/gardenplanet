@@ -145,7 +145,10 @@ namespace StrawberryNova
 		public const string PREFAB_PATH_INFO_POPUP = "prefabs/gui/InfoPopup";
         public const string PREFAB_PATH_IN_GAME_MENU = "prefabs/gui/InGameMenu";
 		public const string PREFAB_PATH_PLAYER_ENERGY = "prefabs/gui/PlayerEnergy";
-        public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse";
+        public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse_normal";
+		public const string TEXTURE_PATH_GUI_MOUSE_HOVER = "textures/gui/mouse_hover";
+		public const string TEXTURE_PATH_GUI_MOUSE_OKAY = "textures/gui/mouse_okay";
+		public const string TEXTURE_PATH_GUI_MOUSE_ERROR = "textures/gui/mouse_error";
 		public const string TILES_PREFABS_PATH = "prefabs/world/tiles/";
 		public const string WORLD_OBJECTS_PREFABS_PATH = "prefabs/world/worldobjects/";
 		public const string ITEMS_PREFABS_PATH = "prefabs/world/items/";

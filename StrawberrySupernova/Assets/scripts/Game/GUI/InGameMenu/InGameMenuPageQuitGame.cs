@@ -12,6 +12,7 @@ namespace StrawberryNova
         public GlobalButton toTitleButton;
         public GlobalButton toDesktopButton;
         private GameController controller;
+        private bool pressed;
 
         private void Awake()
         {
@@ -46,13 +47,16 @@ namespace StrawberryNova
 
         private IEnumerator TitleButtonPressed()
         {
-            yield return controller.screenFade.FadeOut(3f,
-                callback: () => FindObjectOfType<App>().StartNewState(AppState.Title));
+            yield return controller.screenFade.FadeOut(
+                callback: () => FindObjectOfType<App>().StartNewState(AppState.Title)
+                );
         }
 
         private IEnumerator DesktopButtonPressed()
         {
-            yield return controller.screenFade.FadeOut(3f, callback: FindObjectOfType<App>().Quit);
+            yield return controller.screenFade.FadeOut(
+                callback: FindObjectOfType<App>().Quit
+                );
         }
     }
 }
