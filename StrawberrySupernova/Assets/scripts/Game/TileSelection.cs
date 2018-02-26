@@ -52,10 +52,15 @@ namespace StrawberryNova
             }
 
             if(controller.itemHotbar.CanBeUsedOnTilePos(controller.activeTile))
+            {
                 okDisplay.SetActive(true);
+                controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseOkay);
+            }
             else
+            {
+                controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseError);
                 errorDisplay.SetActive(true);
-
+            }
         }
 
     }

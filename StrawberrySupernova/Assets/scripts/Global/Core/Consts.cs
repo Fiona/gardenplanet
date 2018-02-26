@@ -10,15 +10,12 @@ namespace StrawberryNova
 	public static class Consts
 	{
 
-		// TODO: Make these player options
-		public const bool PLAYER_SETTING_STATIC_INFO_POPUP = true;
-
 	    // -----------------------------
 	    // CONFIG SETTINGS
 	    // -----------------------------
 
 	    // Where to boot the app into
-	    public const AppState INITIAL_APP_STATE = AppState.Title;
+		public const AppState INITIAL_APP_STATE = AppState.Game;//AppState.Title;
 
 	    // -----------------------------
 	    // TILE DRAWING
@@ -28,6 +25,7 @@ namespace StrawberryNova
 		public const int COLLISION_LAYER_TILES = 8;
 		public const int COLLISION_LAYER_WORLD_OBJECTS = 9;
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
+		public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
 
 	    // Tiles are this size on all dimensions
@@ -95,6 +93,9 @@ namespace StrawberryNova
 		// How high the player's energy can go
 		public const float PLAYER_MAX_ENERGY = 10.0f;
 
+		// How far the auto pickup radius is
+		public const float PLAYER_AUTO_PICKUP_RADIUS = .2f;
+
 		// -----------------------------
 		// GAMEPLAY
 		// -----------------------------
@@ -144,13 +145,18 @@ namespace StrawberryNova
 		public const string PREFAB_PATH_INFO_POPUP = "prefabs/gui/InfoPopup";
         public const string PREFAB_PATH_IN_GAME_MENU = "prefabs/gui/InGameMenu";
 		public const string PREFAB_PATH_PLAYER_ENERGY = "prefabs/gui/PlayerEnergy";
-        public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse";
+        public const string TEXTURE_PATH_GUI_MOUSE = "textures/gui/mouse_normal";
+		public const string TEXTURE_PATH_GUI_MOUSE_HOVER = "textures/gui/mouse_hover";
+		public const string TEXTURE_PATH_GUI_MOUSE_OKAY = "textures/gui/mouse_okay";
+		public const string TEXTURE_PATH_GUI_MOUSE_ERROR = "textures/gui/mouse_error";
 		public const string TILES_PREFABS_PATH = "prefabs/world/tiles/";
 		public const string WORLD_OBJECTS_PREFABS_PATH = "prefabs/world/worldobjects/";
 		public const string ITEMS_PREFABS_PATH = "prefabs/world/items/";
 		public const string ITEMS_PREFAB_MISSING = "prefabs/world/items/missing";
 		public const string IN_GAME_MENU_TAB_ICONS_PATH_PREFIX = "textures/gui/menu_tab_icon_";
 		public const string IN_GAME_MENU_PAGE_PREFAB_PATH = "prefabs/gui/InGameMenuPages/";
+		public const string PREFAB_PATH_GUI_NAVIGATION_POINTER = "prefabs/gui/GUINavigationPointer";
+		public const string PREFAB_PATH_IN_GAME_MENU_BUTTON = "prefabs/gui/InGameMenuButton";
 
 	    // -----------------------------
 	    // FILESYSTEM
@@ -166,6 +172,7 @@ namespace StrawberryNova
 		public const string FILE_EXTENSION_WORLD_OBJECT_DATA = "json";
         public const string DATA_DIR_ITEM_TYPE_DATA = "items";
         public const string FILE_EXTENSION_ITEM_TYPE_DATA = "json";
+		public const string FILE_GAME_SETTINGS_FILE = "gamesettings.dat";
 
 	    // -----------------------------
 	    // EDITOR

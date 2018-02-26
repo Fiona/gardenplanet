@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using UnityEditorInternal;
+using StrawberryNova;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,14 +14,21 @@ namespace StompyBlondie
      * They each have an equivalent virtual animation functions that are coroutines which are started by the previous
      * event callbacks - HoverAnimation, HoverEndAnimation, ClickAnimation.
      */
+    [RequireComponent(typeof(RectTransform))]
     public class AnimatedButton: MonoBehaviour
     {
+        public RectTransform rectTransform;
+
         private EventTrigger eventTrigger;
         private Action callback;
+        private GameInputManager inputManager;
+        private bool hover;
 
         public void Awake()
         {
+            rectTransform = GetComponent<RectTransform>();
             eventTrigger = gameObject.AddComponent<EventTrigger>();
+            inputManager = FindObjectOfType<GameInputManager>();
         }
 
         public void Start()
@@ -40,6 +47,22 @@ namespace StompyBlondie
             clickEntry.eventID = EventTriggerType.PointerClick;
             clickEntry.callback.AddListener(Click);
             eventTrigger.triggers.Add(clickEntry);
+
+            var pointerDownEntry = new EventTrigger.Entry();
+            pointerDownEntry.eventID = EventTriggerType.PointerDown;
+            pointerDownEntry.callback.AddListener(PointerDown);
+            eventTrigger.triggers.Add(pointerDownEntry);
+
+            var pointerUpEntry = new EventTrigger.Entry();
+            pointerUpEntry.eventID = EventTriggerType.PointerUp;
+            pointerUpEntry.callback.AddListener(PointerUp);
+            eventTrigger.triggers.Add(pointerUpEntry);
+        }
+
+        public void Update()
+        {
+            if(hover)
+                inputManager.SetMouseTexture(inputManager.mouseHover, true);
         }
 
         public void SetCallback(Action callback)
@@ -49,21 +72,39 @@ namespace StompyBlondie
 
         protected virtual void Hover(BaseEventData data)
         {
+            hover = true;
             StartCoroutine(HoverAnimation(data));
         }
 
         protected virtual void HoverEnd(BaseEventData data)
         {
+            hover = false;
             StartCoroutine(HoverEndAnimation(data));
+        }
+
+        protected virtual void PointerDown(BaseEventData data)
+        {
+            StartCoroutine(PointerDownAnimation(data));
+        }
+
+        protected virtual void PointerUp(BaseEventData data)
+        {
+            StartCoroutine(PointerUpAnimation(data));
         }
 
         protected virtual void Click(BaseEventData data)
         {
-            StartCoroutine(ClickAnimation(data));
+            StartCoroutine(DoClick(data));
+        }
+
+        protected virtual IEnumerator DoClick(BaseEventData data)
+        {
+            yield return ClickAnimation(data);
             if(callback == null)
-                return;
+                yield break;
             callback();
         }
+
 
         protected virtual IEnumerator HoverAnimation(BaseEventData data)
         {
@@ -76,6 +117,16 @@ namespace StompyBlondie
         }
 
         protected virtual IEnumerator ClickAnimation(BaseEventData data)
+        {
+            yield break;
+        }
+
+        protected virtual IEnumerator PointerDownAnimation(BaseEventData data)
+        {
+            yield break;
+        }
+
+        protected virtual IEnumerator PointerUpAnimation(BaseEventData data)
         {
             yield break;
         }

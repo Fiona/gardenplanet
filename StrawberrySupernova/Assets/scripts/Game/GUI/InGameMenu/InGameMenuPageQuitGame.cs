@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Rewired;
 using StompyBlondie;
 using UnityEngine;
 
@@ -8,6 +9,17 @@ namespace StrawberryNova
     {
         [Header("Settings")]
         public string displayName = "Quit Game";
+        public GlobalButton toTitleButton;
+        public GlobalButton toDesktopButton;
+        private GameController controller;
+        private bool pressed;
+
+        private void Awake()
+        {
+            controller = FindObjectOfType<GameController>();
+            toTitleButton.SetCallback(() => StartCoroutine(TitleButtonPressed()));
+            toDesktopButton.SetCallback(() => StartCoroutine(DesktopButtonPressed()));
+        }
 
         public string GetDisplayName()
         {
@@ -31,6 +43,20 @@ namespace StrawberryNova
         public void Input(GameInputManager inputManager)
         {
             return;
+        }
+
+        private IEnumerator TitleButtonPressed()
+        {
+            yield return controller.screenFade.FadeOut(
+                callback: () => FindObjectOfType<App>().StartNewState(AppState.Title)
+                );
+        }
+
+        private IEnumerator DesktopButtonPressed()
+        {
+            yield return controller.screenFade.FadeOut(
+                callback: FindObjectOfType<App>().Quit
+                );
         }
     }
 }

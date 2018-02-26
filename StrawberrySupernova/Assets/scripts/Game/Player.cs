@@ -2,7 +2,6 @@ using System;
 using StompyBlondie;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI.Extensions.Tweens;
 
 namespace StrawberryNova
 {
@@ -57,6 +56,11 @@ namespace StrawberryNova
         {
             controller = FindObjectOfType<GameController>();
             SetPassOutEvent();
+
+            // TODO: remove this test item adding
+            controller.GivePlayerItem("broken_sprinkleboy");
+            controller.GivePlayerItem("broken_trowelie");
+            controller.GivePlayerItem("cabbage_seeds", quantity:16);
         }
 
         public void PassOutTimeEvent(GameTime gameTime)
@@ -100,6 +104,23 @@ namespace StrawberryNova
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0.0f);
                 rigidBody.AddForce(0, Consts.PLAYER_JUMP_FORCE * Time.deltaTime, 0, ForceMode.Impulse);
                 attemptJump = false;
+            }
+
+            // Do auto pick-up
+            if(App.gameSettings.autoPickupItems)
+            {
+                var hits = Physics.OverlapSphere(transform.position, Consts.PLAYER_AUTO_PICKUP_RADIUS,
+                    1<<Consts.COLLISION_LAYER_ITEMS);
+                if(hits.Length > 0)
+                {
+                    foreach(var item in hits)
+                    {
+                        var comp = item.GetComponent<InWorldItem>();
+                        if(comp == null)
+                            continue;
+                        comp.Pickup(autoPickup:true);
+                    }
+                }
             }
 
         }
@@ -227,8 +248,7 @@ namespace StrawberryNova
         public IEnumerator PassOut()
         {
             controller.StartCutscene();
-            yield return DialoguePopup.ShowDialoguePopup(
-                "Oh no!",
+            yield return MessagePopup.ShowMessagePopup(
                 "You pass out from exhaustion..."
             );
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));

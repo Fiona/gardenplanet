@@ -23,7 +23,7 @@ namespace StrawberryNova
 
         public void LateUpdate()
         {
-            if(Consts.PLAYER_SETTING_STATIC_INFO_POPUP)
+            if(App.gameSettings.popupInfoStatic)
                 DoStaticDisplay();
             else
                 DoTargetedDisplay();

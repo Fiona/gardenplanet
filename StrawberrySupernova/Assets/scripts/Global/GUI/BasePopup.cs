@@ -31,6 +31,7 @@ namespace StompyBlondie
                 throw new Exception("Can't find a Canvas to attach to.");
 
             popupObject.transform.SetParent(canvas.transform, false);
+            popupObject.transform.SetSiblingIndex(popupObject.transform.GetSiblingIndex() - 1);
             return popupObject.GetComponent<T>();
         }
 

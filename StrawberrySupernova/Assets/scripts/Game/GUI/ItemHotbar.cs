@@ -44,11 +44,17 @@ namespace StrawberryNova
         // Ends up getting called when a hotbar button is clicked and assignment mode is active
         private Action<int, bool> assignmentCallback;
 
+        // Keeps the Y position for moving on and off the screen
+        private float onScreenYPos;
+        private RectTransform rectTransform;
+
         public void Start()
         {
             controller = FindObjectOfType<GameController>();
             SelectItemIndex(0);
             StartCoroutine(DoHotbar());
+            rectTransform = GetComponent<RectTransform>();
+            onScreenYPos = rectTransform.anchoredPosition.y;
         }
 
         IEnumerator DoHotbar()
@@ -180,7 +186,8 @@ namespace StrawberryNova
             var shiftAmount = .1f;
             newPos.x -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
             newPos.y -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
-            controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos);
+            controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos,
+                droppedByPlayer:true);
 
             // Remove from inventory
             controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,
@@ -213,6 +220,28 @@ namespace StrawberryNova
             ));
             assignmentMode = false;
             SelectItemIndex(selectedItemIndex);
+        }
+
+        public void EnterScreen()
+        {
+            StartCoroutine(LerpHelper.QuickTween(
+                (val) => { rectTransform.anchoredPosition = val; },
+                new Vector2(0, -onScreenYPos),
+                new Vector2(0, onScreenYPos),
+                .2f,
+                lerpType:LerpHelper.Type.SmoothStep
+            ));
+        }
+
+        public void LeaveScreen()
+        {
+            StartCoroutine(LerpHelper.QuickTween(
+                (val) => { rectTransform.anchoredPosition = val; },
+                new Vector2(0, onScreenYPos),
+                new Vector2(0, -onScreenYPos),
+                .2f,
+                lerpType:LerpHelper.Type.SmoothStep
+            ));
         }
 
         private void HandleActiveItemScript()

@@ -145,6 +145,24 @@ namespace StompyBlondie
         }
 
         /*
+         * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
+         */
+        public static IEnumerator QuickTween(Action<Vector2> callback, Vector2 fromValue, Vector2 toValue,
+            float durationSeconds, Action onDone = null, LerpHelper.Type lerpType = LerpHelper.Type.Linear)
+        {
+            foreach(var val in LerpHelper.LerpOverTime(durationSeconds))
+            {
+                callback(Vector2.Lerp(fromValue, toValue, ApplyLerpType(val, lerpType)));
+                yield return new WaitForFixedUpdate();
+            }
+
+            if(onDone != null)
+                onDone();
+
+            yield break;
+        }
+
+        /*
         * Returns a coroutine that does a quick tween a property between two values. Pass to StartCoroutine.
         */
         public static IEnumerator QuickTween(Action<Color> callback, Color fromValue, Color toValue,

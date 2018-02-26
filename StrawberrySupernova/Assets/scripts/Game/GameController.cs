@@ -3,11 +3,15 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using LitJson;
+using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace StrawberryNova
 {
+    /*
+     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
+     */
     public class GameController: MonoBehaviour
     {
 
@@ -15,6 +19,7 @@ namespace StrawberryNova
         public PlayerCamera mainCamera;
         public Player player;
         public RectTransform canvasRect;
+        public ScreenFade screenFade;
 
         [HideInInspector]
         public JsonData globalConfig;
@@ -45,16 +50,22 @@ namespace StrawberryNova
         [HideInInspector]
         public GameInputManager GameInputManager;
         [HideInInspector]
+        public GlobalButton inGameMenuButton;
+        [HideInInspector]
         public TilePosition activeTile;
         [HideInInspector]
         public bool noTileSelection;
 
-        GameObject inWorldItems;
-        Debug debugMenu;
-        InfoPopup infoPopup;
+        private GameObject inWorldItems;
+        private Debug debugMenu;
+        private InfoPopup infoPopup;
+        private UnityEngine.Object[] loadedResources;
 
         public void Awake()
         {
+            // Preload some resources
+            loadedResources = Resources.LoadAll("prefabs", typeof(GameObject));
+
             // Load global config
             var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
             var jsonContents = "{}";
@@ -115,6 +126,12 @@ namespace StrawberryNova
             playerEnergyObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
             playerEnergy = itemHotbarObject.GetComponent<PlayerEnergy>();
 
+            var inGameMenuButtonObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU_BUTTON)) as GameObject;
+            inGameMenuButtonObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            inGameMenuButtonObject.transform.SetSiblingIndex(inGameMenuButtonObject.transform.GetSiblingIndex() - 1);
+            inGameMenuButton = inGameMenuButtonObject.GetComponent<GlobalButton>();
+            inGameMenuButton.SetCallback(() => StartCoroutine(OpenInGameMenu()));
+
             // Atmosphere
             var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
             atmosphere = atmosphereObj.GetComponent<Atmosphere>();
@@ -142,6 +159,7 @@ namespace StrawberryNova
         public void Start()
         {
             worldTimer.StartTimer();
+            StartCoroutine(screenFade.FadeIn(1f));
             StartCoroutine(ControllerCoroutine());
         }
 
@@ -258,10 +276,10 @@ namespace StrawberryNova
 
         // Generates an item in the world at the specified position
         public void SpawnItemInWorld(ItemType itemType, System.Collections.Hashtable attributes, int amount,
-            WorldPosition worldPos)
+            WorldPosition worldPos, bool droppedByPlayer = false)
         {
             var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
-            if (resource == null)
+            if(resource == null)
             {
                 resource = Resources.Load<GameObject>(Consts.ITEMS_PREFAB_MISSING);
             }
@@ -273,6 +291,7 @@ namespace StrawberryNova
                 var newItemComponent = newItem.AddComponent<InWorldItem>();
                 newItemComponent.attributes = attributes;
                 newItemComponent.itemType = itemType;
+                newItemComponent.droppedByPlayer = droppedByPlayer;
             }
         }
 
@@ -295,6 +314,7 @@ namespace StrawberryNova
 
         public IEnumerator OpenInGameMenu()
         {
+            inGameMenuButton.gameObject.SetActive(false);
             GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
 
@@ -306,6 +326,7 @@ namespace StrawberryNova
 
             worldTimer.StartTimer();
             GameInputManager.UnlockDirectInput();
+            inGameMenuButton.gameObject.SetActive(true);
         }
 
         public void SelectHotbarItem(int hotbarItemNum)
@@ -324,9 +345,4 @@ namespace StrawberryNova
         }
 
     }
-
-    /*
-     * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
-     *
-     */
 }

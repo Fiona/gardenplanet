@@ -9,7 +9,7 @@ using UnityEngine.Timeline;
 
 namespace StrawberryNova
 {
-    public class InGameMenu: MonoBehaviour
+    public class InGameMenu : MonoBehaviour
     {
         [Header("Settings")]
         [Tooltip("Menu layout of the pages, each line is the name of a page, which corresponds to a child page. A hypen signifies a spacer")]
@@ -18,6 +18,9 @@ namespace StrawberryNova
 
         [Tooltip("Which page to apen first")]
         public string defaultPage = "Inventory";
+
+        [Tooltip("Which page shows the hotbar")]
+        public string[] hotbarPages = {"CloseMenu", "Inventory"};
 
         [Header("Object references")]
         public InGameMenuTabs tabs;
@@ -29,9 +32,12 @@ namespace StrawberryNova
         private string currentPageName;
         private IEnumerator currentPageCoroutine;
         private bool firstPage;
+        private ItemHotbar itemHotbar;
 
         public void Awake()
         {
+            itemHotbar = FindObjectOfType<ItemHotbar>();
+
             // Create pages
             pages = new List<KeyValuePair<string, IInGameMenuPage>>();
 
@@ -54,11 +60,11 @@ namespace StrawberryNova
                 if(prefab == null)
                 {
                     Debug.Log("Can't find resource prefab for page: "+line);
-                    continue;;
+                    continue;
                 }
 
                 var newPageObj = (Instantiate(prefab) as GameObject);
-                newPageObj.transform.SetParent(pageHolder.transform);
+                newPageObj.transform.SetParent(pageHolder.transform, false);
                 newPageObj.SetActive(false);
                 var childPage = newPageObj.GetComponent(pageType) as IInGameMenuPage;
                 if(childPage == null)
@@ -75,6 +81,10 @@ namespace StrawberryNova
 
         public IEnumerator OpenMenu()
         {
+            // Hide hotbar if necessary
+            if(!hotbarPages.Contains(defaultPage))
+                itemHotbar.LeaveScreen();
+
             // Fade in tabs
             yield return LerpHelper.QuickFadeIn(GetComponent<CanvasGroup>(),
                 Consts.GUI_IN_GAME_MENU_FADE_TIME, LerpHelper.Type.SmoothStep);
@@ -89,6 +99,9 @@ namespace StrawberryNova
             tabs.HideTabs();
             yield return LerpHelper.QuickFadeOut(GetComponent<CanvasGroup>(),
                 Consts.GUI_IN_GAME_MENU_FADE_TIME, LerpHelper.Type.SmoothStep);
+
+            if(!hotbarPages.Contains(currentPageName))
+                itemHotbar.EnterScreen();
         }
 
         public void DoPageOpen(string name)
@@ -121,6 +134,14 @@ namespace StrawberryNova
             if(pageRequested == currentPage)
                 yield break;
 
+            if(!firstPage)
+            {
+                if(hotbarPages.Contains(currentPageName) && !hotbarPages.Contains(name))
+                    itemHotbar.LeaveScreen();
+                if(hotbarPages.Contains(name) && !hotbarPages.Contains(currentPageName))
+                    itemHotbar.EnterScreen();
+            }
+
             firstPage = false;
             currentPage = pageRequested;
             currentPageName = name;
@@ -133,6 +154,9 @@ namespace StrawberryNova
             var manager = FindObjectOfType<GameInputManager>();
             while(!closeMenu)
             {
+                while(manager.doingRebind)
+                    yield return new WaitForSeconds(.5f);
+
                 if(manager.player.GetButtonUp("Open Menu") || manager.player.GetButtonUp("Cancel"))
                 {
                     closeMenu = true;
