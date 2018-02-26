@@ -6,47 +6,16 @@ using UnityEngine;
 namespace StrawberryNova
 {
 
-    public class Player: MonoBehaviour
+    public class Player: Character
     {
-
-        Rigidbody rigidBody;
-        Vector3 walkDirBuffer;
-        private Vector3 lookDirection;
-        bool isJumping;
-        bool attemptJump;
-        Vector3 desiredRotation;
-        GameController controller;
-        bool lockFacing;
-
         [HideInInspector]
         public Inventory inventory;
-        [HideInInspector]
-        public int layer;
         public float maxEnergy;
         public float currentEnergy;
 
-        public TilePosition CurrentTilePosition
-        {
-            get
-            {
-                var wPos = new WorldPosition()
-                {
-                    x = this.transform.position.x,
-                    y = this.transform.position.z
-                };
-                var tPos = new TilePosition(wPos)
-                {
-                    layer = layer
-                };
-                return tPos;
-            }
-        }
-
         public void Awake()
         {
-            rigidBody = GetComponent<Rigidbody>();
-            rigidBody.freezeRotation = true;
-
+            base.Awake();
             inventory = new Inventory(Consts.PLAYER_INVENTORY_MAX_STACKS);
             maxEnergy = Consts.PLAYER_START_ENERGY;
             currentEnergy = maxEnergy;
@@ -54,7 +23,7 @@ namespace StrawberryNova
 
         public void Start()
         {
-            controller = FindObjectOfType<GameController>();
+            base.Start();
             SetPassOutEvent();
 
             // TODO: remove this test item adding
@@ -63,48 +32,12 @@ namespace StrawberryNova
             controller.GivePlayerItem("cabbage_seeds", quantity:16);
         }
 
-        public void PassOutTimeEvent(GameTime gameTime)
-        {
-            StartCoroutine(PassOut());
-        }
-
         public void FixedUpdate()
         {
-
-            // Detect layer
-            layer = (int) Math.Floor(transform.position.y * Consts.TILE_SIZE);
+            base.FixedUpdate();
 
             if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
-
-            // Handle walking
-            if(rigidBody.velocity.magnitude < 1.0f)
-                rigidBody.AddForce(
-                    walkDirBuffer * Consts.PLAYER_SPEED * Time.deltaTime,
-                    ForceMode.Impulse
-                );
-
-            // Do rotation towards movement direction
-            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
-                lookDirection = walkDirBuffer;
-            desiredRotation = (transform.position - (transform.position - lookDirection)).normalized;
-            float step = Consts.PLAYER_ROTATION_SPEED * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
-            SetRotation(newDir);
-
-            walkDirBuffer = Vector3.zero;
-            lockFacing = false;
-
-            // Deal with jumping
-            isJumping = (Mathf.Abs(rigidBody.velocity.y) > 0.01f);
-            if(isJumping)
-                attemptJump = false;
-            else if(attemptJump)
-            {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0.0f);
-                rigidBody.AddForce(0, Consts.PLAYER_JUMP_FORCE * Time.deltaTime, 0, ForceMode.Impulse);
-                attemptJump = false;
-            }
 
             // Do auto pick-up
             if(App.gameSettings.autoPickupItems)
@@ -123,115 +56,6 @@ namespace StrawberryNova
                 }
             }
 
-        }
-
-        /*
-         * Rotates the player towards an object and returns when it finishes
-         */
-        public IEnumerator TurnTowardsWorldObject(WorldObject worldObject)
-        {
-
-            var turnToPos = worldObject.gameObject.transform.position;
-            var myPos = transform.position;
-
-            while(true)
-            {
-                Vector3 newDir = Vector3.RotateTowards(
-                    transform.forward,
-                    turnToPos-myPos,
-                    Consts.PLAYER_ROTATION_SPEED*Time.deltaTime,
-                    0.0F
-                );
-                SetRotation(newDir);
-
-                float found = Vector3.Angle(transform.forward, turnToPos-myPos);
-                if(Mathf.Abs(found) < 40f)
-                    break;
-
-                yield return new WaitForFixedUpdate();
-            }
-
-        }
-
-        /*
-          Tells the player to walk in the specified direction.
-          It can be called again to add an additional direction to
-          allow for diaganol movement.
-         */
-        public void WalkInDirection(Direction dir, bool _lockFacing)
-        {
-            lockFacing = _lockFacing;
-            switch(dir)
-            {
-                case Direction.Up:
-                    walkDirBuffer += Vector3.forward;
-                    break;
-                case Direction.Down:
-                    walkDirBuffer += Vector3.back;
-                    break;
-                case Direction.Left:
-                    walkDirBuffer += Vector3.left;
-                    break;
-                case Direction.Right:
-                    walkDirBuffer += Vector3.right;
-                    break;
-            }
-        }
-
-        /*
-         * Points to a specified direction based on two axis.
-         */
-        public void LookInDirection(Vector3 direction)
-        {
-            lookDirection = direction;
-        }
-
-        /*
-         Player will turn towards the world position passed
-         */
-        public void TurnToWorldPoint(Vector3 turnTo)
-        {
-            if((transform.position - turnTo).magnitude > .2f)
-                desiredRotation = turnTo - transform.position;
-        }
-
-        /*
-         Gets the tile position directly in front of the player
-         */
-        public TilePosition GetTileInFrontOf()
-        {
-            var pos = (transform.position + (lookDirection.normalized*.5f));
-            var tilePos = new TilePosition(pos){layer = layer};
-            return tilePos;
-        }
-
-        /*
-         Call if the player should try to jump if possible
-         */
-        public void Jump()
-        {
-            attemptJump = true;
-        }
-
-        /*
-         * When passed a tile it will immediately position and
-         * turn the player to the passed tile position definition.
-         */
-        public void SetPositionToTile(TilePosition pos)
-        {
-            transform.position = new Vector3(
-                pos.x * Consts.TILE_SIZE,
-                pos.layer * Consts.TILE_SIZE,
-                pos.y * Consts.TILE_SIZE
-            );
-            var baseRotation = DirectionHelper.DirectionToDegrees(pos.dir);
-            transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
-        }
-
-        public void SetRotation(Vector3 newDir)
-        {
-            transform.rotation = Quaternion.LookRotation(newDir);
-            transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
         }
 
         public IEnumerator Sleep()
@@ -292,6 +116,11 @@ namespace StrawberryNova
             if(currentEnergy > maxEnergy)
                 currentEnergy = maxEnergy;
             return true;
+        }
+
+        private void PassOutTimeEvent(GameTime gameTime)
+        {
+            StartCoroutine(PassOut());
         }
 
         private void SetPassOutEvent()

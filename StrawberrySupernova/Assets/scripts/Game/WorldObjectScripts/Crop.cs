@@ -91,8 +91,9 @@ namespace StrawberryNova
 
             var extraInfo = "";
             if(worldObject.GetAttrFloat("growth") < 1f && !IsCorrectSeason())
-                extraInfo = "Wont grow in this season!";
-
+                extraInfo = "Wont sprout in this season!";
+            else if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05 && worldObject.GetAttrBool("wilting"))
+                extraInfo = "Wilting - please water me!";
             return new string[2]{ displayName, extraInfo };
         }
 
@@ -156,8 +157,8 @@ namespace StrawberryNova
         {
             var cropType = worldObject.GetAttrString("type");
             JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
-            foreach(JsonData seasonNum in seasons)
-                if((int) seasonNum == controller.worldTimer.gameTime.DateSeason)
+            foreach(JsonData seasonName in seasons)
+                if(Season.GetSeasonByShortName((string)seasonName) == controller.worldTimer.gameTime.DateSeason)
                     return true;
             return false;
         }
