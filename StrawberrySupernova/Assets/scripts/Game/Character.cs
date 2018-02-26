@@ -215,6 +215,7 @@ namespace StrawberryNova
             visualsHolder.DestroyAllChildren();
 
             AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
+            AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face");
             AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + topModelName);
         }
 

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 01fbb25fd1ca903459507276e8fb2354
-timeCreated: 1519651806
+guid: a8303767251cfa34f93111887984b79d
+timeCreated: 1519660856
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
@@ -62,10 +62,10 @@ ModelImporter:
     100108: leg.lower.R_end
     100110: leg.upper.L
     100112: leg.upper.R
-    100114: //RootNode
-    100116: root
-    100118: spine.lower
-    100120: spine.upper
+    100114: root
+    100116: spine.lower
+    100118: spine.upper
+    100120: //RootNode
     100122: tshirt
     400000: arm.elbow.target.L
     400002: arm.elbow.target.L_end
@@ -124,22 +124,26 @@ ModelImporter:
     400108: leg.lower.R_end
     400110: leg.upper.L
     400112: leg.upper.R
-    400114: //RootNode
-    400116: root
-    400118: spine.lower
-    400120: spine.upper
+    400114: root
+    400116: spine.lower
+    400118: spine.upper
+    400120: //RootNode
     400122: tshirt
-    2100000: No Name
+    2100000: tshirt1
     4300000: tshirt
     7400000: walk
     7400002: walk.001
     7400004: Armature|idle
-    7400006: Armature|idle.001
-    7400008: Armature|idle_hips
-    7400010: Armature|walk
+    7400006: Armature|idle_hips
+    7400008: Armature|walk
     9500000: //RootNode
     13700000: tshirt
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tshirt1
+    second: {fileID: 2100000, guid: 30b6f48bf2c0fbc46a63e5f91393000e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

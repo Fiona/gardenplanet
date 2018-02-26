@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 265e5f28adb6ffe49b60389dad137c77
-timeCreated: 1519659586
+guid: 01fbb25fd1ca903459507276e8fb2354
+timeCreated: 1519651806
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
@@ -44,29 +44,29 @@ ModelImporter:
     100072: arm.upper.L
     100074: arm.upper.R
     100076: Armature
-    100078: //RootNode
-    100080: head
-    100082: head_end
-    100084: leg.foot.ik.L
-    100086: leg.foot.ik.R
-    100088: leg.foot.L
-    100090: leg.foot.L_end
-    100092: leg.foot.R
-    100094: leg.foot.R_end
-    100096: leg.knee.target.L
-    100098: leg.knee.target.L_end
-    100100: leg.knee.target.R
-    100102: leg.knee.target.R_end
-    100104: leg.lower.L
-    100106: leg.lower.L_end
-    100108: leg.lower.R
-    100110: leg.lower.R_end
-    100112: leg.upper.L
-    100114: leg.upper.R
-    100116: novakid
-    100118: root
-    100120: spine.lower
-    100122: spine.upper
+    100078: head
+    100080: head_end
+    100082: leg.foot.ik.L
+    100084: leg.foot.ik.R
+    100086: leg.foot.L
+    100088: leg.foot.L_end
+    100090: leg.foot.R
+    100092: leg.foot.R_end
+    100094: leg.knee.target.L
+    100096: leg.knee.target.L_end
+    100098: leg.knee.target.R
+    100100: leg.knee.target.R_end
+    100102: leg.lower.L
+    100104: leg.lower.L_end
+    100106: leg.lower.R
+    100108: leg.lower.R_end
+    100110: leg.upper.L
+    100112: leg.upper.R
+    100114: //RootNode
+    100116: root
+    100118: spine.lower
+    100120: spine.upper
+    100122: tshirt
     400000: arm.elbow.target.L
     400002: arm.elbow.target.L_end
     400004: arm.elbow.target.R
@@ -106,42 +106,40 @@ ModelImporter:
     400072: arm.upper.L
     400074: arm.upper.R
     400076: Armature
-    400078: //RootNode
-    400080: head
-    400082: head_end
-    400084: leg.foot.ik.L
-    400086: leg.foot.ik.R
-    400088: leg.foot.L
-    400090: leg.foot.L_end
-    400092: leg.foot.R
-    400094: leg.foot.R_end
-    400096: leg.knee.target.L
-    400098: leg.knee.target.L_end
-    400100: leg.knee.target.R
-    400102: leg.knee.target.R_end
-    400104: leg.lower.L
-    400106: leg.lower.L_end
-    400108: leg.lower.R
-    400110: leg.lower.R_end
-    400112: leg.upper.L
-    400114: leg.upper.R
-    400116: novakid
-    400118: root
-    400120: spine.lower
-    400122: spine.upper
-    2100000: kid-skin
-    4300000: novakid
-    7400000: Armature|idle
-    7400002: Armature|idle_hips
-    7400004: Armature|walk
+    400078: head
+    400080: head_end
+    400082: leg.foot.ik.L
+    400084: leg.foot.ik.R
+    400086: leg.foot.L
+    400088: leg.foot.L_end
+    400090: leg.foot.R
+    400092: leg.foot.R_end
+    400094: leg.knee.target.L
+    400096: leg.knee.target.L_end
+    400098: leg.knee.target.R
+    400100: leg.knee.target.R_end
+    400102: leg.lower.L
+    400104: leg.lower.L_end
+    400106: leg.lower.R
+    400108: leg.lower.R_end
+    400110: leg.upper.L
+    400112: leg.upper.R
+    400114: //RootNode
+    400116: root
+    400118: spine.lower
+    400120: spine.upper
+    400122: tshirt
+    2100000: No Name
+    4300000: tshirt
+    7400000: walk
+    7400002: walk.001
+    7400004: Armature|idle
+    7400006: Armature|idle.001
+    7400008: Armature|idle_hips
+    7400010: Armature|walk
     9500000: //RootNode
-    13700000: novakid
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: kid-skin
-    second: {fileID: 2100000, guid: a9db2488ba252d6438d2c94ea101c932, type: 2}
+    13700000: tshirt
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -196,7 +194,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
