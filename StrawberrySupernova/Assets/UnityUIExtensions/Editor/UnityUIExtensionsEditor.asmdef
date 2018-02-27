@@ -1,0 +1,10 @@
+{
+    "name": "UnityUIExtensionsEditor",
+    "references": [
+        "UnityUiExtensions"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

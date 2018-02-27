@@ -13,7 +13,8 @@ namespace StrawberryNova
     {
         Title,
         Editor,
-        Game
+        Game,
+        CreateACharacter
     };
 
     // Concepts

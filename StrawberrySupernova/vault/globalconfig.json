@@ -10,5 +10,30 @@
       "growth_per_day":[12.0,20.0],
       "num_growth_stages":2
     }
+  },
+
+  "appearence": {
+    "tops": {
+      "ilovefarmingshirt": {
+        "name": "I <3 Farming Shirt",
+        "unlocked_at_start": true
+      },
+      "blueilovefarmingshirt": {
+        "name": "Blue I <3 Farming Shirt",
+        "unlocked_at_start": true
+      }
+    },
+    "skincolors": [
+      [26, 50, 255],
+      [26, 84, 255],
+      [26, 84, 186],
+      [26, 109, 145],
+      [26, 123, 125],
+      [26, 123, 93],
+      [26, 125, 74],
+      [26, 174, 42],
+      [26, 255, 33],
+      [26, 255, 20]
+    ]
   }
 }

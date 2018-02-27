@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 636390502}
   - component: {fileID: 636390504}
   - component: {fileID: 636390505}
+  - component: {fileID: 636390506}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -392,6 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e13f7955dff447a09fcb938230f2456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headScale: 1
+  lowerSpineScale: 1
+  mainAnimator: {fileID: 636390506}
   layer: 0
   maxEnergy: 0
   currentEnergy: 0
@@ -435,7 +439,24 @@ CapsuleCollider:
   m_Radius: 0.19825485
   m_Height: 0.6912682
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3325882, z: -0.0083324015}
+  m_Center: {x: 0, y: 0.3925882, z: -0.0083324015}
+--- !u!95 &636390506
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 636390501}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 265e5f28adb6ffe49b60389dad137c77, type: 3}
+  m_Controller: {fileID: 9100000, guid: a6577c955a4d2574db5de038528d2197, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &901381171
 Prefab:
   m_ObjectHideFlags: 0
@@ -481,7 +502,7 @@ Prefab:
     - target: {fileID: 224147716245235972, guid: 866d25d4daa2f4c87955ca1cdc7f4891,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224147716245235972, guid: 866d25d4daa2f4c87955ca1cdc7f4891,
         type: 2}

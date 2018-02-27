@@ -13,7 +13,7 @@ namespace StrawberryNova
         public float maxEnergy;
         public float currentEnergy;
 
-        public void Awake()
+        public override void Awake()
         {
             base.Awake();
             inventory = new Inventory(Consts.PLAYER_INVENTORY_MAX_STACKS);
@@ -21,8 +21,15 @@ namespace StrawberryNova
             currentEnergy = maxEnergy;
         }
 
-        public void Start()
+        public override void Start()
         {
+            appearence = new Appearence
+            {
+                topName = "ilovefarmingshirt",
+                skinColor = Color.white,
+                hairColor = Color.white
+            };
+
             base.Start();
             SetPassOutEvent();
 
@@ -32,7 +39,7 @@ namespace StrawberryNova
             controller.GivePlayerItem("cabbage_seeds", quantity:16);
         }
 
-        public void FixedUpdate()
+        public override void FixedUpdate()
         {
             base.FixedUpdate();
 

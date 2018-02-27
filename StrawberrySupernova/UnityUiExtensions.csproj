@@ -52,14 +52,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\CompressionTests.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\Accordion.cs" />
     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\AccordionElement.cs" />
     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\Tweening\FloatTween.cs" />

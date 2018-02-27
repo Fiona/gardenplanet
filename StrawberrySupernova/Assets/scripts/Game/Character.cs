@@ -1,13 +1,44 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using StompyBlondie;
 using UnityEngine;
 
 namespace StrawberryNova
 {
-    public class Character: MonoBehaviour
+    public class Character : MonoBehaviour
     {
+        public struct Appearence
+        {
+            public string topName;
+            public string bottomName;
+            public string shoesName;
+            public string headAccessoryName;
+            public string backAccessoryName;
 
+            public string eyesName;
+            public string mouthName;
+            public string noseName;
+
+            public Color eyeColor;
+            public Color skinColor;
+            public Color hairColor;
+        }
+
+        public struct Information
+        {
+            public string Name;
+            public int monthBirthday;
+            public int dayBirthday;
+        }
+
+        [Range(.1f, 3f)]
+        public float headScale = 1f;
+
+        [Range(1f, 3f)]
+        public float lowerSpineScale = 1f;
+
+        public Animator mainAnimator;
 
         [HideInInspector]
         public int layer;
@@ -24,7 +55,11 @@ namespace StrawberryNova
         protected GameObject visualsHolder;
 
         protected string baseModelName = "basemodel";
-        protected string topModelName = "testshirt";
+        protected Appearence appearence;
+        protected Information information;
+
+        protected List<Transform> lowerSpineBones;
+        protected List<Transform> headBones;
 
         public TilePosition CurrentTilePosition
         {
@@ -43,19 +78,19 @@ namespace StrawberryNova
             }
         }
 
-        public void Awake()
+        public virtual void Awake()
         {
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.freezeRotation = true;
         }
 
-        public void Start()
+        public virtual void Start()
         {
             controller = FindObjectOfType<GameController>();
             RegenerateVisuals();
         }
 
-        public void FixedUpdate()
+        public virtual void FixedUpdate()
         {
             // Detect layer
             layer = (int) Math.Floor(transform.position.y * Consts.TILE_SIZE);
@@ -69,6 +104,7 @@ namespace StrawberryNova
                     walkDirBuffer * Consts.CHARACTER_MOVE_SPEED * Time.deltaTime,
                     ForceMode.Impulse
                 );
+            mainAnimator.SetBool("DoWalk", Mathf.Abs(rigidBody.velocity.magnitude) > 0.1f);
 
             // Do rotation towards movement direction
             if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
@@ -106,13 +142,13 @@ namespace StrawberryNova
             {
                 Vector3 newDir = Vector3.RotateTowards(
                     transform.forward,
-                    turnToPos-myPos,
-                    Consts.CHARACTER_ROTATION_SPEED*Time.deltaTime,
+                    turnToPos - myPos,
+                    Consts.CHARACTER_ROTATION_SPEED * Time.deltaTime,
                     0.0F
                 );
                 SetRotation(newDir);
 
-                float found = Vector3.Angle(transform.forward, turnToPos-myPos);
+                float found = Vector3.Angle(transform.forward, turnToPos - myPos);
                 if(Mathf.Abs(found) < 40f)
                     break;
 
@@ -167,8 +203,8 @@ namespace StrawberryNova
          */
         public TilePosition GetTileInFrontOf()
         {
-            var pos = (transform.position + (lookDirection.normalized*.5f));
-            var tilePos = new TilePosition(pos){layer = layer};
+            var pos = (transform.position + (lookDirection.normalized * .5f));
+            var tilePos = new TilePosition(pos) {layer = layer};
             return tilePos;
         }
 
@@ -204,33 +240,75 @@ namespace StrawberryNova
             transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
         }
 
-        private void RegenerateVisuals()
+        protected void RegenerateVisuals()
         {
             if(visualsHolder == null)
             {
                 visualsHolder = new GameObject("visuals");
                 visualsHolder.transform.SetParent(transform, false);
-                visualsHolder.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
             }
+
+            headBones = new List<Transform>();
+            lowerSpineBones = new List<Transform>();
+            armatures = new List<Transform>();
+
             visualsHolder.DestroyAllChildren();
 
-            AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
-            AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face");
-            AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + topModelName);
+            var baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
+            var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
+
+            AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face", bonesToClone);
+
+            if(appearence.topName != "")
+                AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + appearence.topName, bonesToClone);
+
+            mainAnimator.Rebind();
         }
 
-        private void AddModelToVisuals(string prefabPath)
+        protected List<Transform> armatures;
+
+        protected GameObject AddModelToVisuals(string prefabPath, SkinnedMeshRenderer bonesToClone = null)
         {
             var resource = Resources.Load(prefabPath) as GameObject;
             if(resource == null)
             {
                 Debug.Log("Can't find visuals model " + prefabPath);
-                return;
+                return null;
             }
 
             var newObject = Instantiate(resource);
             newObject.transform.SetParent(visualsHolder.transform, false);
+            armatures.Add(newObject.transform.Find("Armature").transform);
+
+            if(bonesToClone != null)
+            {
+                var boneClone = newObject.AddComponent<BoneClone>();
+                boneClone.rendererToClone = bonesToClone;
+            }
+
+            var modelmeshrenderer = newObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            foreach(var b in modelmeshrenderer.bones)
+            {
+                if(b.name == "head")
+                    headBones.Add(b);
+                if(b.name == "spine.lower")
+                    lowerSpineBones.Add(b);
+            }
+
+            return newObject;
         }
 
+        protected void LateUpdate()
+        {
+            foreach(var a in armatures)
+                a.localScale = Vector3.one;
+            if(headBones.Count > 0)
+                foreach(var head in headBones)
+                    head.localScale = new Vector3(headScale, headScale, headScale);
+
+            if(lowerSpineBones.Count > 0)
+                foreach(var spine in lowerSpineBones)
+                    spine.localScale = new Vector3(lowerSpineScale, lowerSpineScale, lowerSpineScale);
+        }
     }
 }

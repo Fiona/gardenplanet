@@ -185,6 +185,18 @@
       <Project>{819CEF83-2C6A-93B4-ABAA-461675AF1997}</Project>
       <Name>Rewired</Name>
     </ProjectReference>
+    <ProjectReference Include="PostProcessingEditor.csproj">
+      <Project>{70227B2C-6C39-0A7E-4F1D-08B63272AF31}</Project>
+      <Name>PostProcessingEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
+      <Project>{7F961B7C-FF1E-CEF8-2752-06731D3E77A0}</Project>
+      <Name>UnityUIExtensionsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="RewiredEditor.csproj">
+      <Project>{148A90CB-668A-136C-67BF-77AD5E6BA201}</Project>
+      <Name>RewiredEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
