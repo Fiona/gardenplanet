@@ -15,7 +15,7 @@ namespace StrawberryNova
 	    // -----------------------------
 
 	    // Where to boot the app into
-		public const AppState INITIAL_APP_STATE = AppState.Title;
+		public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
 
 	    // -----------------------------
 	    // TILE DRAWING
@@ -178,6 +178,7 @@ namespace StrawberryNova
 		public const string IN_GAME_MENU_PAGE_PREFAB_PATH = "prefabs/gui/InGameMenuPages/";
 		public const string PREFAB_PATH_GUI_NAVIGATION_POINTER = "prefabs/gui/GUINavigationPointer";
 		public const string PREFAB_PATH_IN_GAME_MENU_BUTTON = "prefabs/gui/InGameMenuButton";
+		public const string PREFAB_PATH_LOADING_SCREEN = "prefabs/LoadingScreen";
 
 		public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
 		public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";

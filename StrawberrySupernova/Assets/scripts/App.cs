@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using StompyBlondie;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +33,6 @@ namespace StrawberryNova
         public void StartNewState(AppState state)
         {
             this.state = state;
-            SceneManager.LoadScene("loading");
             var sceneName = "";
             switch(state)
             {
@@ -55,15 +55,30 @@ namespace StrawberryNova
 
         public IEnumerator LoadScene(string sceneName)
         {
-            //yield return new WaitForSeconds(3);
+            var canvas = FindObjectOfType<Canvas>();
+            if(canvas == null)
+            {
+                SceneManager.LoadScene(sceneName);
+                yield break;
+            }
+
+            var loadingScreenObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_LOADING_SCREEN)) as GameObject;
+            loadingScreenObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            var canvasGroup = loadingScreenObj.GetComponent<CanvasGroup>();
+
+            yield return StartCoroutine(LerpHelper.QuickFadeIn(canvasGroup, .5f, lerpType: LerpHelper.Type.SmoothStep));
 
             var asyncLoad = SceneManager.LoadSceneAsync(sceneName);
             asyncLoad.allowSceneActivation = false;
 
             while(!asyncLoad.isDone)
             {
-                if(asyncLoad.progress == 0.9f)
+                if(asyncLoad.progress >= 0.9f)
+                {
+                    yield return StartCoroutine(LerpHelper.QuickFadeOut(canvasGroup, .5f, lerpType: LerpHelper.Type.SmoothStep));
+                    yield return new WaitForSeconds(0.1f);
                     asyncLoad.allowSceneActivation = true;
+                }
                 yield return new WaitForFixedUpdate();
             }
         }
