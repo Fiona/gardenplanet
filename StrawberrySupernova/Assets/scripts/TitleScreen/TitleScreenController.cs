@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Linq;
-using Rewired;
-using Rewired.Editor;
 using StompyBlondie;
 using UnityEngine;
 
@@ -81,7 +79,9 @@ namespace StrawberryNova
         public void NewGameButtonPressed()
         {
             StartCoroutine(
-                screenFade.FadeOut(fadeOutTime, callback: () => FindObjectOfType<App>().StartNewState(AppState.Game))
+                screenFade.FadeOut(
+                    fadeOutTime, callback: () => FindObjectOfType<App>().StartNewState(AppState.CreateACharacter)
+                    )
             );
         }
 

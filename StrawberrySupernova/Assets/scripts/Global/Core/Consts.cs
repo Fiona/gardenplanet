@@ -15,7 +15,7 @@ namespace StrawberryNova
 	    // -----------------------------
 
 	    // Where to boot the app into
-		public const AppState INITIAL_APP_STATE = AppState.Game;//AppState.Title;
+		public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
 
 	    // -----------------------------
 	    // TILE DRAWING
@@ -61,15 +61,19 @@ namespace StrawberryNova
 	    // How far from the ground the rotation usually is
 	    public const float CAMERA_DEFAULT_ROTATION = 45.0f;
 
+		// -----------------------------
+		// CHARACTERS
+		// -----------------------------
+
+		public const float CHARACTER_MOVE_SPEED = 100f;
+
+		public const float CHARACTER_ROTATION_SPEED = 10f;
+
+		public const float CHARACTER_JUMP_FORCE = 800f;
+
 	    // -----------------------------
 	    // PLAYER
 	    // -----------------------------
-
-	    public const float PLAYER_SPEED = 100f;
-
-	    public const float PLAYER_ROTATION_SPEED = 10f;
-
-	    public const float PLAYER_JUMP_FORCE = 800f;
 
 		public const float PLAYER_INTERACT_DISTANCE = .75f;
 		public const float PLAYER_PICKUP_DISTANCE = .50f;
@@ -108,8 +112,25 @@ namespace StrawberryNova
 		// Game time settings
 		public const int NUM_MINUTES_IN_HOUR = 60;
 		public const int NUM_HOURS_IN_DAY = 24;
-		public const int NUM_DAYS_IN_SEASON = 28;
-		public readonly static string[] SEASONS = {"Spring", "Summer", "Autumn", "Winter"};
+		public const int NUM_DAYS_IN_SEASON = 10;
+		public readonly static Season[] SEASONS =
+		{
+			new Season{shortName = "early_spring", displayName = "Early-Spring"},
+			new Season{shortName = "mid_spring", displayName = "Mid-Spring"},
+			new Season{shortName = "late_spring", displayName = "Late-Spring"},
+
+			new Season{shortName = "early_summer", displayName = "Early-Summer"},
+			new Season{shortName = "mid_summer", displayName = "Mid-Summer"},
+			new Season{shortName = "late_summer", displayName = "Late-Summer"},
+
+			new Season{shortName = "early_autumn", displayName = "Early-Autumn"},
+			new Season{shortName = "mid_autumn", displayName = "Mid-Autumn"},
+			new Season{shortName = "late_autumnr", displayName = "Late-Autumn"},
+
+			new Season{shortName = "early_winter", displayName = "Early-Winter"},
+			new Season{shortName = "mid_winter", displayName = "Mid-Winter"},
+			new Season{shortName = "late_winter", displayName = "Late-Winter"}
+		};
 		public readonly static string[] WEEKDAYS = {
 			"Monday", "Tuesday", "Wednesday", "Thursday",
 			"Friday", "Saturday", "Sunday"
@@ -157,6 +178,10 @@ namespace StrawberryNova
 		public const string IN_GAME_MENU_PAGE_PREFAB_PATH = "prefabs/gui/InGameMenuPages/";
 		public const string PREFAB_PATH_GUI_NAVIGATION_POINTER = "prefabs/gui/GUINavigationPointer";
 		public const string PREFAB_PATH_IN_GAME_MENU_BUTTON = "prefabs/gui/InGameMenuButton";
+		public const string PREFAB_PATH_LOADING_SCREEN = "prefabs/LoadingScreen";
+
+		public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
+		public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";
 
 	    // -----------------------------
 	    // FILESYSTEM

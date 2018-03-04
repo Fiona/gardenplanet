@@ -1,0 +1,10 @@
+{
+    "name": "RewiredEditor",
+    "references": [
+        "Rewired"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

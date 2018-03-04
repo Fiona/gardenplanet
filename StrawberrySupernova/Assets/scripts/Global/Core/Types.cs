@@ -13,7 +13,8 @@ namespace StrawberryNova
     {
         Title,
         Editor,
-        Game
+        Game,
+        CreateACharacter
     };
 
     // Concepts
@@ -206,4 +207,22 @@ namespace StrawberryNova
     // Editor
     public enum EditorMessageType{Good, Bad, Meh};
 
+    // Season info
+    public struct Season
+    {
+        public string shortName;
+        public string displayName;
+
+        public static int GetSeasonByShortName(string shortName)
+        {
+            var i = 0;
+            foreach(var s in Consts.SEASONS)
+            {
+                if(s.shortName == shortName)
+                    return i;
+                i++;
+            }
+            return -1;
+        }
+    };
 }

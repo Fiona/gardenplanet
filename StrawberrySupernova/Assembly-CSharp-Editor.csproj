@@ -164,14 +164,6 @@
       <Project>{C9CF9DB4-ACEA-C436-7F3C-86E6F11052FF}</Project>
       <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityUiExtensions.csproj">
-      <Project>{DA8940CA-0407-CB79-20E6-93D2E0EB14BA}</Project>
-      <Name>UnityUiExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="PostProcessing.csproj">
-      <Project>{2E87C92E-5D76-97A7-1029-640F9A12A8C6}</Project>
-      <Name>PostProcessing</Name>
-    </ProjectReference>
     <ProjectReference Include="Editor.csproj">
       <Project>{5A83397D-ECCE-9151-CBA7-2D6CC93AE13A}</Project>
       <Name>Editor</Name>
@@ -180,13 +172,33 @@
       <Project>{6649EF5D-09B6-7C1E-242E-7FB667D9DA7E}</Project>
       <Name>TextMeshPro</Name>
     </ProjectReference>
-    <ProjectReference Include="App.csproj">
-      <Project>{00EDA66F-D9A7-F025-E12C-4098302B595A}</Project>
-      <Name>App</Name>
+    <ProjectReference Include="UnityUiExtensions.csproj">
+      <Project>{DA8940CA-0407-CB79-20E6-93D2E0EB14BA}</Project>
+      <Name>UnityUiExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="Rewired.csproj">
       <Project>{819CEF83-2C6A-93B4-ABAA-461675AF1997}</Project>
       <Name>Rewired</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
+      <Project>{7F961B7C-FF1E-CEF8-2752-06731D3E77A0}</Project>
+      <Name>UnityUIExtensionsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="RewiredEditor.csproj">
+      <Project>{148A90CB-668A-136C-67BF-77AD5E6BA201}</Project>
+      <Name>RewiredEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PostProcessingEditor.csproj">
+      <Project>{70227B2C-6C39-0A7E-4F1D-08B63272AF31}</Project>
+      <Name>PostProcessingEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="App.csproj">
+      <Project>{00EDA66F-D9A7-F025-E12C-4098302B595A}</Project>
+      <Name>App</Name>
+    </ProjectReference>
+    <ProjectReference Include="PostProcessing.csproj">
+      <Project>{2E87C92E-5D76-97A7-1029-640F9A12A8C6}</Project>
+      <Name>PostProcessing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

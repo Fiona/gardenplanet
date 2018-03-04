@@ -83,7 +83,7 @@ namespace StrawberryNova
         // The current season as a displayable string
         public string DateSeasonName{
             get{
-                return Consts.SEASONS[DateSeason-1];
+                return Consts.SEASONS[DateSeason-1].displayName;
             }
         }
 
