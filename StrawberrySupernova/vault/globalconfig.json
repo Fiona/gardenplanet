@@ -13,6 +13,13 @@
   },
 
   "appearence": {
+    "hair": {
+      "straight": {
+        "name": "Straight",
+        "unlocked_at_start": true
+      }
+    },
+
     "tops": {
       "ilovefarmingshirt": {
         "name": "I <3 Farming Shirt",
@@ -23,6 +30,7 @@
         "unlocked_at_start": true
       }
     },
+
     "skincolors": [
       [26, 50, 255],
       [26, 84, 255],
@@ -34,6 +42,57 @@
       [26, 174, 42],
       [26, 255, 33],
       [26, 255, 20]
-    ]
+    ],
+
+    "eyes": {
+      "cute": {
+        "name": "Cute",
+        "unlocked_at_start": true
+      }
+    },
+
+    "eyebrows": {
+      "thin": {
+        "name": "Thin",
+        "unlocked_at_start": true
+      },
+      "bushy": {
+        "name": "Bushy",
+        "unlocked_at_start": true
+      }
+    },
+
+    "noses": {
+      "small": {
+        "name": "Small",
+        "unlocked_at_start": true
+      },
+      "button": {
+        "name": "Button",
+        "unlocked_at_start": true
+      }
+    },
+
+    "mouths": {
+      "kind_smile": {
+        "name": "Kind Smile",
+        "unlocked_at_start": true
+      },
+      "grumpy": {
+        "name": "Grumpy",
+        "unlocked_at_start": true
+      }
+    },
+
+    "face_detail": {
+      "beautymark": {
+        "name": "Beauty Mark",
+        "unlocked_at_start": true
+      },
+      "freckles": {
+        "name": "Freckles",
+        "unlocked_at_start": true
+      }
+    }
   }
 }

@@ -9,14 +9,13 @@ namespace StrawberryNova
 {
     public class GlobalButton: AnimatedButton
     {
-        [Header("Animation Settings")]
-        public float clickAnimTime = .2f;
-        public float hoverFadeTime = .25f;
-
         [Header("Object references")]
         public Image backgroundNormal;
         public Image backgroundHover;
         public Image backgroundPressed;
+
+        private float clickAnimTime = .1f;
+        private float hoverFadeTime = .15f;
 
         public new void Start()
         {
@@ -57,7 +56,7 @@ namespace StrawberryNova
                 LerpHelper.QuickTween(
                     (v) => gameObject.transform.localScale = v,
                     new Vector3(.9f, .9f, .9f), Vector3.one,
-                    clickAnimTime,
+                    clickAnimTime/2f,
                     lerpType:LerpHelper.Type.BounceOut
                 )
             );

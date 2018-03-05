@@ -99,10 +99,9 @@ namespace StompyBlondie
 
         protected virtual IEnumerator DoClick(BaseEventData data)
         {
+            if(callback != null)
+                callback();
             yield return ClickAnimation(data);
-            if(callback == null)
-                yield break;
-            callback();
         }
 
 
