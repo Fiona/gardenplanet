@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e7ae05a2ec41cfa40ab5848f79ce0fbe
-timeCreated: 1519659699
+guid: d715c0c8c5646b247b53fd85c4d0117d
+timeCreated: 1520242410
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
@@ -129,19 +129,14 @@ ModelImporter:
     400118: root
     400120: spine.lower
     400122: spine.upper
-    2100000: kid-face
+    2100000: kid-face2
     4300000: face
     7400000: Armature|idle
     7400002: Armature|idle_hips
     7400004: Armature|walk
     9500000: //RootNode
     13700000: face
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: kid-face
-    second: {fileID: 2100000, guid: ae4d4b1bee45fef409eaed618faac665, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -214,7 +209,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 265e5f28adb6ffe49b60389dad137c77,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c148491ea93c7b343b017fdae6ac2529,
     type: 3}
   animationType: 2
   humanoidOversampling: 1

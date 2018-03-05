@@ -10,15 +10,20 @@ namespace StrawberryNova
     {
         public struct Appearence
         {
-            public string topName;
-            public string bottomName;
-            public string shoesName;
-            public string headAccessoryName;
-            public string backAccessoryName;
+            public string top;
+            public string bottom;
+            public string shoes;
+            public string headAccessory;
+            public string backAccessory;
 
-            public string eyesName;
-            public string mouthName;
-            public string noseName;
+            public string eyes;
+            public string eyebrows;
+            public string mouth;
+            public string nose;
+            public string faceDetail1;
+            public float faceDetail1Opacity;
+            public string faceDetail2;
+            public float faceDetail2Opacity;
 
             public Color eyeColor;
             public Color skinColor;
@@ -28,7 +33,7 @@ namespace StrawberryNova
         public struct Information
         {
             public string Name;
-            public int monthBirthday;
+            public int seasonBirthday;
             public int dayBirthday;
         }
 
@@ -57,6 +62,7 @@ namespace StrawberryNova
         protected string baseModelName = "basemodel";
         protected Appearence appearence;
         protected Information information;
+        protected CharacterFace face;
 
         protected List<Transform> lowerSpineBones;
         protected List<Transform> headBones;
@@ -88,6 +94,7 @@ namespace StrawberryNova
         {
             controller = FindObjectOfType<GameController>();
             RegenerateVisuals();
+            RegenerateFace();
         }
 
         public virtual void FixedUpdate()
@@ -240,6 +247,93 @@ namespace StrawberryNova
             transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
         }
 
+        /*
+         * Returns the appearence struct
+         */
+        public Appearence GetAppearence()
+        {
+            return appearence;
+        }
+
+        /*
+         * Returns the information struct
+         */
+        public Information GetInformation()
+        {
+            return information;
+        }
+
+        /*
+         * Rename the character
+         */
+        public void SetName(string newName)
+        {
+            information.Name = newName.Trim();
+        }
+
+        /*
+         * Sets birthday
+         */
+        public void SetBirthday(int day, int season)
+        {
+            information.dayBirthday = (day > 0 && day <= Consts.NUM_DAYS_IN_SEASON ? day : 1);
+            information.seasonBirthday = (season > 0 && season <= Consts.SEASONS.Length ? season : 1);
+        }
+
+        /*
+         * Sets eyes
+         */
+        public void SetEyes(string newEyes)
+        {
+            appearence.eyes = newEyes;
+            RegenerateFace();
+        }
+
+        /*
+         * Sets eyebrows
+         */
+        public void SetEyebrows(string newEyebrows)
+        {
+            appearence.eyebrows = newEyebrows;
+            RegenerateFace();
+        }
+
+        /*
+         * Sets nose
+         */
+        public void SetNose(string newNose)
+        {
+            appearence.nose = newNose;
+            RegenerateFace();
+        }
+
+        /*
+         * Sets mouth
+         */
+        public void SetMouth(string newMouth)
+        {
+            appearence.mouth = newMouth;
+            RegenerateFace();
+        }
+
+        /*
+         * Sets face detail 1
+         */
+        public void SetFaceDetail1(string newFaceDetail)
+        {
+            appearence.faceDetail1 = newFaceDetail;
+            RegenerateFace();
+        }
+
+        /*
+         * Sets face detail 2
+         */
+        public void SetFaceDetail2(string newFaceDetail)
+        {
+            appearence.faceDetail2 = newFaceDetail;
+            RegenerateFace();
+        }
+
         protected void RegenerateVisuals()
         {
             if(visualsHolder == null)
@@ -257,12 +351,23 @@ namespace StrawberryNova
             var baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
 
-            AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face", bonesToClone);
+            var faceModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face", bonesToClone);
+            face = faceModel.GetComponentInChildren<CharacterFace>();
 
-            if(appearence.topName != "")
-                AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + appearence.topName, bonesToClone);
+            if(appearence.top != "")
+                AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + appearence.top, bonesToClone);
 
             mainAnimator.Rebind();
+        }
+
+        protected void RegenerateFace()
+        {
+            if(face == null)
+            {
+                Debug.Log("Face object is not set");
+                return;
+            }
+            face.Recreate(appearence);
         }
 
         protected List<Transform> armatures;

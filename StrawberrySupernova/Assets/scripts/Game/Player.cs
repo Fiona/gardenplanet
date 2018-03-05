@@ -25,7 +25,7 @@ namespace StrawberryNova
         {
             appearence = new Appearence
             {
-                topName = "ilovefarmingshirt",
+                top = "ilovefarmingshirt",
                 skinColor = Color.white,
                 hairColor = Color.white
             };
