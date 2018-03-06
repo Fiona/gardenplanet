@@ -246,6 +246,9 @@ namespace StrawberryNova
         {
             if(switchingPages)
                 return;
+            var state = GameState.GetInstance();
+            state.Clear();
+            state.Store(character);
             StartCoroutine(screenFade.FadeOut(callback: () => FindObjectOfType<App>().StartNewState(AppState.Game)));
         }
 

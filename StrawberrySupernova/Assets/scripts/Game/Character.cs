@@ -93,32 +93,8 @@ namespace StrawberryNova
         {
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.freezeRotation = true;
-
-            appearence = new Appearence
-            {
-                top = "ilovefarmingshirt",
-                bottom = "",
-                shoes = "",
-                headAccessory = "",
-                backAccessory = "",
-                hair = "straight",
-
-                eyebrows = "thin",
-                eyes = "cute",
-                mouth = "kind_smile",
-                nose = "small",
-
-                eyeColor = Color.HSVToRGB(115/255f, 186/255f, 158/255f),
-                skinColor = Color.HSVToRGB(26/255f, 123/255f, 93/255f),
-                hairColor = Color.HSVToRGB(23/255f, 173/255f, 229/255f),
-
-            };
-            information = new Information
-            {
-                Name = "Tess",
-                seasonBirthday = 1,
-                dayBirthday = 1
-            };
+            appearence = Player.defaultAppearence;
+            information = Player.defaultInformation;
         }
 
         public virtual void Start()
@@ -292,6 +268,24 @@ namespace StrawberryNova
         public Information GetInformation()
         {
             return information;
+        }
+
+        /*
+         * Allows setting the appearence struct
+         */
+        public void SetAppearence(Appearence _appearence)
+        {
+            appearence = _appearence;
+            RegenerateVisuals();
+            RegenerateFace();
+        }
+
+        /*
+         * Allows setting the information struct
+         */
+        public void SetInformation(Information _information)
+        {
+            information = _information;
         }
 
         /*
