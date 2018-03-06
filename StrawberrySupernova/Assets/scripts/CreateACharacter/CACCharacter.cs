@@ -1,39 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace StrawberryNova
 {
     public class CACCharacter : Character
     {
-
-        public override void Awake()
-        {
-            appearence = new Appearence
-            {
-                top = "ilovefarmingshirt",
-                bottom = "",
-                shoes = "",
-                headAccessory = "",
-                backAccessory = "",
-
-                eyebrows = "thin",
-                eyes = "cute",
-                mouth = "kind_smile",
-                nose = "small",
-
-                eyeColor = Color.green,
-                skinColor = Color.blue,
-                hairColor = Color.red
-            };
-            information = new Information
-            {
-                Name = "",
-                seasonBirthday = 1,
-                dayBirthday = 1
-            };
-        }
-
         public override void Start()
         {
+            rigidBody.freezeRotation = false;
             RegenerateVisuals();
             RegenerateFace();
         }
@@ -63,6 +37,24 @@ namespace StrawberryNova
                     break;
                 case "face_detail2":
                     SetFaceDetail2(appearenceValue);
+                    break;
+                case "hair":
+                    SetHair(appearenceValue);
+                    break;
+                case "tops":
+                    SetTop(appearenceValue);
+                    break;
+                case "bottoms":
+                    SetBottom(appearenceValue);
+                    break;
+                case "shoes":
+                    SetShoes(appearenceValue);
+                    break;
+                case "head_accessories":
+                    SetHeadAccessory(appearenceValue);
+                    break;
+                case "back_accessories":
+                    SetBackAccessory(appearenceValue);
                     break;
             }
 
@@ -122,7 +114,15 @@ namespace StrawberryNova
                 case "skin_colours":
                     SetSkinColour(appearenceValue);
                     break;
+                case "hair_colours":
+                    SetHairColour(appearenceValue);
+                    break;
             }
+        }
+
+        public void GrabRotate(float amount)
+        {
+            rigidBody.AddTorque(transform.up * -amount);
         }
 
     }

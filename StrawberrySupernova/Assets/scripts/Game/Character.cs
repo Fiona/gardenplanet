@@ -15,6 +15,7 @@ namespace StrawberryNova
             public string shoes;
             public string headAccessory;
             public string backAccessory;
+            public string hair;
 
             public string eyes;
             public string eyebrows;
@@ -65,6 +66,7 @@ namespace StrawberryNova
         protected Appearence appearence;
         protected Information information;
         protected GameObject baseModel;
+        protected GameObject hairModel;
         protected CharacterFace face;
 
         protected List<Transform> lowerSpineBones;
@@ -91,6 +93,32 @@ namespace StrawberryNova
         {
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.freezeRotation = true;
+
+            appearence = new Appearence
+            {
+                top = "ilovefarmingshirt",
+                bottom = "",
+                shoes = "",
+                headAccessory = "",
+                backAccessory = "",
+                hair = "straight",
+
+                eyebrows = "thin",
+                eyes = "cute",
+                mouth = "kind_smile",
+                nose = "small",
+
+                eyeColor = Color.HSVToRGB(115/255f, 186/255f, 158/255f),
+                skinColor = Color.HSVToRGB(26/255f, 123/255f, 93/255f),
+                hairColor = Color.HSVToRGB(23/255f, 173/255f, 229/255f),
+
+            };
+            information = new Information
+            {
+                Name = "Tess",
+                seasonBirthday = 1,
+                dayBirthday = 1
+            };
         }
 
         public virtual void Start()
@@ -376,6 +404,69 @@ namespace StrawberryNova
             RegenerateFace();
         }
 
+        /*
+         * Sets hair
+         */
+        public void SetHair(string newHair)
+        {
+            appearence.hair = newHair;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets hair colour
+         */
+        public void SetHairColour(Color newColor)
+        {
+            appearence.hairColor = newColor;
+            RegenerateHairColour();
+        }
+
+        /*
+         * Sets top
+         */
+        public void SetTop(string newTop)
+        {
+            appearence.top = newTop;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets bottom
+         */
+        public void SetBottom(string newBottom)
+        {
+            appearence.bottom = newBottom;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets shoes
+         */
+        public void SetShoes(string newShoes)
+        {
+            appearence.shoes = newShoes;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets head accessory
+         */
+        public void SetHeadAccessory(string newHeadAcessory)
+        {
+            appearence.headAccessory = newHeadAcessory;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets back accessory
+         */
+        public void SetBackAccessory(string newBackAccessory)
+        {
+            appearence.backAccessory= newBackAccessory;
+            RegenerateVisuals();
+        }
+
         protected void RegenerateVisuals()
         {
             if(visualsHolder == null)
@@ -399,7 +490,26 @@ namespace StrawberryNova
 
             if(appearence.top != "")
                 AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + appearence.top, bonesToClone);
+            if(appearence.bottom != "")
+                AddModelToVisuals(Consts.CHARACTERS_BOTTOMS_VISUAL_PATH+ appearence.bottom, bonesToClone);
+            if(appearence.shoes != "")
+                AddModelToVisuals(Consts.CHARACTERS_SHOES_VISUAL_PATH + appearence.shoes, bonesToClone);
+            if(appearence.backAccessory != "")
+                AddModelToVisuals(Consts.CHARACTERS_BACK_ACCESSORIES_VISUAL_PATH + appearence.backAccessory, bonesToClone);
+            if(appearence.headAccessory != "")
+                AddModelToVisuals(Consts.CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH + appearence.headAccessory, bonesToClone);
 
+            hairModel = null;
+            if(appearence.hair != "")
+                hairModel = AddModelToVisuals(Consts.CHARACTERS_HAIR_VISUAL_PATH + appearence.hair, bonesToClone);
+            RegenerateHairColour();
+
+            StartCoroutine(RebindAnimation());
+        }
+
+        private IEnumerator RebindAnimation()
+        {
+            yield return new WaitForFixedUpdate();
             mainAnimator.Rebind();
         }
 
@@ -408,6 +518,13 @@ namespace StrawberryNova
             if(baseModel == null)
                 return;
             baseModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.skinColor;
+        }
+
+        protected void RegenerateHairColour()
+        {
+            if(hairModel == null)
+                return;
+            hairModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.hairColor;
         }
 
         protected void RegenerateFace()
@@ -432,6 +549,7 @@ namespace StrawberryNova
             }
 
             var newObject = Instantiate(resource);
+            newObject.SetLayerRecursively(Consts.COLLISION_LAYER_CHARACTERS);
             newObject.transform.SetParent(visualsHolder.transform, false);
             armatures.Add(newObject.transform.Find("Armature").transform);
 

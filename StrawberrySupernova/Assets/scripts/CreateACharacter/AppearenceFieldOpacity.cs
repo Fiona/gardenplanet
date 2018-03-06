@@ -13,6 +13,15 @@ namespace StrawberryNova
 
         private float currentVal;
 
+        public override void Randomise()
+        {
+            currentVal = Random.Range(slider.minValue, slider.maxValue);
+            slider.value = currentVal;
+            if(Random.value < .5f)
+                controller.character.ToggleAppearenceValue(flipHorizontalParameterName);
+            UpdateDisplayAndCharacter();
+        }
+
         private new void Awake()
         {
             base.Awake();

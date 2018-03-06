@@ -3,7 +3,6 @@ using System.Collections;
 using StompyBlondie;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI.Extensions.ColorPicker;
 
 namespace StrawberryNova
@@ -61,6 +60,8 @@ namespace StrawberryNova
 
         private IEnumerator DoHide(bool immediate)
         {
+            callback = null;
+
             if(immediate)
             {
                 canvasGroup.alpha = 0f;

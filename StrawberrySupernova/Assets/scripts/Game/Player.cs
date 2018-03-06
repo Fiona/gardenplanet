@@ -23,13 +23,6 @@ namespace StrawberryNova
 
         public override void Start()
         {
-            appearence = new Appearence
-            {
-                top = "ilovefarmingshirt",
-                skinColor = Color.white,
-                hairColor = Color.white
-            };
-
             base.Start();
             SetPassOutEvent();
 

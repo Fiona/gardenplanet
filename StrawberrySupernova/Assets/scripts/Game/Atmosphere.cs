@@ -27,11 +27,11 @@ namespace StrawberryNova
 		}
 
 		void Update()
-		{	
+		{
 			// Rotate around the Y to change shadow direction
             var hourT = ((float)worldTimer.gameTime.TimeHour / (float)Consts.NUM_HOURS_IN_DAY);
             var minT = (float)worldTimer.gameTime.TimeMinute / ((float)Consts.NUM_MINUTES_IN_HOUR * (float)Consts.NUM_HOURS_IN_DAY);
-			float rotateY = Mathf.Lerp(0f, 360f, hourT + minT);
+			float rotateY = Mathf.Lerp(360f, 0f, hourT + minT);
 
 			// Tilt a bit to change the shadow size
 			const float halfDay = Consts.NUM_HOURS_IN_DAY / 2f;
@@ -52,7 +52,7 @@ namespace StrawberryNova
 		 * Pass current hour and minute get those values.
 		 */
 		Color GetColourFromTimeArray(AtmosphereTime[] timeArray, int hour, int minute)
-		{			
+		{
 			AtmosphereTime timeFrom = null;
 			AtmosphereTime timeTo = null;
 			int num = 0;
@@ -68,12 +68,12 @@ namespace StrawberryNova
 					{
 						// We need to loop back around if at the end of the array
 						timeTo = timeArray[0];
-					}					
+					}
 				}
 
 				// Make sure we're in the bounds
                 if(time.hour < worldTimer.gameTime.TimeHour)
-					timeFrom = time;			
+					timeFrom = time;
                 if(time.hour > worldTimer.gameTime.TimeHour)
 				{
 					// We've gone past our allotted time so we should have two times now

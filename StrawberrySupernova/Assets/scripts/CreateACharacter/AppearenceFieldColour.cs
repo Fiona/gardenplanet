@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
@@ -15,6 +15,16 @@ namespace StrawberryNova
 
         private Color currentVal;
         private List<Color> values;
+
+        public override void Randomise()
+        {
+            if(values.Count == 0)
+                return;
+            var num = Random.Range(0, values.Count);
+            currentVal = values[num];
+            slider.value = num;
+            UpdateDisplayAndCharacter();
+        }
 
         private new void Awake()
         {

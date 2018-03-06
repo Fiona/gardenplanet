@@ -15,6 +15,11 @@ namespace StrawberryNova
 
         protected CreateACharacterController controller;
 
+        public virtual void Randomise()
+        {
+            throw new NotImplementedException();
+        }
+
         protected void Awake()
         {
             controller = FindObjectOfType<CreateACharacterController>();

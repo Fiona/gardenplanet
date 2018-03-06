@@ -27,7 +27,7 @@ namespace StrawberryNova
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
         public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
-
+        public const int COLLISION_LAYER_CHARACTERS = 14;
         // Tiles are this size on all dimensions
         public const float TILE_SIZE = 0.5f;
 
@@ -182,6 +182,11 @@ namespace StrawberryNova
 
         public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
         public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";
+        public const string CHARACTERS_BOTTOMS_VISUAL_PATH = "characters/appearence/bottoms/";
+        public const string CHARACTERS_SHOES_VISUAL_PATH = "characters/appearence/shoes/";
+        public const string CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH = "characters/appearence/head_accessories/";
+        public const string CHARACTERS_BACK_ACCESSORIES_VISUAL_PATH = "characters/appearence/back_accessories/";
+        public const string CHARACTERS_HAIR_VISUAL_PATH = "characters/appearence/hair/";
         public const string CHARACTERS_EYES_TEXTURE_PATH = "characters/appearence/eyes/";
         public const string CHARACTERS_MOUTHS_TEXTURE_PATH = "characters/appearence/mouths/";
         public const string CHARACTERS_NOSES_TEXTURE_PATH = "characters/appearence/noses/";

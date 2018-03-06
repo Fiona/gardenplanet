@@ -16,6 +16,14 @@ namespace StrawberryNova
         private List<string[]> values;
         private int currentVal;
 
+        public override void Randomise()
+        {
+            if(values.Count == 0)
+                return;
+            currentVal = Random.Range(0, values.Count);
+            UpdateDisplayAndCharacter();
+        }
+
         private new void Awake()
         {
             base.Awake();
