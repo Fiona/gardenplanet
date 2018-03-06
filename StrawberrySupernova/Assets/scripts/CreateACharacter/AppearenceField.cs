@@ -11,62 +11,23 @@ namespace StrawberryNova
     {
         [Header("Settings")]
         public string typeShortName;
-        public bool allowNone;
         public string overrideConfigName;
 
-        [Header("Object references")]
-        public GlobalButton previousButton;
-        public GlobalButton nextButton;
-        public TextMeshProUGUI displayText;
+        protected CreateACharacterController controller;
 
-        private CreateACharacterController controller;
-        private List<string[]> values;
-        private int currentVal;
-
-        private void Awake()
-        {
-            values = new List<string[]>();
-        }
-
-        private void Start()
+        protected void Awake()
         {
             controller = FindObjectOfType<CreateACharacterController>();
-            previousButton.SetCallback(PreviousButtonPressed);
-            nextButton.SetCallback(NextButtonPressed);
+        }
 
-            if(allowNone)
-                values.Add(new string[]{"", "None"});
-
-            var typeName = overrideConfigName == "" ? typeShortName : overrideConfigName;
-            var items = controller.globalConfig["appearence"][typeName];
-            foreach(var item in items.Keys)
-                if((bool)items[item]["unlocked_at_start"])
-                    values.Add(new string[]{item, (string)items[item]["name"]});
-
+        protected void Start()
+        {
             UpdateDisplayAndCharacter();
         }
 
-        private void UpdateDisplayAndCharacter()
+        protected virtual void UpdateDisplayAndCharacter()
         {
-            controller.character.SetAppearenceValue(typeShortName, values[currentVal][0]);
-            displayText.text = values[currentVal][1];
+            throw new NotImplementedException();
         }
-
-        private void PreviousButtonPressed()
-        {
-            currentVal--;
-            if(currentVal < 0)
-                currentVal = values.Count-1;
-            UpdateDisplayAndCharacter();
-        }
-
-        private void NextButtonPressed()
-        {
-            currentVal++;
-            if(currentVal >= values.Count)
-                currentVal = 0;
-            UpdateDisplayAndCharacter();
-        }
-
     }
 }

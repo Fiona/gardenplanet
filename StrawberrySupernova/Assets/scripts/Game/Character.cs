@@ -22,8 +22,10 @@ namespace StrawberryNova
             public string nose;
             public string faceDetail1;
             public float faceDetail1Opacity;
+            public bool faceDetail1FlipHorizontal;
             public string faceDetail2;
             public float faceDetail2Opacity;
+            public bool faceDetail2FlipHorizontal;
 
             public Color eyeColor;
             public Color skinColor;
@@ -62,6 +64,7 @@ namespace StrawberryNova
         protected string baseModelName = "basemodel";
         protected Appearence appearence;
         protected Information information;
+        protected GameObject baseModel;
         protected CharacterFace face;
 
         protected List<Transform> lowerSpineBones;
@@ -281,11 +284,26 @@ namespace StrawberryNova
         }
 
         /*
+         * Sets skin colour
+         */
+        public void SetSkinColour(Color newColor)
+        {
+            appearence.skinColor = newColor;
+            RegenerateSkin();
+        }
+
+        /*
          * Sets eyes
          */
         public void SetEyes(string newEyes)
         {
             appearence.eyes = newEyes;
+            RegenerateFace();
+        }
+
+        public void SetEyeColour(Color newColour)
+        {
+            appearence.eyeColor = newColour;
             RegenerateFace();
         }
 
@@ -325,12 +343,36 @@ namespace StrawberryNova
             RegenerateFace();
         }
 
+        public void SetFaceDetail1Opacity(float newOpacity)
+        {
+            appearence.faceDetail1Opacity = newOpacity;
+            RegenerateFace();
+        }
+
+        public void SetFaceDetail1FlipHorizontal(bool flipValue)
+        {
+            appearence.faceDetail1FlipHorizontal = flipValue;
+            RegenerateFace();
+        }
+
         /*
          * Sets face detail 2
          */
         public void SetFaceDetail2(string newFaceDetail)
         {
             appearence.faceDetail2 = newFaceDetail;
+            RegenerateFace();
+        }
+
+        public void SetFaceDetail2Opacity(float newOpacity)
+        {
+            appearence.faceDetail2Opacity = newOpacity;
+            RegenerateFace();
+        }
+
+        public void SetFaceDetail2FlipHorizontal(bool flipValue)
+        {
+            appearence.faceDetail2FlipHorizontal = flipValue;
             RegenerateFace();
         }
 
@@ -348,8 +390,9 @@ namespace StrawberryNova
 
             visualsHolder.DestroyAllChildren();
 
-            var baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
+            baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
+            RegenerateSkin();
 
             var faceModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face", bonesToClone);
             face = faceModel.GetComponentInChildren<CharacterFace>();
@@ -358,6 +401,13 @@ namespace StrawberryNova
                 AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + appearence.top, bonesToClone);
 
             mainAnimator.Rebind();
+        }
+
+        protected void RegenerateSkin()
+        {
+            if(baseModel == null)
+                return;
+            baseModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.skinColor;
         }
 
         protected void RegenerateFace()

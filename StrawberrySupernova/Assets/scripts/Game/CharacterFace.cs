@@ -49,64 +49,50 @@ namespace StrawberryNova
 
             var facePartMaterial = new Material(Shader.Find("Hidden/FacePart"));
 
-            if(!String.IsNullOrEmpty(appearence.faceDetail1))
+            // face detail
+            var detail1Color = new Color(1f, 1f, 1f, appearence.faceDetail1Opacity);
+            BlitFacePart(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH, appearence.faceDetail1, renderTexture,
+                facePartMaterial, detail1Color, appearence.faceDetail1FlipHorizontal);
+            var detail2Color = new Color(1f, 1f, 1f, appearence.faceDetail2Opacity);
+            BlitFacePart(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH, appearence.faceDetail2, renderTexture,
+                facePartMaterial, detail2Color, appearence.faceDetail2FlipHorizontal);
+
+            // mouth
+            BlitFacePart(Consts.CHARACTERS_MOUTHS_TEXTURE_PATH, appearence.mouth, renderTexture, facePartMaterial);
+
+            // nose
+            BlitFacePart(Consts.CHARACTERS_NOSES_TEXTURE_PATH, appearence.nose, renderTexture, facePartMaterial);
+
+            // eyes
+            var doEyeTint = BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes + "_tint", renderTexture,
+                facePartMaterial, appearence.eyeColor);
+            if(doEyeTint)
             {
-                var faceDetail1Texture = Resources.Load<Texture>(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH + appearence.faceDetail1);
-                if(faceDetail1Texture!= null)
-                {
-                    Graphics.Blit(faceDetail1Texture, renderTexture, facePartMaterial);
-                }
-                else
-                    Debug.Log(String.Format("Can't find face detail resource {0}", appearence.faceDetail1));
+                BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes, renderTexture,
+                    facePartMaterial);
             }
 
-            if(!String.IsNullOrEmpty(appearence.faceDetail2))
+            // eyesbrows
+            BlitFacePart(Consts.CHARACTERS_EYEBROWS_TEXTURE_PATH, appearence.eyebrows, renderTexture, facePartMaterial);
+        }
+
+        private bool BlitFacePart(string resourcePath, string resourceName, RenderTexture destination,
+            Material material, Color? color = null, bool flipHorizontally = false)
+        {
+            if(String.IsNullOrEmpty(resourceName))
+                return false;
+
+            var texture = Resources.Load<Texture>(resourcePath + resourceName);
+            if(texture == null)
             {
-                var faceDetail2Texture = Resources.Load<Texture>(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH + appearence.faceDetail2);
-                if(faceDetail2Texture!= null)
-                {
-                    Graphics.Blit(faceDetail2Texture, renderTexture, facePartMaterial);
-                }
-                else
-                    Debug.Log(String.Format("Can't find face detail resource {0}", appearence.faceDetail2));
+                Debug.Log(String.Format("Can't find face part resource {0}", resourcePath + resourceName));
+                return false;
             }
 
-            var mouthTexture = Resources.Load<Texture>(Consts.CHARACTERS_MOUTHS_TEXTURE_PATH + appearence.mouth);
-            if(mouthTexture != null)
-            {
-                Graphics.Blit(mouthTexture, renderTexture, facePartMaterial);
-            }
-            else
-                Debug.Log(String.Format("Can't find mouth resource {0}", appearence.mouth));
-
-            var noseTexture = Resources.Load<Texture>(Consts.CHARACTERS_NOSES_TEXTURE_PATH + appearence.nose);
-            if(noseTexture != null)
-            {
-                Graphics.Blit(noseTexture, renderTexture, facePartMaterial);
-            }
-            else
-                Debug.Log(String.Format("Can't find nose resource {0}", appearence.nose));
-
-            var eyesTexture = Resources.Load<Texture2D>(Consts.CHARACTERS_EYES_TEXTURE_PATH + appearence.eyes);
-            var eyesTextureTint = Resources.Load<Texture2D>(Consts.CHARACTERS_EYES_TEXTURE_PATH + appearence.eyes + "_tint");
-            if(eyesTexture != null)
-            {
-                facePartMaterial.SetColor("_Color", appearence.eyeColor);
-                Graphics.Blit(eyesTextureTint, renderTexture, facePartMaterial);
-                facePartMaterial.SetColor("_Color", Color.white);
-                Graphics.Blit(eyesTexture, renderTexture, facePartMaterial);
-            }
-            else
-                Debug.Log(String.Format("Can't find eyes resource {0}", appearence.eyes));
-
-            var eyebrowsTexture = Resources.Load<Texture>(Consts.CHARACTERS_EYEBROWS_TEXTURE_PATH + appearence.eyebrows);
-            if(eyebrowsTexture != null)
-            {
-                Graphics.Blit(eyebrowsTexture, renderTexture, facePartMaterial);
-            }
-            else
-                Debug.Log(String.Format("Can't find eyebrows resource {0}", appearence.eyebrows));
-
+            material.SetFloat("_FlipHorizontal", flipHorizontally ? 1f : 0f);
+            material.SetColor("_Color", color.GetValueOrDefault(Color.white));
+            Graphics.Blit(texture, destination, material);
+            return true;
         }
 
     }

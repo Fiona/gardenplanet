@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using LitJson;
 using StompyBlondie;
@@ -87,18 +88,22 @@ namespace StrawberryNova
         {
             page = 1;
 
-            page1.gameObject.SetActive(true);
-            page2.gameObject.SetActive(false);
-            page3.gameObject.SetActive(false);
-
             var screenWidth = FindObjectOfType<Canvas>().GetComponent<RectTransform>().sizeDelta.x;
             offScreenPagePosition = new Vector2(screenWidth, 0f);
             page1.anchoredPosition = offScreenPagePosition;
             page2.anchoredPosition = offScreenPagePosition;
             page3.anchoredPosition = offScreenPagePosition;
 
+            // Want them all active to trigger Start functions
+            page1.gameObject.SetActive(true);
+            page2.gameObject.SetActive(true);
+            page3.gameObject.SetActive(true);
+
             yield return screenFade.FadeIn(fadeInTime);
             yield return new WaitForSeconds(1f);
+
+            page2.gameObject.SetActive(false);
+            page3.gameObject.SetActive(false);
 
             yield return LerpHelper.QuickTween(
                 (v) => page1.anchoredPosition = v,

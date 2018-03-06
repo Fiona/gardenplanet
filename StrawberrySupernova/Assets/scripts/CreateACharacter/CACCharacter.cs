@@ -2,8 +2,9 @@
 
 namespace StrawberryNova
 {
-    public class CACCharacter: Character
+    public class CACCharacter : Character
     {
+
         public override void Awake()
         {
             appearence = new Appearence
@@ -64,7 +65,64 @@ namespace StrawberryNova
                     SetFaceDetail2(appearenceValue);
                     break;
             }
+
             RegenerateFace();
+        }
+
+        public void SetAppearenceValue(string appearenceType, float appearenceValue)
+        {
+            switch(appearenceType)
+            {
+                case "face_detail1_opacity":
+                    SetFaceDetail1Opacity(appearenceValue);
+                    break;
+                case "face_detail2_opacity":
+                    SetFaceDetail2Opacity(appearenceValue);
+                    break;
+            }
+
+            RegenerateFace();
+        }
+
+        public void SetAppearenceValue(string appearenceType, bool appearenceValue)
+        {
+            switch(appearenceType)
+            {
+                case "face_detail1_flip_horizontal":
+                    SetFaceDetail1FlipHorizontal(appearenceValue);
+                    break;
+                case "face_detail2_flip_horizontal":
+                    SetFaceDetail2FlipHorizontal(appearenceValue);
+                    break;
+            }
+
+            RegenerateFace();
+        }
+
+        public void ToggleAppearenceValue(string appearenceType)
+        {
+            switch(appearenceType)
+            {
+                case "face_detail1_flip_horizontal":
+                    SetAppearenceValue(appearenceType, !appearence.faceDetail1FlipHorizontal);
+                    break;
+                case "face_detail2_flip_horizontal":
+                    SetAppearenceValue(appearenceType, !appearence.faceDetail2FlipHorizontal);
+                    break;
+            }
+        }
+
+        public void SetAppearenceValue(string appearenceType, Color appearenceValue)
+        {
+            switch(appearenceType)
+            {
+                case "eye_colours":
+                    SetEyeColour(appearenceValue);
+                    break;
+                case "skin_colours":
+                    SetSkinColour(appearenceValue);
+                    break;
+            }
         }
 
     }

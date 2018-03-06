@@ -63,8 +63,12 @@
     <Compile Include="Assets\scripts\Behaviours\UICopySize.cs" />
     <Compile Include="Assets\scripts\Behaviours\YesNoDialog.cs" />
     <Compile Include="Assets\scripts\CreateACharacter\AppearenceField.cs" />
+    <Compile Include="Assets\scripts\CreateACharacter\AppearenceFieldColour.cs" />
+    <Compile Include="Assets\scripts\CreateACharacter\AppearenceFieldOpacity.cs" />
+    <Compile Include="Assets\scripts\CreateACharacter\AppearenceFieldSpinner.cs" />
     <Compile Include="Assets\scripts\CreateACharacter\BirthdayField.cs" />
     <Compile Include="Assets\scripts\CreateACharacter\CACCharacter.cs" />
+    <Compile Include="Assets\scripts\CreateACharacter\CACColourPicker.cs" />
     <Compile Include="Assets\scripts\CreateACharacter\CreateACharacterController.cs" />
     <Compile Include="Assets\scripts\Game\Atmosphere.cs" />
     <Compile Include="Assets\scripts\Game\Character.cs" />
@@ -123,6 +127,7 @@
     <Compile Include="Assets\scripts\Global\Core\GameObjectHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameSettings.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameTime.cs" />
+    <Compile Include="Assets\scripts\Global\Core\JsonHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\LerpHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\Ref.cs" />
     <Compile Include="Assets\scripts\Global\Core\RenderTextureHelper.cs" />
