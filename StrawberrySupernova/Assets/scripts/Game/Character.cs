@@ -15,6 +15,7 @@ namespace StrawberryNova
             public string shoes;
             public string headAccessory;
             public string backAccessory;
+            public string hair;
 
             public string eyes;
             public string eyebrows;
@@ -22,8 +23,10 @@ namespace StrawberryNova
             public string nose;
             public string faceDetail1;
             public float faceDetail1Opacity;
+            public bool faceDetail1FlipHorizontal;
             public string faceDetail2;
             public float faceDetail2Opacity;
+            public bool faceDetail2FlipHorizontal;
 
             public Color eyeColor;
             public Color skinColor;
@@ -62,6 +65,8 @@ namespace StrawberryNova
         protected string baseModelName = "basemodel";
         protected Appearence appearence;
         protected Information information;
+        protected GameObject baseModel;
+        protected GameObject hairModel;
         protected CharacterFace face;
 
         protected List<Transform> lowerSpineBones;
@@ -88,6 +93,8 @@ namespace StrawberryNova
         {
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.freezeRotation = true;
+            appearence = Player.defaultAppearence;
+            information = Player.defaultInformation;
         }
 
         public virtual void Start()
@@ -264,6 +271,24 @@ namespace StrawberryNova
         }
 
         /*
+         * Allows setting the appearence struct
+         */
+        public void SetAppearence(Appearence _appearence)
+        {
+            appearence = _appearence;
+            RegenerateVisuals();
+            RegenerateFace();
+        }
+
+        /*
+         * Allows setting the information struct
+         */
+        public void SetInformation(Information _information)
+        {
+            information = _information;
+        }
+
+        /*
          * Rename the character
          */
         public void SetName(string newName)
@@ -281,11 +306,26 @@ namespace StrawberryNova
         }
 
         /*
+         * Sets skin colour
+         */
+        public void SetSkinColour(Color newColor)
+        {
+            appearence.skinColor = newColor;
+            RegenerateSkin();
+        }
+
+        /*
          * Sets eyes
          */
         public void SetEyes(string newEyes)
         {
             appearence.eyes = newEyes;
+            RegenerateFace();
+        }
+
+        public void SetEyeColour(Color newColour)
+        {
+            appearence.eyeColor = newColour;
             RegenerateFace();
         }
 
@@ -325,6 +365,18 @@ namespace StrawberryNova
             RegenerateFace();
         }
 
+        public void SetFaceDetail1Opacity(float newOpacity)
+        {
+            appearence.faceDetail1Opacity = newOpacity;
+            RegenerateFace();
+        }
+
+        public void SetFaceDetail1FlipHorizontal(bool flipValue)
+        {
+            appearence.faceDetail1FlipHorizontal = flipValue;
+            RegenerateFace();
+        }
+
         /*
          * Sets face detail 2
          */
@@ -332,6 +384,81 @@ namespace StrawberryNova
         {
             appearence.faceDetail2 = newFaceDetail;
             RegenerateFace();
+        }
+
+        public void SetFaceDetail2Opacity(float newOpacity)
+        {
+            appearence.faceDetail2Opacity = newOpacity;
+            RegenerateFace();
+        }
+
+        public void SetFaceDetail2FlipHorizontal(bool flipValue)
+        {
+            appearence.faceDetail2FlipHorizontal = flipValue;
+            RegenerateFace();
+        }
+
+        /*
+         * Sets hair
+         */
+        public void SetHair(string newHair)
+        {
+            appearence.hair = newHair;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets hair colour
+         */
+        public void SetHairColour(Color newColor)
+        {
+            appearence.hairColor = newColor;
+            RegenerateHairColour();
+        }
+
+        /*
+         * Sets top
+         */
+        public void SetTop(string newTop)
+        {
+            appearence.top = newTop;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets bottom
+         */
+        public void SetBottom(string newBottom)
+        {
+            appearence.bottom = newBottom;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets shoes
+         */
+        public void SetShoes(string newShoes)
+        {
+            appearence.shoes = newShoes;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets head accessory
+         */
+        public void SetHeadAccessory(string newHeadAcessory)
+        {
+            appearence.headAccessory = newHeadAcessory;
+            RegenerateVisuals();
+        }
+
+        /*
+         * Sets back accessory
+         */
+        public void SetBackAccessory(string newBackAccessory)
+        {
+            appearence.backAccessory= newBackAccessory;
+            RegenerateVisuals();
         }
 
         protected void RegenerateVisuals()
@@ -348,16 +475,50 @@ namespace StrawberryNova
 
             visualsHolder.DestroyAllChildren();
 
-            var baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
+            baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
+            RegenerateSkin();
 
             var faceModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face", bonesToClone);
             face = faceModel.GetComponentInChildren<CharacterFace>();
 
             if(appearence.top != "")
                 AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + appearence.top, bonesToClone);
+            if(appearence.bottom != "")
+                AddModelToVisuals(Consts.CHARACTERS_BOTTOMS_VISUAL_PATH+ appearence.bottom, bonesToClone);
+            if(appearence.shoes != "")
+                AddModelToVisuals(Consts.CHARACTERS_SHOES_VISUAL_PATH + appearence.shoes, bonesToClone);
+            if(appearence.backAccessory != "")
+                AddModelToVisuals(Consts.CHARACTERS_BACK_ACCESSORIES_VISUAL_PATH + appearence.backAccessory, bonesToClone);
+            if(appearence.headAccessory != "")
+                AddModelToVisuals(Consts.CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH + appearence.headAccessory, bonesToClone);
 
+            hairModel = null;
+            if(appearence.hair != "")
+                hairModel = AddModelToVisuals(Consts.CHARACTERS_HAIR_VISUAL_PATH + appearence.hair, bonesToClone);
+            RegenerateHairColour();
+
+            StartCoroutine(RebindAnimation());
+        }
+
+        private IEnumerator RebindAnimation()
+        {
+            yield return new WaitForFixedUpdate();
             mainAnimator.Rebind();
+        }
+
+        protected void RegenerateSkin()
+        {
+            if(baseModel == null)
+                return;
+            baseModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.skinColor;
+        }
+
+        protected void RegenerateHairColour()
+        {
+            if(hairModel == null)
+                return;
+            hairModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.hairColor;
         }
 
         protected void RegenerateFace()
@@ -382,6 +543,7 @@ namespace StrawberryNova
             }
 
             var newObject = Instantiate(resource);
+            newObject.SetLayerRecursively(Consts.COLLISION_LAYER_CHARACTERS);
             newObject.transform.SetParent(visualsHolder.transform, false);
             armatures.Add(newObject.transform.Find("Armature").transform);
 

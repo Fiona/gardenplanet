@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d715c0c8c5646b247b53fd85c4d0117d
-timeCreated: 1520242410
+guid: a222950e7373d5b46a87356ce4ca6c67
+timeCreated: 1520342711
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
@@ -136,7 +136,12 @@ ModelImporter:
     7400004: Armature|walk
     9500000: //RootNode
     13700000: face
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kid-face2
+    second: {fileID: 2100000, guid: ae4d4b1bee45fef409eaed618faac665, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

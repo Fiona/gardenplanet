@@ -60,6 +60,7 @@ namespace StrawberryNova
         private Debug debugMenu;
         private InfoPopup infoPopup;
         private UnityEngine.Object[] loadedResources;
+        private GameState gameState;
 
         public void Awake()
         {
@@ -73,6 +74,9 @@ namespace StrawberryNova
                 using(var fh = File.OpenText(configFilePath))
                     jsonContents = fh.ReadToEnd();
             globalConfig = JsonMapper.ToObject(jsonContents);
+
+            // Grab current game state
+            gameState = GameState.GetInstance();
 
             // Init
             tileTypeSet = new TileTypeSet("default");
@@ -158,6 +162,9 @@ namespace StrawberryNova
 
         public void Start()
         {
+            // Objects are set up, tell the game state to set the specifics up
+            gameState.InitialiseGame(player);
+
             worldTimer.StartTimer();
             StartCoroutine(screenFade.FadeIn(1f));
             StartCoroutine(ControllerCoroutine());

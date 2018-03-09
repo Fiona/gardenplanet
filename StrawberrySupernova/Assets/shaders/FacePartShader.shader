@@ -2,6 +2,7 @@
     Properties {
         _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (1, 1, 1, 1)
+        [MaterialToggle] _FlipHorizontal ("Flip Horizontally", Float) = 0
     }
     SubShader {
         Tags { "Queue" = "Transparent" }
@@ -35,11 +36,18 @@
 
             sampler2D _MainTex;
             fixed4 _Color;
+            Float _FlipHorizontal;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed2 uv = i.uv;
+                if(_FlipHorizontal > 0)
+                {
+                    uv.x = 1.0 - uv.x;
+                }
+                fixed4 col = tex2D(_MainTex, uv);
                 col.rgb *= _Color;
+                col.a *= _Color.a;
                 return col;
             }
             ENDCG

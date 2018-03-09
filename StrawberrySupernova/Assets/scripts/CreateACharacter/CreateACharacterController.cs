@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using LitJson;
 using StompyBlondie;
@@ -30,26 +31,29 @@ namespace StrawberryNova
         public GlobalButton page1NextPageButton;
         public GlobalButton page1RandomButton;
         public TMP_InputField nameField;
+        public AppearenceField[] page1RandomisableFields;
 
         [Header("Page 2 references")]
         public GlobalButton page2NextPageButton;
         public GlobalButton page2PreviousPageButton;
         public GlobalButton page2RandomButton;
+        public AppearenceField[] page2RandomisableFields;
 
         [Header("Page 3 references")]
         public GlobalButton finishButton;
         public GlobalButton page3PreviousPageButton;
         public GlobalButton page3RandomButton;
+        public AppearenceField[] page3RandomisableFields;
 
         [HideInInspector]
         public JsonData globalConfig;
 
         private int page;
         private Vector2 offScreenPagePosition;
+        private bool switchingPages;
 
-        public void Start()
+        public void Awake()
         {
-
             // Load global config
             var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
             var jsonContents = "{}";
@@ -57,23 +61,29 @@ namespace StrawberryNova
                 using(var fh = File.OpenText(configFilePath))
                     jsonContents = fh.ReadToEnd();
             globalConfig = JsonMapper.ToObject(jsonContents);
+        }
 
+        public void Start()
+        {
             input.directInputEnabled = false;
             StartCoroutine(OpenPage1Animation());
 
             // Page 1 callbacks
             backToTitleButton.SetCallback(BackToTitleButtonPressed);
             page1NextPageButton.SetCallback(NextPageButtonPressed);
+            page1RandomButton.SetCallback(RandomizeButton);
 
             nameField.onValueChanged.AddListener((v) => { character.SetName(v); });
 
             // Page 2 callbacks
             page2PreviousPageButton.SetCallback(PreviousPageButtonPressed);
             page2NextPageButton.SetCallback(NextPageButtonPressed);
+            page2RandomButton.SetCallback(RandomizeButton);
 
             // Page 3 callbacks
             finishButton.SetCallback(FinishButtonPressed);
             page3PreviousPageButton.SetCallback(PreviousPageButtonPressed);
+            page3RandomButton.SetCallback(RandomizeButton);
         }
 
         public void Update()
@@ -87,18 +97,26 @@ namespace StrawberryNova
         {
             page = 1;
 
-            page1.gameObject.SetActive(true);
-            page2.gameObject.SetActive(false);
-            page3.gameObject.SetActive(false);
-
             var screenWidth = FindObjectOfType<Canvas>().GetComponent<RectTransform>().sizeDelta.x;
             offScreenPagePosition = new Vector2(screenWidth, 0f);
             page1.anchoredPosition = offScreenPagePosition;
             page2.anchoredPosition = offScreenPagePosition;
             page3.anchoredPosition = offScreenPagePosition;
 
+            // Want them all active to trigger Start functions
+            page1.gameObject.SetActive(true);
+            page2.gameObject.SetActive(true);
+            page3.gameObject.SetActive(true);
+
+            // Wait a frame for the character objects to be generated
+            yield return new WaitForFixedUpdate();
+            RandomizeAll();
+
             yield return screenFade.FadeIn(fadeInTime);
             yield return new WaitForSeconds(1f);
+
+            page2.gameObject.SetActive(false);
+            page3.gameObject.SetActive(false);
 
             yield return LerpHelper.QuickTween(
                 (v) => page1.anchoredPosition = v,
@@ -111,25 +129,64 @@ namespace StrawberryNova
 
         public IEnumerator SwitchPageAnimation(RectTransform fromPage, RectTransform toPage, int num)
         {
-            yield return LerpHelper.QuickTween(
+            switchingPages = true;
+            Vector2 fromStartPosition = Vector2.zero, fromEndPosition = Vector2.zero;
+            Vector2 toStartPosition = Vector2.zero;
+            // Going backwards
+            if(page > num)
+            {
+                fromStartPosition = new Vector2(pageXPosition, 0f);
+                fromEndPosition = offScreenPagePosition;
+                toStartPosition = new Vector2(-(fromPage.sizeDelta.x *4), 0f);
+            }
+            else
+            {
+                fromStartPosition = new Vector2(pageXPosition, 0f);
+                fromEndPosition = new Vector2(-(fromPage.sizeDelta.x*4), 0f);
+                toStartPosition = offScreenPagePosition;
+            }
+
+            StartCoroutine(LerpHelper.QuickTween(
                 (v) => fromPage.anchoredPosition = v,
-                new Vector2(pageXPosition, 0f),
-                new Vector2(-fromPage.sizeDelta.x, 0f),
-                pageMoveOutTime,
-                lerpType: LerpHelper.Type.SmoothStep
-            );
-            fromPage.gameObject.SetActive(false);
+                fromStartPosition, fromEndPosition, pageMoveOutTime,
+                lerpType: LerpHelper.Type.EaseIn
+            ));
 
             toPage.gameObject.SetActive(true);
             yield return LerpHelper.QuickTween(
                 (v) => toPage.anchoredPosition = v,
-                offScreenPagePosition,
-                new Vector2(pageXPosition, 0f),
-                pageMoveInTime,
-                lerpType: LerpHelper.Type.SmoothStep
+                toStartPosition, new Vector2(pageXPosition, 0f), pageMoveInTime,
+                lerpType: LerpHelper.Type.EaseOut
             );
+            fromPage.gameObject.SetActive(false);
 
             page = num;
+            switchingPages = false;
+        }
+
+        private void RandomizeAll()
+        {
+            foreach(var field in page1RandomisableFields)
+                field.Randomise();
+            foreach(var field in page2RandomisableFields)
+                field.Randomise();
+            foreach(var field in page3RandomisableFields)
+                field.Randomise();
+        }
+
+        private void RandomizeButton()
+        {
+            AppearenceField[] fields;
+            if(page == 1)
+                fields = page1RandomisableFields;
+            else if(page == 2)
+                fields = page2RandomisableFields;
+            else if(page == 3)
+                fields = page3RandomisableFields;
+            else
+                return;
+            foreach(var field in fields)
+                field.Randomise();
         }
 
         // --------------------------------------------------
@@ -143,6 +200,8 @@ namespace StrawberryNova
 
         private void NextPageButtonPressed()
         {
+            if(switchingPages)
+                return;
             RectTransform fromPage = null, toPage = null;
             int num = 0;
             switch(page)
@@ -163,6 +222,8 @@ namespace StrawberryNova
 
         private void PreviousPageButtonPressed()
         {
+            if(switchingPages)
+                return;
             RectTransform fromPage = null, toPage = null;
             int num = 0;
             switch(page)
@@ -183,6 +244,11 @@ namespace StrawberryNova
 
         private void FinishButtonPressed()
         {
+            if(switchingPages)
+                return;
+            var state = GameState.GetInstance();
+            state.Clear();
+            state.Store(character);
             StartCoroutine(screenFade.FadeOut(callback: () => FindObjectOfType<App>().StartNewState(AppState.Game)));
         }
 

@@ -13,6 +13,31 @@ namespace StrawberryNova
         public float maxEnergy;
         public float currentEnergy;
 
+        public static Appearence defaultAppearence = new Appearence
+        {
+            top = "ilovefarmingshirt",
+            bottom = "",
+            shoes = "",
+            headAccessory = "",
+            backAccessory = "",
+            hair = "straight",
+
+            eyebrows = "thin",
+            eyes = "cute",
+            mouth = "kind_smile",
+            nose = "small",
+
+            eyeColor = Color.HSVToRGB(115/255f, 186/255f, 158/255f),
+            skinColor = Color.HSVToRGB(26/255f, 123/255f, 93/255f),
+            hairColor = Color.HSVToRGB(23/255f, 173/255f, 229/255f),
+        };
+        public static Information defaultInformation = new Information
+        {
+            Name = "Tess",
+            seasonBirthday = 1,
+            dayBirthday = 1
+        };
+
         public override void Awake()
         {
             base.Awake();
@@ -23,13 +48,6 @@ namespace StrawberryNova
 
         public override void Start()
         {
-            appearence = new Appearence
-            {
-                top = "ilovefarmingshirt",
-                skinColor = Color.white,
-                hairColor = Color.white
-            };
-
             base.Start();
             SetPassOutEvent();
 
