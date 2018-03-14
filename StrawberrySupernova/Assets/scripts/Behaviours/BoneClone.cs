@@ -29,6 +29,8 @@ namespace StompyBlondie
                 boneArray[i] = store;
                 i++;
             }
+
+            thisRenderer.rootBone = rendererToClone.rootBone;
             thisRenderer.bones = boneArray;
         }
     }

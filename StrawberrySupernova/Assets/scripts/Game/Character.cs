@@ -511,7 +511,9 @@ namespace StrawberryNova
         {
             if(baseModel == null)
                 return;
-            baseModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.skinColor;
+            var skin = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
+            foreach(var mat in skin.materials)
+                mat.color = appearence.skinColor;
         }
 
         protected void RegenerateHairColour()
