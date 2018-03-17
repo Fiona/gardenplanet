@@ -127,6 +127,12 @@ namespace StrawberryNova
             ));
 
             HandleActiveItemScript();
+
+            // Tell controller we're holding a new item
+            if(selectedItemEntry == null)
+                controller.PlayerStopHoldingItem();
+            else
+                controller.PlayerHoldingItem(selectedItemEntry);
         }
 
         public void SelectPreviousItem()

@@ -12,6 +12,7 @@ namespace StrawberryNova.Items
 
         public override IEnumerator Use()
         {
+            yield return StartCoroutine(controller.PlayerDoEat());
             controller.IncreasePlayerEnergy(item.GetAttrFloat("energy_increase"));
             controller.RemovePlayerItem(item.itemType, item.attributes, 1);
             yield return null;

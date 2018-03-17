@@ -29,7 +29,7 @@
             "Category": "Produce",
             "StackSize": 32,
             "CanPickup": true,
-            "Attributes": {"energy_increase":0.2},
+            "Attributes": {"energy_increase":1.0},
             "Script": "Consumable"
         }
 

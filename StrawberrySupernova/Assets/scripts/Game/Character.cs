@@ -6,6 +6,12 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
+
+    public enum CharacterAction
+    {
+        Eat = 1
+    }
+
     public class Character : MonoBehaviour
     {
         public struct Appearence
@@ -51,6 +57,7 @@ namespace StrawberryNova
         [HideInInspector]
         public int layer;
 
+        // Locomotion related members
         protected Rigidbody rigidBody;
         protected GameController controller;
         protected Vector3 walkDirBuffer;
@@ -60,6 +67,7 @@ namespace StrawberryNova
         protected Vector3 desiredRotation;
         protected bool lockFacing;
 
+        // Visuals related members
         protected GameObject visualsHolder;
 
         protected string baseModelName = "basemodel";
@@ -71,6 +79,11 @@ namespace StrawberryNova
 
         protected List<Transform> lowerSpineBones;
         protected List<Transform> headBones;
+
+        protected Transform holdItemHolder;
+
+        // Action related members
+        protected CharacterAction currentAction = 0;
 
         public TilePosition CurrentTilePosition
         {
@@ -109,6 +122,14 @@ namespace StrawberryNova
             // Detect layer
             layer = (int) Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
+            // Deal with actions
+            if(currentAction != 0)
+            {
+                mainAnimator.SetBool("DoWalk", false);
+                return;
+            }
+
+            // Override stop for actions
             if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
 
@@ -177,6 +198,8 @@ namespace StrawberryNova
          */
         public void WalkInDirection(Direction dir, bool _lockFacing)
         {
+            if(currentAction > 0)
+                return;
             lockFacing = _lockFacing;
             switch(dir)
             {
@@ -200,6 +223,8 @@ namespace StrawberryNova
          */
         public void LookInDirection(Vector3 direction)
         {
+            if(currentAction > 0)
+                return;
             lookDirection = direction;
         }
 
@@ -208,6 +233,8 @@ namespace StrawberryNova
          */
         public void TurnToWorldPoint(Vector3 turnTo)
         {
+            if(currentAction > 0)
+                return;
             if((transform.position - turnTo).magnitude > .2f)
                 desiredRotation = turnTo - transform.position;
         }
@@ -227,6 +254,8 @@ namespace StrawberryNova
          */
         public void Jump()
         {
+            if(currentAction > 0)
+                return;
             attemptJump = true;
         }
 
@@ -252,6 +281,21 @@ namespace StrawberryNova
         {
             transform.rotation = Quaternion.LookRotation(newDir);
             transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+        }
+
+        /*
+         * A coroutine that tells the character to immediately do the action passed, will immeditaly break if the
+         * action cannot be done.
+         */
+        public IEnumerator DoAction(CharacterAction action)
+        {
+            if(currentAction > 0)
+                yield break;
+            currentAction = action;
+            if(currentAction == CharacterAction.Eat)
+                mainAnimator.SetBool("DoEat", true);
+            while(currentAction > 0)
+                yield return new WaitForFixedUpdate();
         }
 
         /*
@@ -476,6 +520,9 @@ namespace StrawberryNova
             visualsHolder.DestroyAllChildren();
 
             baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
+            holdItemHolder = baseModel.transform.Find("hold_item");
+            if(holdItemHolder == null)
+                Debug.LogError("Can't find a child called hold_item in character!");
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
             RegenerateSkin();
 
@@ -578,6 +625,14 @@ namespace StrawberryNova
             if(lowerSpineBones.Count > 0)
                 foreach(var spine in lowerSpineBones)
                     spine.localScale = new Vector3(lowerSpineScale, lowerSpineScale, lowerSpineScale);
+        }
+
+        // Animation event: EatItem
+        protected void EatItemDone()
+        {
+            Debug.Log("Eat Item Done");
+            mainAnimator.SetBool("DoEat", false);
+            currentAction = 0;
         }
     }
 }

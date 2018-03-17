@@ -211,6 +211,25 @@ namespace StrawberryNova
             EndCutscene();
         }
 
+        /*
+         * Attempts to have the player holding the item matching the passed ItemType object and attrbutes.
+         * Returns true if the item was successfully placed in their hand.
+         */
+        public bool PlayerHoldingItem(ItemType itemType, System.Collections.Hashtable attributes)
+        {
+            throw new NotImplementedException();
+            return false;
+        }
+
+        /*
+         * Tells the player to stop holding something, they will place it back in their inventory.
+         * This is different to dropping which can be done by PlayerDropItemInHand
+         */
+        public void PlayerStopHoldingItem()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerator PlayerUseItemInHand()
         {
             yield return StartCoroutine(itemHotbar.UseItemInHand());
@@ -224,6 +243,11 @@ namespace StrawberryNova
         public IEnumerator PlayerDropItemInHand()
         {
             yield return StartCoroutine(itemHotbar.DropItemInHand());
+        }
+
+        public IEnumerator PlayerDoEat()
+        {
+            yield return StartCoroutine(player.DoAction(CharacterAction.Eat));
         }
 
         /*
