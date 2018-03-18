@@ -520,7 +520,7 @@ namespace StrawberryNova
             visualsHolder.DestroyAllChildren();
 
             baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
-            holdItemHolder = baseModel.transform.Find("hold_item");
+            holdItemHolder = baseModel.transform.FindRecursive("hold_item");
             if(holdItemHolder == null)
                 Debug.LogError("Can't find a child called hold_item in character!");
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();

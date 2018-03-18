@@ -132,7 +132,7 @@ namespace StrawberryNova
             if(selectedItemEntry == null)
                 controller.PlayerStopHoldingItem();
             else
-                controller.PlayerHoldingItem(selectedItemEntry);
+                controller.PlayerHoldingItem(selectedItemEntry.itemType, selectedItemEntry.attributes);
         }
 
         public void SelectPreviousItem()
