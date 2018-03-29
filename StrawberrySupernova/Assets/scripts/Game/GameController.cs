@@ -215,7 +215,7 @@ namespace StrawberryNova
          * Attempts to have the player holding the item matching the passed ItemType object and attrbutes.
          * Returns true if the item was successfully placed in their hand.
          */
-        public bool PlayerHoldingItem(ItemType itemType, System.Collections.Hashtable attributes)
+        public bool PlayerHoldingItem(ItemType itemType, Hashtable attributes)
         {
             throw new NotImplementedException();
             return false;
