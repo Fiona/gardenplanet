@@ -48,6 +48,63 @@ ModelImporter:
     100080: root
     100082: spine_lower
     100084: spine_upper
+    100086: arm.elbow.target.L
+    100088: arm.elbow.target.L_end
+    100090: arm.elbow.target.R
+    100092: arm.elbow.target.R_end
+    100094: arm.hand.ifinger.lower.L
+    100096: arm.hand.ifinger.lower.L_end
+    100098: arm.hand.ifinger.lower.R
+    100100: arm.hand.ifinger.lower.R_end
+    100102: arm.hand.ifinger.upper.L
+    100104: arm.hand.ifinger.upper.R
+    100106: arm.hand.ik.L
+    100108: arm.hand.ik.L_end
+    100110: arm.hand.ik.R
+    100112: arm.hand.ik.R_end
+    100114: arm.hand.L
+    100116: arm.hand.mfinger.lower.L
+    100118: arm.hand.mfinger.lower.L_end
+    100120: arm.hand.mfinger.lower.R
+    100122: arm.hand.mfinger.lower.R_end
+    100124: arm.hand.mfinger.upper.L
+    100126: arm.hand.mfinger.upper.R
+    100128: arm.hand.pfinger.lower.L
+    100130: arm.hand.pfinger.lower.L_end
+    100132: arm.hand.pfinger.lower.R
+    100134: arm.hand.pfinger.lower.R_end
+    100136: arm.hand.pfinger.upper.L
+    100138: arm.hand.pfinger.upper.R
+    100140: arm.hand.R
+    100142: arm.hand.thumb.lower.L
+    100144: arm.hand.thumb.lower.L_end
+    100146: arm.hand.thumb.lower.R
+    100148: arm.hand.thumb.lower.R_end
+    100150: arm.hand.thumb.upper.L
+    100152: arm.hand.thumb.upper.R
+    100154: arm.lower.L
+    100156: arm.lower.R
+    100158: arm.upper.L
+    100160: arm.upper.R
+    100162: head_end
+    100164: leg.foot.ik.L
+    100166: leg.foot.ik.R
+    100168: leg.foot.L
+    100170: leg.foot.L_end
+    100172: leg.foot.R
+    100174: leg.foot.R_end
+    100176: leg.knee.target.L
+    100178: leg.knee.target.L_end
+    100180: leg.knee.target.R
+    100182: leg.knee.target.R_end
+    100184: leg.lower.L
+    100186: leg.lower.L_end
+    100188: leg.lower.R
+    100190: leg.lower.R_end
+    100192: leg.upper.L
+    100194: leg.upper.R
+    100196: spine.lower
+    100198: spine.upper
     400000: arm_elbow_target_L
     400002: arm_elbow_target_R
     400004: arm_hand_ifinger_lower_L
@@ -91,8 +148,67 @@ ModelImporter:
     400080: root
     400082: spine_lower
     400084: spine_upper
+    400086: arm.elbow.target.L
+    400088: arm.elbow.target.L_end
+    400090: arm.elbow.target.R
+    400092: arm.elbow.target.R_end
+    400094: arm.hand.ifinger.lower.L
+    400096: arm.hand.ifinger.lower.L_end
+    400098: arm.hand.ifinger.lower.R
+    400100: arm.hand.ifinger.lower.R_end
+    400102: arm.hand.ifinger.upper.L
+    400104: arm.hand.ifinger.upper.R
+    400106: arm.hand.ik.L
+    400108: arm.hand.ik.L_end
+    400110: arm.hand.ik.R
+    400112: arm.hand.ik.R_end
+    400114: arm.hand.L
+    400116: arm.hand.mfinger.lower.L
+    400118: arm.hand.mfinger.lower.L_end
+    400120: arm.hand.mfinger.lower.R
+    400122: arm.hand.mfinger.lower.R_end
+    400124: arm.hand.mfinger.upper.L
+    400126: arm.hand.mfinger.upper.R
+    400128: arm.hand.pfinger.lower.L
+    400130: arm.hand.pfinger.lower.L_end
+    400132: arm.hand.pfinger.lower.R
+    400134: arm.hand.pfinger.lower.R_end
+    400136: arm.hand.pfinger.upper.L
+    400138: arm.hand.pfinger.upper.R
+    400140: arm.hand.R
+    400142: arm.hand.thumb.lower.L
+    400144: arm.hand.thumb.lower.L_end
+    400146: arm.hand.thumb.lower.R
+    400148: arm.hand.thumb.lower.R_end
+    400150: arm.hand.thumb.upper.L
+    400152: arm.hand.thumb.upper.R
+    400154: arm.lower.L
+    400156: arm.lower.R
+    400158: arm.upper.L
+    400160: arm.upper.R
+    400162: head_end
+    400164: leg.foot.ik.L
+    400166: leg.foot.ik.R
+    400168: leg.foot.L
+    400170: leg.foot.L_end
+    400172: leg.foot.R
+    400174: leg.foot.R_end
+    400176: leg.knee.target.L
+    400178: leg.knee.target.L_end
+    400180: leg.knee.target.R
+    400182: leg.knee.target.R_end
+    400184: leg.lower.L
+    400186: leg.lower.L_end
+    400188: leg.lower.R
+    400190: leg.lower.R_end
+    400192: leg.upper.L
+    400194: leg.upper.R
+    400196: spine.lower
+    400198: spine.upper
     2100000: kid-skin__kid-skin
     2100002: kid-face__kid-skin
+    2100004: kid-skin
+    2100006: kid-face
     4300000: novakid
     7400000: Default Take
     7400002: eat_item
@@ -102,6 +218,8 @@ ModelImporter:
     7400010: run
     7400012: walk
     7400014: sleepy_fall
+    7400016: sleepy_yawn
+    7400018: pose_wave
     9500000: //RootNode
     13700000: novakid
   externalObjects:
@@ -321,6 +439,62 @@ ModelImporter:
       takeName: sleepy_fall
       firstFrame: 0
       lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: sleepy_yawn
+      takeName: sleepy_yawn
+      firstFrame: 0
+      lastFrame: 83
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: pose_wave
+      takeName: pose_wave
+      firstFrame: 0
+      lastFrame: 37
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
