@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
@@ -10,11 +11,13 @@ namespace StrawberryNova
     public class AppearenceFieldColour: AppearenceField
     {
         [Header("Object references")]
-        public Slider slider;
+        public GameObject swatchTemplate;
+        public GameObject swatchHolder;
         public GlobalButton paletteButton;
 
         private Color currentVal;
         private List<Color> values;
+        private List<GlobalSelectableButton> swatches;
 
         public override void Randomise()
         {
@@ -22,7 +25,7 @@ namespace StrawberryNova
                 return;
             var num = Random.Range(0, values.Count);
             currentVal = values[num];
-            slider.value = num;
+            swatches[num].Select();
             UpdateDisplayAndCharacter();
         }
 
@@ -30,6 +33,7 @@ namespace StrawberryNova
         {
             base.Awake();
             values = new List<Color>();
+            swatches = new List<GlobalSelectableButton>();
         }
 
         private new void Start()
@@ -38,6 +42,7 @@ namespace StrawberryNova
 
             var typeName = overrideConfigName == "" ? typeShortName : overrideConfigName;
 
+            // Get colour values from global config
             try
             {
                 var items = controller.globalConfig["appearence"][typeName];
@@ -56,15 +61,27 @@ namespace StrawberryNova
                 Debug.LogWarningFormat("Can't find definitions for appearence type {0}", typeName);
             }
 
+            // Iterate through colours and create swatches for them
+            var index = 0;
+            foreach(var value in values)
+            {
+                swatchTemplate.SetActive(false);
+                var newSwatch = Instantiate(swatchTemplate) as GameObject;
+                newSwatch.SetActive(true);
+                newSwatch.transform.SetParent(swatchHolder.transform, false);
+                newSwatch.GetComponent<Image>().color = value;
+                var buttonComp = newSwatch.GetComponent<GlobalSelectableButton>();
+                var copy = index;
+                buttonComp.SetCallback(() => SwatchPressed(copy));
+                swatches.Add(buttonComp);
+                index++;
+            }
+
+            // Set fist colour as default
             if(values.Count == 0)
                 currentVal = Color.white;
             else
                 currentVal = values[0];
-
-            slider.wholeNumbers = true;
-            slider.minValue = 0f;
-            slider.maxValue = values.Count-1;
-            slider.onValueChanged.AddListener(OnDragSlider);
 
             paletteButton.SetCallback(PaletteButtonPressed);
             base.Start();
@@ -78,13 +95,25 @@ namespace StrawberryNova
         private void ColourPickerCallback(Color newColour)
         {
             currentVal = newColour;
+            DeselectAllSwatches();
             UpdateDisplayAndCharacter();
         }
 
-        private void OnDragSlider(float val)
+        private void SwatchPressed(int index)
         {
-            currentVal = values[(int)val];
+            if(currentVal == values[index])
+                return;
+            currentVal = values[index];
+            DeselectAllSwatches();
+            swatches[index].Select();
             UpdateDisplayAndCharacter();
+        }
+
+        private void DeselectAllSwatches()
+        {
+            foreach(var swatch in swatches)
+                if(swatch.selected)
+                    swatch.Deselect();
         }
 
         protected override void UpdateDisplayAndCharacter()

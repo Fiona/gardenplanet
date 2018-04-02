@@ -66,6 +66,7 @@ namespace StrawberryNova
         public void Start()
         {
             input.directInputEnabled = false;
+            character.SetName("");
             StartCoroutine(OpenPage1Animation());
 
             // Page 1 callbacks
@@ -249,7 +250,17 @@ namespace StrawberryNova
             var state = GameState.GetInstance();
             state.Clear();
             state.Store(character);
-            StartCoroutine(screenFade.FadeOut(callback: () => FindObjectOfType<App>().StartNewState(AppState.Game)));
+
+            StartCoroutine(FinishAnimation());
+        }
+
+        private IEnumerator FinishAnimation()
+        {
+            character.mainAnimator.SetBool("DoWave", true);
+            yield return new WaitForSeconds(2f);
+            character.mainAnimator.SetBool("DoWave", false);
+            yield return StartCoroutine(
+                screenFade.FadeOut(callback: () => FindObjectOfType<App>().StartNewState(AppState.Game)));
         }
 
     }

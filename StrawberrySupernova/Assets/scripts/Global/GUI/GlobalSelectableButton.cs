@@ -11,6 +11,7 @@ namespace StrawberryNova
         [Header("Animation Settings")]
         public float clickAnimTime = .2f;
         public float hoverFadeTime = .25f;
+        public float scaleToOnSelect = .95f;
 
         [Header("Object references")]
         public Image backgroundNormal;
@@ -41,7 +42,7 @@ namespace StrawberryNova
             StartCoroutine(
                 LerpHelper.QuickTween(
                     (v) => gameObject.transform.localScale = v,
-                    Vector3.one, new Vector3(.95f, .95f, .95f),
+                    Vector3.one, new Vector3(scaleToOnSelect, scaleToOnSelect, scaleToOnSelect),
                     clickAnimTime,
                     lerpType:LerpHelper.Type.SmoothStep
                 )
@@ -55,7 +56,7 @@ namespace StrawberryNova
             StartCoroutine(
                 LerpHelper.QuickTween(
                     (v) => gameObject.transform.localScale = v,
-                    new Vector3(.9f, .9f, .9f), Vector3.one,
+                    new Vector3(scaleToOnSelect, scaleToOnSelect, scaleToOnSelect), Vector3.one,
                     clickAnimTime,
                     lerpType:LerpHelper.Type.BounceOut
                 )
