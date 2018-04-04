@@ -15,6 +15,9 @@ namespace StrawberryNova
         public GameObject swatchHolder;
         public GlobalButton paletteButton;
 
+        [HideInInspector]
+        public GUINavigator navigator;
+
         private Color currentVal;
         private List<Color> values;
         private List<GlobalSelectableButton> swatches;
@@ -89,7 +92,7 @@ namespace StrawberryNova
 
         private void PaletteButtonPressed()
         {
-            CACColourPicker.ShowColourPicker(paletteButton, currentVal, ColourPickerCallback);
+            CACColourPicker.ShowColourPicker(paletteButton, currentVal, ColourPickerCallback, navigator);
         }
 
         private void ColourPickerCallback(Color newColour)

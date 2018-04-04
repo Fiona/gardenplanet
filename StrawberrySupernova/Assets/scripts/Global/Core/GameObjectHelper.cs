@@ -23,5 +23,10 @@ namespace StompyBlondie
             foreach(Transform child in obj.transform)
                 child.gameObject.SetLayerRecursively(layer);
         }
+
+        public static bool HasComponent<T>(this GameObject obj) where T : Component
+        {
+            return obj.GetComponent<T> () != null;
+        }
     }
 }

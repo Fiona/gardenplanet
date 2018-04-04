@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using LitJson;
 using StompyBlondie;
 using TMPro;
@@ -8,6 +9,12 @@ using UnityEngine;
 
 namespace StrawberryNova
 {
+    [System.Serializable]
+    public class MultiDimensionalRectTransform
+    {
+        public RectTransform[] rectTransformArray;
+    }
+
     public class CreateACharacterController: MonoBehaviour
     {
 
@@ -45,15 +52,23 @@ namespace StrawberryNova
         public GlobalButton page3RandomButton;
         public AppearenceField[] page3RandomisableFields;
 
+        [Header("Navigation Targets")]
+        public MultiDimensionalRectTransform[] page1NavigationTargets;
+        public MultiDimensionalRectTransform[] page2NavigationTargets;
+        public MultiDimensionalRectTransform[] page3NavigationTargets;
+
         [HideInInspector]
         public JsonData globalConfig;
 
         private int page;
         private Vector2 offScreenPagePosition;
         private bool switchingPages;
+        private List<GUINavigator> fieldNavigators;
 
         public void Awake()
         {
+            fieldNavigators = new List<GUINavigator>();
+
             // Load global config
             var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
             var jsonContents = "{}";
@@ -126,6 +141,8 @@ namespace StrawberryNova
                 pageMoveInTime,
                 lerpType: LerpHelper.Type.SmoothStep
             );
+
+            RecreateNavigation(1);
         }
 
         public IEnumerator SwitchPageAnimation(RectTransform fromPage, RectTransform toPage, int num)
@@ -163,6 +180,7 @@ namespace StrawberryNova
 
             page = num;
             switchingPages = false;
+            RecreateNavigation(page);
         }
 
         private void RandomizeAll()
@@ -247,20 +265,112 @@ namespace StrawberryNova
         {
             if(switchingPages)
                 return;
+
+            // End navigation
+            foreach(var navigator in fieldNavigators)
+                Destroy(navigator);
+            fieldNavigators = new List<GUINavigator>();
+
+            // Save character settings to state
             var state = GameState.GetInstance();
             state.Clear();
             state.Store(character);
 
+            // Wave at me little guy
             StartCoroutine(FinishAnimation());
         }
 
         private IEnumerator FinishAnimation()
         {
             character.mainAnimator.SetBool("DoWave", true);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             character.mainAnimator.SetBool("DoWave", false);
             yield return StartCoroutine(
                 screenFade.FadeOut(callback: () => FindObjectOfType<App>().StartNewState(AppState.Game)));
+        }
+
+        // --------------------------------------------------
+        // GUI Navigation
+        // --------------------------------------------------
+
+        private void RecreateNavigation(int pageNum)
+        {
+            // Destroy existing navigators
+            foreach(var navigator in fieldNavigators)
+                Destroy(navigator);
+            fieldNavigators = new List<GUINavigator>();
+
+            // Get list of target elements
+            MultiDimensionalRectTransform[] targetList;
+            switch(pageNum)
+            {
+                case 1:
+                    targetList = page1NavigationTargets;
+                    break;
+                case 2:
+                    targetList = page2NavigationTargets;
+                    break;
+                case 3:
+                    targetList = page3NavigationTargets;
+                    break;
+                default:
+                    targetList = new MultiDimensionalRectTransform[0];
+                    break;
+            }
+
+            // Go through each row of taregts, create Navigator for each one
+            GUINavigator previousNavigator = null;
+            foreach(var targetRow in targetList)
+            {
+                var fieldNavigator = gameObject.AddComponent<GUINavigator>();
+                fieldNavigator.direction = GUINavigator.GUINavigatorDirection.Horizontal;
+                fieldNavigator.oppositeAxisLinking = true;
+                fieldNavigator.active = false;
+                fieldNavigator.autoFlowFromLinkedNavigator = false;
+
+                // Handle row linking
+                if(previousNavigator != null)
+                {
+                    fieldNavigator.previousLinkedNavigator = previousNavigator;
+                    previousNavigator.nextLinkedNavigator = fieldNavigator;
+                }
+
+                // Add individual elements to field
+                foreach(var targetElement in targetRow.rectTransformArray)
+                {
+                    // Special fields
+                    var colourField = targetElement.GetComponent<AppearenceFieldColour>();
+                    var opacityField = targetElement.GetComponent<AppearenceFieldOpacity>();
+
+                    // Add all swatches for colour fields
+                    if(colourField != null)
+                    {
+                        foreach(var swatch in colourField.swatchHolder.GetComponentsInChildren<GlobalSelectableButton>())
+                            fieldNavigator.AddNavigationElement(swatch.rectTransform);
+                        fieldNavigator.AddNavigationElement(colourField.paletteButton.rectTransform);
+                        colourField.navigator = fieldNavigator;
+                    }
+                    // Tell the opacity field which navigatior they came frome
+                    else if(opacityField != null)
+                    {
+                        opacityField.navigator = fieldNavigator;
+                        fieldNavigator.AddNavigationElement(opacityField.slider.GetComponent<RectTransform>());
+                        fieldNavigator.AddNavigationElement(opacityField.flipButton.rectTransform);
+                    }
+                    else
+                    {
+                        fieldNavigator.AddNavigationElement(targetElement);
+                    }
+                }
+
+                // Add to list for deletion when page changes
+                fieldNavigators.Add(fieldNavigator);
+                previousNavigator = fieldNavigator;
+            }
+
+            // Activate second one, skipping randomise button etc
+            if(fieldNavigators.Count > 1)
+                fieldNavigators[1].active = true;
         }
 
     }

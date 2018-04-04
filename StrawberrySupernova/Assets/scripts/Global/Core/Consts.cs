@@ -47,6 +47,10 @@ namespace StrawberryNova
         // Rewired player ID
         public const int REWIRED_PLAYER_ID = 0;
 
+        // Rewired input behaviour IDs
+        public const int REWIRED_INPUT_BEHAVIOUR_DEFAULT = 0;
+        public const int REWIRED_INPUT_BEHAVIOUR_MENUDIRECTIONS = 1;
+
         // Any mouse wheel axis movements at or outside of this movement will
         // class as a click in that direction.
         public const float MOUSE_WHEEL_CLICK_SNAP = 0.1f;

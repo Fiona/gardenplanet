@@ -36,6 +36,9 @@ namespace StrawberryNova
                  "selected as the navigation direction for this navigator.")]
         public bool oppositeAxisLinking = false;
 
+        [Tooltip("If true, when activated by a next navigator, the last element will be automatically focussed and vise-versa.")]
+        public bool autoFlowFromLinkedNavigator = true;
+
         [Tooltip("How much of a lead time we have between switches so we don't immediately switch")]
         public float linkTime = .1f;
 
@@ -69,13 +72,19 @@ namespace StrawberryNova
         public void StartActiveLinkFromNext()
         {
             active = true;
-            FocusNavigationElement(navigationElements.Count-1);
+            if(autoFlowFromLinkedNavigator)
+                FocusNavigationElement(navigationElements.Count-1);
+            else
+                FocusNavigationElement(savedFocussedElement > -1 ? savedFocussedElement : 0);
         }
 
         public void StartActiveLinkFromPrevious()
         {
             active = true;
-            FocusNavigationElement(0);
+            if(autoFlowFromLinkedNavigator)
+                FocusNavigationElement(0);
+            else
+                FocusNavigationElement(savedFocussedElement > -1 ? savedFocussedElement : 0);
         }
 
         public void HideNavPointer()
@@ -158,17 +167,18 @@ namespace StrawberryNova
 
                 // Moving down
                 var nav = false;
-                if(input.player.GetButtonRepeating((direction == GUINavigatorDirection.Horizontal
-                    ? "Menu Right"
-                    : "Menu Down")))
+                if(input.player.GetButtonRepeating(
+                    (direction == GUINavigatorDirection.Horizontal ? "Menu Right" : "Menu Down")
+                ))
                 {
                     FocusNextNavigationElement();
                     nav = true;
                 }
 
                 // Moving up
-                if(input.player.GetButtonRepeating((direction == GUINavigatorDirection.Horizontal ? "Menu Left" : "Menu Up"))
-                )
+                if(input.player.GetButtonRepeating(
+                    (direction == GUINavigatorDirection.Horizontal ? "Menu Left" : "Menu Up")
+                ))
                 {
                     FocusPreviousNavigationElement();
                     nav = true;
@@ -344,6 +354,8 @@ namespace StrawberryNova
 
         private void ExecuteOn<T>(int element, ExecuteEvents.EventFunction<T> eventHandler) where T: IEventSystemHandler
         {
+            if(element == -1)
+                return;
             var pointer = new PointerEventData(EventSystem.current);
             ExecuteEvents.Execute(
                 navigationElements[element].gameObject, pointer, eventHandler
