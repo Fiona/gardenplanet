@@ -9684,6 +9684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc8fd7e61df4b6aa9cc0b1c17c99e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystickRotateAmount: 10
+  canRotate: 0
 --- !u!1 &878375989
 GameObject:
   m_ObjectHideFlags: 0
@@ -10832,6 +10834,7 @@ MonoBehaviour:
   typeShortName: face_detail1_opacity
   overrideConfigName: 
   flipHorizontalParameterName: face_detail1_flip_horizontal
+  inputChangeValueSpeed: 0.01
   slider: {fileID: 171640238}
   flipButton: {fileID: 1554565167}
   navigator: {fileID: 0}
@@ -17344,6 +17347,7 @@ MonoBehaviour:
   typeShortName: face_detail2_opacity
   overrideConfigName: 
   flipHorizontalParameterName: face_detail2_flip_horizontal
+  inputChangeValueSpeed: 0.01
   slider: {fileID: 826368694}
   flipButton: {fileID: 1334582095}
   navigator: {fileID: 0}
