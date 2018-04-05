@@ -1,4 +1,5 @@
-﻿using Rewired;
+﻿using System.Security.Permissions;
+using Rewired;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,6 +7,12 @@ namespace StrawberryNova
 {
     public class CharacterRotationPanel: MonoBehaviour
     {
+
+        public float joystickRotateAmount = 5f;
+
+        [HideInInspector]
+        public bool canRotate;
+
         private CACCharacter character;
         private EventTrigger eventTrigger;
         private bool rotating;
@@ -14,6 +21,7 @@ namespace StrawberryNova
 
         private void Start()
         {
+            canRotate = true;
             character = FindObjectOfType<CACCharacter>();
             inputManager = FindObjectOfType<GameInputManager>();
 
@@ -42,6 +50,14 @@ namespace StrawberryNova
 
         private void FixedUpdate()
         {
+            if(!canRotate)
+                return;
+
+            if(inputManager.player.GetButton("Previous Page"))
+                character.GrabRotate(-joystickRotateAmount);
+            if(inputManager.player.GetButton("Next Page"))
+                character.GrabRotate(joystickRotateAmount);
+
             if(rotating)
             {
                 var amount = ReInput.controllers.Mouse.screenPositionDelta.x;

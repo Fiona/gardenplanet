@@ -25,6 +25,7 @@ namespace StrawberryNova
         private BoxSlider colourSVSlider;
         private Slider colourHSlider;
         private string inputBehaviourXML;
+        private CharacterRotationPanel rotationPanel;
 
         public static void ShowColourPicker(GlobalButton buttonPressed, Color startColor, Action<Color> callback,
             GUINavigator _navigator)
@@ -53,6 +54,7 @@ namespace StrawberryNova
 
         private void Start()
         {
+            rotationPanel = FindObjectOfType<CharacterRotationPanel>();
             input = FindObjectOfType<GameInputManager>();
             canvasGroup = GetComponent<CanvasGroup>();
             colorPickerControl = GetComponentInChildren<ColorPickerControl>();
@@ -103,6 +105,8 @@ namespace StrawberryNova
             canvasGroup.blocksRaycasts = true;
             yield return LerpHelper.QuickFadeIn(canvasGroup, fadeTime);
 
+            rotationPanel.canRotate = false;
+
             // Backup the menu direction action behaviour to restore later.
             // The menu direction behaviour causes some undesired stuttering when using menu actions with
             // the colour picker, so we will change the behaviour to the default one and restore it after we close
@@ -127,6 +131,8 @@ namespace StrawberryNova
                 canvasGroup.blocksRaycasts = false;
                 yield break;
             }
+
+            rotationPanel.canRotate = true;
 
             // Restore the action behaviour that we overwrote in DoShow
             var menuDirectionsBehaviour = ReInput.mapping.GetInputBehavior(
