@@ -28,6 +28,7 @@ namespace StrawberryNova
                 return;
             var num = Random.Range(0, values.Count);
             currentVal = values[num];
+            DeselectAllSwatches();
             swatches[num].Select();
             UpdateDisplayAndCharacter();
         }
