@@ -56,6 +56,8 @@ namespace StrawberryNova
 
         [HideInInspector]
         public int layer;
+        [HideInInspector]
+        public Transform holdItemHolder;
 
         // Locomotion related members
         protected Rigidbody rigidBody;
@@ -80,10 +82,9 @@ namespace StrawberryNova
         protected List<Transform> lowerSpineBones;
         protected List<Transform> headBones;
 
-        protected Transform holdItemHolder;
-
-        // Action related members
+        // Action and world related members
         protected CharacterAction currentAction = 0;
+        protected InWorldItem itemCurrentlyHolding;
 
         public TilePosition CurrentTilePosition
         {
@@ -129,6 +130,9 @@ namespace StrawberryNova
                 return;
             }
 
+            // Visibly holding item?
+            mainAnimator.SetBool("IsHolding", itemCurrentlyHolding != null);
+
             // Override stop for actions
             if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
@@ -162,7 +166,6 @@ namespace StrawberryNova
                 rigidBody.AddForce(0, Consts.CHARACTER_JUMP_FORCE * Time.deltaTime, 0, ForceMode.Impulse);
                 attemptJump = false;
             }
-
         }
 
         /*
@@ -503,6 +506,40 @@ namespace StrawberryNova
         {
             appearence.backAccessory= newBackAccessory;
             RegenerateVisuals();
+        }
+
+        /*
+         * Call to start holding the item passed, any item currently being held will be put away.
+         */
+        public bool StartHoldingItem(ItemType itemType, Hashtable attributes)
+        {
+            StopHoldingItem();
+            itemCurrentlyHolding = controller.SpawnItem(itemType, attributes);
+            if(itemCurrentlyHolding == null)
+                return false;
+            itemCurrentlyHolding.HoldInCharactersHands(this);
+            return true;
+        }
+
+        /*
+         * Call to stop holding the currently held item
+         */
+        public void StopHoldingItem()
+        {
+            if(itemCurrentlyHolding != null)
+                itemCurrentlyHolding.PutBackIntoInventory();
+            itemCurrentlyHolding = null;
+        }
+
+        /*
+         * Call to drop the item currently being held
+         */
+        public bool DropHoldingItem()
+        {
+            if(itemCurrentlyHolding == null)
+                return false;
+            itemCurrentlyHolding.DropFromHands(this == controller.player);
+            return true;
         }
 
         protected void RegenerateVisuals()

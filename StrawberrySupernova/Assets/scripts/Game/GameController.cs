@@ -215,10 +215,9 @@ namespace StrawberryNova
          * Attempts to have the player holding the item matching the passed ItemType object and attrbutes.
          * Returns true if the item was successfully placed in their hand.
          */
-        public bool PlayerHoldingItem(ItemType itemType, Hashtable attributes)
+        public bool PlayerStartHoldingItem(ItemType itemType, Hashtable attributes)
         {
-            throw new NotImplementedException();
-            return false;
+            return player.StartHoldingItem(itemType, attributes);
         }
 
         /*
@@ -227,7 +226,7 @@ namespace StrawberryNova
          */
         public void PlayerStopHoldingItem()
         {
-            throw new NotImplementedException();
+            player.StopHoldingItem();
         }
 
         public IEnumerator PlayerUseItemInHand()
@@ -240,9 +239,13 @@ namespace StrawberryNova
             yield return StartCoroutine(itemHotbar.UseItemInHandOnTilePos(tilePos));
         }
 
-        public IEnumerator PlayerDropItemInHand()
+        public bool PlayerDropItemInHand()
         {
-            yield return StartCoroutine(itemHotbar.DropItemInHand());
+            if(!itemHotbar.RemoveItemInHand())
+                return false;
+            player.DropHoldingItem();
+            itemHotbar.UpdateItemInHand();
+            return true;
         }
 
         public IEnumerator PlayerDoEat()
@@ -305,25 +308,20 @@ namespace StrawberryNova
         }
 
 
-        // Generates an item in the world at the specified position
-        public void SpawnItemInWorld(ItemType itemType, System.Collections.Hashtable attributes, int amount,
-            WorldPosition worldPos, bool droppedByPlayer = false)
+        // Generates an item in the world and returns it
+        public InWorldItem SpawnItem(ItemType itemType, System.Collections.Hashtable attributes)
         {
             var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
             if(resource == null)
             {
                 resource = Resources.Load<GameObject>(Consts.ITEMS_PREFAB_MISSING);
             }
-            foreach (var i in Enumerable.Range(1, amount))
-            {
-                var newItem = Instantiate(resource);
-                newItem.transform.parent = inWorldItems.transform;
-                newItem.transform.localPosition = worldPos.TransformPosition();
-                var newItemComponent = newItem.AddComponent<InWorldItem>();
-                newItemComponent.attributes = attributes;
-                newItemComponent.itemType = itemType;
-                newItemComponent.droppedByPlayer = droppedByPlayer;
-            }
+            var newItem = Instantiate(resource);
+            newItem.transform.parent = inWorldItems.transform;
+            var newItemComponent = newItem.AddComponent<InWorldItem>();
+            newItemComponent.attributes = attributes;
+            newItemComponent.itemType = itemType;
+            return newItemComponent;
         }
 
         public void StartCutscene()
@@ -358,6 +356,7 @@ namespace StrawberryNova
             worldTimer.StartTimer();
             GameInputManager.UnlockDirectInput();
             inGameMenuButton.gameObject.SetActive(true);
+            itemHotbar.UpdateItemInHand();
         }
 
         public void SelectHotbarItem(int hotbarItemNum)

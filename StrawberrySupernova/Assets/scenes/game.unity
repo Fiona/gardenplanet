@@ -397,6 +397,7 @@ MonoBehaviour:
   lowerSpineScale: 1
   mainAnimator: {fileID: 636390506}
   layer: 0
+  holdItemHolder: {fileID: 0}
   maxEnergy: 0
   currentEnergy: 0
 --- !u!4 &636390503

@@ -9,6 +9,7 @@ namespace StrawberryNova
         public ItemType itemType;
         public Hashtable attributes;
         public bool droppedByPlayer;
+        public Character beingHeldBy;
 
         GameController controller;
         Glowable highlightGlow;
@@ -16,11 +17,12 @@ namespace StrawberryNova
         bool doHighlight;
         bool doFullHighlight;
         bool beingPickedUp;
+        Rigidbody rigidBody;
 
         public void Start()
         {
             controller = FindObjectOfType<GameController>();
-            StartCoroutine(DropAnim());
+            rigidBody = gameObject.GetComponent<Rigidbody>();
             if(itemType.CanPickup)
             {
                 highlightGlow = gameObject.AddComponent<Glowable>();
@@ -30,6 +32,18 @@ namespace StrawberryNova
 
         public void LateUpdate()
         {
+            // Held items don't do any special things other than tracking position
+            if(beingHeldBy != null)
+            {
+                transform.position = beingHeldBy.holdItemHolder.position;
+                transform.rotation = Quaternion.Euler(
+                    transform.rotation.eulerAngles.x,
+                    beingHeldBy.transform.rotation.eulerAngles.y,
+                    transform.rotation.eulerAngles.z
+                    );
+                return;
+            }
+
             // If dropped we need to not be picked up unless the player has moved away
             if(droppedByPlayer)
             {
@@ -79,7 +93,43 @@ namespace StrawberryNova
             StartCoroutine(PickupAnim());
         }
 
-        private IEnumerator DropAnim()
+        public void HoldInCharactersHands(Character characterHolding)
+        {
+            beingHeldBy = characterHolding;
+            transform.position = beingHeldBy.holdItemHolder.position;
+            if(rigidBody == null)
+                rigidBody = gameObject.GetComponent<Rigidbody>();
+            rigidBody.useGravity = false;
+            gameObject.DisableAllColliders();
+            StartCoroutine(StartHoldingAnim());
+        }
+
+        public void PutBackIntoInventory()
+        {
+            if(beingHeldBy == null)
+                return;
+            StartCoroutine(PutBackAnim());
+        }
+
+        public void DropFromHands(bool heldByPlayer = false)
+        {
+            if(beingHeldBy == null)
+                return;
+
+            rigidBody.useGravity = true;
+            var vel = rigidBody.velocity;
+            vel.x = Random.Range(-1f, 1f);
+            vel.z = Random.Range(-1f, 1f);
+            rigidBody.velocity = vel;
+            rigidBody.freezeRotation = false;
+
+            gameObject.EnableAllColliders();
+            beingHeldBy = null;
+            if(heldByPlayer)
+                droppedByPlayer = true;
+        }
+
+        private IEnumerator StartHoldingAnim()
         {
             var endScale = transform.localScale;
             foreach(var val in LerpHelper.LerpOverTime(.25f))
@@ -88,6 +138,17 @@ namespace StrawberryNova
                 yield return new WaitForFixedUpdate();
             }
             transform.localScale = endScale;
+        }
+
+        private IEnumerator PutBackAnim()
+        {
+            var startScale = transform.localScale;
+            foreach(var val in LerpHelper.LerpOverTime(.25f))
+            {
+                transform.localScale = Vector3.Lerp(startScale, Vector3.zero, val);
+                yield return new WaitForFixedUpdate();
+            }
+            Destroy(gameObject);
         }
 
         private IEnumerator PickupAnim()
@@ -103,7 +164,7 @@ namespace StrawberryNova
             }
             transform.localScale = Vector3.zero;
             controller.GivePlayerItem(itemType, attributes, 1);
-            Object.Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
     }

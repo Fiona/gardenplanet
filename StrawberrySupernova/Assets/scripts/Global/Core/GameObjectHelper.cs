@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework.Constraints;
+using UnityEngine;
 
 namespace StompyBlondie
 {
@@ -28,5 +29,24 @@ namespace StompyBlondie
         {
             return obj.GetComponent<T> () != null;
         }
+
+        public static void EnableAllColliders(this GameObject obj)
+        {
+            SetCollidersEnabled(obj, true);
+        }
+
+        public static void DisableAllColliders(this GameObject obj)
+        {
+            SetCollidersEnabled(obj, false);
+        }
+
+        private static void SetCollidersEnabled(GameObject obj, bool set)
+        {
+            var cols = obj.GetComponentsInChildren<Collider>();
+            foreach(var col in cols)
+                col.enabled = set;
+        }
+
+
     }
 }

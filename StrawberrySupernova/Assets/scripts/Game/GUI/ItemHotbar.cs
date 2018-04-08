@@ -132,7 +132,7 @@ namespace StrawberryNova
             if(selectedItemEntry == null)
                 controller.PlayerStopHoldingItem();
             else
-                controller.PlayerHoldingItem(selectedItemEntry.itemType, selectedItemEntry.attributes);
+                controller.PlayerStartHoldingItem(selectedItemEntry.itemType, selectedItemEntry.attributes);
         }
 
         public void SelectPreviousItem()
@@ -175,32 +175,32 @@ namespace StrawberryNova
             yield return StartCoroutine(activeItemScript.UseOnTilePos(tilePos));
         }
 
-        public IEnumerator DropItemInHand()
+        public bool RemoveItemInHand()
         {
             if(selectedItemEntry == null)
-                yield break;
+                return false;
             if(!controller.player.inventory.ItemEntryExists(selectedItemEntry))
             {
                 Debug.LogError("Item entry in hotbar not in inventory!");
                 StopItemScript();
-                yield break;
+                return false;
             }
-
-            // Spawn item
-            var newPos = new WorldPosition(controller.player.transform.localPosition);
-            newPos.height += .5f;
-            var shiftAmount = .1f;
-            newPos.x -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
-            newPos.y -= UnityEngine.Random.Range(-shiftAmount, shiftAmount);
-            controller.SpawnItemInWorld(selectedItemEntry.itemType, selectedItemEntry.attributes, 1, newPos,
-                droppedByPlayer:true);
 
             // Remove from inventory
             controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,
                 selectedItemEntry.attributes, 1);
+            return true;
+        }
+
+        public void UpdateItemInHand()
+        {
             UpdateHotbarState();
             SelectItemIndex(selectedItemIndex);
-            yield return null;
+            HandleActiveItemScript();
+            if(selectedItemEntry == null)
+                controller.PlayerStopHoldingItem();
+            else
+                controller.PlayerStartHoldingItem(selectedItemEntry.itemType, selectedItemEntry.attributes);
         }
 
         public void StartAssignmentMode(Action<int, bool> assignmentCallback)

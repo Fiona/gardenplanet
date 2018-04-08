@@ -243,7 +243,7 @@ namespace StrawberryNova
             // Drop item in hand on ground
             if(player.GetButtonUp("Drop Item"))
             {
-                StartCoroutine(controller.PlayerDropItemInHand());
+                controller.PlayerDropItemInHand();
                 return;
             }
 
