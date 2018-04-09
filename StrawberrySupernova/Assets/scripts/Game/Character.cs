@@ -664,12 +664,19 @@ namespace StrawberryNova
                     spine.localScale = new Vector3(lowerSpineScale, lowerSpineScale, lowerSpineScale);
         }
 
-        // Animation event: EatItem
-        protected void EatItemDone()
+        // Animation event: Nom some
+        protected void AnimatorNom()
         {
-            Debug.Log("Eat Item Done");
+            itemCurrentlyHolding.transform.localScale -= new Vector3(.35f, .35f, .35f);
+        }
+
+        // Animation event: EatItem
+        protected void AnimatorEatItemDone()
+        {
             mainAnimator.SetBool("DoEat", false);
             currentAction = 0;
+            Destroy(itemCurrentlyHolding.gameObject);
+            itemCurrentlyHolding = null;
         }
     }
 }

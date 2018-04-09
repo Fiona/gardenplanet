@@ -284,7 +284,28 @@ ModelImporter:
       curves: []
       events:
       - time: 1
-        functionName: EatItemDone
+        functionName: AnimatorEatItemDone
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3768116
+        functionName: AnimatorNom
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.53242683
+        functionName: AnimatorNom
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.64802474
+        functionName: AnimatorNom
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
