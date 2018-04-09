@@ -33,6 +33,7 @@ namespace StrawberryNova
         private float previousScrollWheelAxis;
         private float mouseModeTime;
         private bool mouseTextureSet;
+        private float lastDropTime;
 
         public void Awake()
         {
@@ -241,8 +242,9 @@ namespace StrawberryNova
             }
 
             // Drop item in hand on ground
-            if(player.GetButtonUp("Drop Item"))
+            if(player.GetButtonUp("Drop Item") && Time.time > lastDropTime + Consts.DROP_ITEM_COOLDOWN)
             {
+                lastDropTime = Time.time;
                 controller.PlayerDropItemInHand();
                 return;
             }

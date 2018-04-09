@@ -55,6 +55,9 @@ namespace StrawberryNova
         // class as a click in that direction.
         public const float MOUSE_WHEEL_CLICK_SNAP = 0.1f;
 
+        // How long to wait before registering another item drop
+        public const float DROP_ITEM_COOLDOWN = .25f;
+
         // -----------------------------
         // CAMERA
         // -----------------------------
