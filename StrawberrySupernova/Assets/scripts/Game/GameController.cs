@@ -343,7 +343,13 @@ namespace StrawberryNova
 
         public IEnumerator OpenInGameMenu()
         {
-            inGameMenuButton.gameObject.SetActive(false);
+            var igmbCanvas = inGameMenuButton.GetComponent<CanvasGroup>();
+            var igmbInputMode = inGameMenuButton.GetComponent<InputModeVisibility>();
+            igmbCanvas.blocksRaycasts = false;
+            var oldAlpha = igmbCanvas.alpha;
+            igmbCanvas.alpha = 0f;
+            igmbInputMode.enabled = false;
+
             GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
 
@@ -355,8 +361,12 @@ namespace StrawberryNova
 
             worldTimer.StartTimer();
             GameInputManager.UnlockDirectInput();
-            inGameMenuButton.gameObject.SetActive(true);
             itemHotbar.UpdateItemInHand();
+
+            igmbCanvas.blocksRaycasts = true;
+            igmbCanvas.alpha = oldAlpha;
+            igmbInputMode.enabled = true;
+
         }
 
         public void SelectHotbarItem(int hotbarItemNum)
