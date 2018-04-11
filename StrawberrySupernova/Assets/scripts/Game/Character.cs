@@ -58,6 +58,8 @@ namespace StrawberryNova
         public int layer;
         [HideInInspector]
         public Transform holdItemHolder;
+        [HideInInspector]
+        public bool isPlayer;
 
         // Locomotion related members
         protected Rigidbody rigidBody;
@@ -116,6 +118,7 @@ namespace StrawberryNova
             controller = FindObjectOfType<GameController>();
             RegenerateVisuals();
             RegenerateFace();
+            isPlayer = this == controller.player;
         }
 
         public virtual void FixedUpdate()
@@ -292,13 +295,28 @@ namespace StrawberryNova
          */
         public IEnumerator DoAction(CharacterAction action)
         {
+            // Can't start new action without finishing previous one
             if(currentAction > 0)
                 yield break;
+
+            // If player we should disable direct input and restore it after
+            var prevInput = controller.GameInputManager.directInputEnabled;
+            if(isPlayer)
+                controller.GameInputManager.directInputEnabled = false;
+
+            // Start action
             currentAction = action;
+
+            // animation for eating
             if(currentAction == CharacterAction.Eat)
                 mainAnimator.SetBool("DoEat", true);
+
+            // Wait for action to finish
             while(currentAction > 0)
                 yield return new WaitForFixedUpdate();
+
+            if(isPlayer)
+                controller.GameInputManager.directInputEnabled = prevInput;
         }
 
         /*
@@ -667,7 +685,8 @@ namespace StrawberryNova
         // Animation event: Nom some
         protected void AnimatorNom()
         {
-            itemCurrentlyHolding.transform.localScale -= new Vector3(.35f, .35f, .35f);
+            if(itemCurrentlyHolding != null)
+                itemCurrentlyHolding.transform.localScale -= new Vector3(.35f, .35f, .35f);
         }
 
         // Animation event: EatItem
@@ -675,7 +694,8 @@ namespace StrawberryNova
         {
             mainAnimator.SetBool("DoEat", false);
             currentAction = 0;
-            Destroy(itemCurrentlyHolding.gameObject);
+            if(itemCurrentlyHolding != null)
+                Destroy(itemCurrentlyHolding.gameObject);
             itemCurrentlyHolding = null;
         }
     }

@@ -111,7 +111,7 @@ namespace StrawberryNova
                 return;
             }
 
-            if(newIndex == selectedItemIndex)
+            if(newIndex == selectedItemIndex || !controller.GameInputManager.directInputEnabled)
                 return;
 
             // Apply and set marker position
