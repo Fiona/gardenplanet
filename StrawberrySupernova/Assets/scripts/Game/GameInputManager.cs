@@ -13,7 +13,8 @@ namespace StrawberryNova
 
         [HideInInspector]
         public bool directInputEnabled = true;
-        public bool doingRebind = false;
+        [HideInInspector]
+        public bool doingRebind;
         [HideInInspector]
         public Vector2? mouseWorldPosition;
         [HideInInspector]
@@ -223,6 +224,11 @@ namespace StrawberryNova
             // Interact item in hand
             if(player.GetButtonUp("Use Item"))
             {
+                // If we're using the mouse, stop the player doing anything if they're over the UI
+                // this is because they were clicking items on the hotbar and immediately using it
+                if(mouseMode && !controller.isMouseOverWorld.isOver)
+                    return;
+
                 // Tile item
                 if(!controller.noTileSelection &&
                    controller.activeTile != null &&

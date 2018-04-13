@@ -398,6 +398,7 @@ MonoBehaviour:
   mainAnimator: {fileID: 636390506}
   layer: 0
   holdItemHolder: {fileID: 0}
+  isPlayer: 0
   maxEnergy: 0
   currentEnergy: 0
 --- !u!4 &636390503
@@ -631,6 +632,7 @@ MonoBehaviour:
   player: {fileID: 636390502}
   canvasRect: {fileID: 445283150}
   screenFade: {fileID: 901381173}
+  isMouseOverWorld: {fileID: 1653829659}
   tilemap: {fileID: 0}
   markerManager: {fileID: 0}
   worldObjectManager: {fileID: 0}
@@ -643,6 +645,7 @@ MonoBehaviour:
   GameInputManager: {fileID: 0}
   inGameMenuButton: {fileID: 0}
   noTileSelection: 0
+  mouseHoverPlane: {fileID: 0}
 --- !u!4 &1083541996
 Transform:
   m_ObjectHideFlags: 0

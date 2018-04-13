@@ -20,6 +20,7 @@ namespace StrawberryNova
         public Player player;
         public RectTransform canvasRect;
         public ScreenFade screenFade;
+        public IsMouseOver isMouseOverWorld;
 
         [HideInInspector]
         public JsonData globalConfig;
@@ -55,6 +56,8 @@ namespace StrawberryNova
         public TilePosition activeTile;
         [HideInInspector]
         public bool noTileSelection;
+        [HideInInspector]
+        public MouseHoverPlane mouseHoverPlane;
 
         private GameObject inWorldItems;
         private Debug debugMenu;
