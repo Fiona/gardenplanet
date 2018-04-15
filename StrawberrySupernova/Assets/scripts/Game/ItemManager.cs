@@ -70,6 +70,15 @@ namespace StrawberryNova
         }
 
         /*
+         * Attempts to remove an item matching the passed inventory entry.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
+        public bool RemovePlayerItem(Inventory.InventoryItemEntry entry, int quantity = 1)
+        {
+            return controller.player.inventory.RemoveItem(entry, quantity);
+        }
+
+        /*
          * Quick method to get a recoginsed ItemType object whose ID matches the passed string.
          * Returns the ItemType or null.;
          */

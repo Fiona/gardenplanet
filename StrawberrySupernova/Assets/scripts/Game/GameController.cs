@@ -295,6 +295,15 @@ namespace StrawberryNova
         }
 
         /*
+         * Attempts to remove an item from the inventory entry passed.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
+        public bool RemovePlayerItem(Inventory.InventoryItemEntry entry, int quantity = 1)
+        {
+            return itemManager.RemovePlayerItem(entry, quantity);
+        }
+
+        /*
          * Attempt to use up some energy, true if successfully reduced.
          */
         public bool ConsumePlayerEnergy(float amount)

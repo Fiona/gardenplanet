@@ -76,7 +76,7 @@ namespace StrawberryNova
 
         public const float CHARACTER_MAX_WALK_SPEED = .8f;
 
-        public const float CHARACTER_MAX_RUN_SPEED = 1.8f;
+        public const float CHARACTER_MAX_RUN_SPEED = 1.5f;
 
         public const float CHARACTER_ROTATION_SPEED = 10f;
 
