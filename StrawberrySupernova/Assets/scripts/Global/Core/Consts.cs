@@ -72,7 +72,11 @@ namespace StrawberryNova
         // CHARACTERS
         // -----------------------------
 
-        public const float CHARACTER_MOVE_SPEED = 100f;
+        public const float CHARACTER_MOVE_ACCELERATION= 80f;
+
+        public const float CHARACTER_MAX_WALK_SPEED = .8f;
+
+        public const float CHARACTER_MAX_RUN_SPEED = 1.8f;
 
         public const float CHARACTER_ROTATION_SPEED = 10f;
 

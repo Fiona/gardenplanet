@@ -96,6 +96,7 @@ namespace StrawberryNova
             var lookVer = player.GetAxis("Look Vertical");
 
             var directionLock = player.GetButton("Direction Lock");
+            controller.player.SetDoWalk(player.GetButton("Walk"));
             if(walkHor < -0.5f)
                 controller.player.WalkInDirection(Direction.Left, directionLock);
             if(walkHor > 0.5f)

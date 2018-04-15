@@ -64,12 +64,13 @@ namespace StrawberryNova
         // Locomotion related members
         protected Rigidbody rigidBody;
         protected GameController controller;
-        protected Vector3 walkDirBuffer;
+        protected Vector3 moveDirBuffer;
         protected Vector3 lookDirection;
         protected bool isJumping;
         protected bool attemptJump;
         protected Vector3 desiredRotation;
         protected bool lockFacing;
+        protected bool doWalk;
 
         // Visuals related members
         protected GameObject visualsHolder;
@@ -130,6 +131,7 @@ namespace StrawberryNova
             if(currentAction != 0)
             {
                 mainAnimator.SetBool("DoWalk", false);
+                mainAnimator.SetBool("DoRun", false);
                 return;
             }
 
@@ -140,23 +142,41 @@ namespace StrawberryNova
             if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
 
-            // Handle walking
-            if(rigidBody.velocity.magnitude < 1.0f)
+            // Handle walking/running
+            //if(rigidBody.velocity.magnitude < 2.0f)
+            //{
                 rigidBody.AddForce(
-                    walkDirBuffer * Consts.CHARACTER_MOVE_SPEED * Time.deltaTime,
+                    moveDirBuffer * Consts.CHARACTER_MOVE_ACCELERATION * Time.deltaTime,
                     ForceMode.Impulse
                 );
-            mainAnimator.SetBool("DoWalk", Mathf.Abs(rigidBody.velocity.magnitude) > 0.1f);
+            //}
+            rigidBody.velocity = Vector3.ClampMagnitude(
+                rigidBody.velocity, doWalk ? Consts.CHARACTER_MAX_WALK_SPEED : Consts.CHARACTER_MAX_RUN_SPEED
+                );
+
+            //Debug.Log(Mathf.Abs(rigidBody.velocity.magnitude) );
+            //Debug.Log(doWalk);
+
+            if(Mathf.Abs(rigidBody.velocity.magnitude) > .5f)
+            {
+                mainAnimator.SetBool("DoWalk", doWalk);
+                mainAnimator.SetBool("DoRun", !doWalk);
+            }
+            else
+            {
+                mainAnimator.SetBool("DoWalk", false);
+                mainAnimator.SetBool("DoRun", false);
+            }
 
             // Do rotation towards movement direction
-            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
-                lookDirection = walkDirBuffer;
+            if(Mathf.Abs(moveDirBuffer.sqrMagnitude) > 0f && !lockFacing)
+                lookDirection = moveDirBuffer;
             desiredRotation = (transform.position - (transform.position - lookDirection)).normalized;
             float step = Consts.CHARACTER_ROTATION_SPEED * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
             SetRotation(newDir);
 
-            walkDirBuffer = Vector3.zero;
+            moveDirBuffer = Vector3.zero;
             lockFacing = false;
 
             // Deal with jumping
@@ -210,16 +230,16 @@ namespace StrawberryNova
             switch(dir)
             {
                 case Direction.Up:
-                    walkDirBuffer += Vector3.forward;
+                    moveDirBuffer += Vector3.forward;
                     break;
                 case Direction.Down:
-                    walkDirBuffer += Vector3.back;
+                    moveDirBuffer += Vector3.back;
                     break;
                 case Direction.Left:
-                    walkDirBuffer += Vector3.left;
+                    moveDirBuffer += Vector3.left;
                     break;
                 case Direction.Right:
-                    walkDirBuffer += Vector3.right;
+                    moveDirBuffer += Vector3.right;
                     break;
             }
         }
@@ -263,6 +283,14 @@ namespace StrawberryNova
             if(currentAction > 0)
                 return;
             attemptJump = true;
+        }
+
+        /*
+         * Call to change the state of walking or running
+         */
+        public void SetDoWalk(bool _doWalk)
+        {
+            doWalk = _doWalk;
         }
 
         /*
