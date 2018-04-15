@@ -1,6 +1,7 @@
 using System;
 using StompyBlondie;
 using System.Collections;
+using UnityEditor.UI;
 using UnityEngine;
 
 namespace StrawberryNova
@@ -12,6 +13,8 @@ namespace StrawberryNova
         public Inventory inventory;
         public float maxEnergy;
         public float currentEnergy;
+
+        private bool didYawn;
 
         public static Appearence defaultAppearence = new Appearence
         {
@@ -92,15 +95,25 @@ namespace StrawberryNova
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeIn(3f));
             currentEnergy = maxEnergy;
+            passedOut = false;
+            didYawn = false;
         }
 
         public IEnumerator PassOut()
         {
+            // Do falling over animation
+            yield return DoAction(CharacterAction.PassOut);
             controller.StartCutscene();
+
+            // Tell the player what happened
             yield return MessagePopup.ShowMessagePopup(
                 "You pass out from exhaustion..."
             );
+
+            // Fade out
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));
+
+            // Reset some game stuff, set the new day time
             controller.worldTimer.DontRemindMe(PassOutTimeEvent);
             controller.worldTimer.gameTime = new GameTime(
                 days: controller.worldTimer.gameTime.Days + 1,
@@ -108,9 +121,16 @@ namespace StrawberryNova
             );
             SetPassOutEvent();
             controller.worldTimer.DoTimerEvents();
+            mainAnimator.SetBool("DoPassOut", false);
+
+            // Wait a bit and fade back in
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(4f, new Color(1f,1f,1f)));
+
+            // Put energy to 2/3rds maximum
             currentEnergy = maxEnergy * .75f;
+            passedOut = false;
+            didYawn = false;
             controller.EndCutscene();
         }
 
@@ -126,7 +146,16 @@ namespace StrawberryNova
             {
                 currentEnergy = 0f;
                 StartCoroutine(PassOut());
+                return true;
             }
+
+            // Do Yawn
+            if(currentEnergy <= Consts.PLAYER_YAWN_ENERGY_THRESHOLD && !didYawn)
+            {
+                StartCoroutine(DoAction(CharacterAction.Yawn));
+                didYawn = true;
+            }
+
             return true;
         }
 
@@ -140,6 +169,8 @@ namespace StrawberryNova
             currentEnergy += amount;
             if(currentEnergy > maxEnergy)
                 currentEnergy = maxEnergy;
+            if(currentEnergy > Consts.PLAYER_YAWN_ENERGY_THRESHOLD && didYawn)
+                didYawn = false;
             return true;
         }
 

@@ -9,7 +9,9 @@ namespace StrawberryNova
 
     public enum CharacterAction
     {
-        Eat = 1
+        Eat = 1,
+        Yawn = 2,
+        PassOut = 3
     }
 
     public class Character : MonoBehaviour
@@ -89,6 +91,8 @@ namespace StrawberryNova
         protected CharacterAction currentAction = 0;
         protected InWorldItem itemCurrentlyHolding;
 
+        protected bool passedOut;
+
         public TilePosition CurrentTilePosition
         {
             get
@@ -128,7 +132,7 @@ namespace StrawberryNova
             layer = (int) Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
             // Deal with actions
-            if(currentAction != 0)
+            if(currentAction != 0 || passedOut)
             {
                 mainAnimator.SetBool("DoWalk", false);
                 mainAnimator.SetBool("DoRun", false);
@@ -143,19 +147,13 @@ namespace StrawberryNova
                 return;
 
             // Handle walking/running
-            //if(rigidBody.velocity.magnitude < 2.0f)
-            //{
-                rigidBody.AddForce(
-                    moveDirBuffer * Consts.CHARACTER_MOVE_ACCELERATION * Time.deltaTime,
-                    ForceMode.Impulse
-                );
-            //}
+            rigidBody.AddForce(
+                moveDirBuffer * Consts.CHARACTER_MOVE_ACCELERATION * Time.deltaTime,
+                ForceMode.Impulse
+            );
             rigidBody.velocity = Vector3.ClampMagnitude(
                 rigidBody.velocity, doWalk ? Consts.CHARACTER_MAX_WALK_SPEED : Consts.CHARACTER_MAX_RUN_SPEED
-                );
-
-            //Debug.Log(Mathf.Abs(rigidBody.velocity.magnitude) );
-            //Debug.Log(doWalk);
+            );
 
             if(Mathf.Abs(rigidBody.velocity.magnitude) > .5f)
             {
@@ -338,6 +336,12 @@ namespace StrawberryNova
             // animation for eating
             if(currentAction == CharacterAction.Eat)
                 mainAnimator.SetBool("DoEat", true);
+            // animation for yawning
+            if(currentAction == CharacterAction.Yawn)
+                mainAnimator.SetBool("DoYawn", true);
+            // animation for passing out
+            if(currentAction == CharacterAction.PassOut)
+                mainAnimator.SetBool("DoPassOut", true);
 
             // Wait for action to finish
             while(currentAction > 0)
@@ -726,5 +730,20 @@ namespace StrawberryNova
                 Destroy(itemCurrentlyHolding.gameObject);
             itemCurrentlyHolding = null;
         }
+
+        // Animation event: YawnDone
+        protected void AnimatorYawnDone()
+        {
+            mainAnimator.SetBool("DoYawn", false);
+            currentAction = 0;
+        }
+
+        // Animation event: PassOutDone
+        protected void AnimatorPassOutDone()
+        {
+            currentAction = 0;
+            passedOut = true;
+        }
+
     }
 }

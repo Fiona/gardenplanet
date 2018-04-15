@@ -111,6 +111,9 @@ namespace StrawberryNova
         // How far the auto pickup radius is
         public const float PLAYER_AUTO_PICKUP_RADIUS = .2f;
 
+        // How many hearts till the player does a yawn
+        public const float PLAYER_YAWN_ENERGY_THRESHOLD = 2f;
+
         // -----------------------------
         // GAMEPLAY
         // -----------------------------
