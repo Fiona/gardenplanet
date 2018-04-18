@@ -738,6 +738,15 @@ namespace StrawberryNova
             currentAction = 0;
         }
 
+        // Animation event: PassOutMid
+        protected void AnimatorPassOutMid()
+        {
+            if(this == controller.player)
+                controller.PlayerDropItemInHand();
+            else
+                DropHoldingItem();
+        }
+
         // Animation event: PassOutDone
         protected void AnimatorPassOutDone()
         {

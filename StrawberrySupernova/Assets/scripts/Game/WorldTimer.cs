@@ -85,7 +85,7 @@ namespace StrawberryNova
         {
             timerText.text = String.Format("{0:D2}:{1:D2}", gameTime.TimeHour, gameTime.TimeMinute);
             dayText.text = String.Format("{0} {1:D2}",gameTime.WeekdayName, gameTime.DateDay);
-            dateText.text = String.Format("{0} Yr {1}", gameTime.DateSeasonName, gameTime.Years);
+            dateText.text = String.Format("{0} Yr {1}", gameTime.DateSeasonNameWithThird, gameTime.Years);
 
             // Work out rotation for the clock
             const float minsInDay = (float)(Consts.NUM_MINUTES_IN_HOUR * Consts.NUM_HOURS_IN_DAY);

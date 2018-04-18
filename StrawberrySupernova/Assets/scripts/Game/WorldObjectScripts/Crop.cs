@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using LitJson;
 using UnityEngine;
@@ -155,12 +156,21 @@ namespace StrawberryNova
 
         private bool IsCorrectSeason()
         {
+            // Get list of acceptable season numbers
             var cropType = worldObject.GetAttrString("type");
             JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
+            var seasonNumbers = new List<int>();
             foreach(JsonData seasonName in seasons)
-                if(Season.GetSeasonByShortName((string)seasonName) == controller.worldTimer.gameTime.DateSeason)
-                    return true;
-            return false;
+                seasonNumbers.Add(Season.GetSeasonByShortName((string)seasonName));
+
+            // First check if current season is dead-on
+            if(seasonNumbers.Contains(controller.worldTimer.gameTime.DateSeason))
+                return true;
+
+            // Crops can grow past any season into the next third, so check to see if the last season was valid (if
+            // we're still in the first third of current one)
+            var previousSeason = (controller.worldTimer.gameTime - new GameTime(0, 0, 0, 1)).DateSeason;
+            return controller.worldTimer.gameTime.DateSeasonThird == 1 && seasonNumbers.Contains(previousSeason);
         }
 
     }
