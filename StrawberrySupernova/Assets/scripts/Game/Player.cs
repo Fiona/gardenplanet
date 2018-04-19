@@ -116,7 +116,7 @@ namespace StrawberryNova
             // Reset some game stuff, set the new day time
             controller.worldTimer.DontRemindMe(PassOutTimeEvent);
             controller.worldTimer.gameTime = new GameTime(
-                days: controller.worldTimer.gameTime.Days + 1,
+                days: controller.worldTimer.gameTime.Days,
                 hours: Consts.PLAYER_PASS_OUT_WAKE_HOUR
             );
             SetPassOutEvent();
