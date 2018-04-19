@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StompyBlondie;
 using UnityEngine;
 
@@ -6,33 +7,46 @@ namespace StrawberryNova
 {
     public class CharacterFace: MonoBehaviour
     {
-        private RenderTexture renderTexture;
+        public enum FaceState
+        {
+            NORMAL,
+            EYES_CLOSED
+        };
+
+        private Dictionary<FaceState, RenderTexture> renderTextures;
         private Material faceMaterial;
         private Character.Appearence appearence;
         private bool suppliedAppearence;
+        private FaceState currentState = FaceState.NORMAL;
 
         private void Awake()
         {
-            renderTexture = new RenderTexture(2048, 2048, 16, RenderTextureFormat.ARGB32);
-            renderTexture.Create();
+            renderTextures = new Dictionary<FaceState, RenderTexture>();
+            foreach(var state in Enum.GetValues(typeof(FaceState)))
+            {
+                var newRenderTexture = new RenderTexture(2048, 2048, 16, RenderTextureFormat.ARGB32);
+                newRenderTexture.Create();
+                renderTextures[(FaceState)state] = newRenderTexture;
+            }
         }
 
         private void Start()
         {
             faceMaterial = GetComponentInChildren<SkinnedMeshRenderer>().material;
-            faceMaterial.mainTexture = renderTexture;
+            SetFaceState(FaceState.NORMAL);
         }
 
         private void Update()
         {
-            if(!renderTexture.IsCreated())
+            if(!renderTextures[FaceState.NORMAL].IsCreated())
                 Recreate();
         }
 
         private void OnDestroy()
         {
-            renderTexture.Release();
-            renderTexture = null;
+            foreach(var texture in renderTextures.Values)
+                texture.Release();
+            renderTextures = null;
         }
 
         public void Recreate()
@@ -43,37 +57,57 @@ namespace StrawberryNova
 
         public void Recreate(Character.Appearence _appearence)
         {
-            suppliedAppearence = true;
             appearence = _appearence;
-            renderTexture.Clear(Color.clear);
+            foreach(var state in renderTextures.Keys)
+                GenerateFaceTexture(renderTextures[state], state);
+        }
+
+        public void SetFaceState(FaceState state)
+        {
+            currentState = state;
+            faceMaterial.mainTexture = renderTextures[state];
+        }
+
+        private void GenerateFaceTexture(RenderTexture texture, FaceState state)
+        {
+            suppliedAppearence = true;
+            texture.Clear(Color.clear);
 
             var facePartMaterial = new Material(Shader.Find("Hidden/FacePart"));
 
             // face detail
             var detail1Color = new Color(1f, 1f, 1f, appearence.faceDetail1Opacity);
-            BlitFacePart(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH, appearence.faceDetail1, renderTexture,
+            BlitFacePart(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH, appearence.faceDetail1, texture,
                 facePartMaterial, detail1Color, appearence.faceDetail1FlipHorizontal);
             var detail2Color = new Color(1f, 1f, 1f, appearence.faceDetail2Opacity);
-            BlitFacePart(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH, appearence.faceDetail2, renderTexture,
+            BlitFacePart(Consts.CHARACTERS_FACE_DETAILS_TEXTURE_PATH, appearence.faceDetail2, texture,
                 facePartMaterial, detail2Color, appearence.faceDetail2FlipHorizontal);
 
             // mouth
-            BlitFacePart(Consts.CHARACTERS_MOUTHS_TEXTURE_PATH, appearence.mouth, renderTexture, facePartMaterial);
+            BlitFacePart(Consts.CHARACTERS_MOUTHS_TEXTURE_PATH, appearence.mouth, texture, facePartMaterial);
 
             // nose
-            BlitFacePart(Consts.CHARACTERS_NOSES_TEXTURE_PATH, appearence.nose, renderTexture, facePartMaterial);
+            BlitFacePart(Consts.CHARACTERS_NOSES_TEXTURE_PATH, appearence.nose, texture, facePartMaterial);
 
             // eyes
-            var doEyeTint = BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes + "_tint", renderTexture,
-                facePartMaterial, appearence.eyeColor);
-            if(doEyeTint)
+            if(state == FaceState.EYES_CLOSED)
             {
-                BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes, renderTexture,
+                BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes + "_closed", texture,
                     facePartMaterial);
+            }
+            else
+            {
+                var doEyeTint = BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes + "_tint", texture,
+                    facePartMaterial, appearence.eyeColor);
+                if(doEyeTint)
+                {
+                    BlitFacePart(Consts.CHARACTERS_EYES_TEXTURE_PATH, appearence.eyes, texture,
+                        facePartMaterial);
+                }
             }
 
             // eyesbrows
-            BlitFacePart(Consts.CHARACTERS_EYEBROWS_TEXTURE_PATH, appearence.eyebrows, renderTexture, facePartMaterial);
+            BlitFacePart(Consts.CHARACTERS_EYEBROWS_TEXTURE_PATH, appearence.eyebrows, texture, facePartMaterial);
         }
 
         private bool BlitFacePart(string resourcePath, string resourceName, RenderTexture destination,
