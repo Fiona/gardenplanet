@@ -122,6 +122,7 @@ namespace StrawberryNova
             SetPassOutEvent();
             controller.worldTimer.DoTimerEvents();
             mainAnimator.SetBool("DoPassOut", false);
+            face.SetFaceState(CharacterFace.FaceState.NORMAL);
 
             // Wait a bit and fade back in
             yield return new WaitForSeconds(2f);

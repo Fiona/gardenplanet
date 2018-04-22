@@ -731,9 +731,16 @@ namespace StrawberryNova
             itemCurrentlyHolding = null;
         }
 
+        // Animation event: Close eyes
+        protected void AnimatorCloseEyes()
+        {
+            face.SetFaceState(CharacterFace.FaceState.EYES_CLOSED);
+        }
+
         // Animation event: YawnDone
         protected void AnimatorYawnDone()
         {
+            face.SetFaceState(CharacterFace.FaceState.NORMAL);
             mainAnimator.SetBool("DoYawn", false);
             currentAction = 0;
         }

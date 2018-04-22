@@ -15,7 +15,7 @@ namespace StrawberryNova
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Game;
+        public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
 
         // -----------------------------
         // TILE DRAWING
@@ -27,7 +27,9 @@ namespace StrawberryNova
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
         public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
+
         public const int COLLISION_LAYER_CHARACTERS = 14;
+
         // Tiles are this size on all dimensions
         public const float TILE_SIZE = 0.5f;
 
@@ -72,7 +74,7 @@ namespace StrawberryNova
         // CHARACTERS
         // -----------------------------
 
-        public const float CHARACTER_MOVE_ACCELERATION= 80f;
+        public const float CHARACTER_MOVE_ACCELERATION = 80f;
 
         public const float CHARACTER_MAX_WALK_SPEED = .8f;
 
@@ -81,6 +83,10 @@ namespace StrawberryNova
         public const float CHARACTER_ROTATION_SPEED = 10f;
 
         public const float CHARACTER_JUMP_FORCE = 800f;
+
+        public static readonly float[] CHARACTER_BETWEEN_BLINK_WAIT_RANGE = { 2f, 3f };
+
+        public static readonly float[] CHARACTER_BLINK_TIME_RANGE = { .05f, .1f };
 
         // -----------------------------
         // PLAYER

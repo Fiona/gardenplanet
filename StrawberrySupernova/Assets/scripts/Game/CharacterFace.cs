@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using StompyBlondie;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace StrawberryNova
         private Character.Appearence appearence;
         private bool suppliedAppearence;
         private FaceState currentState = FaceState.NORMAL;
+        private float blinkWait;
+        private float blinkTime;
 
         private void Awake()
         {
@@ -34,12 +37,39 @@ namespace StrawberryNova
         {
             faceMaterial = GetComponentInChildren<SkinnedMeshRenderer>().material;
             SetFaceState(FaceState.NORMAL);
+            StartCoroutine(DoExpressions());
         }
 
         private void Update()
         {
             if(!renderTextures[FaceState.NORMAL].IsCreated())
+            {
                 Recreate();
+                return;
+            }
+        }
+
+        private IEnumerator DoExpressions()
+        {
+            while(true)
+            {
+                if(currentState == FaceState.EYES_CLOSED)
+                {
+                    SetRenderTexture(renderTextures[FaceState.EYES_CLOSED]);
+                }
+                else if(currentState == FaceState.NORMAL)
+                {
+                    SetRenderTexture(renderTextures[FaceState.NORMAL]);
+                    var betweenBlinkTime = UnityEngine.Random.Range(Consts.CHARACTER_BETWEEN_BLINK_WAIT_RANGE[0],
+                        Consts.CHARACTER_BETWEEN_BLINK_WAIT_RANGE[1]);
+                    yield return new WaitForSeconds(betweenBlinkTime);
+                    SetRenderTexture(renderTextures[FaceState.EYES_CLOSED]);
+                    var blinkTime = UnityEngine.Random.Range(Consts.CHARACTER_BLINK_TIME_RANGE[0],
+                        Consts.CHARACTER_BLINK_TIME_RANGE[1]);
+                    yield return new WaitForSeconds(blinkTime);
+                }
+                yield return new WaitForFixedUpdate();
+            }
         }
 
         private void OnDestroy()
@@ -66,6 +96,12 @@ namespace StrawberryNova
         {
             currentState = state;
             faceMaterial.mainTexture = renderTextures[state];
+        }
+
+        private void SetRenderTexture(RenderTexture setTo)
+        {
+            if(setTo.IsCreated() && faceMaterial.mainTexture != setTo)
+                faceMaterial.mainTexture = setTo;
         }
 
         private void GenerateFaceTexture(RenderTexture texture, FaceState state)
