@@ -18,11 +18,13 @@ namespace StompyBlondie
     public class AnimatedButton: MonoBehaviour
     {
         public RectTransform rectTransform;
+        public bool repeatable = true;
 
         private EventTrigger eventTrigger;
         private Action callback;
         private GameInputManager inputManager;
         private bool hover;
+        private bool hasClicked = false;
 
         public void Awake()
         {
@@ -73,27 +75,38 @@ namespace StompyBlondie
         protected virtual void Hover(BaseEventData data)
         {
             hover = true;
+            if(!repeatable && hasClicked)
+                return;
             StartCoroutine(HoverAnimation(data));
         }
 
         protected virtual void HoverEnd(BaseEventData data)
         {
             hover = false;
+            if(!repeatable && hasClicked)
+                return;
             StartCoroutine(HoverEndAnimation(data));
         }
 
         protected virtual void PointerDown(BaseEventData data)
         {
+            if(!repeatable && hasClicked)
+                return;
             StartCoroutine(PointerDownAnimation(data));
         }
 
         protected virtual void PointerUp(BaseEventData data)
         {
+            if(!repeatable && hasClicked)
+                return;
             StartCoroutine(PointerUpAnimation(data));
         }
 
         protected virtual void Click(BaseEventData data)
         {
+            if(!repeatable && hasClicked)
+                return;
+            hasClicked = true;
             StartCoroutine(DoClick(data));
         }
 

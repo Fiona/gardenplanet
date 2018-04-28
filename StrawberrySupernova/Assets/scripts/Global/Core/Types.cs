@@ -11,6 +11,7 @@ namespace StrawberryNova
     // Top level state
     public enum AppState
     {
+        Logo,
         Title,
         Editor,
         Game,

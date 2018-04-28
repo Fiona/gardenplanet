@@ -15,7 +15,7 @@ namespace StrawberryNova
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
+        public const AppState INITIAL_APP_STATE = AppState.Logo;
 
         // -----------------------------
         // TILE DRAWING
