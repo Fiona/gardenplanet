@@ -187,7 +187,7 @@ namespace StompyBlondie
             LerpHelper.Type lerpType = LerpHelper.Type.Linear)
         {
             yield return LerpHelper.QuickTween(
-                (i) => { canvasGroup.alpha = i; },
+                (i) => { if(canvasGroup != null) canvasGroup.alpha = i; },
                 0f, 1f, durationSeconds, lerpType: lerpType
             );
         }
@@ -211,7 +211,7 @@ namespace StompyBlondie
             LerpHelper.Type lerpType = LerpHelper.Type.Linear)
         {
             yield return LerpHelper.QuickTween(
-                (i) => { canvasGroup.alpha = i; },
+                (i) => { if(canvasGroup != null) canvasGroup.alpha = i; },
                 1f, 0f, durationSeconds, lerpType: lerpType
             );
         }

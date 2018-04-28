@@ -187,9 +187,17 @@ namespace StrawberryNova
                         hit.transform.gameObject.GetComponentInParent<WorldObjectInteractable>();
                     if(worldObjectComponent != null)
                     {
-                        if(Vector3.Distance(controller.player.transform.position,
-                               worldObjectComponent.gameObject.transform.position) <
-                           Consts.PLAYER_INTERACT_DISTANCE)
+                        // Need to determine if we're actually looking at the object's collider otherwise
+                        // we'd be checking for the centre point which is no good for odd shaped ones.
+                        RaycastHit dummy;
+                        var canActuallySee = hit.collider.Raycast(
+                            new Ray(
+                                controller.player.transform.position,
+                                hit.transform.position - controller.player.transform.position
+                                ),
+                            out dummy,
+                            Consts.PLAYER_INTERACT_DISTANCE);
+                        if(canActuallySee)
                         {
                             worldObjectComponent.FullHighlight();
                             controller.noTileSelection = true;
