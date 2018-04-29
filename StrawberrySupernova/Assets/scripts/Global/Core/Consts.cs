@@ -15,7 +15,7 @@ namespace StrawberryNova
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Logo;
+        public const AppState INITIAL_APP_STATE = AppState.Game;
 
         // -----------------------------
         // TILE DRAWING
@@ -192,6 +192,8 @@ namespace StrawberryNova
         public const string PREFAB_PATH_GUI_NAVIGATION_POINTER = "prefabs/gui/GUINavigationPointer";
         public const string PREFAB_PATH_IN_GAME_MENU_BUTTON = "prefabs/gui/InGameMenuButton";
         public const string PREFAB_PATH_LOADING_SCREEN = "prefabs/LoadingScreen";
+        public const string MATERIAL_PATH_HOED_SOIL = "materials/HoedSoil";
+        public const string MATERIAL_PATH_WATERED_HOED_SOIL = "materials/WateredHoedSoil";
 
         public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
         public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";

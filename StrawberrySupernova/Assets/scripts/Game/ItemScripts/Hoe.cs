@@ -77,7 +77,6 @@ namespace StrawberryNova
                 var soil = controller.worldObjectManager.AddWorldObject(
                     controller.worldObjectManager.GetWorldObjectTypeByName("crop"), tilePos
                 );
-                soil.gameObject.transform.localRotation = Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f);
             }
 
             public override bool CanBeDroppedOnTilePos(TilePosition tilePos)

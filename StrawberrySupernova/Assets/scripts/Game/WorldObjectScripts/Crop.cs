@@ -30,18 +30,25 @@ namespace StrawberryNova
             controller.worldTimer.DontRemindMe(DailyGrowth);
         }
 
-        public override GameObject GetAppearencePrefab()
+        public override GameObject GetAppearencePrefab(bool isNew = false)
         {
+            if(controller == null)
+                controller = FindObjectOfType<GameController>();
+
             var cropType = worldObject.GetAttrString("type");
             var appearenceHolder = new GameObject("CropAppearence");
 
             // Add soil
-            string soilPrefabName = "hoedsoil";
-            if(worldObject.GetAttrBool("watered"))
-                soilPrefabName += "_watered";
-            Instantiate(
-                Resources.Load<GameObject>(Path.Combine(Consts.WORLD_OBJECTS_PREFABS_PATH, soilPrefabName))
-            ).transform.SetParent(appearenceHolder.transform, false);
+            var soilObject = Instantiate(
+                Resources.Load<GameObject>(Path.Combine(Consts.WORLD_OBJECTS_PREFABS_PATH, "hoedsoil"))
+            );
+            soilObject.transform.SetParent(appearenceHolder.transform, false);
+            controller.autoTileManager.SetMaterialOfSoil(
+                soilObject,
+                new TilePosition(new WorldPosition(worldObject.x, worldObject.y, worldObject.height)),
+                worldObject.GetAttrBool("watered"),
+                isNew
+                );
 
             // If nothing else this is all we want
             if(cropType == "")
@@ -71,6 +78,7 @@ namespace StrawberryNova
                 Resources.Load<GameObject>(Path.Combine(Consts.WORLD_OBJECTS_PREFABS_PATH, additionalPrefabName))
             );
             additionalPrefab.transform.SetParent(appearenceHolder.transform, false);
+            additionalPrefab.transform.localRotation = Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f);
 
             if(fullyGrown)
             {

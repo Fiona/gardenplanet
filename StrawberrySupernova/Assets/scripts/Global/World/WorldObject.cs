@@ -22,7 +22,7 @@ namespace StrawberryNova
             return script != null ? script.GetInfoPopup() : null;
         }
 
-        public void SetAppearence()
+        public void SetAppearence(bool isNew = false)
         {
             if(gameObject.transform.childCount > 0)
                 UnityEngine.Object.DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
@@ -32,7 +32,7 @@ namespace StrawberryNova
 
             GameObject prefab = null;
             if(script != null)
-                prefab = script.GetAppearencePrefab();
+                prefab = script.GetAppearencePrefab(isNew);
             else if(objectType.prefab != null)
                 prefab = UnityEngine.Object.Instantiate(objectType.prefab);
 

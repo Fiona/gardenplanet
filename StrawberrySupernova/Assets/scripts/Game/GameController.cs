@@ -58,6 +58,8 @@ namespace StrawberryNova
         public bool noTileSelection;
         [HideInInspector]
         public MouseHoverPlane mouseHoverPlane;
+        [HideInInspector]
+        public AutoTileManager autoTileManager;
 
         private GameObject inWorldItems;
         private Debug debugMenu;
@@ -110,6 +112,9 @@ namespace StrawberryNova
 
             var inputManagerObj = new GameObject("GameInputManager");
             GameInputManager = inputManagerObj.AddComponent<GameInputManager>();
+
+            var autoTileManagerObj = new GameObject("AutoTileManager");
+            autoTileManager = autoTileManagerObj.AddComponent<AutoTileManager>();
 
             inWorldItems = new GameObject("In World Items");
 
