@@ -2034,8 +2034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  clickAnimTime: 0.2
-  hoverFadeTime: 0.25
   backgroundNormal: {fileID: 114139663837649640}
   backgroundHover: {fileID: 114477167749251498}
   backgroundPressed: {fileID: 114813968409785334}
@@ -2387,6 +2385,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114470601421119070}
   backgroundHover: {fileID: 114698935184425336}
   backgroundPressed: {fileID: 114235408996978862}
@@ -2520,6 +2519,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114357769637718144}
   backgroundHover: {fileID: 114773116565786702}
   backgroundPressed: {fileID: 114610028697666982}
@@ -2722,6 +2722,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114832360429238908}
   backgroundHover: {fileID: 114773962652547208}
   backgroundPressed: {fileID: 114172019481392004}
@@ -3089,6 +3090,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114854051561361518}
   backgroundHover: {fileID: 114781053547251940}
   backgroundPressed: {fileID: 114134544534189788}
@@ -3108,6 +3110,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114920486912223290}
   backgroundHover: {fileID: 114967353352124612}
   backgroundPressed: {fileID: 114960222671295368}
@@ -3888,7 +3891,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_enableKerning: 1
@@ -3907,7 +3910,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.00008430868, y: 0, z: 0, w: -1.6178946}
   m_textInfo:
     textComponent: {fileID: 114382097747574138}
     characterCount: 14
@@ -3915,7 +3918,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 1
@@ -4060,8 +4063,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  clickAnimTime: 0.2
-  hoverFadeTime: 0.25
   backgroundNormal: {fileID: 114687344823705932}
   backgroundHover: {fileID: 114432217632305320}
   backgroundPressed: {fileID: 114500319995452456}
@@ -4091,8 +4092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  clickAnimTime: 0.2
-  hoverFadeTime: 0.25
   backgroundNormal: {fileID: 114307697919619474}
   backgroundHover: {fileID: 114078488065169424}
   backgroundPressed: {fileID: 114429651211907682}
@@ -4436,6 +4435,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114110954849536858}
   backgroundHover: {fileID: 114444783708293292}
   backgroundPressed: {fileID: 114781589844451418}
@@ -4941,6 +4941,7 @@ MonoBehaviour:
   - Previous Hotbar Item
   - Next Hotbar Item
   - '-'
+  - Walk
   - Direction Lock
   - '-'
   - Hotbar Item 1
@@ -5391,6 +5392,7 @@ MonoBehaviour:
   selected: 0
   clickAnimTime: 0.2
   hoverFadeTime: 0.25
+  scaleToOnSelect: 0.95
   backgroundNormal: {fileID: 114170347517226078}
   backgroundHover: {fileID: 114022715733785394}
   backgroundPressed: {fileID: 114566006783899758}
@@ -7596,7 +7598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 121.79999, y: -92}
+  m_AnchoredPosition: {x: 120.600006, y: -92.54454}
   m_SizeDelta: {x: 217, y: 189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224185558286411756
@@ -7840,7 +7842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 677.25, y: -510.1}
+  m_AnchoredPosition: {x: 677.25, y: -558}
   m_SizeDelta: {x: 1238.9, y: 867.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224319067374691332
@@ -8455,7 +8457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 677.25, y: -556.2}
+  m_AnchoredPosition: {x: 675, y: -556}
   m_SizeDelta: {x: 1238.9, y: 867.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224552249725395310
@@ -8723,7 +8725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 5.7, y: -127.23}
+  m_AnchoredPosition: {x: -0.000012397766, y: -131.72733}
   m_SizeDelta: {x: 644.8, y: 120.29999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224739495055866646
@@ -8889,8 +8891,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 3.2, y: -3.2}
+  m_SizeDelta: {x: 640.1, y: 312.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224768557766819474
 RectTransform:
@@ -9152,7 +9154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.95, y: 82.8}
+  m_AnchoredPosition: {x: -0.000012218952, y: 83.70875}
   m_SizeDelta: {x: 654.3, y: 69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224855125064711972
@@ -9192,7 +9194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109.70001, y: 27.549469}
+  m_AnchoredPosition: {x: -107.3, y: 31}
   m_SizeDelta: {x: 219, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224902197620760764
@@ -9315,7 +9317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -42.7}
+  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
   m_SizeDelta: {x: 800, y: 310.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224949062607527632

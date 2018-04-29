@@ -13,7 +13,8 @@ namespace StrawberryNova
 
         [HideInInspector]
         public bool directInputEnabled = true;
-        public bool doingRebind = false;
+        [HideInInspector]
+        public bool doingRebind;
         [HideInInspector]
         public Vector2? mouseWorldPosition;
         [HideInInspector]
@@ -33,6 +34,7 @@ namespace StrawberryNova
         private float previousScrollWheelAxis;
         private float mouseModeTime;
         private bool mouseTextureSet;
+        private float lastDropTime;
 
         public void Awake()
         {
@@ -94,6 +96,7 @@ namespace StrawberryNova
             var lookVer = player.GetAxis("Look Vertical");
 
             var directionLock = player.GetButton("Direction Lock");
+            controller.player.SetDoWalk(player.GetButton("Walk"));
             if(walkHor < -0.5f)
                 controller.player.WalkInDirection(Direction.Left, directionLock);
             if(walkHor > 0.5f)
@@ -184,9 +187,17 @@ namespace StrawberryNova
                         hit.transform.gameObject.GetComponentInParent<WorldObjectInteractable>();
                     if(worldObjectComponent != null)
                     {
-                        if(Vector3.Distance(controller.player.transform.position,
-                               worldObjectComponent.gameObject.transform.position) <
-                           Consts.PLAYER_INTERACT_DISTANCE)
+                        // Need to determine if we're actually looking at the object's collider otherwise
+                        // we'd be checking for the centre point which is no good for odd shaped ones.
+                        RaycastHit dummy;
+                        var canActuallySee = hit.collider.Raycast(
+                            new Ray(
+                                controller.player.transform.position,
+                                hit.transform.position - controller.player.transform.position
+                                ),
+                            out dummy,
+                            Consts.PLAYER_INTERACT_DISTANCE);
+                        if(canActuallySee)
                         {
                             worldObjectComponent.FullHighlight();
                             controller.noTileSelection = true;
@@ -222,6 +233,11 @@ namespace StrawberryNova
             // Interact item in hand
             if(player.GetButtonUp("Use Item"))
             {
+                // If we're using the mouse, stop the player doing anything if they're over the UI
+                // this is because they were clicking items on the hotbar and immediately using it
+                if(mouseMode && !controller.isMouseOverWorld.isOver)
+                    return;
+
                 // Tile item
                 if(!controller.noTileSelection &&
                    controller.activeTile != null &&
@@ -241,8 +257,9 @@ namespace StrawberryNova
             }
 
             // Drop item in hand on ground
-            if(player.GetButtonUp("Drop Item"))
+            if(player.GetButtonUp("Drop Item") && Time.time > lastDropTime + Consts.DROP_ITEM_COOLDOWN)
             {
+                lastDropTime = Time.time;
                 controller.PlayerDropItemInHand();
                 return;
             }

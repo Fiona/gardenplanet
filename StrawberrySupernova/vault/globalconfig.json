@@ -6,7 +6,7 @@
   },
   "crops":{
     "cabbage":{
-      "seasons":["early_spring", "mid_spring", "late_spring", "early_summer", "early_autumn", "mid_autumn", "late_autumn", "early_winter"],
+      "seasons":["spring", "autumn"],
       "growth_per_day":[12.0,20.0],
       "num_growth_stages":2
     }

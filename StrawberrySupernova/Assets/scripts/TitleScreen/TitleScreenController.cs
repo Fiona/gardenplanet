@@ -61,7 +61,7 @@ namespace StrawberryNova
                 dir = !dir;
             }
 
-            yield return screenFade.FadeIn(fadeInTime);
+            yield return screenFade.FadeIn(fadeInTime, Color.black);
 
             // animate in buttons
             foreach(var b in buttons)

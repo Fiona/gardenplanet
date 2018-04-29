@@ -96,7 +96,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &114026192787735958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,8 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  clickAnimTime: 0.2
-  hoverFadeTime: 0.25
   backgroundNormal: {fileID: 114104911941759542}
   backgroundHover: {fileID: 114681169747847416}
   backgroundPressed: {fileID: 114602192220579404}

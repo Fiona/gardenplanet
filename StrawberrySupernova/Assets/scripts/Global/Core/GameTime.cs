@@ -87,6 +87,20 @@ namespace StrawberryNova
             }
         }
 
+        // The current season as a displayable string with a third prefix (like early- mid- and late-)
+        public string DateSeasonNameWithThird{
+            get{
+                return Consts.SEASON_THIRD_PREFIXES[DateSeasonThird-1] + DateSeasonName;
+            }
+        }
+
+        // Which third the current season is in (1, 2, 3)
+        public int DateSeasonThird{
+            get{
+                return (int)Mathf.Floor((DateDay / (Consts.NUM_DAYS_IN_SEASON + 1.0f) * 3f)) + 1;
+            }
+        }
+
         // The current day of the season starting at 1
         public int DateDay{
             get{

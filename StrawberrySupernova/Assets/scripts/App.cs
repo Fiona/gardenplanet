@@ -36,6 +36,9 @@ namespace StrawberryNova
             var sceneName = "";
             switch(state)
             {
+                case AppState.Logo:
+                    sceneName = "logo";
+                    break;
                 case AppState.Title:
                     sceneName = "titlescreen";
                     break;

@@ -98,6 +98,7 @@ namespace StrawberryNova
 
             // Page 3 callbacks
             finishButton.SetCallback(FinishButtonPressed);
+            finishButton.repeatable = false;
             page3PreviousPageButton.SetCallback(PreviousPageButtonPressed);
             page3RandomButton.SetCallback(RandomizeButton);
         }

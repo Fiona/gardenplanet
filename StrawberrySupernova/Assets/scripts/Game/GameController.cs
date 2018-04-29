@@ -20,6 +20,7 @@ namespace StrawberryNova
         public Player player;
         public RectTransform canvasRect;
         public ScreenFade screenFade;
+        public IsMouseOver isMouseOverWorld;
 
         [HideInInspector]
         public JsonData globalConfig;
@@ -55,6 +56,8 @@ namespace StrawberryNova
         public TilePosition activeTile;
         [HideInInspector]
         public bool noTileSelection;
+        [HideInInspector]
+        public MouseHoverPlane mouseHoverPlane;
 
         private GameObject inWorldItems;
         private Debug debugMenu;
@@ -292,6 +295,15 @@ namespace StrawberryNova
         }
 
         /*
+         * Attempts to remove an item from the inventory entry passed.
+         * Returns true if the player has such an item and it was removed successfully.
+         */
+        public bool RemovePlayerItem(Inventory.InventoryItemEntry entry, int quantity = 1)
+        {
+            return itemManager.RemovePlayerItem(entry, quantity);
+        }
+
+        /*
          * Attempt to use up some energy, true if successfully reduced.
          */
         public bool ConsumePlayerEnergy(float amount)
@@ -341,22 +353,46 @@ namespace StrawberryNova
             yield return StartCoroutine(player.Sleep());
         }
 
-        public IEnumerator OpenInGameMenu()
+        public IEnumerator OpenInGameMenu(bool forceOpen = false)
         {
-            inGameMenuButton.gameObject.SetActive(false);
+            // Cancel if input is disabled
+            if(!GameInputManager.directInputEnabled && !forceOpen)
+                yield break;
+
+            // Hide and disable the in-game menu button
+            var igmbCanvas = inGameMenuButton.GetComponent<CanvasGroup>();
+            var igmbInputMode = inGameMenuButton.GetComponent<InputModeVisibility>();
+            igmbCanvas.blocksRaycasts = false;
+            var oldAlpha = igmbCanvas.alpha;
+            igmbCanvas.alpha = 0f;
+            igmbInputMode.enabled = false;
+
+            // Stop direct input and pause the game
             GameInputManager.LockDirectInput();
             worldTimer.StopTimer();
 
+            // Create the in-game menu object and attach
             var inGameMenuObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU)) as GameObject;
             inGameMenuObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
             inGameMenuObj.transform.SetSiblingIndex(worldTimer.transform.GetSiblingIndex());
+
+            // Hand control over to the in-game menu, will return when it's closed
             yield return inGameMenuObj.GetComponent<InGameMenu>().OpenMenu();
+
+            // Destroy the menu
             Destroy(inGameMenuObj);
 
+            // Restart the game
             worldTimer.StartTimer();
             GameInputManager.UnlockDirectInput();
-            inGameMenuButton.gameObject.SetActive(true);
+
+            // Update the current item if the player changed what's in their hand
             itemHotbar.UpdateItemInHand();
+
+            // Restore the in-game menu button
+            igmbCanvas.blocksRaycasts = true;
+            igmbCanvas.alpha = oldAlpha;
+            igmbInputMode.enabled = true;
         }
 
         public void SelectHotbarItem(int hotbarItemNum)

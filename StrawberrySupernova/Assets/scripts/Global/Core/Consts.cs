@@ -15,7 +15,7 @@ namespace StrawberryNova
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Game;
+        public const AppState INITIAL_APP_STATE = AppState.Logo;
 
         // -----------------------------
         // TILE DRAWING
@@ -27,7 +27,9 @@ namespace StrawberryNova
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
         public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
+
         public const int COLLISION_LAYER_CHARACTERS = 14;
+
         // Tiles are this size on all dimensions
         public const float TILE_SIZE = 0.5f;
 
@@ -55,6 +57,9 @@ namespace StrawberryNova
         // class as a click in that direction.
         public const float MOUSE_WHEEL_CLICK_SNAP = 0.1f;
 
+        // How long to wait before registering another item drop
+        public const float DROP_ITEM_COOLDOWN = .25f;
+
         // -----------------------------
         // CAMERA
         // -----------------------------
@@ -69,11 +74,19 @@ namespace StrawberryNova
         // CHARACTERS
         // -----------------------------
 
-        public const float CHARACTER_MOVE_SPEED = 100f;
+        public const float CHARACTER_MOVE_ACCELERATION = 80f;
+
+        public const float CHARACTER_MAX_WALK_SPEED = .8f;
+
+        public const float CHARACTER_MAX_RUN_SPEED = 1.5f;
 
         public const float CHARACTER_ROTATION_SPEED = 10f;
 
         public const float CHARACTER_JUMP_FORCE = 800f;
+
+        public static readonly float[] CHARACTER_BETWEEN_BLINK_WAIT_RANGE = { 2f, 3f };
+
+        public static readonly float[] CHARACTER_BLINK_TIME_RANGE = { .05f, .1f };
 
         // -----------------------------
         // PLAYER
@@ -104,6 +117,9 @@ namespace StrawberryNova
         // How far the auto pickup radius is
         public const float PLAYER_AUTO_PICKUP_RADIUS = .2f;
 
+        // How many hearts till the player does a yawn
+        public const float PLAYER_YAWN_ENERGY_THRESHOLD = 2f;
+
         // -----------------------------
         // GAMEPLAY
         // -----------------------------
@@ -116,29 +132,22 @@ namespace StrawberryNova
         // Game time settings
         public const int NUM_MINUTES_IN_HOUR = 60;
         public const int NUM_HOURS_IN_DAY = 24;
-        public const int NUM_DAYS_IN_SEASON = 10;
-        public readonly static Season[] SEASONS =
-        {
-            new Season{shortName = "early_spring", displayName = "Early-Spring"},
-            new Season{shortName = "mid_spring", displayName = "Mid-Spring"},
-            new Season{shortName = "late_spring", displayName = "Late-Spring"},
+        public const int NUM_DAYS_IN_SEASON = 30;
 
-            new Season{shortName = "early_summer", displayName = "Early-Summer"},
-            new Season{shortName = "mid_summer", displayName = "Mid-Summer"},
-            new Season{shortName = "late_summer", displayName = "Late-Summer"},
-
-            new Season{shortName = "early_autumn", displayName = "Early-Autumn"},
-            new Season{shortName = "mid_autumn", displayName = "Mid-Autumn"},
-            new Season{shortName = "late_autumnr", displayName = "Late-Autumn"},
-
-            new Season{shortName = "early_winter", displayName = "Early-Winter"},
-            new Season{shortName = "mid_winter", displayName = "Mid-Winter"},
-            new Season{shortName = "late_winter", displayName = "Late-Winter"}
-        };
         public readonly static string[] WEEKDAYS = {
             "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "Sunday"
         };
+
+        public readonly static Season[] SEASONS =
+        {
+            new Season{shortName = "spring", displayName = "Spring"},
+            new Season{shortName = "summer", displayName = "Summer"},
+            new Season{shortName = "autumn", displayName = "Autumn"},
+            new Season{shortName = "winter", displayName = "Winter"}
+        };
+
+        public readonly static string[] SEASON_THIRD_PREFIXES = {"Early-", "Mid-", "Late-"};
 
         public const int HOTBAR_SIZE = 10;
 

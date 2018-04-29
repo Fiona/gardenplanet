@@ -9,7 +9,9 @@ namespace StrawberryNova
 
     public enum CharacterAction
     {
-        Eat = 1
+        Eat = 1,
+        Yawn = 2,
+        PassOut = 3
     }
 
     public class Character : MonoBehaviour
@@ -58,16 +60,19 @@ namespace StrawberryNova
         public int layer;
         [HideInInspector]
         public Transform holdItemHolder;
+        [HideInInspector]
+        public bool isPlayer;
 
         // Locomotion related members
         protected Rigidbody rigidBody;
         protected GameController controller;
-        protected Vector3 walkDirBuffer;
+        protected Vector3 moveDirBuffer;
         protected Vector3 lookDirection;
         protected bool isJumping;
         protected bool attemptJump;
         protected Vector3 desiredRotation;
         protected bool lockFacing;
+        protected bool doWalk;
 
         // Visuals related members
         protected GameObject visualsHolder;
@@ -85,6 +90,8 @@ namespace StrawberryNova
         // Action and world related members
         protected CharacterAction currentAction = 0;
         protected InWorldItem itemCurrentlyHolding;
+
+        protected bool passedOut;
 
         public TilePosition CurrentTilePosition
         {
@@ -116,6 +123,7 @@ namespace StrawberryNova
             controller = FindObjectOfType<GameController>();
             RegenerateVisuals();
             RegenerateFace();
+            isPlayer = this == controller.player;
         }
 
         public virtual void FixedUpdate()
@@ -124,9 +132,10 @@ namespace StrawberryNova
             layer = (int) Math.Floor(transform.position.y * Consts.TILE_SIZE);
 
             // Deal with actions
-            if(currentAction != 0)
+            if(currentAction != 0 || passedOut)
             {
                 mainAnimator.SetBool("DoWalk", false);
+                mainAnimator.SetBool("DoRun", false);
                 return;
             }
 
@@ -137,23 +146,35 @@ namespace StrawberryNova
             if(controller.GameInputManager == null || !controller.GameInputManager.directInputEnabled)
                 return;
 
-            // Handle walking
-            if(rigidBody.velocity.magnitude < 1.0f)
-                rigidBody.AddForce(
-                    walkDirBuffer * Consts.CHARACTER_MOVE_SPEED * Time.deltaTime,
-                    ForceMode.Impulse
-                );
-            mainAnimator.SetBool("DoWalk", Mathf.Abs(rigidBody.velocity.magnitude) > 0.1f);
+            // Handle walking/running
+            rigidBody.AddForce(
+                moveDirBuffer * Consts.CHARACTER_MOVE_ACCELERATION * Time.deltaTime,
+                ForceMode.Impulse
+            );
+            rigidBody.velocity = Vector3.ClampMagnitude(
+                rigidBody.velocity, doWalk ? Consts.CHARACTER_MAX_WALK_SPEED : Consts.CHARACTER_MAX_RUN_SPEED
+            );
+
+            if(Mathf.Abs(rigidBody.velocity.magnitude) > .5f)
+            {
+                mainAnimator.SetBool("DoWalk", doWalk);
+                mainAnimator.SetBool("DoRun", !doWalk);
+            }
+            else
+            {
+                mainAnimator.SetBool("DoWalk", false);
+                mainAnimator.SetBool("DoRun", false);
+            }
 
             // Do rotation towards movement direction
-            if(Mathf.Abs(walkDirBuffer.sqrMagnitude) > 0f && !lockFacing)
-                lookDirection = walkDirBuffer;
+            if(Mathf.Abs(moveDirBuffer.sqrMagnitude) > 0f && !lockFacing)
+                lookDirection = moveDirBuffer;
             desiredRotation = (transform.position - (transform.position - lookDirection)).normalized;
             float step = Consts.CHARACTER_ROTATION_SPEED * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
             SetRotation(newDir);
 
-            walkDirBuffer = Vector3.zero;
+            moveDirBuffer = Vector3.zero;
             lockFacing = false;
 
             // Deal with jumping
@@ -207,16 +228,16 @@ namespace StrawberryNova
             switch(dir)
             {
                 case Direction.Up:
-                    walkDirBuffer += Vector3.forward;
+                    moveDirBuffer += Vector3.forward;
                     break;
                 case Direction.Down:
-                    walkDirBuffer += Vector3.back;
+                    moveDirBuffer += Vector3.back;
                     break;
                 case Direction.Left:
-                    walkDirBuffer += Vector3.left;
+                    moveDirBuffer += Vector3.left;
                     break;
                 case Direction.Right:
-                    walkDirBuffer += Vector3.right;
+                    moveDirBuffer += Vector3.right;
                     break;
             }
         }
@@ -263,6 +284,14 @@ namespace StrawberryNova
         }
 
         /*
+         * Call to change the state of walking or running
+         */
+        public void SetDoWalk(bool _doWalk)
+        {
+            doWalk = _doWalk;
+        }
+
+        /*
          * When passed a tile it will immediately position and
          * turn the character to the passed tile position definition.
          */
@@ -292,13 +321,34 @@ namespace StrawberryNova
          */
         public IEnumerator DoAction(CharacterAction action)
         {
+            // Can't start new action without finishing previous one
             if(currentAction > 0)
                 yield break;
+
+            // If player we should disable direct input and restore it after
+            var prevInput = controller.GameInputManager.directInputEnabled;
+            if(isPlayer)
+                controller.GameInputManager.directInputEnabled = false;
+
+            // Start action
             currentAction = action;
+
+            // animation for eating
             if(currentAction == CharacterAction.Eat)
                 mainAnimator.SetBool("DoEat", true);
+            // animation for yawning
+            if(currentAction == CharacterAction.Yawn)
+                mainAnimator.SetBool("DoYawn", true);
+            // animation for passing out
+            if(currentAction == CharacterAction.PassOut)
+                mainAnimator.SetBool("DoPassOut", true);
+
+            // Wait for action to finish
             while(currentAction > 0)
                 yield return new WaitForFixedUpdate();
+
+            if(isPlayer)
+                controller.GameInputManager.directInputEnabled = prevInput;
         }
 
         /*
@@ -557,9 +607,9 @@ namespace StrawberryNova
             visualsHolder.DestroyAllChildren();
 
             baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
-            holdItemHolder = baseModel.transform.FindRecursive("hold_item");
+            holdItemHolder = baseModel.transform.FindRecursive("item");
             if(holdItemHolder == null)
-                Debug.LogError("Can't find a child called hold_item in character!");
+                Debug.LogError("Can't find a child called item in character!");
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
             RegenerateSkin();
 
@@ -664,12 +714,52 @@ namespace StrawberryNova
                     spine.localScale = new Vector3(lowerSpineScale, lowerSpineScale, lowerSpineScale);
         }
 
-        // Animation event: EatItem
-        protected void EatItemDone()
+        // Animation event: Nom some
+        protected void AnimatorNom()
         {
-            Debug.Log("Eat Item Done");
+            if(itemCurrentlyHolding != null)
+                itemCurrentlyHolding.transform.localScale -= new Vector3(.35f, .35f, .35f);
+        }
+
+        // Animation event: EatItem
+        protected void AnimatorEatItemDone()
+        {
             mainAnimator.SetBool("DoEat", false);
             currentAction = 0;
+            if(itemCurrentlyHolding != null)
+                Destroy(itemCurrentlyHolding.gameObject);
+            itemCurrentlyHolding = null;
         }
+
+        // Animation event: Close eyes
+        protected void AnimatorCloseEyes()
+        {
+            face.SetFaceState(CharacterFace.FaceState.EYES_CLOSED);
+        }
+
+        // Animation event: YawnDone
+        protected void AnimatorYawnDone()
+        {
+            face.SetFaceState(CharacterFace.FaceState.NORMAL);
+            mainAnimator.SetBool("DoYawn", false);
+            currentAction = 0;
+        }
+
+        // Animation event: PassOutMid
+        protected void AnimatorPassOutMid()
+        {
+            if(this == controller.player)
+                controller.PlayerDropItemInHand();
+            else
+                DropHoldingItem();
+        }
+
+        // Animation event: PassOutDone
+        protected void AnimatorPassOutDone()
+        {
+            currentAction = 0;
+            passedOut = true;
+        }
+
     }
 }

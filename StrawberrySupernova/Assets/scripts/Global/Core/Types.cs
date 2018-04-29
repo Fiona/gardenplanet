@@ -11,6 +11,7 @@ namespace StrawberryNova
     // Top level state
     public enum AppState
     {
+        Logo,
         Title,
         Editor,
         Game,
@@ -215,14 +216,14 @@ namespace StrawberryNova
 
         public static int GetSeasonByShortName(string shortName)
         {
-            var i = 0;
+            var i = 1;
             foreach(var s in Consts.SEASONS)
             {
                 if(s.shortName == shortName)
                     return i;
                 i++;
             }
-            return -1;
+            return 0;
         }
     };
 }

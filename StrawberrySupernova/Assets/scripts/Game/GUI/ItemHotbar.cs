@@ -111,7 +111,7 @@ namespace StrawberryNova
                 return;
             }
 
-            if(newIndex == selectedItemIndex)
+            if(newIndex == selectedItemIndex || !controller.GameInputManager.directInputEnabled)
                 return;
 
             // Apply and set marker position
@@ -187,9 +187,7 @@ namespace StrawberryNova
             }
 
             // Remove from inventory
-            controller.itemManager.RemovePlayerItem(selectedItemEntry.itemType,
-                selectedItemEntry.attributes, 1);
-            return true;
+            return controller.player.inventory.RemoveItem(selectedItemEntry, 1);
         }
 
         public void UpdateItemInHand()

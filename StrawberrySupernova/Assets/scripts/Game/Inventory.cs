@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.IO;
 using LitJson;
 using UnityEngine;
 
@@ -150,7 +151,8 @@ namespace StrawberryNova
         }
 
         /*
-         * Removes one or more item types from the inventory.
+         * Removes one or more items of a passed type from the inventory. Will always
+         * attempt to remove up to the quantity given.
          * Return false if the item wasn't there or true otherwise.
          */
         public bool RemoveItem(ItemType itemType, Hashtable attributes, int quantity = 1)
@@ -168,6 +170,22 @@ namespace StrawberryNova
             foreach(var entry in cloneList)
                 if(entry.quantity <= 0)
                     items.Remove(entry);
+            return true;
+        }
+
+        /*
+         * Removes one or more of the entry passed. Returns false if the entry doesn't exist
+         * or there aren't enough of the item on that entry
+         */
+        public bool RemoveItem(InventoryItemEntry entry, int quantity = 1)
+        {
+            if(!ItemEntryExists(entry))
+                return false;
+            if(entry.quantity < quantity)
+                return false;
+            entry.quantity -= quantity;
+            if(entry.quantity <= 0)
+                items.Remove(entry);
             return true;
         }
 

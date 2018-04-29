@@ -35,7 +35,7 @@ namespace StrawberryNova
                 var crop = tilePos.GetTileWorldObjects("crop")[0];
                 crop.SetAttrString("type", item.GetAttrString("type"));
                 crop.SetAppearence();
-                controller.RemovePlayerItem(item.itemType, item.attributes, 1);
+                controller.RemovePlayerItem(item, 1);
                 yield return null;
             }
 
