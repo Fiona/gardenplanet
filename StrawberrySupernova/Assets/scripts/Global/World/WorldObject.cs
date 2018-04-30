@@ -91,5 +91,10 @@ namespace StrawberryNova
             attributes[key] = val;
         }
 
+        public WorldPosition GetWorldPosition()
+        {
+            return new WorldPosition(x, y, height);
+        }
+
     }
 }

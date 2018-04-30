@@ -194,7 +194,7 @@ namespace StrawberryNova
             var list = new List<InventoryItemEntry>();
             foreach(var item in items)
                 if(item.itemType == itemType && DoAttributesMatch(attributes, item.attributes))
-                        list.Add(item);
+                    list.Add(item);
             return list;
         }
 
@@ -214,4 +214,3 @@ namespace StrawberryNova
 
     }
 }
-

@@ -53,6 +53,7 @@ namespace StrawberryNova
                         if(i.GetAttrString("type") == "")
                         {
                             controller.worldObjectManager.DeleteWorldObject(i);
+                            controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;
                         }
                         // Ungrown seeds can be fished out
@@ -60,6 +61,7 @@ namespace StrawberryNova
                         {
                             controller.GivePlayerItem(i.GetAttrString("type")+"_seeds", new Hashtable(), 1);
                             controller.worldObjectManager.DeleteWorldObject(i);
+                            controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;
                         }
                         // Damage part grown crops and destroy if broken

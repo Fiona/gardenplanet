@@ -9,10 +9,13 @@ namespace StrawberryNova
 {
     public class Crop: WorldObjectScript
     {
-        GameController controller;
+        private GameController controller;
+        private float cropRotation;
+
         public void Start()
         {
             controller = FindObjectOfType<GameController>();
+            cropRotation = UnityEngine.Random.Range(0, 360);
             SetDailyReminder();
         }
 
@@ -21,8 +24,10 @@ namespace StrawberryNova
         {
             if(worldObject.GetAttrFloat("growth") < 100f)
                 yield break;
-            controller.GivePlayerItem(worldObject.GetAttrString("type"), new Hashtable(), 1);
-            controller.worldObjectManager.DeleteWorldObject(worldObject);
+            // Try to give the player theh produce, if it worked, reset values and appearence
+            // so we go back to hoed ground
+            if(controller.GivePlayerItem(worldObject.GetAttrString("type")))
+                ResetToSoil();
         }
 
         public override void OnDestroy()
@@ -48,7 +53,7 @@ namespace StrawberryNova
                 new TilePosition(new WorldPosition(worldObject.x, worldObject.y, worldObject.height)),
                 worldObject.GetAttrBool("watered"),
                 isNew
-                );
+            );
 
             // If nothing else this is all we want
             if(cropType == "")
@@ -78,7 +83,7 @@ namespace StrawberryNova
                 Resources.Load<GameObject>(Path.Combine(Consts.WORLD_OBJECTS_PREFABS_PATH, additionalPrefabName))
             );
             additionalPrefab.transform.SetParent(appearenceHolder.transform, false);
-            additionalPrefab.transform.localRotation = Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f);
+            additionalPrefab.transform.localRotation = Quaternion.Euler(0f, cropRotation, 0f);
 
             if(fullyGrown)
             {
@@ -98,11 +103,17 @@ namespace StrawberryNova
 
             var displayName = controller.itemManager.GetItemTypeByID(worldObject.GetAttrString("type")).DisplayName;
 
+            // Finished crops inform the player
+            if(worldObject.GetAttrFloat("growth") >= 100.0f)
+                return new string[2] {displayName, "Ready to harvest!"};
+
+            // Extra hints of crop behaviour
             var extraInfo = "";
             if(worldObject.GetAttrFloat("growth") < 1f && !IsCorrectSeason())
                 extraInfo = "Wont sprout in this season!";
             else if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05 && worldObject.GetAttrBool("wilting"))
                 extraInfo = "Wilting - please water me!";
+
             return new string[2]{ displayName, extraInfo };
         }
 
@@ -110,10 +121,16 @@ namespace StrawberryNova
         {
             var cropType = worldObject.GetAttrString("type");
 
-            // If not seeded yet we go away
+            // If not seeded yet there's a chance that we go away
             if(cropType == "")
             {
-                controller.worldObjectManager.DeleteWorldObject(worldObject);
+                if(UnityEngine.Random.Range(0f, 1f) < .2f)
+                {
+                    controller.worldObjectManager.DeleteWorldObject(worldObject);
+                    controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(worldObject.GetWorldPosition()));
+                }
+                else
+                    SetDailyReminder();
                 return;
             }
 
@@ -179,6 +196,16 @@ namespace StrawberryNova
             // we're still in the first third of current one)
             var previousSeason = (controller.worldTimer.gameTime - new GameTime(0, 0, 0, 1)).DateSeason;
             return controller.worldTimer.gameTime.DateSeasonThird == 1 && seasonNumbers.Contains(previousSeason);
+        }
+
+        private void ResetToSoil()
+        {
+            worldObject.SetAttrString("type", "");
+            worldObject.SetAttrFloat("growth", 0f);
+            worldObject.SetAttrFloat("damage", 0f);
+            worldObject.SetAttrBool("wilting", false);
+            worldObject.SetAttrBool("watered", false);
+            worldObject.SetAppearence();
         }
 
     }
