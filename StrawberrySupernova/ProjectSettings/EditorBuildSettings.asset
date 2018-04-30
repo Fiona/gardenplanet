@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/scenes/entrypoint.unity
     guid: 210f0a5e149334320b14f90acefba3bc
   - enabled: 1
+    path: Assets/scenes/logo.unity
+    guid: 1a2863bc4b0fd5844bc41f2b4c8e0421
+  - enabled: 1
     path: Assets/scenes/titlescreen.unity
     guid: c9bb5856a676741fe965c9c0ea13b7fb
   - enabled: 1

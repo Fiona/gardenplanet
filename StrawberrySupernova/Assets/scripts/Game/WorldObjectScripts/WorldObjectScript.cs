@@ -64,7 +64,7 @@ namespace StrawberryNova
 		/*
 		 * Used to get a gameobject that's to be used for the in-game appearence of this object
 		 */
-		public virtual GameObject GetAppearencePrefab()
+		public virtual GameObject GetAppearencePrefab(bool isNew = false)
 		{
 			return Instantiate(worldObject.objectType.prefab);
 		}

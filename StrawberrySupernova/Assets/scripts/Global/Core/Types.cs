@@ -95,6 +95,11 @@ namespace StrawberryNova
             );
         }
 
+        public TilePosition Offset(int _x, int _y, int _layer = 0)
+        {
+            return new TilePosition(x + _x, y + _y, layer + _layer);
+        }
+
         public bool ContainsCollidableWorldObjects()
         {
             var pos = new Vector3(

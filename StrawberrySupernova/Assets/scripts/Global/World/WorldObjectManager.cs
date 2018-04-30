@@ -97,7 +97,8 @@ namespace StrawberryNova
             return worldObjectTypes[index];
         }
 
-        public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos, Hashtable attributes = null)
+        public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos, Hashtable attributes = null,
+            bool setAppearence = true)
         {
             if(objectType == null)
                 return null;
@@ -154,7 +155,8 @@ namespace StrawberryNova
                 comp.material = WorldObjectManager.slideMaterial;
 
             // Set up appearence
-            newWorldObject.SetAppearence();
+            if(setAppearence)
+                newWorldObject.SetAppearence(true);
 
             return newWorldObject;
 
@@ -170,7 +172,7 @@ namespace StrawberryNova
                 y=pos.y * Consts.TILE_SIZE,
                 height=pos.layer * Consts.TILE_SIZE
             };
-            var newWorldObject = AddWorldObject(objectType, worldPos, attributes);
+            var newWorldObject = AddWorldObject(objectType, worldPos, attributes, false);
             if(newWorldObject == null)
                 return null;
 
@@ -182,6 +184,8 @@ namespace StrawberryNova
                     tilePosToWorldObjects[posS] = new List<WorldObject>();
                 tilePosToWorldObjects[posS].Add(newWorldObject);
             }
+
+            newWorldObject.SetAppearence(true);
             return newWorldObject;
         }
 
