@@ -76,7 +76,7 @@ namespace StrawberryNova
                 }
 
                 // Empty tile so hoe the ground
-                var soil = controller.worldObjectManager.AddWorldObject(
+                controller.worldObjectManager.AddWorldObject(
                     controller.worldObjectManager.GetWorldObjectTypeByName("crop"), tilePos
                 );
             }

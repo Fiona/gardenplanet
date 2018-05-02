@@ -80,7 +80,7 @@
     <Compile Include="Assets\scripts\Game\Glowable.cs" />
     <Compile Include="Assets\scripts\Game\GUI\GUINavigator.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InfoPopup.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InfoPopupDisplay.cs" />
+    <Compile Include="Assets\scripts\Game\GUI\InfoPopupDisplayHolder.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\IInGameMenuPage.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenu.cs" />
     <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageCloseMenu.cs" />

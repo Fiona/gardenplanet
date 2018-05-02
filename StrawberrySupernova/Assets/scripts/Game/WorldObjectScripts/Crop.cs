@@ -96,16 +96,20 @@ namespace StrawberryNova
             return appearenceHolder;
         }
 
-        public override string[] GetInfoPopup()
+        public override InfoPopup.InfoPopupDisplay GetInfoPopup()
         {
             if(worldObject.GetAttrString("type") == "")
-                return null;
+                return new InfoPopup.InfoPopupDisplay();
 
             var displayName = controller.itemManager.GetItemTypeByID(worldObject.GetAttrString("type")).DisplayName;
 
             // Finished crops inform the player
             if(worldObject.GetAttrFloat("growth") >= 100.0f)
-                return new string[2] {displayName, "Ready to harvest!"};
+                return new InfoPopup.InfoPopupDisplay{
+                    Text = displayName,
+                    ExtraText = "Ready to harvest!",
+                    Icon = InfoPopup.ExtraInfoIcon.HAPPY
+                };
 
             // Extra hints of crop behaviour
             var extraInfo = "";
@@ -114,7 +118,10 @@ namespace StrawberryNova
             else if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05 && worldObject.GetAttrBool("wilting"))
                 extraInfo = "Wilting - please water me!";
 
-            return new string[2]{ displayName, extraInfo };
+            return new InfoPopup.InfoPopupDisplay{
+                Text = displayName,
+                ExtraText = extraInfo
+            };
         }
 
         public void DailyGrowth(GameTime gameTime)
@@ -124,13 +131,21 @@ namespace StrawberryNova
             // If not seeded yet there's a chance that we go away
             if(cropType == "")
             {
+                // 1 in 5 chance of it being removed automatically
                 if(UnityEngine.Random.Range(0f, 1f) < .2f)
                 {
                     controller.worldObjectManager.DeleteWorldObject(worldObject);
                     controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(worldObject.GetWorldPosition()));
+                    return;
                 }
-                else
-                    SetDailyReminder();
+
+                // Otherwise make sure we're dried up and keep our reminder
+                if(worldObject.GetAttrBool("watered"))
+                {
+                    worldObject.SetAttrBool("watered", false);
+                    worldObject.SetAppearence();
+                }
+                SetDailyReminder();
                 return;
             }
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace StrawberryNova
 {
-    public class InfoPopupDisplay: MonoBehaviour
+    public class InfoPopupDisplayHolder: MonoBehaviour
     {
         [HideInInspector]
         public RectTransform rectTransform;
@@ -25,9 +25,9 @@ namespace StrawberryNova
             canvasGroup.alpha = 0f;
         }
 
-        public void SetText(string _text, string extraText)
+        public void SetDisplay(InfoPopup.InfoPopupDisplay displayInfo, Sprite extraIcon)
         {
-            if(extraText == "")
+            if(string.IsNullOrEmpty(displayInfo.ExtraText))
             {
                 info.SetActive(true);
                 extraInfo.SetActive(false);
@@ -36,9 +36,10 @@ namespace StrawberryNova
             {
                 info.SetActive(false);
                 extraInfo.SetActive(true);
-                extraInfoText.text = extraText;
+                extraInfoText.text = displayInfo.ExtraText;
+                extraInfoIcon.sprite = extraIcon;
             }
-            text.text = _text;
+            text.text = displayInfo.Text;
         }
 
     }

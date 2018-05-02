@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using StompyBlondie;
 using TMPro;
 using UnityEngine;
@@ -7,9 +8,29 @@ namespace StrawberryNova
 {
     public class InfoPopup: MonoBehaviour
     {
-        public InfoPopupDisplay displayRight;
-        public InfoPopupDisplay displayLeft;
-        public InfoPopupDisplay displayStatic;
+        public struct InfoPopupDisplay
+        {
+            public string Text;
+            public string ExtraText;
+            public ExtraInfoIcon Icon;
+        };
+
+        public enum ExtraInfoIcon
+        {
+            ALERT,
+            HAPPY
+        };
+
+        [Serializable]
+        public struct IconImage {
+            public ExtraInfoIcon type;
+            public Sprite sprite;
+        }
+
+        public InfoPopupDisplayHolder displayRight;
+        public InfoPopupDisplayHolder displayLeft;
+        public InfoPopupDisplayHolder displayStatic;
+        public IconImage[] extraInfoIcons;
 
         private GameController controller;
         private bool showingThisFrame;
@@ -57,18 +78,26 @@ namespace StrawberryNova
             showingThisFrame = false;
         }
 
-        public void Show(TilePosition tilePos, string textToShow, string extraTextToShow = "")
+        public void Show(TilePosition tilePos, InfoPopupDisplay infoPopupDisplay)
         {
-            Show(new WorldPosition(tilePos), textToShow, extraTextToShow);
+            Show(new WorldPosition(tilePos), infoPopupDisplay);
         }
 
-        public void Show(WorldPosition worldPos, string textToShow, string extraTextToShow = "")
+        public void Show(WorldPosition worldPos, InfoPopupDisplay infoPopupDisplay)
         {
-            displayLeft.SetText(textToShow, extraTextToShow);
-            displayRight.SetText(textToShow, extraTextToShow);
-            displayStatic.SetText(textToShow, extraTextToShow);
+            if(string.IsNullOrEmpty(infoPopupDisplay.Text))
+                return;
+            var icon = GetExtraInfoIconSprite(infoPopupDisplay.Icon);
+            displayLeft.SetDisplay(infoPopupDisplay, icon);
+            displayRight.SetDisplay(infoPopupDisplay, icon);
+            displayStatic.SetDisplay(infoPopupDisplay, icon);
             targetPos = worldPos.TransformPosition();
             showingThisFrame = true;
+        }
+
+        private Sprite GetExtraInfoIconSprite(ExtraInfoIcon icon)
+        {
+            return extraInfoIcons.First(i => i.type == icon).sprite;
         }
 
         private void DoStaticDisplay()

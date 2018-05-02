@@ -1204,6 +1204,11 @@ MonoBehaviour:
   displayRight: {fileID: 114150370351619790}
   displayLeft: {fileID: 114766354054444652}
   displayStatic: {fileID: 114265834007356842}
+  extraInfoIcons:
+  - type: 0
+    sprite: {fileID: 21300000, guid: 17d37cf30bccc89409bd6cc486865128, type: 3}
+  - type: 1
+    sprite: {fileID: 21300000, guid: 99b3a036e9237ad48880bc6542037d67, type: 3}
 --- !u!114 &114986024600281988
 MonoBehaviour:
   m_ObjectHideFlags: 1

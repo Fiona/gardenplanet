@@ -44,8 +44,7 @@ namespace StrawberryNova
         {
             controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseOkay);
             glow.GlowTo(new Color(0f, .5f, 1f), .5f);
-            var infoPopup = worldObject.GetInfoPopup();
-            controller.ShowInfoPopup(new WorldPosition(transform.position), infoPopup[0], infoPopup[1]);
+            controller.ShowInfoPopup(new WorldPosition(transform.position), worldObject.GetInfoPopup());
         }
 
         public void InteractWith()

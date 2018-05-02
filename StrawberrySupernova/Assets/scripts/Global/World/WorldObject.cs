@@ -17,9 +17,9 @@ namespace StrawberryNova
         public WorldObjectType objectType;
         public Hashtable attributes;
 
-        public string[] GetInfoPopup()
+        public InfoPopup.InfoPopupDisplay GetInfoPopup()
         {
-            return script != null ? script.GetInfoPopup() : null;
+            return script != null ? script.GetInfoPopup() : new InfoPopup.InfoPopupDisplay();
         }
 
         public void SetAppearence(bool isNew = false)

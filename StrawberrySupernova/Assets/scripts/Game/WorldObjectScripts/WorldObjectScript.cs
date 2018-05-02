@@ -72,9 +72,9 @@ namespace StrawberryNova
 		/*
 		 * Gets info popup for name etc
 		 */
-		public virtual string[] GetInfoPopup()
+		public virtual InfoPopup.InfoPopupDisplay GetInfoPopup()
 		{
-			return new[]{ worldObject.objectType.displayName, ""};
+			return new InfoPopup.InfoPopupDisplay{ Text = worldObject.objectType.displayName };
 		}
 	}
 }

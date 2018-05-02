@@ -29,9 +29,9 @@ namespace StrawberryNova
             foreach(var o in objs)
             {
                 var info = o.GetInfoPopup();
-                if(info == null)
+                if(info.Text == "")
                     continue;
-                controller.ShowInfoPopup(controller.activeTile, info[0], info[1]);
+                controller.ShowInfoPopup(controller.activeTile, info);
             }
 
             // Display the right version of the selection marker

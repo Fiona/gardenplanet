@@ -58,7 +58,7 @@ namespace StrawberryNova
 
         public void UpdateTilesSurrounding(TilePosition tilePos)
         {
-            var dummy = GetTileIndex(tilePos, true);
+            GetTileIndex(tilePos, true);
         }
 
         private Material[] GenerateTiledMaterials(string materialPath)

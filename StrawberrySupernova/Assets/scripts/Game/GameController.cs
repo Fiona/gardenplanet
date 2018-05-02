@@ -191,14 +191,14 @@ namespace StrawberryNova
             activeTile = tilePosition;
         }
 
-        public void ShowInfoPopup(TilePosition tilePos, string textToShow, string extraTextToShow = "")
+        public void ShowInfoPopup(TilePosition tilePos, InfoPopup.InfoPopupDisplay infoPopupDisplay)
         {
-            infoPopup.Show(tilePos, textToShow, extraTextToShow);
+            infoPopup.Show(tilePos, infoPopupDisplay);
         }
 
-        public void ShowInfoPopup(WorldPosition tilePos, string textToShow, string extraTextToShow = "")
+        public void ShowInfoPopup(WorldPosition tilePos, InfoPopup.InfoPopupDisplay infoPopupDisplay)
         {
-            infoPopup.Show(tilePos, textToShow, extraTextToShow);
+            infoPopup.Show(tilePos, infoPopupDisplay);
         }
 
         public IEnumerator PlayerInteractWith(WorldObject worldObject)
