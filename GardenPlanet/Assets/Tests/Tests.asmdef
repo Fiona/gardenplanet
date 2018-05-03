@@ -1,12 +1,14 @@
 {
-    "name": "Editor",
+    "name": "Tests",
     "references": [
         "App"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false
 }
