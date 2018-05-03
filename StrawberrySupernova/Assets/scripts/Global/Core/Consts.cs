@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     public static class Consts
@@ -15,7 +15,7 @@ namespace StrawberryNova
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Logo;
+        public const AppState INITIAL_APP_STATE = AppState.Game;
 
         // -----------------------------
         // TILE DRAWING

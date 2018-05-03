@@ -3,7 +3,7 @@ using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     [TestFixture]
 //    [Category("GameTimeTests")]

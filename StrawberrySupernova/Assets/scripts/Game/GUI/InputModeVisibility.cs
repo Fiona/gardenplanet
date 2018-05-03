@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class InputModeVisibility : MonoBehaviour

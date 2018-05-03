@@ -3,7 +3,7 @@ using System.Collections;
 using LitJson;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class WorldObject
     {

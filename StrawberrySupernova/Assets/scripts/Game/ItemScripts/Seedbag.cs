@@ -6,7 +6,7 @@ using StompyBlondie;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     namespace Items
     {

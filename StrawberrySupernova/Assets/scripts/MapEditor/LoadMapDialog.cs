@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	
 	public class LoadMapDialog : MonoBehaviour

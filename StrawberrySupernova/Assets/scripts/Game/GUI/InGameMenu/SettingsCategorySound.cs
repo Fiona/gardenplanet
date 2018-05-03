@@ -2,7 +2,7 @@
 using StompyBlondie;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class SettingsCategorySound: SettingsCategory
     {

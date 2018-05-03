@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public abstract class MapEditorMode
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class SettingsCategoryInput: SettingsCategory
     {

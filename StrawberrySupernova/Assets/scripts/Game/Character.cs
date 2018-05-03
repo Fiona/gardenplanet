@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using StompyBlondie;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     public enum CharacterAction

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	[Serializable]
 	public class AtmosphereTime

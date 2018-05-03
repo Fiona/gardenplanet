@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 		
 	public class MapSetSizeDialog : MonoBehaviour

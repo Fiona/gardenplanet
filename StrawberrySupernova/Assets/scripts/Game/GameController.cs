@@ -7,7 +7,7 @@ using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     /*
      * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.

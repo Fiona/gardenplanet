@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Image = UnityEngine.UI.Image;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InGameMenuTabButton: SelectableAnimatedButton
     {

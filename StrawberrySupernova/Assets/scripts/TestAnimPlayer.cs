@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using StompyBlondie;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class TestAnimPlayer: MonoBehaviour
     {

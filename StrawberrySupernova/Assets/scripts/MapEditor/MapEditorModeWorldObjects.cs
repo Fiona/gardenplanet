@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class MapEditorModeWorldObjects: MapEditorMode
     {

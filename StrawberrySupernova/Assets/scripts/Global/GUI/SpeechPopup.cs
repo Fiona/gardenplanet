@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Security.Cryptography;
-using StrawberryNova;
+using GardenPlanet;
 using TMPro;
 
 namespace StompyBlondie

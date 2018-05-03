@@ -5,7 +5,7 @@ using System.Linq;
 using StompyBlondie;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     namespace Items
     {

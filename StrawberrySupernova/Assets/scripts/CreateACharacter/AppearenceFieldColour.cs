@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using LitJson;
 using Debug = UnityEngine.Debug;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class AppearenceFieldColour: AppearenceField
     {

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class GlobalSelectableButton: SelectableAnimatedButton
     {

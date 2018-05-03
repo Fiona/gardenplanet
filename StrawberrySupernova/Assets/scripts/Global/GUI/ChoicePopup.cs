@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
-using StrawberryNova;
+using GardenPlanet;
 using TMPro;
 
 namespace StompyBlondie

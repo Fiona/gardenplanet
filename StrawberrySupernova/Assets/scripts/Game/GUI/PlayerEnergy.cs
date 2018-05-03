@@ -5,7 +5,7 @@ using UnityEngine.Advertisements;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     /*
      * GUI object that shows how much energy the player has via filled hearts

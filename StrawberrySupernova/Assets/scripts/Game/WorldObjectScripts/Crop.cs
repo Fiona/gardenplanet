@@ -5,7 +5,7 @@ using System.IO;
 using LitJson;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class Crop: WorldObjectScript
     {

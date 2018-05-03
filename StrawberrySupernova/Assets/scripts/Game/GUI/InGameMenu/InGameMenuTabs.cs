@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InGameMenuTabs: MonoBehaviour
     {

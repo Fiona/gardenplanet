@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using StompyBlondie;
 using TMPro;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InGameMenuPageInventory : MonoBehaviour, IInGameMenuPage
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InventoryItemButton: SelectableAnimatedButton
     {

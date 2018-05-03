@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class TileTagManager : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	public class Glowable: MonoBehaviour
 	{

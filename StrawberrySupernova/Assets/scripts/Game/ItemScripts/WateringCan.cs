@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     namespace Items
     {

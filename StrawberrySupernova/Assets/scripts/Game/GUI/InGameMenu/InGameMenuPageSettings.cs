@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using StompyBlondie;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InGameMenuPageSettings: MonoBehaviour, IInGameMenuPage
     {

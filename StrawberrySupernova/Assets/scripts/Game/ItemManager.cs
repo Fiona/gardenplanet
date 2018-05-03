@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     /*
      * Holds all the item types currently loaded and can be used to give or remove items from the player

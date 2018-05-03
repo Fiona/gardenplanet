@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	
 	public class EditTileDialog : MonoBehaviour

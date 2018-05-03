@@ -4,7 +4,7 @@ using StompyBlondie;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     public class App: MonoBehaviour

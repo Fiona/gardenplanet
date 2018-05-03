@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = System.Object;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     /*
      * Representation of times in the game. Can use addition and subtraction

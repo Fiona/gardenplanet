@@ -7,7 +7,7 @@ using StompyBlondie;
 using TMPro;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     [System.Serializable]
     public class MultiDimensionalRectTransform

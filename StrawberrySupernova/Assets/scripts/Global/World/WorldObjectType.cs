@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using LitJson;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class WorldObjectType
     {

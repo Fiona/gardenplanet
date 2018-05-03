@@ -5,7 +5,7 @@ using LitJson;
 using TMPro;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class AppearenceField: MonoBehaviour
     {

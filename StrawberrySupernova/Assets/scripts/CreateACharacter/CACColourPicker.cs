@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.UI.Extensions.ColorPicker;
 using UnityEngine.UI.Extensions;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class CACColourPicker: MonoBehaviour
     {

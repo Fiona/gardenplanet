@@ -3,7 +3,7 @@ using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using StompyBlondie;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class SettingsCategory: MonoBehaviour

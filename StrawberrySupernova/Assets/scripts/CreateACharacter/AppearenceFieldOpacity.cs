@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class AppearenceFieldOpacity : AppearenceField
     {

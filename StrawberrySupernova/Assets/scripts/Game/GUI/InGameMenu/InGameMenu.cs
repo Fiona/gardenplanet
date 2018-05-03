@@ -7,7 +7,7 @@ using System.Text;
 using StompyBlondie;
 using UnityEngine.Timeline;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InGameMenu : MonoBehaviour
     {

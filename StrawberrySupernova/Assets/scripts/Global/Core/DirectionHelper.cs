@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	public class DirectionHelper
 	{

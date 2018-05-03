@@ -3,7 +3,7 @@ using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     /*
      * A GUI object for a single heart in the PlayerEnergy GUI object.

@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 using StompyBlondie;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class SettingsCategoryGame: SettingsCategory
     {

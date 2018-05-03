@@ -3,7 +3,7 @@ using Rewired;
 using StompyBlondie;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InGameMenuPageQuitGame: MonoBehaviour, IInGameMenuPage
     {

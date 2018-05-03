@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class AppearenceFieldSpinner: AppearenceField
     {

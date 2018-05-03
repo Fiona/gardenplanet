@@ -6,7 +6,7 @@ using LitJson;
 using System.Text;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
 	public class TileTypeSet

@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine.UI;
 using StompyBlondie;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class WorldObjectManager: MonoBehaviour
     {

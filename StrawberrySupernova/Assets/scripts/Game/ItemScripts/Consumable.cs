@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace StrawberryNova.Items
+namespace GardenPlanet.Items
 {
     public class Consumable: ItemScript
     {

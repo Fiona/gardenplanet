@@ -5,7 +5,7 @@ using Rewired.Utils.Classes.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     // Top level state

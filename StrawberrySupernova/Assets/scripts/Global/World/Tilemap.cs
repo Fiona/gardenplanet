@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     public class Tilemap : MonoBehaviour

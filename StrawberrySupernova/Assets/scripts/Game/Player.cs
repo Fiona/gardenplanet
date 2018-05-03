@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEditor.UI;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     public class Player: Character

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     // All in-game menu tab pages inherit from this
     public interface IInGameMenuPage

@@ -4,7 +4,7 @@ using StompyBlondie;
 using TMPro;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InfoPopup: MonoBehaviour
     {

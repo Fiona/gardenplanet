@@ -8,7 +8,7 @@ using StompyBlondie;
 using TMPro;
 using UnityEngine.AI;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class WorldTimer: MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class InWorldItem : MonoBehaviour
     {

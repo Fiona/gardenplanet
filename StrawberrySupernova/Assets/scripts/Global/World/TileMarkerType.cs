@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	public class TileMarkerType
 	{

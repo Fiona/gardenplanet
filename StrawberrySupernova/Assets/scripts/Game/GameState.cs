@@ -1,7 +1,7 @@
 ﻿using System.Security.Permissions;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class GameStateFile
     {

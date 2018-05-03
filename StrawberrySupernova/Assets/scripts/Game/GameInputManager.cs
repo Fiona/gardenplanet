@@ -5,7 +5,7 @@ using UnityEngine;
 using Rewired;
 using UnityEngine.PostProcessing;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 
     public class GameInputManager : MonoBehaviour

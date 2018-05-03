@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using StrawberryNova;
+using GardenPlanet;
 using TMPro;
 
 namespace StompyBlondie

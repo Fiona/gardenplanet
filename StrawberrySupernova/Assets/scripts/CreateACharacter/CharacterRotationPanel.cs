@@ -3,7 +3,7 @@ using Rewired;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class CharacterRotationPanel: MonoBehaviour
     {

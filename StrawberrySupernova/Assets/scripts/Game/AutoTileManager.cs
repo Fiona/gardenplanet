@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
     public class AutoTileManager: MonoBehaviour
     {

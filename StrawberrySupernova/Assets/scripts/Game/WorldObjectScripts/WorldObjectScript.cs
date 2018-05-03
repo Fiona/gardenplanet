@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace StrawberryNova
+namespace GardenPlanet
 {
 	/*
 	 * All scripts extend from this
