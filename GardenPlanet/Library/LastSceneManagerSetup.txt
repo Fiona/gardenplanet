@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/scenes/createacharacter.unity
+  isLoaded: 1
+  isActive: 1
