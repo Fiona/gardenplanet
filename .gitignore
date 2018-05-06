@@ -21,9 +21,9 @@ src/locale
 *.orig.meta
 
 # Unity excludes
-StrawberrySupernova/Library
-StrawberrySupernova/Temp
-StrawberrySupernova/.vs
+GardenPlanet/Library
+GardenPlanet/Temp
+GardenPlanet/.vs
 obj/
 
 # Blender stuff
@@ -33,7 +33,7 @@ obj/
 bin/
 
 # Third party 
-StrawberrySupernova/Assets/AmplifyShaderEditor/
-StrawberrySupernova/Assets/AmplifyShaderEditor.meta
-StrawberrySupernova/Assets/Editor/PanicButton*
+GardenPlanet/Assets/AmplifyShaderEditor/
+GardenPlanet/Assets/AmplifyShaderEditor.meta
+GardenPlanet/Assets/Editor/PanicButton*
 
