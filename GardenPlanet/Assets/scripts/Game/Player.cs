@@ -55,8 +55,8 @@ namespace GardenPlanet
             SetPassOutEvent();
 
             // TODO: remove this test item adding
-            controller.GivePlayerItem("broken_sprinkleboy");
-            controller.GivePlayerItem("broken_trowelie");
+            controller.GivePlayerItem("wateringcan-level1");
+            controller.GivePlayerItem("hoe-level1");
             controller.GivePlayerItem("cabbage_seeds", quantity:16);
         }
 

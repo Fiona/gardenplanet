@@ -71,8 +71,8 @@ namespace GardenPlanet
 
 	            if(GUILayout.Button("Give Tools Level 1"))
 	            {
-		            itemManager.GivePlayerItem("broken_sprinkleboy");
-		            itemManager.GivePlayerItem("broken_trowelie");
+		            itemManager.GivePlayerItem("wateringcan-level1");
+		            itemManager.GivePlayerItem("hoe-level1");
 	            }
 
                 if(GUILayout.Button("Give Seeds"))
@@ -84,8 +84,8 @@ namespace GardenPlanet
 	            if(GUILayout.Button("Give Vegetables"))
 	            {
 		            itemManager.GivePlayerItem("cabbage", quantity: 16);
-	            }	            
-	            
+	            }
+
                 if(GUILayout.Button("< Back"))
                     DebugMode = 1;
             }

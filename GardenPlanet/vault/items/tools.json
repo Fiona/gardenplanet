@@ -1,9 +1,9 @@
 {
   "itemTypes": {
-    "broken_sprinkleboy": {
-      "ID": "broken_sprinkleboy",
-      "DisplayName": "Sprinkle Boy (Broken)",
-      "Description": "A tool for dispensing water, designed for... smaller hands.\n\nUnfortunately there's holes in it and the spout isn't the spoutiest. It's broken.",
+    "wateringcan-level1": {
+      "ID": "wateringcan-level1",
+      "DisplayName": "Beginner's Watering Can",
+      "Description": "This cute little container will help you carry water to all your thirsty plant friends.",
       "Category": "Tools",
       "StackSize": 1,
       "CanPickup": true,
@@ -12,13 +12,13 @@
       },
       "Script": "WateringCan"
     },
-    "broken_trowelie": {
-      "ID": "broken_trowelie",
-      "DisplayName": "Trowelie (Broken)",
+    "hoe-level1": {
+      "ID": "hoe-level1",
+      "DisplayName": "Beginner's Hoe",
       "Category": "Tools",
       "StackSize": 1,
       "CanPickup": true,
-      "Description": "\"The latest in agricultural innovation! It's your new best friend - Trowelie! The trowel on a stick!\"\n\nOr so the advert goes. Unfortunately, this one is not as good as promised. It's broken.",
+      "Description": "For tilling the ground ready for sowing seeds. It's simple but effective.",
       "Attributes": {
         "energy_consumption_modifier":1.0
       },
