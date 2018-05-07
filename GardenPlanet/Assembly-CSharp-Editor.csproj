@@ -163,6 +163,26 @@
       <Project>{8412EAF0-6995-FB47-FB69-056B2EA92ED1}</Project>
       <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityUiExtensions.csproj">
+      <Project>{662357F3-65D0-1B55-7D1A-579ADE68A581}</Project>
+      <Name>UnityUiExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tests.csproj">
+      <Project>{305587DB-ED1F-ED15-C408-443008A4727B}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="PostProcessing.csproj">
+      <Project>{7AC5898A-EF95-41C0-2912-131D693B4DCE}</Project>
+      <Name>PostProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="RewiredEditor.csproj">
+      <Project>{0A339864-FE32-2340-EC92-95D223240FB0}</Project>
+      <Name>RewiredEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
+      <Project>{991291BF-C8EA-0291-4374-68D2758531DE}</Project>
+      <Name>UnityUIExtensionsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Editor.csproj">
       <Project>{E4A1E7F3-9930-9A31-A81B-D063A432BB3A}</Project>
       <Name>Editor</Name>
@@ -170,26 +190,6 @@
     <ProjectReference Include="TextMeshPro.csproj">
       <Project>{D5D59E51-EBB0-98F4-C028-CB070BD4B4AF}</Project>
       <Name>TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUiExtensions.csproj">
-      <Project>{662357F3-65D0-1B55-7D1A-579ADE68A581}</Project>
-      <Name>UnityUiExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="Rewired.csproj">
-      <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
-      <Name>Rewired</Name>
-    </ProjectReference>
-    <ProjectReference Include="Tests.csproj">
-      <Project>{305587DB-ED1F-ED15-C408-443008A4727B}</Project>
-      <Name>Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{991291BF-C8EA-0291-4374-68D2758531DE}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="RewiredEditor.csproj">
-      <Project>{0A339864-FE32-2340-EC92-95D223240FB0}</Project>
-      <Name>RewiredEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PostProcessingEditor.csproj">
       <Project>{E2BC5208-7C84-86D0-E3D4-2361B552EC45}</Project>
@@ -199,9 +199,9 @@
       <Project>{E695261D-ECD2-F612-61FB-D4ED7A5A6980}</Project>
       <Name>App</Name>
     </ProjectReference>
-    <ProjectReference Include="PostProcessing.csproj">
-      <Project>{7AC5898A-EF95-41C0-2912-131D693B4DCE}</Project>
-      <Name>PostProcessing</Name>
+    <ProjectReference Include="Rewired.csproj">
+      <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
+      <Name>Rewired</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

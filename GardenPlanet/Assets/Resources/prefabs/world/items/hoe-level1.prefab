@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23016019377118512}
   - component: {fileID: 54345864864944262}
   - component: {fileID: 65532366135490780}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: hoe-level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 9559fa437c6c5b94186ec3f6067926b5, type: 2}
   m_StaticBatchInfo:
