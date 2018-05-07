@@ -13,6 +13,8 @@ namespace GardenPlanet
         public Button[] hotbarButtons;
         public Image[] hotbarImages;
         public TextMeshProUGUI[] hotbarQuantityText;
+        public ItemHotbarNameplate nameplate;
+
         [Header("Selection Marker")]
         public Image selectionMarker;
         [HideInInspector]
@@ -63,6 +65,13 @@ namespace GardenPlanet
             {
                 UpdateHotbarState();
                 HandleActiveItemScript();
+                if(!assignmentMode && selectedItemEntry != null)
+                    nameplate.Show(
+                        selectedItemEntry.itemType.DisplayName,
+                        hotbarButtons[selectedItemIndex].transform
+                    );
+                else
+                    nameplate.Hide();
                 yield return new WaitForFixedUpdate();
             }
         }

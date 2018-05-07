@@ -59,7 +59,10 @@ namespace GardenPlanet
                         // Ungrown seeds can be fished out
                         if(i.GetAttrFloat("growth") < 1f)
                         {
-                            controller.GivePlayerItem(i.GetAttrString("type")+"_seeds", new Hashtable(), 1);
+                            controller.GivePlayerItem(
+                                i.GetAttrString("type")+"_seeds",
+                                new Hashtable{{"type", i.GetAttrString("type")}}
+                                );
                             controller.worldObjectManager.DeleteWorldObject(i);
                             controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;

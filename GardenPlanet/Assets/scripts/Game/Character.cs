@@ -196,6 +196,8 @@ namespace GardenPlanet
         {
             var turnToPos = worldObject.gameObject.transform.position;
             var myPos = transform.position;
+            moveDirBuffer = Vector3.zero;
+            lookDirection = Vector3.zero;
 
             while(true)
             {
@@ -208,7 +210,7 @@ namespace GardenPlanet
                 SetRotation(newDir);
 
                 float found = Vector3.Angle(transform.forward, turnToPos - myPos);
-                if(Mathf.Abs(found) < 40f)
+                if(Mathf.Abs(found) < 20f)
                     break;
 
                 yield return new WaitForFixedUpdate();
