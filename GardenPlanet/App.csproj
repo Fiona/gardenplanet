@@ -139,6 +139,7 @@
     <Compile Include="Assets\scripts\Global\Core\RenderTextureHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\ScrollbarHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\TransformHelper.cs" />
+    <Compile Include="Assets\scripts\Global\Core\TransparentBackgroundScreenshotRecorder.cs" />
     <Compile Include="Assets\scripts\Global\Core\Types.cs" />
     <Compile Include="Assets\scripts\Global\GUI\AnimatedButton.cs" />
     <Compile Include="Assets\scripts\Global\GUI\BasePopup.cs" />
