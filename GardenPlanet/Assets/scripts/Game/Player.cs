@@ -90,6 +90,7 @@ namespace GardenPlanet
         public IEnumerator Sleep()
         {
             controller.worldTimer.DontRemindMe(PassOutTimeEvent);
+            StopHoldingItem();
             yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeOut(2f));
             controller.worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
             SetPassOutEvent();
@@ -99,6 +100,7 @@ namespace GardenPlanet
             wokeUpOnDay = controller.worldTimer.gameTime.Days;
             passedOut = false;
             didYawn = false;
+            controller.itemHotbar.UpdateItemInHand();
         }
 
         public IEnumerator PassOut()
@@ -136,6 +138,7 @@ namespace GardenPlanet
             passedOut = false;
             didYawn = false;
             wokeUpOnDay = controller.worldTimer.gameTime.Days;
+            controller.itemHotbar.UpdateItemInHand();
             controller.EndCutscene();
         }
 

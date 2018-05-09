@@ -340,7 +340,11 @@ namespace GardenPlanet
                 mainAnimator.SetBool("DoEat", true);
             // animation for yawning
             if(currentAction == CharacterAction.Yawn)
+            {
                 mainAnimator.SetBool("DoYawn", true);
+                if(this == controller.player)
+                    controller.PlayerStopHoldingItem();
+            }
             // animation for passing out
             if(currentAction == CharacterAction.PassOut)
                 mainAnimator.SetBool("DoPassOut", true);
@@ -566,6 +570,8 @@ namespace GardenPlanet
         public bool StartHoldingItem(ItemType itemType, Hashtable attributes)
         {
             StopHoldingItem();
+            if(currentAction != 0 || passedOut)
+                return false;
             itemCurrentlyHolding = controller.SpawnItem(itemType, attributes);
             if(itemCurrentlyHolding == null)
                 return false;
@@ -745,6 +751,8 @@ namespace GardenPlanet
             face.SetFaceState(CharacterFace.FaceState.NORMAL);
             mainAnimator.SetBool("DoYawn", false);
             currentAction = 0;
+            if(this == controller.player)
+                controller.itemHotbar.UpdateItemInHand();
         }
 
         // Animation event: PassOutMid
