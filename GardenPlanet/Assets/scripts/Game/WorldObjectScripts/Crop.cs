@@ -15,7 +15,7 @@ namespace GardenPlanet
         public void Start()
         {
             controller = FindObjectOfType<GameController>();
-            cropRotation = UnityEngine.Random.Range(0, 360);
+            cropRotation = 180 + UnityEngine.Random.Range(-45, 45);
             SetDailyReminder();
         }
 

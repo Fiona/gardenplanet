@@ -56,7 +56,7 @@ namespace GardenPlanet
         {
             if(controller.currentHoveredTile == null)
                 return;
-            
+
             var axis = Input.GetAxis("Mouse ScrollWheel");
 
             if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
@@ -64,9 +64,9 @@ namespace GardenPlanet
                 var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
                 controller.tilemap.RotateTileInDirection(controller.currentHoveredTile, dir);
                 newTileDirection = controller.currentHoveredTile.direction;
-            }            
+            }
         }
-        
+
         public override void Destroy()
         {
             base.Destroy();
@@ -75,7 +75,7 @@ namespace GardenPlanet
         }
 
         public override void SaveToMap(Map map)
-        {        
+        {
         }
 
         public override void ResizeMap(int width, int height)
@@ -88,9 +88,27 @@ namespace GardenPlanet
             {
                 controller.tilemap.RemoveTile(tilePos.x, tilePos.y, tilePos.layer);
                 controller.tilemap.AddTile(currentTileName, tilePos.x, tilePos.y, tilePos.layer, newTileDirection);
+                // auto tags
+                var tagManager = UnityEngine.Object.FindObjectOfType<TileTagManager>();
+                tagManager.ClearTagsAt(tilePos);
+                if(currentTileName == null)
+                    return;
+                var autoTag = controller.tileTypeSet.GetTileTypeByName(currentTileName).autoTag;
+                if(autoTag != "")
+                {
+                    var newTag = new TileTag()
+                    {
+                        TagType = autoTag,
+                        X = tilePos.x,
+                        Y = tilePos.y,
+                        Layer = tilePos.layer
+                    };
+                    tagManager.AddTag(newTag);
+                    tagManager.EditorTileTagObjects[newTag].active = false;
+                }
             }
             else if(pointerEventData.button == PointerEventData.InputButton.Right)
-                SelectTileType(controller.currentHoveredTile.tileTypeName);            
+                SelectTileType(controller.currentHoveredTile.tileTypeName);
         }
 
         /*
@@ -123,7 +141,7 @@ namespace GardenPlanet
             rect.localPosition = currentTileTemplate.GetComponent<RectTransform>().localPosition;
             rect.localScale = currentTileTemplate.GetComponent<RectTransform>().localScale;
             rect.localRotation = currentTileTemplate.GetComponent<RectTransform>().localRotation;
-            
+
             currentTileName = tileTypeName;
             currentTileText.text = currentTileName;
 
@@ -216,6 +234,6 @@ namespace GardenPlanet
             previousTileType = currentTileName;
             SelectTileType(null);
         }
-            
+
     }
 }

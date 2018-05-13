@@ -15,7 +15,7 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Game;
+        public const AppState INITIAL_APP_STATE = AppState.Editor;
 
         // -----------------------------
         // TILE DRAWING
