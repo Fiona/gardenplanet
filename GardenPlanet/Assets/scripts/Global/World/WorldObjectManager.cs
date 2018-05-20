@@ -118,11 +118,11 @@ namespace GardenPlanet
                 gameObject = newGameObject,
                 name = objectType.name,
                 objectType = objectType,
-                attributes = new Hashtable(objectType.defaultAttributes)
+                attributes = new Attributes(objectType.defaultAttributes)
             };
             if(attributes != null)
                 foreach(DictionaryEntry attr in attributes)
-                    newWorldObject.attributes[attr.Key] = attr.Value;
+                    newWorldObject.attributes.Set((string)attr.Key, attr.Value);
 
             worldObjects.Add(newWorldObject);
             SetWorldObjectDirection(newWorldObject, pos.dir);

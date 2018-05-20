@@ -15,7 +15,7 @@ namespace GardenPlanet
         public GameObject gameObject;
         public WorldObjectScript script;
         public WorldObjectType objectType;
-        public Hashtable attributes;
+        public Attributes attributes;
 
         public InfoPopup.InfoPopupDisplay GetInfoPopup()
         {
@@ -41,54 +41,6 @@ namespace GardenPlanet
                 prefab.transform.SetParent(appearence.transform, false);
                 prefab.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
             }
-        }
-
-        public bool GetAttrBool(string key)
-        {
-            if(attributes[key] is bool)
-                return (bool)attributes[key];
-            return (bool)((JsonData)attributes[key]);
-        }
-
-        public void SetAttrBool(string key, bool val)
-        {
-            attributes[key] = val;
-        }
-
-        public string GetAttrString(string key)
-        {
-            if(attributes[key] is string)
-                return (string)attributes[key];
-            return (string)((JsonData)attributes[key]);
-        }
-
-        public void SetAttrString(string key, string val)
-        {
-            attributes[key] = val;
-        }
-
-        public float GetAttrFloat(string key)
-        {
-            if(attributes[key] is float)
-                return (float)attributes[key];
-            return (float)(double)((JsonData)attributes[key]);
-        }
-
-        public void SetAttrFloat(string key, float val)
-        {
-            attributes[key] = val;
-        }
-
-        public int GetAttrInt(string key)
-        {
-            if(attributes[key] is int)
-                return (int)attributes[key];
-            return (int)((JsonData)attributes[key]);
-        }
-
-        public void SetAttrInt(string key, int val)
-        {
-            attributes[key] = val;
         }
 
         public WorldPosition GetWorldPosition()

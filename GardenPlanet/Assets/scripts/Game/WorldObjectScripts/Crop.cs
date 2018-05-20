@@ -22,11 +22,11 @@ namespace GardenPlanet
         // Harvestable when fully grown
         public override IEnumerator PlayerInteract()
         {
-            if(worldObject.GetAttrFloat("growth") < 100f)
+            if(worldObject.attributes.Get<float>("growth") < 100f)
                 yield break;
             // Try to give the player theh produce, if it worked, reset values and appearence
             // so we go back to hoed ground
-            if(controller.GivePlayerItem(worldObject.GetAttrString("type")))
+            if(controller.GivePlayerItem(worldObject.attributes.Get<string>("type")))
                 ResetToSoil();
         }
 
@@ -40,7 +40,7 @@ namespace GardenPlanet
             if(controller == null)
                 controller = FindObjectOfType<GameController>();
 
-            var cropType = worldObject.GetAttrString("type");
+            var cropType = worldObject.attributes.Get<string>("type");
             var appearenceHolder = new GameObject("CropAppearence");
 
             // Add soil
@@ -51,7 +51,7 @@ namespace GardenPlanet
             controller.autoTileManager.SetMaterialOfSoil(
                 soilObject,
                 new TilePosition(new WorldPosition(worldObject.x, worldObject.y, worldObject.height)),
-                worldObject.GetAttrBool("watered"),
+                worldObject.attributes.Get<bool>("watered"),
                 isNew
             );
 
@@ -62,20 +62,21 @@ namespace GardenPlanet
             // If it's been planted on, add additional visuals
             var fullyGrown = false;
             var additionalPrefabName = "planted_seeds";
-            if(worldObject.GetAttrFloat("growth") >= 100f)
+            var growth = worldObject.attributes.Get<float>("growth");
+            if(growth >= 100f)
             {
                 // Finished one is interactable
                 additionalPrefabName = String.Format("crop_{0}_grown", cropType);
                 fullyGrown = true;
             }
-            else if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05)
+            else if(Math.Abs(growth) > 0.05)
             {
                 // Work out which stage to display
                 var numStages = (int)controller.globalConfig["crops"][cropType]["num_growth_stages"];
-                var stageAt = Math.Ceiling(numStages * (worldObject.GetAttrFloat("growth") / 100f));
+                var stageAt = Math.Ceiling(numStages * (growth / 100f));
                 additionalPrefabName = String.Format("crop_{0}_{1}", cropType, stageAt);
                 // Show wilted version if applicable
-                if(worldObject.GetAttrBool("wilting"))
+                if(worldObject.attributes.Get<bool>("wilting"))
                     additionalPrefabName += "_wilting";
             }
 
@@ -98,13 +99,16 @@ namespace GardenPlanet
 
         public override InfoPopup.InfoPopupDisplay GetInfoPopup()
         {
-            if(worldObject.GetAttrString("type") == "")
+            var cropType = worldObject.attributes.Get<string>("type");
+            var growth = worldObject.attributes.Get<float>("growth");
+
+            if(cropType == "")
                 return new InfoPopup.InfoPopupDisplay();
 
-            var displayName = controller.itemManager.GetItemTypeByID(worldObject.GetAttrString("type")).DisplayName;
+            var displayName = controller.itemManager.GetItemTypeByID(cropType).DisplayName;
 
             // Finished crops inform the player
-            if(worldObject.GetAttrFloat("growth") >= 100.0f)
+            if(growth >= 100.0f)
                 return new InfoPopup.InfoPopupDisplay{
                     Text = displayName,
                     ExtraText = "Ready to harvest!",
@@ -113,9 +117,9 @@ namespace GardenPlanet
 
             // Extra hints of crop behaviour
             var extraInfo = "";
-            if(worldObject.GetAttrFloat("growth") < 1f && !IsCorrectSeason())
+            if(growth < 1f && !IsCorrectSeason())
                 extraInfo = "Wont sprout in this season!";
-            else if(Math.Abs(worldObject.GetAttrFloat("growth")) > 0.05 && worldObject.GetAttrBool("wilting"))
+            else if(Math.Abs(growth) > 0.05 && worldObject.attributes.Get<bool>("wilting"))
                 extraInfo = "Wilting - please water me!";
 
             return new InfoPopup.InfoPopupDisplay{
@@ -126,7 +130,7 @@ namespace GardenPlanet
 
         public void DailyGrowth(GameTime gameTime)
         {
-            var cropType = worldObject.GetAttrString("type");
+            var cropType = worldObject.attributes.Get<string>("type");
 
             // If not seeded yet there's a chance that we go away
             if(cropType == "")
@@ -140,9 +144,9 @@ namespace GardenPlanet
                 }
 
                 // Otherwise make sure we're dried up and keep our reminder
-                if(worldObject.GetAttrBool("watered"))
+                if(worldObject.attributes.Get<bool>("watered"))
                 {
-                    worldObject.SetAttrBool("watered", false);
+                    worldObject.attributes.Set("watered", false);
                     worldObject.SetAppearence();
                 }
                 SetDailyReminder();
@@ -150,12 +154,13 @@ namespace GardenPlanet
             }
 
             // Watered plants grow
-            if(worldObject.GetAttrBool("watered"))
+            if(worldObject.attributes.Get<bool>("watered"))
             {
                 var willGrow = true;
+                var growth = worldObject.attributes.Get<float>("growth");
 
-                // Check if the right season if we haven't started growing yet
-                if(worldObject.GetAttrFloat("growth") < 1f)
+                // Check if the right season if we haven't started finished growing yet
+                if(growth < 1f)
                     willGrow = IsCorrectSeason();
 
                 // Little wheat sheaf stretches up to the sky
@@ -164,24 +169,23 @@ namespace GardenPlanet
                     var growthMin = (float) (double) controller.globalConfig["crops"][cropType]["growth_per_day"][0];
                     var growthMax = (float) (double) controller.globalConfig["crops"][cropType]["growth_per_day"][1];
                     var growthAmount = UnityEngine.Random.Range(growthMin, growthMax);
-                    var currentGrowth = worldObject.GetAttrFloat("growth");
-                    worldObject.SetAttrFloat("growth", currentGrowth + growthAmount);
-                    if(worldObject.GetAttrFloat("growth") > 100.0f)
-                        worldObject.SetAttrFloat("growth", 100f);
+                    worldObject.attributes.Set("growth", growth + growthAmount);
+                    if(growth > 100.0f)
+                        worldObject.attributes.Set("growth", 100f);
                 }
 
                 // Dry up and un wilt
-                worldObject.SetAttrBool("wilting", false);
-                worldObject.SetAttrBool("watered", false);
+                worldObject.attributes.Set("wilting", false);
+                worldObject.attributes.Set("watered", false);
             }
             else
             {
                 // Unwatered plants wilt
-                worldObject.SetAttrBool("wilting", true);
+                worldObject.attributes.Set("wilting", true);
             }
 
             // Reset any damage done to it
-            worldObject.SetAttrFloat("damage", 0f);
+            worldObject.attributes.Set("damage", 0f);
 
             // Reset appearence etc
             worldObject.SetAppearence();
@@ -197,7 +201,7 @@ namespace GardenPlanet
         private bool IsCorrectSeason()
         {
             // Get list of acceptable season numbers
-            var cropType = worldObject.GetAttrString("type");
+            var cropType = worldObject.attributes.Get<string>("type");
             JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
             var seasonNumbers = new List<int>();
             foreach(JsonData seasonName in seasons)
@@ -215,11 +219,11 @@ namespace GardenPlanet
 
         private void ResetToSoil()
         {
-            worldObject.SetAttrString("type", "");
-            worldObject.SetAttrFloat("growth", 0f);
-            worldObject.SetAttrFloat("damage", 0f);
-            worldObject.SetAttrBool("wilting", false);
-            worldObject.SetAttrBool("watered", false);
+            worldObject.attributes.Set("type", "");
+            worldObject.attributes.Set("growth", 0f);
+            worldObject.attributes.Set("damage", 0f);
+            worldObject.attributes.Set("wilting", false);
+            worldObject.attributes.Set("watered", false);
             worldObject.SetAppearence();
         }
 

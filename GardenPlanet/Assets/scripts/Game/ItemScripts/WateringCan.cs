@@ -18,7 +18,7 @@ namespace GardenPlanet
                     return false;
 
                 var crops = tilePos.GetTileWorldObjects("crop");
-                if(crops.Count == 0 || crops[0].GetAttrFloat("growth") >= 100f)
+                if(crops.Count == 0 || crops[0].attributes.Get<float>("growth") >= 100f)
                     return false;
                 return true;
             }
@@ -32,7 +32,7 @@ namespace GardenPlanet
                     yield break;
 
                 var crop = tilePos.GetTileWorldObjects("crop")[0];
-                crop.SetAttrBool("watered", true);
+                crop.attributes.Set("watered", true);
                 crop.SetAppearence();
                 yield return null;
             }

@@ -22,7 +22,7 @@ namespace GardenPlanet
                 if(tilePos.TileDistance(controller.player.CurrentTilePosition) >= Consts.PLAYER_TOOLS_RANGE)
                     return false;
 
-                return tilePos.GetTileWorldObjects("crop").Any(crop => crop.GetAttrString("type") == "");
+                return tilePos.GetTileWorldObjects("crop").Any(crop => crop.attributes.Get<string>("type") == "");
             }
 
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
@@ -33,7 +33,7 @@ namespace GardenPlanet
                     yield break;
 
                 var crop = tilePos.GetTileWorldObjects("crop")[0];
-                crop.SetAttrString("type", item.GetAttrString("type"));
+                crop.attributes.Set("type", item.GetAttrString("type"));
                 crop.SetAppearence();
                 controller.RemovePlayerItem(item, 1);
                 yield return null;

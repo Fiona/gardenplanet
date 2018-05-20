@@ -135,7 +135,7 @@ namespace GardenPlanet
             if(currentTileName == null)
                 return;
             var autoTag = controller.tileTypeSet.GetTileTypeByName(currentTileName).autoTag;
-            if(autoTag != "")
+            if(!String.IsNullOrEmpty(autoTag))
             {
                 var newTag = new TileTag()
                 {
