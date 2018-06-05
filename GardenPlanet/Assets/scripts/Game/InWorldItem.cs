@@ -7,7 +7,7 @@ namespace GardenPlanet
     public class InWorldItem : MonoBehaviour
     {
         public ItemType itemType;
-        public Hashtable attributes;
+        public Attributes attributes;
         public bool droppedByPlayer;
         public Character beingHeldBy;
 

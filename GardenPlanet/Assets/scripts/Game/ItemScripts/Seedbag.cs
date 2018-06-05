@@ -33,7 +33,7 @@ namespace GardenPlanet
                     yield break;
 
                 var crop = tilePos.GetTileWorldObjects("crop")[0];
-                crop.attributes.Set("type", item.GetAttrString("type"));
+                crop.attributes.Set("type", item.attributes.Get<string>("type"));
                 crop.SetAppearence();
                 controller.RemovePlayerItem(item, 1);
                 yield return null;

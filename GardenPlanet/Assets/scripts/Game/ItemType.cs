@@ -113,7 +113,7 @@ namespace GardenPlanet
                         using(var fh = File.OpenText(f))
                         {
 							var fileConents = fh.ReadToEnd();
-							fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);                            
+							fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);
                             var loadedDataFile = JsonMapper.ToObject<ItemTypeDataFile>(fileConents);
                             foreach(var singleItemTypeData in loadedDataFile.itemTypes)
                             {

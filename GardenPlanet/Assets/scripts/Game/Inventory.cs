@@ -16,55 +16,7 @@ namespace GardenPlanet
         {
             public ItemType itemType;
             public int quantity;
-            public Hashtable attributes;
-
-            public bool GetAttrBool(string key)
-            {
-                if(attributes[key] is bool)
-                    return (bool)attributes[key];
-                return (bool)((JsonData)attributes[key]);
-            }
-
-            public void SetAttrBool(string key, bool val)
-            {
-                attributes[key] = val;
-            }
-
-            public string GetAttrString(string key)
-            {
-                if(attributes[key] is string)
-                    return (string)attributes[key];
-                return (string)((JsonData)attributes[key]);
-            }
-
-            public void SetAttrString(string key, string val)
-            {
-                attributes[key] = val;
-            }
-
-            public float GetAttrFloat(string key)
-            {
-                if(attributes[key] is float)
-                    return (float)attributes[key];
-                return (float)(double)((JsonData)attributes[key]);
-            }
-
-            public void SetAttrFloat(string key, float val)
-            {
-                attributes[key] = val;
-            }
-
-            public int GetAttrInt(string key)
-            {
-                if(attributes[key] is int)
-                    return (int)attributes[key];
-                return (int)((JsonData)attributes[key]);
-            }
-
-            public void SetAttrInt(string key, int val)
-            {
-                attributes[key] = val;
-            }
+            public Attributes attributes;
 
             public List<KeyValuePair<string, string>> GetAttributeDisplay()
             {
@@ -73,6 +25,10 @@ namespace GardenPlanet
                 return list;
             }
 
+            public override string ToString()
+            {
+                return $"[type: {itemType.DisplayName}, num: {quantity}, attrs: {attributes}]";
+            }
         }
 
         public List<InventoryItemEntry> Items
@@ -96,7 +52,7 @@ namespace GardenPlanet
          * Returns true if successful or false if the item wouldn't fit into
          * the inventory.
          */
-        public bool AddItem(ItemType itemType, Hashtable attributes, int quantity = 1)
+        public bool AddItem(ItemType itemType, Attributes attributes, int quantity = 1)
         {
 
             // Check if we have any stacks of this type
@@ -113,7 +69,7 @@ namespace GardenPlanet
                     new InventoryItemEntry {
                         itemType = itemType,
                         quantity = quantity,
-                        attributes = new Hashtable(attributes)
+                        attributes = new Attributes(attributes)
                     }
                 );
                 return true;
@@ -139,7 +95,7 @@ namespace GardenPlanet
                     {
                         itemType = itemType,
                         quantity = quantity,
-                        attributes = new Hashtable(attributes)
+                        attributes = new Attributes(attributes)
                     }
                 );
                 return true;
@@ -155,7 +111,7 @@ namespace GardenPlanet
          * attempt to remove up to the quantity given.
          * Return false if the item wasn't there or true otherwise.
          */
-        public bool RemoveItem(ItemType itemType, Hashtable attributes, int quantity = 1)
+        public bool RemoveItem(ItemType itemType, Attributes attributes, int quantity = 1)
         {
             var entries = GetItemEntriesOfType(itemType, attributes);
             // We don't have that type in the inventory
@@ -189,7 +145,7 @@ namespace GardenPlanet
             return true;
         }
 
-        List<InventoryItemEntry> GetItemEntriesOfType(ItemType itemType, Hashtable attributes)
+        List<InventoryItemEntry> GetItemEntriesOfType(ItemType itemType, Attributes attributes)
         {
             var list = new List<InventoryItemEntry>();
             foreach(var item in items)
@@ -198,19 +154,15 @@ namespace GardenPlanet
             return list;
         }
 
-        public bool DoAttributesMatch(Hashtable attributesA, Hashtable attributesB)
+        public bool DoAttributesMatch(Attributes attributesA, Attributes attributesB)
         {
-            foreach(var key in attributesA.Keys)
-                if(!attributesB.ContainsKey(key) || attributesA[key] != attributesB[key])
-                    return false;
-            return true;
+            return attributesA == attributesB;
         }
 
         public bool ItemEntryExists(InventoryItemEntry entry)
         {
             return items.IndexOf(entry) > -1;
         }
-
 
     }
 }

@@ -567,7 +567,7 @@ namespace GardenPlanet
         /*
          * Call to start holding the item passed, any item currently being held will be put away.
          */
-        public bool StartHoldingItem(ItemType itemType, Hashtable attributes)
+        public bool StartHoldingItem(ItemType itemType, Attributes attributes)
         {
             StopHoldingItem();
             if(currentAction != 0 || passedOut)
