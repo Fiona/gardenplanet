@@ -112,14 +112,14 @@ namespace GardenPlanet
         [Test]
         public void TestEqualityDifferentOrderInitialisation()
         {
-            var attrs1 = new Attributes()
+            var attrs1 = new Attributes
             {
                 {"foo", "bar"},
                 {"baz", "boop"},
                 {"wow", "cool"},
                 {"many", "tests"}
             };
-            var attrs2 = new Attributes()
+            var attrs2 = new Attributes
             {
                 {"many", "tests"},
                 {"wow", "cool"},
@@ -127,6 +127,77 @@ namespace GardenPlanet
                 {"foo", "bar"}
             };
             Assert.That(attrs1 == attrs2);
+        }
+
+        [Test]
+        public void TestThatAttributesCanBeConcatenated()
+        {
+            var attrs1 = new Attributes
+            {
+                {"big dog", "Roman"},
+                {"not paranoia", "Usooooos penetentary"}
+            };
+            var attrs2 = new Attributes
+            {
+                {"rainmaker", "Okada"},
+                {"villian", "Marty"}
+            };
+            Assert.That(attrs1 + attrs2, Is.EqualTo(
+                new Attributes
+                {
+                    {"big dog", "Roman"},
+                    {"not paranoia", "Usooooos penetentary"},
+                    {"rainmaker", "Okada"},
+                    {"villian", "Marty"}
+                }
+            ));
+        }
+
+        [Test]
+        public void TestThatEmptyAttributesCanBeConcatenated()
+        {
+            var attrs1 = new Attributes();
+            var attrs2 = new Attributes();
+            Assert.That(attrs1 + attrs2, Is.EqualTo(new Attributes()));
+        }
+
+        [Test]
+        public void TestThatEmptyAndNonEmptyAttributesCanBeConcatenated()
+        {
+            var attrs1 = new Attributes
+            {
+                {"boots and cats", "and boots and cats and boots"}
+            };
+            var attrs2 = new Attributes();
+            Assert.That(attrs1 + attrs2, Is.EqualTo(
+                new Attributes
+                {
+                    {"boots and cats", "and boots and cats and boots"}
+                }
+            ));
+        }
+
+        [Test]
+        public void TestThatConcatenatedAttributesAreOverriden()
+        {
+            var attrs1 = new Attributes
+            {
+                {"a value", "I'm not going to be there"},
+                {"another value", "Goodbye by brother"}
+            };
+            var attrs2 = new Attributes
+            {
+                {"a value", "I have defeated you"},
+                {"different value", "So, we meet again"}
+            };
+            Assert.That(attrs1 + attrs2, Is.EqualTo(
+                new Attributes
+                {
+                    {"another value", "Goodbye by brother"},
+                    {"a value", "I have defeated you"},
+                    {"different value", "So, we meet again"}
+                }
+            ));
         }
 
         [Test]

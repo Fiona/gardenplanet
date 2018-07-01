@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\AttributesTests.cs" />
     <Compile Include="Assets\Tests\GameTimeTests.cs" />
+    <Compile Include="Assets\Tests\InventoryTests.cs" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>

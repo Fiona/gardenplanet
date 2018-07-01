@@ -77,10 +77,9 @@ namespace GardenPlanet
             set{ data.Image = value; }
         }
 
-        public Hashtable Attributes
+        public Attributes Attributes
         {
-            get{ return data.Attributes; }
-            set{ data.Attributes = value; }
+            get{ return new Attributes(data.Attributes); }
         }
 
         public string Script
@@ -126,20 +125,22 @@ namespace GardenPlanet
                                         Category=singleItemTypeData.Value.Category,
                                         StackSize=singleItemTypeData.Value.StackSize,
                                         CanPickup=singleItemTypeData.Value.CanPickup,
-                                        Attributes=new Hashtable(),
+                                        Attributes=singleItemTypeData.Value.Attributes,
                                         Script=singleItemTypeData.Value.Script,
                                         Appearance=singleItemTypeData.Value.Appearance
                                     };
 
                                 itemTypeData.Add(singleItemTypeData.Key, newData);
-
+Debug.Log(newData.Attributes);
                                 // attributes
+                                /*
                                 foreach(string key in singleItemTypeData.Value.Attributes.Keys)
                                 {
                                     var attrData = ((JsonData)singleItemTypeData.Value.Attributes[key]);
                                     singleItemTypeData.Value.Attributes.Remove(singleItemTypeData.Key);
                                     itemTypeData[singleItemTypeData.Key].Attributes.Add(key, attrData);
                                 }
+                                */
                             }
                         }
                     }

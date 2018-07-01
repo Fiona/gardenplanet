@@ -19,9 +19,17 @@ namespace GardenPlanet
         }
 
         /*
+         * Constructor with no defaults
+         */
+        public Attributes()
+        {
+            items = new Hashtable();
+        }
+
+        /*
          * Constructor with Hashtable object as default
          */
-        public Attributes(Hashtable initial = null)
+        public Attributes(Hashtable initial)
         {
             items = new Hashtable();
             if(initial != null && initial.Count > 0)
@@ -164,6 +172,21 @@ namespace GardenPlanet
         public static bool operator !=(Attributes x, Attributes y)
         {
             return !(x == y);
+        }
+
+        public static Attributes operator +(Attributes x, Attributes y)
+        {
+            // Null checks
+            if(ReferenceEquals(x, null))
+                return new Attributes(y);
+            if(ReferenceEquals(y, null))
+                return new Attributes(x);
+            // Build new attrs with first list as base
+            var concatAttributes = new Attributes(x);
+            // Override with second list
+            foreach(var item in y)
+                concatAttributes.items[item.Key] = item.Value;
+            return concatAttributes;
         }
 
         /*
