@@ -18,6 +18,7 @@ namespace GardenPlanet
             public bool interactable;
             public bool tileObject;
             public bool hideInEditor;
+            public bool ghost;
             public string script;
             public Hashtable defaultAttributes;
         };
@@ -49,6 +50,11 @@ namespace GardenPlanet
         {
             get{ return data.hideInEditor; }
             set{ data.hideInEditor = value; }
+        }
+        public bool ghost
+        {
+            get{ return data.ghost; }
+            set{ data.ghost = value; }
         }
         public string script
         {
@@ -94,6 +100,7 @@ namespace GardenPlanet
                                         interactable=singleObjectData.Value.interactable,
                                         tileObject=singleObjectData.Value.tileObject,
                                         hideInEditor=singleObjectData.Value.hideInEditor,
+                                        ghost=singleObjectData.Value.ghost,
                                         script=singleObjectData.Value.script,
                                         defaultAttributes=singleObjectData.Value.defaultAttributes
                                     }

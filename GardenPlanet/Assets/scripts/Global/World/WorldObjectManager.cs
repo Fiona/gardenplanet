@@ -109,8 +109,7 @@ namespace GardenPlanet
             newGameObject = new GameObject(objectType.name);
             newGameObject.transform.parent = transform;
             newGameObject.transform.localPosition = new Vector3(pos.x, pos.height, pos.y);
-            newGameObject.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
-
+            
             var newWorldObject = new WorldObject {
                 x = pos.x,
                 y = pos.y,
@@ -157,7 +156,13 @@ namespace GardenPlanet
             // Set up appearence
             if(setAppearence)
                 newWorldObject.SetAppearence(true);
-
+            else
+                newGameObject.SetLayerRecursively(
+                    objectType.ghost ? 
+                    Consts.COLLISION_LAYER_GHOST_WORLD_OBJECTS :
+                    Consts.COLLISION_LAYER_WORLD_OBJECTS
+                );
+            
             return newWorldObject;
 
         }

@@ -6,6 +6,7 @@
             "script" : "Crop",
             "tileObject" : true,
             "hideInEditor" : true,
+            "ghost" : true,
             "defaultAttributes": {
                 "type" : "",
                 "watered" : false,

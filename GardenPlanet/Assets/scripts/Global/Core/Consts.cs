@@ -15,7 +15,7 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Game;
+        public const AppState INITIAL_APP_STATE = AppState.Title;
 
         // -----------------------------
         // TILE DRAWING
@@ -27,6 +27,7 @@ namespace GardenPlanet
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
         public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
+        public const int COLLISION_LAYER_GHOST_WORLD_OBJECTS = 15;
 
         public const int COLLISION_LAYER_CHARACTERS = 14;
 

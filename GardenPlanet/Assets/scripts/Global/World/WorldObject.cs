@@ -2,6 +2,7 @@
 using System.Collections;
 using LitJson;
 using UnityEngine;
+using StompyBlondie;
 
 namespace GardenPlanet
 {
@@ -37,10 +38,13 @@ namespace GardenPlanet
                 prefab = UnityEngine.Object.Instantiate(objectType.prefab);
 
             if(prefab != null)
-            {
                 prefab.transform.SetParent(appearence.transform, false);
-                prefab.layer = Consts.COLLISION_LAYER_WORLD_OBJECTS;
-            }
+            
+            gameObject.SetLayerRecursively(
+                objectType.ghost ? 
+                    Consts.COLLISION_LAYER_GHOST_WORLD_OBJECTS :
+                    Consts.COLLISION_LAYER_WORLD_OBJECTS
+            );            
         }
 
         public WorldPosition GetWorldPosition()
