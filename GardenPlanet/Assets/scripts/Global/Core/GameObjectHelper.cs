@@ -38,7 +38,7 @@ namespace StompyBlondie
         {
             SetCollidersEnabled(obj, false);
         }
-
+        
         private static void SetCollidersEnabled(GameObject obj, bool set)
         {
             var cols = obj.GetComponentsInChildren<Collider>();

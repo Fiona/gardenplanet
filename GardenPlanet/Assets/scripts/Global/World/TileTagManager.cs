@@ -92,6 +92,13 @@ namespace GardenPlanet
             return null;
         }
 
+        public void ClearTagsAt(TilePosition tilePos)
+        {
+            foreach(var tag in new List<TileTag>(TileTags))
+                if(tag.X == tilePos.x && tag.Y == tilePos.y && tag.Layer == tilePos.layer)
+                    RemoveTag(tag);
+        }
+
         public bool IsTileTaggedWith(TilePosition tilePos, string tagName)
         {
             var tag = FindTagAt(tilePos.x, tilePos.y, tilePos.layer);

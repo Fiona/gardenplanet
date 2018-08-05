@@ -7,7 +7,7 @@ namespace GardenPlanet
     public class InWorldItem : MonoBehaviour
     {
         public ItemType itemType;
-        public Hashtable attributes;
+        public Attributes attributes;
         public bool droppedByPlayer;
         public Character beingHeldBy;
 
@@ -120,11 +120,17 @@ namespace GardenPlanet
                 return;
 
             rigidBody.useGravity = true;
+            rigidBody.freezeRotation = false;
+            var rotationPush = 25f;
+            rigidBody.angularVelocity = new Vector3(
+                Random.Range(-rotationPush, rotationPush),
+                Random.Range(-rotationPush, rotationPush),
+                Random.Range(-rotationPush, rotationPush)
+            );
             var vel = rigidBody.velocity;
             vel.x = Random.Range(-1f, 1f);
             vel.z = Random.Range(-1f, 1f);
             rigidBody.velocity = vel;
-            rigidBody.freezeRotation = false;
 
             gameObject.EnableAllColliders();
             beingHeldBy = null;

@@ -13,7 +13,7 @@ namespace GardenPlanet.Items
         public override IEnumerator Use()
         {
             yield return StartCoroutine(controller.PlayerDoEat());
-            controller.IncreasePlayerEnergy(item.GetAttrFloat("energy_increase"));
+            controller.IncreasePlayerEnergy(item.attributes.Get<float>("energy_increase"));
             controller.RemovePlayerItem(item.itemType, item.attributes, 1);
             controller.itemHotbar.UpdateItemInHand();
             yield return null;

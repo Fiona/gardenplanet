@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23233123765285400}
   - component: {fileID: 65545725063689006}
   - component: {fileID: 54048318334705378}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wateringcan-level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 961c37ea683ea9347a839e29b2a57592, type: 2}
   m_StaticBatchInfo:
@@ -92,14 +91,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1604640276372410}
   serializedVersion: 2
-  m_Mass: 5
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 10
+  m_Drag: 5
+  m_AngularDrag: 0.2
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &65545725063689006
 BoxCollider:
   m_ObjectHideFlags: 1

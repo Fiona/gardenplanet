@@ -15,13 +15,11 @@ namespace GardenPlanet
 
         public void Start()
         {
-            RecreateCollisionPlane();
+            //RecreateCollisionPlane();
         }
             
-        public void RecreateCollisionPlane()
+        public void RecreateCollisionPlane(Tilemap tilemap)
         {
-            var tilemap = FindObjectOfType<Tilemap>();
-
             int layer = 0;
             if(app.state == AppState.Editor)
             {

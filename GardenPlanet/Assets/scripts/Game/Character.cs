@@ -121,8 +121,6 @@ namespace GardenPlanet
         public virtual void Start()
         {
             controller = FindObjectOfType<GameController>();
-            RegenerateVisuals();
-            RegenerateFace();
             isPlayer = this == controller.player;
         }
 
@@ -196,6 +194,8 @@ namespace GardenPlanet
         {
             var turnToPos = worldObject.gameObject.transform.position;
             var myPos = transform.position;
+            moveDirBuffer = Vector3.zero;
+            lookDirection = Vector3.zero;
 
             while(true)
             {
@@ -208,7 +208,7 @@ namespace GardenPlanet
                 SetRotation(newDir);
 
                 float found = Vector3.Angle(transform.forward, turnToPos - myPos);
-                if(Mathf.Abs(found) < 40f)
+                if(Mathf.Abs(found) < 20f)
                     break;
 
                 yield return new WaitForFixedUpdate();
@@ -338,7 +338,11 @@ namespace GardenPlanet
                 mainAnimator.SetBool("DoEat", true);
             // animation for yawning
             if(currentAction == CharacterAction.Yawn)
+            {
                 mainAnimator.SetBool("DoYawn", true);
+                if(this == controller.player)
+                    controller.PlayerStopHoldingItem();
+            }
             // animation for passing out
             if(currentAction == CharacterAction.PassOut)
                 mainAnimator.SetBool("DoPassOut", true);
@@ -561,9 +565,11 @@ namespace GardenPlanet
         /*
          * Call to start holding the item passed, any item currently being held will be put away.
          */
-        public bool StartHoldingItem(ItemType itemType, Hashtable attributes)
+        public bool StartHoldingItem(ItemType itemType, Attributes attributes)
         {
             StopHoldingItem();
+            if(currentAction != 0 || passedOut)
+                return false;
             itemCurrentlyHolding = controller.SpawnItem(itemType, attributes);
             if(itemCurrentlyHolding == null)
                 return false;
@@ -594,22 +600,32 @@ namespace GardenPlanet
 
         protected void RegenerateVisuals()
         {
-            if(visualsHolder == null)
-            {
-                visualsHolder = new GameObject("visuals");
-                visualsHolder.transform.SetParent(transform, false);
-            }
+            if(visualsHolder != null)
+                Destroy(visualsHolder);
+            
+            visualsHolder = new GameObject("visuals");
+            visualsHolder.transform.SetParent(transform, false);
 
+            // Copy animator into the visuals holder, it looks after the animations
+            var newAnimator = visualsHolder.AddComponent<Animator>();
+            newAnimator.runtimeAnimatorController = mainAnimator.runtimeAnimatorController;
+            newAnimator.avatar = mainAnimator.avatar;
+            newAnimator.applyRootMotion = mainAnimator.applyRootMotion;
+            newAnimator.updateMode = mainAnimator.updateMode;
+            newAnimator.cullingMode = mainAnimator.cullingMode;
+            
+            DestroyImmediate(mainAnimator);
+            mainAnimator = newAnimator;
+            
+            // Add animation event pass-through component
+            var animationEventListener = visualsHolder.AddComponent<CharacterAnimatorEventListener>();
+            animationEventListener.character = this;
+        
             headBones = new List<Transform>();
             lowerSpineBones = new List<Transform>();
             armatures = new List<Transform>();
 
-            visualsHolder.DestroyAllChildren();
-
             baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
-            holdItemHolder = baseModel.transform.FindRecursive("item");
-            if(holdItemHolder == null)
-                Debug.LogError("Can't find a child called item in character!");
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
             RegenerateSkin();
 
@@ -630,13 +646,27 @@ namespace GardenPlanet
             hairModel = null;
             if(appearence.hair != "")
                 hairModel = AddModelToVisuals(Consts.CHARACTERS_HAIR_VISUAL_PATH + appearence.hair, bonesToClone);
+            
             RegenerateHairColour();
-
+           
             StartCoroutine(RebindAnimation());
         }
 
         private IEnumerator RebindAnimation()
         {
+            yield return new WaitForFixedUpdate();
+            
+            // Unity was not happy with us doing this till the next frame, I hope this wont cause
+            // any weird not-animating-for-a-frame effects
+            AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, new []{"item"});
+
+            holdItemHolder = transform.FindRecursive("item");
+            if(holdItemHolder == null)
+                Debug.LogError("Can't find a child called item in character!");            
+            baseModel = transform.FindRecursive("basemodel").gameObject;
+            var findHair = transform.FindRecursive("hair");
+            hairModel = findHair ? findHair.gameObject : null;
+            
             yield return new WaitForFixedUpdate();
             mainAnimator.Rebind();
         }
@@ -683,12 +713,13 @@ namespace GardenPlanet
             newObject.transform.SetParent(visualsHolder.transform, false);
             armatures.Add(newObject.transform.Find("Armature").transform);
 
+            /*
             if(bonesToClone != null)
             {
                 var boneClone = newObject.AddComponent<BoneClone>();
                 boneClone.rendererToClone = bonesToClone;
             }
-
+*/
             var modelmeshrenderer = newObject.GetComponentInChildren<SkinnedMeshRenderer>();
             foreach(var b in modelmeshrenderer.bones)
             {
@@ -703,6 +734,7 @@ namespace GardenPlanet
 
         protected void LateUpdate()
         {
+            /*
             foreach(var a in armatures)
                 a.localScale = Vector3.one;
             if(headBones.Count > 0)
@@ -712,17 +744,18 @@ namespace GardenPlanet
             if(lowerSpineBones.Count > 0)
                 foreach(var spine in lowerSpineBones)
                     spine.localScale = new Vector3(lowerSpineScale, lowerSpineScale, lowerSpineScale);
+            */
         }
 
         // Animation event: Nom some
-        protected void AnimatorNom()
+        public void AnimatorNom()
         {
             if(itemCurrentlyHolding != null)
                 itemCurrentlyHolding.transform.localScale -= new Vector3(.35f, .35f, .35f);
         }
 
         // Animation event: EatItem
-        protected void AnimatorEatItemDone()
+        public void AnimatorEatItemDone()
         {
             mainAnimator.SetBool("DoEat", false);
             currentAction = 0;
@@ -732,21 +765,23 @@ namespace GardenPlanet
         }
 
         // Animation event: Close eyes
-        protected void AnimatorCloseEyes()
+        public void AnimatorCloseEyes()
         {
             face.SetFaceState(CharacterFace.FaceState.EYES_CLOSED);
         }
 
         // Animation event: YawnDone
-        protected void AnimatorYawnDone()
+        public void AnimatorYawnDone()
         {
             face.SetFaceState(CharacterFace.FaceState.NORMAL);
             mainAnimator.SetBool("DoYawn", false);
             currentAction = 0;
+            if(this == controller.player)
+                controller.itemHotbar.UpdateItemInHand();
         }
 
         // Animation event: PassOutMid
-        protected void AnimatorPassOutMid()
+        public void AnimatorPassOutMid()
         {
             if(this == controller.player)
                 controller.PlayerDropItemInHand();
@@ -755,7 +790,7 @@ namespace GardenPlanet
         }
 
         // Animation event: PassOutDone
-        protected void AnimatorPassOutDone()
+        public void AnimatorPassOutDone()
         {
             currentAction = 0;
             passedOut = true;

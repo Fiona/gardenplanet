@@ -30,15 +30,13 @@ namespace GardenPlanet
          * Returns true if the player has room in their inventory for such an item and it was added
          * successfully.
          */
-        public bool GivePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
+        public bool GivePlayerItem(ItemType itemType, Attributes attributes = null, int quantity = 1)
         {
             if(controller == null)
                 controller = FindObjectOfType<GameController>();
             if(itemType == null)
                 return false;
-            if(attributes == null)
-                attributes = new Hashtable(itemType.Attributes);
-            return controller.player.inventory.AddItem(itemType, attributes, quantity);
+            return controller.player.inventory.AddItem(itemType, itemType.Attributes + attributes, quantity);
         }
 
         /*
@@ -46,27 +44,29 @@ namespace GardenPlanet
          * Returns true if the player has room in their inventory for such an item, the item exists and
          * that it was added successfully.
          */
-        public bool GivePlayerItem(string itemTypeID, Hashtable attributes = null, int quantity = 1)
+        public bool GivePlayerItem(string itemTypeID, Attributes attributes = null, int quantity = 1)
         {
-            return GivePlayerItem(GetItemTypeByID(itemTypeID), attributes, quantity);
+            var itemType = GetItemTypeByID(itemTypeID);
+            return GivePlayerItem(itemType, itemType.Attributes + attributes, quantity);
         }
 
         /*
          * Attempts to remove an item matching the passed ItemType object and attributes.
          * Returns true if the player has such an item and it was removed successfully.
          */
-        public bool RemovePlayerItem(ItemType itemType, Hashtable attributes, int quantity = 1)
+        public bool RemovePlayerItem(ItemType itemType, Attributes attributes, int quantity = 1)
         {
-            return controller.player.inventory.RemoveItem(itemType, attributes, quantity);
+            return controller.player.inventory.RemoveItem(itemType, itemType.Attributes + attributes, quantity);
         }
 
         /*
          * Attempts to remove an item matching the passed ID string and attributes.
          * Returns true if the player has such an item and it was removed successfully.
          */
-        public bool RemovePlayerItem(string itemTypeID, Hashtable attributes, int quantity = 1)
+        public bool RemovePlayerItem(string itemTypeID, Attributes attributes, int quantity = 1)
         {
-            return RemovePlayerItem(GetItemTypeByID(itemTypeID), attributes, quantity);
+            var itemType = GetItemTypeByID(itemTypeID);
+            return RemovePlayerItem(itemType, itemType.Attributes + attributes, quantity);
         }
 
         /*

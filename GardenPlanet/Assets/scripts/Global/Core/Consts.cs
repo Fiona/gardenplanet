@@ -27,6 +27,7 @@ namespace GardenPlanet
         public const int COLLISION_LAYER_MOUSE_HOVER_PLANE = 10;
         public const int COLLISION_LAYER_PLAYER = 12;
         public const int COLLISION_LAYER_ITEMS = 13;
+        public const int COLLISION_LAYER_GHOST_WORLD_OBJECTS = 15;
 
         public const int COLLISION_LAYER_CHARACTERS = 14;
 
@@ -65,11 +66,14 @@ namespace GardenPlanet
         // -----------------------------
 
         // How far away the camera usually is from the player
-        public const float CAMERA_PLAYER_DISTANCE = 4.0f;
+        public const float CAMERA_PLAYER_DISTANCE = 3.0f;
 
         // How far from the ground the rotation usually is
         public const float CAMERA_DEFAULT_ROTATION = 45.0f;
 
+        // How fast the camera will lock to the player
+        public const float CAMERA_PLAYER_LOCK_SPEED = 3.0f;
+        
         // -----------------------------
         // CHARACTERS
         // -----------------------------

@@ -8,8 +8,8 @@ namespace GardenPlanet
         public override void Start()
         {
             rigidBody.freezeRotation = false;
-            RegenerateVisuals();
-            RegenerateFace();
+            //RegenerateVisuals();
+            //RegenerateFace();
         }
 
         public override void FixedUpdate()

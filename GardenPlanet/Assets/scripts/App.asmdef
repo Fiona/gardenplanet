@@ -2,10 +2,12 @@
     "name": "App",
     "references": [
         "UnityUiExtensions",
-        "TextMeshPro",
         "Rewired",
-        "PostProcessing"
+        "PostProcessing",
+        "Unity.TextMeshPro"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }

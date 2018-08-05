@@ -15,6 +15,7 @@ namespace GardenPlanet
         public float currentEnergy;
 
         private bool didYawn;
+        private int wokeUpOnDay = -1;
 
         public static Appearence defaultAppearence = new Appearence
         {
@@ -89,14 +90,17 @@ namespace GardenPlanet
         public IEnumerator Sleep()
         {
             controller.worldTimer.DontRemindMe(PassOutTimeEvent);
+            StopHoldingItem();
             yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeOut(2f));
             controller.worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
             SetPassOutEvent();
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeIn(3f));
             currentEnergy = maxEnergy;
+            wokeUpOnDay = controller.worldTimer.gameTime.Days;
             passedOut = false;
             didYawn = false;
+            controller.itemHotbar.UpdateItemInHand();
         }
 
         public IEnumerator PassOut()
@@ -115,12 +119,13 @@ namespace GardenPlanet
 
             // Reset some game stuff, set the new day time
             controller.worldTimer.DontRemindMe(PassOutTimeEvent);
-            controller.worldTimer.gameTime = new GameTime(
-                days: controller.worldTimer.gameTime.Days,
-                hours: Consts.PLAYER_PASS_OUT_WAKE_HOUR
-            );
+            // If we passed out during the morning of the next day then going to the next day will skip a whole day
+            // so just adjust the hour forward instead
+            if(controller.worldTimer.gameTime.Days == wokeUpOnDay || wokeUpOnDay == -1)
+                controller.worldTimer.GoToNextDay(Consts.PLAYER_PASS_OUT_WAKE_HOUR);
+            else
+                controller.worldTimer.GoToHour(Consts.PLAYER_PASS_OUT_WAKE_HOUR);
             SetPassOutEvent();
-            controller.worldTimer.DoTimerEvents();
             mainAnimator.SetBool("DoPassOut", false);
             face.SetFaceState(CharacterFace.FaceState.NORMAL);
 
@@ -132,6 +137,8 @@ namespace GardenPlanet
             currentEnergy = maxEnergy * .75f;
             passedOut = false;
             didYawn = false;
+            wokeUpOnDay = controller.worldTimer.gameTime.Days;
+            controller.itemHotbar.UpdateItemInHand();
             controller.EndCutscene();
         }
 

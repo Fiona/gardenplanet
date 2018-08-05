@@ -107,6 +107,12 @@ namespace GardenPlanet
             DoTimerEvents();
         }
 
+        public void GoToHour(int hourToStartAt)
+        {
+            gameTime = new GameTime(days: gameTime.Days, hours: hourToStartAt);
+            DoTimerEvents();
+        }
+
         public void DoTimerEvents()
         {
             if(eventCallbacks.Count <= 0 || eventCallbacks.First().Key >= gameTime)

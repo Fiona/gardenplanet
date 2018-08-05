@@ -18,7 +18,7 @@ namespace GardenPlanet
                     return false;
 
                 var crops = tilePos.GetTileWorldObjects("crop");
-                if(crops.Count == 0 || crops[0].GetAttrFloat("growth") >= 100f)
+                if(crops.Count == 0 || crops[0].attributes.Get<float>("growth") >= 100f)
                     return false;
                 return true;
             }
@@ -27,12 +27,12 @@ namespace GardenPlanet
             {
                 // Make sure we reduced energy
                 var energyConsumption = (float) (double) controller.globalConfig["energy_usage"]["watering_can"] *
-                                        item.GetAttrFloat("energy_consumption_modifier");
+                                        item.attributes.Get<float>("energy_consumption_modifier");
                 if(!controller.ConsumePlayerEnergy(energyConsumption))
                     yield break;
 
                 var crop = tilePos.GetTileWorldObjects("crop")[0];
-                crop.SetAttrBool("watered", true);
+                crop.attributes.Set("watered", true);
                 crop.SetAppearence();
                 yield return null;
             }

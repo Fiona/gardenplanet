@@ -213,6 +213,7 @@ namespace GardenPlanet
         public double xCentre;
         public double yCentre;
         public double zCentre;
+		public string autoTag;
 	}
 
 }

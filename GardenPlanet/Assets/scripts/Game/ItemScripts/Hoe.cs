@@ -39,7 +39,7 @@ namespace GardenPlanet
             {
                 // Make sure we reduced energy
                 var energyConsumption = (float)(double)controller.globalConfig["energy_usage"]["hoe"] *
-                                        item.GetAttrFloat("energy_consumption_modifier");
+                                        item.attributes.Get<float>("energy_consumption_modifier");
                 if(!controller.ConsumePlayerEnergy(energyConsumption))
                     yield break;
 
@@ -49,17 +49,21 @@ namespace GardenPlanet
                 {
                     foreach(var i in tileObjects)
                     {
+                        var cropType = i.attributes.Get<string>("type");
                         // Unseeded soil is removed
-                        if(i.GetAttrString("type") == "")
+                        if(cropType == "")
                         {
                             controller.worldObjectManager.DeleteWorldObject(i);
                             controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;
                         }
                         // Ungrown seeds can be fished out
-                        if(i.GetAttrFloat("growth") < 1f)
+                        if(i.attributes.Get<float>("growth") < 1f)
                         {
-                            controller.GivePlayerItem(i.GetAttrString("type")+"_seeds", new Hashtable(), 1);
+                            controller.GivePlayerItem(
+                                i.attributes.Get<string>("type")+"_seeds",
+                                new Attributes{{"type", cropType}}
+                                );
                             controller.worldObjectManager.DeleteWorldObject(i);
                             controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;
@@ -67,8 +71,8 @@ namespace GardenPlanet
                         // Damage part grown crops and destroy if broken
                         var effect = Instantiate(Resources.Load("effects/oneshot/CropDamage")) as GameObject;
                         effect.transform.position = i.gameObject.transform.position;
-                        var damage = i.GetAttrFloat("damage") + Consts.CROP_DAMAGE_PER_HOE_HIT;
-                        i.SetAttrFloat("damage", damage);
+                        var damage = i.attributes.Get<float>("damage") + Consts.CROP_DAMAGE_PER_HOE_HIT;
+                        i.attributes.Set("damage", damage);
                         if(damage >= 100f)
                             controller.worldObjectManager.DeleteWorldObject(i);
                         yield break;

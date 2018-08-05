@@ -116,7 +116,9 @@ namespace GardenPlanet
             // Interacting with objects in the world
             bool collisionTest = false;
             RaycastHit hit;
-            var colLayers = (1 << Consts.COLLISION_LAYER_WORLD_OBJECTS) | (1 << Consts.COLLISION_LAYER_ITEMS);
+            var colLayers = (1 << Consts.COLLISION_LAYER_WORLD_OBJECTS) |
+                            (1 << Consts.COLLISION_LAYER_ITEMS) |
+                            (1 << Consts.COLLISION_LAYER_GHOST_WORLD_OBJECTS);
 
             // Hovering mouse over objects or in-world items
             if(mouseMode)

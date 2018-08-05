@@ -241,7 +241,7 @@ namespace GardenPlanet
                 mainCamera.transform.position.z);
             CreateBarrier();
             tilemap.GenerateEmptyTiles(currentLayer);
-            mouseHoverPlane.RecreateCollisionPlane();
+            mouseHoverPlane.RecreateCollisionPlane(tilemap);
         }
 
         public void ResizeTilemapTo(int width, int height)

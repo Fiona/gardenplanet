@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,14 +9,16 @@ namespace GardenPlanet
     public class MapEditorModeTile: MapEditorMode
     {
 
-        GameObject currentTilePanel;
-        Text currentTileText;
-        GameObject currentTileTemplate;
-        EditTileDialog editTileDialog;
-        string currentTileName;
-        string previousTileType;
-        GameObject currentTileTypeSelectedObj;
-        Direction newTileDirection;
+        private GameObject currentTilePanel;
+        private Text currentTileText;
+        private GameObject currentTileTemplate;
+        private EditTileDialog editTileDialog;
+        private string currentTileName;
+        private string previousTileType;
+        private GameObject currentTileTypeSelectedObj;
+        private Direction newTileDirection;
+        private bool rectangleDrawing;
+        private TilePosition firstRectanglePoint;
 
         public override string GetModeName()
         {
@@ -32,6 +35,7 @@ namespace GardenPlanet
             base.Initialize();
             SelectTileType(controller.tileTypeSet.types[0].name);
             newTileDirection = Direction.Down;
+            rectangleDrawing = false;
         }
 
         public override void InitializeGUI()
@@ -56,7 +60,7 @@ namespace GardenPlanet
         {
             if(controller.currentHoveredTile == null)
                 return;
-            
+
             var axis = Input.GetAxis("Mouse ScrollWheel");
 
             if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
@@ -64,9 +68,15 @@ namespace GardenPlanet
                 var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
                 controller.tilemap.RotateTileInDirection(controller.currentHoveredTile, dir);
                 newTileDirection = controller.currentHoveredTile.direction;
-            }            
+            }
+
+            if(Input.GetKeyUp(KeyCode.Return))
+            {
+                rectangleDrawing = !rectangleDrawing;
+                firstRectanglePoint = null;
+            }
         }
-        
+
         public override void Destroy()
         {
             base.Destroy();
@@ -75,7 +85,7 @@ namespace GardenPlanet
         }
 
         public override void SaveToMap(Map map)
-        {        
+        {
         }
 
         public override void ResizeMap(int width, int height)
@@ -86,11 +96,57 @@ namespace GardenPlanet
         {
             if(pointerEventData.button == PointerEventData.InputButton.Left)
             {
-                controller.tilemap.RemoveTile(tilePos.x, tilePos.y, tilePos.layer);
-                controller.tilemap.AddTile(currentTileName, tilePos.x, tilePos.y, tilePos.layer, newTileDirection);
+                // Rectangle drawing
+                if(rectangleDrawing)
+                {
+                    if(firstRectanglePoint == null)
+                    {
+                        firstRectanglePoint = tilePos;
+                        return;
+                    }
+
+                    var minX = Math.Min(firstRectanglePoint.x, tilePos.x);
+                    var maxX = Math.Max(firstRectanglePoint.x, tilePos.x);
+                    var minY = Math.Min(firstRectanglePoint.y, tilePos.y);
+                    var maxY = Math.Max(firstRectanglePoint.y, tilePos.y);
+                    for(var x = minX; x <= maxX; x++)
+                        for(var y = minY; y <= maxY; y++)
+                            AddTileAt(new TilePosition(x, y, tilePos.layer));
+                    firstRectanglePoint = null;
+                }
+
+                // Regular old drawing
+                AddTileAt(tilePos);
             }
             else if(pointerEventData.button == PointerEventData.InputButton.Right)
-                SelectTileType(controller.currentHoveredTile.tileTypeName);            
+            {
+                SelectTileType(controller.currentHoveredTile.tileTypeName);
+            }
+        }
+
+        private void AddTileAt(TilePosition tilePos)
+        {
+            var tagManager = UnityEngine.Object.FindObjectOfType<TileTagManager>();
+            controller.tilemap.RemoveTile(tilePos.x, tilePos.y, tilePos.layer);
+            tagManager.ClearTagsAt(tilePos);
+            controller.tilemap.AddTile(currentTileName, tilePos.x, tilePos.y, tilePos.layer, newTileDirection);
+
+            // Add auto tag
+            if(currentTileName == null)
+                return;
+            var autoTag = controller.tileTypeSet.GetTileTypeByName(currentTileName).autoTag;
+            if(!String.IsNullOrEmpty(autoTag))
+            {
+                var newTag = new TileTag()
+                {
+                    TagType = autoTag,
+                    X = tilePos.x,
+                    Y = tilePos.y,
+                    Layer = tilePos.layer
+                };
+                tagManager.AddTag(newTag);
+                tagManager.EditorTileTagObjects[newTag].SetActive(false);
+            }
         }
 
         /*
@@ -123,7 +179,7 @@ namespace GardenPlanet
             rect.localPosition = currentTileTemplate.GetComponent<RectTransform>().localPosition;
             rect.localScale = currentTileTemplate.GetComponent<RectTransform>().localScale;
             rect.localRotation = currentTileTemplate.GetComponent<RectTransform>().localRotation;
-            
+
             currentTileName = tileTypeName;
             currentTileText.text = currentTileName;
 
@@ -216,6 +272,6 @@ namespace GardenPlanet
             previousTileType = currentTileName;
             SelectTileType(null);
         }
-            
+
     }
 }

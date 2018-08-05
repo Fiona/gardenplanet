@@ -11,14 +11,24 @@ namespace GardenPlanet
         public string displayName = "Quit Game";
         public GlobalButton toTitleButton;
         public GlobalButton toDesktopButton;
+
         private GameController controller;
         private bool pressed;
+        private GUINavigator navigator;
 
         private void Awake()
         {
             controller = FindObjectOfType<GameController>();
             toTitleButton.SetCallback(() => StartCoroutine(TitleButtonPressed()));
             toDesktopButton.SetCallback(() => StartCoroutine(DesktopButtonPressed()));
+
+            if(navigator == null)
+                navigator = gameObject.AddComponent<GUINavigator>();
+            navigator.ClearNavigationElements();
+            navigator.direction = GUINavigator.GUINavigatorDirection.Vertical;
+            navigator.AddNavigationElement(toTitleButton.GetComponent<RectTransform>());
+            navigator.AddNavigationElement(toDesktopButton.GetComponent<RectTransform>());
+            navigator.active = true;
         }
 
         public string GetDisplayName()
@@ -49,14 +59,14 @@ namespace GardenPlanet
         {
             yield return controller.screenFade.FadeOut(
                 callback: () => FindObjectOfType<App>().StartNewState(AppState.Title)
-                );
+            );
         }
 
         private IEnumerator DesktopButtonPressed()
         {
             yield return controller.screenFade.FadeOut(
                 callback: FindObjectOfType<App>().Quit
-                );
+            );
         }
     }
 }

@@ -5,12 +5,13 @@ namespace GardenPlanet
 {
 
 	public class PlayerCamera: MonoBehaviour
-	{
-	    private GameObject target = null;
+	{	   
+		public float distance;
+		public float speed;
+		
+		private GameObject target = null;
 	    private Vector3 offset;
-	    private float distance;
-	    private float speed;
-
+		
 	    public void Awake()
 	    {
 	    }

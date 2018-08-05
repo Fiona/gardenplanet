@@ -8,20 +8,21 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1278764139617308}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1278764139617308
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4468451058130162}
   - component: {fileID: 33534926238202076}
   - component: {fileID: 23510169323574810}
   - component: {fileID: 65945489597125736}
+  - component: {fileID: 54919211300709662}
   m_Layer: 0
   m_Name: crop_cabbage_grown
   m_TagString: Untagged
@@ -32,9 +33,9 @@ GameObject:
 --- !u!1 &1437132018671902
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4968451238100292}
   - component: {fileID: 33108975918408638}
@@ -49,7 +50,7 @@ GameObject:
 --- !u!4 &4468451058130162
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278764139617308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -63,7 +64,7 @@ Transform:
 --- !u!4 &4968451238100292
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437132018671902}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
@@ -76,7 +77,7 @@ Transform:
 --- !u!23 &23510169323574810
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278764139617308}
   m_Enabled: 1
@@ -86,6 +87,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 98d268a6d4dae2d449012be7b9009e15, type: 2}
   m_StaticBatchInfo:
@@ -110,7 +112,7 @@ MeshRenderer:
 --- !u!23 &23939172659465888
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437132018671902}
   m_Enabled: 1
@@ -120,6 +122,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 1c7b66e81e352d14a9353d870cdcc24b, type: 2}
   m_StaticBatchInfo:
@@ -144,21 +147,36 @@ MeshRenderer:
 --- !u!33 &33108975918408638
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437132018671902}
   m_Mesh: {fileID: 4300002, guid: 16a759cfadb1d3a4aa0052298e66c906, type: 3}
 --- !u!33 &33534926238202076
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278764139617308}
   m_Mesh: {fileID: 4300000, guid: 16a759cfadb1d3a4aa0052298e66c906, type: 3}
+--- !u!54 &54919211300709662
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278764139617308}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &65945489597125736
 BoxCollider:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278764139617308}
   m_Material: {fileID: 0}

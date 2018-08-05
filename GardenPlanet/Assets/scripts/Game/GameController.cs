@@ -155,7 +155,7 @@ namespace GardenPlanet
             else
                 player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
             mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
-            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
+            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
 
             // Start at day...
             worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
@@ -223,7 +223,7 @@ namespace GardenPlanet
          * Attempts to have the player holding the item matching the passed ItemType object and attrbutes.
          * Returns true if the item was successfully placed in their hand.
          */
-        public bool PlayerStartHoldingItem(ItemType itemType, Hashtable attributes)
+        public bool PlayerStartHoldingItem(ItemType itemType, Attributes attributes)
         {
             return player.StartHoldingItem(itemType, attributes);
         }
@@ -266,7 +266,7 @@ namespace GardenPlanet
          * Returns true if the player has room in their inventory for such an item and it was added
          * successfully.
          */
-        public bool GivePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
+        public bool GivePlayerItem(ItemType itemType, Attributes attributes = null, int quantity = 1)
         {
             return itemManager.GivePlayerItem(itemType, attributes, quantity);
         }
@@ -276,7 +276,7 @@ namespace GardenPlanet
          * Returns true if the player has room in their inventory for such an item, the item exists and
          * that it was added successfully.
          */
-        public bool GivePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
+        public bool GivePlayerItem(string itemTypeId, Attributes attributes = null, int quantity = 1)
         {
             return itemManager.GivePlayerItem(itemTypeId, attributes, quantity);
         }
@@ -285,7 +285,7 @@ namespace GardenPlanet
          * Attempts to remove an item matching the passed ItemType object and attributes.
          * Returns true if the player has such an item and it was removed successfully.
          */
-        public bool RemovePlayerItem(ItemType itemType, Hashtable attributes = null, int quantity = 1)
+        public bool RemovePlayerItem(ItemType itemType, Attributes attributes = null, int quantity = 1)
         {
             return itemManager.RemovePlayerItem(itemType, attributes, quantity);
         }
@@ -294,7 +294,7 @@ namespace GardenPlanet
          * Attempts to remove an item matching the passed ID string and attributes.
          * Returns true if the player has such an item and it was removed successfully.
          */
-        public bool RemovePlayerItem(string itemTypeId, Hashtable attributes = null, int quantity = 1)
+        public bool RemovePlayerItem(string itemTypeId, Attributes attributes = null, int quantity = 1)
         {
             return itemManager.RemovePlayerItem(itemTypeId, attributes, quantity);
         }
@@ -326,7 +326,7 @@ namespace GardenPlanet
 
 
         // Generates an item in the world and returns it
-        public InWorldItem SpawnItem(ItemType itemType, System.Collections.Hashtable attributes)
+        public InWorldItem SpawnItem(ItemType itemType, Attributes attributes)
         {
             var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
             if(resource == null)

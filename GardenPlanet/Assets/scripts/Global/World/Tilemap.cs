@@ -190,7 +190,7 @@ namespace GardenPlanet
             foreach(var tile in tilesToKill)
                 RemoveTile(tile.x, tile.y, tile.layer);
 
-            FindObjectOfType<MouseHoverPlane>().RecreateCollisionPlane();
+            FindObjectOfType<MouseHoverPlane>().RecreateCollisionPlane(this);
         }
 
         /*
