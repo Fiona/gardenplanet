@@ -155,7 +155,7 @@ namespace GardenPlanet
             else
                 player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
             mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
-            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, 5.0f);
+            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
 
             // Start at day...
             worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);

@@ -152,9 +152,14 @@ namespace GardenPlanet
         {
             // Null checks
             if(ReferenceEquals(x, null))
-                return ReferenceEquals(y, null);
+            {
+                if(ReferenceEquals(y, null))
+                    return true;
+                return y.Count == 0;
+            }
+
             if(ReferenceEquals(y, null))
-                return false;
+                return x.Count == 0;
             // Count checks
             if(x.Count() != y.Count())
                 return false;

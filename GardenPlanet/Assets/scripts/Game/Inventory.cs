@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using System.Security.Cryptography;
 using LitJson;
 using UnityEngine;
 
@@ -149,14 +150,11 @@ namespace GardenPlanet
         {
             var list = new List<InventoryItemEntry>();
             foreach(var item in items)
-                if(item.itemType == itemType && DoAttributesMatch(attributes, item.attributes))
+            {
+                if(item.itemType == itemType && attributes == item.attributes)
                     list.Add(item);
+            }
             return list;
-        }
-
-        public bool DoAttributesMatch(Attributes attributesA, Attributes attributesB)
-        {
-            return attributesA == attributesB;
         }
 
         public bool ItemEntryExists(InventoryItemEntry entry)

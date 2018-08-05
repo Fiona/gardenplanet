@@ -15,7 +15,7 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Title;
+        public const AppState INITIAL_APP_STATE = AppState.Game;
 
         // -----------------------------
         // TILE DRAWING
@@ -66,11 +66,14 @@ namespace GardenPlanet
         // -----------------------------
 
         // How far away the camera usually is from the player
-        public const float CAMERA_PLAYER_DISTANCE = 4.0f;
+        public const float CAMERA_PLAYER_DISTANCE = 3.0f;
 
         // How far from the ground the rotation usually is
         public const float CAMERA_DEFAULT_ROTATION = 45.0f;
 
+        // How fast the camera will lock to the player
+        public const float CAMERA_PLAYER_LOCK_SPEED = 3.0f;
+        
         // -----------------------------
         // CHARACTERS
         // -----------------------------

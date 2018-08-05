@@ -69,10 +69,12 @@ namespace GardenPlanet
                     controller.currentHoveredTile.x,
                     controller.currentHoveredTile.y,
                     controller.currentHoveredTile.layer
-                    );
+                );
                 if(marker != null)
-                    markerManager.RotateMarkerInDirection(marker, dir);						
-                newMarkerDirection = marker.dir;                
+                {
+                    markerManager.RotateMarkerInDirection(marker, dir);
+                    newMarkerDirection = marker.dir;
+                }                
             }            
         }        
 

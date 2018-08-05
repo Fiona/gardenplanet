@@ -78,6 +78,41 @@ namespace GardenPlanet
         }
 
         [Test]
+        public void TestNullEquality()
+        {
+            Attributes attrs1 = null;
+            Attributes attrs2 = null;
+            Assert.That(attrs1, Is.EqualTo(attrs2));
+        }
+
+        [Test]
+        public void TestEmptyNullEquality()
+        {
+            Attributes attrs1 = new Attributes();
+            Attributes attrs2 = null;
+            Assert.That(attrs1 == attrs2, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void TestEmptyNullEqualityFlipped()
+        {
+            Attributes attrs1 = null;
+            Attributes attrs2 = new Attributes();
+            Assert.That(attrs1 == attrs2, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void TestNotEmptyNullEquality()
+        {
+            Attributes attrs1 = new Attributes
+            {
+                {"meow", "beepboop"}
+            };
+            Attributes attrs2 = null;
+            Assert.That(attrs1, Is.Not.EqualTo(attrs2));
+        }
+
+        [Test]
         public void TestEquality()
         {
             var attrs1 = new Attributes()

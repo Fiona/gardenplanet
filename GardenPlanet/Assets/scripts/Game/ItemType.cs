@@ -131,16 +131,6 @@ namespace GardenPlanet
                                     };
 
                                 itemTypeData.Add(singleItemTypeData.Key, newData);
-Debug.Log(newData.Attributes);
-                                // attributes
-                                /*
-                                foreach(string key in singleItemTypeData.Value.Attributes.Keys)
-                                {
-                                    var attrData = ((JsonData)singleItemTypeData.Value.Attributes[key]);
-                                    singleItemTypeData.Value.Attributes.Remove(singleItemTypeData.Key);
-                                    itemTypeData[singleItemTypeData.Key].Attributes.Add(key, attrData);
-                                }
-                                */
                             }
                         }
                     }
