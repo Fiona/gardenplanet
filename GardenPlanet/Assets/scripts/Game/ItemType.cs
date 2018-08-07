@@ -145,7 +145,6 @@ namespace GardenPlanet
                 var newItem = new ItemType{ data = i.Value };
                 newItem.Image = Resources.Load<Sprite>(string.Format("textures/items/{0}_image", newItem.Appearance));
                 allItems.Add(newItem);
-                Debug.Log(newItem.Attributes);
             }
 
             // Reorder and return

@@ -26,7 +26,7 @@ namespace GardenPlanet
             {
                 // Make sure we reduced energy
                 var energyConsumption = controller.globalConfig.energyUsage["wateringCan"] *
-                                        item.attributes.Get<float>("energy_consumption_modifier");
+                                        item.attributes.Get<float>("energyConsumptionModifier");
                 if(!controller.ConsumePlayerEnergy(energyConsumption))
                     yield break;
 
