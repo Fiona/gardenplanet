@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.UI;
-using LitJson;
 using Debug = UnityEngine.Debug;
 
 namespace GardenPlanet
@@ -49,14 +46,28 @@ namespace GardenPlanet
             // Get colour values from global config
             try
             {
-                var items = controller.globalConfig["appearence"][typeName];
-                foreach(JsonData item in items)
+                var colourItems = new List<List<int>>();
+                switch(typeName)
+                {
+                    case "skin_colours":
+                        colourItems = controller.globalConfig.appearence.skinColours;
+                        break;
+                    case "eye_colours":
+                        colourItems = controller.globalConfig.appearence.eyeColours;
+                        break;
+                    case "hair_colours":
+                        colourItems = controller.globalConfig.appearence.hairColours;
+                        break;
+                    default:
+                        throw new KeyNotFoundException();
+                }
+                foreach(var item in colourItems)
                 {
                     if(item.Count < 3)
                         continue;
-                    var h = (int)item[0] / 255f;
-                    var s = (int)item[1] / 255f;
-                    var v = (int)item[2] / 255f;
+                    var h = item[0] / 255f;
+                    var s = item[1] / 255f;
+                    var v = item[2] / 255f;
                     values.Add(Color.HSVToRGB(h, s, v));
                 }
             }

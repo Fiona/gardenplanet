@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
-using System.Text;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using LitJson;
 using UnityEngine;
+
 
 namespace GardenPlanet
 {
+
     public class WorldObjectType
     {
 
-        public struct WorldObjectDataEntry
+        public class WorldObjectDataEntry
         {
             public string displayName;
             public bool interactable;
@@ -20,10 +18,10 @@ namespace GardenPlanet
             public bool hideInEditor;
             public bool ghost;
             public string script;
-            public Hashtable defaultAttributes;
+            public Attributes defaultAttributes;
         };
 
-        public struct WorldObjectTypeDataFile
+        public class WorldObjectTypeDataFile
         {
             public Dictionary<string, WorldObjectDataEntry> worldObjectTypes;
         };
@@ -61,7 +59,7 @@ namespace GardenPlanet
             get{ return data.script; }
             set{ data.script = value; }
         }
-        public Hashtable defaultAttributes
+        public Attributes defaultAttributes
         {
             get{ return data.defaultAttributes; }
             set{ data.defaultAttributes = value; }
@@ -87,8 +85,8 @@ namespace GardenPlanet
                         using(var fh = File.OpenText(f))
                         {
                             var fileConents = fh.ReadToEnd();
-                            //fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);
-                            var loadedDataFile = JsonMapper.ToObject<WorldObjectTypeDataFile>(fileConents);
+
+                            var loadedDataFile = JsonHandler.Deserialize<WorldObjectTypeDataFile>(fileConents);
                             foreach(var singleObjectData in loadedDataFile.worldObjectTypes)
                             {
                                 var newType = new WorldObjectType
@@ -106,15 +104,15 @@ namespace GardenPlanet
                                     }
                                 };
                                 if(newType.defaultAttributes == null)
-                                    newType.defaultAttributes = new Hashtable();
+                                    newType.defaultAttributes = new Attributes();
                                 newType.prefab = Resources.Load<GameObject>(
                                     Path.Combine(Consts.WORLD_OBJECTS_PREFABS_PATH, singleObjectData.Key)
-                                    );
+                                );
                                 worldObjects.Add(newType);
                             }
                         }
                     }
-                    catch(JsonException e)
+                    catch(JsonErrorException e)
                     {
                         Debug.Log(e);
                     }
@@ -128,7 +126,6 @@ namespace GardenPlanet
 
         public static WorldObjectTypeDataFile CreateEmptyWorldObjectDataFile(string name)
         {
-
             var newDataFile = new WorldObjectTypeDataFile {
                 worldObjectTypes=new Dictionary<string, WorldObjectDataEntry>()
             };
@@ -136,7 +133,8 @@ namespace GardenPlanet
                 new WorldObjectDataEntry
                 {
                     displayName="Completely Nothing",
-                    interactable=false
+                    interactable=false,
+                    defaultAttributes=new Attributes{{"foo", "bar"}}
                 }
             );
 
@@ -148,20 +146,9 @@ namespace GardenPlanet
             if(!Directory.Exists(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_WORLD_OBJECT_DATA)))
                 Directory.CreateDirectory(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_WORLD_OBJECT_DATA));
 
-            var jsonOutput = new StringBuilder();
-            var writer = new JsonWriter(jsonOutput);
-            writer.PrettyPrint = true;
-            JsonMapper.ToJson(newDataFile, writer);
-
-            using(var fh = File.OpenWrite(filepath))
-            {
-                var jsonBytes = Encoding.UTF8.GetBytes(jsonOutput.ToString());
-                fh.SetLength(0);
-                fh.Write(jsonBytes, 0, jsonBytes.Length);
-            }
+            JsonHandler.SerializeToFile(newDataFile, filepath);
 
             return newDataFile;
-
         }
 
         public static string GetWorldObjectDataFilePathFromName(string name)

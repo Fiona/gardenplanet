@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using LitJson;
 using System.Text;
 using UnityEngine;
 
@@ -37,9 +35,9 @@ namespace GardenPlanet
 	            try
 	            {
 	                using(var fh = File.OpenText(fullFilePath))
-	                    loadedSet = JsonMapper.ToObject<TileTypeSet>(fh.ReadToEnd());
+	                    loadedSet = JsonHandler.Deserialize<TileTypeSet>(fh.ReadToEnd());
 	            }
-	            catch(JsonException e)
+	            catch(JsonErrorException e)
 	            {
 	                Debug.Log(e);
 	                throw new EditorErrorException("Error loading set.");
@@ -116,9 +114,9 @@ namespace GardenPlanet
 	        string jsonOutput;
 	        try
 	        {
-	            jsonOutput = JsonMapper.ToJson(this);
+	            jsonOutput = JsonHandler.Serialize(this);
 	        }
-	        catch(JsonException e)
+	        catch(JsonErrorException e)
 	        {
 	            Debug.Log(e);
 	            throw new EditorErrorException("Error saving tile set.");

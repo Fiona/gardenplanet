@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Linq;
 
 namespace GardenPlanet
 {
@@ -26,7 +25,7 @@ namespace GardenPlanet
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
                 // Make sure we reduced energy
-                var energyConsumption = (float) (double) controller.globalConfig["energy_usage"]["watering_can"] *
+                var energyConsumption = controller.globalConfig.energyUsage["wateringCan"] *
                                         item.attributes.Get<float>("energy_consumption_modifier");
                 if(!controller.ConsumePlayerEnergy(energyConsumption))
                     yield break;

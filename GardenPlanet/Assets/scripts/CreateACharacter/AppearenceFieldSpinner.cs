@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using AppearenceObject = GardenPlanet.GlobalConfig.AppearenceConfig.AppearenceObject;
 
 namespace GardenPlanet
 {
@@ -44,10 +45,36 @@ namespace GardenPlanet
 
             try
             {
-                var items = controller.globalConfig["appearence"][typeName];
-                foreach(var item in items.Keys)
-                    if((bool) items[item]["unlocked_at_start"])
-                        values.Add(new string[] {item, (string) items[item]["name"]});
+                var appearenceObjects = new Dictionary<string, AppearenceObject>();
+                switch(typeName)
+                {
+                    case "eyes":
+                        appearenceObjects = controller.globalConfig.appearence.eyes;
+                        break;
+                    case "hair":
+                        appearenceObjects = controller.globalConfig.appearence.hair;
+                        break;
+                    case "tops":
+                        appearenceObjects = controller.globalConfig.appearence.tops;
+                        break;
+                    case "eyebrows":
+                        appearenceObjects = controller.globalConfig.appearence.eyebrows;
+                        break;
+                    case "noses":
+                        appearenceObjects = controller.globalConfig.appearence.noses;
+                        break;
+                    case "mouths":
+                        appearenceObjects = controller.globalConfig.appearence.mouths;
+                        break;
+                    case "face_detail":
+                        appearenceObjects = controller.globalConfig.appearence.faceDetail;
+                        break;
+                    default:
+                        throw new KeyNotFoundException();
+                }
+                foreach(var item in appearenceObjects.Keys)
+                    if(appearenceObjects[item].unlockedAtStart)
+                        values.Add(new []{item, appearenceObjects[item].name});
             }
             catch(KeyNotFoundException)
             {

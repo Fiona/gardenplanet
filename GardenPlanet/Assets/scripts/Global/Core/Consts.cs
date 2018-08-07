@@ -73,7 +73,7 @@ namespace GardenPlanet
 
         // How fast the camera will lock to the player
         public const float CAMERA_PLAYER_LOCK_SPEED = 3.0f;
-        
+
         // -----------------------------
         // CHARACTERS
         // -----------------------------

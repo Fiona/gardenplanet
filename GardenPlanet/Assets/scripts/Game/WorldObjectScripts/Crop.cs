@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using LitJson;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -72,7 +71,7 @@ namespace GardenPlanet
             else if(Math.Abs(growth) > 0.05)
             {
                 // Work out which stage to display
-                var numStages = (int)controller.globalConfig["crops"][cropType]["num_growth_stages"];
+                var numStages = controller.globalConfig.crops[cropType].numGrowthStages;
                 var stageAt = Math.Ceiling(numStages * (growth / 100f));
                 additionalPrefabName = String.Format("crop_{0}_{1}", cropType, stageAt);
                 // Show wilted version if applicable
@@ -166,8 +165,8 @@ namespace GardenPlanet
                 // Little wheat sheaf stretches up to the sky
                 if(willGrow)
                 {
-                    var growthMin = (float) (double) controller.globalConfig["crops"][cropType]["growth_per_day"][0];
-                    var growthMax = (float) (double) controller.globalConfig["crops"][cropType]["growth_per_day"][1];
+                    var growthMin = controller.globalConfig.crops[cropType].growthPerDay[0];
+                    var growthMax = controller.globalConfig.crops[cropType].growthPerDay[1];
                     var growthAmount = UnityEngine.Random.Range(growthMin, growthMax);
                     worldObject.attributes.Set("growth", growth + growthAmount);
                     if(growth > 100.0f)
@@ -202,10 +201,10 @@ namespace GardenPlanet
         {
             // Get list of acceptable season numbers
             var cropType = worldObject.attributes.Get<string>("type");
-            JsonData seasons = controller.globalConfig["crops"][cropType]["seasons"];
+            var seasons = controller.globalConfig.crops[cropType].seasons;
             var seasonNumbers = new List<int>();
-            foreach(JsonData seasonName in seasons)
-                seasonNumbers.Add(Season.GetSeasonByShortName((string)seasonName));
+            foreach(var seasonName in seasons)
+                seasonNumbers.Add(Season.GetSeasonByShortName(seasonName));
 
             // First check if current season is dead-on
             if(seasonNumbers.Contains(controller.worldTimer.gameTime.DateSeason))

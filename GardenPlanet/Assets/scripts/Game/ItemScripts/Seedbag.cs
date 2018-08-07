@@ -28,7 +28,7 @@ namespace GardenPlanet
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
                 // Make sure we reduced energy
-                var energyConsumption = (float)(double)controller.globalConfig["energy_usage"]["seedbag"];
+                var energyConsumption = controller.globalConfig.energyUsage["seedbag"];
                 if(!controller.ConsumePlayerEnergy(energyConsumption))
                     yield break;
 

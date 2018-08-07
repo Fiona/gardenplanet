@@ -26,7 +26,7 @@ namespace GardenPlanet
                             Category = "Produce",
                             StackSize = 32,
                             CanPickup = true,
-                            Attributes = new Hashtable(),
+                            Attributes = new Attributes(),
                             Script = "Consumable",
                             Appearance = null
                         }
@@ -43,7 +43,7 @@ namespace GardenPlanet
                             Category = "Tool",
                             StackSize = 1,
                             CanPickup = true,
-                            Attributes = new Hashtable(),
+                            Attributes = new Attributes(),
                             Script = "Shovel",
                             Appearance = null
                         }
