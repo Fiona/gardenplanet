@@ -1,11 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Text;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using LitJson;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -22,7 +19,7 @@ namespace GardenPlanet
             public string Category;
             public int StackSize;
             public bool CanPickup;
-            public Hashtable Attributes;
+            public Attributes Attributes;
             public Sprite Image;
             public string Script;
             public string Appearance;
@@ -113,7 +110,7 @@ namespace GardenPlanet
                         {
 							var fileConents = fh.ReadToEnd();
 							fileConents = Regex.Replace(fileConents, @"\/\*(.*)\*\/", String.Empty);
-                            var loadedDataFile = JsonMapper.ToObject<ItemTypeDataFile>(fileConents);
+                            var loadedDataFile = JsonHandler.Deserialize<ItemTypeDataFile>(fileConents);
                             foreach(var singleItemTypeData in loadedDataFile.itemTypes)
                             {
                                 // Basic item data
@@ -134,7 +131,7 @@ namespace GardenPlanet
                             }
                         }
                     }
-                    catch(JsonException e)
+                    catch(JsonErrorException e)
                     {
                         Debug.Log(e);
                     }
@@ -170,7 +167,7 @@ namespace GardenPlanet
                     Category="boop",
                     StackSize=64,
                     CanPickup=true,
-                    Attributes=new Hashtable(),
+                    Attributes=new Attributes(),
                     Script=null,
                     Appearance=null
                 }
@@ -184,14 +181,11 @@ namespace GardenPlanet
             if(!Directory.Exists(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_ITEM_TYPE_DATA)))
                 Directory.CreateDirectory(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_ITEM_TYPE_DATA));
 
-            var jsonOutput = new StringBuilder();
-            var writer = new JsonWriter(jsonOutput);
-            writer.PrettyPrint = true;
-            JsonMapper.ToJson(newDataFile, writer);
+            var jsonOutput = JsonHandler.Serialize(newDataFile);
 
             using(var fh = File.OpenWrite(filepath))
             {
-                var jsonBytes = Encoding.UTF8.GetBytes(jsonOutput.ToString());
+                var jsonBytes = Encoding.UTF8.GetBytes(jsonOutput);
                 fh.SetLength(0);
                 fh.Write(jsonBytes, 0, jsonBytes.Length);
             }

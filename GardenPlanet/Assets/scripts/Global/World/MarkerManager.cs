@@ -50,7 +50,7 @@ namespace GardenPlanet
 					type=marker.name
 				};
 				map.markers.Add(newMarker);
-			}			
+			}
 		}
 
 		public TileMarkerType GetTileMarkerTypeByName(string name)
@@ -91,7 +91,7 @@ namespace GardenPlanet
 
 			if(markerType == null)
 				return;
-			
+
 			var tilemap = FindObjectOfType<Tilemap>();
 			if(x < 0 || x >= tilemap.width || y < 0 || y >= tilemap.height)
 				throw new EditorErrorException("Marker outside of tilemap.");
@@ -141,7 +141,7 @@ namespace GardenPlanet
 				if(marker.x >= width || marker.y >= height)
 					markersToKill.Add(marker);
 			foreach(var marker in markersToKill)
-				RemoveMarkerAt(marker.x, marker.y, marker.layer);			
+				RemoveMarkerAt(marker.x, marker.y, marker.layer);
 		}
 
 		public void RotateMarkerInDirection(ObjectTilePosition marker, RotationalDirection rot)

@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
 using System.IO;
-using System.Linq;
-using LitJson;
 using StompyBlondie;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GardenPlanet
 {
@@ -23,7 +19,7 @@ namespace GardenPlanet
         public IsMouseOver isMouseOverWorld;
 
         [HideInInspector]
-        public JsonData globalConfig;
+        public GlobalConfig globalConfig;
         [HideInInspector]
         public Tilemap tilemap;
         [HideInInspector]
@@ -78,7 +74,8 @@ namespace GardenPlanet
             if(File.Exists(configFilePath))
                 using(var fh = File.OpenText(configFilePath))
                     jsonContents = fh.ReadToEnd();
-            globalConfig = JsonMapper.ToObject(jsonContents);
+            globalConfig = new GlobalConfig();
+            JsonHandler.PopulateObject(jsonContents, globalConfig);
 
             // Grab current game state
             gameState = GameState.GetInstance();

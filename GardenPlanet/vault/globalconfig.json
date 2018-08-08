@@ -1,14 +1,14 @@
 {
-  "energy_usage":{
+  "energyUsage":{
     "hoe":0.3,
-    "watering_can":0.1,
+    "wateringCan":0.1,
     "seedbag":0.2
   },
   "crops":{
     "cabbage":{
       "seasons":["spring", "autumn"],
-      "growth_per_day":[12.0,20.0],
-      "num_growth_stages":2
+      "growthPerDay":[12.0,20.0],
+      "numGrowthStages":2
     }
   },
 
@@ -16,22 +16,22 @@
     "hair": {
       "straight": {
         "name": "Straight",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     },
 
     "tops": {
       "ilovefarmingshirt": {
         "name": "I <3 Farming Shirt",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       },
       "blueilovefarmingshirt": {
         "name": "Blue I <3 Farming Shirt",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     },
 
-    "skin_colours": [
+    "skinColours": [
       [26, 50, 255],
       [26, 84, 255],
       [26, 84, 186],
@@ -42,7 +42,7 @@
       [26, 174, 42]
     ],
 
-    "hair_colours": [
+    "hairColours": [
       [23, 255, 120],
       [23, 181, 182],
       [23, 173, 229],
@@ -56,7 +56,7 @@
       [135, 255, 241]
     ],
 
-    "eye_colours": [
+    "eyeColours": [
       [157, 214, 199],
       [170, 214, 199],
       [115, 186, 158],
@@ -70,51 +70,51 @@
     "eyes": {
       "cute": {
         "name": "Cute",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     },
 
     "eyebrows": {
       "thin": {
         "name": "Thin",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       },
       "bushy": {
         "name": "Bushy",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     },
 
     "noses": {
       "small": {
         "name": "Small",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       },
       "button": {
         "name": "Button",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     },
 
     "mouths": {
       "kind_smile": {
         "name": "Kind Smile",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       },
       "grumpy": {
         "name": "Grumpy",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     },
 
-    "face_detail": {
+    "faceDetail": {
       "beautymark": {
         "name": "Beauty Mark",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       },
       "freckles": {
         "name": "Freckles",
-        "unlocked_at_start": true
+        "unlockedAtStart": true
       }
     }
   }

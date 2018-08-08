@@ -8,7 +8,7 @@
       "StackSize": 1,
       "CanPickup": true,
       "Attributes": {
-        "energy_consumption_modifier":1.0
+        "energyConsumptionModifier":1.0
       },
       "Script": "WateringCan"
     },
@@ -20,7 +20,7 @@
       "CanPickup": true,
       "Description": "For tilling the ground ready for sowing seeds. It's simple but effective.",
       "Attributes": {
-        "energy_consumption_modifier":1.0
+        "energyConsumptionModifier":1.0
       },
       "Script": "Hoe"
     }

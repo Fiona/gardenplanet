@@ -1,7 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using LitJson;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -13,7 +13,6 @@ namespace GardenPlanet
         public bool autoPickupItems;
 
         private string gameSettingsPath;
-        private JsonData settings;
 
         public GameSettings()
         {
@@ -28,21 +27,16 @@ namespace GardenPlanet
             if(File.Exists(gameSettingsPath))
                 using(var fh = File.OpenText(gameSettingsPath))
                     jsonContents = fh.ReadToEnd();
-            settings = JsonMapper.ToObject(jsonContents);
+            JsonHandler.PopulateObject(jsonContents, this);
 
             // Load settings
-            popupInfoStatic = (bool)(SettingContain("popupInfoStatic") ? settings["popupInfoStatic"] : false);
-            autoPickupItems = (bool)(SettingContain("autoPickupItems") ? settings["autoPickupItems"] : true);
+            //popupInfoStatic = (bool)(SettingContain("popupInfoStatic") ? settings["popupInfoStatic"] : false);
+            //autoPickupItems = (bool)(SettingContain("autoPickupItems") ? settings["autoPickupItems"] : true);
         }
 
         public void Save()
         {
-            settings["popupInfoStatic"] = popupInfoStatic;
-            settings["autoPickupItems"] = autoPickupItems;
-
-            string jsonOutput;
-            jsonOutput = JsonMapper.ToJson(settings);
-
+            var jsonOutput = JsonHandler.Serialize(this);
             using(var fh = File.OpenWrite(gameSettingsPath))
             {
                 var jsonBytes = Encoding.UTF8.GetBytes(jsonOutput);
@@ -51,6 +45,7 @@ namespace GardenPlanet
             }
         }
 
+        /*
         private bool SettingContain(string key)
         {
             if(settings == null || !settings.IsObject)
@@ -59,6 +54,6 @@ namespace GardenPlanet
             if(tdictionary == null)
                 return false;
             return tdictionary.Contains(key);
-        }
+        }*/
     }
 }

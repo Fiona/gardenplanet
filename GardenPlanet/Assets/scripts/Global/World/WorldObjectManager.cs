@@ -50,7 +50,7 @@ namespace GardenPlanet
                     height=(float)worldObject.height,
                     dir=worldObject.direction
                 };
-                AddWorldObject(GetWorldObjectTypeByName(worldObject.type), pos);
+                AddWorldObject(GetWorldObjectTypeByName(worldObject.type), pos, worldObject.attributes);
             }
         }
 
@@ -63,7 +63,8 @@ namespace GardenPlanet
                     y=(double)worldObject.y,
                     height=(double)worldObject.height,
                     direction=worldObject.dir,
-                    type=worldObject.name
+                    type=worldObject.name,
+                    attributes=worldObject.attributes
                 };
                 map.worldObjects.Add(newWorldObject);
             }
@@ -97,7 +98,7 @@ namespace GardenPlanet
             return worldObjectTypes[index];
         }
 
-        public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos, Hashtable attributes = null,
+        public WorldObject AddWorldObject(WorldObjectType objectType, WorldPosition pos, Attributes attributes = null,
             bool setAppearence = true)
         {
             if(objectType == null)
@@ -109,7 +110,7 @@ namespace GardenPlanet
             newGameObject = new GameObject(objectType.name);
             newGameObject.transform.parent = transform;
             newGameObject.transform.localPosition = new Vector3(pos.x, pos.height, pos.y);
-            
+
             var newWorldObject = new WorldObject {
                 x = pos.x,
                 y = pos.y,
@@ -117,11 +118,8 @@ namespace GardenPlanet
                 gameObject = newGameObject,
                 name = objectType.name,
                 objectType = objectType,
-                attributes = new Attributes(objectType.defaultAttributes)
+                attributes = new Attributes(attributes ?? objectType.defaultAttributes)
             };
-            if(attributes != null)
-                foreach(DictionaryEntry attr in attributes)
-                    newWorldObject.attributes.Set((string)attr.Key, attr.Value);
 
             worldObjects.Add(newWorldObject);
             SetWorldObjectDirection(newWorldObject, pos.dir);
@@ -158,16 +156,16 @@ namespace GardenPlanet
                 newWorldObject.SetAppearence(true);
             else
                 newGameObject.SetLayerRecursively(
-                    objectType.ghost ? 
+                    objectType.ghost ?
                     Consts.COLLISION_LAYER_GHOST_WORLD_OBJECTS :
                     Consts.COLLISION_LAYER_WORLD_OBJECTS
                 );
-            
+
             return newWorldObject;
 
         }
 
-        public WorldObject AddWorldObject(WorldObjectType objectType, TilePosition pos, Hashtable attributes = null)
+        public WorldObject AddWorldObject(WorldObjectType objectType, TilePosition pos, Attributes attributes = null)
         {
             var tilemap = FindObjectOfType<Tilemap>();
             if(pos.x < 0 || pos.x >= tilemap.width || pos.y < 0 || pos.y >= tilemap.height)

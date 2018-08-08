@@ -44,4 +44,22 @@ namespace GardenPlanet
 	    }
 	}
 
+	public class JsonErrorException: Exception
+	{
+		public JsonErrorException()
+		{
+		}
+
+		public JsonErrorException(string message)
+			: base(message)
+		{
+		}
+
+		public JsonErrorException(string message, Exception inner)
+			: base(message, inner)
+		{
+		}
+	}
+
+
 }

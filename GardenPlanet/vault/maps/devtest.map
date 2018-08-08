@@ -1,1 +1,3421 @@
-{"width":25,"height":25,"filename":"devtest","fullFilepath":"vault\\maps\\devtest.map","tiles":[{"x":0,"y":3,"layer":0,"type":"wall01-concave1","direction":3},{"x":7,"y":3,"layer":0,"type":"wall01-concave1","direction":2},{"x":3,"y":3,"layer":0,"type":"wall01-s1","direction":2},{"x":5,"y":3,"layer":0,"type":"wall01-s1","direction":2},{"x":7,"y":5,"layer":0,"type":"wall01-convex1","direction":1},{"x":9,"y":5,"layer":0,"type":"wall01-s1","direction":2},{"x":11,"y":5,"layer":0,"type":"wall01-s1","direction":2},{"x":0,"y":5,"layer":0,"type":"wall01-s1","direction":3},{"x":0,"y":7,"layer":0,"type":"wall01-s1","direction":3},{"x":0,"y":9,"layer":0,"type":"wall01-s1","direction":3},{"x":0,"y":11,"layer":0,"type":"wall01-s1","direction":3},{"x":0,"y":13,"layer":0,"type":"wall01-s1","direction":3},{"x":0,"y":16,"layer":0,"type":"wall01-concave1","direction":0},{"x":2,"y":16,"layer":0,"type":"wall01-s1","direction":0},{"x":4,"y":16,"layer":0,"type":"wall01-s1","direction":0},{"x":6,"y":16,"layer":0,"type":"wall01-s1","direction":0},{"x":8,"y":16,"layer":0,"type":"wall01-convex1","direction":3},{"x":8,"y":17,"layer":0,"type":"wall01-s1","direction":3},{"x":8,"y":19,"layer":0,"type":"wall01-s1","direction":3},{"x":8,"y":22,"layer":0,"type":"wall01-concave1","direction":0},{"x":10,"y":22,"layer":0,"type":"wall01-s1","direction":0},{"x":12,"y":22,"layer":0,"type":"wall01-s1","direction":0},{"x":14,"y":22,"layer":0,"type":"wall01-s1","direction":0},{"x":16,"y":22,"layer":0,"type":"wall01-s1","direction":0},{"x":19,"y":22,"layer":0,"type":"wall01-concave1","direction":1},{"x":19,"y":20,"layer":0,"type":"wall01-convex1","direction":0},{"x":21,"y":20,"layer":0,"type":"wall01-concave1","direction":1},{"x":21,"y":18,"layer":0,"type":"wall01-s1","direction":1},{"x":21,"y":16,"layer":0,"type":"wall01-s1","direction":1},{"x":21,"y":14,"layer":0,"type":"wall01-s1","direction":1},{"x":21,"y":12,"layer":0,"type":"wall01-convex1","direction":0},{"x":23,"y":12,"layer":0,"type":"wall01-concave1","direction":1},{"x":23,"y":10,"layer":0,"type":"wall01-s1","direction":1},{"x":23,"y":8,"layer":0,"type":"wall01-s1","direction":1},{"x":23,"y":6,"layer":0,"type":"wall01-s1","direction":1},{"x":23,"y":4,"layer":0,"type":"wall01-s1","direction":1},{"x":23,"y":1,"layer":0,"type":"wall01-concave1","direction":2},{"x":21,"y":1,"layer":0,"type":"wall01-s1","direction":2},{"x":19,"y":1,"layer":0,"type":"wall01-s1","direction":2},{"x":14,"y":1,"layer":0,"type":"wall01-concave1","direction":3},{"x":17,"y":1,"layer":0,"type":"wall01-s1","direction":2},{"x":12,"y":5,"layer":0,"type":"wall01-convex1","direction":2},{"x":14,"y":3,"layer":0,"type":"wall01-convex1","direction":2},{"x":12,"y":3,"layer":0,"type":"wall01-concave1","direction":3},{"x":2,"y":5,"layer":0,"type":"grass01-long","direction":0},{"x":2,"y":7,"layer":0,"type":"grass01","direction":0},{"x":2,"y":9,"layer":0,"type":"grass01","direction":0},{"x":2,"y":11,"layer":0,"type":"grass01","direction":0},{"x":2,"y":13,"layer":0,"type":"grass01","direction":0},{"x":4,"y":13,"layer":0,"type":"grass01","direction":0},{"x":4,"y":11,"layer":0,"type":"grass01","direction":0},{"x":4,"y":9,"layer":0,"type":"grass01","direction":0},{"x":4,"y":7,"layer":0,"type":"grass01","direction":0},{"x":6,"y":7,"layer":0,"type":"grass01","direction":0},{"x":6,"y":9,"layer":0,"type":"grass01","direction":0},{"x":6,"y":13,"layer":0,"type":"grass01","direction":0},{"x":8,"y":13,"layer":0,"type":"grass01","direction":0},{"x":8,"y":11,"layer":0,"type":"grass01","direction":0},{"x":8,"y":9,"layer":0,"type":"grass01","direction":0},{"x":8,"y":7,"layer":0,"type":"grass01","direction":0},{"x":10,"y":7,"layer":0,"type":"grass01","direction":0},{"x":10,"y":9,"layer":0,"type":"grass01","direction":0},{"x":10,"y":11,"layer":0,"type":"grass01","direction":0},{"x":10,"y":13,"layer":0,"type":"grass01","direction":0},{"x":10,"y":15,"layer":0,"type":"grass01","direction":0},{"x":10,"y":17,"layer":0,"type":"grass01","direction":0},{"x":10,"y":19,"layer":0,"type":"grass01","direction":0},{"x":12,"y":19,"layer":0,"type":"grass01","direction":0},{"x":14,"y":19,"layer":0,"type":"grass01","direction":0},{"x":16,"y":19,"layer":0,"type":"grass01","direction":0},{"x":12,"y":17,"layer":0,"type":"grass01","direction":0},{"x":14,"y":17,"layer":0,"type":"grass01","direction":0},{"x":16,"y":17,"layer":0,"type":"grass01","direction":0},{"x":18,"y":17,"layer":0,"type":"grass01","direction":0},{"x":12,"y":15,"layer":0,"type":"grass01","direction":0},{"x":12,"y":13,"layer":0,"type":"grass01","direction":0},{"x":12,"y":11,"layer":0,"type":"grass01","direction":0},{"x":12,"y":9,"layer":0,"type":"grass01","direction":0},{"x":12,"y":7,"layer":0,"type":"grass01","direction":0},{"x":14,"y":5,"layer":0,"type":"grass01","direction":0},{"x":16,"y":5,"layer":0,"type":"grass01","direction":0},{"x":18,"y":5,"layer":0,"type":"grass01","direction":0},{"x":20,"y":5,"layer":0,"type":"grass01","direction":0},{"x":20,"y":3,"layer":0,"type":"grass01","direction":0},{"x":18,"y":3,"layer":0,"type":"grass01","direction":0},{"x":16,"y":3,"layer":0,"type":"grass01","direction":0},{"x":20,"y":7,"layer":0,"type":"grass01","direction":0},{"x":20,"y":9,"layer":0,"type":"grass01","direction":0},{"x":14,"y":7,"layer":0,"type":"grass01","direction":0},{"x":14,"y":9,"layer":0,"type":"grass01","direction":0},{"x":16,"y":11,"layer":0,"type":"grass01","direction":0},{"x":16,"y":7,"layer":0,"type":"grass01","direction":0},{"x":18,"y":7,"layer":0,"type":"grass01","direction":0},{"x":18,"y":9,"layer":0,"type":"grass01","direction":0},{"x":18,"y":11,"layer":0,"type":"grass01","direction":0},{"x":16,"y":13,"layer":0,"type":"grass01","direction":0},{"x":18,"y":15,"layer":0,"type":"grass01","direction":0},{"x":18,"y":13,"layer":0,"type":"grass01","direction":0},{"x":16,"y":15,"layer":0,"type":"grass01","direction":0},{"x":14,"y":13,"layer":0,"type":"grass01","direction":0},{"x":14,"y":11,"layer":0,"type":"grass01","direction":0},{"x":5,"y":0,"layer":1,"type":"wall01-s1","direction":2},{"x":7,"y":0,"layer":1,"type":"wall01-s1","direction":2},{"x":9,"y":0,"layer":1,"type":"wall01-s1","direction":2},{"x":0,"y":21,"layer":1,"type":"wall01-s1","direction":0},{"x":2,"y":21,"layer":1,"type":"wall01-s1","direction":0},{"x":4,"y":21,"layer":1,"type":"wall01-convex1","direction":3},{"x":4,"y":22,"layer":1,"type":"wall01-s1","direction":3},{"x":4,"y":24,"layer":1,"type":"wall01-s1","direction":3},{"x":3,"y":0,"layer":1,"type":"wall01-convex1","direction":1},{"x":10,"y":0,"layer":1,"type":"wall01-convex1","direction":2},{"x":0,"y":0,"layer":1,"type":"grass01","direction":0},{"x":8,"y":3,"layer":1,"type":"grass01","direction":0},{"x":10,"y":3,"layer":1,"type":"grass01","direction":0},{"x":12,"y":1,"layer":1,"type":"grass01","direction":0},{"x":22,"y":13,"layer":1,"type":"grass01","direction":0},{"x":22,"y":15,"layer":1,"type":"grass01","direction":0},{"x":22,"y":17,"layer":1,"type":"grass01","direction":0},{"x":22,"y":19,"layer":1,"type":"grass01","direction":0},{"x":20,"y":21,"layer":1,"type":"grass01","direction":0},{"x":22,"y":21,"layer":1,"type":"grass01","direction":0},{"x":6,"y":23,"layer":1,"type":"grass01","direction":0},{"x":8,"y":23,"layer":1,"type":"grass01","direction":0},{"x":10,"y":23,"layer":1,"type":"grass01","direction":0},{"x":12,"y":23,"layer":1,"type":"grass01","direction":0},{"x":14,"y":23,"layer":1,"type":"grass01","direction":0},{"x":16,"y":23,"layer":1,"type":"grass01","direction":0},{"x":18,"y":23,"layer":1,"type":"grass01","direction":0},{"x":20,"y":23,"layer":1,"type":"grass01","direction":0},{"x":22,"y":23,"layer":1,"type":"grass01","direction":0},{"x":0,"y":18,"layer":1,"type":"grass01","direction":0},{"x":2,"y":18,"layer":1,"type":"grass01","direction":0},{"x":4,"y":18,"layer":1,"type":"grass01","direction":0},{"x":6,"y":18,"layer":1,"type":"grass01","direction":0},{"x":6,"y":20,"layer":1,"type":"grass01","direction":0},{"x":0,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":1,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":2,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":3,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":4,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":5,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":6,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":7,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":6,"y":22,"layer":1,"type":"grass01-small","direction":0},{"x":7,"y":22,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":24,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":23,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":22,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":21,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":20,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":19,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":18,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":17,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":16,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":14,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":15,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":13,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":12,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":10,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":11,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":9,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":8,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":7,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":6,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":5,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":4,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":3,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":1,"layer":1,"type":"grass01-small","direction":0},{"x":24,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":23,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":12,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":13,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":14,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":15,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":16,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":17,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":18,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":19,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":20,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":22,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":21,"y":0,"layer":1,"type":"grass01-small","direction":0},{"x":0,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":1,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":2,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":3,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":4,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":5,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":6,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":7,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":8,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":10,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":11,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":9,"y":2,"layer":1,"type":"grass01-small","direction":0},{"x":0,"y":22,"layer":2,"type":"grass02","direction":0},{"x":2,"y":22,"layer":2,"type":"grass02","direction":0},{"x":0,"y":24,"layer":2,"type":"grass01-small","direction":0},{"x":2,"y":24,"layer":2,"type":"grass01-small","direction":0},{"x":3,"y":24,"layer":2,"type":"grass01-small","direction":0},{"x":1,"y":24,"layer":2,"type":"grass01-small","direction":0},{"x":6,"y":11,"layer":0,"type":"grass02","direction":0},{"x":16,"y":9,"layer":0,"type":"grass02","direction":0},{"x":14,"y":16,"layer":0,"type":"grass02","direction":1}],"markers":[{"x":5,"y":9,"layer":0,"type":"PlayerStart","direction":3}],"worldObjects":[{"x":20.0,"y":20.0,"height":0.0,"type":"bed01","direction":1},{"x":3.5,"y":5.0,"height":0.0,"type":"bed01","direction":7}],"mapTags":[{"X":5,"Y":5,"Layer":0,"TagType":"Farm"},{"X":4,"Y":5,"Layer":0,"TagType":"Farm"},{"X":2,"Y":6,"Layer":0,"TagType":"Farm"},{"X":3,"Y":6,"Layer":0,"TagType":"Farm"},{"X":3,"Y":5,"Layer":0,"TagType":"Farm"},{"X":2,"Y":7,"Layer":0,"TagType":"Farm"},{"X":3,"Y":7,"Layer":0,"TagType":"Farm"},{"X":3,"Y":8,"Layer":0,"TagType":"Farm"},{"X":2,"Y":8,"Layer":0,"TagType":"Farm"},{"X":2,"Y":10,"Layer":0,"TagType":"Farm"},{"X":3,"Y":9,"Layer":0,"TagType":"Farm"},{"X":2,"Y":9,"Layer":0,"TagType":"Farm"},{"X":3,"Y":10,"Layer":0,"TagType":"Farm"},{"X":2,"Y":11,"Layer":0,"TagType":"Farm"},{"X":2,"Y":13,"Layer":0,"TagType":"Farm"},{"X":2,"Y":12,"Layer":0,"TagType":"Farm"},{"X":2,"Y":14,"Layer":0,"TagType":"Farm"},{"X":3,"Y":14,"Layer":0,"TagType":"Farm"},{"X":3,"Y":13,"Layer":0,"TagType":"Farm"},{"X":3,"Y":12,"Layer":0,"TagType":"Farm"},{"X":3,"Y":11,"Layer":0,"TagType":"Farm"},{"X":4,"Y":6,"Layer":0,"TagType":"Farm"},{"X":4,"Y":7,"Layer":0,"TagType":"Farm"},{"X":4,"Y":8,"Layer":0,"TagType":"Farm"},{"X":5,"Y":6,"Layer":0,"TagType":"Farm"},{"X":5,"Y":8,"Layer":0,"TagType":"Farm"},{"X":5,"Y":7,"Layer":0,"TagType":"Farm"},{"X":5,"Y":9,"Layer":0,"TagType":"Farm"},{"X":4,"Y":9,"Layer":0,"TagType":"Farm"},{"X":4,"Y":10,"Layer":0,"TagType":"Farm"},{"X":4,"Y":12,"Layer":0,"TagType":"Farm"},{"X":4,"Y":11,"Layer":0,"TagType":"Farm"},{"X":5,"Y":10,"Layer":0,"TagType":"Farm"},{"X":5,"Y":11,"Layer":0,"TagType":"Farm"},{"X":5,"Y":12,"Layer":0,"TagType":"Farm"},{"X":5,"Y":13,"Layer":0,"TagType":"Farm"},{"X":4,"Y":13,"Layer":0,"TagType":"Farm"},{"X":4,"Y":14,"Layer":0,"TagType":"Farm"},{"X":5,"Y":14,"Layer":0,"TagType":"Farm"},{"X":6,"Y":7,"Layer":0,"TagType":"Farm"},{"X":7,"Y":7,"Layer":0,"TagType":"Farm"},{"X":7,"Y":8,"Layer":0,"TagType":"Farm"},{"X":6,"Y":8,"Layer":0,"TagType":"Farm"},{"X":6,"Y":9,"Layer":0,"TagType":"Farm"},{"X":7,"Y":9,"Layer":0,"TagType":"Farm"},{"X":7,"Y":10,"Layer":0,"TagType":"Farm"},{"X":6,"Y":10,"Layer":0,"TagType":"Farm"},{"X":6,"Y":11,"Layer":0,"TagType":"Farm"},{"X":7,"Y":11,"Layer":0,"TagType":"Farm"},{"X":7,"Y":12,"Layer":0,"TagType":"Farm"},{"X":6,"Y":12,"Layer":0,"TagType":"Farm"},{"X":6,"Y":13,"Layer":0,"TagType":"Farm"},{"X":7,"Y":13,"Layer":0,"TagType":"Farm"},{"X":7,"Y":14,"Layer":0,"TagType":"Farm"},{"X":6,"Y":14,"Layer":0,"TagType":"Farm"},{"X":8,"Y":14,"Layer":0,"TagType":"Farm"},{"X":8,"Y":13,"Layer":0,"TagType":"Farm"},{"X":8,"Y":12,"Layer":0,"TagType":"Farm"},{"X":8,"Y":11,"Layer":0,"TagType":"Farm"},{"X":8,"Y":10,"Layer":0,"TagType":"Farm"},{"X":8,"Y":9,"Layer":0,"TagType":"Farm"},{"X":8,"Y":8,"Layer":0,"TagType":"Farm"},{"X":8,"Y":7,"Layer":0,"TagType":"Farm"},{"X":9,"Y":7,"Layer":0,"TagType":"Farm"},{"X":9,"Y":8,"Layer":0,"TagType":"Farm"},{"X":10,"Y":9,"Layer":0,"TagType":"Farm"},{"X":9,"Y":9,"Layer":0,"TagType":"Farm"},{"X":9,"Y":10,"Layer":0,"TagType":"Farm"},{"X":10,"Y":10,"Layer":0,"TagType":"Farm"},{"X":10,"Y":11,"Layer":0,"TagType":"Farm"},{"X":9,"Y":11,"Layer":0,"TagType":"Farm"},{"X":10,"Y":12,"Layer":0,"TagType":"Farm"},{"X":9,"Y":12,"Layer":0,"TagType":"Farm"},{"X":9,"Y":13,"Layer":0,"TagType":"Farm"},{"X":10,"Y":13,"Layer":0,"TagType":"Farm"},{"X":10,"Y":14,"Layer":0,"TagType":"Farm"},{"X":9,"Y":14,"Layer":0,"TagType":"Farm"},{"X":10,"Y":15,"Layer":0,"TagType":"Farm"},{"X":10,"Y":16,"Layer":0,"TagType":"Farm"},{"X":10,"Y":17,"Layer":0,"TagType":"Farm"},{"X":10,"Y":18,"Layer":0,"TagType":"Farm"},{"X":10,"Y":20,"Layer":0,"TagType":"Farm"},{"X":10,"Y":19,"Layer":0,"TagType":"Farm"},{"X":11,"Y":20,"Layer":0,"TagType":"Farm"},{"X":12,"Y":20,"Layer":0,"TagType":"Farm"},{"X":13,"Y":20,"Layer":0,"TagType":"Farm"},{"X":14,"Y":20,"Layer":0,"TagType":"Farm"},{"X":15,"Y":20,"Layer":0,"TagType":"Farm"},{"X":16,"Y":20,"Layer":0,"TagType":"Farm"},{"X":17,"Y":20,"Layer":0,"TagType":"Farm"},{"X":17,"Y":19,"Layer":0,"TagType":"Farm"},{"X":17,"Y":18,"Layer":0,"TagType":"Farm"},{"X":18,"Y":18,"Layer":0,"TagType":"Farm"},{"X":19,"Y":18,"Layer":0,"TagType":"Farm"},{"X":19,"Y":17,"Layer":0,"TagType":"Farm"},{"X":18,"Y":17,"Layer":0,"TagType":"Farm"},{"X":17,"Y":17,"Layer":0,"TagType":"Farm"},{"X":11,"Y":17,"Layer":0,"TagType":"Farm"},{"X":12,"Y":17,"Layer":0,"TagType":"Farm"},{"X":13,"Y":17,"Layer":0,"TagType":"Farm"},{"X":15,"Y":17,"Layer":0,"TagType":"Farm"},{"X":16,"Y":17,"Layer":0,"TagType":"Farm"},{"X":14,"Y":17,"Layer":0,"TagType":"Farm"},{"X":11,"Y":18,"Layer":0,"TagType":"Farm"},{"X":12,"Y":18,"Layer":0,"TagType":"Farm"},{"X":13,"Y":18,"Layer":0,"TagType":"Farm"},{"X":14,"Y":18,"Layer":0,"TagType":"Farm"},{"X":16,"Y":18,"Layer":0,"TagType":"Farm"},{"X":15,"Y":18,"Layer":0,"TagType":"Farm"},{"X":16,"Y":19,"Layer":0,"TagType":"Farm"},{"X":15,"Y":19,"Layer":0,"TagType":"Farm"},{"X":12,"Y":19,"Layer":0,"TagType":"Farm"},{"X":11,"Y":19,"Layer":0,"TagType":"Farm"},{"X":13,"Y":19,"Layer":0,"TagType":"Farm"},{"X":14,"Y":19,"Layer":0,"TagType":"Farm"},{"X":11,"Y":16,"Layer":0,"TagType":"Farm"},{"X":11,"Y":15,"Layer":0,"TagType":"Farm"},{"X":11,"Y":14,"Layer":0,"TagType":"Farm"},{"X":11,"Y":13,"Layer":0,"TagType":"Farm"},{"X":11,"Y":12,"Layer":0,"TagType":"Farm"},{"X":10,"Y":8,"Layer":0,"TagType":"Farm"},{"X":10,"Y":7,"Layer":0,"TagType":"Farm"},{"X":11,"Y":7,"Layer":0,"TagType":"Farm"},{"X":11,"Y":9,"Layer":0,"TagType":"Farm"},{"X":11,"Y":8,"Layer":0,"TagType":"Farm"},{"X":11,"Y":10,"Layer":0,"TagType":"Farm"},{"X":11,"Y":11,"Layer":0,"TagType":"Farm"},{"X":12,"Y":7,"Layer":0,"TagType":"Farm"},{"X":13,"Y":7,"Layer":0,"TagType":"Farm"},{"X":14,"Y":7,"Layer":0,"TagType":"Farm"},{"X":14,"Y":6,"Layer":0,"TagType":"Farm"},{"X":14,"Y":5,"Layer":0,"TagType":"Farm"},{"X":15,"Y":5,"Layer":0,"TagType":"Farm"},{"X":16,"Y":6,"Layer":0,"TagType":"Farm"},{"X":15,"Y":6,"Layer":0,"TagType":"Farm"},{"X":15,"Y":7,"Layer":0,"TagType":"Farm"},{"X":15,"Y":8,"Layer":0,"TagType":"Farm"},{"X":14,"Y":8,"Layer":0,"TagType":"Farm"},{"X":13,"Y":8,"Layer":0,"TagType":"Farm"},{"X":13,"Y":9,"Layer":0,"TagType":"Farm"},{"X":12,"Y":9,"Layer":0,"TagType":"Farm"},{"X":12,"Y":8,"Layer":0,"TagType":"Farm"},{"X":14,"Y":9,"Layer":0,"TagType":"Farm"},{"X":19,"Y":11,"Layer":0,"TagType":"Farm"},{"X":19,"Y":12,"Layer":0,"TagType":"Farm"},{"X":19,"Y":13,"Layer":0,"TagType":"Farm"},{"X":19,"Y":14,"Layer":0,"TagType":"Farm"},{"X":19,"Y":15,"Layer":0,"TagType":"Farm"},{"X":20,"Y":10,"Layer":0,"TagType":"Farm"},{"X":21,"Y":10,"Layer":0,"TagType":"Farm"},{"X":21,"Y":9,"Layer":0,"TagType":"Farm"},{"X":21,"Y":8,"Layer":0,"TagType":"Farm"},{"X":21,"Y":7,"Layer":0,"TagType":"Farm"},{"X":21,"Y":6,"Layer":0,"TagType":"Farm"},{"X":21,"Y":5,"Layer":0,"TagType":"Farm"},{"X":21,"Y":4,"Layer":0,"TagType":"Farm"},{"X":21,"Y":3,"Layer":0,"TagType":"Farm"},{"X":20,"Y":3,"Layer":0,"TagType":"Farm"},{"X":19,"Y":3,"Layer":0,"TagType":"Farm"},{"X":17,"Y":3,"Layer":0,"TagType":"Farm"},{"X":18,"Y":3,"Layer":0,"TagType":"Farm"},{"X":16,"Y":3,"Layer":0,"TagType":"Farm"},{"X":16,"Y":4,"Layer":0,"TagType":"Farm"},{"X":16,"Y":5,"Layer":0,"TagType":"Farm"},{"X":17,"Y":5,"Layer":0,"TagType":"Farm"},{"X":18,"Y":5,"Layer":0,"TagType":"Farm"},{"X":17,"Y":4,"Layer":0,"TagType":"Farm"},{"X":18,"Y":4,"Layer":0,"TagType":"Farm"},{"X":19,"Y":4,"Layer":0,"TagType":"Farm"},{"X":20,"Y":4,"Layer":0,"TagType":"Farm"},{"X":20,"Y":5,"Layer":0,"TagType":"Farm"},{"X":19,"Y":5,"Layer":0,"TagType":"Farm"},{"X":19,"Y":6,"Layer":0,"TagType":"Farm"},{"X":20,"Y":6,"Layer":0,"TagType":"Farm"},{"X":20,"Y":9,"Layer":0,"TagType":"Farm"},{"X":20,"Y":7,"Layer":0,"TagType":"Farm"},{"X":19,"Y":7,"Layer":0,"TagType":"Farm"},{"X":19,"Y":8,"Layer":0,"TagType":"Farm"},{"X":20,"Y":8,"Layer":0,"TagType":"Farm"},{"X":19,"Y":10,"Layer":0,"TagType":"Farm"},{"X":19,"Y":9,"Layer":0,"TagType":"Farm"},{"X":18,"Y":8,"Layer":0,"TagType":"Farm"},{"X":18,"Y":7,"Layer":0,"TagType":"Farm"},{"X":18,"Y":6,"Layer":0,"TagType":"Farm"},{"X":17,"Y":6,"Layer":0,"TagType":"Farm"},{"X":17,"Y":7,"Layer":0,"TagType":"Farm"},{"X":16,"Y":7,"Layer":0,"TagType":"Farm"},{"X":16,"Y":8,"Layer":0,"TagType":"Farm"},{"X":17,"Y":8,"Layer":0,"TagType":"Farm"},{"X":18,"Y":10,"Layer":0,"TagType":"Farm"},{"X":18,"Y":9,"Layer":0,"TagType":"Farm"},{"X":17,"Y":9,"Layer":0,"TagType":"Farm"},{"X":16,"Y":9,"Layer":0,"TagType":"Farm"},{"X":15,"Y":9,"Layer":0,"TagType":"Farm"},{"X":16,"Y":11,"Layer":0,"TagType":"Farm"},{"X":17,"Y":11,"Layer":0,"TagType":"Farm"},{"X":17,"Y":10,"Layer":0,"TagType":"Farm"},{"X":16,"Y":10,"Layer":0,"TagType":"Farm"},{"X":15,"Y":10,"Layer":0,"TagType":"Farm"},{"X":14,"Y":10,"Layer":0,"TagType":"Farm"},{"X":13,"Y":10,"Layer":0,"TagType":"Farm"},{"X":12,"Y":11,"Layer":0,"TagType":"Farm"},{"X":12,"Y":10,"Layer":0,"TagType":"Farm"},{"X":13,"Y":12,"Layer":0,"TagType":"Farm"},{"X":13,"Y":11,"Layer":0,"TagType":"Farm"},{"X":14,"Y":11,"Layer":0,"TagType":"Farm"},{"X":18,"Y":11,"Layer":0,"TagType":"Farm"},{"X":18,"Y":12,"Layer":0,"TagType":"Farm"},{"X":18,"Y":13,"Layer":0,"TagType":"Farm"},{"X":18,"Y":14,"Layer":0,"TagType":"Farm"},{"X":18,"Y":15,"Layer":0,"TagType":"Farm"},{"X":18,"Y":16,"Layer":0,"TagType":"Farm"},{"X":12,"Y":16,"Layer":0,"TagType":"Farm"},{"X":12,"Y":14,"Layer":0,"TagType":"Farm"},{"X":12,"Y":13,"Layer":0,"TagType":"Farm"},{"X":12,"Y":12,"Layer":0,"TagType":"Farm"},{"X":13,"Y":14,"Layer":0,"TagType":"Farm"},{"X":13,"Y":13,"Layer":0,"TagType":"Farm"},{"X":12,"Y":15,"Layer":0,"TagType":"Farm"},{"X":13,"Y":15,"Layer":0,"TagType":"Farm"},{"X":13,"Y":16,"Layer":0,"TagType":"Farm"},{"X":14,"Y":16,"Layer":0,"TagType":"Farm"},{"X":15,"Y":16,"Layer":0,"TagType":"Farm"},{"X":16,"Y":16,"Layer":0,"TagType":"Farm"},{"X":17,"Y":16,"Layer":0,"TagType":"Farm"},{"X":17,"Y":15,"Layer":0,"TagType":"Farm"},{"X":17,"Y":14,"Layer":0,"TagType":"Farm"},{"X":17,"Y":12,"Layer":0,"TagType":"Farm"},{"X":14,"Y":13,"Layer":0,"TagType":"Farm"},{"X":14,"Y":12,"Layer":0,"TagType":"Farm"},{"X":15,"Y":11,"Layer":0,"TagType":"Farm"},{"X":15,"Y":12,"Layer":0,"TagType":"Farm"},{"X":16,"Y":12,"Layer":0,"TagType":"Farm"},{"X":17,"Y":13,"Layer":0,"TagType":"Farm"},{"X":16,"Y":13,"Layer":0,"TagType":"Farm"},{"X":15,"Y":13,"Layer":0,"TagType":"Farm"},{"X":15,"Y":14,"Layer":0,"TagType":"Farm"},{"X":15,"Y":15,"Layer":0,"TagType":"Farm"},{"X":14,"Y":15,"Layer":0,"TagType":"Farm"},{"X":14,"Y":14,"Layer":0,"TagType":"Farm"},{"X":16,"Y":15,"Layer":0,"TagType":"Farm"},{"X":16,"Y":14,"Layer":0,"TagType":"Farm"},{"X":6,"Y":6,"Layer":0,"TagType":"Farm"},{"X":6,"Y":5,"Layer":0,"TagType":"Farm"},{"X":6,"Y":4,"Layer":0,"TagType":"Farm"},{"X":5,"Y":4,"Layer":0,"TagType":"Farm"},{"X":4,"Y":4,"Layer":0,"TagType":"Farm"},{"X":3,"Y":4,"Layer":0,"TagType":"Farm"},{"X":2,"Y":4,"Layer":0,"TagType":"Farm"},{"X":1,"Y":4,"Layer":0,"TagType":"Farm"},{"X":1,"Y":5,"Layer":0,"TagType":"Farm"},{"X":1,"Y":6,"Layer":0,"TagType":"Farm"},{"X":1,"Y":7,"Layer":0,"TagType":"Farm"},{"X":1,"Y":8,"Layer":0,"TagType":"Farm"},{"X":1,"Y":9,"Layer":0,"TagType":"Farm"},{"X":1,"Y":10,"Layer":0,"TagType":"Farm"},{"X":1,"Y":11,"Layer":0,"TagType":"Farm"},{"X":1,"Y":13,"Layer":0,"TagType":"Farm"},{"X":1,"Y":12,"Layer":0,"TagType":"Farm"},{"X":2,"Y":15,"Layer":0,"TagType":"Farm"},{"X":1,"Y":14,"Layer":0,"TagType":"Farm"},{"X":1,"Y":15,"Layer":0,"TagType":"Farm"},{"X":3,"Y":15,"Layer":0,"TagType":"Farm"},{"X":4,"Y":15,"Layer":0,"TagType":"Farm"},{"X":5,"Y":15,"Layer":0,"TagType":"Farm"},{"X":6,"Y":15,"Layer":0,"TagType":"Farm"},{"X":7,"Y":15,"Layer":0,"TagType":"Farm"},{"X":9,"Y":15,"Layer":0,"TagType":"Farm"},{"X":8,"Y":15,"Layer":0,"TagType":"Farm"},{"X":9,"Y":16,"Layer":0,"TagType":"Farm"},{"X":9,"Y":17,"Layer":0,"TagType":"Farm"},{"X":9,"Y":19,"Layer":0,"TagType":"Farm"},{"X":9,"Y":18,"Layer":0,"TagType":"Farm"},{"X":9,"Y":20,"Layer":0,"TagType":"Farm"},{"X":9,"Y":21,"Layer":0,"TagType":"Farm"},{"X":10,"Y":21,"Layer":0,"TagType":"Farm"},{"X":11,"Y":21,"Layer":0,"TagType":"Farm"},{"X":12,"Y":21,"Layer":0,"TagType":"Farm"},{"X":13,"Y":21,"Layer":0,"TagType":"Farm"},{"X":15,"Y":21,"Layer":0,"TagType":"Farm"},{"X":14,"Y":21,"Layer":0,"TagType":"Farm"},{"X":16,"Y":21,"Layer":0,"TagType":"Farm"},{"X":17,"Y":21,"Layer":0,"TagType":"Farm"},{"X":18,"Y":21,"Layer":0,"TagType":"Farm"},{"X":18,"Y":20,"Layer":0,"TagType":"Farm"},{"X":18,"Y":19,"Layer":0,"TagType":"Farm"},{"X":19,"Y":19,"Layer":0,"TagType":"Farm"},{"X":20,"Y":19,"Layer":0,"TagType":"Farm"},{"X":20,"Y":18,"Layer":0,"TagType":"Farm"},{"X":7,"Y":6,"Layer":0,"TagType":"Farm"},{"X":8,"Y":6,"Layer":0,"TagType":"Farm"},{"X":9,"Y":6,"Layer":0,"TagType":"Farm"},{"X":10,"Y":6,"Layer":0,"TagType":"Farm"},{"X":11,"Y":6,"Layer":0,"TagType":"Farm"},{"X":12,"Y":6,"Layer":0,"TagType":"Farm"},{"X":13,"Y":6,"Layer":0,"TagType":"Farm"},{"X":13,"Y":5,"Layer":0,"TagType":"Farm"},{"X":13,"Y":4,"Layer":0,"TagType":"Farm"},{"X":14,"Y":4,"Layer":0,"TagType":"Farm"},{"X":15,"Y":4,"Layer":0,"TagType":"Farm"},{"X":15,"Y":3,"Layer":0,"TagType":"Farm"},{"X":15,"Y":2,"Layer":0,"TagType":"Farm"},{"X":17,"Y":2,"Layer":0,"TagType":"Farm"},{"X":16,"Y":2,"Layer":0,"TagType":"Farm"},{"X":18,"Y":2,"Layer":0,"TagType":"Farm"},{"X":20,"Y":2,"Layer":0,"TagType":"Farm"},{"X":21,"Y":2,"Layer":0,"TagType":"Farm"},{"X":19,"Y":2,"Layer":0,"TagType":"Farm"},{"X":22,"Y":2,"Layer":0,"TagType":"Farm"},{"X":22,"Y":4,"Layer":0,"TagType":"Farm"},{"X":22,"Y":6,"Layer":0,"TagType":"Farm"},{"X":22,"Y":7,"Layer":0,"TagType":"Farm"},{"X":22,"Y":9,"Layer":0,"TagType":"Farm"},{"X":22,"Y":10,"Layer":0,"TagType":"Farm"},{"X":22,"Y":8,"Layer":0,"TagType":"Farm"},{"X":22,"Y":5,"Layer":0,"TagType":"Farm"},{"X":22,"Y":3,"Layer":0,"TagType":"Farm"},{"X":22,"Y":11,"Layer":0,"TagType":"Farm"},{"X":21,"Y":11,"Layer":0,"TagType":"Farm"},{"X":20,"Y":13,"Layer":0,"TagType":"Farm"},{"X":20,"Y":14,"Layer":0,"TagType":"Farm"},{"X":19,"Y":16,"Layer":0,"TagType":"Farm"},{"X":20,"Y":17,"Layer":0,"TagType":"Farm"},{"X":20,"Y":15,"Layer":0,"TagType":"Farm"},{"X":20,"Y":16,"Layer":0,"TagType":"Farm"},{"X":20,"Y":11,"Layer":0,"TagType":"Farm"},{"X":20,"Y":12,"Layer":0,"TagType":"Farm"}]}
+{
+  "width": 25,
+  "height": 25,
+  "filename": "devtest",
+  "fullFilepath": "vault\\maps\\devtest.map",
+  "tiles": [
+    {
+      "x": 0,
+      "y": 3,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 3
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 2
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "layer": 0,
+      "type": "wall01-convex1",
+      "direction": 1
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 0,
+      "y": 11,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 0,
+      "y": 13,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 0,
+      "y": 16,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 16,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 16,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 16,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 16,
+      "layer": 0,
+      "type": "wall01-convex1",
+      "direction": 3
+    },
+    {
+      "x": 8,
+      "y": 17,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 8,
+      "y": 19,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 8,
+      "y": 22,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 22,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 22,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 22,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 22,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 19,
+      "y": 22,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 1
+    },
+    {
+      "x": 19,
+      "y": 20,
+      "layer": 0,
+      "type": "wall01-convex1",
+      "direction": 0
+    },
+    {
+      "x": 21,
+      "y": 20,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 1
+    },
+    {
+      "x": 21,
+      "y": 18,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 21,
+      "y": 16,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 21,
+      "y": 14,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 21,
+      "y": 12,
+      "layer": 0,
+      "type": "wall01-convex1",
+      "direction": 0
+    },
+    {
+      "x": 23,
+      "y": 12,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 1
+    },
+    {
+      "x": 23,
+      "y": 10,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 23,
+      "y": 8,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 23,
+      "y": 6,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 23,
+      "y": 4,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 1
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 2
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 14,
+      "y": 1,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 3
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "layer": 0,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "layer": 0,
+      "type": "wall01-convex1",
+      "direction": 2
+    },
+    {
+      "x": 14,
+      "y": 3,
+      "layer": 0,
+      "type": "wall01-convex1",
+      "direction": 2
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "layer": 0,
+      "type": "wall01-concave1",
+      "direction": 3
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "layer": 0,
+      "type": "grass01-long",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 15,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 17,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 19,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 19,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 19,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 19,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 17,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 17,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 17,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 17,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 15,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 5,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 5,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 5,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 5,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 3,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 3,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 3,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 7,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 9,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 13,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "layer": 0,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 2
+    },
+    {
+      "x": 0,
+      "y": 21,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 21,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 21,
+      "layer": 1,
+      "type": "wall01-convex1",
+      "direction": 3
+    },
+    {
+      "x": 4,
+      "y": 22,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 4,
+      "y": 24,
+      "layer": 1,
+      "type": "wall01-s1",
+      "direction": 3
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "layer": 1,
+      "type": "wall01-convex1",
+      "direction": 1
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "layer": 1,
+      "type": "wall01-convex1",
+      "direction": 2
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 13,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 15,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 19,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 21,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 21,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 0,
+      "y": 18,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 18,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 18,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 18,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 20,
+      "layer": 1,
+      "type": "grass01",
+      "direction": 0
+    },
+    {
+      "x": 0,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 1,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 3,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 5,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 7,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 22,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 7,
+      "y": 22,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 24,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 23,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 22,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 21,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 20,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 19,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 18,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 17,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 16,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 14,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 15,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 13,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 12,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 10,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 11,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 9,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 8,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 7,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 6,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 5,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 4,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 3,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 1,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "layer": 1,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 0,
+      "y": 22,
+      "layer": 2,
+      "type": "grass02",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 22,
+      "layer": 2,
+      "type": "grass02",
+      "direction": 0
+    },
+    {
+      "x": 0,
+      "y": 24,
+      "layer": 2,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 2,
+      "y": 24,
+      "layer": 2,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 3,
+      "y": 24,
+      "layer": 2,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 1,
+      "y": 24,
+      "layer": 2,
+      "type": "grass01-small",
+      "direction": 0
+    },
+    {
+      "x": 6,
+      "y": 11,
+      "layer": 0,
+      "type": "grass02",
+      "direction": 0
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "layer": 0,
+      "type": "grass02",
+      "direction": 0
+    },
+    {
+      "x": 14,
+      "y": 16,
+      "layer": 0,
+      "type": "grass02",
+      "direction": 1
+    }
+  ],
+  "markers": [
+    {
+      "x": 5,
+      "y": 9,
+      "layer": 0,
+      "type": "PlayerStart",
+      "direction": 3,
+      "attributes": null
+    }
+  ],
+  "worldObjects": [
+    {
+      "x": 20,
+      "y": 20,
+      "height": 0,
+      "type": "bed01",
+      "direction": 1,
+      "attributes": {}
+    },
+    {
+      "x": 3.5,
+      "y": 4.5,
+      "height": 0,
+      "type": "bed01",
+      "direction": 7,
+      "attributes": {}
+    }
+  ],
+  "mapTags": [
+    {
+      "X": 5,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 2,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 1,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 3,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 4,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 5,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 6,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 21,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 20,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 19,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 18,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 7,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 8,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 9,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 10,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 11,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 12,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 13,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 14,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 15,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 17,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 16,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 18,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 2,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 4,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 6,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 7,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 9,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 10,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 8,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 5,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 3,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 22,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 21,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 13,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 14,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 19,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 17,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 15,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 16,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 11,
+      "Layer": 0,
+      "TagType": "Farm"
+    },
+    {
+      "X": 20,
+      "Y": 12,
+      "Layer": 0,
+      "TagType": "Farm"
+    }
+  ]
+}

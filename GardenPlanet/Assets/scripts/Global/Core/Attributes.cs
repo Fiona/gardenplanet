@@ -2,9 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using LitJson;
-using UnityEditor;
-using UnityEngine;
 
 namespace GardenPlanet
 {
@@ -34,7 +31,7 @@ namespace GardenPlanet
             items = new Hashtable();
             if(initial != null && initial.Count > 0)
                 foreach(DictionaryEntry entry in initial)
-                    items[entry.Key] = ConvertFromJsonData(entry.Value);
+                    items[entry.Key] = entry.Value;
         }
 
         /*
@@ -77,61 +74,11 @@ namespace GardenPlanet
         }
 
         /*
-         * Set the value given to the key given. If a jsondata object is passed this will automatically be
-         * turned into a primitive before storing.
+         * Set the value given to the key given.
          */
         public void Set<T>(string key, T val)
         {
-            items[key] = ConvertFromJsonData(val);
-        }
-
-        /*
-         * Turns a json data object into either bool, string, int or float depending on what it is.
-         */
-        private object ConvertFromJsonData(object val)
-        {
-            var jsonData = val as JsonData;
-            if(jsonData != null)
-            {
-                if(jsonData.IsBoolean)
-                    return (bool)jsonData;
-                if(jsonData.IsString)
-                    return (string)jsonData;
-                if(IsNumeric(jsonData))
-                {
-                    var floatData = CastToFloat(jsonData);
-                    if(Math.Abs(floatData % 1.0f) > 0.001f)
-                        return floatData;
-                    return (int)floatData;
-                }
-            }
-            return val;
-        }
-
-        /*
-         * Helper method for returning if the jsondata object is a float, int, whatever
-         */
-        private static bool IsNumeric(JsonData jsonData)
-        {
-            return jsonData.IsDouble || jsonData.IsInt || jsonData.IsLong;
-        }
-
-        /*
-         * Helper method for getting a float value out of the jsondata
-         */
-        private static float CastToFloat(JsonData jsonData)
-        {
-            switch(jsonData.GetJsonType())
-            {
-                case JsonType.Int:
-                    return (int)jsonData;
-                case JsonType.Long:
-                    return (long)jsonData;
-                case JsonType.Double:
-                    return (float)(double)jsonData;
-                default:
-                    throw new ArgumentException($"Non-numeric json type: {jsonData.GetJsonType()}");
-            }
+            items[key] = val;
         }
 
         /*

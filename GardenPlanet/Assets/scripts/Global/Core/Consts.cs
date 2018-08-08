@@ -15,7 +15,7 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Game;
+        public const AppState INITIAL_APP_STATE = AppState.Logo;
 
         // -----------------------------
         // TILE DRAWING
@@ -73,7 +73,7 @@ namespace GardenPlanet
 
         // How fast the camera will lock to the player
         public const float CAMERA_PLAYER_LOCK_SPEED = 3.0f;
-        
+
         // -----------------------------
         // CHARACTERS
         // -----------------------------

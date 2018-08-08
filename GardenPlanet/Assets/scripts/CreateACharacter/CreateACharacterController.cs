@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using LitJson;
 using StompyBlondie;
 using TMPro;
 using UnityEngine;
@@ -58,7 +56,7 @@ namespace GardenPlanet
         public MultiDimensionalRectTransform[] page3NavigationTargets;
 
         [HideInInspector]
-        public JsonData globalConfig;
+        public GlobalConfig globalConfig;
 
         private int page;
         private Vector2 offScreenPagePosition;
@@ -75,7 +73,8 @@ namespace GardenPlanet
             if(File.Exists(configFilePath))
                 using(var fh = File.OpenText(configFilePath))
                     jsonContents = fh.ReadToEnd();
-            globalConfig = JsonMapper.ToObject(jsonContents);
+            globalConfig = new GlobalConfig();
+            JsonHandler.PopulateObject(jsonContents, globalConfig);
         }
 
         public void Start()

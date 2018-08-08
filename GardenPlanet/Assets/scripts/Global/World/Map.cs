@@ -1,14 +1,13 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using LitJson;
 using System.Text;
 using UnityEngine;
 
 namespace GardenPlanet
 {
-		
+
     public class Map
     {
 
@@ -28,6 +27,7 @@ namespace GardenPlanet
             public int layer;
             public string type;
             public Direction direction;
+            public Attributes attributes;
         }
 
         public struct WorldObject
@@ -37,16 +37,17 @@ namespace GardenPlanet
             public double height;
             public string type;
             public EightDirection direction;
+            public Attributes attributes;
         }
 
         public int width;
         public int height;
         public string filename;
         public string fullFilepath;
-        public List<MapTile> tiles;
-        public List<Marker> markers;
-        public List<WorldObject> worldObjects;
-        public List<TileTag> mapTags;
+        public IList<MapTile> tiles;
+        public IList<Marker> markers;
+        public IList<WorldObject> worldObjects;
+        public IList<TileTag> mapTags;
 
         public Map()
         {
@@ -58,7 +59,7 @@ namespace GardenPlanet
             tiles = new List<MapTile>();
             markers = new List<Marker>();
             worldObjects = new List<WorldObject>();
-            mapTags = new List<TileTag>();          
+            mapTags = new List<TileTag>();
         }
 
         public Map(string filename)
@@ -80,9 +81,9 @@ namespace GardenPlanet
                 try
                 {
                     using(var fh = File.OpenText(fullFilepath))
-                        loadedMap = JsonMapper.ToObject<Map>(fh.ReadToEnd());
+                        loadedMap = JsonHandler.Deserialize<Map>(fh.ReadToEnd());
                 }
-                catch(JsonException e)
+                catch(JsonErrorException e)
                 {
                     Debug.Log(e);
                     throw new EditorErrorException("Error loading map.");
@@ -125,9 +126,9 @@ namespace GardenPlanet
             string jsonOutput;
             try
             {
-                jsonOutput = JsonMapper.ToJson(this);
+                jsonOutput = JsonHandler.Serialize(this);
             }
-            catch(JsonException e)
+            catch(JsonErrorException e)
             {
                 Debug.Log(e);
                 throw new EditorErrorException("Error saving map.");

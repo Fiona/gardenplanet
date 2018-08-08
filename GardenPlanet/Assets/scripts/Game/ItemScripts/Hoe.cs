@@ -38,8 +38,8 @@ namespace GardenPlanet
             public override IEnumerator UseOnTilePos(TilePosition tilePos)
             {
                 // Make sure we reduced energy
-                var energyConsumption = (float)(double)controller.globalConfig["energy_usage"]["hoe"] *
-                                        item.attributes.Get<float>("energy_consumption_modifier");
+                var energyConsumption = controller.globalConfig.energyUsage["hoe"] *
+                                        item.attributes.Get<float>("energyConsumptionModifier");
                 if(!controller.ConsumePlayerEnergy(energyConsumption))
                     yield break;
 
@@ -81,7 +81,8 @@ namespace GardenPlanet
 
                 // Empty tile so hoe the ground
                 controller.worldObjectManager.AddWorldObject(
-                    controller.worldObjectManager.GetWorldObjectTypeByName("crop"), tilePos
+                    controller.worldObjectManager.GetWorldObjectTypeByName("crop"),
+                    tilePos
                 );
             }
 
