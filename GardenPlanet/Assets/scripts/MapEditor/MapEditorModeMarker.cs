@@ -2,20 +2,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-    
+
 namespace GardenPlanet
 {
     public class MapEditorModeMarker: MapEditorMode
     {
-        
+
         MarkerManager markerManager;
         TileMarkerType selectedMarker;
         TileMarkerType previousMarker;
-        Direction newMarkerDirection;
-        
+        EightDirection newMarkerDirection;
+
         Image currentMarkerPreview;
         Text currentMarkerText;
-        
+
         public override string GetModeName()
         {
             return "Tile Markers";
@@ -32,18 +32,18 @@ namespace GardenPlanet
             var markerManagerObj = new GameObject("MarkerManager");
             markerManager = markerManagerObj.AddComponent<MarkerManager>();
             markerManager.LoadFromMap(controller.map);
-            SelectMarkerType(markerManager.tileMarkerTypes[0].name);
-            newMarkerDirection = Direction.Down;            
+            SelectMarkerType(markerManager.tileMarkerTypes[0]);
+            newMarkerDirection = EightDirection.Down;
         }
 
         public override void InitializeGUI()
         {
             base.InitializeGUI();
-            
-            var currentMarkerPanel = guiHolder.transform.Find("CurrentMarkerPanel").gameObject;            
+
+            var currentMarkerPanel = guiHolder.transform.Find("CurrentMarkerPanel").gameObject;
             currentMarkerPreview = currentMarkerPanel.transform.Find("CurrentMarker").GetComponent<Image>();
             currentMarkerText = currentMarkerPanel.transform.Find("CurrentMarkerText").GetComponent<Text>();
-            
+
             currentMarkerPanel.transform.Find("NextMarkerButton").GetComponent<Button>().onClick.AddListener(NextMarkerButtonPressed);
             currentMarkerPanel.transform.Find("PreviousMarkerButton").GetComponent<Button>().onClick.AddListener(PreviousMarkerButtonPressed);
             currentMarkerPanel.transform.Find("EmptyMarkerButton").GetComponent<Button>().onClick.AddListener(EmptyMarkerButtonPressed);
@@ -54,29 +54,33 @@ namespace GardenPlanet
             base.Destroy();
             UnityEngine.Object.Destroy(markerManager.gameObject);
         }
-        
+
         public override void Update()
         {
             if(controller.currentHoveredTile == null)
                 return;
-            
-            var axis = Input.GetAxis("Mouse ScrollWheel");
 
+            var marker = markerManager.GetMarkerAt(
+                controller.currentHoveredTile.x,
+                controller.currentHoveredTile.y,
+                controller.currentHoveredTile.layer
+            );
+            if(marker == null)
+                return;
+
+            var axis = Input.GetAxis("Mouse ScrollWheel");
             if(Mathf.Abs(axis) >= Consts.MOUSE_WHEEL_CLICK_SNAP)
             {
-                var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);                
-                var marker = markerManager.GetMarkerAt(
-                    controller.currentHoveredTile.x,
-                    controller.currentHoveredTile.y,
-                    controller.currentHoveredTile.layer
-                );
-                if(marker != null)
-                {
-                    markerManager.RotateMarkerInDirection(marker, dir);
-                    newMarkerDirection = marker.dir;
-                }                
-            }            
-        }        
+                var dir = (axis > 0.0f ? RotationalDirection.AntiClockwise : RotationalDirection.Clockwise);
+                markerManager.RotateMarkerInDirection(marker, dir);
+                newMarkerDirection = marker.direction;
+            }
+
+            if(Input.GetKeyUp(KeyCode.Return))
+            {
+
+            }
+        }
 
         public override void TileLocationClicked(TilePosition tilePos, PointerEventData pointerEventData)
         {
@@ -90,23 +94,23 @@ namespace GardenPlanet
                 var marker = markerManager.GetMarkerAt(
                     controller.currentHoveredTile.x, controller.currentHoveredTile.y, controller.currentHoveredTile.layer
                 );
-                SelectMarkerType(marker == null ? null : marker.name);
-            }            
+                SelectMarkerType(marker == null ? null : marker.type);
+            }
         }
 
         public override void SaveToMap(Map map)
-        {        
+        {
             markerManager.SaveToMap(map);
         }
-        
+
         public override void ResizeMap(int width, int height)
         {
-            markerManager.ResizeMap(width, height);            
-        }        
-        
-        private void SelectMarkerType(string markerTypeName)
+            markerManager.ResizeMap(width, height);
+        }
+
+        private void SelectMarkerType(TileMarkerType markerType)
         {
-            if(markerTypeName == null)
+            if(markerType == null)
             {
                 currentMarkerText.text = "-";
                 selectedMarker = null;
@@ -116,13 +120,13 @@ namespace GardenPlanet
             try
             {
                 currentMarkerPreview.gameObject.SetActive(true);
-                selectedMarker = markerManager.GetTileMarkerTypeByName(markerTypeName);
+                selectedMarker = markerType;
                 currentMarkerPreview.sprite = selectedMarker.sprite;
             }
             catch(EditorErrorException){ }
-            currentMarkerText.text = markerTypeName;
+            currentMarkerText.text = markerType.name;
         }
-     
+
         /*
           Pressed button to go to the next tile marker
          */
@@ -130,10 +134,10 @@ namespace GardenPlanet
         {
             if(selectedMarker == null)
             {
-                SelectMarkerType(previousMarker == null ? null : previousMarker.name);
+                SelectMarkerType(previousMarker);
                 return;
             }
-            SelectMarkerType(markerManager.GetNextTileMarkerType(selectedMarker).name);
+            SelectMarkerType(markerManager.GetNextTileMarkerType(selectedMarker));
         }
 
         /*
@@ -143,10 +147,10 @@ namespace GardenPlanet
         {
             if(selectedMarker == null)
             {
-                SelectMarkerType(previousMarker == null ? null : previousMarker.name);
+                SelectMarkerType(previousMarker);
                 return;
             }
-            SelectMarkerType(markerManager.GetPreviousTileMarkerType(selectedMarker).name);
+            SelectMarkerType(markerManager.GetPreviousTileMarkerType(selectedMarker));
         }
 
         /*
@@ -157,14 +161,19 @@ namespace GardenPlanet
             if(selectedMarker == null)
             {
                 if(previousMarker == null)
-                    SelectMarkerType(markerManager.tileMarkerTypes[0].name);
+                    SelectMarkerType(markerManager.tileMarkerTypes[0]);
                 else
-                    SelectMarkerType(previousMarker.name);
+                    SelectMarkerType(previousMarker);
                 return;
             }
             previousMarker = selectedMarker;
             SelectMarkerType(null);
         }
-        
+
+        /*
+         * Opening attributes editor for the selected marker
+         */
+        //private void OpenAttributesDialog()
+
     }
 }

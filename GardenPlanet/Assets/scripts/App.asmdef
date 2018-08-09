@@ -3,7 +3,6 @@
     "references": [
         "UnityUiExtensions",
         "Rewired",
-        "PostProcessing",
         "Unity.TextMeshPro"
     ],
     "optionalUnityReferences": [],

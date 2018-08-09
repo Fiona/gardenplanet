@@ -8,12 +8,12 @@ namespace GardenPlanet
 	{
 
 		public List<TileMarkerType> tileMarkerTypes;
-		public List<ObjectTilePosition> tileMarkers;
+		public List<TileMarker> tileMarkers;
 
 		public void Awake()
 		{
 			tileMarkerTypes = TileMarkerType.GetAllTileMarkerTypes();
-			tileMarkers = new List<ObjectTilePosition>();
+			tileMarkers = new List<TileMarker>();
 		}
 
 		/*
@@ -24,17 +24,17 @@ namespace GardenPlanet
 			// Destroy old one
 			if(tileMarkers.Count > 0)
 			{
-				var markerListClone = new List<ObjectTilePosition>(tileMarkers);
+				var markerListClone = new List<TileMarker>(tileMarkers);
 				foreach(var marker in markerListClone)
 					RemoveMarkerAt(marker.x, marker.y, marker.layer);
-				tileMarkers = new List<ObjectTilePosition>();
+				tileMarkers = new List<TileMarker>();
 			}
 
 			// Load in markers
 			foreach(var marker in map.markers)
 				AddMarkerAt(
 					GetTileMarkerTypeByName(marker.type),
-					marker.x, marker.y, marker.layer, marker.direction
+					marker.x, marker.y, marker.layer, marker.direction, marker.attributes
 				);
 		}
 
@@ -42,12 +42,13 @@ namespace GardenPlanet
 		{
 			foreach(var marker in tileMarkers)
 			{
-				var newMarker = new Map.Marker(){
+				var newMarker = new Map.Marker{
 					x=marker.x,
 					y=marker.y,
 					layer=marker.layer,
-					direction=marker.dir,
-					type=marker.name
+					direction=marker.direction,
+					type=marker.type.name,
+					attributes=new Attributes(marker.attributes)
 				};
 				map.markers.Add(newMarker);
 			}
@@ -57,7 +58,7 @@ namespace GardenPlanet
 		{
 			if(name == null)
 				return null;
-			foreach(var type in this.tileMarkerTypes)
+			foreach(var type in tileMarkerTypes)
 				if(type.name == name)
 					return type;
 			throw new EditorErrorException("Couldn't find marker type requested.");
@@ -86,9 +87,8 @@ namespace GardenPlanet
 			tileMarkers.Remove(marker);
 		}
 
-		public void AddMarkerAt(TileMarkerType markerType, int x, int y, int layer, Direction dir)
+		public void AddMarkerAt(TileMarkerType markerType, int x, int y, int layer, EightDirection dir, Attributes attributes = null)
 		{
-
 			if(markerType == null)
 				return;
 
@@ -114,19 +114,20 @@ namespace GardenPlanet
 			}
 
 			// Create new marker display
-			var newMarker = new ObjectTilePosition{
+			var attrs = new Attributes(attributes ?? markerType.defaultAttributes);
+			var newMarker = new TileMarker{
 				x = x,
 				y = y,
 				layer = layer,
 				gameObject = newGameObject,
-				name = markerType.name
+				attributes = attrs,
+				type = markerType
 			};
 			tileMarkers.Add(newMarker);
 			SetMarkerDirection(newMarker, dir);
-
 		}
 
-		public ObjectTilePosition GetMarkerAt(int x, int y, int layer)
+		public TileMarker GetMarkerAt(int x, int y, int layer)
 		{
 			foreach(var marker in tileMarkers)
 				if(marker.x == x && marker.y == y && marker.layer == layer)
@@ -136,7 +137,7 @@ namespace GardenPlanet
 
 		public void ResizeMap(int width, int height)
 		{
-			var markersToKill = new List<ObjectTilePosition>();
+			var markersToKill = new List<TileMarker>();
 			foreach(var marker in tileMarkers)
 				if(marker.x >= width || marker.y >= height)
 					markersToKill.Add(marker);
@@ -144,14 +145,14 @@ namespace GardenPlanet
 				RemoveMarkerAt(marker.x, marker.y, marker.layer);
 		}
 
-		public void RotateMarkerInDirection(ObjectTilePosition marker, RotationalDirection rot)
+		public void RotateMarkerInDirection(TileMarker marker, RotationalDirection rot)
 		{
-			SetMarkerDirection(marker, DirectionHelper.RotateDirection(marker.dir, rot));
+			SetMarkerDirection(marker, DirectionHelper.RotateDirection(marker.direction, rot));
 		}
 
-		public void SetMarkerDirection(ObjectTilePosition marker, Direction direction)
+		public void SetMarkerDirection(TileMarker marker, EightDirection direction)
 		{
-			marker.dir = direction;
+			marker.direction = direction;
 			if(marker.gameObject != null)
 			{
 				var baseRotation = DirectionHelper.DirectionToDegrees(direction);
@@ -159,10 +160,10 @@ namespace GardenPlanet
 			}
 		}
 
-		public ObjectTilePosition GetFirstTileMarkerOfType(string markerType)
+		public TileMarker GetFirstTileMarkerOfType(TileMarkerType type)
 		{
 			foreach(var marker in tileMarkers)
-				if(marker.name == markerType)
+				if(marker.type == type)
 					return marker;
 			return null;
 		}

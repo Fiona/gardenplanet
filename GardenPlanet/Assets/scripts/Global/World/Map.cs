@@ -26,7 +26,7 @@ namespace GardenPlanet
             public int y;
             public int layer;
             public string type;
-            public Direction direction;
+            public EightDirection direction;
             public Attributes attributes;
         }
 

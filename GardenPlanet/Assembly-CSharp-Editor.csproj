@@ -64,6 +64,12 @@
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
@@ -310,6 +316,9 @@
     <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Rewired_Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
     </Reference>
@@ -333,9 +342,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Fiona/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.1f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -692,10 +698,6 @@
       <Project>{662357F3-65D0-1B55-7D1A-579ADE68A581}</Project>
       <Name>UnityUiExtensions</Name>
     </ProjectReference>
-    <ProjectReference Include="PostProcessing.csproj">
-      <Project>{7AC5898A-EF95-41C0-2912-131D693B4DCE}</Project>
-      <Name>PostProcessing</Name>
-    </ProjectReference>
     <ProjectReference Include="RewiredEditor.csproj">
       <Project>{0A339864-FE32-2340-EC92-95D223240FB0}</Project>
       <Name>RewiredEditor</Name>
@@ -703,10 +705,6 @@
     <ProjectReference Include="UnityUIExtensionsEditor.csproj">
       <Project>{991291BF-C8EA-0291-4374-68D2758531DE}</Project>
       <Name>UnityUIExtensionsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PostProcessingEditor.csproj">
-      <Project>{E2BC5208-7C84-86D0-E3D4-2361B552EC45}</Project>
-      <Name>PostProcessingEditor</Name>
     </ProjectReference>
     <ProjectReference Include="App.csproj">
       <Project>{E695261D-ECD2-F612-61FB-D4ED7A5A6980}</Project>

@@ -307,6 +307,21 @@ namespace GardenPlanet
         }
 
         /*
+         * When passed a TileMarker it will immediately position and
+         * turn the character to the passed Tile Marker position.
+         */
+        public void SetPositionToTile(TileMarker tileMarker)
+        {
+            transform.position = new Vector3(
+                tileMarker.x * Consts.TILE_SIZE,
+                tileMarker.layer * Consts.TILE_SIZE,
+                tileMarker.y * Consts.TILE_SIZE
+            );
+            var baseRotation = DirectionHelper.DirectionToDegrees(tileMarker.direction);
+            transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
+        }
+
+        /*
          * Immediately rotate the character to the supplied direction
          */
         public void SetRotation(Vector3 newDir)
@@ -602,7 +617,7 @@ namespace GardenPlanet
         {
             if(visualsHolder != null)
                 Destroy(visualsHolder);
-            
+
             visualsHolder = new GameObject("visuals");
             visualsHolder.transform.SetParent(transform, false);
 
@@ -613,14 +628,14 @@ namespace GardenPlanet
             newAnimator.applyRootMotion = mainAnimator.applyRootMotion;
             newAnimator.updateMode = mainAnimator.updateMode;
             newAnimator.cullingMode = mainAnimator.cullingMode;
-            
+
             DestroyImmediate(mainAnimator);
             mainAnimator = newAnimator;
-            
+
             // Add animation event pass-through component
             var animationEventListener = visualsHolder.AddComponent<CharacterAnimatorEventListener>();
             animationEventListener.character = this;
-        
+
             headBones = new List<Transform>();
             lowerSpineBones = new List<Transform>();
             armatures = new List<Transform>();
@@ -646,27 +661,27 @@ namespace GardenPlanet
             hairModel = null;
             if(appearence.hair != "")
                 hairModel = AddModelToVisuals(Consts.CHARACTERS_HAIR_VISUAL_PATH + appearence.hair, bonesToClone);
-            
+
             RegenerateHairColour();
-           
+
             StartCoroutine(RebindAnimation());
         }
 
         private IEnumerator RebindAnimation()
         {
             yield return new WaitForFixedUpdate();
-            
+
             // Unity was not happy with us doing this till the next frame, I hope this wont cause
             // any weird not-animating-for-a-frame effects
             AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, new []{"item"});
 
             holdItemHolder = transform.FindRecursive("item");
             if(holdItemHolder == null)
-                Debug.LogError("Can't find a child called item in character!");            
+                Debug.LogError("Can't find a child called item in character!");
             baseModel = transform.FindRecursive("basemodel").gameObject;
             var findHair = transform.FindRecursive("hair");
             hairModel = findHair ? findHair.gameObject : null;
-            
+
             yield return new WaitForFixedUpdate();
             mainAnimator.Rebind();
         }

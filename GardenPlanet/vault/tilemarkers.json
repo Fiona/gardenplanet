@@ -1,0 +1,17 @@
+[
+  {
+    "name": "PlayerStart",
+    "defaultAttributes": {}
+  },
+  {
+    "name": "Pengy",
+    "defaultAttributes": {}
+  },
+  {
+    "name": "Bed",
+    "defaultAttributes": {
+	  "type": "bed01",
+	  "owner": "PLAYER"
+	}
+  }  
+]

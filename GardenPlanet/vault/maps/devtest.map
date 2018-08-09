@@ -1432,25 +1432,25 @@
       "y": 9,
       "layer": 0,
       "type": "PlayerStart",
-      "direction": 3,
-      "attributes": null
+      "direction": 6,
+      "attributes": {}
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "layer": 0,
+      "type": "Bed",
+      "direction": 7,
+      "attributes": {}
     }
   ],
   "worldObjects": [
     {
-      "x": 20,
-      "y": 20,
-      "height": 0,
+      "x": 20.0,
+      "y": 20.0,
+      "height": 0.0,
       "type": "bed01",
       "direction": 1,
-      "attributes": {}
-    },
-    {
-      "x": 3.5,
-      "y": 4.5,
-      "height": 0,
-      "type": "bed01",
-      "direction": 7,
       "attributes": {}
     }
   ],

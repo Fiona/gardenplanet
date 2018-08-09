@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 using Rewired;
-using UnityEngine.PostProcessing;
 
 namespace GardenPlanet
 {
@@ -61,7 +60,7 @@ namespace GardenPlanet
             mouseTextureSet = false;
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             if(doingRebind)
                 return;

@@ -146,7 +146,7 @@ namespace GardenPlanet
             atmosphere = atmosphereObj.GetComponent<Atmosphere>();
 
             // Set up player and camera
-            var playerStartMarker = markerManager.GetFirstTileMarkerOfType("PlayerStart");
+            var playerStartMarker = markerManager.GetFirstTileMarkerOfType(markerManager.GetTileMarkerTypeByName("PlayerStart"));
             if(playerStartMarker != null)
                 player.SetPositionToTile(playerStartMarker);
             else
