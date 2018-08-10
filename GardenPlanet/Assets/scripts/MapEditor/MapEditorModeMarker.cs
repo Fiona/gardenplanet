@@ -2,19 +2,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Object = UnityEngine.Object;
 
 namespace GardenPlanet
 {
     public class MapEditorModeMarker: MapEditorMode
     {
 
-        MarkerManager markerManager;
-        TileMarkerType selectedMarker;
-        TileMarkerType previousMarker;
-        EightDirection newMarkerDirection;
+        private MarkerManager markerManager;
+        private TileMarkerType selectedMarker;
+        private TileMarkerType previousMarker;
+        private EightDirection newMarkerDirection;
 
-        Image currentMarkerPreview;
-        Text currentMarkerText;
+        private Image currentMarkerPreview;
+        private Text currentMarkerText;
+        private GameObject attributesDialog;
+        private TileMarker attributeEditingMarker;
 
         public override string GetModeName()
         {
@@ -57,7 +60,7 @@ namespace GardenPlanet
 
         public override void Update()
         {
-            if(controller.currentHoveredTile == null)
+            if(controller.currentHoveredTile == null || attributeEditingMarker != null)
                 return;
 
             var marker = markerManager.GetMarkerAt(
@@ -77,9 +80,7 @@ namespace GardenPlanet
             }
 
             if(Input.GetKeyUp(KeyCode.Return))
-            {
-
-            }
+                OpenAttributesDialog(marker);
         }
 
         public override void TileLocationClicked(TilePosition tilePos, PointerEventData pointerEventData)
@@ -173,7 +174,30 @@ namespace GardenPlanet
         /*
          * Opening attributes editor for the selected marker
          */
-        //private void OpenAttributesDialog()
+        private void OpenAttributesDialog(TileMarker marker)
+        {
+            attributeEditingMarker = marker;
+            attributesDialog = Object.Instantiate(
+                Resources.Load<GameObject>(Consts.PREFAB_PATH_EDITOR_ATTRIBUTES_DIALOG)
+                );
+            attributesDialog.transform.SetParent(guiHolder.transform, false);
+            attributesDialog.GetComponent<EditAttributesDialog>().EditAttributes(
+                marker.attributes, CancelAttributesCallback, ApplyAttributesCallback
+            );
+        }
+
+        public void CancelAttributesCallback()
+        {
+            Object.Destroy(attributesDialog);
+            attributeEditingMarker = null;
+        }
+
+        public void ApplyAttributesCallback(Attributes attributes)
+        {
+            attributeEditingMarker.attributes = new Attributes(attributes);
+            Object.Destroy(attributesDialog);
+            attributeEditingMarker = null;
+        }
 
     }
 }
