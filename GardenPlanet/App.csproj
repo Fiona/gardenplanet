@@ -172,6 +172,7 @@
     <Compile Include="Assets\scripts\Global\World\WorldObjectManager.cs" />
     <Compile Include="Assets\scripts\Global\World\WorldObjectType.cs" />
     <Compile Include="Assets\scripts\Logo\LogoController.cs" />
+    <Compile Include="Assets\scripts\MapEditor\AttributeField.cs" />
     <Compile Include="Assets\scripts\MapEditor\DropdownMenu.cs" />
     <Compile Include="Assets\scripts\MapEditor\EditAttributesDialog.cs" />
     <Compile Include="Assets\scripts\MapEditor\EditorInputManager.cs" />

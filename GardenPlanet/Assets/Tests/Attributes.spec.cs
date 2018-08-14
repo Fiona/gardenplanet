@@ -312,7 +312,7 @@ namespace GardenPlanet
         [Test]
         public void TestBools()
         {
-            var attrs = new Attributes()
+            var attrs = new Attributes
             {
                 {"booling", true}
             };
@@ -320,6 +320,84 @@ namespace GardenPlanet
             Assert.That(()=>attrs.Get<string>("booling"), Throws.TypeOf<InvalidCastException>());
             Assert.That(()=>attrs.Get<float>("booling"), Throws.TypeOf<InvalidCastException>());
             Assert.That(()=>attrs.Get<int>("booling"), Throws.TypeOf<InvalidCastException>());
+        }
+
+        [Test]
+        public void TestIsKeyType()
+        {
+            var attrs = new Attributes
+            {
+                {"bool", true},
+                {"float", 15.45f},
+                {"int", 100},
+                {"string", "Hello"}
+            };
+
+            Assert.That(attrs.IsKeyType("bool", typeof(bool)), Is.True);
+            Assert.That(attrs.IsKeyType("bool", typeof(string)), Is.False);
+            Assert.That(attrs.IsKeyType("bool", typeof(float)), Is.False);
+            Assert.That(attrs.IsKeyType("bool", typeof(int)), Is.False);
+
+            Assert.That(attrs.IsKeyType("float", typeof(bool)), Is.False);
+            Assert.That(attrs.IsKeyType("float", typeof(string)), Is.False);
+            Assert.That(attrs.IsKeyType("float", typeof(float)), Is.True);
+            Assert.That(attrs.IsKeyType("float", typeof(int)), Is.False);
+
+            Assert.That(attrs.IsKeyType("int", typeof(bool)), Is.False);
+            Assert.That(attrs.IsKeyType("int", typeof(string)), Is.False);
+            Assert.That(attrs.IsKeyType("int", typeof(float)), Is.False);
+            Assert.That(attrs.IsKeyType("int", typeof(int)), Is.True);
+
+            Assert.That(attrs.IsKeyType("string", typeof(bool)), Is.False);
+            Assert.That(attrs.IsKeyType("string", typeof(string)), Is.True);
+            Assert.That(attrs.IsKeyType("string", typeof(float)), Is.False);
+            Assert.That(attrs.IsKeyType("string", typeof(int)), Is.False);
+        }
+
+        [Test]
+        public void TestIsKeyTypeNotExist()
+        {
+            var attrs = new Attributes();
+            Assert.That(
+                ()=>attrs.IsKeyType("nothing", typeof(bool)),
+                Throws.TypeOf<KeyNotFoundException>()
+                );
+        }
+
+        [Test]
+        public void TestContains()
+        {
+            var attrs = new Attributes
+            {
+                {"foo", "bar"}
+            };
+            Assert.That(attrs.Contains("foo"), Is.True);
+            Assert.That(attrs.Contains("bar"), Is.False);
+            Assert.That(attrs.Contains("boop"), Is.False);
+            Assert.That(attrs.Contains(""), Is.False);
+        }
+
+        [Test]
+        public void TestRemove()
+        {
+            var attrs = new Attributes
+            {
+                {"foo", "bar"},
+                {"biz", "baz"}
+            };
+            attrs.Remove("biz");
+            Assert.That(attrs.Count, Is.EqualTo(1));
+            Assert.That(attrs, Is.EqualTo(new Attributes{{"foo", "bar"}}));
+        }
+
+        [Test]
+        public void TestRemoveNotExist()
+        {
+            var attrs = new Attributes();
+            Assert.That(
+                ()=>attrs.Remove("nothing"),
+                Throws.TypeOf<KeyNotFoundException>()
+            );
         }
 
     }

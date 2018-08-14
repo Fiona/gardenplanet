@@ -8,7 +8,7 @@ namespace GardenPlanet
     public class Attributes: IEnumerable<DictionaryEntry>
     {
 
-        public Hashtable items;
+        private Hashtable items;
 
         public int Count
         {
@@ -79,6 +79,35 @@ namespace GardenPlanet
         public void Set<T>(string key, T val)
         {
             items[key] = val;
+        }
+
+        /*
+         * If the Attributes contain a particular key
+         */
+        public bool Contains(string key)
+        {
+            return items.Contains(key);
+        }
+
+        /*
+         * Removes the specified key from the attributes
+         */
+        public void Remove(string key)
+        {
+            if(items[key] == null)
+                throw new KeyNotFoundException($"Key {key} not found in Attributes");
+            items.Remove(key);
+        }
+
+        /*
+         * Checks if the key passed is a particular type
+         */
+        public bool IsKeyType(string key, Type type)
+        {
+            var item = items[key];
+            if(item == null)
+                throw new KeyNotFoundException($"Key {key} not found in Attributes");
+            return item.GetType() == type;
         }
 
         /*
