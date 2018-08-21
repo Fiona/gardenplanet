@@ -1442,11 +1442,8 @@
       "type": "Bed",
       "direction": 7,
       "attributes": {
-        "testfloat": 5.0,
-        "testbool": true,
-        "testint": 1000,
         "type": "bed01",
-        "owner": "PLAYER"
+        "owner": "__PLAYER__"
       }
     }
   ],

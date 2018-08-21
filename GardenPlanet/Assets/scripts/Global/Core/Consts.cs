@@ -15,7 +15,10 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Editor;
+        public const AppState INITIAL_APP_STATE = AppState.Game;
+
+        // What the first map name is
+        public const string START_MAP = "devtest";
 
         // -----------------------------
         // TILE DRAWING
@@ -91,6 +94,8 @@ namespace GardenPlanet
         public static readonly float[] CHARACTER_BETWEEN_BLINK_WAIT_RANGE = { 2f, 3f };
 
         public static readonly float[] CHARACTER_BLINK_TIME_RANGE = { .05f, .1f };
+
+        public static string CHAR_ID_PLAYER = "__PLAYER__";
 
         // -----------------------------
         // PLAYER
@@ -198,6 +203,8 @@ namespace GardenPlanet
         public const string PREFAB_PATH_LOADING_SCREEN = "prefabs/LoadingScreen";
         public const string MATERIAL_PATH_HOED_SOIL = "materials/HoedSoil";
         public const string MATERIAL_PATH_WATERED_HOED_SOIL = "materials/WateredHoedSoil";
+        public const string PREFAB_PATH_PLAYER = "prefabs/world/Player";
+        public const string PREFAB_PATH_CHARACTER = "prefabs/world/Character";
 
         public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
         public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";

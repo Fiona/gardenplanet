@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
-using UnityEngine;
+using Rewired.ComponentControls.Data;
+using Debug = UnityEngine.Debug;
 
 namespace GardenPlanet
 {
@@ -95,6 +97,8 @@ namespace GardenPlanet
                 width = loadedMap.width;
                 height = loadedMap.height;
             }
+            else
+                throw new Exception($"Map file does not exist: {fullFilepath}");
         }
 
         // Constructor for converting from tilemap

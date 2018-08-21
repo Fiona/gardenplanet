@@ -13,35 +13,20 @@ namespace GardenPlanet
 
         [Header("Object References")]
         public PlayerCamera mainCamera;
-        public Player player;
         public RectTransform canvasRect;
         public ScreenFade screenFade;
         public IsMouseOver isMouseOverWorld;
 
         [HideInInspector]
+        public Player player;
+        [HideInInspector]
         public GlobalConfig globalConfig;
-        [HideInInspector]
-        public Tilemap tilemap;
-        [HideInInspector]
-        public TileTypeSet tileTypeSet;
-        [HideInInspector]
-        public Map map;
-        [HideInInspector]
-        public MarkerManager markerManager;
-        [HideInInspector]
-        public WorldObjectManager worldObjectManager;
-        [HideInInspector]
-        public TileTagManager tileTagManager;
         [HideInInspector]
         public ItemManager itemManager;
         [HideInInspector]
         public WorldObject objectCurrentlyInteractingWith;
         [HideInInspector]
-        public WorldTimer worldTimer;
-        [HideInInspector]
         public ItemHotbar itemHotbar;
-        [HideInInspector]
-        public Atmosphere atmosphere;
         [HideInInspector]
         public PlayerEnergy playerEnergy;
         [HideInInspector]
@@ -56,18 +41,15 @@ namespace GardenPlanet
         public MouseHoverPlane mouseHoverPlane;
         [HideInInspector]
         public AutoTileManager autoTileManager;
+        [HideInInspector]
+        public World world;
 
-        private GameObject inWorldItems;
         private Debug debugMenu;
         private InfoPopup infoPopup;
-        private UnityEngine.Object[] loadedResources;
         private GameState gameState;
 
         public void Awake()
         {
-            // Preload some resources
-            loadedResources = Resources.LoadAll("prefabs", typeof(GameObject));
-
             // Load global config
             var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
             var jsonContents = "{}";
@@ -80,29 +62,13 @@ namespace GardenPlanet
             // Grab current game state
             gameState = GameState.GetInstance();
 
-            // Init
-            tileTypeSet = new TileTypeSet("default");
-            map = new Map("devtest");
-
             // Managers etc
             var mouseHoverPlane = new GameObject("Mouse Hover Plane");
             mouseHoverPlane.AddComponent<MouseHoverPlane>();
 
-            var tilemapObj = new GameObject("Tilemap");
-            tilemap = tilemapObj.AddComponent<Tilemap>();
-            tilemap.LoadFromMap(map, tileTypeSet);
-
-            var markerManagerObj = new GameObject("MarkerManager");
-            markerManager = markerManagerObj.AddComponent<MarkerManager>();
-            markerManager.LoadFromMap(map);
-
-            var worldObjectManagerObj = new GameObject("WorldObjectManager");
-            worldObjectManager = worldObjectManagerObj.AddComponent<WorldObjectManager>();
-            worldObjectManager.LoadFromMap(map);
-
-            var tileTagManagerObj = new GameObject("TileTagManager");
-            tileTagManager = tileTagManagerObj.AddComponent<TileTagManager>();
-            tileTagManager.LoadFromMap(map);
+            var worldObject = new GameObject("World");
+            world = worldObject.AddComponent<World>();
+            player = world.AddCharacter(Consts.CHAR_ID_PLAYER) as Player;
 
             var itemManagerObj = new GameObject("ItemManager");
             itemManager = itemManagerObj.AddComponent<ItemManager>();
@@ -113,14 +79,7 @@ namespace GardenPlanet
             var autoTileManagerObj = new GameObject("AutoTileManager");
             autoTileManager = autoTileManagerObj.AddComponent<AutoTileManager>();
 
-            inWorldItems = new GameObject("In World Items");
-
             // GUI objects
-            var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
-            worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
-            worldTimer = worldTimerObject.GetComponent<WorldTimer>();
-
             infoPopup = (Instantiate(Resources.Load(Consts.PREFAB_PATH_INFO_POPUP)) as GameObject).GetComponent<InfoPopup>();
             infoPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
             infoPopup.transform.SetSiblingIndex(infoPopup.transform.GetSiblingIndex() - 1);
@@ -141,21 +100,12 @@ namespace GardenPlanet
             inGameMenuButton = inGameMenuButtonObject.GetComponent<GlobalButton>();
             inGameMenuButton.SetCallback(() => StartCoroutine(OpenInGameMenu()));
 
-            // Atmosphere
-            var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
-            atmosphere = atmosphereObj.GetComponent<Atmosphere>();
-
             // Set up player and camera
-            var playerStartMarker = markerManager.GetFirstTileMarkerOfType(markerManager.GetTileMarkerTypeByName("PlayerStart"));
-            if(playerStartMarker != null)
-                player.SetPositionToTile(playerStartMarker);
-            else
-                player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
             mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
             mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
 
             // Start at day...
-            worldTimer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
+            world.timer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
 
             // Optional debug menu
             if(Debug.isDebugBuild || Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
@@ -167,10 +117,24 @@ namespace GardenPlanet
 
         public void Start()
         {
+            // Set player position
+            var playerStartMarker = world.markers.GetFirstTileMarkerOfType(
+                world.markers.GetTileMarkerTypeByName("PlayerStart")
+                );
+            if(playerStartMarker != null)
+                player.SetPositionToTile(playerStartMarker);
+            else
+                player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
+
+            // Set bed
+            if(player.GetBedInformation() == null)
+            {
+                var bedInfo = world.GetBedOwnedBy(Consts.CHAR_ID_PLAYER);
+                player.SetBed(bedInfo.Item1, bedInfo.Item2);
+            }
+
             // Objects are set up, tell the game state to set the specifics up
             gameState.InitialiseGame(player);
-
-            worldTimer.StartTimer();
             StartCoroutine(screenFade.FadeIn(1f));
             StartCoroutine(ControllerCoroutine());
         }
@@ -321,32 +285,15 @@ namespace GardenPlanet
             return player.IncreaseEnergy(amount);
         }
 
-
-        // Generates an item in the world and returns it
-        public InWorldItem SpawnItem(ItemType itemType, Attributes attributes)
-        {
-            var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
-            if(resource == null)
-            {
-                resource = Resources.Load<GameObject>(Consts.ITEMS_PREFAB_MISSING);
-            }
-            var newItem = Instantiate(resource);
-            newItem.transform.parent = inWorldItems.transform;
-            var newItemComponent = newItem.AddComponent<InWorldItem>();
-            newItemComponent.attributes = attributes;
-            newItemComponent.itemType = itemType;
-            return newItemComponent;
-        }
-
         public void StartCutscene()
         {
             GameInputManager.LockDirectInput();
-            worldTimer.StopTimer();
+            world.timer.StopTimer();
         }
 
         public void EndCutscene()
         {
-            worldTimer.StartTimer();
+            world.timer.StartTimer();
             GameInputManager.UnlockDirectInput();
         }
 
@@ -371,12 +318,12 @@ namespace GardenPlanet
 
             // Stop direct input and pause the game
             GameInputManager.LockDirectInput();
-            worldTimer.StopTimer();
+            world.timer.StopTimer();
 
             // Create the in-game menu object and attach
             var inGameMenuObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU)) as GameObject;
             inGameMenuObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            inGameMenuObj.transform.SetSiblingIndex(worldTimer.transform.GetSiblingIndex());
+            inGameMenuObj.transform.SetSiblingIndex(world.timer.transform.GetSiblingIndex());
 
             // Hand control over to the in-game menu, will return when it's closed
             yield return inGameMenuObj.GetComponent<InGameMenu>().OpenMenu();
@@ -385,7 +332,7 @@ namespace GardenPlanet
             Destroy(inGameMenuObj);
 
             // Restart the game
-            worldTimer.StartTimer();
+            world.timer.StartTimer();
             GameInputManager.UnlockDirectInput();
 
             // Update the current item if the player changed what's in their hand

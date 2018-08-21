@@ -38,7 +38,8 @@ namespace GardenPlanet
         {
             Name = "Tess",
             seasonBirthday = 1,
-            dayBirthday = 1
+            dayBirthday = 1,
+            id = Consts.CHAR_ID_PLAYER
         };
 
         public override void Awake()
@@ -88,15 +89,15 @@ namespace GardenPlanet
 
         public IEnumerator Sleep()
         {
-            controller.worldTimer.DontRemindMe(PassOutTimeEvent);
+            controller.world.timer.DontRemindMe(PassOutTimeEvent);
             StopHoldingItem();
-            yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeOut(2f));
-            controller.worldTimer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(2f));
+            controller.world.timer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
             SetPassOutEvent();
             yield return new WaitForSeconds(2f);
-            yield return StartCoroutine(FindObjectOfType<StompyBlondie.ScreenFade>().FadeIn(3f));
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(3f));
             currentEnergy = maxEnergy;
-            wokeUpOnDay = controller.worldTimer.gameTime.Days;
+            wokeUpOnDay = controller.world.timer.gameTime.Days;
             passedOut = false;
             didYawn = false;
             controller.itemHotbar.UpdateItemInHand();
@@ -117,13 +118,13 @@ namespace GardenPlanet
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f, new Color(1f,1f,1f)));
 
             // Reset some game stuff, set the new day time
-            controller.worldTimer.DontRemindMe(PassOutTimeEvent);
+            controller.world.timer.DontRemindMe(PassOutTimeEvent);
             // If we passed out during the morning of the next day then going to the next day will skip a whole day
             // so just adjust the hour forward instead
-            if(controller.worldTimer.gameTime.Days == wokeUpOnDay || wokeUpOnDay == -1)
-                controller.worldTimer.GoToNextDay(Consts.PLAYER_PASS_OUT_WAKE_HOUR);
+            if(controller.world.timer.gameTime.Days == wokeUpOnDay || wokeUpOnDay == -1)
+                controller.world.timer.GoToNextDay(Consts.PLAYER_PASS_OUT_WAKE_HOUR);
             else
-                controller.worldTimer.GoToHour(Consts.PLAYER_PASS_OUT_WAKE_HOUR);
+                controller.world.timer.GoToHour(Consts.PLAYER_PASS_OUT_WAKE_HOUR);
             SetPassOutEvent();
             mainAnimator.SetBool("DoPassOut", false);
             face.SetFaceState(CharacterFace.FaceState.NORMAL);
@@ -136,7 +137,7 @@ namespace GardenPlanet
             currentEnergy = maxEnergy * .75f;
             passedOut = false;
             didYawn = false;
-            wokeUpOnDay = controller.worldTimer.gameTime.Days;
+            wokeUpOnDay = controller.world.timer.gameTime.Days;
             controller.itemHotbar.UpdateItemInHand();
             controller.EndCutscene();
         }
@@ -188,8 +189,8 @@ namespace GardenPlanet
 
         private void SetPassOutEvent()
         {
-            var passOutOn = new GameTime(days: controller.worldTimer.gameTime.Days + 1, hours: Consts.PLAYER_PASS_OUT_HOUR);
-            controller.worldTimer.RemindMe(passOutOn, PassOutTimeEvent);
+            var passOutOn = new GameTime(days: controller.world.timer.gameTime.Days + 1, hours: Consts.PLAYER_PASS_OUT_HOUR);
+            controller.world.timer.RemindMe(passOutOn, PassOutTimeEvent);
         }
 
     }

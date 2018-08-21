@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Rewired.Utils.Classes.Data;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 
 namespace GardenPlanet
@@ -193,6 +194,27 @@ namespace GardenPlanet
         public Vector3 TransformPosition()
         {
             return new Vector3(x, height, y);
+        }
+    }
+
+    // Representation of points in a particular map
+    public class MapWorldPosition : WorldPosition
+    {
+        public Map map;
+
+        public MapWorldPosition(Map map, float x, float y, float height) : base(x, y, height)
+        {
+            this.map = map;
+        }
+
+        public MapWorldPosition(Map map, TilePosition tilePos) : base(tilePos)
+        {
+            this.map = map;
+        }
+
+        public MapWorldPosition(Map map, Vector3 transformPos) : base(transformPos)
+        {
+            this.map = map;
         }
     }
 

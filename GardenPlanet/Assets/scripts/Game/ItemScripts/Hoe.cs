@@ -19,7 +19,7 @@ namespace GardenPlanet
             public override bool CanBeUsedOnTilePos(TilePosition tilePos)
             {
                 // Check the tile is hoeable, that it's close enough and that it doesn't contain colliding world objects
-                var initialCheck = controller.tileTagManager.IsTileTaggedWith(tilePos, Consts.TILE_TAG_FARM) &&
+                var initialCheck = controller.world.tileTags.IsTileTaggedWith(tilePos, Consts.TILE_TAG_FARM) &&
                                    tilePos.TileDistance(controller.player.CurrentTilePosition) < Consts.PLAYER_TOOLS_RANGE &&
                                    !tilePos.ContainsCollidableWorldObjects();
                 // Any of those are an immediate no-no
@@ -53,7 +53,7 @@ namespace GardenPlanet
                         // Unseeded soil is removed
                         if(cropType == "")
                         {
-                            controller.worldObjectManager.DeleteWorldObject(i);
+                            controller.world.objects.DeleteWorldObject(i);
                             controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;
                         }
@@ -64,7 +64,7 @@ namespace GardenPlanet
                                 i.attributes.Get<string>("type")+"_seeds",
                                 new Attributes{{"type", cropType}}
                                 );
-                            controller.worldObjectManager.DeleteWorldObject(i);
+                            controller.world.objects.DeleteWorldObject(i);
                             controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(i.GetWorldPosition()));
                             yield break;
                         }
@@ -74,14 +74,14 @@ namespace GardenPlanet
                         var damage = i.attributes.Get<float>("damage") + Consts.CROP_DAMAGE_PER_HOE_HIT;
                         i.attributes.Set("damage", damage);
                         if(damage >= 100f)
-                            controller.worldObjectManager.DeleteWorldObject(i);
+                            controller.world.objects.DeleteWorldObject(i);
                         yield break;
                     }
                 }
 
                 // Empty tile so hoe the ground
-                controller.worldObjectManager.AddWorldObject(
-                    controller.worldObjectManager.GetWorldObjectTypeByName("crop"),
+                controller.world.objects.AddWorldObject(
+                    controller.world.objects.GetWorldObjectTypeByName("crop"),
                     tilePos
                 );
             }

@@ -40,7 +40,7 @@ namespace GardenPlanet
                     if(FindObjectOfType<App>().state == AppState.Editor)
                         tileType = FindObjectOfType<MapEditorController>().tileTypeSet.GetTileTypeByName(tileTypeName);
                     else
-                        tileType = FindObjectOfType<GameController>().tileTypeSet.GetTileTypeByName(tileTypeName);
+                        tileType = FindObjectOfType<World>().tileTypeSet.GetTileTypeByName(tileTypeName);
                     sharedMaterials = tileObj.GetComponent<Renderer>().sharedMaterials;
                 }
 

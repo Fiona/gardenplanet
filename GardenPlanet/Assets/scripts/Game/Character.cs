@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using StompyBlondie;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GardenPlanet
 {
@@ -43,9 +44,13 @@ namespace GardenPlanet
 
         public struct Information
         {
+            public string id;
             public string Name;
             public int seasonBirthday;
             public int dayBirthday;
+
+            public string bedType;
+            public MapWorldPosition bedLocation;
         }
 
         [Range(.1f, 3f)]
@@ -62,6 +67,12 @@ namespace GardenPlanet
         public Transform holdItemHolder;
         [HideInInspector]
         public bool isPlayer;
+
+        public string id
+        {
+            get { return information.id; }
+            set { information.id = value; }
+        }
 
         // Locomotion related members
         protected Rigidbody rigidBody;
@@ -116,11 +127,11 @@ namespace GardenPlanet
             rigidBody.freezeRotation = true;
             appearence = Player.defaultAppearence;
             information = Player.defaultInformation;
+            controller = FindObjectOfType<GameController>();
         }
 
         public virtual void Start()
         {
-            controller = FindObjectOfType<GameController>();
             isPlayer = this == controller.player;
         }
 
@@ -371,6 +382,26 @@ namespace GardenPlanet
         }
 
         /*
+         * Gets bed information for this character or null if they don't have bed info set
+         */
+        public Tuple<MapWorldPosition, string> GetBedInformation()
+        {
+            if(string.IsNullOrEmpty(information.bedType))
+                return null;
+            return Tuple.Create(information.bedLocation, information.bedType);
+        }
+
+        /*
+         * Sets the bed information for this character
+         */
+        public void SetBed(MapWorldPosition mapPos, string bedType)
+        {
+            information.bedLocation = mapPos;
+            information.bedType = bedType;
+            controller.world.SetBed(id, information.bedLocation, information.bedType);
+        }
+
+        /*
          * Returns the appearence struct
          */
         public Appearence GetAppearence()
@@ -585,7 +616,7 @@ namespace GardenPlanet
             StopHoldingItem();
             if(currentAction != 0 || passedOut)
                 return false;
-            itemCurrentlyHolding = controller.SpawnItem(itemType, attributes);
+            itemCurrentlyHolding = controller.world.SpawnItem(itemType, attributes);
             if(itemCurrentlyHolding == null)
                 return false;
             itemCurrentlyHolding.HoldInCharactersHands(this);

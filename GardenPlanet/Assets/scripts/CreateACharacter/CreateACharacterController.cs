@@ -274,6 +274,7 @@ namespace GardenPlanet
             // Save character settings to state
             var state = GameState.GetInstance();
             state.Clear();
+            character.id = Consts.CHAR_ID_PLAYER;
             state.Store(character);
 
             // Wave at me little guy

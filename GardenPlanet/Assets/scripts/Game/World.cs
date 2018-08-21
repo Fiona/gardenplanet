@@ -1,0 +1,172 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
+
+namespace GardenPlanet
+{
+    public class World : MonoBehaviour
+    {
+        public Map currentMap;
+        public List<Map> maps;
+        public TileTypeSet tileTypeSet;
+        public WorldTimer timer;
+        public Atmosphere atmosphere;
+        public Tilemap tilemap;
+        public MarkerManager markers;
+        public WorldObjectManager objects;
+        public TileTagManager tileTags;
+        public GameObject items;
+        public GameObject charactersParent;
+        public Dictionary<string, Character> characters;
+
+        private Dictionary<string, WorldObject> bedObjects;
+
+        private void Awake()
+        {
+            bedObjects = new Dictionary<string, WorldObject>();
+
+            // Init characters
+            characters = new Dictionary<string, Character>();
+            charactersParent = new GameObject("Characters");
+            charactersParent.transform.SetParent(transform, true);
+
+            // Set up maps and default map
+            tileTypeSet = new TileTypeSet("default");
+            maps = new List<Map>();
+            currentMap = new Map(Consts.START_MAP);
+            maps.Add(currentMap);
+
+            // World timer
+            var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
+            worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
+            timer = worldTimerObject.GetComponent<WorldTimer>();
+
+            // Atmosphere
+            var atmosphereObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_ATMOSPHERE)) as GameObject;
+            atmosphereObj.transform.SetParent(transform, true);
+            atmosphere = atmosphereObj.GetComponent<Atmosphere>();
+
+            // Tilemap
+            var tilemapObj = new GameObject("Tilemap");
+            tilemapObj.transform.SetParent(transform, true);
+            tilemap = tilemapObj.AddComponent<Tilemap>();
+            tilemap.LoadFromMap(currentMap, tileTypeSet);
+
+            // Markers
+            var markerManagerObj = new GameObject("MarkerManager");
+            markerManagerObj.transform.SetParent(transform, true);
+            markers = markerManagerObj.AddComponent<MarkerManager>();
+            markers.LoadFromMap(currentMap);
+
+            // World objects
+            var worldObjectManagerObj = new GameObject("ObjectManager");
+            worldObjectManagerObj.transform.SetParent(transform, true);
+            objects = worldObjectManagerObj.AddComponent<WorldObjectManager>();
+            objects.LoadFromMap(currentMap);
+
+            // Tile Tags
+            var tileTagManagerObj = new GameObject("TileTagManager");
+            tileTagManagerObj.transform.SetParent(transform, true);
+            tileTags = tileTagManagerObj.AddComponent<TileTagManager>();
+            tileTags.LoadFromMap(currentMap);
+
+            // In world items
+            items = new GameObject("Items");
+            items.transform.SetParent(transform, true);
+        }
+
+        private void Start()
+        {
+            // Create beds
+            InitBeds();
+
+            timer.StartTimer();
+        }
+
+        private void InitBeds()
+        {
+            foreach(var bedMarker in markers.GetMarkersOfType(markers.GetTileMarkerTypeByName("Bed")))
+            {
+                var owner = bedMarker.attributes.Get<string>("owner");
+                if(!characters.ContainsKey(owner))
+                    continue;
+                var bedType = FindObjectOfType<Player>().GetInformation().bedType;
+                bedObjects[owner] = objects.AddWorldObject(
+                    objects.GetWorldObjectTypeByName(bedType),
+                    new TilePosition(bedMarker.x, bedMarker.y, bedMarker.layer),
+                    new Attributes {{"owner", owner}}
+                );
+            }
+        }
+
+        /*
+         * Updates a characters bed data, making sure the relevant objects are created
+         */
+        public void SetBed(string characterId, MapWorldPosition location, string type)
+        {
+            // TODO: replace marker in map data and support multiple maps
+            if(bedObjects.ContainsKey(characterId))
+                objects.DeleteWorldObject(bedObjects[characterId]);
+            bedObjects[characterId] = objects.AddWorldObject(
+                objects.GetWorldObjectTypeByName(type),
+                location,
+                new Attributes {{"owner", characterId}}
+            );
+        }
+
+        /*
+         * Generates an item in the world and returns it
+         */
+        public InWorldItem SpawnItem(ItemType itemType, Attributes attributes)
+        {
+            var resource = Resources.Load<GameObject>(Consts.ITEMS_PREFABS_PATH + itemType.Appearance);
+            resource = resource ?? Resources.Load<GameObject>(Consts.ITEMS_PREFAB_MISSING);
+            var newItem = Instantiate(resource);
+            newItem.transform.parent = items.transform;
+            var newItemComponent = newItem.AddComponent<InWorldItem>();
+            newItemComponent.attributes = attributes;
+            newItemComponent.itemType = itemType;
+            return newItemComponent;
+        }
+
+        /*
+         * Gives back a bed location and type for the passed owner name.
+         * Null if owner requested does not have a bed set in the world.
+         */
+        public Tuple<MapWorldPosition, string> GetBedOwnedBy(string owner)
+        {
+            foreach(var map in maps)
+            {
+                foreach(var marker in map.markers)
+                {
+                    if(marker.type == "Bed" && marker.attributes.Contains("owner") &&
+                       marker.attributes.Get<string>("owner") == owner)
+                    {
+                        return Tuple.Create(
+                            new MapWorldPosition(map, new TilePosition(marker.x, marker.y, marker.layer)),
+                            marker.attributes.Get<string>("type")
+                        );
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /*
+         * Tries to create the specified character. If the character cannot be created, null is returned.
+         * Will not create duplicate characters with the same ID.
+         */
+        public Character AddCharacter(string ID)
+        {
+            if(characters.ContainsKey(ID))
+                return null;
+            var prefabPath = ID == Consts.CHAR_ID_PLAYER ? Consts.PREFAB_PATH_PLAYER : Consts.PREFAB_PATH_CHARACTER;
+            var character = Instantiate(Resources.Load<Character>(prefabPath));
+            characters.Add(ID, character);
+            return character;
+        }
+    }
+}

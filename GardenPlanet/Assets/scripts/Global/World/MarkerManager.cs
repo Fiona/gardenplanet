@@ -168,6 +168,15 @@ namespace GardenPlanet
 			return null;
 		}
 
+		public List<TileMarker> GetMarkersOfType(TileMarkerType type)
+		{
+			var markers = new List<TileMarker>();
+			foreach(var marker in tileMarkers)
+				if(marker.type == type)
+					markers.Add(marker);
+			return markers;
+		}
+
 	}
 }
 

@@ -31,7 +31,7 @@ namespace GardenPlanet
 
         public override void OnDestroy()
         {
-            controller.worldTimer.DontRemindMe(DailyGrowth);
+            controller.world.timer.DontRemindMe(DailyGrowth);
         }
 
         public override GameObject GetAppearencePrefab(bool isNew = false)
@@ -137,7 +137,7 @@ namespace GardenPlanet
                 // 1 in 5 chance of it being removed automatically
                 if(UnityEngine.Random.Range(0f, 1f) < .2f)
                 {
-                    controller.worldObjectManager.DeleteWorldObject(worldObject);
+                    controller.world.objects.DeleteWorldObject(worldObject);
                     controller.autoTileManager.UpdateTilesSurrounding(new TilePosition(worldObject.GetWorldPosition()));
                     return;
                 }
@@ -193,8 +193,8 @@ namespace GardenPlanet
 
         private void SetDailyReminder()
         {
-            var dailyTime = new GameTime(days: controller.worldTimer.gameTime.Days + 1, hours: Consts.CROP_GROWTH_HOUR);
-            controller.worldTimer.RemindMe(dailyTime, DailyGrowth);
+            var dailyTime = new GameTime(days: controller.world.timer.gameTime.Days + 1, hours: Consts.CROP_GROWTH_HOUR);
+            controller.world.timer.RemindMe(dailyTime, DailyGrowth);
         }
 
         private bool IsCorrectSeason()
@@ -207,13 +207,13 @@ namespace GardenPlanet
                 seasonNumbers.Add(Season.GetSeasonByShortName(seasonName));
 
             // First check if current season is dead-on
-            if(seasonNumbers.Contains(controller.worldTimer.gameTime.DateSeason))
+            if(seasonNumbers.Contains(controller.world.timer.gameTime.DateSeason))
                 return true;
 
             // Crops can grow past any season into the next third, so check to see if the last season was valid (if
             // we're still in the first third of current one)
-            var previousSeason = (controller.worldTimer.gameTime - new GameTime(0, 0, 0, 1)).DateSeason;
-            return controller.worldTimer.gameTime.DateSeasonThird == 1 && seasonNumbers.Contains(previousSeason);
+            var previousSeason = (controller.world.timer.gameTime - new GameTime(0, 0, 0, 1)).DateSeason;
+            return controller.world.timer.gameTime.DateSeasonThird == 1 && seasonNumbers.Contains(previousSeason);
         }
 
         private void ResetToSoil()
