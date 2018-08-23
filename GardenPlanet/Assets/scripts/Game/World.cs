@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -79,39 +78,20 @@ namespace GardenPlanet
 
         private void Start()
         {
-            // Create beds
-            InitBeds();
-
             timer.StartTimer();
-        }
-
-        private void InitBeds()
-        {
-            foreach(var bedMarker in markers.GetMarkersOfType(markers.GetTileMarkerTypeByName("Bed")))
-            {
-                var owner = bedMarker.attributes.Get<string>("owner");
-                if(!characters.ContainsKey(owner))
-                    continue;
-                var bedType = FindObjectOfType<Player>().GetInformation().bedType;
-                bedObjects[owner] = objects.AddWorldObject(
-                    objects.GetWorldObjectTypeByName(bedType),
-                    new TilePosition(bedMarker.x, bedMarker.y, bedMarker.layer),
-                    new Attributes {{"owner", owner}}
-                );
-            }
         }
 
         /*
          * Updates a characters bed data, making sure the relevant objects are created
          */
-        public void SetBed(string characterId, MapWorldPosition location, string type)
+        public void SetBed(string characterId, Character.Information.Bed bedInformation)
         {
             // TODO: replace marker in map data and support multiple maps
             if(bedObjects.ContainsKey(characterId))
                 objects.DeleteWorldObject(bedObjects[characterId]);
             bedObjects[characterId] = objects.AddWorldObject(
-                objects.GetWorldObjectTypeByName(type),
-                location,
+                objects.GetWorldObjectTypeByName(bedInformation.type),
+                bedInformation.location,
                 new Attributes {{"owner", characterId}}
             );
         }
@@ -132,26 +112,26 @@ namespace GardenPlanet
         }
 
         /*
-         * Gives back a bed location and type for the passed owner name.
+         * Gives back bed information for the passed owner name.
          * Null if owner requested does not have a bed set in the world.
          */
-        public Tuple<MapWorldPosition, string> GetBedOwnedBy(string owner)
+        public Character.Information.Bed GetBedOwnedBy(string owner)
         {
             foreach(var map in maps)
             {
                 foreach(var marker in map.markers)
                 {
-                    if(marker.type == "Bed" && marker.attributes.Contains("owner") &&
-                       marker.attributes.Get<string>("owner") == owner)
+                    if(marker.type != "Bed" || !marker.attributes.Contains("owner") ||
+                       marker.attributes.Get<string>("owner") != owner)
+                        continue;
+                    var tilePos = new TilePosition(marker.x, marker.y, marker.layer) {dir = marker.direction};
+                    return new Character.Information.Bed
                     {
-                        return Tuple.Create(
-                            new MapWorldPosition(map, new TilePosition(marker.x, marker.y, marker.layer)),
-                            marker.attributes.Get<string>("type")
-                        );
-                    }
+                        location =  new MapWorldPosition(map, tilePos),
+                        type = marker.attributes.Get<string>("type")
+                    };
                 }
             }
-
             return null;
         }
 
@@ -159,13 +139,27 @@ namespace GardenPlanet
          * Tries to create the specified character. If the character cannot be created, null is returned.
          * Will not create duplicate characters with the same ID.
          */
-        public Character AddCharacter(string ID)
+        public Character AddCharacter(string ID, MapTilePosition spawnLocation = null)
         {
             if(characters.ContainsKey(ID))
                 return null;
+
+            // Create and add the character game object
             var prefabPath = ID == Consts.CHAR_ID_PLAYER ? Consts.PREFAB_PATH_PLAYER : Consts.PREFAB_PATH_CHARACTER;
             var character = Instantiate(Resources.Load<Character>(prefabPath));
             characters.Add(ID, character);
+
+            // Set position
+            if(spawnLocation == null)
+                character.currentMap = currentMap;
+            else
+                character.SetPositionToTile(spawnLocation, spawnLocation.map);
+
+            // Create bed if applicable
+            var bedInfo = character.GetBedInformation() ?? GetBedOwnedBy(ID);
+            if(bedInfo != null)
+                character.SetBed(bedInfo);
+
             return character;
         }
     }

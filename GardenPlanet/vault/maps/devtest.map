@@ -9,84 +9,84 @@
       "y": 3,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 7,
       "y": 3,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 3,
       "y": 3,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 5,
       "y": 3,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 7,
       "y": 5,
       "layer": 0,
       "type": "wall01-convex1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 9,
       "y": 5,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 11,
       "y": 5,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 0,
       "y": 5,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 0,
       "y": 7,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 0,
       "y": 9,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 0,
       "y": 11,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 0,
       "y": 13,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 0,
@@ -121,21 +121,21 @@
       "y": 16,
       "layer": 0,
       "type": "wall01-convex1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 8,
       "y": 17,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 8,
       "y": 19,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 8,
@@ -177,7 +177,7 @@
       "y": 22,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 19,
@@ -191,28 +191,28 @@
       "y": 20,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 21,
       "y": 18,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 21,
       "y": 16,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 21,
       "y": 14,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 21,
@@ -226,91 +226,91 @@
       "y": 12,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 23,
       "y": 10,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 23,
       "y": 8,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 23,
       "y": 6,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 23,
       "y": 4,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 23,
       "y": 1,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 21,
       "y": 1,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 19,
       "y": 1,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 14,
       "y": 1,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 17,
       "y": 1,
       "layer": 0,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 12,
       "y": 5,
       "layer": 0,
       "type": "wall01-convex1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 14,
       "y": 3,
       "layer": 0,
       "type": "wall01-convex1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 12,
       "y": 3,
       "layer": 0,
       "type": "wall01-concave1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 2,
@@ -716,21 +716,21 @@
       "y": 0,
       "layer": 1,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 7,
       "y": 0,
       "layer": 1,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 9,
       "y": 0,
       "layer": 1,
       "type": "wall01-s1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 0,
@@ -751,35 +751,35 @@
       "y": 21,
       "layer": 1,
       "type": "wall01-convex1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 4,
       "y": 22,
       "layer": 1,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 4,
       "y": 24,
       "layer": 1,
       "type": "wall01-s1",
-      "direction": 3
+      "direction": 6
     },
     {
       "x": 3,
       "y": 0,
       "layer": 1,
       "type": "wall01-convex1",
-      "direction": 1
+      "direction": 2
     },
     {
       "x": 10,
       "y": 0,
       "layer": 1,
       "type": "wall01-convex1",
-      "direction": 2
+      "direction": 4
     },
     {
       "x": 0,
@@ -1423,12 +1423,12 @@
       "y": 16,
       "layer": 0,
       "type": "grass02",
-      "direction": 1
+      "direction": 2
     }
   ],
   "markers": [
     {
-      "x": 5,
+      "x": 6,
       "y": 9,
       "layer": 0,
       "type": "PlayerStart",
@@ -1436,7 +1436,7 @@
       "attributes": {}
     },
     {
-      "x": 7,
+      "x": 8,
       "y": 10,
       "layer": 0,
       "type": "Bed",

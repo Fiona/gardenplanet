@@ -12,7 +12,9 @@ namespace GardenPlanet
     {
         Eat = 1,
         Yawn = 2,
-        PassOut = 3
+        PassOut = 3,
+        BedStart = 4,
+        BedEnd = 5
     }
 
     public class Character : MonoBehaviour
@@ -49,8 +51,12 @@ namespace GardenPlanet
             public int seasonBirthday;
             public int dayBirthday;
 
-            public string bedType;
-            public MapWorldPosition bedLocation;
+            public class Bed
+            {
+                public string type;
+                public MapWorldPosition location;
+            };
+            public Bed bed;
         }
 
         [Range(.1f, 3f)]
@@ -66,7 +72,8 @@ namespace GardenPlanet
         [HideInInspector]
         public Transform holdItemHolder;
         [HideInInspector]
-        public bool isPlayer;
+        public Map currentMap;
+        public bool isPlayer => id == Consts.CHAR_ID_PLAYER;
 
         public string id
         {
@@ -104,16 +111,16 @@ namespace GardenPlanet
 
         protected bool passedOut;
 
-        public TilePosition CurrentTilePosition
+        public MapTilePosition CurrentTilePosition
         {
             get
             {
-                var wPos = new WorldPosition()
+                var wPos = new WorldPosition
                 {
                     x = this.transform.position.x,
                     y = this.transform.position.z
                 };
-                var tPos = new TilePosition(wPos)
+                var tPos = new MapTilePosition(currentMap, wPos)
                 {
                     layer = layer
                 };
@@ -128,11 +135,6 @@ namespace GardenPlanet
             appearence = Player.defaultAppearence;
             information = Player.defaultInformation;
             controller = FindObjectOfType<GameController>();
-        }
-
-        public virtual void Start()
-        {
-            isPlayer = this == controller.player;
         }
 
         public virtual void FixedUpdate()
@@ -306,7 +308,7 @@ namespace GardenPlanet
          * When passed a tile it will immediately position and
          * turn the character to the passed tile position definition.
          */
-        public void SetPositionToTile(TilePosition pos)
+        public void SetPositionToTile(TilePosition pos, Map map = null)
         {
             transform.position = new Vector3(
                 pos.x * Consts.TILE_SIZE,
@@ -315,13 +317,15 @@ namespace GardenPlanet
             );
             var baseRotation = DirectionHelper.DirectionToDegrees(pos.dir);
             transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
+            if(map != null)
+                currentMap = map;
         }
 
         /*
          * When passed a TileMarker it will immediately position and
          * turn the character to the passed Tile Marker position.
          */
-        public void SetPositionToTile(TileMarker tileMarker)
+        public void SetPositionToTile(TileMarker tileMarker, Map map = null)
         {
             transform.position = new Vector3(
                 tileMarker.x * Consts.TILE_SIZE,
@@ -330,6 +334,8 @@ namespace GardenPlanet
             );
             var baseRotation = DirectionHelper.DirectionToDegrees(tileMarker.direction);
             transform.localRotation = Quaternion.Euler(0, -baseRotation, 0);
+            if(map != null)
+                currentMap = map;
         }
 
         /*
@@ -345,7 +351,7 @@ namespace GardenPlanet
          * A coroutine that tells the character to immediately do the action passed, will immeditaly break if the
          * action cannot be done.
          */
-        public IEnumerator DoAction(CharacterAction action)
+        public IEnumerator DoAction(CharacterAction action, GameObject actionObject = null)
         {
             // Can't start new action without finishing previous one
             if(currentAction > 0)
@@ -372,6 +378,11 @@ namespace GardenPlanet
             // animation for passing out
             if(currentAction == CharacterAction.PassOut)
                 mainAnimator.SetBool("DoPassOut", true);
+            // animation for getting into bed
+            if(currentAction == CharacterAction.BedStart)
+                yield return StartCoroutine(JumpIntoBed(actionObject));
+            if(currentAction == CharacterAction.BedEnd)
+                throw new NotImplementedException();
 
             // Wait for action to finish
             while(currentAction > 0)
@@ -384,21 +395,18 @@ namespace GardenPlanet
         /*
          * Gets bed information for this character or null if they don't have bed info set
          */
-        public Tuple<MapWorldPosition, string> GetBedInformation()
+        public Information.Bed GetBedInformation()
         {
-            if(string.IsNullOrEmpty(information.bedType))
-                return null;
-            return Tuple.Create(information.bedLocation, information.bedType);
+            return information.bed;
         }
 
         /*
          * Sets the bed information for this character
          */
-        public void SetBed(MapWorldPosition mapPos, string bedType)
+        public void SetBed(Information.Bed bedInformation)
         {
-            information.bedLocation = mapPos;
-            information.bedType = bedType;
-            controller.world.SetBed(id, information.bedLocation, information.bedType);
+            information.bed = bedInformation;
+            controller.world.SetBed(id, information.bed);
         }
 
         /*
@@ -791,6 +799,25 @@ namespace GardenPlanet
                 foreach(var spine in lowerSpineBones)
                     spine.localScale = new Vector3(lowerSpineScale, lowerSpineScale, lowerSpineScale);
             */
+        }
+
+        private IEnumerator JumpIntoBed(GameObject bedObject)
+        {
+            // Find bed anim start position
+            var startPos = bedObject.transform.Find("BedAnimStart").transform;
+
+            // TODO: Pathfind and walk to the position
+            transform.position = new Vector3(startPos.position.x, transform.position.y, startPos.position.z);
+            transform.rotation = startPos.rotation;
+
+            // Do bed anim
+            mainAnimator.SetBool("DoBed", true);
+            while(mainAnimator.GetBool("DoBed"))
+                yield return new WaitForFixedUpdate();
+
+            // Do a snore
+            // ...
+
         }
 
         // Animation event: Nom some

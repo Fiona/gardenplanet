@@ -124,14 +124,7 @@ namespace GardenPlanet
             if(playerStartMarker != null)
                 player.SetPositionToTile(playerStartMarker);
             else
-                player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=Direction.Down});
-
-            // Set bed
-            if(player.GetBedInformation() == null)
-            {
-                var bedInfo = world.GetBedOwnedBy(Consts.CHAR_ID_PLAYER);
-                player.SetBed(bedInfo.Item1, bedInfo.Item2);
-            }
+                player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=EightDirection.Down});
 
             // Objects are set up, tell the game state to set the specifics up
             gameState.InitialiseGame(player);
@@ -297,9 +290,9 @@ namespace GardenPlanet
             GameInputManager.UnlockDirectInput();
         }
 
-        public IEnumerator PlayerSleep()
+        public IEnumerator PlayerSleep(GameObject bedObject)
         {
-            yield return StartCoroutine(player.Sleep());
+            yield return StartCoroutine(player.Sleep(bedObject));
         }
 
         public IEnumerator OpenInGameMenu(bool forceOpen = false)

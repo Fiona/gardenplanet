@@ -58,7 +58,7 @@ namespace GardenPlanet
         public int x;
         public int y;
         public int layer;
-        public Direction dir;
+        public EightDirection dir;
         public string name = "";
 
         private static WorldObjectManager _worldObjectManager;
@@ -141,7 +141,27 @@ namespace GardenPlanet
         {
             return String.Format("{0},{1},{2}", x, y, layer);
         }
+    }
 
+    // Representation of tiles in a particular map
+    public class MapTilePosition : TilePosition
+    {
+        public Map map;
+
+        public MapTilePosition(Map map, int x, int y, int layer) : base(x, y, layer)
+        {
+            this.map = map;
+        }
+
+        public MapTilePosition(Map map, Vector3 pos) : base(pos)
+        {
+            this.map = map;
+        }
+
+        public MapTilePosition(Map map, WorldPosition pos) : base(pos)
+        {
+            this.map = map;
+        }
     }
 
     public class ObjectTilePosition : TilePosition
@@ -182,6 +202,7 @@ namespace GardenPlanet
             x = tilePos.x * Consts.TILE_SIZE;
             y = tilePos.y * Consts.TILE_SIZE;
             height = tilePos.layer * Consts.TILE_SIZE;
+            dir = tilePos.dir;
         }
 
         public WorldPosition(Vector3 transformPos)

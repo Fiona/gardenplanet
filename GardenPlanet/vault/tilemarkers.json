@@ -11,7 +11,7 @@
     "name": "Bed",
     "defaultAttributes": {
 	  "type": "bed01",
-	  "owner": "PLAYER"
+	  "owner": "__PLAYER__"
 	}
-  }  
+  }
 ]

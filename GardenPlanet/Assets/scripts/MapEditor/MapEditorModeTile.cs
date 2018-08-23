@@ -16,7 +16,7 @@ namespace GardenPlanet
         private string currentTileName;
         private string previousTileType;
         private GameObject currentTileTypeSelectedObj;
-        private Direction newTileDirection;
+        private EightDirection newTileDirection;
         private bool rectangleDrawing;
         private TilePosition firstRectanglePoint;
 
@@ -34,7 +34,7 @@ namespace GardenPlanet
         {
             base.Initialize();
             SelectTileType(controller.tileTypeSet.types[0].name);
-            newTileDirection = Direction.Down;
+            newTileDirection = EightDirection.Down;
             rectangleDrawing = false;
         }
 

@@ -5,7 +5,7 @@ namespace GardenPlanet
 {
     public class CACCharacter : Character
     {
-        public override void Start()
+        public void Start()
         {
             rigidBody.freezeRotation = false;
             //RegenerateVisuals();

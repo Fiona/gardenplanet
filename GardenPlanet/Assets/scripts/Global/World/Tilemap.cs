@@ -14,7 +14,7 @@ namespace GardenPlanet
             public int x;
             public int y;
             public int layer;
-            public Direction direction;
+            public EightDirection direction;
             public GameObject tileObj;
             public bool emptyTile;
             public string tileTypeName;
@@ -23,7 +23,7 @@ namespace GardenPlanet
 
             private static PhysicMaterial slideMaterial;
 
-            public Tile(int x, int y, int layer, Direction direction, GameObject tileObj, string tileTypeName)
+            public Tile(int x, int y, int layer, EightDirection direction, GameObject tileObj, string tileTypeName)
             {
                 if(Tile.slideMaterial == null)
                     Tile.slideMaterial = (PhysicMaterial)Resources.Load("SlideMaterial") as PhysicMaterial;
@@ -111,7 +111,7 @@ namespace GardenPlanet
 
             }
 
-            public void SetDirection(Direction direction)
+            public void SetDirection(EightDirection direction)
             {
                 if(tileType == null)
                     return;
@@ -197,7 +197,7 @@ namespace GardenPlanet
           Helper method fer adding a tile including it's gameobject at
           a specified tile position.
          */
-        public void AddTile(string tilename, int x, int y, int layer, Direction direction)
+        public void AddTile(string tilename, int x, int y, int layer, EightDirection direction)
         {
 
             if(x < 0 || x >= width || y < 0 || y >= height)
@@ -330,7 +330,7 @@ namespace GardenPlanet
             for(int x = 0; x < width; x++)
             for(int y = 0; y < height; y++)
                 if(GetTileAt(x, y, layer) == null)
-                    AddTile(null, x, y, layer, Direction.Down);
+                    AddTile(null, x, y, layer, EightDirection.Down);
 
         }
 
@@ -340,7 +340,11 @@ namespace GardenPlanet
          */
         public void RotateTileInDirection(Tile tile, RotationalDirection direction)
         {
-            tile.SetDirection(DirectionHelper.RotateDirection(tile.direction, direction));
+            var newDir = DirectionHelper.RotateDirection(
+                DirectionHelper.RotateDirection(tile.direction, direction),
+                direction
+            );
+            tile.SetDirection(newDir);
         }
 
     }

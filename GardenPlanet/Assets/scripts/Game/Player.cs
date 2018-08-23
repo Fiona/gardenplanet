@@ -50,9 +50,8 @@ namespace GardenPlanet
             currentEnergy = maxEnergy;
         }
 
-        public override void Start()
+        public void Start()
         {
-            base.Start();
             SetPassOutEvent();
 
             // TODO: remove this test item adding
@@ -87,19 +86,33 @@ namespace GardenPlanet
 
         }
 
-        public IEnumerator Sleep()
+        public IEnumerator Sleep(GameObject bedObject)
         {
             controller.world.timer.DontRemindMe(PassOutTimeEvent);
             StopHoldingItem();
+
+            yield return StartCoroutine(DoAction(CharacterAction.BedStart, bedObject));
+
+            // Sleeping
+            yield return new WaitForSeconds(2f);
+
+            // Fade out, progress time, fade in
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(2f));
             controller.world.timer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
             SetPassOutEvent();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(3f));
+
+            // Reset some stuff
             currentEnergy = maxEnergy;
             wokeUpOnDay = controller.world.timer.gameTime.Days;
             passedOut = false;
             didYawn = false;
+
+            // Get out of bed
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(DoAction(CharacterAction.BedEnd, bedObject));
+
             controller.itemHotbar.UpdateItemInHand();
         }
 
