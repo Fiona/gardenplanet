@@ -20,7 +20,7 @@ namespace GardenPlanet
 		public void Awake()
 		{
 			if(Glowable.glowShader == null)
-				Glowable.glowShader = Shader.Find(shaderName);			
+				Glowable.glowShader = Shader.Find(shaderName);
 		}
 
 		public void OnEnable()
@@ -30,8 +30,9 @@ namespace GardenPlanet
 				mesh = filter.mesh;
 		}
 
-		public void LateUpdate()
+		public void FixedUpdate()
 		{
+			return;
 			if(mesh == null  || (glowChild == null && !doGlow && glowTimer <= 0f))
 				return;
 			// If we're being told to glow
@@ -73,15 +74,15 @@ namespace GardenPlanet
 				}
 				// Set the new glow colour
 				SetGlowChildSettings(glowTimer);
-			}	
+			}
 		}
 
 		public void OnDestroy()
 		{
 			if(glowChild != null)
-				Destroy(glowChild);			
+				Destroy(glowChild);
 		}
-			
+
 		public void GlowTo(Color glowColour, float glowWidth, float glowSpeed = 0.001f)
 		{
 			this.glowColour = glowColour;

@@ -205,6 +205,7 @@ namespace GardenPlanet
         public const string MATERIAL_PATH_WATERED_HOED_SOIL = "materials/WateredHoedSoil";
         public const string PREFAB_PATH_PLAYER = "prefabs/world/Player";
         public const string PREFAB_PATH_CHARACTER = "prefabs/world/Character";
+        public const string PREFAB_PATH_EFFECTS = "effects/";
 
         public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
         public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";

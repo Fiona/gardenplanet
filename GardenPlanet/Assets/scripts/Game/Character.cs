@@ -83,6 +83,7 @@ namespace GardenPlanet
 
         // Locomotion related members
         protected Rigidbody rigidBody;
+        protected Collider collider;
         protected GameController controller;
         protected Vector3 moveDirBuffer;
         protected Vector3 lookDirection;
@@ -101,6 +102,7 @@ namespace GardenPlanet
         protected GameObject baseModel;
         protected GameObject hairModel;
         protected CharacterFace face;
+        protected Dictionary<string, Transform> boneTransforms;
 
         protected List<Transform> lowerSpineBones;
         protected List<Transform> headBones;
@@ -132,9 +134,11 @@ namespace GardenPlanet
         {
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.freezeRotation = true;
+            collider = GetComponent<Collider>();
             appearence = Player.defaultAppearence;
             information = Player.defaultInformation;
             controller = FindObjectOfType<GameController>();
+            boneTransforms = new Dictionary<string, Transform>();
         }
 
         public virtual void FixedUpdate()
@@ -652,6 +656,40 @@ namespace GardenPlanet
             return true;
         }
 
+        /*
+         * Stops the character colliding with anything
+         */
+        public void DisableCollision()
+        {
+            collider.enabled = false;
+            rigidBody.detectCollisions = false;
+        }
+
+        /*
+         * Starts the character colliding with other stuff
+         */
+        public void EnableCollision()
+        {
+            collider.enabled = true;
+            rigidBody.detectCollisions = true;
+        }
+
+        /*
+         * Turns off all physics on this character
+         */
+        public void DisableRigidbody()
+        {
+            rigidBody.isKinematic = true;
+        }
+
+        /*
+         * Turns physics back on for this character
+         */
+        public void EnableRigidbody()
+        {
+            rigidBody.isKinematic = false;
+        }
+
         protected void RegenerateVisuals()
         {
             if(visualsHolder != null)
@@ -712,11 +750,14 @@ namespace GardenPlanet
 
             // Unity was not happy with us doing this till the next frame, I hope this wont cause
             // any weird not-animating-for-a-frame effects
-            AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, new []{"item"});
+            AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, new []{"item", "leg_foot_L", "leg_foot_R"});
 
             holdItemHolder = transform.FindRecursive("item");
             if(holdItemHolder == null)
                 Debug.LogError("Can't find a child called item in character!");
+            boneTransforms = new Dictionary<string, Transform>();
+            boneTransforms["left_foot"] = transform.FindRecursive("leg_foot_L");
+            boneTransforms["right_foot"] = transform.FindRecursive("leg_foot_R");
             baseModel = transform.FindRecursive("basemodel").gameObject;
             var findHair = transform.FindRecursive("hair");
             hairModel = findHair ? findHair.gameObject : null;
@@ -803,21 +844,27 @@ namespace GardenPlanet
 
         private IEnumerator JumpIntoBed(GameObject bedObject)
         {
-            // Find bed anim start position
-            var startPos = bedObject.transform.Find("BedAnimStart").transform;
+            // Find bed anim markers
+            var startPos = bedObject.transform.FindRecursive("BedAnimStart").transform;
+            var endPos = bedObject.transform.FindRecursive("BedAnimEnd").transform;
 
             // TODO: Pathfind and walk to the position
             transform.position = new Vector3(startPos.position.x, transform.position.y, startPos.position.z);
             transform.rotation = startPos.rotation;
 
-            // Do bed anim
+            // Disable collisions and physics so we can safely intersect with the bed
+            DisableCollision();
+            DisableRigidbody();
+
+            yield return new WaitForSeconds(.5f);
+
+            // Start bed anim and wait for it to finish
             mainAnimator.SetBool("DoBed", true);
             while(mainAnimator.GetBool("DoBed"))
                 yield return new WaitForFixedUpdate();
 
             // Do a snore
             // ...
-
         }
 
         // Animation event: Nom some
@@ -841,6 +888,12 @@ namespace GardenPlanet
         public void AnimatorCloseEyes()
         {
             face.SetFaceState(CharacterFace.FaceState.EYES_CLOSED);
+        }
+
+        // Animation event: Open eyes
+        public void AnimatorOpenEyes()
+        {
+            face.SetFaceState(CharacterFace.FaceState.NORMAL);
         }
 
         // Animation event: YawnDone
@@ -867,6 +920,18 @@ namespace GardenPlanet
         {
             currentAction = 0;
             passedOut = true;
+        }
+
+        // Animation event: LeftFootStep
+        public void AnimatorLeftFootStep()
+        {
+            controller.effectsManager.CreateEffect(EffectsType.ONESHOT_STEPDUST, boneTransforms["left_foot"].position);
+        }
+
+        // Animation event: RightFootStep
+        public void AnimatorRightFootStep()
+        {
+            controller.effectsManager.CreateEffect(EffectsType.ONESHOT_STEPDUST, boneTransforms["right_foot"].position);
         }
 
     }

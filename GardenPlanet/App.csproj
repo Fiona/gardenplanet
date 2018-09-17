@@ -78,6 +78,7 @@
     <Compile Include="Assets\scripts\Game\Character.cs" />
     <Compile Include="Assets\scripts\Game\CharacterAnimatorEventListener.cs" />
     <Compile Include="Assets\scripts\Game\CharacterFace.cs" />
+    <Compile Include="Assets\scripts\Game\EffectsManager.cs" />
     <Compile Include="Assets\scripts\Game\GameController.cs" />
     <Compile Include="Assets\scripts\Game\GameInputManager.cs" />
     <Compile Include="Assets\scripts\Game\GameState.cs" />

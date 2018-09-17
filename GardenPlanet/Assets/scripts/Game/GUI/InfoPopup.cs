@@ -42,7 +42,7 @@ namespace GardenPlanet
             controller = FindObjectOfType<GameController>();
         }
 
-        public void LateUpdate()
+        public void FixedUpdate()
         {
             if(App.gameSettings.popupInfoStatic)
                 DoStaticDisplay();

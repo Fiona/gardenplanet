@@ -132,6 +132,7 @@ namespace GardenPlanet
 
             // Reset some game stuff, set the new day time
             controller.world.timer.DontRemindMe(PassOutTimeEvent);
+
             // If we passed out during the morning of the next day then going to the next day will skip a whole day
             // so just adjust the hour forward instead
             if(controller.world.timer.gameTime.Days == wokeUpOnDay || wokeUpOnDay == -1)
