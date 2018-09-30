@@ -61,6 +61,7 @@
     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
     <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
     <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
+    <None Include="Assets\UnityUIExtensions\Editor\UnityUIExtensionsEditor.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>

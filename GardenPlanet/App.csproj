@@ -192,6 +192,7 @@
     <Compile Include="Assets\scripts\MapEditor\MenuBarMessage.cs" />
     <Compile Include="Assets\scripts\TestAnimPlayer.cs" />
     <Compile Include="Assets\scripts\TitleScreen\TitleScreenController.cs" />
+    <None Include="Assets\scripts\App.asmdef" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>

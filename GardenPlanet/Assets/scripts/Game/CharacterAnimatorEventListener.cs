@@ -60,5 +60,16 @@ namespace GardenPlanet
             character.AnimatorRightFootStep();
         }
 
+        // Animation event: BedStartDone
+        public void AnimatorBedStartDone()
+        {
+            character.AnimatorBedStartDone();
+        }
+
+        // Animation event: BedEndDone
+        public void AnimatorBedEndDone()
+        {
+            character.AnimatorBedEndDone();
+        }
     }
 }

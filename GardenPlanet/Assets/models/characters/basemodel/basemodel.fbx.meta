@@ -623,6 +623,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.9951338
+        functionName: AnimatorBedStartDone
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -695,6 +702,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.09245742
         functionName: AnimatorOpenEyes
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.96388245
+        functionName: AnimatorBedEndDone
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -83,7 +83,6 @@ namespace GardenPlanet
                     }
                 }
             }
-
         }
 
         public IEnumerator Sleep(GameObject bedObject)
@@ -97,11 +96,11 @@ namespace GardenPlanet
             yield return new WaitForSeconds(2f);
 
             // Fade out, progress time, fade in
-            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(2f));
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f));
             controller.world.timer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
             SetPassOutEvent();
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(3f));
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(4f));
 
             // Reset some stuff
             currentEnergy = maxEnergy;

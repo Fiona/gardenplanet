@@ -57,6 +57,7 @@
     <Compile Include="Assets\Tests\Attributes.spec.cs" />
     <Compile Include="Assets\Tests\GameTime.spec.cs" />
     <Compile Include="Assets\Tests\Inventory.spec.cs" />
+    <None Include="Assets\Tests\Tests.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>

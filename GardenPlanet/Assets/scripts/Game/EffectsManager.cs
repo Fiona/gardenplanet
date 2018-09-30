@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -18,12 +17,40 @@ namespace GardenPlanet
         public Transform followTransform;
         public EffectsManager manager;
 
+        private List<ParticleSystem> systems;
+        private bool dying;
+
+        public Effect(GameObject effect, EffectsManager manager)
+        {
+            this.effect = effect;
+            this.manager = manager;
+            systems = new List<ParticleSystem>();
+            foreach(var comp in effect.GetComponentsInChildren<ParticleSystem>())
+                systems.Add(comp);
+        }
+
         public void Update()
         {
             if(!effect)
                 manager.RemoveEffect(this);
             if(followTransform)
                 effect.transform.position = followTransform.transform.position;
+            // Waiting for all particles to disappear before destroying
+            if(dying)
+            {
+                foreach(var s in systems)
+                    if(s && s.IsAlive())
+                        return;
+                manager.RemoveEffect(this, immediate:true);
+            }
+        }
+
+        public void Kill()
+        {
+            foreach(var s in systems)
+                if(s)
+                    s.Stop();
+            dying = true;
         }
     }
 
@@ -56,7 +83,7 @@ namespace GardenPlanet
                 var path = Consts.PREFAB_PATH_EFFECTS + name;
                 preloadedEffects[name] = Resources.Load<GameObject>(path);
                 if(!preloadedEffects[name])
-                    throw new Exception("Can't find required effect " + path);
+                    throw new Exception("Can't find resource for defined effect " + path);
             }
         }
 
@@ -69,11 +96,7 @@ namespace GardenPlanet
                 throw new Exception("Error instantiating " + type);
             newObj.transform.SetParent(gameObject.transform);
             newObj.transform.position = location;
-            var effect = new Effect
-            {
-                effect = newObj,
-                manager = this
-            };
+            var effect = new Effect(newObj, this);
             activeEffects.Add(effect);
             return effect;
         }
@@ -85,8 +108,13 @@ namespace GardenPlanet
             return effect;
         }
 
-        public void RemoveEffect(Effect effect)
+        public void RemoveEffect(Effect effect, bool immediate = false)
         {
+            if(!immediate)
+            {
+                effect.Kill();
+                return;
+            }
             if(effect.effect)
                 Destroy(effect.effect);
             activeEffects.Remove(effect);
