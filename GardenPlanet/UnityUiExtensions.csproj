@@ -184,6 +184,7 @@
     <Compile Include="Assets\UnityUIExtensions\Scripts\VR Extensions\VRCursor.cs" />
     <Compile Include="Assets\UnityUIExtensions\Scripts\VR Extensions\VRInputModule.cs" />
     <None Include="Assets\UnityUIExtensions\Shaders\UIAdditive.shader" />
+    <None Include="Assets\UnityUIExtensions\UnityUiExtensions.asmdef" />
     <None Include="Assets\UnityUIExtensions\Shaders\UISoftAdditive.shader" />
     <None Include="Assets\UnityUIExtensions\Shaders\UIParticleHidden.shader" />
     <None Include="Assets\UnityUIExtensions\Shaders\SoftMaskShader.shader" />

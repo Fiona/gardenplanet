@@ -83,7 +83,6 @@ namespace GardenPlanet
                     }
                 }
             }
-
         }
 
         public IEnumerator Sleep(GameObject bedObject)
@@ -97,11 +96,11 @@ namespace GardenPlanet
             yield return new WaitForSeconds(2f);
 
             // Fade out, progress time, fade in
-            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(2f));
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeOut(4f));
             controller.world.timer.GoToNextDay(Consts.PLAYER_WAKE_HOUR);
             SetPassOutEvent();
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(3f));
+            yield return StartCoroutine(FindObjectOfType<ScreenFade>().FadeIn(4f));
 
             // Reset some stuff
             currentEnergy = maxEnergy;
@@ -132,6 +131,7 @@ namespace GardenPlanet
 
             // Reset some game stuff, set the new day time
             controller.world.timer.DontRemindMe(PassOutTimeEvent);
+
             // If we passed out during the morning of the next day then going to the next day will skip a whole day
             // so just adjust the hour forward instead
             if(controller.world.timer.gameTime.Days == wokeUpOnDay || wokeUpOnDay == -1)

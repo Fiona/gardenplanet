@@ -61,6 +61,7 @@
     <Compile Include="Assets\Rewired\Internal\Scripts\Editor\CustomInspectors\InputManagerInspector.cs" />
     <Compile Include="Assets\Rewired\Internal\Scripts\Editor\CustomInspectors\UserDataStore_PlayerPrefsInspector.cs" />
     <Compile Include="Assets\Rewired\Internal\Scripts\Editor\UnityEditorBridge.cs" />
+    <None Include="Assets\Rewired\Internal\Scripts\Editor\RewiredEditor.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>

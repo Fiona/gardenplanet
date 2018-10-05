@@ -83,6 +83,7 @@ namespace GardenPlanet
 
         // Locomotion related members
         protected Rigidbody rigidBody;
+        protected Collider collider;
         protected GameController controller;
         protected Vector3 moveDirBuffer;
         protected Vector3 lookDirection;
@@ -101,6 +102,7 @@ namespace GardenPlanet
         protected GameObject baseModel;
         protected GameObject hairModel;
         protected CharacterFace face;
+        protected Dictionary<string, Transform> boneTransforms;
 
         protected List<Transform> lowerSpineBones;
         protected List<Transform> headBones;
@@ -108,8 +110,10 @@ namespace GardenPlanet
         // Action and world related members
         protected CharacterAction currentAction = 0;
         protected InWorldItem itemCurrentlyHolding;
+        protected Effect sleepingEffect;
 
         protected bool passedOut;
+
 
         public MapTilePosition CurrentTilePosition
         {
@@ -132,9 +136,11 @@ namespace GardenPlanet
         {
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.freezeRotation = true;
+            collider = GetComponent<Collider>();
             appearence = Player.defaultAppearence;
             information = Player.defaultInformation;
             controller = FindObjectOfType<GameController>();
+            boneTransforms = new Dictionary<string, Transform>();
         }
 
         public virtual void FixedUpdate()
@@ -382,7 +388,7 @@ namespace GardenPlanet
             if(currentAction == CharacterAction.BedStart)
                 yield return StartCoroutine(JumpIntoBed(actionObject));
             if(currentAction == CharacterAction.BedEnd)
-                throw new NotImplementedException();
+                yield return StartCoroutine(JumpOutOfBed(actionObject));
 
             // Wait for action to finish
             while(currentAction > 0)
@@ -652,6 +658,40 @@ namespace GardenPlanet
             return true;
         }
 
+        /*
+         * Stops the character colliding with anything
+         */
+        public void DisableCollision()
+        {
+            collider.enabled = false;
+            rigidBody.detectCollisions = false;
+        }
+
+        /*
+         * Starts the character colliding with other stuff
+         */
+        public void EnableCollision()
+        {
+            collider.enabled = true;
+            rigidBody.detectCollisions = true;
+        }
+
+        /*
+         * Turns off all physics on this character
+         */
+        public void DisableRigidbody()
+        {
+            rigidBody.isKinematic = true;
+        }
+
+        /*
+         * Turns physics back on for this character
+         */
+        public void EnableRigidbody()
+        {
+            rigidBody.isKinematic = false;
+        }
+
         protected void RegenerateVisuals()
         {
             if(visualsHolder != null)
@@ -712,11 +752,15 @@ namespace GardenPlanet
 
             // Unity was not happy with us doing this till the next frame, I hope this wont cause
             // any weird not-animating-for-a-frame effects
-            AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, new []{"item"});
+            var itemTransforms = new[] {"item", "leg_foot_L", "leg_foot_R", "head"};
+            AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, itemTransforms);
 
             holdItemHolder = transform.FindRecursive("item");
             if(holdItemHolder == null)
                 Debug.LogError("Can't find a child called item in character!");
+            boneTransforms = new Dictionary<string, Transform>();
+            foreach(var trans in itemTransforms)
+                boneTransforms[trans] = transform.FindRecursive(trans);
             baseModel = transform.FindRecursive("basemodel").gameObject;
             var findHair = transform.FindRecursive("hair");
             hairModel = findHair ? findHair.gameObject : null;
@@ -767,13 +811,6 @@ namespace GardenPlanet
             newObject.transform.SetParent(visualsHolder.transform, false);
             armatures.Add(newObject.transform.Find("Armature").transform);
 
-            /*
-            if(bonesToClone != null)
-            {
-                var boneClone = newObject.AddComponent<BoneClone>();
-                boneClone.rendererToClone = bonesToClone;
-            }
-*/
             var modelmeshrenderer = newObject.GetComponentInChildren<SkinnedMeshRenderer>();
             foreach(var b in modelmeshrenderer.bones)
             {
@@ -803,21 +840,55 @@ namespace GardenPlanet
 
         private IEnumerator JumpIntoBed(GameObject bedObject)
         {
-            // Find bed anim start position
-            var startPos = bedObject.transform.Find("BedAnimStart").transform;
+            // Find bed anim markers
+            var bedAnimMarker = bedObject.transform.FindRecursive("BedAnimStart").transform;
 
             // TODO: Pathfind and walk to the position
-            transform.position = new Vector3(startPos.position.x, transform.position.y, startPos.position.z);
-            transform.rotation = startPos.rotation;
+            transform.position = new Vector3(bedAnimMarker.position.x, transform.position.y, bedAnimMarker.position.z);
+            transform.rotation = bedAnimMarker.rotation;
 
-            // Do bed anim
+            // Disable collisions and physics so we can safely intersect with the bed
+            DisableCollision();
+            DisableRigidbody();
+
+            yield return new WaitForSeconds(.5f);
+
+            // Start bed anim and wait for it to finish
             mainAnimator.SetBool("DoBed", true);
             while(mainAnimator.GetBool("DoBed"))
                 yield return new WaitForFixedUpdate();
 
             // Do a snore
-            // ...
+            sleepingEffect = controller.effectsManager.CreateEffect(EffectsType.LOOP_SLEEPING, boneTransforms["head"].position);
+        }
 
+        private IEnumerator JumpOutOfBed(GameObject bedObject)
+        {
+            // Place player in bed
+            var bedAnimMarker = bedObject.transform.FindRecursive("BedAnimStart").transform;
+            transform.position = new Vector3(bedAnimMarker.position.x, transform.position.y, bedAnimMarker.position.z);
+            transform.rotation = bedAnimMarker.rotation;
+
+            // Disable collisions and physics so we can safely intersect with the bed
+            DisableCollision();
+            DisableRigidbody();
+
+            // Kill sleeping efffect
+            if(sleepingEffect == null)
+                controller.effectsManager.RemoveEffect(sleepingEffect);
+
+            // Wait a bit
+            yield return new WaitForSeconds(2f);
+
+            // Start exit anim and wait for it to finish
+            mainAnimator.SetBool("Sleeping", false);
+            mainAnimator.SetBool("DoBed", true);
+            while(mainAnimator.GetBool("DoBed"))
+                yield return new WaitForFixedUpdate();
+
+            // Put collisions and physics back on
+            EnableCollision();
+            EnableRigidbody();
         }
 
         // Animation event: Nom some
@@ -841,6 +912,12 @@ namespace GardenPlanet
         public void AnimatorCloseEyes()
         {
             face.SetFaceState(CharacterFace.FaceState.EYES_CLOSED);
+        }
+
+        // Animation event: Open eyes
+        public void AnimatorOpenEyes()
+        {
+            face.SetFaceState(CharacterFace.FaceState.NORMAL);
         }
 
         // Animation event: YawnDone
@@ -869,5 +946,32 @@ namespace GardenPlanet
             passedOut = true;
         }
 
+        // Animation event: LeftFootStep
+        public void AnimatorLeftFootStep()
+        {
+            controller.effectsManager.CreateEffect(EffectsType.ONESHOT_STEPDUST, boneTransforms["leg_foot_L"].position);
+        }
+
+        // Animation event: RightFootStep
+        public void AnimatorRightFootStep()
+        {
+            controller.effectsManager.CreateEffect(EffectsType.ONESHOT_STEPDUST, boneTransforms["leg_foot_R"].position);
+        }
+
+        // Animation event: BedStartDone
+        public void AnimatorBedStartDone()
+        {
+            mainAnimator.SetBool("DoBed", false);
+            mainAnimator.SetBool("Sleeping", true);
+            currentAction = 0;
+        }
+
+        // Animation event: BedEndDone
+        public void AnimatorBedEndDone()
+        {
+            mainAnimator.SetBool("DoBed", false);
+            mainAnimator.SetBool("Sleeping", false);
+            currentAction = 0;
+        }
     }
 }

@@ -43,6 +43,8 @@ namespace GardenPlanet
         public AutoTileManager autoTileManager;
         [HideInInspector]
         public World world;
+        [HideInInspector]
+        public EffectsManager effectsManager;
 
         private Debug debugMenu;
         private InfoPopup infoPopup;
@@ -78,6 +80,8 @@ namespace GardenPlanet
 
             var autoTileManagerObj = new GameObject("AutoTileManager");
             autoTileManager = autoTileManagerObj.AddComponent<AutoTileManager>();
+
+            effectsManager = EffectsManager.CreateEffectsManager();
 
             // GUI objects
             infoPopup = (Instantiate(Resources.Load(Consts.PREFAB_PATH_INFO_POPUP)) as GameObject).GetComponent<InfoPopup>();

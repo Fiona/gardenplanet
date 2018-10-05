@@ -5,7 +5,7 @@ namespace GardenPlanet
     public class CharacterAnimatorEventListener: MonoBehaviour
     {
         public Character character;
-        
+
         // Animation event: Nom some
         public void AnimatorNom()
         {
@@ -18,10 +18,16 @@ namespace GardenPlanet
             character.AnimatorEatItemDone();
         }
 
-        // Animation event: Close eyes
+        // Animation event: CloseEyes
         public void AnimatorCloseEyes()
         {
             character.AnimatorCloseEyes();
+        }
+
+        // Animation event: OpenEyes
+        public void AnimatorOpenEyes()
+        {
+            character.AnimatorOpenEyes();
         }
 
         // Animation event: YawnDone
@@ -42,5 +48,28 @@ namespace GardenPlanet
             character.AnimatorPassOutDone();
         }
 
+        // Animation event: LeftFootStep
+        public void AnimatorLeftFootStep()
+        {
+            character.AnimatorLeftFootStep();
+        }
+
+        // Animation event: RightFootStep
+        public void AnimatorRightFootStep()
+        {
+            character.AnimatorRightFootStep();
+        }
+
+        // Animation event: BedStartDone
+        public void AnimatorBedStartDone()
+        {
+            character.AnimatorBedStartDone();
+        }
+
+        // Animation event: BedEndDone
+        public void AnimatorBedEndDone()
+        {
+            character.AnimatorBedEndDone();
+        }
     }
 }
