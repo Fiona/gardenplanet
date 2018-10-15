@@ -31,6 +31,32 @@
       }
     },
 
+    "bottoms": {
+      "jeans" : {
+        "name": "Jeans",
+        "unlockedAtStart": true
+      },
+      "greenLongSkirt": {
+        "name": "Green Long Skirt",
+        "unlockedAtStart": true
+      }
+    },
+
+    "shoes": {
+      "brownBoots": {
+        "name": "Brown Boots",
+        "unlockedAtStart": true
+      }
+    },
+
+    "headAccessories" : {
+      "spacecap": {
+        "name": "Space Cap",
+        "unlockedAtStart": true,
+        "hideHair": true
+      }
+    },
+
     "skinColours": [
       [26, 50, 255],
       [26, 84, 255],

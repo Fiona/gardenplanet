@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: d221347355fd2f848bda786ec466ba5c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: arm_elbow_target_L
+    100002: arm_elbow_target_R
+    100004: arm_hand_ifinger_lower_L
+    100006: arm_hand_ifinger_lower_R
+    100008: arm_hand_ifinger_upper_L
+    100010: arm_hand_ifinger_upper_R
+    100012: arm_hand_ik_L
+    100014: arm_hand_ik_R
+    100016: arm_hand_L
+    100018: arm_hand_mfinger_lower_L
+    100020: arm_hand_mfinger_lower_R
+    100022: arm_hand_mfinger_upper_L
+    100024: arm_hand_mfinger_upper_R
+    100026: arm_hand_pfinger_lower_L
+    100028: arm_hand_pfinger_lower_R
+    100030: arm_hand_pfinger_upper_L
+    100032: arm_hand_pfinger_upper_R
+    100034: arm_hand_R
+    100036: arm_hand_thumb_lower_L
+    100038: arm_hand_thumb_lower_R
+    100040: arm_hand_thumb_upper_L
+    100042: arm_hand_thumb_upper_R
+    100044: arm_lower_L
+    100046: arm_lower_R
+    100048: arm_upper_L
+    100050: arm_upper_R
+    100052: Armature
+    100054: head
+    100056: item
+    100058: leg_foot_ik_L
+    100060: leg_foot_ik_R
+    100062: leg_foot_L
+    100064: leg_foot_R
+    100066: leg_knee_target_L
+    100068: leg_knee_target_R
+    100070: leg_lower_L
+    100072: leg_lower_R
+    100074: leg_upper_L
+    100076: leg_upper_R
+    100078: root
+    100080: //RootNode
+    100082: skirt1
+    100084: spine_lower
+    100086: spine_upper
+    400000: arm_elbow_target_L
+    400002: arm_elbow_target_R
+    400004: arm_hand_ifinger_lower_L
+    400006: arm_hand_ifinger_lower_R
+    400008: arm_hand_ifinger_upper_L
+    400010: arm_hand_ifinger_upper_R
+    400012: arm_hand_ik_L
+    400014: arm_hand_ik_R
+    400016: arm_hand_L
+    400018: arm_hand_mfinger_lower_L
+    400020: arm_hand_mfinger_lower_R
+    400022: arm_hand_mfinger_upper_L
+    400024: arm_hand_mfinger_upper_R
+    400026: arm_hand_pfinger_lower_L
+    400028: arm_hand_pfinger_lower_R
+    400030: arm_hand_pfinger_upper_L
+    400032: arm_hand_pfinger_upper_R
+    400034: arm_hand_R
+    400036: arm_hand_thumb_lower_L
+    400038: arm_hand_thumb_lower_R
+    400040: arm_hand_thumb_upper_L
+    400042: arm_hand_thumb_upper_R
+    400044: arm_lower_L
+    400046: arm_lower_R
+    400048: arm_upper_L
+    400050: arm_upper_R
+    400052: Armature
+    400054: head
+    400056: item
+    400058: leg_foot_ik_L
+    400060: leg_foot_ik_R
+    400062: leg_foot_L
+    400064: leg_foot_R
+    400066: leg_knee_target_L
+    400068: leg_knee_target_R
+    400070: leg_lower_L
+    400072: leg_lower_R
+    400074: leg_upper_L
+    400076: leg_upper_R
+    400078: root
+    400080: //RootNode
+    400082: skirt1
+    400084: spine_lower
+    400086: spine_upper
+    2100000: skirt1__skirt1
+    4300000: skirt1
+    7400000: Default Take
+    7400002: bed_end
+    7400004: bed_loop
+    7400006: bed_start
+    7400008: eat_item
+    7400010: hold_hoe
+    7400012: hold_item
+    7400014: hold_seeds
+    7400016: hold_wcan
+    7400018: idle
+    7400020: idle_001
+    7400022: idle_002
+    7400024: idle_hips
+    7400026: pose_wave
+    7400028: run
+    7400030: sleepy_fall
+    7400032: sleepy_yawn
+    7400034: stunner
+    7400036: use_floor_item
+    7400038: use_hoe
+    7400040: use_hoe2
+    7400042: use_seeds
+    7400044: use_wcan_end
+    7400046: use_wcan_fill
+    7400048: use_wcan_fill2
+    7400050: use_wcan_loop
+    7400052: use_wcan_start
+    7400054: walk
+    9500000: //RootNode
+    13700000: skirt1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skirt1__skirt1
+    second: {fileID: 2100000, guid: 435ae4775b52eec44a3a47d649fcd1bb, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 1
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7314ea6868ad3db44988b20d1aaf3593,
+    type: 3}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

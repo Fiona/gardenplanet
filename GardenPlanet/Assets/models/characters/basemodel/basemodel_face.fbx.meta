@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: ea97a82e543b1f14985878ebe629ca1a
-timeCreated: 1521063908
-licenseType: Free
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: arm_elbow_target_L
     100002: arm_elbow_target_R
@@ -48,6 +46,7 @@ ModelImporter:
     100080: root
     100082: spine_lower
     100084: spine_upper
+    100086: item
     400000: arm_elbow_target_L
     400002: arm_elbow_target_R
     400004: arm_hand_ifinger_lower_L
@@ -91,6 +90,7 @@ ModelImporter:
     400080: root
     400082: spine_lower
     400084: spine_upper
+    400086: item
     2100000: kid-face2__kid-face
     4300000: face
     9500000: //RootNode
@@ -119,6 +119,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -150,6 +151,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

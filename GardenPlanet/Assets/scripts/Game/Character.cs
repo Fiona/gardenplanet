@@ -27,6 +27,7 @@ namespace GardenPlanet
             public string headAccessory;
             public string backAccessory;
             public string hair;
+            public bool hideHair;
 
             public string eyes;
             public string eyebrows;
@@ -734,11 +735,16 @@ namespace GardenPlanet
                 AddModelToVisuals(Consts.CHARACTERS_SHOES_VISUAL_PATH + appearence.shoes, bonesToClone);
             if(appearence.backAccessory != "")
                 AddModelToVisuals(Consts.CHARACTERS_BACK_ACCESSORIES_VISUAL_PATH + appearence.backAccessory, bonesToClone);
+            var hideHair = false;
             if(appearence.headAccessory != "")
-                AddModelToVisuals(Consts.CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH + appearence.headAccessory, bonesToClone);
+            {
+                AddModelToVisuals(Consts.CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH + appearence.headAccessory,
+                    bonesToClone);
+                //hideHair = controller.globalConfig.appearence.headAccessories[appearence.headAccessory].hideHair;
+            }
 
             hairModel = null;
-            if(appearence.hair != "")
+            if(appearence.hair != "" && !hideHair)
                 hairModel = AddModelToVisuals(Consts.CHARACTERS_HAIR_VISUAL_PATH + appearence.hair, bonesToClone);
 
             RegenerateHairColour();
@@ -809,9 +815,13 @@ namespace GardenPlanet
             var newObject = Instantiate(resource);
             newObject.SetLayerRecursively(Consts.COLLISION_LAYER_CHARACTERS);
             newObject.transform.SetParent(visualsHolder.transform, false);
-            armatures.Add(newObject.transform.Find("Armature").transform);
+            var armature = newObject.transform.Find("Armature");
+            if(armature)
+                armatures.Add(armature.transform);
 
             var modelmeshrenderer = newObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            if(!modelmeshrenderer)
+                return newObject;
             foreach(var b in modelmeshrenderer.bones)
             {
                 if(b.name == "head")

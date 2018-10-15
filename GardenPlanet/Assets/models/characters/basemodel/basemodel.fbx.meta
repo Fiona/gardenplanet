@@ -225,6 +225,7 @@ ModelImporter:
     7400024: bed_end
     9500000: //RootNode
     13700000: novakid
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -250,7 +251,29 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: Event AnimatorNom has a time (0.659420) outside the clip's
+      valid range (0.000000..0.041667). It will never be firedEvent AnimatorNom has
+      a time (0.931747) outside the clip's valid range (0.000000..0.041667). It will
+      never be firedEvent AnimatorNom has a time (1.134043) outside the clip's valid
+      range (0.000000..0.041667). It will never be firedEvent AnimatorEatItemDone
+      has a time (1.610224) outside the clip's valid range (0.000000..0.041667). It
+      will never be firedEvent AnimatorLeftFootStep has a time (0.284001) outside
+      the clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorRightFootStep
+      has a time (0.880037) outside the clip's valid range (0.000000..0.041667). It
+      will never be firedEvent AnimatorPassOutDone has a time (1.900110) outside the
+      clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorPassOutMid
+      has a time (0.810749) outside the clip's valid range (0.000000..0.041667). It
+      will never be firedEvent AnimatorCloseEyes has a time (0.342516) outside the
+      clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorCloseEyes
+      has a time (0.607999) outside the clip's valid range (0.000000..0.041667). It
+      will never be firedEvent AnimatorYawnDone has a time (3.167633) outside the
+      clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorCloseEyes
+      has a time (1.609793) outside the clip's valid range (0.000000..0.041667). It
+      will never be firedEvent AnimatorBedStartDone has a time (3.275649) outside
+      the clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorOpenEyes
+      has a time (0.254258) outside the clip's valid range (0.000000..0.041667). It
+      will never be firedEvent AnimatorBedEndDone has a time (2.650677) outside the
+      clip's valid range (0.000000..0.041667). It will never be fired
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
