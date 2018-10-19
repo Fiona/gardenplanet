@@ -57,6 +57,12 @@ namespace GardenPlanet
                     case "tops":
                         appearenceObjects = controller.globalConfig.appearence.tops;
                         break;
+                    case "bottoms":
+                        appearenceObjects = controller.globalConfig.appearence.bottoms;
+                        break;
+                    case "shoes":
+                        appearenceObjects = controller.globalConfig.appearence.shoes;
+                        break;
                     case "eyebrows":
                         appearenceObjects = controller.globalConfig.appearence.eyebrows;
                         break;
@@ -68,6 +74,9 @@ namespace GardenPlanet
                         break;
                     case "face_detail":
                         appearenceObjects = controller.globalConfig.appearence.faceDetail;
+                        break;
+                    case "head_accessories":
+                        appearenceObjects = controller.globalConfig.appearence.headAccessories;
                         break;
                     default:
                         throw new KeyNotFoundException();

@@ -18914,7 +18914,6 @@ MonoBehaviour:
   mainAnimator: {fileID: 1628578001}
   layer: 0
   holdItemHolder: {fileID: 0}
-  isPlayer: 0
 --- !u!4 &1628578003
 Transform:
   m_ObjectHideFlags: 0

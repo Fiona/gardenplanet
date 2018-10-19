@@ -3,7 +3,7 @@
 --- !u!319 &31900000
 AvatarMask:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: CharactersHandsAvatarMask
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -22,8 +22,6 @@ AvatarMask:
     m_Weight: 0
   - m_Path: Armature/root/arm_hand_ik_R
     m_Weight: 0
-  - m_Path: Armature/root/item
-    m_Weight: 1
   - m_Path: Armature/root/leg_foot_ik_L
     m_Weight: 0
   - m_Path: Armature/root/leg_foot_ik_L/leg_foot_L
@@ -92,7 +90,9 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Armature/root/spine_lower/spine_upper/arm_upper_R/arm_lower_R/arm_hand_R/arm_hand_thumb_upper_R/arm_hand_thumb_lower_R
     m_Weight: 1
+  - m_Path: Armature/root/spine_lower/spine_upper/arm_upper_R/arm_lower_R/arm_hand_R/item
+    m_Weight: 1
   - m_Path: Armature/root/spine_lower/spine_upper/head
     m_Weight: 1
   - m_Path: novakid
-    m_Weight: 1
+    m_Weight: 0
