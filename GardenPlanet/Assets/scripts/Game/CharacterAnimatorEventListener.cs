@@ -12,12 +12,6 @@ namespace GardenPlanet
             character.AnimatorNom();
         }
 
-        // Animation event: EatItem
-        public void AnimatorEatItemDone()
-        {
-            character.AnimatorEatItemDone();
-        }
-
         // Animation event: CloseEyes
         public void AnimatorCloseEyes()
         {
@@ -30,22 +24,10 @@ namespace GardenPlanet
             character.AnimatorOpenEyes();
         }
 
-        // Animation event: YawnDone
-        public void AnimatorYawnDone()
-        {
-            character.AnimatorYawnDone();
-        }
-
         // Animation event: PassOutMid
         public void AnimatorPassOutMid()
         {
             character.AnimatorPassOutMid();
-        }
-
-        // Animation event: PassOutDone
-        public void AnimatorPassOutDone()
-        {
-            character.AnimatorPassOutDone();
         }
 
         // Animation event: LeftFootStep
@@ -58,18 +40,6 @@ namespace GardenPlanet
         public void AnimatorRightFootStep()
         {
             character.AnimatorRightFootStep();
-        }
-
-        // Animation event: BedStartDone
-        public void AnimatorBedStartDone()
-        {
-            character.AnimatorBedStartDone();
-        }
-
-        // Animation event: BedEndDone
-        public void AnimatorBedEndDone()
-        {
-            character.AnimatorBedEndDone();
         }
     }
 }

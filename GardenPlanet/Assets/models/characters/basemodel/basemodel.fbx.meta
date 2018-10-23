@@ -251,29 +251,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: Event AnimatorNom has a time (0.659420) outside the clip's
-      valid range (0.000000..0.041667). It will never be firedEvent AnimatorNom has
-      a time (0.931747) outside the clip's valid range (0.000000..0.041667). It will
-      never be firedEvent AnimatorNom has a time (1.134043) outside the clip's valid
-      range (0.000000..0.041667). It will never be firedEvent AnimatorEatItemDone
-      has a time (1.610224) outside the clip's valid range (0.000000..0.041667). It
-      will never be firedEvent AnimatorLeftFootStep has a time (0.284001) outside
-      the clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorRightFootStep
-      has a time (0.880037) outside the clip's valid range (0.000000..0.041667). It
-      will never be firedEvent AnimatorPassOutDone has a time (1.900110) outside the
-      clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorPassOutMid
-      has a time (0.810749) outside the clip's valid range (0.000000..0.041667). It
-      will never be firedEvent AnimatorCloseEyes has a time (0.342516) outside the
-      clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorCloseEyes
-      has a time (0.607999) outside the clip's valid range (0.000000..0.041667). It
-      will never be firedEvent AnimatorYawnDone has a time (3.167633) outside the
-      clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorCloseEyes
-      has a time (1.609793) outside the clip's valid range (0.000000..0.041667). It
-      will never be firedEvent AnimatorBedStartDone has a time (3.275649) outside
-      the clip's valid range (0.000000..0.041667). It will never be firedEvent AnimatorOpenEyes
-      has a time (0.254258) outside the clip's valid range (0.000000..0.041667). It
-      will never be firedEvent AnimatorBedEndDone has a time (2.650677) outside the
-      clip's valid range (0.000000..0.041667). It will never be fired
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -326,13 +304,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.64802474
         functionName: AnimatorNom
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.9201278
-        functionName: AnimatorEatItemDone
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -520,13 +491,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9306663
-        functionName: AnimatorPassOutDone
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.39710143
         functionName: AnimatorPassOutMid
         data: 
@@ -571,13 +535,6 @@ ModelImporter:
       events:
       - time: 0.17580701
         functionName: AnimatorCloseEyes
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.915942
-        functionName: AnimatorYawnDone
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -641,13 +598,6 @@ ModelImporter:
       events:
       - time: 0.48905107
         functionName: AnimatorCloseEyes
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.9951338
-        functionName: AnimatorBedStartDone
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -725,13 +675,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.09245742
         functionName: AnimatorOpenEyes
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.96388245
-        functionName: AnimatorBedEndDone
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

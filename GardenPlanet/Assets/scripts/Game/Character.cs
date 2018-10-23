@@ -82,10 +82,12 @@ namespace GardenPlanet
             set { information.id = value; }
         }
 
+        protected GameController controller;
+        protected Controller baseController;
+
         // Locomotion related members
         protected Rigidbody rigidBody;
         protected Collider collider;
-        protected GameController controller;
         protected Vector3 moveDirBuffer;
         protected Vector3 lookDirection;
         protected bool isJumping;
@@ -115,7 +117,6 @@ namespace GardenPlanet
 
         protected bool passedOut;
 
-
         public MapTilePosition CurrentTilePosition
         {
             get
@@ -141,6 +142,7 @@ namespace GardenPlanet
             appearence = Player.defaultAppearence;
             information = Player.defaultInformation;
             controller = FindObjectOfType<GameController>();
+            baseController = FindObjectOfType<Controller>();
             boneTransforms = new Dictionary<string, Transform>();
         }
 
@@ -693,6 +695,22 @@ namespace GardenPlanet
             rigidBody.isKinematic = false;
         }
 
+        /*
+         * Returns the direction the character wants to face
+         */
+        public Vector3 GetFacing()
+        {
+            return desiredRotation;
+        }
+
+        /*
+         * Returns how fast the character is moving
+         */
+        public float GetSpeed()
+        {
+            return rigidBody.velocity.magnitude;
+        }
+
         protected void RegenerateVisuals()
         {
             if(visualsHolder != null)
@@ -740,7 +758,7 @@ namespace GardenPlanet
             {
                 AddModelToVisuals(Consts.CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH + appearence.headAccessory,
                     bonesToClone);
-                //hideHair = controller.globalConfig.appearence.headAccessories[appearence.headAccessory].hideHair;
+                hideHair = baseController.globalConfig.appearence.headAccessories[appearence.headAccessory].hideHair;
             }
 
             hairModel = null;
@@ -748,18 +766,15 @@ namespace GardenPlanet
                 hairModel = AddModelToVisuals(Consts.CHARACTERS_HAIR_VISUAL_PATH + appearence.hair, bonesToClone);
 
             RegenerateHairColour();
-
             StartCoroutine(RebindAnimation());
         }
 
         private IEnumerator RebindAnimation()
         {
-            yield return new WaitForFixedUpdate();
-
-            // Unity was not happy with us doing this till the next frame, I hope this wont cause
-            // any weird not-animating-for-a-frame effects
             var itemTransforms = new[] {"item", "leg_foot_L", "leg_foot_R", "head"};
             AnimatorUtility.OptimizeTransformHierarchy(visualsHolder, itemTransforms);
+
+            yield return new WaitForFixedUpdate();
 
             holdItemHolder = transform.FindRecursive("item");
             if(holdItemHolder == null)
@@ -771,7 +786,6 @@ namespace GardenPlanet
             var findHair = transform.FindRecursive("hair");
             hairModel = findHair ? findHair.gameObject : null;
 
-            yield return new WaitForFixedUpdate();
             mainAnimator.Rebind();
         }
 
@@ -884,8 +898,11 @@ namespace GardenPlanet
             DisableRigidbody();
 
             // Kill sleeping efffect
-            if(sleepingEffect == null)
+            if(sleepingEffect != null)
+            {
+                sleepingEffect.MultiplySpeed(3f);
                 controller.effectsManager.RemoveEffect(sleepingEffect);
+            }
 
             // Wait a bit
             yield return new WaitForSeconds(2f);
@@ -897,6 +914,8 @@ namespace GardenPlanet
                 yield return new WaitForFixedUpdate();
 
             // Put collisions and physics back on
+            transform.forward = -transform.forward;
+
             EnableCollision();
             EnableRigidbody();
         }

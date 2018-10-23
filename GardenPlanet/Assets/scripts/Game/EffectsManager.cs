@@ -29,6 +29,15 @@ namespace GardenPlanet
                 systems.Add(comp);
         }
 
+        public void MultiplySpeed(float factor)
+        {
+            foreach(var particle in systems)
+            {
+                var main = particle.main;
+                main.simulationSpeed *= factor;
+            }
+        }
+
         public void Update()
         {
             if(!effect)
