@@ -61,5 +61,21 @@ namespace GardenPlanet
 		}
 	}
 
+	public class AITaskException: Exception
+	{
+		public AITaskException()
+		{
+		}
+
+		public AITaskException(string message)
+			: base(message)
+		{
+		}
+
+		public AITaskException(string message, Exception inner)
+			: base(message, inner)
+		{
+		}
+	}
 
 }

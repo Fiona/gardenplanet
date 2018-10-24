@@ -75,10 +75,13 @@
     <Compile Include="Assets\scripts\CreateACharacter\CreateACharacterController.cs" />
     <Compile Include="Assets\scripts\Game\Atmosphere.cs" />
     <Compile Include="Assets\scripts\Game\AutoTileManager.cs" />
-    <Compile Include="Assets\scripts\Game\Character.cs" />
-    <Compile Include="Assets\scripts\Game\CharacterAnimationBehaviours.cs" />
-    <Compile Include="Assets\scripts\Game\CharacterAnimatorEventListener.cs" />
-    <Compile Include="Assets\scripts\Game\CharacterFace.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\Character.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\CharacterAI.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\CharacterAnimationBehaviours.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\CharacterAnimatorEventListener.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\CharacterFace.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\CharacterTask.cs" />
+    <Compile Include="Assets\scripts\Game\Characters\Player.cs" />
     <Compile Include="Assets\scripts\Game\EffectsManager.cs" />
     <Compile Include="Assets\scripts\Game\GameController.cs" />
     <Compile Include="Assets\scripts\Game\GameInputManager.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Assets\scripts\Game\GUI\ItemHotbarNameplate.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergy.cs" />
     <Compile Include="Assets\scripts\Game\GUI\PlayerEnergyHeart.cs" />
+    <Compile Include="Assets\scripts\Game\InGameCamera.cs" />
     <Compile Include="Assets\scripts\Game\Inventory.cs" />
     <Compile Include="Assets\scripts\Game\InWorldItem.cs" />
     <Compile Include="Assets\scripts\Game\ItemManager.cs" />
@@ -121,8 +125,6 @@
     <Compile Include="Assets\scripts\Game\ItemScripts\Seedbag.cs" />
     <Compile Include="Assets\scripts\Game\ItemScripts\WateringCan.cs" />
     <Compile Include="Assets\scripts\Game\ItemType.cs" />
-    <Compile Include="Assets\scripts\Game\Player.cs" />
-    <Compile Include="Assets\scripts\Game\PlayerCamera.cs" />
     <Compile Include="Assets\scripts\Game\StateMachineBehaviourCallbacks.cs" />
     <Compile Include="Assets\scripts\Game\TileSelection.cs" />
     <Compile Include="Assets\scripts\Game\World.cs" />

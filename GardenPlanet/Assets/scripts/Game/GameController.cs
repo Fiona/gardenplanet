@@ -12,7 +12,7 @@ namespace GardenPlanet
     {
 
         [Header("Object References")]
-        public PlayerCamera mainCamera;
+        public InGameCamera mainCamera;
         public RectTransform canvasRect;
         public ScreenFade screenFade;
         public IsMouseOver isMouseOverWorld;
@@ -119,7 +119,7 @@ namespace GardenPlanet
         {
             while(true)
             {
-                mainCamera.SetLookAheadPlayer(player);
+                mainCamera.SetLookAheadCharacter(player);
                 yield return new WaitForFixedUpdate();
             }
         }

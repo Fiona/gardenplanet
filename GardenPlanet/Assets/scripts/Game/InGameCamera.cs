@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GardenPlanet
 {
 
-    public class PlayerCamera: MonoBehaviour
+    public class InGameCamera: MonoBehaviour
     {
         public float distance;
         public float speed;
@@ -49,9 +49,9 @@ namespace GardenPlanet
             this.speed = speed;
         }
 
-        public void SetLookAheadPlayer(Player player)
+        public void SetLookAheadCharacter(Character character)
         {
-            lookAheadAdjust = player.GetFacing() * player.GetSpeed();
+            lookAheadAdjust = character.GetFacing() * character.GetSpeed();
         }
 
         Vector3 GetTargetPosition(GameObject _target, float _distance)
