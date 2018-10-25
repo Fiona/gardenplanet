@@ -7,22 +7,23 @@ using UnityEngine;
 namespace GardenPlanet
 {
 
-    public class AttributesConverver : JsonConverter
+    public class AttributesConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var jObject = new JObject();
-            var attrs = (Attributes)value;
+            var attrs = (Attributes) value;
             foreach(var attr in attrs)
                 jObject.Add(attr.Key.ToString(), JToken.FromObject(attr.Value, serializer));
             jObject.WriteTo(writer);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             var attributes = new Attributes();
 
-            JObject obj = (JObject)serializer.Deserialize(reader);
+            JObject obj = (JObject) serializer.Deserialize(reader);
             if(obj == null)
                 return attributes;
             foreach(var prop in obj.Properties())
@@ -30,16 +31,16 @@ namespace GardenPlanet
                 switch(prop.Value.Type)
                 {
                     case JTokenType.Boolean:
-                        attributes.Add(prop.Name, (bool)prop.Value);
+                        attributes.Add(prop.Name, (bool) prop.Value);
                         break;
                     case JTokenType.Integer:
-                        attributes.Add(prop.Name, (int)prop.Value);
+                        attributes.Add(prop.Name, (int) prop.Value);
                         break;
                     case JTokenType.Float:
-                        attributes.Add(prop.Name, (float)prop.Value);
+                        attributes.Add(prop.Name, (float) prop.Value);
                         break;
                     case JTokenType.String:
-                        attributes.Add(prop.Name, (string)prop.Value);
+                        attributes.Add(prop.Name, (string) prop.Value);
                         break;
                     default:
                         attributes.Add(prop.Name, prop.Value);
@@ -53,6 +54,39 @@ namespace GardenPlanet
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(Attributes);
+        }
+    }
+
+    public class UnityColorConverter : JsonConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var color = (Color)value;
+            var colors = new JArray();
+            colors.Add(color.r);
+            colors.Add(color.g);
+            colors.Add(color.b);
+            colors.Add(color.a);
+            colors.WriteTo(writer);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var color = new UnityEngine.Color();
+
+            JArray obj = (JArray) serializer.Deserialize(reader);
+            if(obj == null)
+                return color;
+            color.r = (float)obj[0];
+            color.g = (float)obj[0];
+            color.b = (float)obj[0];
+            color.a = (float)obj[0];
+            return color;
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(UnityEngine.Color);
         }
     }
 
@@ -98,7 +132,8 @@ namespace GardenPlanet
             {
                 Formatting = Formatting.Indented
             };
-            serializerSettings.Converters.Add(new AttributesConverver());
+            serializerSettings.Converters.Add(new AttributesConverter());
+            serializerSettings.Converters.Add(new UnityColorConverter());
             return serializerSettings;
         }
     }

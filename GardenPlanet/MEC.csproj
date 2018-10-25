@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E695261D-ECD2-F612-61FB-D4ED7A5A6980}</ProjectGuid>
+    <ProjectGuid>{A023A90E-F085-2121-582B-3CBEE3BD052C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>App</AssemblyName>
+    <AssemblyName>MEC</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -54,154 +54,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\App.cs" />
-    <Compile Include="Assets\scripts\Behaviours\Bobber.cs" />
-    <Compile Include="Assets\scripts\Behaviours\BoneClone.cs" />
-    <Compile Include="Assets\scripts\Behaviours\DummyMonoBehaviour.cs" />
-    <Compile Include="Assets\scripts\Behaviours\FaceCamera.cs" />
-    <Compile Include="Assets\scripts\Behaviours\IsMouseOver.cs" />
-    <Compile Include="Assets\scripts\Behaviours\OneShotParticleSystem.cs" />
-    <Compile Include="Assets\scripts\Behaviours\Spinner.cs" />
-    <Compile Include="Assets\scripts\Behaviours\UICopySize.cs" />
-    <Compile Include="Assets\scripts\Behaviours\YesNoDialog.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\AppearenceField.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\AppearenceFieldColour.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\AppearenceFieldOpacity.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\AppearenceFieldSpinner.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\BirthdayField.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\CACCharacter.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\CACColourPicker.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\CharacterRotationPanel.cs" />
-    <Compile Include="Assets\scripts\CreateACharacter\CreateACharacterController.cs" />
-    <Compile Include="Assets\scripts\Game\Atmosphere.cs" />
-    <Compile Include="Assets\scripts\Game\AutoTileManager.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\Character.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\CharacterAI.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\CharacterAnimationBehaviours.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\CharacterAnimatorEventListener.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\CharacterFace.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\CharacterTask.cs" />
-    <Compile Include="Assets\scripts\Game\Characters\Player.cs" />
-    <Compile Include="Assets\scripts\Game\EffectsManager.cs" />
-    <Compile Include="Assets\scripts\Game\GameController.cs" />
-    <Compile Include="Assets\scripts\Game\GameInputManager.cs" />
-    <Compile Include="Assets\scripts\Game\GameState.cs" />
-    <Compile Include="Assets\scripts\Game\GlobalConfig.cs" />
-    <Compile Include="Assets\scripts\Game\Glowable.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\GUINavigator.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InfoPopup.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InfoPopupDisplayHolder.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\IInGameMenuPage.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenu.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageCloseMenu.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageCommunity.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageEncyclopedia.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageInventory.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageQuitGame.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageSaveGame.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuPageSettings.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuTabButton.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InGameMenuTabs.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\InventoryItemButton.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategory.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategoryButton.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategoryGame.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategoryGraphics.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategoryInput.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsCategorySound.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InGameMenu\SettingsInputKeybind.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\InputModeVisibility.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\ItemHotbar.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\ItemHotbarNameplate.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\PlayerEnergy.cs" />
-    <Compile Include="Assets\scripts\Game\GUI\PlayerEnergyHeart.cs" />
-    <Compile Include="Assets\scripts\Game\InGameCamera.cs" />
-    <Compile Include="Assets\scripts\Game\Inventory.cs" />
-    <Compile Include="Assets\scripts\Game\InWorldItem.cs" />
-    <Compile Include="Assets\scripts\Game\ItemManager.cs" />
-    <Compile Include="Assets\scripts\Game\ItemScripts\Consumable.cs" />
-    <Compile Include="Assets\scripts\Game\ItemScripts\Hoe.cs" />
-    <Compile Include="Assets\scripts\Game\ItemScripts\ItemScript.cs" />
-    <Compile Include="Assets\scripts\Game\ItemScripts\Seedbag.cs" />
-    <Compile Include="Assets\scripts\Game\ItemScripts\WateringCan.cs" />
-    <Compile Include="Assets\scripts\Game\ItemType.cs" />
-    <Compile Include="Assets\scripts\Game\StateMachineBehaviourCallbacks.cs" />
-    <Compile Include="Assets\scripts\Game\TileSelection.cs" />
-    <Compile Include="Assets\scripts\Game\World.cs" />
-    <Compile Include="Assets\scripts\Game\WorldObjectInteractable.cs" />
-    <Compile Include="Assets\scripts\Game\WorldObjectScripts\Bed.cs" />
-    <Compile Include="Assets\scripts\Game\WorldObjectScripts\Crop.cs" />
-    <Compile Include="Assets\scripts\Game\WorldObjectScripts\WorldObjectScript.cs" />
-    <Compile Include="Assets\scripts\Game\WorldTimer.cs" />
-    <Compile Include="Assets\scripts\Global\Core\AStar.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Attributes.cs" />
-    <Compile Include="Assets\scripts\Global\Core\AudioSourceHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Clone.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Consts.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Controller.cs" />
-    <Compile Include="Assets\scripts\Global\Core\ConvertTypeHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\DirectionHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\EnumerableMap.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Exception.cs" />
-    <Compile Include="Assets\scripts\Global\Core\ExtensionMonoBehaviour.cs" />
-    <Compile Include="Assets\scripts\Global\Core\GameObjectHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\GameSettings.cs" />
-    <Compile Include="Assets\scripts\Global\Core\GameTime.cs" />
-    <Compile Include="Assets\scripts\Global\Core\JsonHandler.cs" />
-    <Compile Include="Assets\scripts\Global\Core\LerpHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Ref.cs" />
-    <Compile Include="Assets\scripts\Global\Core\RenderTextureHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\ScrollbarHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\TransformHelper.cs" />
-    <Compile Include="Assets\scripts\Global\Core\TransparentBackgroundScreenshotRecorder.cs" />
-    <Compile Include="Assets\scripts\Global\Core\Types.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\AnimatedButton.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\BasePopup.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\ChoicePopup.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\DebugMenu.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\GlobalButton.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\GlobalCheckbox.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\GlobalCheckboxGroup.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\GlobalSelectableButton.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\MessagePopup.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\ScreenFade.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\SelectableAnimatedButton.cs" />
-    <Compile Include="Assets\scripts\Global\GUI\SpeechPopup.cs" />
-    <Compile Include="Assets\scripts\Global\World\Map.cs" />
-    <Compile Include="Assets\scripts\Global\World\MarkerManager.cs" />
-    <Compile Include="Assets\scripts\Global\World\MouseHoverPlane.cs" />
-    <Compile Include="Assets\scripts\Global\World\Tilemap.cs" />
-    <Compile Include="Assets\scripts\Global\World\TileMarker.cs" />
-    <Compile Include="Assets\scripts\Global\World\TileMarkerType.cs" />
-    <Compile Include="Assets\scripts\Global\World\TileTagManager.cs" />
-    <Compile Include="Assets\scripts\Global\World\TileTagType.cs" />
-    <Compile Include="Assets\scripts\Global\World\TileTypeSet.cs" />
-    <Compile Include="Assets\scripts\Global\World\WorldObject.cs" />
-    <Compile Include="Assets\scripts\Global\World\WorldObjectManager.cs" />
-    <Compile Include="Assets\scripts\Global\World\WorldObjectType.cs" />
-    <Compile Include="Assets\scripts\Logo\LogoController.cs" />
-    <Compile Include="Assets\scripts\MapEditor\AttributeField.cs" />
-    <Compile Include="Assets\scripts\MapEditor\DropdownMenu.cs" />
-    <Compile Include="Assets\scripts\MapEditor\EditAttributesDialog.cs" />
-    <Compile Include="Assets\scripts\MapEditor\EditorInputManager.cs" />
-    <Compile Include="Assets\scripts\MapEditor\EditTileDialog.cs" />
-    <Compile Include="Assets\scripts\MapEditor\LoadMapDialog.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MainMenuBar.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapEditorController.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapEditorMode.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapEditorModeMarker.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapEditorModeTile.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapEditorModeTileTags.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapEditorModeWorldObjects.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapNameDialog.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MapSetSizeDialog.cs" />
-    <Compile Include="Assets\scripts\MapEditor\MenuBarMessage.cs" />
-    <Compile Include="Assets\scripts\TestAnimPlayer.cs" />
-    <Compile Include="Assets\scripts\TitleScreen\TitleScreenController.cs" />
-    <None Include="Assets\scripts\App.asmdef" />
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
+    <Compile Include="Assets\Plugins\Trinary Software\Timing.cs" />
+    <None Include="Assets\Plugins\Trinary Software\MEC.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -793,20 +647,6 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Rewired.csproj">
-      <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
-      <Name>Rewired</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
-      <Name>UnityUIExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="MEC.csproj">
-      <Project>{A023A90E-F085-2121-582B-3CBEE3BD052C}</Project>
-      <Name>MEC</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

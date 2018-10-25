@@ -714,6 +714,10 @@
       <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
       <Name>UnityUIExtensions</Name>
     </ProjectReference>
+    <ProjectReference Include="MEC.csproj">
+      <Project>{A023A90E-F085-2121-582B-3CBEE3BD052C}</Project>
+      <Name>MEC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
