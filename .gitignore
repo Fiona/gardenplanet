@@ -27,7 +27,8 @@ GardenPlanet/.vs
 obj/
 
 # Blender stuff
-*.blend1
+*.blend[0-9]*
+raw/models/characters/marks/export
 
 # builds
 bin/
