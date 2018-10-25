@@ -14,9 +14,15 @@ namespace GardenPlanet
             character = GetComponent<Character>();
         }
 
-        public void AddTask(CharacterTask taskType)
+        public void AddTask(CharacterTask task)
         {
-            taskType.SetCharacter(character);
+            task.SetCharacter(character);
+            tasks.Add(task);
+        }
+
+        public CharacterTask GetCurrentTask()
+        {
+            return currentTask;
         }
     }
 }

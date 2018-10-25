@@ -1,0 +1,3 @@
+[submodule "GardenPlanet/Assets/Plugins/UnityUIExtensions"]
+	path = GardenPlanet/Assets/Plugins/UnityUIExtensions
+	url = git@bitbucket.org:UnityUIExtensions/unity-ui-extensions.git

@@ -54,23 +54,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Rewired\Examples\ControlRemapping1\Scripts\ControlRemappingDemo1.cs" />
-    <Compile Include="Assets\Rewired\Examples\CustomControllersTilt\Scripts\CustomControllersTiltDemo.cs" />
-    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo.cs" />
-    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo_Player.cs" />
-    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\TouchButtonExample.cs" />
-    <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\TouchJoystickExample.cs" />
-    <Compile Include="Assets\Rewired\Examples\Shared\Scripts\Bullet.cs" />
-    <Compile Include="Assets\Rewired\Examples\SimpleControlRemapping\Scripts\SimpleControlRemapping.cs" />
-    <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredStandaloneInputModule.cs" />
-    <Compile Include="Assets\Rewired\Internal\Scripts\DataStorage\UserDataStore_PlayerPrefs.cs" />
-    <Compile Include="Assets\Rewired\Internal\Scripts\InputManager.cs" />
-    <Compile Include="Assets\Rewired\Internal\Scripts\Misc\ExternalTools.cs" />
-    <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
-    <None Include="Assets\Rewired\Documentation\licences.txt" />
-    <None Include="Assets\Rewired\Documentation\ReadMe.txt" />
-    <None Include="Assets\Rewired\Documentation\ReleaseNotes.txt" />
-    <None Include="Assets\Rewired\Rewired.asmdef" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\ControlRemapping1\Scripts\ControlRemappingDemo1.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\CustomControllersTilt\Scripts\CustomControllersTiltDemo.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo_Player.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\CustomControllersTouch\Scripts\TouchButtonExample.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\CustomControllersTouch\Scripts\TouchJoystickExample.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\Shared\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Examples\SimpleControlRemapping\Scripts\SimpleControlRemapping.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Integration\UnityUI\RewiredStandaloneInputModule.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Internal\Scripts\DataStorage\UserDataStore_PlayerPrefs.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Internal\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Internal\Scripts\Misc\ExternalTools.cs" />
+    <Compile Include="Assets\Plugins\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
+    <None Include="Assets\Plugins\Rewired\Documentation\licences.txt" />
+    <None Include="Assets\Plugins\Rewired\Documentation\ReadMe.txt" />
+    <None Include="Assets\Plugins\Rewired\Documentation\ReleaseNotes.txt" />
+    <None Include="Assets\Plugins\Rewired\Rewired.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -293,15 +293,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rewired_Editor">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Core">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Windows_Lib">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -316,6 +307,15 @@
     </Reference>
     <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows_Lib">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Editor">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

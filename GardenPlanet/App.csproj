@@ -424,15 +424,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rewired_Editor">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Core">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Windows_Lib">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -447,6 +438,15 @@
     </Reference>
     <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows_Lib">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Editor">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

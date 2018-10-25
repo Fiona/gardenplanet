@@ -54,14 +54,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
-    <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
-    <None Include="Assets\UnityUIExtensions\Editor\UnityUIExtensionsEditor.asmdef" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\TextPicEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\uGUITools.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
+    <None Include="Assets\Plugins\UnityUIExtensions\Editor\UnityUIExtensionsEditor.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -287,15 +287,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rewired_Editor">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Core">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Windows_Lib">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -310,6 +301,15 @@
     </Reference>
     <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows_Lib">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Editor">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Editor/Rewired_Editor.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
