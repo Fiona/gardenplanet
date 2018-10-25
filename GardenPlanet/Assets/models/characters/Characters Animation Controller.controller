@@ -99,6 +99,238 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &114012364235545004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3938f1ba0c4087b0e0329992a254b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onStateEnterEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateUpdateEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateExitEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114819225546459430}
+        m_MethodName: BedStartDone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateMoveEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateIKEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &114115741976300330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3938f1ba0c4087b0e0329992a254b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onStateEnterEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateUpdateEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateExitEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114620245476747936}
+        m_MethodName: EatItemDone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateMoveEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateIKEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &114331393120044620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d6b773b50043d6927de49af04ef9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114408137312942094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d6b773b50043d6927de49af04ef9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114620245476747936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d6b773b50043d6927de49af04ef9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114792106406374396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3938f1ba0c4087b0e0329992a254b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onStateEnterEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateUpdateEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateExitEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114408137312942094}
+        m_MethodName: YawnDone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateMoveEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateIKEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &114819225546459430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d6b773b50043d6927de49af04ef9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114867815652437182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3938f1ba0c4087b0e0329992a254b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onStateEnterEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateUpdateEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateExitEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114331393120044620}
+        m_MethodName: BedEndDone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateMoveEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateIKEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!206 &206568504158458832
 BlendTree:
   m_ObjectHideFlags: 1
@@ -845,7 +1077,9 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101105312978767984}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114867815652437182}
+  - {fileID: 114331393120044620}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -975,7 +1209,9 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101005710696634034}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114115741976300330}
+  - {fileID: 114620245476747936}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1001,7 +1237,9 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101088368206427202}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114012364235545004}
+  - {fileID: 114819225546459430}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1081,7 +1319,9 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101294779518329304}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114792106406374396}
+  - {fileID: 114408137312942094}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

@@ -13,9 +13,8 @@ namespace GardenPlanet
         public RectTransform[] rectTransformArray;
     }
 
-    public class CreateACharacterController: MonoBehaviour
+    public class CreateACharacterController: Controller
     {
-
         [Header("Settings")]
         public float fadeInTime;
         public float fadeOutTime;
@@ -55,26 +54,16 @@ namespace GardenPlanet
         public MultiDimensionalRectTransform[] page2NavigationTargets;
         public MultiDimensionalRectTransform[] page3NavigationTargets;
 
-        [HideInInspector]
-        public GlobalConfig globalConfig;
-
         private int page;
         private Vector2 offScreenPagePosition;
         private bool switchingPages;
         private List<GUINavigator> fieldNavigators;
 
-        public void Awake()
+        protected override void Awake()
         {
-            fieldNavigators = new List<GUINavigator>();
+            base.Awake();
 
-            // Load global config
-            var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
-            var jsonContents = "{}";
-            if(File.Exists(configFilePath))
-                using(var fh = File.OpenText(configFilePath))
-                    jsonContents = fh.ReadToEnd();
-            globalConfig = new GlobalConfig();
-            JsonHandler.PopulateObject(jsonContents, globalConfig);
+            fieldNavigators = new List<GUINavigator>();
         }
 
         public void Start()
@@ -190,7 +179,8 @@ namespace GardenPlanet
             foreach(var field in page2RandomisableFields)
                 field.Randomise();
             foreach(var field in page3RandomisableFields)
-                field.Randomise();
+                if(field.typeShortName != "head_accessories")
+                    field.Randomise();
         }
 
         private void RandomizeButton()

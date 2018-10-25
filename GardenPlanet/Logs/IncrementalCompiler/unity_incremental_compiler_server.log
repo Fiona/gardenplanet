@@ -1,0 +1,377 @@
+ (0,0): [10/23/2018 01:05:36.921 PM] Unity incremental compiler server
+ (0,0): [10/23/2018 01:05:37.045 PM] watchdog active on pid: 2760
+ (0,0): [10/23/2018 01:05:38.257 PM] Unity.TextMeshPro.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:38.274 PM] Unity.TextMeshPro.dll compiling...
+ (0,0): [10/23/2018 01:05:38.282 PM] Unity.PackageManagerUI.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:38.294 PM] Unity.PackageManagerUI.Editor.dll compiling...
+ (0,0): [10/23/2018 01:05:38.299 PM] Unity.Postprocessing.Runtime.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:38.310 PM] Unity.Postprocessing.Runtime.dll compiling...
+ (0,0): [10/23/2018 01:05:38.317 PM] UnityUiExtensions.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:38.328 PM] UnityUiExtensions.dll compiling...
+ (0,0): [10/23/2018 01:05:38.333 PM] Rewired.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:38.344 PM] Rewired.dll compiling...
+ (0,0): [10/23/2018 01:05:40.868 PM] Unity.PackageManagerUI.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.PackageManagerUI.Editor.dll
+ (0,0): [10/23/2018 01:05:40.996 PM] Unity.PackageManagerUI.Editor.dll compilation finished in 2701ms  source files re-parsed: 44 metadata reloaded: 188
+ (0,0): [10/23/2018 01:05:41.009 PM] Unity.PackageManagerUI.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:41.326 PM] Unity.Postprocessing.Runtime.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Runtime.dll
+ (0,0): [10/23/2018 01:05:41.326 PM] Unity.TextMeshPro.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.dll
+ (0,0): [10/23/2018 01:05:41.327 PM] Rewired.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Rewired.dll
+ (0,0): [10/23/2018 01:05:41.326 PM] UnityUiExtensions.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUiExtensions.dll
+ (0,0): [10/23/2018 01:05:41.383 PM] Rewired.dll compilation finished in 3038ms  source files re-parsed: 13 metadata reloaded: 187
+ (0,0): [10/23/2018 01:05:41.391 PM] Unity.TextMeshPro.dll compilation finished in 3115ms  source files re-parsed: 45 metadata reloaded: 194
+ (0,0): [10/23/2018 01:05:41.394 PM] Rewired.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:41.402 PM] Unity.TextMeshPro.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:41.416 PM] Unity.Postprocessing.Runtime.dll compilation finished in 3106ms  source files re-parsed: 56 metadata reloaded: 186
+ (0,0): [10/23/2018 01:05:41.416 PM] UnityUiExtensions.dll compilation finished in 3088ms  source files re-parsed: 129 metadata reloaded: 186
+ (0,0): [10/23/2018 01:05:41.428 PM] Unity.Postprocessing.Runtime.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:41.439 PM] UnityUiExtensions.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:41.791 PM] RewiredEditor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:41.803 PM] RewiredEditor.dll compiling...
+ (0,0): [10/23/2018 01:05:41.840 PM] RewiredEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\RewiredEditor.dll
+ (0,0): [10/23/2018 01:05:41.868 PM] RewiredEditor.dll compilation finished in 65ms  source files re-parsed: 7 metadata reloaded: 1
+ (0,0): [10/23/2018 01:05:41.880 PM] RewiredEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.191 PM] App.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.203 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:05:42.321 PM] Unity.Postprocessing.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.333 PM] Unity.Postprocessing.Editor.dll compiling...
+ (0,0): [10/23/2018 01:05:42.376 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:05:42.422 PM] App.dll compilation finished in 219ms  source files re-parsed: 142 metadata reloaded: 2
+ (0,0): [10/23/2018 01:05:42.423 PM] Unity.TextMeshPro.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.445 PM] Unity.TextMeshPro.Editor.dll compiling...
+ (0,0): [10/23/2018 01:05:42.445 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.511 PM] UnityUIExtensionsEditor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.511 PM] Unity.Postprocessing.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Editor.dll
+ (0,0): [10/23/2018 01:05:42.527 PM] UnityUIExtensionsEditor.dll compiling...
+ (0,0): [10/23/2018 01:05:42.596 PM] Unity.TextMeshPro.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.Editor.dll
+ (0,0): [10/23/2018 01:05:42.605 PM] Unity.Postprocessing.Editor.dll compilation finished in 272ms  source files re-parsed: 35 metadata reloaded: 1
+ (0,0): [10/23/2018 01:05:42.609 PM] Unity.TextMeshPro.Editor.dll compilation finished in 163ms  source files re-parsed: 39 metadata reloaded: 0
+ (0,0): [10/23/2018 01:05:42.617 PM] Unity.Postprocessing.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.621 PM] Unity.TextMeshPro.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:42.629 PM] UnityUIExtensionsEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUIExtensionsEditor.dll
+ (0,0): [10/23/2018 01:05:42.678 PM] UnityUIExtensionsEditor.dll compilation finished in 150ms  source files re-parsed: 7 metadata reloaded: 0
+ (0,0): [10/23/2018 01:05:42.690 PM] UnityUIExtensionsEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.062 PM] Unity.PackageManagerUI.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.074 PM] Unity.PackageManagerUI.Editor.dll compiling...
+ (0,0): [10/23/2018 01:05:50.138 PM] Unity.PackageManagerUI.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.PackageManagerUI.Editor.dll
+ (0,0): [10/23/2018 01:05:50.139 PM] Unity.Postprocessing.Runtime.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.151 PM] Unity.Postprocessing.Runtime.dll compiling...
+ (0,0): [10/23/2018 01:05:50.151 PM] Unity.PackageManagerUI.Editor.dll compilation finished in 76ms  source files re-parsed: 43 metadata reloaded: 4
+ (0,0): [10/23/2018 01:05:50.178 PM] Unity.PackageManagerUI.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.264 PM] Rewired.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.272 PM] Unity.Postprocessing.Runtime.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Runtime.dll
+ (0,0): [10/23/2018 01:05:50.276 PM] Rewired.dll compiling...
+ (0,0): [10/23/2018 01:05:50.367 PM] Unity.TextMeshPro.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.371 PM] Unity.Postprocessing.Runtime.dll compilation finished in 219ms  source files re-parsed: 56 metadata reloaded: 0
+ (0,0): [10/23/2018 01:05:50.377 PM] Rewired.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Rewired.dll
+ (0,0): [10/23/2018 01:05:50.379 PM] Unity.TextMeshPro.dll compiling...
+ (0,0): [10/23/2018 01:05:50.381 PM] Unity.Postprocessing.Runtime.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.460 PM] Rewired.dll compilation finished in 184ms  source files re-parsed: 13 metadata reloaded: 0
+ (0,0): [10/23/2018 01:05:50.494 PM] Rewired.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.502 PM] UnityUiExtensions.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.532 PM] UnityUiExtensions.dll compiling...
+ (0,0): [10/23/2018 01:05:50.827 PM] UnityUiExtensions.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUiExtensions.dll
+ (0,0): [10/23/2018 01:05:50.854 PM] Unity.TextMeshPro.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.dll
+ (0,0): [10/23/2018 01:05:50.885 PM] UnityUiExtensions.dll compilation finished in 354ms  source files re-parsed: 129 metadata reloaded: 0
+ (0,0): [10/23/2018 01:05:50.897 PM] UnityUiExtensions.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:05:50.917 PM] Unity.TextMeshPro.dll compilation finished in 538ms  source files re-parsed: 45 metadata reloaded: 0
+ (0,0): [10/23/2018 01:05:50.929 PM] Unity.TextMeshPro.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:00.959 PM] Unity.Postprocessing.Runtime.dll compiling...
+ (0,0): [10/23/2018 01:06:01.056 PM] Unity.Postprocessing.Runtime.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Runtime.dll
+ (0,0): [10/23/2018 01:06:01.064 PM] UnityUiExtensions.dll compiling...
+ (0,0): [10/23/2018 01:06:01.185 PM] Unity.TextMeshPro.dll compiling...
+ (0,0): [10/23/2018 01:06:01.197 PM] Unity.Postprocessing.Runtime.dll compilation finished in 237ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:01.200 PM] UnityUiExtensions.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUiExtensions.dll
+ (0,0): [10/23/2018 01:06:01.220 PM] Unity.Postprocessing.Runtime.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.253 PM] Unity.Postprocessing.Runtime.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.307 PM] Unity.PackageManagerUI.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.319 PM] Unity.PackageManagerUI.Editor.dll compiling...
+ (0,0): [10/23/2018 01:06:01.321 PM] UnityUiExtensions.dll compilation finished in 257ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:01.345 PM] UnityUiExtensions.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.368 PM] UnityUiExtensions.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.421 PM] Unity.Analytics.Android.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.432 PM] Unity.Analytics.Android.Editor.dll compiling...
+ (0,0): [10/23/2018 01:06:01.456 PM] Unity.PackageManagerUI.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.PackageManagerUI.Editor.dll
+ (0,0): [10/23/2018 01:06:01.461 PM] Unity.Analytics.Android.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Analytics.Android.Editor.dll
+ (0,0): [10/23/2018 01:06:01.476 PM] Rewired.dll compiling...
+ (0,0): [10/23/2018 01:06:01.492 PM] Unity.Analytics.Android.Editor.dll compilation finished in 60ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:01.495 PM] Unity.TextMeshPro.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.dll
+ (0,0): [10/23/2018 01:06:01.504 PM] Unity.Analytics.Android.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.533 PM] Unity.PackageManagerUI.Editor.dll compilation finished in 213ms  source files re-parsed: 52 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:01.558 PM] Rewired.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Rewired.dll
+ (0,0): [10/23/2018 01:06:01.607 PM] Unity.CollabProxy.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.893 PM] Unity.PackageManagerUI.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.923 PM] Unity.TextMeshPro.dll compilation finished in 738ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:01.915 PM] Unity.CollabProxy.Editor.dll compiling...
+ (0,0): [10/23/2018 01:06:01.935 PM] Unity.TextMeshPro.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.692 PM] Unity.Postprocessing.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.946 PM] Unity.TextMeshPro.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.948 PM] Unity.Postprocessing.Editor.dll compiling...
+ (0,0): [10/23/2018 01:06:01.966 PM] Rewired.dll compilation finished in 491ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:01.985 PM] Rewired.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:01.997 PM] Unity.CollabProxy.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.CollabProxy.Editor.dll
+ (0,0): [10/23/2018 01:06:01.998 PM] Rewired.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.060 PM] UnityUIExtensionsEditor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.071 PM] UnityUIExtensionsEditor.dll compiling...
+ (0,0): [10/23/2018 01:06:02.078 PM] Unity.Postprocessing.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Editor.dll
+ (0,0): [10/23/2018 01:06:02.079 PM] Unity.CollabProxy.Editor.dll compilation finished in 164ms  source files re-parsed: 17 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:02.092 PM] Unity.CollabProxy.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.157 PM] UnityUIExtensionsEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUIExtensionsEditor.dll
+ (0,0): [10/23/2018 01:06:02.171 PM] Unity.Postprocessing.Editor.dll compilation finished in 223ms  source files re-parsed: 35 metadata reloaded: 1
+ (0,0): [10/23/2018 01:06:02.182 PM] Unity.Postprocessing.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.207 PM] UnityUIExtensionsEditor.dll compilation finished in 136ms  source files re-parsed: 7 metadata reloaded: 1
+ (0,0): [10/23/2018 01:06:02.219 PM] UnityUIExtensionsEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.340 PM] Unity.TextMeshPro.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.352 PM] Unity.TextMeshPro.Editor.dll compiling...
+ (0,0): [10/23/2018 01:06:02.474 PM] App.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.486 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:06:02.513 PM] Unity.TextMeshPro.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.Editor.dll
+ (0,0): [10/23/2018 01:06:02.608 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:06:02.609 PM] RewiredEditor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.620 PM] RewiredEditor.dll compiling...
+ (0,0): [10/23/2018 01:06:02.620 PM] App.dll compilation finished in 133ms  source files re-parsed: 142 metadata reloaded: 1
+ (0,0): [10/23/2018 01:06:02.643 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.663 PM] RewiredEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\RewiredEditor.dll
+ (0,0): [10/23/2018 01:06:02.666 PM] Unity.TextMeshPro.Editor.dll compilation finished in 313ms  source files re-parsed: 40 metadata reloaded: 1
+ (0,0): [10/23/2018 01:06:02.677 PM] Unity.TextMeshPro.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:06:02.697 PM] RewiredEditor.dll compilation finished in 77ms  source files re-parsed: 7 metadata reloaded: 0
+ (0,0): [10/23/2018 01:06:02.708 PM] RewiredEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:07:57.496 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:07:57.578 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:07:57.591 PM] App.dll compilation finished in 94ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:07:57.603 PM] App.dll: compilation was cached, 1 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:07:57.614 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:08:11.011 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:08:11.081 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:08:11.092 PM] App.dll compilation finished in 82ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:08:11.106 PM] App.dll: compilation was cached, 1 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:08:11.118 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:08:27.563 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:08:27.753 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:08:27.830 PM] App.dll compilation finished in 267ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:08:27.842 PM] App.dll: compilation was cached, 1 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:08:27.854 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:08:28.298 PM] Tests.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:08:28.309 PM] Tests.dll compiling...
+ (0,0): [10/23/2018 01:08:28.385 PM] Tests.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Tests.dll
+ (0,0): [10/23/2018 01:08:28.387 PM] Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:08:28.399 PM] Editor.dll compiling...
+ (0,0): [10/23/2018 01:08:28.427 PM] Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Editor.dll
+ (0,0): [10/23/2018 01:08:28.436 PM] Tests.dll compilation finished in 127ms  source files re-parsed: 3 metadata reloaded: 1
+ (0,0): [10/23/2018 01:08:28.448 PM] Tests.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:08:28.463 PM] Editor.dll compilation finished in 64ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:08:28.475 PM] Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:08:28.491 PM] Assembly-CSharp-Editor-firstpass.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:08:28.503 PM] Assembly-CSharp-Editor-firstpass.dll compiling...
+ (0,0): [10/23/2018 01:08:28.530 PM] Assembly-CSharp-Editor-firstpass.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor-firstpass.dll
+ (0,0): [10/23/2018 01:08:28.557 PM] Assembly-CSharp-Editor-firstpass.dll compilation finished in 54ms  source files re-parsed: 1 metadata reloaded: 7
+ (0,0): [10/23/2018 01:08:28.569 PM] Assembly-CSharp-Editor-firstpass.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:08:29.000 PM] Assembly-CSharp-Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:08:29.012 PM] Assembly-CSharp-Editor.dll compiling...
+ (0,0): [10/23/2018 01:08:29.046 PM] Assembly-CSharp-Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor.dll
+ (0,0): [10/23/2018 01:08:29.084 PM] Assembly-CSharp-Editor.dll compilation finished in 71ms  source files re-parsed: 1 metadata reloaded: 1
+ (0,0): [10/23/2018 01:08:29.095 PM] Assembly-CSharp-Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.057 PM] Unity.Postprocessing.Runtime.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.069 PM] Unity.Postprocessing.Runtime.dll compiling...
+ (0,0): [10/23/2018 01:09:42.237 PM] UnityUiExtensions.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.250 PM] UnityUiExtensions.dll compiling...
+ (0,0): [10/23/2018 01:09:42.323 PM] Unity.TextMeshPro.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.325 PM] Unity.Postprocessing.Runtime.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Runtime.dll
+ (0,0): [10/23/2018 01:09:42.346 PM] Unity.TextMeshPro.dll compiling...
+ (0,0): [10/23/2018 01:09:42.436 PM] Unity.PackageManagerUI.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.465 PM] Unity.PackageManagerUI.Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:42.472 PM] Unity.Postprocessing.Runtime.dll compilation finished in 403ms  source files re-parsed: 56 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.488 PM] Unity.Postprocessing.Runtime.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.554 PM] Unity.Analytics.Android.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.600 PM] UnityUiExtensions.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUiExtensions.dll
+ (0,0): [10/23/2018 01:09:42.602 PM] Unity.Analytics.Android.Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:42.651 PM] Rewired.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.674 PM] Unity.Analytics.Android.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Analytics.Android.Editor.dll
+ (0,0): [10/23/2018 01:09:42.674 PM] Rewired.dll compiling...
+ (0,0): [10/23/2018 01:09:42.714 PM] Unity.Analytics.Android.Editor.dll compilation finished in 112ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.718 PM] UnityUiExtensions.dll compilation finished in 468ms  source files re-parsed: 129 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.736 PM] Unity.Analytics.Android.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.741 PM] Unity.CollabProxy.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.765 PM] UnityUiExtensions.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.769 PM] Unity.PackageManagerUI.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.PackageManagerUI.Editor.dll
+ (0,0): [10/23/2018 01:09:42.765 PM] Unity.CollabProxy.Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:42.853 PM] Rewired.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Rewired.dll
+ (0,0): [10/23/2018 01:09:42.859 PM] Unity.CollabProxy.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.CollabProxy.Editor.dll
+ (0,0): [10/23/2018 01:09:42.860 PM] Unity.PackageManagerUI.Editor.dll compilation finished in 395ms  source files re-parsed: 52 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.876 PM] Unity.PackageManagerUI.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.917 PM] Unity.TextMeshPro.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.dll
+ (0,0): [10/23/2018 01:09:42.921 PM] Unity.CollabProxy.Editor.dll compilation finished in 156ms  source files re-parsed: 17 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.933 PM] Unity.CollabProxy.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.933 PM] Rewired.dll compilation finished in 258ms  source files re-parsed: 13 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.945 PM] Rewired.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:42.987 PM] Unity.TextMeshPro.dll compilation finished in 640ms  source files re-parsed: 45 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:42.999 PM] Unity.TextMeshPro.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.021 PM] Unity.Postprocessing.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.034 PM] Unity.Postprocessing.Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:43.135 PM] Unity.Postprocessing.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Editor.dll
+ (0,0): [10/23/2018 01:09:43.152 PM] UnityUIExtensionsEditor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.164 PM] UnityUIExtensionsEditor.dll compiling...
+ (0,0): [10/23/2018 01:09:43.228 PM] Unity.Postprocessing.Editor.dll compilation finished in 194ms  source files re-parsed: 35 metadata reloaded: 1
+ (0,0): [10/23/2018 01:09:43.240 PM] Unity.Postprocessing.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.248 PM] UnityUIExtensionsEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUIExtensionsEditor.dll
+ (0,0): [10/23/2018 01:09:43.298 PM] UnityUIExtensionsEditor.dll compilation finished in 133ms  source files re-parsed: 7 metadata reloaded: 1
+ (0,0): [10/23/2018 01:09:43.310 PM] UnityUIExtensionsEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.563 PM] RewiredEditor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.575 PM] RewiredEditor.dll compiling...
+ (0,0): [10/23/2018 01:09:43.601 PM] RewiredEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\RewiredEditor.dll
+ (0,0): [10/23/2018 01:09:43.631 PM] RewiredEditor.dll compilation finished in 56ms  source files re-parsed: 7 metadata reloaded: 1
+ (0,0): [10/23/2018 01:09:43.643 PM] RewiredEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.648 PM] App.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.660 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:09:43.833 PM] Unity.TextMeshPro.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:43.845 PM] Unity.TextMeshPro.Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:44.005 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:09:44.058 PM] Unity.TextMeshPro.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.Editor.dll
+ (0,0): [10/23/2018 01:09:44.084 PM] App.dll compilation finished in 424ms  source files re-parsed: 142 metadata reloaded: 1
+ (0,0): [10/23/2018 01:09:44.096 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.169 PM] Unity.TextMeshPro.Editor.dll compilation finished in 324ms  source files re-parsed: 40 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:44.181 PM] Unity.TextMeshPro.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.493 PM] Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.505 PM] Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:44.534 PM] Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Editor.dll
+ (0,0): [10/23/2018 01:09:44.561 PM] Editor.dll compilation finished in 57ms  source files re-parsed: 1 metadata reloaded: 1
+ (0,0): [10/23/2018 01:09:44.573 PM] Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.585 PM] Tests.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.597 PM] Tests.dll compiling...
+ (0,0): [10/23/2018 01:09:44.652 PM] Tests.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Tests.dll
+ (0,0): [10/23/2018 01:09:44.686 PM] Assembly-CSharp-Editor-firstpass.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.697 PM] Assembly-CSharp-Editor-firstpass.dll compiling...
+ (0,0): [10/23/2018 01:09:44.702 PM] Tests.dll compilation finished in 105ms  source files re-parsed: 3 metadata reloaded: 0
+ (0,0): [10/23/2018 01:09:44.714 PM] Tests.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:44.723 PM] Assembly-CSharp-Editor-firstpass.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor-firstpass.dll
+ (0,0): [10/23/2018 01:09:44.750 PM] Assembly-CSharp-Editor-firstpass.dll compilation finished in 52ms  source files re-parsed: 1 metadata reloaded: 7
+ (0,0): [10/23/2018 01:09:44.761 PM] Assembly-CSharp-Editor-firstpass.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:09:45.015 PM] Assembly-CSharp-Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:09:45.027 PM] Assembly-CSharp-Editor.dll compiling...
+ (0,0): [10/23/2018 01:09:45.059 PM] Assembly-CSharp-Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor.dll
+ (0,0): [10/23/2018 01:09:45.095 PM] Assembly-CSharp-Editor.dll compilation finished in 67ms  source files re-parsed: 1 metadata reloaded: 1
+ (0,0): [10/23/2018 01:09:45.106 PM] Assembly-CSharp-Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:39.322 PM] Compiler cache size is now 23.98 MB
+ (0,0): [10/23/2018 01:10:45.835 PM] Unity.Postprocessing.Runtime.dll compiling...
+ (0,0): [10/23/2018 01:10:45.937 PM] UnityUiExtensions.dll compiling...
+ (0,0): [10/23/2018 01:10:45.949 PM] Unity.Postprocessing.Runtime.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Runtime.dll
+ (0,0): [10/23/2018 01:10:46.041 PM] Unity.TextMeshPro.dll compiling...
+ (0,0): [10/23/2018 01:10:46.057 PM] Unity.Postprocessing.Runtime.dll compilation finished in 221ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.079 PM] Unity.Postprocessing.Runtime.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.088 PM] UnityUiExtensions.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUiExtensions.dll
+ (0,0): [10/23/2018 01:10:46.092 PM] Unity.Postprocessing.Runtime.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.147 PM] Rewired.dll compiling...
+ (0,0): [10/23/2018 01:10:46.197 PM] UnityUiExtensions.dll compilation finished in 259ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.210 PM] UnityUiExtensions.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.229 PM] UnityUiExtensions.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.241 PM] Unity.PackageManagerUI.Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:46.338 PM] Rewired.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Rewired.dll
+ (0,0): [10/23/2018 01:10:46.382 PM] Unity.PackageManagerUI.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.PackageManagerUI.Editor.dll
+ (0,0): [10/23/2018 01:10:46.382 PM] Unity.CollabProxy.Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:46.404 PM] Unity.TextMeshPro.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.dll
+ (0,0): [10/23/2018 01:10:46.422 PM] Rewired.dll compilation finished in 274ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.430 PM] Unity.CollabProxy.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.CollabProxy.Editor.dll
+ (0,0): [10/23/2018 01:10:46.433 PM] Rewired.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.444 PM] Rewired.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.455 PM] Unity.PackageManagerUI.Editor.dll compilation finished in 213ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.463 PM] Unity.Analytics.Android.Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:46.467 PM] Unity.PackageManagerUI.Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.479 PM] Unity.PackageManagerUI.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.491 PM] Unity.TextMeshPro.dll compilation finished in 449ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.495 PM] Unity.Analytics.Android.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Analytics.Android.Editor.dll
+ (0,0): [10/23/2018 01:10:46.495 PM] Unity.CollabProxy.Editor.dll compilation finished in 112ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.504 PM] Unity.TextMeshPro.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.508 PM] Unity.CollabProxy.Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.515 PM] Unity.TextMeshPro.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.519 PM] Unity.CollabProxy.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.522 PM] Unity.Analytics.Android.Editor.dll compilation finished in 59ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:46.533 PM] Unity.Analytics.Android.Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.544 PM] Unity.Analytics.Android.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.561 PM] Unity.Postprocessing.Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:46.647 PM] Unity.Postprocessing.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.Postprocessing.Editor.dll
+ (0,0): [10/23/2018 01:10:46.672 PM] UnityUIExtensionsEditor.dll compiling...
+ (0,0): [10/23/2018 01:10:46.737 PM] Unity.Postprocessing.Editor.dll compilation finished in 175ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:10:46.739 PM] UnityUIExtensionsEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\UnityUIExtensionsEditor.dll
+ (0,0): [10/23/2018 01:10:46.748 PM] Unity.Postprocessing.Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.759 PM] Unity.Postprocessing.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.790 PM] UnityUIExtensionsEditor.dll compilation finished in 117ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:10:46.801 PM] UnityUIExtensionsEditor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:46.812 PM] UnityUIExtensionsEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.058 PM] RewiredEditor.dll compiling...
+ (0,0): [10/23/2018 01:10:47.082 PM] RewiredEditor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\RewiredEditor.dll
+ (0,0): [10/23/2018 01:10:47.113 PM] RewiredEditor.dll compilation finished in 54ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:10:47.125 PM] RewiredEditor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.135 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:10:47.136 PM] RewiredEditor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.241 PM] Unity.TextMeshPro.Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:47.339 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:10:47.365 PM] Unity.TextMeshPro.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.TextMeshPro.Editor.dll
+ (0,0): [10/23/2018 01:10:47.414 PM] App.dll compilation finished in 279ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:10:47.426 PM] App.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.437 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.474 PM] Unity.TextMeshPro.Editor.dll compilation finished in 233ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:47.485 PM] Unity.TextMeshPro.Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.496 PM] Unity.TextMeshPro.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:47.956 PM] Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:47.982 PM] Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Editor.dll
+ (0,0): [10/23/2018 01:10:48.009 PM] Editor.dll compilation finished in 52ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:10:48.020 PM] Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.031 PM] Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.057 PM] Tests.dll compiling...
+ (0,0): [10/23/2018 01:10:48.113 PM] Tests.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Tests.dll
+ (0,0): [10/23/2018 01:10:48.159 PM] Assembly-CSharp-Editor-firstpass.dll compiling...
+ (0,0): [10/23/2018 01:10:48.175 PM] Tests.dll compilation finished in 118ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:10:48.187 PM] Tests.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.188 PM] Assembly-CSharp-Editor-firstpass.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor-firstpass.dll
+ (0,0): [10/23/2018 01:10:48.199 PM] Tests.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.215 PM] Assembly-CSharp-Editor-firstpass.dll compilation finished in 55ms  source files re-parsed: 0 metadata reloaded: 7
+ (0,0): [10/23/2018 01:10:48.226 PM] Assembly-CSharp-Editor-firstpass.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.237 PM] Assembly-CSharp-Editor-firstpass.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.467 PM] Assembly-CSharp-Editor.dll compiling...
+ (0,0): [10/23/2018 01:10:48.500 PM] Assembly-CSharp-Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor.dll
+ (0,0): [10/23/2018 01:10:48.537 PM] Assembly-CSharp-Editor.dll compilation finished in 69ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:10:48.549 PM] Assembly-CSharp-Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:10:48.561 PM] Assembly-CSharp-Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:22:59.992 PM] App.dll compiling...
+ (0,0): [10/23/2018 01:23:00.153 PM] App.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\App.dll
+ (0,0): [10/23/2018 01:23:00.226 PM] App.dll compilation finished in 234ms  source files re-parsed: 1 metadata reloaded: 0
+ (0,0): [10/23/2018 01:23:00.237 PM] App.dll: compilation was cached, 1 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.248 PM] App.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.694 PM] Tests.dll compiling...
+ (0,0): [10/23/2018 01:23:00.752 PM] Tests.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Tests.dll
+ (0,0): [10/23/2018 01:23:00.795 PM] Editor.dll compiling...
+ (0,0): [10/23/2018 01:23:00.810 PM] Tests.dll compilation finished in 116ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:23:00.818 PM] Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Editor.dll
+ (0,0): [10/23/2018 01:23:00.822 PM] Tests.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.833 PM] Tests.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.843 PM] Editor.dll compilation finished in 48ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:23:00.854 PM] Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.865 PM] Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.904 PM] Assembly-CSharp-Editor-firstpass.dll compiling...
+ (0,0): [10/23/2018 01:23:00.928 PM] Assembly-CSharp-Editor-firstpass.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor-firstpass.dll
+ (0,0): [10/23/2018 01:23:00.961 PM] Assembly-CSharp-Editor-firstpass.dll compilation finished in 56ms  source files re-parsed: 0 metadata reloaded: 0
+ (0,0): [10/23/2018 01:23:00.972 PM] Assembly-CSharp-Editor-firstpass.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:00.983 PM] Assembly-CSharp-Editor-firstpass.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:01.219 PM] Assembly-CSharp-Editor.dll compiling...
+ (0,0): [10/23/2018 01:23:01.254 PM] Assembly-CSharp-Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor.dll
+ (0,0): [10/23/2018 01:23:01.288 PM] Assembly-CSharp-Editor.dll compilation finished in 68ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:23:01.300 PM] Assembly-CSharp-Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:01.311 PM] Assembly-CSharp-Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:31.596 PM] Unity.PackageManagerUI.Editor.dll: no prior compilation found in cache. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:31.608 PM] Unity.PackageManagerUI.Editor.dll compiling...
+ (0,0): [10/23/2018 01:23:31.686 PM] Unity.PackageManagerUI.Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Unity.PackageManagerUI.Editor.dll
+ (0,0): [10/23/2018 01:23:31.749 PM] Unity.PackageManagerUI.Editor.dll compilation finished in 141ms  source files re-parsed: 52 metadata reloaded: 0
+ (0,0): [10/23/2018 01:23:31.760 PM] Unity.PackageManagerUI.Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:32.097 PM] Assembly-CSharp-Editor-firstpass.dll compiling...
+ (0,0): [10/23/2018 01:23:32.120 PM] Assembly-CSharp-Editor-firstpass.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor-firstpass.dll
+ (0,0): [10/23/2018 01:23:32.146 PM] Assembly-CSharp-Editor-firstpass.dll compilation finished in 49ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:23:32.157 PM] Assembly-CSharp-Editor-firstpass.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:32.169 PM] Assembly-CSharp-Editor-firstpass.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:23:32.397 PM] Assembly-CSharp-Editor.dll compiling...
+ (0,0): [10/23/2018 01:23:32.428 PM] Assembly-CSharp-Editor.dll: emitting IL to : D:\devel\unity\gardenplanet\GardenPlanet\Temp\Assembly-CSharp-Editor.dll
+ (0,0): [10/23/2018 01:23:32.464 PM] Assembly-CSharp-Editor.dll compilation finished in 67ms  source files re-parsed: 0 metadata reloaded: 1
+ (0,0): [10/23/2018 01:23:32.477 PM] Assembly-CSharp-Editor.dll: compilation was cached, 0 file(s) were found to have changed. Caller PID: 2760
+ (0,0): [10/23/2018 01:23:32.488 PM] Assembly-CSharp-Editor.dll: session status updated to IncrementalCompilationStatus.Finished for Caller PID: 2760
+ (0,0): [10/23/2018 01:25:43.596 PM] watchdog threw an exception: System.ArgumentException: Process with an Id of 2760 is not running.
+   at System.Diagnostics.Process.GetProcessById(Int32 processId, String machineName)
+   at System.Diagnostics.Process.GetProcessById(Int32 processId)
+   at UnityEditor.Compilation.IncrementalCompiler.Server.<>c__DisplayClass7_0.<Watchdog>b__0()

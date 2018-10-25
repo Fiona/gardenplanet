@@ -8,9 +8,8 @@ using System.Text;
 namespace GardenPlanet
 {
 
-    public class MapEditorController : MonoBehaviour
+    public class MapEditorController : Controller
     {
-
         List<GameObject> barriers;
         MouseHoverPlane mouseHoverPlane;
         List<MapEditorMode> mapEditorModes;
@@ -33,8 +32,10 @@ namespace GardenPlanet
         public Map map;
         public Text currentModeText;
 
-        public void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             var mouseHoverPlaneObj = new GameObject("Mouse Hover Plane");
             mouseHoverPlane = mouseHoverPlaneObj.AddComponent<MouseHoverPlane>();
 

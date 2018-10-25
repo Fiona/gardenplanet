@@ -8,19 +8,17 @@ namespace GardenPlanet
     /*
      * Main controller for the game itself. Always exists and holds references to a whole load of useful objects.
      */
-    public class GameController: MonoBehaviour
+    public class GameController: Controller
     {
 
         [Header("Object References")]
-        public PlayerCamera mainCamera;
+        public InGameCamera mainCamera;
         public RectTransform canvasRect;
         public ScreenFade screenFade;
         public IsMouseOver isMouseOverWorld;
 
         [HideInInspector]
         public Player player;
-        [HideInInspector]
-        public GlobalConfig globalConfig;
         [HideInInspector]
         public ItemManager itemManager;
         [HideInInspector]
@@ -46,23 +44,11 @@ namespace GardenPlanet
         [HideInInspector]
         public EffectsManager effectsManager;
 
-        private Debug debugMenu;
         private InfoPopup infoPopup;
-        private GameState gameState;
 
-        public void Awake()
+        protected override void Awake()
         {
-            // Load global config
-            var configFilePath = Path.Combine(Consts.DATA_DIR, Consts.FILE_GLOBAL_CONFIG);
-            var jsonContents = "{}";
-            if(File.Exists(configFilePath))
-                using(var fh = File.OpenText(configFilePath))
-                    jsonContents = fh.ReadToEnd();
-            globalConfig = new GlobalConfig();
-            JsonHandler.PopulateObject(jsonContents, globalConfig);
-
-            // Grab current game state
-            gameState = GameState.GetInstance();
+            base.Awake();
 
             // Managers etc
             var mouseHoverPlane = new GameObject("Mouse Hover Plane");
@@ -105,18 +91,11 @@ namespace GardenPlanet
             inGameMenuButton.SetCallback(() => StartCoroutine(OpenInGameMenu()));
 
             // Set up player and camera
-            mainCamera.SetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
             mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
+            mainCamera.InstantSetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
 
             // Start at day...
             world.timer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
-
-            // Optional debug menu
-            if(Debug.isDebugBuild || Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                var debugObj = new GameObject("DebugMenu");
-                debugObj.AddComponent<DebugMenu>();
-            }
         }
 
         public void Start()
@@ -136,12 +115,13 @@ namespace GardenPlanet
             StartCoroutine(ControllerCoroutine());
         }
 
-        /*
-         * TODO TODO
-         */
         public IEnumerator ControllerCoroutine()
         {
-            yield return new WaitForFixedUpdate();
+            while(true)
+            {
+                mainCamera.SetLookAheadCharacter(player);
+                yield return new WaitForFixedUpdate();
+            }
         }
 
         public void UpdateMouseOverTile(TilePosition tilePosition)
@@ -296,7 +276,9 @@ namespace GardenPlanet
 
         public IEnumerator PlayerSleep(GameObject bedObject)
         {
+            mainCamera.LockTarget(bedObject, 2f, .3f);
             yield return StartCoroutine(player.Sleep(bedObject));
+            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
         }
 
         public IEnumerator OpenInGameMenu(bool forceOpen = false)

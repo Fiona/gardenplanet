@@ -83,7 +83,7 @@ namespace GardenPlanet
                 return player.controllers.maps.GetMap(controller.type, controller.id, category, layoutMenus);
             }
         }
-        private Controller controller { get { return player.controllers.GetController(selectedControllerType, selectedControllerId); } }
+        private Rewired.Controller controller { get { return player.controllers.GetController(selectedControllerType, selectedControllerId); } }
 
         private GameInputManager manager;
         private InputMapper inputMapper;
