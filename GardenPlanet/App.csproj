@@ -795,13 +795,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityUiExtensions.csproj">
-      <Project>{662357F3-65D0-1B55-7D1A-579ADE68A581}</Project>
-      <Name>UnityUiExtensions</Name>
-    </ProjectReference>
     <ProjectReference Include="Rewired.csproj">
       <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
       <Name>Rewired</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
+      <Name>UnityUIExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
