@@ -690,6 +690,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{A0C6F18D-20D2-2193-A791-B91A9B9ADAE6}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
       <Project>{8412EAF0-6995-FB47-FB69-056B2EA92ED1}</Project>
       <Name>Assembly-CSharp-Editor-firstpass</Name>
@@ -706,13 +710,13 @@
       <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
       <Name>Rewired</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityUiExtensions.csproj">
-      <Project>{662357F3-65D0-1B55-7D1A-579ADE68A581}</Project>
-      <Name>UnityUiExtensions</Name>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
+      <Name>UnityUIExtensions</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{991291BF-C8EA-0291-4374-68D2758531DE}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
+    <ProjectReference Include="MEC.csproj">
+      <Project>{A023A90E-F085-2121-582B-3CBEE3BD052C}</Project>
+      <Name>MEC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

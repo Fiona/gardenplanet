@@ -109,6 +109,9 @@ namespace GardenPlanet
             else
                 player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=EightDirection.Down});
 
+            // Add testy boi
+            world.AddCharacter(Consts.CHAR_ID_TESTYBOI, new MapTilePosition(world.currentMap, 3, 7, 0));
+
             // Objects are set up, tell the game state to set the specifics up
             gameState.InitialiseGame(player);
             StartCoroutine(screenFade.FadeIn(1f));

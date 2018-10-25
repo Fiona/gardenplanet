@@ -15,7 +15,7 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
+        public const AppState INITIAL_APP_STATE = AppState.Game;
 
         // What the first map name is
         public const string START_MAP = "devtest";
@@ -96,6 +96,7 @@ namespace GardenPlanet
         public static readonly float[] CHARACTER_BLINK_TIME_RANGE = { .05f, .1f };
 
         public static string CHAR_ID_PLAYER = "__PLAYER__";
+        public static string CHAR_ID_TESTYBOI = "TestyBoi";
 
         // -----------------------------
         // PLAYER
@@ -236,6 +237,8 @@ namespace GardenPlanet
         public const string FILE_EXTENSION_ITEM_TYPE_DATA = "json";
         public const string FILE_GAME_SETTINGS_FILE = "gamesettings.dat";
         public const string FILE_TILE_MARKERS_FILE = "tilemarkers.json";
+        public const string DATA_DIR_CHARACTERS_DATA = "characters";
+        public const string FILE_EXTENSION_CHARACTER_DATA = "json";
 
         // -----------------------------
         // EDITOR

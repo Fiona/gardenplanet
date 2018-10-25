@@ -1,0 +1,46 @@
+{
+  "appearence": {
+    "top": "ilovefarmingshirt",
+    "bottom": "jeans",
+    "shoes": "brownBoots",
+    "headAccessory": "spacecap",
+    "backAccessory": "",
+    "hair": "",
+    "hideHair": false,
+    "eyes": "cute",
+    "eyebrows": "bushy",
+    "mouth": "kind_smile",
+    "nose": "button",
+    "faceDetail1": "freckles",
+    "faceDetail1Opacity": 1.0,
+    "faceDetail1FlipHorizontal": true,
+    "faceDetail2": "beautymark",
+    "faceDetail2Opacity": 0.844885468,
+    "faceDetail2FlipHorizontal": true,
+    "eyeColor": [
+      1.0,
+      0.9946378,
+      0.1372549,
+      1.0
+    ],
+    "skinColor": [
+      0.5686275,
+      0.474262863,
+      0.3255671,
+      1.0
+    ],
+    "hairColor": [
+      0.8980392,
+      0.6184973,
+      0.288781226,
+      1.0
+    ]
+  },
+  "information": {
+    "id": "TestyBoi",
+    "Name": "Testy Boi",
+    "seasonBirthday": 1,
+    "dayBirthday": 4,
+    "bed": null
+  }
+}

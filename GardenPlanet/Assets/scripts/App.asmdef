@@ -1,12 +1,17 @@
 {
     "name": "App",
     "references": [
-        "UnityUiExtensions",
         "Rewired",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "UnityUIExtensions",
+        "MEC"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

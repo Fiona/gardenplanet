@@ -55,6 +55,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Editor\MissingPushNotificationEntitlementRemover.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\BezierLineRendererEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\ColorPickerPresetsEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\CUIBezierCurveEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\CUIGraphicEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\CUIImageEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\CUITextEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\ReadOnlyDrawer.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\TextPicEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\TextPicIconEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\TextPicIconListCopier.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\TextPicRenameEditor.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\uGUITools.cs" />
+    <Compile Include="Assets\Plugins\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -690,6 +707,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{A0C6F18D-20D2-2193-A791-B91A9B9ADAE6}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="App.csproj">
       <Project>{E695261D-ECD2-F612-61FB-D4ED7A5A6980}</Project>
       <Name>App</Name>
@@ -702,13 +723,13 @@
       <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
       <Name>Rewired</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityUiExtensions.csproj">
-      <Project>{662357F3-65D0-1B55-7D1A-579ADE68A581}</Project>
-      <Name>UnityUiExtensions</Name>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
+      <Name>UnityUIExtensions</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{991291BF-C8EA-0291-4374-68D2758531DE}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
+    <ProjectReference Include="MEC.csproj">
+      <Project>{A023A90E-F085-2121-582B-3CBEE3BD052C}</Project>
+      <Name>MEC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

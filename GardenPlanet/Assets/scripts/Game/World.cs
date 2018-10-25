@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -147,7 +148,31 @@ namespace GardenPlanet
             // Create and add the character game object
             var prefabPath = ID == Consts.CHAR_ID_PLAYER ? Consts.PREFAB_PATH_PLAYER : Consts.PREFAB_PATH_CHARACTER;
             var character = Instantiate(Resources.Load<Character>(prefabPath));
+            character.id = ID;
             characters.Add(ID, character);
+
+            // Load data in
+            if(ID != Consts.CHAR_ID_PLAYER)
+            {
+                var dataFilepath = character.GetCharacterDataFilePath();
+                if(File.Exists(dataFilepath))
+                {
+                    Character.CharacterData loadedData;
+                    try
+                    {
+                        using(var fh = File.OpenText(dataFilepath))
+                            loadedData = JsonHandler.Deserialize<Character.CharacterData>(fh.ReadToEnd());
+                        character.SetCharacterData(loadedData);
+                    }
+                    catch(JsonErrorException e)
+                    {
+                        Debug.Log(e);
+                        throw new Exception($"Error loading character data: {dataFilepath}");
+                    }
+                }
+                else
+                    throw new Exception($"Character data file does not exist: {dataFilepath}");
+            }
 
             // Set position
             if(spawnLocation == null)
@@ -159,6 +184,9 @@ namespace GardenPlanet
             var bedInfo = character.GetBedInformation() ?? GetBedOwnedBy(ID);
             if(bedInfo != null)
                 character.SetBed(bedInfo);
+
+            // Add AI component
+            character.gameObject.AddComponent<CharacterAI>();
 
             return character;
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Schema;
 using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +21,12 @@ namespace GardenPlanet
 
     public class Character : MonoBehaviour
     {
+        public struct CharacterData
+        {
+            public Appearence appearence;
+            public Information information;
+        }
+
         public struct Appearence
         {
             public string top;
@@ -453,6 +461,24 @@ namespace GardenPlanet
         }
 
         /*
+         * Up-to-date character data struct
+         */
+        public CharacterData GetCharacterData => new CharacterData
+        {
+            appearence = appearence,
+            information = information
+        };
+
+        /*
+         * Updates data in one struct
+         */
+        public void SetCharacterData(CharacterData newData)
+        {
+            SetInformation(newData.information);
+            SetAppearence(newData.appearence);
+        }
+
+        /*
          * Rename the character
          */
         public void SetName(string newName)
@@ -709,6 +735,34 @@ namespace GardenPlanet
         public float GetSpeed()
         {
             return rigidBody.velocity.magnitude;
+        }
+
+        /*
+         * Saves out the information on this Character to a character data json file
+         */
+        public void SaveToFile()
+        {
+            var filepath = GetCharacterDataFilePath();
+
+            // Check directories exist
+            if(!Directory.Exists(Consts.DATA_DIR))
+                Directory.CreateDirectory(Consts.DATA_DIR);
+            if(!Directory.Exists(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_CHARACTERS_DATA)))
+                Directory.CreateDirectory(Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_CHARACTERS_DATA));
+
+            // Collate data and save out
+            JsonHandler.SerializeToFile(GetCharacterData, filepath);
+        }
+
+        /*
+         * The path to save character data files out to
+         */
+        public string GetCharacterDataFilePath()
+        {
+            return Path.Combine(
+                Path.Combine(Consts.DATA_DIR, Consts.DATA_DIR_CHARACTERS_DATA),
+                $"{id}.{Consts.FILE_EXTENSION_CHARACTER_DATA}"
+            );
         }
 
         protected void RegenerateVisuals()
