@@ -29,6 +29,7 @@ namespace GardenPlanet
             public Dictionary<string, AppearenceObject> mouths;
             public Dictionary<string, AppearenceObject> faceDetail;
             public Dictionary<string, AppearenceObject> headAccessories;
+            public Dictionary<string, AppearenceObject> backAccessories;
             public Dictionary<string, AppearenceObject> shoes;
             public List<List<int>> skinColours;
             public List<List<int>> hairColours;

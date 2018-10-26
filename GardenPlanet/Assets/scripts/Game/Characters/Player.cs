@@ -18,16 +18,16 @@ namespace GardenPlanet
 
         public static Appearence defaultAppearence = new Appearence
         {
-            top = "ilovefarmingshirt",
+            top = "iLoveFarmingShirt",
             bottom = "",
             shoes = "",
             headAccessory = "",
-            backAccessory = "",
+            backAccessory = "redBackpack",
             hair = "straight",
 
             eyebrows = "thin",
             eyes = "cute",
-            mouth = "kind_smile",
+            mouth = "kindSmile",
             nose = "small",
 
             eyeColor = Color.HSVToRGB(115/255f, 186/255f, 158/255f),

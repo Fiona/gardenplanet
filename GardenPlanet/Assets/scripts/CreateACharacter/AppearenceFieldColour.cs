@@ -49,13 +49,13 @@ namespace GardenPlanet
                 var colourItems = new List<List<int>>();
                 switch(typeName)
                 {
-                    case "skin_colours":
+                    case "skinColours":
                         colourItems = controller.globalConfig.appearence.skinColours;
                         break;
-                    case "eye_colours":
+                    case "eyeColours":
                         colourItems = controller.globalConfig.appearence.eyeColours;
                         break;
-                    case "hair_colours":
+                    case "hairColours":
                         colourItems = controller.globalConfig.appearence.hairColours;
                         break;
                     default:

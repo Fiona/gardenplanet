@@ -32,10 +32,10 @@ namespace GardenPlanet
                 case "mouths":
                     SetMouth(appearenceValue);
                     break;
-                case "face_detail1":
+                case "faceDetail1":
                     SetFaceDetail1(appearenceValue);
                     break;
-                case "face_detail2":
+                case "faceDetail2":
                     SetFaceDetail2(appearenceValue);
                     break;
                 case "hair":
@@ -50,10 +50,10 @@ namespace GardenPlanet
                 case "shoes":
                     SetShoes(appearenceValue);
                     break;
-                case "head_accessories":
+                case "headAccessories":
                     SetHeadAccessory(appearenceValue);
                     break;
-                case "back_accessories":
+                case "backAccessories":
                     SetBackAccessory(appearenceValue);
                     break;
             }
@@ -65,10 +65,10 @@ namespace GardenPlanet
         {
             switch(appearenceType)
             {
-                case "face_detail1_opacity":
+                case "faceDetail1Opacity":
                     SetFaceDetail1Opacity(appearenceValue);
                     break;
-                case "face_detail2_opacity":
+                case "faceDetail2Opacity":
                     SetFaceDetail2Opacity(appearenceValue);
                     break;
             }
@@ -80,10 +80,10 @@ namespace GardenPlanet
         {
             switch(appearenceType)
             {
-                case "face_detail1_flip_horizontal":
+                case "faceDetail1FlipHorizontal":
                     SetFaceDetail1FlipHorizontal(appearenceValue);
                     break;
-                case "face_detail2_flip_horizontal":
+                case "faceDetail2FlipHorizontal":
                     SetFaceDetail2FlipHorizontal(appearenceValue);
                     break;
             }
@@ -95,10 +95,10 @@ namespace GardenPlanet
         {
             switch(appearenceType)
             {
-                case "face_detail1_flip_horizontal":
+                case "faceDetail1FlipHorizontal":
                     SetAppearenceValue(appearenceType, !appearence.faceDetail1FlipHorizontal);
                     break;
-                case "face_detail2_flip_horizontal":
+                case "faceDetail2FlipHorizontal":
                     SetAppearenceValue(appearenceType, !appearence.faceDetail2FlipHorizontal);
                     break;
             }
@@ -108,13 +108,13 @@ namespace GardenPlanet
         {
             switch(appearenceType)
             {
-                case "eye_colours":
+                case "eyeColours":
                     SetEyeColour(appearenceValue);
                     break;
-                case "skin_colours":
+                case "skinColours":
                     SetSkinColour(appearenceValue);
                     break;
-                case "hair_colours":
+                case "hairColours":
                     SetHairColour(appearenceValue);
                     break;
             }

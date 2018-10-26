@@ -13,9 +13,9 @@ namespace GardenPlanet
             visualsHolder = new GameObject("visuals");
             visualsHolder.transform.SetParent(transform, false);
 
-            baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + "basemodel");
+            baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_MODEL_VISUAL_PATH + "basemodel");
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
-            AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + "basemodel_face", bonesToClone);
+            AddModelToVisuals(Consts.CHARACTERS_BASE_MODEL_VISUAL_PATH + "basemodel_face", bonesToClone);
             //AddModelToVisuals(Consts.CHARACTERS_TOPS_VISUAL_PATH + "ilovefarmingshirt", bonesToClone);
 
             Animator anim = GetComponent<Animator>();

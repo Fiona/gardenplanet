@@ -15,7 +15,7 @@ namespace GardenPlanet
         // -----------------------------
 
         // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.Game;
+        public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
 
         // What the first map name is
         public const string START_MAP = "devtest";
@@ -208,18 +208,18 @@ namespace GardenPlanet
         public const string PREFAB_PATH_CHARACTER = "prefabs/world/Character";
         public const string PREFAB_PATH_EFFECTS = "effects/";
 
-        public const string CHARACTERS_BASE_VISUAL_PATH = "characters/base/";
+        public const string CHARACTERS_BASE_MODEL_VISUAL_PATH = "characters/baseModel/";
         public const string CHARACTERS_TOPS_VISUAL_PATH = "characters/appearence/tops/";
         public const string CHARACTERS_BOTTOMS_VISUAL_PATH = "characters/appearence/bottoms/";
         public const string CHARACTERS_SHOES_VISUAL_PATH = "characters/appearence/shoes/";
-        public const string CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH = "characters/appearence/head_accessories/";
-        public const string CHARACTERS_BACK_ACCESSORIES_VISUAL_PATH = "characters/appearence/back_accessories/";
+        public const string CHARACTERS_HEAD_ACCESSORIES_VISUAL_PATH = "characters/appearence/headAccessories/";
+        public const string CHARACTERS_BACK_ACCESSORIES_VISUAL_PATH = "characters/appearence/backAccessories/";
         public const string CHARACTERS_HAIR_VISUAL_PATH = "characters/appearence/hair/";
         public const string CHARACTERS_EYES_TEXTURE_PATH = "characters/appearence/eyes/";
         public const string CHARACTERS_MOUTHS_TEXTURE_PATH = "characters/appearence/mouths/";
         public const string CHARACTERS_NOSES_TEXTURE_PATH = "characters/appearence/noses/";
         public const string CHARACTERS_EYEBROWS_TEXTURE_PATH = "characters/appearence/eyebrows/";
-        public const string CHARACTERS_FACE_DETAILS_TEXTURE_PATH = "characters/appearence/face_details/";
+        public const string CHARACTERS_FACE_DETAILS_TEXTURE_PATH = "characters/appearence/faceDetails/";
 
         // -----------------------------
         // FILESYSTEM

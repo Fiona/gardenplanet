@@ -107,7 +107,7 @@ namespace GardenPlanet
         // Visuals related members
         protected GameObject visualsHolder;
 
-        protected string baseModelName = "basemodel";
+        protected string baseModelName = "baseModel";
         protected Appearence appearence;
         protected Information information;
         protected GameObject baseModel;
@@ -792,11 +792,11 @@ namespace GardenPlanet
             lowerSpineBones = new List<Transform>();
             armatures = new List<Transform>();
 
-            baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName);
+            baseModel = AddModelToVisuals(Consts.CHARACTERS_BASE_MODEL_VISUAL_PATH + baseModelName);
             var bonesToClone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
             RegenerateSkin();
 
-            var faceModel = AddModelToVisuals(Consts.CHARACTERS_BASE_VISUAL_PATH + baseModelName + "_face", bonesToClone);
+            var faceModel = AddModelToVisuals(Consts.CHARACTERS_BASE_MODEL_VISUAL_PATH + baseModelName + "Face", bonesToClone);
             face = faceModel.GetComponentInChildren<CharacterFace>();
 
             if(appearence.top != "")

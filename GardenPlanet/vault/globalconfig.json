@@ -21,12 +21,12 @@
     },
 
     "tops": {
-      "ilovefarmingshirt": {
+      "iLoveFarmingShirt": {
         "name": "I <3 Farming Shirt",
         "unlockedAtStart": true
       },
-      "blueilovefarmingshirt": {
-        "name": "Blue I <3 Farming Shirt",
+      "iLoveFarmingShirtAlt1": {
+        "name": "I <3 Farming Shirt (Blue)",
         "unlockedAtStart": true
       }
     },
@@ -50,10 +50,17 @@
     },
 
     "headAccessories" : {
-      "spacecap": {
+      "spaceCap": {
         "name": "Space Cap",
         "unlockedAtStart": true,
         "hideHair": true
+      }
+    },
+
+    "backAccessories" : {
+      "redBackpack": {
+        "name": "Red Backpack",
+        "unlockedAtStart": true
       }
     },
 
@@ -123,7 +130,7 @@
     },
 
     "mouths": {
-      "kind_smile": {
+      "kindSmile": {
         "name": "Kind Smile",
         "unlockedAtStart": true
       },
@@ -134,7 +141,7 @@
     },
 
     "faceDetail": {
-      "beautymark": {
+      "beautyMark": {
         "name": "Beauty Mark",
         "unlockedAtStart": true
       },

@@ -179,7 +179,7 @@ namespace GardenPlanet
             foreach(var field in page2RandomisableFields)
                 field.Randomise();
             foreach(var field in page3RandomisableFields)
-                if(field.typeShortName != "head_accessories")
+                if(field.typeShortName != "headAccessories")
                     field.Randomise();
         }
 
