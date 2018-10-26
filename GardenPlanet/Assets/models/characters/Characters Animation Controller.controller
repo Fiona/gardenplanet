@@ -196,6 +196,66 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114312451862727562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d6b773b50043d6927de49af04ef9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114317268055405364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3938f1ba0c4087b0e0329992a254b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onStateEnterEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateUpdateEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateExitEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114312451862727562}
+        m_MethodName: PassOutDone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateMoveEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStateIKEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GardenPlanet.AnimatorParamEvent, App, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114331393120044620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -887,23 +947,17 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Sleeping
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: DoPassOut
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102333664128670212}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.9628383
-  m_HasExitTime: 0
+  m_TransitionDuration: 0.11322856
+  m_TransitionOffset: 0.010628961
+  m_ExitTime: 1.0012329
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -998,7 +1052,9 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101866791723862466}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114317268055405364}
+  - {fileID: 114312451862727562}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

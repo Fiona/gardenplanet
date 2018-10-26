@@ -5,7 +5,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
- 
+
 /// <summary>
 /// Scene auto loader.
 /// </summary>
@@ -27,7 +27,7 @@ static class SceneAutoLoader
 	{
 		EditorApplication.playModeStateChanged += OnPlayModeChanged;
 	}
- 
+
 	// Menu items to select the "master" scene and control whether or not to load it.
 	[MenuItem("File/Scene Autoload/Select Master Scene...")]
 	private static void SelectMasterScene()
@@ -40,7 +40,7 @@ static class SceneAutoLoader
 			LoadMasterOnPlay = true;
 		}
 	}
- 
+
 	[MenuItem("File/Scene Autoload/Load Master On Play", true)]
 	private static bool ShowLoadMasterOnPlay()
 	{
@@ -51,7 +51,7 @@ static class SceneAutoLoader
 	{
 		LoadMasterOnPlay = true;
 	}
- 
+
 	[MenuItem("File/Scene Autoload/Don't Load Master On Play", true)]
 	private static bool ShowDontLoadMasterOnPlay()
 	{
@@ -62,7 +62,7 @@ static class SceneAutoLoader
 	{
 		LoadMasterOnPlay = false;
 	}
- 
+
 	// Play mode change callback handles the scene load/reload.
 	private static void OnPlayModeChanged(PlayModeStateChange state)
 	{
@@ -70,7 +70,7 @@ static class SceneAutoLoader
 		{
 			return;
 		}
- 
+
 		if (!EditorApplication.isPlaying && EditorApplication.isPlayingOrWillChangePlaymode)
 		{
 			// User pressed play -- autoload master scene.
@@ -85,7 +85,7 @@ static class SceneAutoLoader
 				{
 					Debug.LogError(string.Format("error: scene not found: {0}", MasterScene));
 					EditorApplication.isPlaying = false;
- 
+
 				}
 			}
 			else
@@ -94,7 +94,7 @@ static class SceneAutoLoader
 				EditorApplication.isPlaying = false;
 			}
 		}
- 
+
 		// isPlaying check required because cannot OpenScene while playing
 		if (!EditorApplication.isPlaying && !EditorApplication.isPlayingOrWillChangePlaymode)
 		{
@@ -109,27 +109,32 @@ static class SceneAutoLoader
 			}
 		}
 	}
- 
+
 	// Properties are remembered as editor preferences.
 	private const string cEditorPrefLoadMasterOnPlay = "SceneAutoLoader.LoadMasterOnPlay";
 	private const string cEditorPrefMasterScene = "SceneAutoLoader.MasterScene";
 	private const string cEditorPrefPreviousScene = "SceneAutoLoader.PreviousScene";
- 
+
+	private static string EditorPrefsName(string valueName)
+	{
+		return $"{PlayerSettings.companyName}.{PlayerSettings.productName}.{valueName}";
+	}
+
 	private static bool LoadMasterOnPlay
 	{
-		get { return EditorPrefs.GetBool(cEditorPrefLoadMasterOnPlay, false); }
-		set { EditorPrefs.SetBool(cEditorPrefLoadMasterOnPlay, value); }
+		get { return EditorPrefs.GetBool(EditorPrefsName(cEditorPrefLoadMasterOnPlay), false); }
+		set { EditorPrefs.SetBool(EditorPrefsName(cEditorPrefLoadMasterOnPlay), value); }
 	}
- 
+
 	private static string MasterScene
 	{
-		get { return EditorPrefs.GetString(cEditorPrefMasterScene, "Master.unity"); }
-		set { EditorPrefs.SetString(cEditorPrefMasterScene, value); }
+		get { return EditorPrefs.GetString(EditorPrefsName(cEditorPrefMasterScene), "Master.unity"); }
+		set { EditorPrefs.SetString(EditorPrefsName(cEditorPrefMasterScene), value); }
 	}
- 
+
 	private static string PreviousScene
 	{
-		get { return EditorPrefs.GetString(cEditorPrefPreviousScene, EditorSceneManager.GetActiveScene().path); }
-		set { EditorPrefs.SetString(cEditorPrefPreviousScene, value); }
+		get { return EditorPrefs.GetString(EditorPrefsName(cEditorPrefPreviousScene), EditorSceneManager.GetActiveScene().path); }
+		set { EditorPrefs.SetString(EditorPrefsName(cEditorPrefPreviousScene), value); }
 	}
 }
