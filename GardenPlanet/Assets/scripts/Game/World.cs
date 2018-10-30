@@ -16,6 +16,7 @@ namespace GardenPlanet
         public MarkerManager markers;
         public WorldObjectManager objects;
         public TileTagManager tileTags;
+        public Player player;
         public GameObject items;
         public GameObject charactersParent;
         public Dictionary<string, Character> characters;
@@ -34,12 +35,13 @@ namespace GardenPlanet
             // Set up maps and default map
             tileTypeSet = new TileTypeSet("default");
             maps = new List<Map>();
-            currentMap = new Map(Consts.START_MAP);
+            currentMap = new Map(App.Instance.appSettings.StartMap);
             maps.Add(currentMap);
 
             // World timer
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
             var worldTimerObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_WORLD_TIMER)) as GameObject;
-            worldTimerObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            worldTimerObject.transform.SetParent(mainCanvas.transform, false);
             worldTimerObject.transform.SetSiblingIndex(worldTimerObject.transform.GetSiblingIndex() - 1);
             timer = worldTimerObject.GetComponent<WorldTimer>();
 
@@ -140,7 +142,7 @@ namespace GardenPlanet
          * Tries to create the specified character. If the character cannot be created, null is returned.
          * Will not create duplicate characters with the same ID.
          */
-        public Character AddCharacter(string ID, MapTilePosition spawnLocation = null)
+        public Character AddCharacter(string ID, MapTilePosition spawnLocation = null, EightDirection? direction = null)
         {
             if(characters.ContainsKey(ID))
                 return null;
@@ -148,6 +150,7 @@ namespace GardenPlanet
             // Create and add the character game object
             var prefabPath = ID == Consts.CHAR_ID_PLAYER ? Consts.PREFAB_PATH_PLAYER : Consts.PREFAB_PATH_CHARACTER;
             var character = Instantiate(Resources.Load<Character>(prefabPath));
+            character.transform.SetParent(charactersParent.transform);
             character.id = ID;
             characters.Add(ID, character);
 
@@ -173,12 +176,20 @@ namespace GardenPlanet
                 else
                     throw new Exception($"Character data file does not exist: {dataFilepath}");
             }
+            else
+            {
+                player = character as Player;
+            }
 
             // Set position
             if(spawnLocation == null)
                 character.currentMap = currentMap;
             else
                 character.SetPositionToTile(spawnLocation, spawnLocation.map);
+
+            // Set direction
+            if(direction != null)
+                character.SetRotation(DirectionHelper.DirectionToDegrees(direction.Value));
 
             // Create bed if applicable
             var bedInfo = character.GetBedInformation() ?? GetBedOwnedBy(ID);

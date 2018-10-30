@@ -167,7 +167,7 @@ namespace GardenPlanet
             foreach(var val in LerpHelper.LerpOverTime(.25f))
             {
                 transform.localScale = Vector3.Lerp(startScale, Vector3.zero, val);
-                var playerPos = controller.player.transform.position - new Vector3(0f, -.25f, 0f);
+                var playerPos = controller.world.player.transform.position - new Vector3(0f, -.25f, 0f);
                 transform.position = Vector3.Lerp(startPos, playerPos, val);
                 yield return new WaitForFixedUpdate();
             }

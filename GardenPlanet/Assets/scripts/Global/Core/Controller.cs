@@ -23,13 +23,6 @@ namespace GardenPlanet
                     jsonContents = fh.ReadToEnd();
             globalConfig = new GlobalConfig();
             JsonHandler.PopulateObject(jsonContents, globalConfig);
-
-            // Optional debug menu
-            if(Debug.isDebugBuild || Application.platform == RuntimePlatform.LinuxEditor || Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                var debugObj = new GameObject("DebugMenu");
-                debugObj.AddComponent<DebugMenu>();
-            }
         }
     }
 }

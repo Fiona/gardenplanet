@@ -6,15 +6,15 @@ using UnityEngine;
 
 namespace GardenPlanet
 {
-    public class GameSettings
+    public class PlayerSettings
     {
 
         public bool popupInfoStatic;
         public bool autoPickupItems;
 
-        private string gameSettingsPath;
+        private string playerSettingsPath;
 
-        public GameSettings()
+        public PlayerSettings()
         {
             Load();
             Save();
@@ -22,10 +22,10 @@ namespace GardenPlanet
 
         private void Load()
         {
-            gameSettingsPath = Path.Combine(Application.persistentDataPath, Consts.FILE_GAME_SETTINGS_FILE);
+            playerSettingsPath = Path.Combine(Application.persistentDataPath, Consts.FILE_PLAYER_SETTINGS_FILE);
             var jsonContents = "{}";
-            if(File.Exists(gameSettingsPath))
-                using(var fh = File.OpenText(gameSettingsPath))
+            if(File.Exists(playerSettingsPath))
+                using(var fh = File.OpenText(playerSettingsPath))
                     jsonContents = fh.ReadToEnd();
             JsonHandler.PopulateObject(jsonContents, this);
 
@@ -37,7 +37,7 @@ namespace GardenPlanet
         public void Save()
         {
             var jsonOutput = JsonHandler.Serialize(this);
-            using(var fh = File.OpenWrite(gameSettingsPath))
+            using(var fh = File.OpenWrite(playerSettingsPath))
             {
                 var jsonBytes = Encoding.UTF8.GetBytes(jsonOutput);
                 fh.SetLength(0);

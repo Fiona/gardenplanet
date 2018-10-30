@@ -4,7 +4,8 @@
         "Rewired",
         "Unity.TextMeshPro",
         "UnityUIExtensions",
-        "MEC"
+        "MEC",
+        "Graphy"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

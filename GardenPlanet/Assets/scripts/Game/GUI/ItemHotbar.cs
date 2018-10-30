@@ -82,7 +82,7 @@ namespace GardenPlanet
             for(int i = 0; i < Consts.HOTBAR_SIZE; i++)
             {
                 var itemEntry = hotbarItems[i];
-                if(itemEntry != null && !controller.player.inventory.ItemEntryExists(itemEntry))
+                if(itemEntry != null && !controller.world.player.inventory.ItemEntryExists(itemEntry))
                     hotbarItems[i] = null;
 
                 if(hotbarItems[i] == null)
@@ -188,7 +188,7 @@ namespace GardenPlanet
         {
             if(selectedItemEntry == null)
                 return false;
-            if(!controller.player.inventory.ItemEntryExists(selectedItemEntry))
+            if(!controller.world.player.inventory.ItemEntryExists(selectedItemEntry))
             {
                 Debug.LogError("Item entry in hotbar not in inventory!");
                 StopItemScript();
@@ -196,7 +196,7 @@ namespace GardenPlanet
             }
 
             // Remove from inventory
-            return controller.player.inventory.RemoveItem(selectedItemEntry, 1);
+            return controller.world.player.inventory.RemoveItem(selectedItemEntry, 1);
         }
 
         public void UpdateItemInHand()

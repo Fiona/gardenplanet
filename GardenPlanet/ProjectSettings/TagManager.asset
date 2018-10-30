@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Glowing
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

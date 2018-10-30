@@ -33,13 +33,14 @@ namespace GardenPlanet
          * Use to add functionality when the map is resized
          */
         public abstract void ResizeMap(int width, int height);
-        
+
         public virtual void InitializeGUI()
         {
             guiHolder = Object.Instantiate(Resources.Load(GetGUIPrefabPath())) as GameObject;
-            guiHolder.transform.SetParent(Object.FindObjectOfType<Canvas>().transform, false);
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
+            guiHolder.transform.SetParent(mainCanvas.transform, false);
         }
-            
+
         public virtual void Initialize()
         {
             controller = Object.FindObjectOfType<MapEditorController>();
@@ -62,7 +63,7 @@ namespace GardenPlanet
         }
 
         public virtual void Update()
-        {            
+        {
         }
     }
 }

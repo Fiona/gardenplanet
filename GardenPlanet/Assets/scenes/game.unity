@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 445283151}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: MainCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -627,7 +627,6 @@ MonoBehaviour:
   canvasRect: {fileID: 445283150}
   screenFade: {fileID: 901381173}
   isMouseOverWorld: {fileID: 1653829659}
-  player: {fileID: 0}
   itemManager: {fileID: 0}
   itemHotbar: {fileID: 0}
   playerEnergy: {fileID: 0}

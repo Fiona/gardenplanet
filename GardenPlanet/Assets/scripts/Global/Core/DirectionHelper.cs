@@ -14,7 +14,7 @@ namespace GardenPlanet
 			if(dir == (Direction)0 && rot == RotationalDirection.AntiClockwise)
 				return (Direction)(numDirs - 1);
 			int rotDir = (rot == RotationalDirection.Clockwise ? 1 : -1);
-			return (Direction)(((int)dir + rotDir) % numDirs);			
+			return (Direction)(((int)dir + rotDir) % numDirs);
 		}
 
 		/*
@@ -27,7 +27,7 @@ namespace GardenPlanet
 			if(dir == (EightDirection)0 && rot == RotationalDirection.AntiClockwise)
 				return (EightDirection)(numDirs - 1);
 			int rotDir = (rot == RotationalDirection.Clockwise ? 1 : -1);
-			return (EightDirection)(((int)dir + rotDir) % numDirs);			
+			return (EightDirection)(((int)dir + rotDir) % numDirs);
 		}
 
 		/*
@@ -36,7 +36,7 @@ namespace GardenPlanet
 		 */
 		public static float DirectionToDegrees(Direction dir)
 		{
-			return (90f * (int)dir);
+			return 180f + (90f * (int)dir);
 		}
 
 		/*
@@ -45,7 +45,7 @@ namespace GardenPlanet
 		 */
 		public static float DirectionToDegrees(EightDirection dir)
 		{
-			return (45f * (int)dir);
+			return 180f + (45f * (int)dir);
 		}
 
 	}

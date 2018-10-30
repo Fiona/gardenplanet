@@ -12,13 +12,20 @@ namespace GardenPlanet
         private List<CharacterTask> tasks;
         private CharacterTask currentTask;
         private Character character;
+        private App app;
+
+        public void DebugLog(string logMessage)
+        {
+            if(app.appSettings.AITasksShouldOutput)
+                Debug.Log(logMessage);
+        }
 
         public void AddTask(CharacterTask task)
         {
             task.SetCharacter(character);
             task.SetCharacterAIManager(this);
             tasks.Add(task);
-            Debug.Log($"AI Task Added {task}");
+            DebugLog($"AI Task Added {task}");
             RunHighestPriorityTask();
         }
 
@@ -29,6 +36,7 @@ namespace GardenPlanet
 
         private void Awake()
         {
+            app = App.Instance;
             character = GetComponent<Character>();
             Timing.RunCoroutine(DoAI().CancelWith(character.gameObject));
         }

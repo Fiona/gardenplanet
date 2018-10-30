@@ -88,15 +88,18 @@
     <Compile Include="Assets\Plugins\UnityUIExtensions\Examples\UILineRenderer\TestAddingPoints.cs" />
     <Compile Include="Assets\Plugins\UnityUIExtensions\Examples\UIVerticalScrollerDemo\Scripts\ScrollingCalendar.cs" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UIAdditive.shader" />
+    <None Include="Assets\Plugins\Tayx\Graphy - Ultimate Stats Monitor\Changelog.txt" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle AddSmooth.shader" />
+    <None Include="Assets\Plugins\Tayx\Graphy - Ultimate Stats Monitor\Font\Roboto\LICENSE.txt" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle Premultiply Blend.shader" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UISoftAdditive.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UIParticleHidden.shader" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\SoftMaskShader.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Plugins\Tayx\Graphy - Ultimate Stats Monitor\Font\Northwest-Bold\ERIC-TIRADO-NORTHWEST-LICENSE.txt" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle Add.shader" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle Multiply.shader" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle Alpha Blend.shader" />
@@ -110,6 +113,7 @@
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle Blend.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\Plugins\Tayx\Graphy - Ultimate Stats Monitor\Shaders\GraphStandard.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UIMultiply.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -120,6 +124,7 @@
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UIScreen.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Plugins\Tayx\Graphy - Ultimate Stats Monitor\Shaders\GraphMobile.shader" />
     <None Include="Assets\Plugins\UnityUIExtensions\Resources\Shaders\UI Particle MultiplyDouble.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -340,6 +345,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows_Lib">
+      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -351,12 +362,6 @@
     </Reference>
     <Reference Include="Unity.Analytics">
       <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Library/PackageCache/com.unity.analytics@3.0.9/Android/Unity.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Windows_Lib">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Windows_Lib.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Core">
-      <HintPath>D:/devel/unity/gardenplanet/GardenPlanet/Assets/Plugins/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b6/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -705,25 +710,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="App.csproj">
-      <Project>{E695261D-ECD2-F612-61FB-D4ED7A5A6980}</Project>
-      <Name>App</Name>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
+      <Name>UnityUIExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="RewiredEditor.csproj">
       <Project>{0A339864-FE32-2340-EC92-95D223240FB0}</Project>
       <Name>RewiredEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="Rewired.csproj">
-      <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
-      <Name>Rewired</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{84DF7956-59F1-2BB4-C058-52E962026190}</Project>
-      <Name>UnityUIExtensions</Name>
+    <ProjectReference Include="App.csproj">
+      <Project>{E695261D-ECD2-F612-61FB-D4ED7A5A6980}</Project>
+      <Name>App</Name>
     </ProjectReference>
     <ProjectReference Include="MEC.csproj">
       <Project>{A023A90E-F085-2121-582B-3CBEE3BD052C}</Project>
       <Name>MEC</Name>
+    </ProjectReference>
+    <ProjectReference Include="Rewired.csproj">
+      <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
+      <Name>Rewired</Name>
+    </ProjectReference>
+    <ProjectReference Include="Graphy.csproj">
+      <Project>{FBFE261F-53FB-C970-7910-19B94E3EF04A}</Project>
+      <Name>Graphy</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -95,21 +95,21 @@ namespace GardenPlanet
             var lookVer = player.GetAxis("Look Vertical");
 
             var directionLock = player.GetButton("Direction Lock");
-            controller.player.SetDoWalk(player.GetButton("Walk"));
+            controller.world.player.SetDoWalk(player.GetButton("Walk"));
             if(walkHor < -0.5f)
-                controller.player.WalkInDirection(Direction.Left, directionLock);
+                controller.world.player.WalkInDirection(Direction.Left, directionLock);
             if(walkHor > 0.5f)
-                controller.player.WalkInDirection(Direction.Right, directionLock);
+                controller.world.player.WalkInDirection(Direction.Right, directionLock);
 
             if(walkVer < -0.5f)
-                controller.player.WalkInDirection(Direction.Down, directionLock);
+                controller.world.player.WalkInDirection(Direction.Down, directionLock);
             if(walkVer > 0.5f)
-                controller.player.WalkInDirection(Direction.Up, directionLock);
+                controller.world.player.WalkInDirection(Direction.Up, directionLock);
 
             // looking in direction
             if(Mathf.Abs(walkHor) < .5f && Mathf.Abs(walkVer) < .5f && (Mathf.Abs(lookHor) > .5f || Mathf.Abs(lookVer) > .5f))
             {
-                controller.player.LookInDirection(new Vector3(lookHor, 0f, lookVer));
+                controller.world.player.LookInDirection(new Vector3(lookHor, 0f, lookVer));
             }
 
             // Interacting with objects in the world
@@ -140,7 +140,7 @@ namespace GardenPlanet
                         {
                             x = tileOverX,
                             y = tileOverY,
-                            layer = controller.player.layer
+                            layer = controller.world.player.layer
                         };
                         controller.UpdateMouseOverTile(tilePosition);
                     }
@@ -152,11 +152,11 @@ namespace GardenPlanet
                 // Joystick or keyboard only mode
             {
                 // Pointing at nearest object
-                collisionTest = Physics.SphereCast(controller.player.transform.position, .1f,
-                    controller.player.transform.forward, out hit, Mathf.Infinity, colLayers);
+                collisionTest = Physics.SphereCast(controller.world.player.transform.position, .1f,
+                    controller.world.player.transform.forward, out hit, Mathf.Infinity, colLayers);
 
                 // Get tile in front of player
-                controller.UpdateMouseOverTile(controller.player.GetTileInFrontOf());
+                controller.UpdateMouseOverTile(controller.world.player.GetTileInFrontOf());
             }
 
             // If we're pointing at an object with mouse or joystick/keyboard-only
@@ -167,7 +167,7 @@ namespace GardenPlanet
                 var itemComponent = hit.transform.gameObject.GetComponent<InWorldItem>();
                 if(itemComponent != null && itemComponent.itemType.CanPickup)
                 {
-                    if(Vector3.Distance(controller.player.transform.position, itemComponent.transform.position) <
+                    if(Vector3.Distance(controller.world.player.transform.position, itemComponent.transform.position) <
                        Consts.PLAYER_PICKUP_DISTANCE)
                     {
                         itemComponent.FullHighlight();
@@ -193,8 +193,8 @@ namespace GardenPlanet
                         RaycastHit dummy;
                         var canActuallySee = hit.collider.Raycast(
                             new Ray(
-                                controller.player.transform.position,
-                                hit.transform.position - controller.player.transform.position
+                                controller.world.player.transform.position,
+                                hit.transform.position - controller.world.player.transform.position
                                 ),
                             out dummy,
                             Consts.PLAYER_INTERACT_DISTANCE);

@@ -44,7 +44,7 @@ namespace GardenPlanet
 
         public void FixedUpdate()
         {
-            if(App.gameSettings.popupInfoStatic)
+            if(App.PlayerSettings.popupInfoStatic)
                 DoStaticDisplay();
             else
                 DoTargetedDisplay();

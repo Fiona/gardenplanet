@@ -1,11 +1,9 @@
 [
   {
-    "name": "PlayerStart",
-    "defaultAttributes": {}
-  },
-  {
-    "name": "Pengy",
-    "defaultAttributes": {}
+    "name": "Character",
+    "defaultAttributes": {
+      "id": ""
+    }
   },
   {
     "name": "Bed",
@@ -13,5 +11,16 @@
 	  "type": "bed01",
 	  "owner": "__PLAYER__"
 	}
+  },
+  {
+    "name": "Path",
+    "defaultAttributes": {
+      "name": "pathName",
+      "position": 0
+    }
+  },
+  {
+    "name": "Pengy",
+    "defaultAttributes": {}
   }
 ]

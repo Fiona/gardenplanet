@@ -9,17 +9,6 @@ namespace GardenPlanet
 
     public static class Consts
     {
-
-        // -----------------------------
-        // CONFIG SETTINGS
-        // -----------------------------
-
-        // Where to boot the app into
-        public const AppState INITIAL_APP_STATE = AppState.CreateACharacter;
-
-        // What the first map name is
-        public const string START_MAP = "devtest";
-
         // -----------------------------
         // TILE DRAWING
         // -----------------------------
@@ -235,7 +224,7 @@ namespace GardenPlanet
         public const string FILE_EXTENSION_WORLD_OBJECT_DATA = "json";
         public const string DATA_DIR_ITEM_TYPE_DATA = "items";
         public const string FILE_EXTENSION_ITEM_TYPE_DATA = "json";
-        public const string FILE_GAME_SETTINGS_FILE = "gamesettings.dat";
+        public const string FILE_PLAYER_SETTINGS_FILE = "playersettings.dat";
         public const string FILE_TILE_MARKERS_FILE = "tilemarkers.json";
         public const string DATA_DIR_CHARACTERS_DATA = "characters";
         public const string FILE_EXTENSION_CHARACTER_DATA = "json";

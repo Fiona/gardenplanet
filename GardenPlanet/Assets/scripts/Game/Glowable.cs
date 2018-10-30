@@ -32,7 +32,6 @@ namespace GardenPlanet
 
 		public void FixedUpdate()
 		{
-			return;
 			if(mesh == null  || (glowChild == null && !doGlow && glowTimer <= 0f))
 				return;
 			// If we're being told to glow

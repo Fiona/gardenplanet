@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using StompyBlondie;
+using Tayx.Graphy;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,17 +10,31 @@ namespace GardenPlanet
 
     public class App: MonoBehaviour
     {
-
+        public AppSettings appSettings;
+        public Canvas appCanvas;
+        public static PlayerSettings PlayerSettings;
         [HideInInspector]
         public AppState state;
 
-        public static GameSettings gameSettings;
+        public static App Instance => _instance;
+        private static App _instance;
 
         public void Awake()
         {
+            _instance = this;
             DontDestroyOnLoad(this);
-            App.gameSettings = new GameSettings();
-            StartNewState(Consts.INITIAL_APP_STATE);
+            App.PlayerSettings = new PlayerSettings();
+            StartNewState(appSettings.InitialAppState);
+
+            // Optional debug menu
+            if(appSettings.ShowDebugMenu)
+            {
+                var debugObj = new GameObject("DebugMenu");
+                debugObj.AddComponent<DebugMenu>();
+                DontDestroyOnLoad(debugObj);
+            }
+            else
+                Destroy(FindObjectOfType<GraphyManager>()?.gameObject);
         }
 
         public void Quit()
@@ -58,15 +73,14 @@ namespace GardenPlanet
 
         public IEnumerator LoadScene(string sceneName)
         {
-            var canvas = FindObjectOfType<Canvas>();
-            if(canvas == null)
+            if(appCanvas == null)
             {
                 SceneManager.LoadScene(sceneName);
                 yield break;
             }
 
             var loadingScreenObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_LOADING_SCREEN)) as GameObject;
-            loadingScreenObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            loadingScreenObj.transform.SetParent(appCanvas.transform, false);
             var canvasGroup = loadingScreenObj.GetComponent<CanvasGroup>();
 
             yield return StartCoroutine(LerpHelper.QuickFadeIn(canvasGroup, .5f, lerpType: LerpHelper.Type.SmoothStep));

@@ -20,7 +20,7 @@ namespace GardenPlanet
             {
                 // Check the tile is hoeable, that it's close enough and that it doesn't contain colliding world objects
                 var initialCheck = controller.world.tileTags.IsTileTaggedWith(tilePos, Consts.TILE_TAG_FARM) &&
-                                   tilePos.TileDistance(controller.player.CurrentTilePosition) < Consts.PLAYER_TOOLS_RANGE &&
+                                   tilePos.TileDistance(controller.world.player.CurrentTilePosition) < Consts.PLAYER_TOOLS_RANGE &&
                                    !tilePos.ContainsCollidableWorldObjects();
                 // Any of those are an immediate no-no
                 if(!initialCheck)

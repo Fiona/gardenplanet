@@ -37,13 +37,13 @@ namespace GardenPlanet
         public void Highlight()
         {
             controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseHover);
-            glow.GlowTo(new Color(.6f, .75f, .86f), .1f);
+            glow?.GlowTo(new Color(.6f, .75f, .86f), .1f);
         }
 
         public void FullHighlight()
         {
             controller.GameInputManager.SetMouseTexture(controller.GameInputManager.mouseOkay);
-            glow.GlowTo(new Color(0f, .5f, 1f), .5f);
+            glow?.GlowTo(new Color(0f, .5f, 1f), .5f);
             controller.ShowInfoPopup(new WorldPosition(transform.position), worldObject.GetInfoPopup());
         }
 

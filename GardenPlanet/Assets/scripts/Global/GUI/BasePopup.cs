@@ -26,7 +26,7 @@ namespace StompyBlondie
             var popupObject = Instantiate(resource);
 
             // Add to canvas
-            var canvas = FindObjectOfType<Canvas>();
+            var canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
             if(canvas == null)
                 throw new Exception("Can't find a Canvas to attach to.");
 

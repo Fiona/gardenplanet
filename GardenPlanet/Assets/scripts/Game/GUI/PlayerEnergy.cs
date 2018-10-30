@@ -23,16 +23,16 @@ namespace GardenPlanet
         {
             controller = FindObjectOfType<GameController>();
             templateHeart.SetActive(false);
-            previousPlayerEnergy = controller.player.currentEnergy;
-            ResetHearts(controller.player.currentEnergy, controller.player.maxEnergy);
+            previousPlayerEnergy = controller.world.player.currentEnergy;
+            ResetHearts(controller.world.player.currentEnergy, controller.world.player.maxEnergy);
         }
 
         public void LateUpdate()
         {
-            if(Math.Abs(controller.player.currentEnergy - previousPlayerEnergy) < 0.05f)
+            if(Math.Abs(controller.world.player.currentEnergy - previousPlayerEnergy) < 0.05f)
                 return;
-            ResetHearts(controller.player.currentEnergy, controller.player.maxEnergy);
-            previousPlayerEnergy = controller.player.currentEnergy;
+            ResetHearts(controller.world.player.currentEnergy, controller.world.player.maxEnergy);
+            previousPlayerEnergy = controller.world.player.currentEnergy;
         }
 
         private void ResetHearts(float currentEnergy, float maxEnergy)

@@ -13,8 +13,8 @@ namespace GardenPlanet
 
         public override void Init(GUINavigator catButtonNavigator)
         {
-            popupInfoStatic.SetValue(App.gameSettings.popupInfoStatic ? 1 : 0);
-            autoPickupItems.SetValue(App.gameSettings.autoPickupItems ? 1 : 0);
+            popupInfoStatic.SetValue(App.PlayerSettings.popupInfoStatic ? 1 : 0);
+            autoPickupItems.SetValue(App.PlayerSettings.autoPickupItems ? 1 : 0);
             base.Init(catButtonNavigator);
         }
 
@@ -36,9 +36,9 @@ namespace GardenPlanet
 
         public override IEnumerator Save()
         {
-            App.gameSettings.popupInfoStatic = popupInfoStatic.GetValue() == 1;
-            App.gameSettings.autoPickupItems = autoPickupItems.GetValue() == 1;
-            App.gameSettings.Save();
+            App.PlayerSettings.popupInfoStatic = popupInfoStatic.GetValue() == 1;
+            App.PlayerSettings.autoPickupItems = autoPickupItems.GetValue() == 1;
+            App.PlayerSettings.Save();
             yield return null;
         }
 

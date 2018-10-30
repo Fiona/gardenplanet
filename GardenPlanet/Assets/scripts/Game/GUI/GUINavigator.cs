@@ -111,7 +111,8 @@ namespace GardenPlanet
         {
             navPointer = Instantiate(Resources.Load(Consts.PREFAB_PATH_GUI_NAVIGATION_POINTER) as GameObject)
                 .GetComponent<RectTransform>();
-            navPointer.SetParent(FindObjectOfType<Canvas>().transform);
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
+            navPointer.SetParent(mainCanvas.transform);
             navPointer.transform.SetSiblingIndex(navPointer.transform.GetSiblingIndex() - 1);
             navPointer.localScale = Vector3.one;
             if(linkTimer < 0)

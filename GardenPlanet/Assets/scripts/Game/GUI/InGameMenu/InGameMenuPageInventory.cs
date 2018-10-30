@@ -145,7 +145,7 @@ namespace GardenPlanet
             itemInfo.GetComponent<CanvasGroup>().alpha = 0;
             itemButtonTemplate.gameObject.SetActive(false);
 
-            playerInventory = FindObjectOfType<GameController>().player.inventory;
+            playerInventory = FindObjectOfType<GameController>().world.player.inventory;
             if(playerInventory.Items.Count > 0)
                 noItemsMessage.gameObject.SetActive(false);
 

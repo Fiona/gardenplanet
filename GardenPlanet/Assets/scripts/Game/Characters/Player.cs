@@ -68,7 +68,7 @@ namespace GardenPlanet
                 return;
 
             // Do auto pick-up
-            if(App.gameSettings.autoPickupItems)
+            if(App.PlayerSettings.autoPickupItems)
             {
                 var hits = Physics.OverlapSphere(transform.position, Consts.PLAYER_AUTO_PICKUP_RADIUS,
                     1<<Consts.COLLISION_LAYER_ITEMS);

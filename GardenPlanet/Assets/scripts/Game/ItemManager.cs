@@ -36,7 +36,7 @@ namespace GardenPlanet
                 controller = FindObjectOfType<GameController>();
             if(itemType == null)
                 return false;
-            return controller.player.inventory.AddItem(itemType, itemType.Attributes + attributes, quantity);
+            return controller.world.player.inventory.AddItem(itemType, itemType.Attributes + attributes, quantity);
         }
 
         /*
@@ -56,7 +56,7 @@ namespace GardenPlanet
          */
         public bool RemovePlayerItem(ItemType itemType, Attributes attributes, int quantity = 1)
         {
-            return controller.player.inventory.RemoveItem(itemType, itemType.Attributes + attributes, quantity);
+            return controller.world.player.inventory.RemoveItem(itemType, itemType.Attributes + attributes, quantity);
         }
 
         /*
@@ -75,7 +75,7 @@ namespace GardenPlanet
          */
         public bool RemovePlayerItem(Inventory.InventoryItemEntry entry, int quantity = 1)
         {
-            return controller.player.inventory.RemoveItem(entry, quantity);
+            return controller.world.player.inventory.RemoveItem(entry, quantity);
         }
 
         /*

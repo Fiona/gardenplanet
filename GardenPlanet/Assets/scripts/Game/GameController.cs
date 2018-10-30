@@ -18,8 +18,6 @@ namespace GardenPlanet
         public IsMouseOver isMouseOverWorld;
 
         [HideInInspector]
-        public Player player;
-        [HideInInspector]
         public ItemManager itemManager;
         [HideInInspector]
         public WorldObject objectCurrentlyInteractingWith;
@@ -54,15 +52,14 @@ namespace GardenPlanet
             var mouseHoverPlane = new GameObject("Mouse Hover Plane");
             mouseHoverPlane.AddComponent<MouseHoverPlane>();
 
+            var inputManagerObj = new GameObject("GameInputManager");
+            GameInputManager = inputManagerObj.AddComponent<GameInputManager>();
+
             var worldObject = new GameObject("World");
             world = worldObject.AddComponent<World>();
-            player = world.AddCharacter(Consts.CHAR_ID_PLAYER) as Player;
 
             var itemManagerObj = new GameObject("ItemManager");
             itemManager = itemManagerObj.AddComponent<ItemManager>();
-
-            var inputManagerObj = new GameObject("GameInputManager");
-            GameInputManager = inputManagerObj.AddComponent<GameInputManager>();
 
             var autoTileManagerObj = new GameObject("AutoTileManager");
             autoTileManager = autoTileManagerObj.AddComponent<AutoTileManager>();
@@ -70,29 +67,16 @@ namespace GardenPlanet
             effectsManager = EffectsManager.CreateEffectsManager();
 
             // GUI objects
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
             infoPopup = (Instantiate(Resources.Load(Consts.PREFAB_PATH_INFO_POPUP)) as GameObject).GetComponent<InfoPopup>();
-            infoPopup.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            infoPopup.transform.SetParent(mainCanvas.transform, false);
             infoPopup.transform.SetSiblingIndex(infoPopup.transform.GetSiblingIndex() - 1);
 
-            var itemHotbarObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_ITEM_HOTBAR)) as GameObject;
-            itemHotbarObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            itemHotbarObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
-            itemHotbar = itemHotbarObject.GetComponent<ItemHotbar>();
-
-            var playerEnergyObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_PLAYER_ENERGY)) as GameObject;
-            playerEnergyObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-            playerEnergyObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
-            playerEnergy = itemHotbarObject.GetComponent<PlayerEnergy>();
-
             var inGameMenuButtonObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU_BUTTON)) as GameObject;
-            inGameMenuButtonObject.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            inGameMenuButtonObject.transform.SetParent(mainCanvas.transform, false);
             inGameMenuButtonObject.transform.SetSiblingIndex(inGameMenuButtonObject.transform.GetSiblingIndex() - 1);
             inGameMenuButton = inGameMenuButtonObject.GetComponent<GlobalButton>();
             inGameMenuButton.SetCallback(() => StartCoroutine(OpenInGameMenu()));
-
-            // Set up player and camera
-            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
-            mainCamera.InstantSetTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
 
             // Start at day...
             world.timer.gameTime += new GameTime(hours: Consts.PLAYER_WAKE_HOUR);
@@ -100,20 +84,34 @@ namespace GardenPlanet
 
         public void Start()
         {
-            // Set player position
-            var playerStartMarker = world.markers.GetFirstTileMarkerOfType(
-                world.markers.GetTileMarkerTypeByName("PlayerStart")
-                );
-            if(playerStartMarker != null)
-                player.SetPositionToTile(playerStartMarker);
-            else
-                player.SetPositionToTile(new ObjectTilePosition{x=0, y=0, layer=0, dir=EightDirection.Down});
+            // Spit out characters
+            var chars = world.markers.GetMarkersOfType(
+                world.markers.GetTileMarkerTypeByName("Character")
+            );
+            foreach(var character in chars)
+            {
+                var pos = new MapTilePosition(world.currentMap, character.x, character.y, character.layer);
+                world.AddCharacter(character.attributes.Get<string>("id"), pos, character.direction);
+            }
 
-            // Add testy boi
-            world.AddCharacter(Consts.CHAR_ID_TESTYBOI, new MapTilePosition(world.currentMap, 3, 7, 0));
+            // Set up camera
+            mainCamera.LockTarget(world.player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
+            mainCamera.InstantSetTarget(world.player.gameObject, Consts.CAMERA_PLAYER_DISTANCE);
+
+            // Player gui objects
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
+            var itemHotbarObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_ITEM_HOTBAR)) as GameObject;
+            itemHotbarObject.transform.SetParent(mainCanvas.transform, false);
+            itemHotbarObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
+            itemHotbar = itemHotbarObject.GetComponent<ItemHotbar>();
+
+            var playerEnergyObject = Instantiate(Resources.Load(Consts.PREFAB_PATH_PLAYER_ENERGY)) as GameObject;
+            playerEnergyObject.transform.SetParent(mainCanvas.transform, false);
+            playerEnergyObject.transform.SetSiblingIndex(itemHotbarObject.transform.GetSiblingIndex() - 1);
+            playerEnergy = itemHotbarObject.GetComponent<PlayerEnergy>();
 
             // Objects are set up, tell the game state to set the specifics up
-            gameState.InitialiseGame(player);
+            gameState.InitialiseGame(world.player);
             StartCoroutine(screenFade.FadeIn(1f));
             StartCoroutine(ControllerCoroutine());
         }
@@ -122,7 +120,7 @@ namespace GardenPlanet
         {
             while(true)
             {
-                mainCamera.SetLookAheadCharacter(player);
+                mainCamera.SetLookAheadCharacter(world.player);
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -151,7 +149,7 @@ namespace GardenPlanet
             StartCutscene();
             objectCurrentlyInteractingWith = worldObject;
             // Make the player look at the object
-            yield return StartCoroutine(player.TurnTowardsWorldObject(worldObject));
+            yield return StartCoroutine(world.player.TurnTowardsWorldObject(worldObject));
             // Run a script that is on the object
             if(worldObject.script != null)
                 yield return StartCoroutine(worldObject.script.PlayerInteract());
@@ -166,7 +164,7 @@ namespace GardenPlanet
          */
         public bool PlayerStartHoldingItem(ItemType itemType, Attributes attributes)
         {
-            return player.StartHoldingItem(itemType, attributes);
+            return world.player.StartHoldingItem(itemType, attributes);
         }
 
         /*
@@ -175,7 +173,7 @@ namespace GardenPlanet
          */
         public void PlayerStopHoldingItem()
         {
-            player.StopHoldingItem();
+            world.player.StopHoldingItem();
         }
 
         public IEnumerator PlayerUseItemInHand()
@@ -192,14 +190,14 @@ namespace GardenPlanet
         {
             if(!itemHotbar.RemoveItemInHand())
                 return false;
-            player.DropHoldingItem();
+            world.player.DropHoldingItem();
             itemHotbar.UpdateItemInHand();
             return true;
         }
 
         public IEnumerator PlayerDoEat()
         {
-            yield return StartCoroutine(player.DoAction(CharacterAction.Eat));
+            yield return StartCoroutine(world.player.DoAction(CharacterAction.Eat));
         }
 
         /*
@@ -254,7 +252,7 @@ namespace GardenPlanet
          */
         public bool ConsumePlayerEnergy(float amount)
         {
-            return player.ConsumeEnergy(amount);
+            return world.player.ConsumeEnergy(amount);
         }
 
         /*
@@ -262,7 +260,7 @@ namespace GardenPlanet
          */
         public bool IncreasePlayerEnergy(float amount)
         {
-            return player.IncreaseEnergy(amount);
+            return world.player.IncreaseEnergy(amount);
         }
 
         public void StartCutscene()
@@ -280,8 +278,8 @@ namespace GardenPlanet
         public IEnumerator PlayerSleep(GameObject bedObject)
         {
             mainCamera.LockTarget(bedObject, 2f, .3f);
-            yield return StartCoroutine(player.Sleep(bedObject));
-            mainCamera.LockTarget(player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
+            yield return StartCoroutine(world.player.Sleep(bedObject));
+            mainCamera.LockTarget(world.player.gameObject, Consts.CAMERA_PLAYER_DISTANCE, Consts.CAMERA_PLAYER_LOCK_SPEED);
         }
 
         public IEnumerator OpenInGameMenu(bool forceOpen = false)
@@ -303,8 +301,9 @@ namespace GardenPlanet
             world.timer.StopTimer();
 
             // Create the in-game menu object and attach
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
             var inGameMenuObj = Instantiate(Resources.Load(Consts.PREFAB_PATH_IN_GAME_MENU)) as GameObject;
-            inGameMenuObj.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
+            inGameMenuObj.transform.SetParent(mainCanvas.transform, false);
             inGameMenuObj.transform.SetSiblingIndex(world.timer.transform.GetSiblingIndex());
 
             // Hand control over to the in-game menu, will return when it's closed

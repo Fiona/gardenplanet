@@ -102,7 +102,8 @@ namespace GardenPlanet
         {
             page = 1;
 
-            var screenWidth = FindObjectOfType<Canvas>().GetComponent<RectTransform>().sizeDelta.x;
+            var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
+            var screenWidth = mainCanvas.GetComponent<RectTransform>().sizeDelta.x;
             offScreenPagePosition = new Vector2(screenWidth, 0f);
             page1.anchoredPosition = offScreenPagePosition;
             page2.anchoredPosition = offScreenPagePosition;

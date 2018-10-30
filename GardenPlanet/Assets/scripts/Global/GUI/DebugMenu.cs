@@ -1,12 +1,21 @@
 ﻿using System;
 using UnityEngine;
+using Tayx.Graphy;
 
 namespace GardenPlanet
 {
     public class DebugMenu: MonoBehaviour
     {
         static int DebugMode;
-        const int width = 150;
+        private static bool graphyOn;
+        private const int width = 150;
+        private GraphyManager graphy;
+
+        void Start()
+        {
+            graphy = FindObjectOfType<GraphyManager>();
+            GoAwayGraphy();
+        }
 
         void OnGUI()
         {
@@ -37,6 +46,22 @@ namespace GardenPlanet
 
                 if(GUILayout.Button("Print info"))
                     DebugMode = 4;
+
+                if(GUILayout.Button("Graphy Toggle"))
+                {
+                    graphyOn = !graphyOn;
+                    GoAwayGraphy();
+                    if(graphyOn)
+                    {
+                        graphy.FpsModuleState = GraphyManager.ModuleState.FULL;
+                        graphy.RamModuleState = GraphyManager.ModuleState.FULL;
+                        graphy.AdvancedModuleState = GraphyManager.ModuleState.FULL;
+                        var listener = FindObjectOfType<AudioListener>();
+                        graphy.AudioListener = listener;
+                        graphy.AudioModuleState =
+                            listener ? GraphyManager.ModuleState.FULL : GraphyManager.ModuleState.OFF;
+                    }
+                }
 
                 if(GUILayout.Button("< Back"))
                     DebugMode = 0;
@@ -102,8 +127,8 @@ namespace GardenPlanet
 
                 if(GUILayout.Button("Player Inventory"))
                 {
-                    Debug.Log($"Num items: {controller.player.inventory.Items.Count}");
-                    foreach(var item in controller.player.inventory.Items)
+                    Debug.Log($"Num items: {controller.world.player.inventory.Items.Count}");
+                    foreach(var item in controller.world.player.inventory.Items)
                         Debug.Log(item.ToString());
                 }
 
@@ -116,8 +141,14 @@ namespace GardenPlanet
             {
                 GUILayout.Box("App");
 
+                if(GUILayout.Button("To Logo"))
+                    FindObjectOfType<App>().StartNewState(AppState.Logo);
+
                 if(GUILayout.Button("To Title"))
                     FindObjectOfType<App>().StartNewState(AppState.Title);
+
+                if(GUILayout.Button("To Game"))
+                    FindObjectOfType<App>().StartNewState(AppState.Game);
 
                 if(GUILayout.Button("To Editor"))
                     FindObjectOfType<App>().StartNewState(AppState.Editor);
@@ -135,6 +166,14 @@ namespace GardenPlanet
 
             GUILayout.EndArea();
 
+        }
+
+        void GoAwayGraphy()
+        {
+            graphy.FpsModuleState = GraphyManager.ModuleState.OFF;
+            graphy.RamModuleState = GraphyManager.ModuleState.OFF;
+            graphy.AdvancedModuleState = GraphyManager.ModuleState.OFF;
+            graphy.AudioModuleState = GraphyManager.ModuleState.OFF;
         }
 
     }

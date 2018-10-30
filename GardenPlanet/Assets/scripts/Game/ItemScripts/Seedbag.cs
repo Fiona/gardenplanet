@@ -19,7 +19,7 @@ namespace GardenPlanet
 
             public override bool CanBeUsedOnTilePos(TilePosition tilePos)
             {
-                if(tilePos.TileDistance(controller.player.CurrentTilePosition) >= Consts.PLAYER_TOOLS_RANGE)
+                if(tilePos.TileDistance(controller.world.player.CurrentTilePosition) >= Consts.PLAYER_TOOLS_RANGE)
                     return false;
 
                 return tilePos.GetTileWorldObjects("crop").Any(crop => crop.attributes.Get<string>("type") == "");

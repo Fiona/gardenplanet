@@ -176,7 +176,7 @@ namespace GardenPlanet
 
             // Handle walking/running
             rigidBody.AddForce(
-                moveDirBuffer * Consts.CHARACTER_MOVE_ACCELERATION * Time.deltaTime,
+                moveDirBuffer * Consts.CHARACTER_MOVE_ACCELERATION * Time.fixedDeltaTime,
                 ForceMode.Impulse
             );
             rigidBody.velocity = Vector3.ClampMagnitude(
@@ -198,7 +198,7 @@ namespace GardenPlanet
             if(Mathf.Abs(moveDirBuffer.sqrMagnitude) > 0f && !lockFacing)
                 lookDirection = moveDirBuffer;
             desiredRotation = (transform.position - (transform.position - lookDirection)).normalized;
-            float step = Consts.CHARACTER_ROTATION_SPEED * Time.deltaTime;
+            float step = Consts.CHARACTER_ROTATION_SPEED * Time.fixedDeltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, desiredRotation, step, 0.0F);
             SetRotation(newDir);
 
@@ -212,7 +212,7 @@ namespace GardenPlanet
             else if(attemptJump)
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0.0f);
-                rigidBody.AddForce(0, Consts.CHARACTER_JUMP_FORCE * Time.deltaTime, 0, ForceMode.Impulse);
+                rigidBody.AddForce(0, Consts.CHARACTER_JUMP_FORCE * Time.fixedDeltaTime, 0, ForceMode.Impulse);
                 attemptJump = false;
             }
         }
@@ -280,6 +280,17 @@ namespace GardenPlanet
             if(currentAction > 0)
                 return;
             lookDirection = direction;
+        }
+
+        /*
+         * Points to a specified eight direction
+         */
+        public void LookInDirection(EightDirection direction)
+        {
+            if(currentAction > 0)
+                return;
+            var baseRotation = DirectionHelper.DirectionToDegrees(direction);
+            lookDirection = new Vector3(0, baseRotation, 0);
         }
 
         /*
@@ -365,6 +376,14 @@ namespace GardenPlanet
         }
 
         /*
+         * Immediately rotate the character to the supplied rotation in degrees
+         */
+        public void SetRotation(float degrees)
+        {
+            transform.localRotation = Quaternion.Euler(0, degrees, 0);
+        }
+
+        /*
          * A coroutine that tells the character to immediately do the action passed, will immeditaly break if the
          * action cannot be done.
          */
@@ -389,7 +408,7 @@ namespace GardenPlanet
             if(currentAction == CharacterAction.Yawn)
             {
                 mainAnimator.SetBool("DoYawn", true);
-                if(this == controller.player)
+                if(this == controller.world.player)
                     controller.PlayerStopHoldingItem();
             }
             // animation for passing out
@@ -683,7 +702,7 @@ namespace GardenPlanet
         {
             if(itemCurrentlyHolding == null)
                 return false;
-            itemCurrentlyHolding.DropFromHands(this == controller.player);
+            itemCurrentlyHolding.DropFromHands(this == controller.world.player);
             return true;
         }
 
@@ -1009,14 +1028,14 @@ namespace GardenPlanet
             face.SetFaceState(CharacterFace.FaceState.NORMAL);
             mainAnimator.SetBool("DoYawn", false);
             currentAction = 0;
-            if(this == controller.player)
+            if(this == controller.world.player)
                 controller.itemHotbar.UpdateItemInHand();
         }
 
         // Animation event: PassOutMid
         public void AnimatorPassOutMid()
         {
-            if(this == controller.player)
+            if(this == controller.world.player)
                 controller.PlayerDropItemInHand();
             else
                 DropHoldingItem();

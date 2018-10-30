@@ -33,6 +33,7 @@ namespace GardenPlanet
         protected CharacterTask dependency;
         protected List<CharacterTask> children;
         protected CoroutineHandle coroutine;
+        protected CharacterAI manager;
 
         public CharacterTask(TaskPriority priority, CharacterTask dependency = null)
         {
@@ -63,6 +64,7 @@ namespace GardenPlanet
 
         public void SetCharacterAIManager(CharacterAI manager)
         {
+            this.manager = manager;
             foreach(var c in children)
                 manager.AddTask(c);
         }
@@ -75,7 +77,7 @@ namespace GardenPlanet
                 throw new AITaskException($"{this} - Can't start, already started");
             if(dependency != null && !dependency.done)
                 throw new AITaskException($"{this} - Can't start, dependency not done: {dependency}");
-            Debug.Log($"{this} - Starting");
+            manager.DebugLog($"{this} - Starting");
             coroutine = Timing.RunCoroutine(TaskRoutine().Append(() => done = true));
             started = true;
         }
@@ -86,7 +88,7 @@ namespace GardenPlanet
                 throw new AITaskException($"{this} - Character not set");
             if(!started)
                 throw new AITaskException($"{this} - Can't pause, not started");
-            Debug.Log($"{this} - Pausing");
+            manager.DebugLog($"{this} - Pausing");
             coroutine.IsPaused = true;
             paused = true;
         }
@@ -97,7 +99,7 @@ namespace GardenPlanet
                 throw new AITaskException($"{this} - Character not set");
             if(!started || !paused)
                 throw new AITaskException($"{this} - Can't resume, not paused or started");
-            Debug.Log($"{this} - Resuming");
+            manager.DebugLog($"{this} - Resuming");
             coroutine.IsPaused = false;
             paused = false;
         }
