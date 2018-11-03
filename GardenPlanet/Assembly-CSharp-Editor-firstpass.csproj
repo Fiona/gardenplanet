@@ -737,6 +737,10 @@
       <Project>{FBFE261F-53FB-C970-7910-19B94E3EF04A}</Project>
       <Name>Graphy</Name>
     </ProjectReference>
+    <ProjectReference Include="UltiDraw.csproj">
+      <Project>{C5174C80-848D-E3B4-FD36-61E328A80AF4}</Project>
+      <Name>UltiDraw</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

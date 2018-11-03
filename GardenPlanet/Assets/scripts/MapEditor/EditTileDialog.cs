@@ -1,9 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using StompyBlondie;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace GardenPlanet
 {
@@ -19,11 +25,14 @@ namespace GardenPlanet
         public GameObject volumePlaneTemplate;
         public Button volumeListButtonTemplate;
         public GameObject volumeListContent;
-        public Dropdown newVolumeTypeDropdown;
-        public Toggle isWallToggle;
+        public Dropdown newVolumeShapeDropdown;
+        public Dropdown volumeSurfaceDropdown;
         public GameObject gridLine;
         public GameObject tileCentreMark;
         public Dropdown autoTileTagDropdown;
+        public NavigationMapDebugRenderer navigationMapDebugRenderer;
+        public InputField tileSizeXInput;
+        public InputField tileSizeYInput;
 
         private TileType tileType;
         private TileTypeVolume selectedVolume;
@@ -34,6 +43,7 @@ namespace GardenPlanet
         private float rotation;
         private bool recreateTilesOfType;
         private List<TileTagType> tileTagTypes;
+        private bool showNav;
 
         public void Awake()
         {
@@ -72,6 +82,7 @@ namespace GardenPlanet
         {
             SetTilePreviewRotation();
             SetTileCentreMark();
+            CalculateNavPoints();
         }
 
         public void SetTileCentreMark()
@@ -116,9 +127,9 @@ namespace GardenPlanet
             rect.localRotation = tilePreviewTemplate.GetComponent<RectTransform>().localRotation;
 
             // Set volume dropdown options
-            newVolumeTypeDropdown.ClearOptions();
+            newVolumeShapeDropdown.ClearOptions();
             var options = new List<Dropdown.OptionData>();
-            foreach(TileTypeVolumeType volumeType in Enum.GetValues(typeof(TileTypeVolumeType)))
+            foreach(TileTypeVolumeShape volumeType in Enum.GetValues(typeof(TileTypeVolumeShape)))
             {
                 options.Add(
                     new Dropdown.OptionData()
@@ -127,7 +138,7 @@ namespace GardenPlanet
                     }
                 );
             }
-            newVolumeTypeDropdown.AddOptions(options);
+            newVolumeShapeDropdown.AddOptions(options);
 
             // Set tag dropdown options
             tileTagTypes = TileTagType.GetAllTileTagTypes();
@@ -143,10 +154,27 @@ namespace GardenPlanet
             autoTileTagDropdown.AddOptions(typeOptions);
             autoTileTagDropdown.value = current;
 
+            // Set volume surface dropdown options
+            volumeSurfaceDropdown.ClearOptions();
+            options = new List<Dropdown.OptionData>();
+            foreach(TileTypeVolumeSurface volumeSurface in Enum.GetValues(typeof(TileTypeVolumeSurface)))
+            {
+                options.Add(
+                    new Dropdown.OptionData()
+                    {
+                        text = volumeSurface.ToString()
+                    }
+                );
+            }
+            volumeSurfaceDropdown.AddOptions(options);
+
             // Create volume list buttons
             RecreateVolumeList();
 
             // Set up other elements
+            tileSizeXInput.text = tileType.size[0].ToString();
+            tileSizeYInput.text = tileType.size[1].ToString();
+            CalculateNavPoints();
             tileNameText.text = tileTypeName;
             volumeSettings.SetActive(false);
 
@@ -188,7 +216,7 @@ namespace GardenPlanet
             {
                 var newButton = Instantiate(volumeListButtonTemplate);
                 newButton.gameObject.SetActive(true);
-                newButton.GetComponentInChildren<Text>().text = GetVolumeTypeName(volume.type);
+                newButton.GetComponentInChildren<Text>().text = GetVolumeTypeName(volume.shape);
                 newButton.transform.SetParent(volumeListContent.transform, false);
                 newButton.GetComponent<Button>().onClick.AddListener(
                     delegate
@@ -218,34 +246,34 @@ namespace GardenPlanet
             else
             {
                 volumeSettings.SetActive(true);
-                isWallToggle.isOn = volume.isWall;
-                currentVolumeObject = Instantiate(GetVolumeTypeTemplate(selectedVolume.type));
+                volumeSurfaceDropdown.value = (int)selectedVolume.surface;
+                currentVolumeObject = Instantiate(GetVolumeTypeTemplate(selectedVolume.shape));
                 currentVolumeObject.SetActive(true);
                 currentVolumeObject.transform.SetParent(currentTilePreviewObject.transform, false);
                 PositionAndScaleVolume();
             }
         }
 
-        public string GetVolumeTypeName(TileTypeVolumeType type)
+        public string GetVolumeTypeName(TileTypeVolumeShape type)
         {
             switch(type)
             {
-                case TileTypeVolumeType.CollisionBox:
+                case TileTypeVolumeShape.CollisionBox:
                     return "Collision Box";
-                case TileTypeVolumeType.CollisionPlane:
+                case TileTypeVolumeShape.CollisionPlane:
                     return "Collision Plane";
                 default:
                     return "Unknown volume";
             }
         }
 
-        public GameObject GetVolumeTypeTemplate(TileTypeVolumeType type)
+        public GameObject GetVolumeTypeTemplate(TileTypeVolumeShape type)
         {
             switch(type)
             {
-                case TileTypeVolumeType.CollisionBox:
+                case TileTypeVolumeShape.CollisionBox:
                     return volumeCubeTemplate;
-                case TileTypeVolumeType.CollisionPlane:
+                case TileTypeVolumeShape.CollisionPlane:
                     return volumePlaneTemplate;
                 default:
                     return null;
@@ -266,12 +294,13 @@ namespace GardenPlanet
                 ((Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.yScale),// / .01f,
                 ((Consts.VOLUME_SCALE_DEFAULT / 100.0f) * selectedVolume.zScale)// / .01f
             );
-            if(selectedVolume.type == TileTypeVolumeType.CollisionPlane)
+            if(selectedVolume.shape == TileTypeVolumeShape.CollisionPlane)
                 currentVolumeObject.transform.localScale = new Vector3(
                     currentVolumeObject.transform.localScale.x * 0.1f,
                     currentVolumeObject.transform.localScale.y * 0.1f,
                     currentVolumeObject.transform.localScale.z * 0.1f
                 );
+            CalculateNavPoints();
         }
 
         public void CancelPressed()
@@ -293,7 +322,7 @@ namespace GardenPlanet
 
         public void CreateNewVolumePressed()
         {
-            var newVolume = new TileTypeVolume((TileTypeVolumeType)newVolumeTypeDropdown.value);
+            var newVolume = new TileTypeVolume((TileTypeVolumeShape)newVolumeShapeDropdown.value);
             tileType.volumes.Add(newVolume);
             RecreateVolumeList();
             SelectNewVolume(newVolume);
@@ -404,16 +433,14 @@ namespace GardenPlanet
             PositionAndScaleVolume();
         }
 
-        public void IsWallToggled()
-        {
-            if (selectedVolume == null)
-                return;
-            selectedVolume.isWall = isWallToggle.isOn;
-        }
-
         public void RotateTilePreviewPressed()
         {
             rotation = (rotation + 90f) % 360.0f;
+        }
+
+        public void ShowNavPressed()
+        {
+            showNav = !showNav;
         }
 
         public void XCentreMinusPressed(){ tileType.xCentre -= Consts.TILE_SIZE/2; }
@@ -423,11 +450,57 @@ namespace GardenPlanet
         public void ZCentreMinusPressed(){ tileType.zCentre -= Consts.TILE_SIZE/2; }
         public void ZCentrePlusPressed(){ tileType.zCentre += Consts.TILE_SIZE/2; }
 
+        public void VolumeSurfaceDropdownChanged(int index)
+        {
+            if(selectedVolume == null)
+                return;
+            selectedVolume.surface = (TileTypeVolumeSurface)index;
+        }
+
         public void AutoTagTileDropdownChanged(int index)
         {
             tileType.autoTag = index == 0 ? "" : tileTagTypes[index-1].ID;
         }
 
+        private void CalculateNavPoints()
+        {
+            tileType.navigationMap.Reset();
+            var halfTileSize = Consts.TILE_SIZE/2;
+
+            for(var tileX = 0; tileX < tileType.size[0]; tileX++)
+            {
+                for(var tileY = 0; tileY < tileType.size[1]; tileY++)
+                {
+                    for(var x = -halfTileSize; x <= halfTileSize; x += halfTileSize)
+                    {
+                        for(var y = -halfTileSize; y <= halfTileSize; y += halfTileSize)
+                        {
+                            tileType.navigationMap.AddPoint(
+                                new Pos(x + (tileX * Consts.TILE_SIZE), y + (tileY * Consts.TILE_SIZE), 0f)
+                            );
+                        }
+                    }
+                }
+            }
+
+            navigationMapDebugRenderer.offset = new Vector3(
+                (float)tileType.xCentre,
+                (float)tileType.zCentre,
+                (float)-tileType.yCentre
+            );
+            navigationMapDebugRenderer.navigationMap = tileType.navigationMap;
+            navigationMapDebugRenderer.gameObject.SetActive(showNav);
+        }
+
+        public void TileSizeXChanged(string newValue)
+        {
+            tileType.size[0] = Int32.Parse(newValue);
+        }
+
+        public void TileSizeYChanged(string newValue)
+        {
+            tileType.size[1] = Int32.Parse(newValue);
+        }
     }
 
 }

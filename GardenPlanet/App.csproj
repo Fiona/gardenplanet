@@ -145,6 +145,7 @@
     <Compile Include="Assets\scripts\Global\Core\EnumerableMap.cs" />
     <Compile Include="Assets\scripts\Global\Core\Exception.cs" />
     <Compile Include="Assets\scripts\Global\Core\ExtensionMonoBehaviour.cs" />
+    <Compile Include="Assets\scripts\Global\Core\ExtensionUnityVector3.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameObjectHelper.cs" />
     <Compile Include="Assets\scripts\Global\Core\GameTime.cs" />
     <Compile Include="Assets\scripts\Global\Core\JsonHandler.cs" />
@@ -171,7 +172,9 @@
     <Compile Include="Assets\scripts\Global\World\Map.cs" />
     <Compile Include="Assets\scripts\Global\World\MarkerManager.cs" />
     <Compile Include="Assets\scripts\Global\World\MouseHoverPlane.cs" />
+    <Compile Include="Assets\scripts\Global\World\NavigationMapDebugRenderer.cs" />
     <Compile Include="Assets\scripts\Global\World\Tilemap.cs" />
+    <Compile Include="Assets\scripts\Global\World\TilemapNavigation.cs" />
     <Compile Include="Assets\scripts\Global\World\TileMarker.cs" />
     <Compile Include="Assets\scripts\Global\World\TileMarkerType.cs" />
     <Compile Include="Assets\scripts\Global\World\TileTagManager.cs" />
@@ -811,6 +814,10 @@
     <ProjectReference Include="Graphy.csproj">
       <Project>{FBFE261F-53FB-C970-7910-19B94E3EF04A}</Project>
       <Name>Graphy</Name>
+    </ProjectReference>
+    <ProjectReference Include="UltiDraw.csproj">
+      <Project>{C5174C80-848D-E3B4-FD36-61E328A80AF4}</Project>
+      <Name>UltiDraw</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

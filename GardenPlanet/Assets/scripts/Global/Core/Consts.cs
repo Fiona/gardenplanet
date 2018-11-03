@@ -35,6 +35,9 @@ namespace GardenPlanet
         // Default scale of tile volumes
         public const float VOLUME_SCALE_DEFAULT = 1f;
 
+        // How wide a character is
+        public const float CHARACTER_RADIUS = .25f;
+
         // -----------------------------
         // INPUT
         // -----------------------------

@@ -5,7 +5,8 @@
         "Unity.TextMeshPro",
         "UnityUIExtensions",
         "MEC",
-        "Graphy"
+        "Graphy",
+        "UltiDraw"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

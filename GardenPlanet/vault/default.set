@@ -1,1 +1,758 @@
-{"name":"default","fullFilePath":"vault\\default.set","types":[{"name":"farmable","volumes":[{"type":0,"x":0.0,"y":0.0,"z":0.0,"xScale":50,"yScale":100,"zScale":50,"isWall":false}],"xCentre":0.0,"yCentre":0.0,"zCentre":0.0,"autoTag":"Farm"},{"name":"grass01","volumes":[{"type":0,"x":0.0,"y":0.0,"z":0.0,"xScale":100,"yScale":100,"zScale":100,"isWall":false}],"xCentre":0.25,"yCentre":0.0,"zCentre":0.25,"autoTag":null},{"name":"grass01-long","volumes":[{"type":0,"x":0.0,"y":0.0,"z":0.0,"xScale":200,"yScale":100,"zScale":100,"isWall":false}],"xCentre":0.75,"yCentre":0.0,"zCentre":0.25,"autoTag":null},{"name":"grass01-small","volumes":[],"xCentre":0.0,"yCentre":0.0,"zCentre":0.0,"autoTag":null},{"name":"grass02","volumes":[{"type":0,"x":0.0,"y":0.0,"z":0.0,"xScale":100,"yScale":100,"zScale":100,"isWall":false}],"xCentre":0.25,"yCentre":0.0,"zCentre":0.25,"autoTag":null},{"name":"wall01-concave1","volumes":[{"type":0,"x":1.0,"y":0.0,"z":-1.0,"xScale":50,"yScale":100,"zScale":50,"isWall":false},{"type":1,"x":0.0,"y":1.0,"z":1.0,"xScale":100,"yScale":50,"zScale":50,"isWall":true},{"type":1,"x":-1.0,"y":1.0,"z":-1.0,"xScale":50,"yScale":50,"zScale":50,"isWall":true}],"xCentre":0.25,"yCentre":0.0,"zCentre":-0.25,"autoTag":null},{"name":"wall01-convex1","volumes":[{"type":0,"x":0.0,"y":0.0,"z":0.0,"xScale":100,"yScale":100,"zScale":100,"isWall":false},{"type":1,"x":1.0,"y":1.0,"z":1.0,"xScale":50,"yScale":60,"zScale":50,"isWall":true}],"xCentre":-0.25,"yCentre":0.0,"zCentre":-0.25,"autoTag":null},{"name":"wall01-s1","volumes":[{"type":0,"x":0.0,"y":0.0,"z":-1.0,"xScale":100,"yScale":100,"zScale":50,"isWall":false},{"type":1,"x":0.0,"y":1.0,"z":1.0,"xScale":100,"yScale":50,"zScale":50,"isWall":true}],"xCentre":0.25,"yCentre":0.0,"zCentre":-0.25,"autoTag":null}]}
+{
+  "name": "default",
+  "fullFilePath": "vault\\default.set",
+  "types": [
+    {
+      "name": "farmable",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 50,
+          "yScale": 100,
+          "zScale": 50,
+          "surface": 1
+        }
+      ],
+      "xCentre": 0.0,
+      "yCentre": 0.0,
+      "zCentre": 0.0,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": "Farm",
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "grass01",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 100,
+          "yScale": 100,
+          "zScale": 100,
+          "surface": 1
+        }
+      ],
+      "xCentre": 0.25,
+      "yCentre": 0.0,
+      "zCentre": 0.25,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "grass01-long",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 200,
+          "yScale": 100,
+          "zScale": 100,
+          "surface": 1
+        }
+      ],
+      "xCentre": 0.75,
+      "yCentre": 0.0,
+      "zCentre": 0.25,
+      "size": [
+        4,
+        2
+      ],
+      "autoTag": "",
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0.5, 0>": {
+            "position": "<-0.25, 0.5, 0>",
+            "links": []
+          },
+          "<-0.25, 0.75, 0>": {
+            "position": "<-0.25, 0.75, 0>",
+            "links": []
+          },
+          "<0, 0.5, 0>": {
+            "position": "<0, 0.5, 0>",
+            "links": []
+          },
+          "<0, 0.75, 0>": {
+            "position": "<0, 0.75, 0>",
+            "links": []
+          },
+          "<0.25, 0.5, 0>": {
+            "position": "<0.25, 0.5, 0>",
+            "links": []
+          },
+          "<0.25, 0.75, 0>": {
+            "position": "<0.25, 0.75, 0>",
+            "links": []
+          },
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": []
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": []
+          },
+          "<0.5, 0.25, 0>": {
+            "position": "<0.5, 0.25, 0>",
+            "links": []
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": []
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": []
+          },
+          "<0.75, 0.25, 0>": {
+            "position": "<0.75, 0.25, 0>",
+            "links": []
+          },
+          "<0.5, 0.5, 0>": {
+            "position": "<0.5, 0.5, 0>",
+            "links": []
+          },
+          "<0.5, 0.75, 0>": {
+            "position": "<0.5, 0.75, 0>",
+            "links": []
+          },
+          "<0.75, 0.5, 0>": {
+            "position": "<0.75, 0.5, 0>",
+            "links": []
+          },
+          "<0.75, 0.75, 0>": {
+            "position": "<0.75, 0.75, 0>",
+            "links": []
+          },
+          "<1, -0.25, 0>": {
+            "position": "<1, -0.25, 0>",
+            "links": []
+          },
+          "<1, 0, 0>": {
+            "position": "<1, 0, 0>",
+            "links": []
+          },
+          "<1, 0.25, 0>": {
+            "position": "<1, 0.25, 0>",
+            "links": []
+          },
+          "<1.25, -0.25, 0>": {
+            "position": "<1.25, -0.25, 0>",
+            "links": []
+          },
+          "<1.25, 0, 0>": {
+            "position": "<1.25, 0, 0>",
+            "links": []
+          },
+          "<1.25, 0.25, 0>": {
+            "position": "<1.25, 0.25, 0>",
+            "links": []
+          },
+          "<1, 0.5, 0>": {
+            "position": "<1, 0.5, 0>",
+            "links": []
+          },
+          "<1, 0.75, 0>": {
+            "position": "<1, 0.75, 0>",
+            "links": []
+          },
+          "<1.25, 0.5, 0>": {
+            "position": "<1.25, 0.5, 0>",
+            "links": []
+          },
+          "<1.25, 0.75, 0>": {
+            "position": "<1.25, 0.75, 0>",
+            "links": []
+          },
+          "<1.5, -0.25, 0>": {
+            "position": "<1.5, -0.25, 0>",
+            "links": []
+          },
+          "<1.5, 0, 0>": {
+            "position": "<1.5, 0, 0>",
+            "links": []
+          },
+          "<1.5, 0.25, 0>": {
+            "position": "<1.5, 0.25, 0>",
+            "links": []
+          },
+          "<1.75, -0.25, 0>": {
+            "position": "<1.75, -0.25, 0>",
+            "links": []
+          },
+          "<1.75, 0, 0>": {
+            "position": "<1.75, 0, 0>",
+            "links": []
+          },
+          "<1.75, 0.25, 0>": {
+            "position": "<1.75, 0.25, 0>",
+            "links": []
+          },
+          "<1.5, 0.5, 0>": {
+            "position": "<1.5, 0.5, 0>",
+            "links": []
+          },
+          "<1.5, 0.75, 0>": {
+            "position": "<1.5, 0.75, 0>",
+            "links": []
+          },
+          "<1.75, 0.5, 0>": {
+            "position": "<1.75, 0.5, 0>",
+            "links": []
+          },
+          "<1.75, 0.75, 0>": {
+            "position": "<1.75, 0.75, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "grass01-small",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 50,
+          "yScale": 100,
+          "zScale": 50,
+          "surface": 1
+        }
+      ],
+      "xCentre": 0.0,
+      "yCentre": 0.0,
+      "zCentre": 0.0,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "grass02",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 100,
+          "yScale": 100,
+          "zScale": 100,
+          "surface": 1
+        }
+      ],
+      "xCentre": 0.25,
+      "yCentre": 0.0,
+      "zCentre": 0.25,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "wall01-concave1",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 1.0,
+          "y": 0.0,
+          "z": -1.0,
+          "xScale": 50,
+          "yScale": 100,
+          "zScale": 50,
+          "surface": 1
+        },
+        {
+          "shape": 1,
+          "x": 0.0,
+          "y": 1.0,
+          "z": 1.0,
+          "xScale": 100,
+          "yScale": 50,
+          "zScale": 50,
+          "surface": 0
+        },
+        {
+          "shape": 1,
+          "x": -1.0,
+          "y": 1.0,
+          "z": -1.0,
+          "xScale": 50,
+          "yScale": 50,
+          "zScale": 50,
+          "surface": 0
+        }
+      ],
+      "xCentre": 0.25,
+      "yCentre": 0.0,
+      "zCentre": 0.25,
+      "size": [
+        2,
+        2
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0.5, 0>": {
+            "position": "<-0.25, 0.5, 0>",
+            "links": []
+          },
+          "<-0.25, 0.75, 0>": {
+            "position": "<-0.25, 0.75, 0>",
+            "links": []
+          },
+          "<0, 0.5, 0>": {
+            "position": "<0, 0.5, 0>",
+            "links": []
+          },
+          "<0, 0.75, 0>": {
+            "position": "<0, 0.75, 0>",
+            "links": []
+          },
+          "<0.25, 0.5, 0>": {
+            "position": "<0.25, 0.5, 0>",
+            "links": []
+          },
+          "<0.25, 0.75, 0>": {
+            "position": "<0.25, 0.75, 0>",
+            "links": []
+          },
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": []
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": []
+          },
+          "<0.5, 0.25, 0>": {
+            "position": "<0.5, 0.25, 0>",
+            "links": []
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": []
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": []
+          },
+          "<0.75, 0.25, 0>": {
+            "position": "<0.75, 0.25, 0>",
+            "links": []
+          },
+          "<0.5, 0.5, 0>": {
+            "position": "<0.5, 0.5, 0>",
+            "links": []
+          },
+          "<0.5, 0.75, 0>": {
+            "position": "<0.5, 0.75, 0>",
+            "links": []
+          },
+          "<0.75, 0.5, 0>": {
+            "position": "<0.75, 0.5, 0>",
+            "links": []
+          },
+          "<0.75, 0.75, 0>": {
+            "position": "<0.75, 0.75, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "wall01-convex1",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 100,
+          "yScale": 100,
+          "zScale": 100,
+          "surface": 1
+        },
+        {
+          "shape": 1,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0,
+          "xScale": 50,
+          "yScale": 50,
+          "zScale": 50,
+          "surface": 0
+        }
+      ],
+      "xCentre": -0.25,
+      "yCentre": 0.0,
+      "zCentre": -0.25,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          }
+        }
+      }
+    },
+    {
+      "name": "wall01-s1",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": -1.0,
+          "xScale": 100,
+          "yScale": 100,
+          "zScale": 50,
+          "surface": 1
+        },
+        {
+          "shape": 1,
+          "x": 0.0,
+          "y": 1.0,
+          "z": 1.0,
+          "xScale": 100,
+          "yScale": 50,
+          "zScale": 50,
+          "surface": 0
+        }
+      ],
+      "xCentre": 0.25,
+      "yCentre": 0.0,
+      "zCentre": -0.25,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": "",
+      "navigationMap": {
+        "points": {
+          "<-0.25, -0.25, 0>": {
+            "position": "<-0.25, -0.25, 0>",
+            "links": []
+          },
+          "<-0.25, 0, 0>": {
+            "position": "<-0.25, 0, 0>",
+            "links": []
+          },
+          "<-0.25, 0.25, 0>": {
+            "position": "<-0.25, 0.25, 0>",
+            "links": []
+          },
+          "<0, -0.25, 0>": {
+            "position": "<0, -0.25, 0>",
+            "links": []
+          },
+          "<0, 0, 0>": {
+            "position": "<0, 0, 0>",
+            "links": []
+          },
+          "<0, 0.25, 0>": {
+            "position": "<0, 0.25, 0>",
+            "links": []
+          },
+          "<0.25, -0.25, 0>": {
+            "position": "<0.25, -0.25, 0>",
+            "links": []
+          },
+          "<0.25, 0, 0>": {
+            "position": "<0.25, 0, 0>",
+            "links": []
+          },
+          "<0.25, 0.25, 0>": {
+            "position": "<0.25, 0.25, 0>",
+            "links": []
+          }
+        }
+      }
+    }
+  ]
+}

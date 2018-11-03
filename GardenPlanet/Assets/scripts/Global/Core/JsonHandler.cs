@@ -3,6 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using NumericsVector3 = System.Numerics.Vector3;
 
 namespace GardenPlanet
 {
@@ -90,6 +91,37 @@ namespace GardenPlanet
         }
     }
 
+    public class NumericsVector3Converter : JsonConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var vector = (NumericsVector3)value;
+            var output = $"<{vector.X}, {vector.Y}, {vector.Z}>";
+            new JValue(output).WriteTo(writer);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var vector = new NumericsVector3();
+
+            var obj = (string)serializer.Deserialize(reader);
+            if(obj == null)
+                return vector;
+            foreach(var c in new []{"<", ">", " "})
+                obj = obj.Replace(c, string.Empty);
+            var parts = obj.Split(',');
+            vector.X = float.Parse(parts[0]);
+            vector.Y = float.Parse(parts[1]);
+            vector.Z = float.Parse(parts[2]);
+            return vector;
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(NumericsVector3);
+        }
+    }
+
     public static class JsonHandler
     {
         public static T Deserialize<T>(string jsonContents)
@@ -134,6 +166,7 @@ namespace GardenPlanet
             };
             serializerSettings.Converters.Add(new AttributesConverter());
             serializerSettings.Converters.Add(new UnityColorConverter());
+            serializerSettings.Converters.Add(new NumericsVector3Converter());
             return serializerSettings;
         }
     }

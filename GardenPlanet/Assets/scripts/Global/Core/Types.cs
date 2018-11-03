@@ -44,14 +44,20 @@ namespace GardenPlanet
     {
         Clockwise,
         AntiClockwise
-    };
+    }
 
     // Tile related
-    public enum TileTypeVolumeType
+    public enum TileTypeVolumeShape
     {
         CollisionPlane,
         CollisionBox
-    };
+    }
+
+    public enum TileTypeVolumeSurface
+    {
+        WALL,
+        FLOOR
+    }
 
     public class TilePosition
     {

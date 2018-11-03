@@ -144,7 +144,7 @@ namespace GardenPlanet
          */
         public Character AddCharacter(string ID, MapTilePosition spawnLocation = null, EightDirection? direction = null)
         {
-            if(characters.ContainsKey(ID))
+            if(ID == "" || characters.ContainsKey(ID))
                 return null;
 
             // Create and add the character game object

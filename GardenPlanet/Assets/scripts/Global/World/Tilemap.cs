@@ -89,7 +89,7 @@ namespace GardenPlanet
                 {
                     BoxCollider newCollider = tileObj.AddComponent<BoxCollider>();
                     float yScale;
-                    if(volume.type == TileTypeVolumeType.CollisionPlane)
+                    if(volume.shape == TileTypeVolumeShape.CollisionPlane)
                         yScale = 0.005f;
                     else
                         yScale = (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * volume.yScale;
@@ -103,9 +103,9 @@ namespace GardenPlanet
                         Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.y,
                         Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)volume.z
                     );
-                    if(volume.type == TileTypeVolumeType.CollisionPlane)
+                    if(volume.shape == TileTypeVolumeShape.CollisionPlane)
                         newCollider.center += new Vector3(0.0f, 0.005f, 0.0f);
-                    if(volume.isWall)
+                    if(volume.surface == TileTypeVolumeSurface.WALL)
                         newCollider.material = Tile.slideMaterial;
                 }
 
