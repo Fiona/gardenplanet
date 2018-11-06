@@ -24,7 +24,7 @@ namespace StompyBlondie
                 var pos = new Pos();
                 pos.X = float.Parse(parts[0]);
                 pos.Y = float.Parse(parts[1]);
-                pos.Z = float.Parse(parts[2]);
+                pos.Layer = float.Parse(parts[2]);
                 return pos;
             }
             return base.ConvertFrom(context, culture, value);
@@ -36,23 +36,23 @@ namespace StompyBlondie
     {
         public float X;
         public float Y;
-        public float Z;
+        public float Layer;
 
-        public Pos(float x, float y, float z)
+        public Pos(float x, float y, float layer)
         {
             X = x;
             Y = y;
-            Z = z;
+            Layer = layer;
         }
 
         public override string ToString()
         {
-            return $"<{X}, {Y}, {Z}>";
+            return $"<{X}, {Y}, {Layer}>";
         }
 
         public static bool operator ==(Pos a, Pos b)
         {
-            return (Math.Abs(a.X - b.X) < .005f) && (Math.Abs(a.Y - b.Y) < .005f) && (Math.Abs(a.Z - b.Z) < .005f);
+            return (Math.Abs(a.X - b.X) < .005f) && (Math.Abs(a.Y - b.Y) < .005f) && (Math.Abs(a.Layer - b.Layer) < .005f);
         }
 
         public static bool operator !=(Pos a, Pos b)
@@ -60,6 +60,15 @@ namespace StompyBlondie
             return !(a == b);
         }
 
+        public override bool Equals(System.Object obj)
+        {
+            return this == (Pos)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() + Y.GetHashCode() + Layer.GetHashCode();
+        }
     }
 
     public struct NavigationPointLink
@@ -86,7 +95,7 @@ namespace StompyBlondie
         public void BreakLink(Pos linkToBreak)
         {
             var i = links.FindIndex(v => v.linkTo == linkToBreak);
-            if(i > -1)
+            if(i == -1)
                 return;
             links.RemoveAt(i);
         }
@@ -134,6 +143,16 @@ namespace StompyBlondie
         }
 
         /*
+         * Removes the point passed and any links to and from it are broken.
+         */
+        public void RemovePoint(Pos position)
+        {
+            points.Remove(position);
+            foreach(var p in points.Values)
+                p.BreakLink(position);
+        }
+
+        /*
          * Breaks any link between two passed points
          */
         public void BreakPointLink(Pos pointA, Pos pointB)
@@ -143,6 +162,15 @@ namespace StompyBlondie
             if(HasPoint(pointB))
                 points[pointB].BreakLink(pointA);
         }
+
+        /*
+         * Check determination of point distance
+         */
+        public float DistanceBetweenPoints(Pos pointA, Pos pointB)
+        {
+            return (float)Math.Sqrt(Math.Pow((pointB.X - pointA.X), 2) + Math.Pow((pointB.Y - pointA.Y), 2));
+        }
+
     }
 
     public class TilemapNavigation

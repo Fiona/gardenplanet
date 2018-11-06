@@ -28,39 +28,208 @@
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.25, 0>": {
             "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.25, 0>": {
             "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.25, 0>": {
             "position": "<0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -83,47 +252,712 @@
       "yCentre": 0.0,
       "zCentre": 0.25,
       "size": [
-        1,
-        1
+        2,
+        2
       ],
-      "autoTag": null,
+      "autoTag": "",
       "navigationMap": {
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.25, 0>": {
             "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.25, 0>": {
             "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.25, 0>": {
             "position": "<0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<-0.25, 0.5, 0>": {
+            "position": "<-0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<-0.25, 0.75, 0>": {
+            "position": "<-0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.5, 0>": {
+            "position": "<0, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.75, 0>": {
+            "position": "<0, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.25, 0.5, 0>": {
+            "position": "<0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.25, 0.75, 0>": {
+            "position": "<0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.25, 0>": {
+            "position": "<0.5, 0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.25, 0>": {
+            "position": "<0.75, 0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.5, 0>": {
+            "position": "<0.5, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.75, 0>": {
+            "position": "<0.5, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.5, 0>": {
+            "position": "<0.75, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.75, 0>": {
+            "position": "<0.75, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -154,183 +988,1348 @@
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.25, 0>": {
             "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.25, 0>": {
             "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.25, 0>": {
             "position": "<0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.5, 0>": {
             "position": "<-0.25, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.75, 0>": {
             "position": "<-0.25, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.5, 0>": {
             "position": "<0, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.75, 0>": {
             "position": "<0, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.5, 0>": {
             "position": "<0.25, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.75, 0>": {
             "position": "<0.25, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.5, -0.25, 0>": {
             "position": "<0.5, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.5, 0, 0>": {
             "position": "<0.5, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.5, 0.25, 0>": {
             "position": "<0.5, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, -0.25, 0>": {
             "position": "<0.75, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, 0, 0>": {
             "position": "<0.75, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, 0.25, 0>": {
             "position": "<0.75, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.5, 0.5, 0>": {
             "position": "<0.5, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.5, 0.75, 0>": {
             "position": "<0.5, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, 0.5, 0>": {
             "position": "<0.75, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, 0.75, 0>": {
             "position": "<0.75, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1, -0.25, 0>": {
             "position": "<1, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1, 0, 0>": {
             "position": "<1, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1, 0.25, 0>": {
             "position": "<1, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.25, -0.25, 0>": {
             "position": "<1.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.25, 0, 0>": {
             "position": "<1.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.25, 0.25, 0>": {
             "position": "<1.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1, 0.5, 0>": {
             "position": "<1, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1, 0.75, 0>": {
             "position": "<1, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.25, 0.5, 0>": {
             "position": "<1.25, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.25, 0.75, 0>": {
             "position": "<1.25, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.5, -0.25, 0>": {
             "position": "<1.5, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.5, 0, 0>": {
             "position": "<1.5, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.5, 0.25, 0>": {
             "position": "<1.5, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.75, -0.25, 0>": {
             "position": "<1.75, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.75, 0, 0>": {
             "position": "<1.75, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.75, 0.25, 0>": {
             "position": "<1.75, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.5, 0.5, 0>": {
             "position": "<1.5, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.5, 0.75, 0>": {
             "position": "<1.5, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.75, 0.5, 0>": {
             "position": "<1.75, 0.5, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<1.75, 0.75, 0>": {
             "position": "<1.75, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<1.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<1.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -361,39 +2360,208 @@
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.25, 0>": {
             "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.25, 0>": {
             "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.25, 0>": {
             "position": "<0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -416,47 +2584,712 @@
       "yCentre": 0.0,
       "zCentre": 0.25,
       "size": [
-        1,
-        1
+        2,
+        2
       ],
       "autoTag": null,
       "navigationMap": {
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.25, 0>": {
             "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.25, 0>": {
             "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0.25, 0>": {
             "position": "<0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<-0.25, 0.5, 0>": {
+            "position": "<-0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<-0.25, 0.75, 0>": {
+            "position": "<-0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.5, 0>": {
+            "position": "<0, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.75, 0>": {
+            "position": "<0, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.25, 0.5, 0>": {
+            "position": "<0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.25, 0.75, 0>": {
+            "position": "<0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.25, 0>": {
+            "position": "<0.5, 0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.25, 0>": {
+            "position": "<0.75, 0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.5, 0>": {
+            "position": "<0.5, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.75, 0>": {
+            "position": "<0.5, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.5, 0>": {
+            "position": "<0.75, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.75, 0>": {
+            "position": "<0.75, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -505,105 +3338,73 @@
       "autoTag": null,
       "navigationMap": {
         "points": {
-          "<-0.25, -0.25, 0>": {
-            "position": "<-0.25, -0.25, 0>",
-            "links": []
-          },
-          "<-0.25, 0, 0>": {
-            "position": "<-0.25, 0, 0>",
-            "links": []
-          },
-          "<-0.25, 0.25, 0>": {
-            "position": "<-0.25, 0.25, 0>",
-            "links": []
-          },
-          "<0, -0.25, 0>": {
-            "position": "<0, -0.25, 0>",
-            "links": []
-          },
-          "<0, 0, 0>": {
-            "position": "<0, 0, 0>",
-            "links": []
-          },
-          "<0, 0.25, 0>": {
-            "position": "<0, 0.25, 0>",
-            "links": []
-          },
-          "<0.25, -0.25, 0>": {
-            "position": "<0.25, -0.25, 0>",
-            "links": []
-          },
-          "<0.25, 0, 0>": {
-            "position": "<0.25, 0, 0>",
-            "links": []
-          },
-          "<0.25, 0.25, 0>": {
-            "position": "<0.25, 0.25, 0>",
-            "links": []
-          },
-          "<-0.25, 0.5, 0>": {
-            "position": "<-0.25, 0.5, 0>",
-            "links": []
-          },
-          "<-0.25, 0.75, 0>": {
-            "position": "<-0.25, 0.75, 0>",
-            "links": []
-          },
-          "<0, 0.5, 0>": {
-            "position": "<0, 0.5, 0>",
-            "links": []
-          },
-          "<0, 0.75, 0>": {
-            "position": "<0, 0.75, 0>",
-            "links": []
-          },
-          "<0.25, 0.5, 0>": {
-            "position": "<0.25, 0.5, 0>",
-            "links": []
-          },
-          "<0.25, 0.75, 0>": {
-            "position": "<0.25, 0.75, 0>",
-            "links": []
-          },
           "<0.5, -0.25, 0>": {
             "position": "<0.5, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.5, 0, 0>": {
             "position": "<0.5, 0, 0>",
-            "links": []
-          },
-          "<0.5, 0.25, 0>": {
-            "position": "<0.5, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, -0.25, 0>": {
             "position": "<0.75, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.75, 0, 0>": {
             "position": "<0.75, 0, 0>",
-            "links": []
-          },
-          "<0.75, 0.25, 0>": {
-            "position": "<0.75, 0.25, 0>",
-            "links": []
-          },
-          "<0.5, 0.5, 0>": {
-            "position": "<0.5, 0.5, 0>",
-            "links": []
-          },
-          "<0.5, 0.75, 0>": {
-            "position": "<0.5, 0.75, 0>",
-            "links": []
-          },
-          "<0.75, 0.5, 0>": {
-            "position": "<0.75, 0.5, 0>",
-            "links": []
-          },
-          "<0.75, 0.75, 0>": {
-            "position": "<0.75, 0.75, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -632,51 +3433,391 @@
           "surface": 0
         }
       ],
-      "xCentre": -0.25,
+      "xCentre": 0.25,
       "yCentre": 0.0,
-      "zCentre": -0.25,
+      "zCentre": 0.25,
       "size": [
-        1,
-        1
+        2,
+        2
       ],
       "autoTag": null,
       "navigationMap": {
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0.25, 0>": {
             "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0.25, 0>": {
             "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
-          "<0.25, 0.25, 0>": {
-            "position": "<0.25, 0.25, 0>",
-            "links": []
+          "<-0.25, 0.5, 0>": {
+            "position": "<-0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<-0.25, 0.75, 0>": {
+            "position": "<-0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.5, 0>": {
+            "position": "<0, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.75, 0>": {
+            "position": "<0, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }
@@ -707,49 +3848,231 @@
       ],
       "xCentre": 0.25,
       "yCentre": 0.0,
-      "zCentre": -0.25,
+      "zCentre": 0.25,
       "size": [
-        1,
-        1
+        2,
+        2
       ],
       "autoTag": "",
       "navigationMap": {
         "points": {
           "<-0.25, -0.25, 0>": {
             "position": "<-0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<-0.25, 0, 0>": {
             "position": "<-0.25, 0, 0>",
-            "links": []
-          },
-          "<-0.25, 0.25, 0>": {
-            "position": "<-0.25, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, -0.25, 0>": {
             "position": "<0, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0, 0, 0>": {
             "position": "<0, 0, 0>",
-            "links": []
-          },
-          "<0, 0.25, 0>": {
-            "position": "<0, 0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<-0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, -0.25, 0>": {
             "position": "<0.25, -0.25, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
           "<0.25, 0, 0>": {
             "position": "<0.25, 0, 0>",
-            "links": []
+            "links": [
+              {
+                "linkTo": "<0, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           },
-          "<0.25, 0.25, 0>": {
-            "position": "<0.25, 0.25, 0>",
-            "links": []
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
           }
         }
       }

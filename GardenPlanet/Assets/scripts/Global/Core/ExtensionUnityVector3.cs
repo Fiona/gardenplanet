@@ -6,12 +6,12 @@ namespace StompyBlondie
     {
         public static Pos ToPos(this Vector3 input)
         {
-            return new Pos {X = input.x, Y = input.y, Z = input.z};
+            return new Pos {X = input.x, Y = input.z, Layer = input.y};
         }
 
         public static Vector3 ToVector3(this Pos input)
         {
-            return new Vector3(input.X, input.Y, input.Z);
+            return new Vector3(input.X, input.Layer, input.Y);
         }
     }
 }

@@ -11,26 +11,41 @@ namespace StompyBlondie
         public float scale = 1f;
         public Vector3 offset;
 
+        private Color ColorOfNavPoints = Color.blue;
+        private Color ColorOfNavLines = Color.cyan;
+
         private void OnRenderObject()
         {
             if(navigationMap == null)
                 return;
             UltiDraw.Begin();
 
-            var centre = transform.position;
-            var rotation = transform.rotation;
+            // Draw points
             foreach(var point in navigationMap.points)
             {
-                var pos = centre + ((point.Key.ToVector3() - offset) * scale);
-                pos =  rotation * (pos - centre) + centre;
-                UltiDraw.DrawSphere(pos, Quaternion.identity, SizeOfNavPoints, ColorOfNavPoints);
+                var drawFrom = CalcualateDrawPos(point.Key);
+                UltiDraw.DrawSphere(drawFrom, Quaternion.identity, SizeOfNavPoints, ColorOfNavPoints);
+
+                // Draw link lines
+                foreach(var link in point.Value.links)
+                {
+                    var drawTo = CalcualateDrawPos(link.linkTo);
+                    UltiDraw.DrawLine(drawFrom, drawTo, ColorOfNavLines);
+                }
             }
 
-            //UltiDraw.DrawLine();
             UltiDraw.End();
 
         }
 
-        private Color ColorOfNavPoints = Color.cyan;
+        private Vector3 CalcualateDrawPos(Pos virtualPos)
+        {
+            var centre = transform.position;
+            var rotation = transform.rotation;
+
+            var pos = centre + ((virtualPos.ToVector3() - offset) * scale);
+            return rotation * (pos - centre) + centre;
+        }
+
     }
 }

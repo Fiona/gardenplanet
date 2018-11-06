@@ -464,29 +464,11 @@ namespace GardenPlanet
 
         private void CalculateNavPoints()
         {
-            tileType.navigationMap.Reset();
-            var halfTileSize = Consts.TILE_SIZE/2;
-
-            for(var tileX = 0; tileX < tileType.size[0]; tileX++)
-            {
-                for(var tileY = 0; tileY < tileType.size[1]; tileY++)
-                {
-                    for(var x = -halfTileSize; x <= halfTileSize; x += halfTileSize)
-                    {
-                        for(var y = -halfTileSize; y <= halfTileSize; y += halfTileSize)
-                        {
-                            tileType.navigationMap.AddPoint(
-                                new Pos(x + (tileX * Consts.TILE_SIZE), y + (tileY * Consts.TILE_SIZE), 0f)
-                            );
-                        }
-                    }
-                }
-            }
-
+            tileType.CalculateNavPoints();
             navigationMapDebugRenderer.offset = new Vector3(
                 (float)tileType.xCentre,
-                (float)tileType.zCentre,
-                (float)-tileType.yCentre
+                (float)tileType.yCentre,
+                (float)tileType.zCentre
             );
             navigationMapDebugRenderer.navigationMap = tileType.navigationMap;
             navigationMapDebugRenderer.gameObject.SetActive(showNav);

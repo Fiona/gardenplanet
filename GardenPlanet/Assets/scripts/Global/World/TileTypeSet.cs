@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using StompyBlondie;
 using UnityEngine;
@@ -214,6 +215,76 @@ namespace GardenPlanet
         public int[] size = {1,1};
         public string autoTag;
         public NavigationMap navigationMap = new NavigationMap();
+
+        public void CalculateNavPoints()
+        {
+            navigationMap.Reset();
+            var halfTileSize = Consts.TILE_SIZE / 2;
+
+            // Add all relevant points
+            var points = new List<Pos>();
+            for(var tileX = 0; tileX < size[0]; tileX++)
+            {
+                for(var tileY = 0; tileY < size[1]; tileY++)
+                {
+                    for(var x = -halfTileSize; x <= halfTileSize; x += halfTileSize)
+                    {
+                        for(var y = -halfTileSize; y <= halfTileSize; y += halfTileSize)
+                        {
+                            points.Add(new Pos(x + (tileX * Consts.TILE_SIZE), y + (tileY * Consts.TILE_SIZE), 0f));
+                            navigationMap.AddPoint(points.Last());
+                        }
+                    }
+                }
+            }
+
+            // Add links between all points
+            foreach(var p in points)
+            {
+                foreach(var p2 in points)
+                {
+                    // Skip same point
+                    if(p == p2)
+                        continue;
+                    // Skip if point is too far away
+                    var distanceCutOff = halfTileSize * Mathf.Sqrt(2);
+                    if(navigationMap.DistanceBetweenPoints(p, p2) > distanceCutOff)
+                        continue;
+                    navigationMap.AddPointLink(p, p2);
+                }
+            }
+
+            // Remove points by seeing if they overlap with wall volumes
+            foreach(var vol in volumes)
+            {
+                // Only walls and boxes are supported
+                if(vol.surface != TileTypeVolumeSurface.WALL || vol.shape != TileTypeVolumeShape.CollisionBox)
+                    continue;
+                // Create bounding box
+                var volumeSize = new Vector3(
+                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * vol.xScale + Consts.CHARACTER_RADIUS,
+                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * vol.yScale + Consts.CHARACTER_RADIUS,
+                    (Consts.VOLUME_SCALE_DEFAULT / 100.0f) * vol.zScale + Consts.CHARACTER_RADIUS
+                );
+                var volumeCentre = new Vector3(
+                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)vol.x,
+                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)vol.y,
+                    Consts.VOLUME_POSITION_SHIFT_PER_UNIT * (float)vol.z
+                    );
+                var volumeBounds = new Bounds(volumeCentre, volumeSize);
+                // Find out if any of the points are inside it
+                var pointsToRemove = new List<Pos>();
+                foreach(var p in points)
+                {
+                    var positionOnTile = p.ToVector3() - new Vector3((float)xCentre, (float)yCentre, (float)zCentre);
+                    if(volumeBounds.Contains(positionOnTile))
+                        pointsToRemove.Add(p);
+                }
+                // Remove any points found
+                foreach(var p in pointsToRemove)
+                    navigationMap.RemovePoint(p);
+            }
+        }
     }
 
 }
