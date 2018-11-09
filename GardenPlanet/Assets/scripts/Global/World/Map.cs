@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
-using Rewired.ComponentControls.Data;
+using StompyBlondie;
+using StompyBlondie.Common.Types;
 using Debug = UnityEngine.Debug;
+using StompyBlondie.AI;
 
 namespace GardenPlanet
 {
@@ -50,6 +50,7 @@ namespace GardenPlanet
         public IList<Marker> markers;
         public IList<WorldObject> worldObjects;
         public IList<TileTag> mapTags;
+        public NavigationMap navigationMap = new NavigationMap();
 
         public Map()
         {
@@ -62,6 +63,7 @@ namespace GardenPlanet
             markers = new List<Marker>();
             worldObjects = new List<WorldObject>();
             mapTags = new List<TileTag>();
+            navigationMap = new NavigationMap();
         }
 
         public Map(string filename)
@@ -96,6 +98,7 @@ namespace GardenPlanet
                 mapTags = loadedMap.mapTags;
                 width = loadedMap.width;
                 height = loadedMap.height;
+                navigationMap = loadedMap.navigationMap;
             }
             else
                 throw new Exception($"Map file does not exist: {fullFilepath}");

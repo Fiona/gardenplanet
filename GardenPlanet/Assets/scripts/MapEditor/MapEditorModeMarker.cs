@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Object = UnityEngine.Object;
+using StompyBlondie.Common.Types;
 
 namespace GardenPlanet
 {

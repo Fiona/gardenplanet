@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using StompyBlondie;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using StompyBlondie.Utils;
 
 namespace GardenPlanet
 {

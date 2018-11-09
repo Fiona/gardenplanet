@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using GardenPlanet;
+using StompyBlondie.Common;
+using StompyBlondie.Utils;
 using TMPro;
 
 namespace StompyBlondie

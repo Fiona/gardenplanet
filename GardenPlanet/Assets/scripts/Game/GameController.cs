@@ -1,6 +1,8 @@
 using System.Collections;
 using System.IO;
 using StompyBlondie;
+using StompyBlondie.Behaviours;
+using StompyBlondie.Systems;
 using UnityEngine;
 
 namespace GardenPlanet
@@ -64,7 +66,10 @@ namespace GardenPlanet
             var autoTileManagerObj = new GameObject("AutoTileManager");
             autoTileManager = autoTileManagerObj.AddComponent<AutoTileManager>();
 
-            effectsManager = EffectsManager.CreateEffectsManager();
+            effectsManager = EffectsManager.CreateEffectsManager(
+                typeof(EffectsType).GetFields(),
+                Consts.PREFAB_PATH_EFFECTS
+                );
 
             // GUI objects
             var mainCanvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();

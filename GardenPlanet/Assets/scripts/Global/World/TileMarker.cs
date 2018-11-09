@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using StompyBlondie.Common.Types;
 
 namespace GardenPlanet
 {

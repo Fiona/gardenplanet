@@ -154,7 +154,7 @@ namespace GardenPlanet
             // We managed to remove everything
             if(quantity <= 0)
                 return true;
-            // Try and get existing stacks, we try to take frome those first
+            // Try and get existing stacks, we try to take from those first
             var existingStacks = GetItemEntriesOfType(itemType, attributes, itemList)
                 .OrderBy(x => x.quantity).ToList();
             // If none exist then we can't remove them

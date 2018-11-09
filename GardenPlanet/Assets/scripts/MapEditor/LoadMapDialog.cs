@@ -3,10 +3,11 @@ using System.IO;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using StompyBlondie.Common;
 
 namespace GardenPlanet
 {
-	
+
 	public class LoadMapDialog : MonoBehaviour
 	{
 
@@ -14,14 +15,14 @@ namespace GardenPlanet
 	    public GameObject scrollContent;
 
 	    private bool close;
-	    private StompyBlondie.Ref<string> nameStore;
+	    private Ref<string> nameStore;
 
 	    public void Awake()
 	    {
 	        buttonTemplate.SetActive(false);
 	    }
 
-		public IEnumerator Show(StompyBlondie.Ref<string> nameStore)
+		public IEnumerator Show(Ref<string> nameStore)
 	    {
 
 	        this.nameStore = nameStore;

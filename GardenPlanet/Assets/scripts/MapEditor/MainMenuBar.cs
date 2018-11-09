@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using StompyBlondie.Common;
 
 namespace GardenPlanet
 {
-	
+
 	public class MainMenuBar : MonoBehaviour
 	{
 
@@ -71,7 +72,7 @@ namespace GardenPlanet
 
 	    public IEnumerator DoNewMapPressed()
 	    {
-			var nameStore = new StompyBlondie.Ref<string>("");
+			var nameStore = new Ref<string>("");
 	        yield return StartCoroutine(mapNameDialog.Show(nameStore));
 	        if(nameStore.Value.Trim() == "")
 	            yield break;
@@ -92,7 +93,7 @@ namespace GardenPlanet
 	    {
 	        if(controller.map.filename == null)
 	        {
-				var nameStore = new StompyBlondie.Ref<string>("");
+				var nameStore = new Ref<string>("");
 	            yield return StartCoroutine(mapNameDialog.Show(nameStore));
 	            if(nameStore.Value.Trim() == "")
 	                yield break;
@@ -115,7 +116,7 @@ namespace GardenPlanet
 
 	    public IEnumerator DoLoadMapPressed()
 	    {
-			var nameStore = new StompyBlondie.Ref<string>("");
+			var nameStore = new Ref<string>("");
 	        yield return StartCoroutine(loadMapDialog.Show(nameStore));
 
 	        if(nameStore.Value == "")
@@ -161,6 +162,15 @@ namespace GardenPlanet
 	        controller.ResizeTilemapTo(width, height);
 	    }
 
+		public void RegenNavmapPressed()
+		{
+			controller.RegenNavigationMap();
+		}
+
+		public void ShowNavmapPressed()
+		{
+			controller.ToggleNavmapDisplay();
+		}
 	}
 
 }

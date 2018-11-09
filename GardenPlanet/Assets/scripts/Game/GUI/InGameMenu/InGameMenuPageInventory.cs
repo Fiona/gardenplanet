@@ -3,11 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using StompyBlondie;
 using TMPro;
+using StompyBlondie.Utils;
 
 namespace GardenPlanet
 {

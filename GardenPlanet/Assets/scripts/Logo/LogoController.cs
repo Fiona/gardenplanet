@@ -4,6 +4,8 @@ using Rewired;
 using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
+using StompyBlondie.Utils;
+using StompyBlondie.Extensions;
 
 namespace GardenPlanet
 {

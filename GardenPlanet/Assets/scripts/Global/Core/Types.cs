@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rewired.Utils.Classes.Data;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.UI;
+using StompyBlondie.Common.Types;
 
 namespace GardenPlanet
 {
@@ -18,33 +16,6 @@ namespace GardenPlanet
         Game,
         CreateACharacter
     };
-
-    // Concepts
-    public enum Direction
-    {
-        Down,
-        Left,
-        Up,
-        Right
-    };
-
-    public enum EightDirection
-    {
-        Down,
-        DownLeft,
-        Left,
-        LeftUp,
-        Up,
-        UpRight,
-        Right,
-        RightDown
-    };
-
-    public enum RotationalDirection
-    {
-        Clockwise,
-        AntiClockwise
-    }
 
     // Tile related
     public enum TileTypeVolumeShape
@@ -78,6 +49,7 @@ namespace GardenPlanet
             this.x = x;
             this.y = y;
             this.layer = layer;
+
         }
 
         public TilePosition(Vector3 pos)
@@ -280,4 +252,12 @@ namespace GardenPlanet
             return 0;
         }
     };
+
+    // Types of visual effects
+    public static class EffectsType
+    {
+        public static string LOOP_SLEEPING = "looping/Sleeping";
+        public static string ONESHOT_STEPDUST = "oneshot/StepDust";
+        public static string ONESHOT_CROPDAMAGE = "oneshot/CropDamage";
+    }
 }

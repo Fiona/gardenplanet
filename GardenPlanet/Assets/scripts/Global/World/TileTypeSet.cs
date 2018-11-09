@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using StompyBlondie;
 using UnityEngine;
+using StompyBlondie.AI;
+using StompyBlondie.Common.Types;
+using StompyBlondie.Extensions;
 
 namespace GardenPlanet
 {
@@ -248,9 +251,12 @@ namespace GardenPlanet
                         continue;
                     // Skip if point is too far away
                     var distanceCutOff = halfTileSize * Mathf.Sqrt(2);
-                    if(navigationMap.DistanceBetweenPoints(p, p2) > distanceCutOff)
+                    var pointDistance = navigationMap.DistanceBetweenPoints(p, p2);
+                    if(pointDistance > distanceCutOff)
                         continue;
-                    navigationMap.AddPointLink(p, p2);
+                    // Slightly different cost based on longer point distances
+                    var cost = Mathf.Max(1f, pointDistance / halfTileSize);
+                    navigationMap.AddPointLink(p, p2, cost);
                 }
             }
 

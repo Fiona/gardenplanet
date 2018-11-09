@@ -1,7 +1,7 @@
 ﻿using System;
-using StompyBlondie;
 using UnityEngine;
 using UnityEngine.UI;
+using StompyBlondie.Utils;
 
 namespace GardenPlanet
 {

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using System.Collections;
+using StompyBlondie.Common;
 
 namespace GardenPlanet
 {
@@ -15,7 +14,7 @@ namespace GardenPlanet
 		public override IEnumerator PlayerInteract()
 		{
 			const string question = "Go to bed and sleep till the morning?";
-			var result = new StompyBlondie.Ref<int>(-1);
+			var result = new Ref<int>(-1);
 			yield return StartCoroutine(StompyBlondie.ChoicePopup.ShowYesNoPopup(question, result));
 			if(result.Value == 1)
 				yield return StartCoroutine(controller.PlayerSleep(gameObject));

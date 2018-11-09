@@ -3,7 +3,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using StompyBlondie;
+using StompyBlondie.Behaviours;
+using StompyBlondie.AI;
 
 namespace GardenPlanet
 {
@@ -19,6 +21,7 @@ namespace GardenPlanet
         [HideInInspector] public Tilemap.Tile currentHoveredTile;
         [HideInInspector] public TileTypeSet tileTypeSet;
         [HideInInspector] public EditorInputManager editorInputManager;
+        [HideInInspector] public bool showNavMap;
 
         [Header("Editor component references")]
         public Tilemap tilemap;
@@ -31,6 +34,7 @@ namespace GardenPlanet
         public StompyBlondie.YesNoDialog yesNoDialog;
         public Map map;
         public Text currentModeText;
+        public NavigationMap navigationMap = new NavigationMap();
 
         protected override void Awake()
         {
@@ -110,7 +114,7 @@ namespace GardenPlanet
             var body = mainCamera.GetComponent<Rigidbody>();
             Vector3? direction = null;
 
-            if(worldPanel.GetComponent<StompyBlondie.IsMouseOver>().isOver)
+            if(worldPanel.GetComponent<IsMouseOver>().isOver)
             {
                 if(Input.mousePosition[0] < Consts.MOUSE_BUMP_BORDER)
                     direction = Vector3.left;
@@ -141,6 +145,7 @@ namespace GardenPlanet
                 return;
             }
             tilemap.LoadFromMap(map, tileTypeSet);
+            navigationMap = new NavigationMap(map.navigationMap);
             CreateMapEditorModes();
             SwitchToLayer(0);
             SelectEditorMode(0);
@@ -209,7 +214,7 @@ namespace GardenPlanet
          */
         public void SelectedNewTile(Tilemap.Tile selectedTile)
         {
-            if(worldPanel.GetComponent<StompyBlondie.IsMouseOver>().isOver)
+            if(worldPanel.GetComponent<IsMouseOver>().isOver)
                 currentHoveredTile = selectedTile;
             else
                 currentHoveredTile = null;
@@ -342,6 +347,22 @@ namespace GardenPlanet
         public void LayerDownButtonPressed()
         {
             SwitchToLayer(currentLayer - 1);
+        }
+
+        /*
+         * Regenerating the nav map from nothing
+         */
+        public void RegenNavigationMap()
+        {
+
+        }
+
+        /*
+         * Toggles the nav map viewable off and on
+         */
+        public void ToggleNavmapDisplay()
+        {
+
         }
 
     }

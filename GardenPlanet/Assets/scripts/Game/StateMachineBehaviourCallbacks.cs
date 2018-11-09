@@ -1,13 +1,24 @@
-﻿using UnityEngine;
+﻿/*
+ * 2018 Stompy Blondie Games
+ * Licensed under MIT. See accompanying LICENSE file for details.
+ */
+using UnityEngine;
 using UnityEngine.Events;
 
-namespace GardenPlanet
+namespace GardenPlanet.Utils
 {
     [System.Serializable]
     public class AnimatorParamEvent : UnityEvent<Animator>
     {
     }
 
+    /*
+     * Added to any Mechanim state machine behaviour to pass-through to any other method that can be represented
+     * by a UnityEvent.
+     *
+     * Attach this and a behaviour containing the method in question and wire the method up to the desired state
+     * event list. Enter and exit events are most useful.
+     */
     public class StateMachineBehaviourCallbacks: StateMachineBehaviour
     {
         public AnimatorParamEvent onStateEnterEvents;

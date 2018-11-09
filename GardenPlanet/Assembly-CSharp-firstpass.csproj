@@ -738,6 +738,10 @@
       <Project>{8312FCCF-8A40-807A-9F81-6AEF739C2C8C}</Project>
       <Name>Rewired</Name>
     </ProjectReference>
+    <ProjectReference Include="StompyBlondieUnityTools.csproj">
+      <Project>{218CA75D-85FC-C40D-36A2-819E11AD7D2F}</Project>
+      <Name>StompyBlondieUnityTools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

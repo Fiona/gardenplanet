@@ -1,8 +1,7 @@
 using System;
-using System.Runtime.InteropServices;
-using System.Text;
 using UnityEngine;
 using Rewired;
+using StompyBlondie.Common.Types;
 
 namespace GardenPlanet
 {

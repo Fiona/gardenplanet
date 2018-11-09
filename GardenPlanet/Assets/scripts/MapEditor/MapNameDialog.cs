@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using StompyBlondie.Common;
 
 namespace GardenPlanet
 {
-	
+
 	public class MapNameDialog : MonoBehaviour
 	{
 
@@ -13,7 +14,7 @@ namespace GardenPlanet
 
 	    private bool close;
 
-		public IEnumerator Show(StompyBlondie.Ref<string> nameStore)
+		public IEnumerator Show(Ref<string> nameStore)
 	    {
 	        close = false;
 	        gameObject.SetActive(true);

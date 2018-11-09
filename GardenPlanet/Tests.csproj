@@ -54,7 +54,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Tests\AStar.spec.cs" />
     <Compile Include="Assets\Tests\Attributes.spec.cs" />
     <Compile Include="Assets\Tests\GameTime.spec.cs" />
     <Compile Include="Assets\Tests\Inventory.spec.cs" />

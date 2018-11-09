@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Rewired;
 using StompyBlondie;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using StompyBlondie.Utils;
 using Object = UnityEngine.Object;
 
 namespace GardenPlanet

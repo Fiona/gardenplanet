@@ -6,7 +6,8 @@
         "UnityUIExtensions",
         "MEC",
         "Graphy",
-        "UltiDraw"
+        "UltiDraw",
+        "StompyBlondieUnityTools"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

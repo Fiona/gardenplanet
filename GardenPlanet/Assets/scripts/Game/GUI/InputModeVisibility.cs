@@ -1,7 +1,5 @@
-﻿using StompyBlondie;
-using UnityEngine;
-using UnityEngine.Advertisements;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using StompyBlondie.Utils;
 
 namespace GardenPlanet
 {
