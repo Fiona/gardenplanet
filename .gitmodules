@@ -1,0 +1,3 @@
+[submodule "GardenPlanet/Assets/Plugins/StompyBlondieUnityTools"]
+	path = GardenPlanet/Assets/Plugins/StompyBlondieUnityTools
+	url = git@bitbucket.org:FionaSarah/stompyblondieunitytools.git
