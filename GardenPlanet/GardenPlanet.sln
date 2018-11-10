@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rewired", "Rewired.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEC", "MEC.csproj", "{A023A90E-F085-2121-582B-3CBEE3BD052C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StompyBlondieToolsEditor", "StompyBlondieToolsEditor.csproj", "{C426847F-DDD8-5996-899E-69394D518FBA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RewiredEditor", "RewiredEditor.csproj", "{0A339864-FE32-2340-EC92-95D223240FB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{8412EAF0-6995-FB47-FB69-056B2EA92ED1}"
@@ -27,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StompyBlondieToolsTests", "StompyBlondieToolsTests.csproj", "{66B5BC53-0C92-E15B-325B-74AE7FA2484A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{DA7260BE-528E-64C0-F877-04E13DC17E67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StompyBlondieToolsEditor", "StompyBlondieToolsEditor.csproj", "{C426847F-DDD8-5996-899E-69394D518FBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +66,6 @@ Global
 		{A023A90E-F085-2121-582B-3CBEE3BD052C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A023A90E-F085-2121-582B-3CBEE3BD052C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A023A90E-F085-2121-582B-3CBEE3BD052C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C426847F-DDD8-5996-899E-69394D518FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C426847F-DDD8-5996-899E-69394D518FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C426847F-DDD8-5996-899E-69394D518FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C426847F-DDD8-5996-899E-69394D518FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A339864-FE32-2340-EC92-95D223240FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A339864-FE32-2340-EC92-95D223240FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A339864-FE32-2340-EC92-95D223240FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,6 +86,10 @@ Global
 		{DA7260BE-528E-64C0-F877-04E13DC17E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA7260BE-528E-64C0-F877-04E13DC17E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA7260BE-528E-64C0-F877-04E13DC17E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C426847F-DDD8-5996-899E-69394D518FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C426847F-DDD8-5996-899E-69394D518FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C426847F-DDD8-5996-899E-69394D518FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C426847F-DDD8-5996-899E-69394D518FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

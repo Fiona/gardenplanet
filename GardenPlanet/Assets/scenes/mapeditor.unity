@@ -338,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLayer: 0
   editorInputManager: {fileID: 0}
+  showNavMap: 0
   tilemap: {fileID: 1694270511}
   mainCamera: {fileID: 1603667694}
   layerText: {fileID: 1430831533}
@@ -5774,12 +5775,12 @@ PrefabInstance:
     - target: {fileID: 224432861614173904, guid: ed318b445bc48e64c8ec5536f27d95b4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.9567871
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 224432861614173904, guid: ed318b445bc48e64c8ec5536f27d95b4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.3468628
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 224432861614173904, guid: ed318b445bc48e64c8ec5536f27d95b4,
         type: 3}
@@ -5833,6 +5834,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1933966638948214, guid: ed318b445bc48e64c8ec5536f27d95b4, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224040805864746888, guid: ed318b445bc48e64c8ec5536f27d95b4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224040805864746888, guid: ed318b445bc48e64c8ec5536f27d95b4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
