@@ -870,14 +870,14 @@ namespace GardenPlanet
                 return;
             var skin = baseModel.GetComponentInChildren<SkinnedMeshRenderer>();
             foreach(var mat in skin.materials)
-                mat.color = appearence.skinColor;
+                mat.SetColor("_BaseColor", appearence.skinColor);
         }
 
         protected void RegenerateHairColour()
         {
             if(hairModel == null)
                 return;
-            hairModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = appearence.hairColor;
+            hairModel.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_BaseColor", appearence.hairColor);
         }
 
         protected void RegenerateFace()

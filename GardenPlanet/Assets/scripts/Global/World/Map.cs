@@ -59,6 +59,8 @@ namespace GardenPlanet
 
         public void Init()
         {
+            width = 20;
+            height = 20;
             tiles = new List<MapTile>();
             markers = new List<Marker>();
             worldObjects = new List<WorldObject>();
@@ -69,8 +71,6 @@ namespace GardenPlanet
         public Map(string filename)
         {
             this.filename = filename;
-            width = 20;
-            height = 20;
             Init();
 
             if(filename == null)
@@ -101,7 +101,7 @@ namespace GardenPlanet
                 navigationMap = loadedMap.navigationMap;
             }
             else
-                throw new Exception($"Map file does not exist: {fullFilepath}");
+                throw new IOException($"Map file does not exist: {fullFilepath}");
         }
 
         // Constructor for converting from tilemap
@@ -167,6 +167,16 @@ namespace GardenPlanet
         {
             var path = Map.GetMapFilePathFromName(name);
             return File.Exists(path);
+        }
+
+        public static Map NewMap(string filename, int width = 20, int height = 20)
+        {
+            var map = new Map();
+            map.filename = filename;
+            map.width = width;
+            map.height = height;
+            map.fullFilepath = GetMapFilePathFromName(filename);
+            return map;
         }
 
     }

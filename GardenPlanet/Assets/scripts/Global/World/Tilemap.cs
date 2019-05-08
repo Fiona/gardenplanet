@@ -41,7 +41,11 @@ namespace GardenPlanet
                         tileType = FindObjectOfType<MapEditorController>().tileTypeSet.GetTileTypeByName(tileTypeName);
                     else
                         tileType = FindObjectOfType<World>().tileTypeSet.GetTileTypeByName(tileTypeName);
-                    sharedMaterials = tileObj.GetComponent<Renderer>().sharedMaterials;
+                    var mats = new List<Material>();
+                    var renderers = tileObj.GetComponentsInChildren<Renderer>(false);
+                    foreach(var renderer in renderers)
+                        mats.AddRange(renderer.sharedMaterials);
+                    sharedMaterials = mats.ToArray();
                 }
 
                 ResetPosition();
@@ -224,11 +228,12 @@ namespace GardenPlanet
                 if(!tileToRemove.emptyTile)
                 {
                     // Check materials need cleaning
-                    var renderer = tileToRemove.tileObj.GetComponent<Renderer>();
-
-                    if(renderer.materials != renderer.sharedMaterials)
-                        for(var i = 0; i < renderer.materials.Length; i++)
-                            Destroy(renderer.materials[i]);
+                    var renderers = tileToRemove.tileObj.GetComponentsInChildren<Renderer>();
+                   
+                    foreach(var renderer in renderers)
+                        if(renderer.materials != renderer.sharedMaterials)
+                            for(var i = 0; i < renderer.materials.Length; i++)
+                                Destroy(renderer.materials[i]);
                 }
 
                 // Delete game object and Tile instance
@@ -246,20 +251,16 @@ namespace GardenPlanet
         {
             if(mapEditor != null)
             {
-
                 // Make older hovered tile visible
                 if(currentTileMouseOver != tile && currentTileMouseOver != null && currentTileMouseOver.emptyTile == false)
                 {
                     // Destroy the old instanced materials and go back to the shared ones
                     if(currentTileMouseOver.tileObj != null)
                     {
-                        var tileRenderer = currentTileMouseOver.tileObj.GetComponent<Renderer>();
-                        for(var i = 0; i < tileRenderer.materials.Length; i++)
-                            Destroy(tileRenderer.materials[i]);
-                        tileRenderer.materials = currentTileMouseOver.sharedMaterials;
+                        foreach(var renderer in currentTileMouseOver.tileObj.GetComponentsInChildren<Renderer>(false))
+                            renderer.materials = renderer.sharedMaterials;
                     }
                 }
-
             }
 
             if(mapEditor != null && tile != null && tile.layer != mapEditor.currentLayer)
@@ -270,9 +271,16 @@ namespace GardenPlanet
             // Make new tile hovered a different colour in editor
             if(mapEditor != null)
             {
-                if(currentTileMouseOver != null && currentTileMouseOver != null && currentTileMouseOver.emptyTile == false)
-                    foreach(var mat in currentTileMouseOver.tileObj.GetComponent<Renderer>().materials)
-                        mat.color = new Color(1f, .7f, .7f, 1f);
+                if(currentTileMouseOver != null && currentTileMouseOver != null &&
+                   currentTileMouseOver.emptyTile == false)
+                {
+                    foreach(var renderer in currentTileMouseOver.tileObj.GetComponentsInChildren<Renderer>())
+                    {
+                        foreach(var mat in renderer.materials)
+                            mat.color = new Color(1f, .7f, .7f, 1f);
+                    }
+                }
+
                 mapEditor.SelectedNewTile(currentTileMouseOver);
             }
         }

@@ -164,11 +164,13 @@ namespace GardenPlanet
 
 		public void RegenNavmapPressed()
 		{
+			CloseAllDropdowns();
 			controller.RegenNavigationMap();
 		}
 
 		public void ShowNavmapPressed()
 		{
+			CloseAllDropdowns();
 			controller.ToggleNavmapDisplay();
 		}
 	}

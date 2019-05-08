@@ -3,25 +3,29 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using StompyBlondie;
 using StompyBlondie.Behaviours;
 using StompyBlondie.AI;
+using StompyBlondie.Common.Types;
 
 namespace GardenPlanet
 {
 
     public class MapEditorController : Controller
     {
-        List<GameObject> barriers;
-        MouseHoverPlane mouseHoverPlane;
-        List<MapEditorMode> mapEditorModes;
-        int currentMapEditorMode = -1;
+        private List<GameObject> barriers;
+        private MouseHoverPlane mouseHoverPlane;
+        private List<MapEditorMode> mapEditorModes;
+        private int currentMapEditorMode = -1;
+        private bool showNavigationMap;
 
         [HideInInspector] public int currentLayer;
         [HideInInspector] public Tilemap.Tile currentHoveredTile;
         [HideInInspector] public TileTypeSet tileTypeSet;
         [HideInInspector] public EditorInputManager editorInputManager;
         [HideInInspector] public bool showNavMap;
+        [HideInInspector] public NavigationMap navigationMap;
 
         [Header("Editor component references")]
         public Tilemap tilemap;
@@ -34,21 +38,23 @@ namespace GardenPlanet
         public StompyBlondie.YesNoDialog yesNoDialog;
         public Map map;
         public Text currentModeText;
-        public NavigationMap navigationMap = new NavigationMap();
+        public NavigationMapDebugRenderer navigationMapDebugRenderer;
+
+        [Header("Camera")]
+        public float cameraY;
 
         protected override void Awake()
         {
             base.Awake();
-
+            navigationMap = new NavigationMap();
             var mouseHoverPlaneObj = new GameObject("Mouse Hover Plane");
             mouseHoverPlane = mouseHoverPlaneObj.AddComponent<MouseHoverPlane>();
-
             var inputManagerObj = new GameObject("Input Manager");
             editorInputManager = inputManagerObj.AddComponent<EditorInputManager>();
-
             barriers = new List<GameObject>();
-
             tileTypeSet = new TileTypeSet("default");
+            cameraY = Consts.CAMERA_Y;
+            navigationMapDebugRenderer.SizeOfNavPoints = 0.08f;
 
             try
             {
@@ -104,6 +110,12 @@ namespace GardenPlanet
             InputBumpScrolling();
             ClampCameraToBorders();
             mapEditorModes[currentMapEditorMode].Update();
+            // Update camera position
+            var y = cameraY + (Consts.TILE_SIZE * currentLayer);
+            mainCamera.transform.position = new Vector3(
+                mainCamera.transform.position.x,
+                y,
+                mainCamera.transform.position.z);
         }
 
         /**
@@ -139,17 +151,23 @@ namespace GardenPlanet
             try
             {
                 map = new Map(filename);
+                mainMenuBar.ShowGoodMessage("Loaded map");
             }
-            catch(EditorErrorException)
+            catch(EditorErrorException e)
             {
+                mainMenuBar.ShowBadMessage(e.Message);
                 return;
+            }
+            catch(IOException)
+            {
+                map = Map.NewMap(filename);
+                mainMenuBar.ShowGoodMessage("Created new map");
             }
             tilemap.LoadFromMap(map, tileTypeSet);
             navigationMap = new NavigationMap(map.navigationMap);
             CreateMapEditorModes();
             SwitchToLayer(0);
             SelectEditorMode(0);
-            mainMenuBar.ShowGoodMessage("Loaded map");
             editorInputManager.SetUpMouse();
         }
 
@@ -163,6 +181,7 @@ namespace GardenPlanet
                 map = new Map(map.filename, tilemap);
                 foreach(var mode in mapEditorModes)
                     mode.SaveToMap(map);
+                map.navigationMap = navigationMap;
                 map.SaveMap();
             }
             catch(EditorErrorException)
@@ -240,11 +259,6 @@ namespace GardenPlanet
         {
             currentLayer = layer;
             layerText.text = String.Format("{0}", layer);
-            float y = Consts.CAMERA_Y + (Consts.TILE_SIZE * layer);
-            mainCamera.transform.position = new Vector3(
-                mainCamera.transform.position.x,
-                y,
-                mainCamera.transform.position.z);
             CreateBarrier();
             tilemap.GenerateEmptyTiles(currentLayer);
             mouseHoverPlane.RecreateCollisionPlane(tilemap);
@@ -354,7 +368,22 @@ namespace GardenPlanet
          */
         public void RegenNavigationMap()
         {
-
+            mainMenuBar.ShowMehMessage("Regenerating navigation map...");
+            navigationMap.Reset();
+            foreach(var tile in tilemap.tilemap)
+            {
+                if(tile.emptyTile)
+                    continue;
+                navigationMap.SuperimposeNavigationMap(
+                    tile.tileType.navigationMap,
+                    new Pos(tile.x* Consts.TILE_SIZE, tile.y* Consts.TILE_SIZE, tile.layer* Consts.TILE_SIZE),
+                    tile.direction,
+                    new Pos(
+                        (float)tile.tileType.xCentre, (float)tile.tileType.yCentre, (float)tile.tileType.zCentre
+                    )
+                );
+            }
+            mainMenuBar.ShowMehMessage("Finished regenerating navigation map.");
         }
 
         /*
@@ -362,7 +391,9 @@ namespace GardenPlanet
          */
         public void ToggleNavmapDisplay()
         {
-
+            showNavigationMap = !showNavigationMap;
+            navigationMapDebugRenderer.navigationMap = navigationMap;
+            navigationMapDebugRenderer.gameObject.SetActive(showNavigationMap);
         }
 
     }

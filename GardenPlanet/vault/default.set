@@ -3295,6 +3295,480 @@
       }
     },
     {
+      "name": "rockface-convex-bottom",
+      "volumes": [
+        {
+          "shape": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "xScale": 100,
+          "yScale": 100,
+          "zScale": 100,
+          "surface": 1
+        },
+        {
+          "shape": 1,
+          "x": 1.0,
+          "y": 2.0,
+          "z": -1.0,
+          "xScale": 50,
+          "yScale": 100,
+          "zScale": 50,
+          "surface": 0
+        }
+      ],
+      "xCentre": -0.25,
+      "yCentre": 0.0,
+      "zCentre": 0.25,
+      "size": [
+        2,
+        2
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {
+          "<-0.25, 0.5, 0>": {
+            "position": "<-0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<-0.25, 0.75, 0>": {
+            "position": "<-0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0, 0.5, 0>": {
+            "position": "<0, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<0, 0.75, 0>": {
+            "position": "<0, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<-0.25, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<-0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.25, 0.5, 0>": {
+            "position": "<0.25, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<0.25, 0.75, 0>": {
+            "position": "<0.25, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, -0.25, 0>": {
+            "position": "<0.5, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<0.5, 0, 0>": {
+            "position": "<0.5, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<0.5, 0.25, 0>": {
+            "position": "<0.5, 0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<0.75, -0.25, 0>": {
+            "position": "<0.75, -0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0, 0>": {
+            "position": "<0.75, 0, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, -0.25, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, -0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.25, 0>": {
+            "position": "<0.75, 0.25, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.5, 0.5, 0>": {
+            "position": "<0.5, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              }
+            ]
+          },
+          "<0.5, 0.75, 0>": {
+            "position": "<0.5, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0.25, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.25, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.5, 0>": {
+            "position": "<0.75, 0.5, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0.25, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0.25, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.75, 0.75, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          },
+          "<0.75, 0.75, 0>": {
+            "position": "<0.75, 0.75, 0>",
+            "links": [
+              {
+                "linkTo": "<0.5, 0.5, 0>",
+                "costMultiplier": 1.41421354
+              },
+              {
+                "linkTo": "<0.5, 0.75, 0>",
+                "costMultiplier": 1.0
+              },
+              {
+                "linkTo": "<0.75, 0.5, 0>",
+                "costMultiplier": 1.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "rockface-convex-middle",
+      "volumes": [],
+      "xCentre": 0.0,
+      "yCentre": 0.0,
+      "zCentre": 0.0,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {}
+      }
+    },
+    {
+      "name": "rockface-convex-top",
+      "volumes": [
+        {
+          "shape": 1,
+          "x": 1.0,
+          "y": 2.0,
+          "z": -1.0,
+          "xScale": 50,
+          "yScale": 100,
+          "zScale": 50,
+          "surface": 0
+        },
+        {
+          "shape": 1,
+          "x": 0.0,
+          "y": 6.0,
+          "z": -1.0,
+          "xScale": 10,
+          "yScale": 110,
+          "zScale": 70,
+          "surface": 0
+        },
+        {
+          "shape": 1,
+          "x": 1.0,
+          "y": 6.0,
+          "z": 0.0,
+          "xScale": 70,
+          "yScale": 100,
+          "zScale": 10,
+          "surface": 0
+        }
+      ],
+      "xCentre": -0.25,
+      "yCentre": 0.0,
+      "zCentre": 0.25,
+      "size": [
+        1,
+        1
+      ],
+      "autoTag": null,
+      "navigationMap": {
+        "points": {}
+      }
+    },
+    {
       "name": "wall01-concave1",
       "volumes": [
         {

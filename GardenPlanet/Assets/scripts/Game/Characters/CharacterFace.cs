@@ -95,13 +95,13 @@ namespace GardenPlanet
         public void SetFaceState(FaceState state)
         {
             currentState = state;
-            faceMaterial.mainTexture = renderTextures[state];
+            faceMaterial.SetTexture("_MainTex", renderTextures[state]);
         }
 
         private void SetRenderTexture(RenderTexture setTo)
         {
-            if(setTo.IsCreated() && faceMaterial.mainTexture != setTo)
-                faceMaterial.mainTexture = setTo;
+            if(setTo.IsCreated())
+                faceMaterial.SetTexture("_BaseColorMap", setTo);
         }
 
         private void GenerateFaceTexture(RenderTexture texture, FaceState state)
