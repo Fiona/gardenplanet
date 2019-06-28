@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080d29a1363715d44aa029e236a33d0c, type: 3}
   m_Name: App
   m_EditorClassIdentifier: 
-  InitialAppState: 4
+  InitialAppState: 3
   StartMap: devtest
   ShowDebugMenu: 1
   AITasksShouldOutput: 0

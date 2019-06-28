@@ -155,7 +155,7 @@ namespace GardenPlanet
             var screenBounds = new Rect(0f, 0f, Screen.width, Screen.height);
             var objectCorners = new Vector3[4];
             displayTransform.GetWorldCorners(objectCorners);
-            var tempScreenSpaceCorner = controller.canvasRect.GetComponent<Canvas>().worldCamera.WorldToScreenPoint(objectCorners[screenQuad]);
+            var tempScreenSpaceCorner = controller.mainCamera.WorldToScreenPoint(objectCorners[screenQuad]);
             if(!screenBounds.Contains(tempScreenSpaceCorner))
                 showingThisFrame = false;
         }

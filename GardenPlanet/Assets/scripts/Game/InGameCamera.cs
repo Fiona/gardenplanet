@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace GardenPlanet
 {
@@ -16,9 +18,11 @@ namespace GardenPlanet
         private GameObject target = null;
         private Vector3 offset;
         private Vector3 lookAheadAdjust;
+        private Camera camera;
 
         public void Awake()
         {
+            camera = GetComponent<Camera>();
             lookAheadAdjust = Vector3.zero;
         }
 
@@ -60,6 +64,14 @@ namespace GardenPlanet
                       (lookAheadAdjust * lookAheadStrength) +
                       (Vector3.up * verticalTargetAdjustment);
             return (-((transform.rotation * Vector3.forward) * _distance)) + pos;
+        }
+
+        /*
+         * Uses the Unity WorldToScreenPoint method to convert a Vector3 position in world space to screen space.
+         */
+        public Vector3 WorldToScreenPoint(Vector3 worldPoint)
+        {
+            return camera.WorldToScreenPoint(worldPoint);
         }
     }
 

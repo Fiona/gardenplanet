@@ -129,6 +129,7 @@ namespace GardenPlanet
                 RaycastHit tileHit;
                 if(Physics.Raycast(ray, out tileHit, Mathf.Infinity, 1 << Consts.COLLISION_LAYER_MOUSE_HOVER_PLANE))
                 {
+                    Debug.Log("hit floor");
                     var rayNormal = tileHit.transform.TransformDirection(tileHit.normal);
                     if(rayNormal == tileHit.transform.up)
                     {
